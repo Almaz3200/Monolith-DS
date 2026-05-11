@@ -20986,3 +20986,12 @@ Entries:
   id: 2313
   time: '2026-05-11T09:24:46.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/3972
+- author: Ilya246
+  changes:
+    - type: Fix
+      message: >-
+        Grappling gun will no longer break with grappling onto fast-moving
+        ships.
+  id: 2314
+  time: '2026-05-11T09:25:32.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/3976
