@@ -56,7 +56,7 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: Matchbox #Lua
+  - type: Matchbox #LuaM
   - type: ItemSlots #Lua
     slots:
       item:
