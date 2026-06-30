@@ -51,13 +51,13 @@
     containers:
       storagebase: !type:Container
         ents: []
-      item: !type:ContainerSlot #LuaM
+      item: !type:ContainerSlot # LuaM
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: Matchbox #LuaM
-  - type: ItemSlots #LuaM
+  - type: Matchbox # LuaM
+  - type: ItemSlots # LuaM
     slots:
       item:
         name: clothing-webbing-sidearm
