@@ -284,6 +284,6 @@
   - type: LaserPointer
     targetedColor: "#ff0037"
     defaultColor: "#03c2fc"
-  - type: Tag
+  - type: Tag # LuaM
     tags:
     - GrenadeLauncher
