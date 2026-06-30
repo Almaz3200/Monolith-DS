@@ -95,7 +95,7 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
-  - type: Tag
+  - type: Tag # LuaM
     tags:
     - GrenadeLauncher
 
