@@ -64,8 +64,11 @@
         whitelist:
           components:
           - Gun
-          - MeleeWeapon
-          - WeaponCaseInsertable
+        blacklist:
+          id:
+          - WeaponLauncherTSFAnubis
+          - WeaponLauncherChinaLakeEmp
+          - WeaponLauncherChinaLake
 
 - type: entity
   abstract: true
