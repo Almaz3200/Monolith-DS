@@ -168,7 +168,7 @@
       proto: CannonBall
       soundInsert:
         path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
-    - type: Tag
+    - type: Tag # LuaM
       tags:
       - GrenadeLauncher
 
