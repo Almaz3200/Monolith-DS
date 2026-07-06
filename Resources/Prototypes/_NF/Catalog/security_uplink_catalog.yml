@@ -443,7 +443,10 @@
     - !type:StoreWhitelistCondition # LuaM: BuyerJobCondition > StoreWhitelistCondition
       whitelist:
         tags:
-          - SecurityUplink # LuaM
+        #- Sheriff # Commented by LuaM
+        #- Brigmedic
+        tags: # LuaM
+          - SecurityUplink
 
 
 - type: listing
