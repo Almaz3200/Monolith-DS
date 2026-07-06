@@ -440,7 +440,7 @@
       whitelist:
         tags:
           - SecurityUplink
-    - !type:BuyerJobCondition
+    - !type:StoreWhitelistCondition
       whitelist:
         tags:
           - SecurityUplink # LuaM
@@ -479,7 +479,7 @@
       whitelist:
         tags:
           - SecurityUplink
-    - !type:BuyerJobCondition
+    - !type:StoreWhitelistCondition
       whitelist:
         tags:
           - SecurityUplink # LuaM
