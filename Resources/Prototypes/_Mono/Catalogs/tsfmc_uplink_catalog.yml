@@ -247,7 +247,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - SecurityUplink # LuaM
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 # start T1
 
