@@ -247,7 +247,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 # start T1
 
@@ -264,7 +264,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 - type: listing
   id: UplinkSecurityT1VoucherDagger
@@ -279,7 +279,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 - type: listing
   id: UplinkSecurityT1VoucherTarantula
@@ -294,7 +294,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 - type: listing
   id: UplinkSecurityT1VoucherSentinel
@@ -309,7 +309,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 - type: listing
   id: UplinkSecurityT1VoucherMercury
@@ -324,7 +324,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 - type: listing
   id: UplinkSecurityT1VoucherAldebaran
@@ -339,7 +339,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 # end T1
 
@@ -358,7 +358,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 # end T2
 
@@ -377,7 +377,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 # end T3
 
@@ -396,7 +396,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - FactionStaticUplinkTsf
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 # end T4
 
