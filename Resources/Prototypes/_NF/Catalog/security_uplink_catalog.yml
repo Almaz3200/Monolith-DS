@@ -442,8 +442,9 @@
           - SecurityUplink
     - !type:BuyerJobCondition
       whitelist:
-        - Sheriff
-        - Brigmedic
+        tags:
+          - SecurityUplink # LuaM
+
 
 - type: listing
   id: UplinkSecurityMedicalAssembler
@@ -480,8 +481,8 @@
           - SecurityUplink
     - !type:BuyerJobCondition
       whitelist:
-        - Sheriff
-        - Brigmedic
+        tags:
+          - SecurityUplink # LuaM
 
 - type: listing
   id: UplinkSecuritySyringeCaseFilled
