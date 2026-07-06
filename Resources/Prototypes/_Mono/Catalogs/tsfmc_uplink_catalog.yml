@@ -432,6 +432,21 @@
       tags:
       - SecurityUplink
 
+- type: listing # LuaM
+  id: UplinkSecurityOmnizineJug
+  name: uplink-faction-omnizine-jug-name
+  description: uplink-faction-omnizine-jug-desc
+  productEntity: JugOmnizine
+  cost:
+    FederationMilitaryCredit: 65
+  categories:
+  - UplinkSecurityUtility
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink
+
 # - type: listing
 #   id: UplinkSecurityAuroraExosuit
 #   name:  uplink-exosuit-aurora-name
