@@ -479,7 +479,7 @@
       whitelist:
         tags:
           - SecurityUplink
-    - !type:StoreWhitelistCondition
+    - !type:StoreWhitelistCondition # LuaM: BuyerJobCondition > StoreWhitelistCondition
       whitelist:
         #- Sheriff # Commented by LuaM
         #- Brigmedic
