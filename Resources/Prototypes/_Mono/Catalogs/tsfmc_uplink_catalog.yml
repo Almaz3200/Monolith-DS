@@ -294,7 +294,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - SecurityUplink # LuaM
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
 
 - type: listing
   id: UplinkSecurityT1VoucherSentinel
