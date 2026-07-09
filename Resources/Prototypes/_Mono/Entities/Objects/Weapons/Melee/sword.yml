@@ -285,8 +285,8 @@
     wideAnimationRotation: -60
     damage:
       types: # It's still incredibly strong, but -reasonable-
-        Slash: 42
-        Structural: 75 # Ion doesn't exist, according to Proto manager.
+        Slash: 50 # LuaM: 42 > 50
+        Structural: 125 # LuaM: 75 > 125
   - type: Item
     sprite: _Mono/Objects/Weapons/Melee/viz-sabre.rsi
   - type: Clothing
@@ -295,7 +295,7 @@
     - Belt
     - suitStorage
   - type: Reflect
-    reflectProb: 0.8
+    reflectProb: 0.5 # LuaM 0.8 > 0.5
     reflects:
     - Energy
     - NonEnergy
@@ -304,16 +304,16 @@
   - type: StaticPrice
     price: 5000 # YOU CALL THAT A BLADE.... I'LL SHOW YOU A BLADE...
   - type: WeaponMeleeCharge
-    activeTime: 3
-    cooldown: 30
+    activeTime: 5 #LuaM: 3 > 5
+    cooldown: 15 #LuaM 30 > 15
     cooldownDamagePenalty:
       types:
         Slash: -27
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
-            Slash: 100
-            Structural: 300
+            Slash: 125 # LuaM: 100 > 125
+            Structural: 500 # LuaM: 300 > 500
   - type: ItemToggle
     predictable: false
     soundActivate:

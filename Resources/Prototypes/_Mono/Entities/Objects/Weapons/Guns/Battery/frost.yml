@@ -46,8 +46,8 @@
     - proto: BulletDisabler
       fireCost: 75
       name: disable
-    - proto: BulletEnergyGunLaser
-      fireCost: 150
+    - proto: HandheldAutopulserProjectile # LuaM BulletEnergyGunLaser > HandheldAutopulserProjectile
+      fireCost: 125 # LuaM: 150 > 125
       name: lethal
   - type: MagazineVisuals
     magState: mag

@@ -108,9 +108,10 @@
     tags:
     - EnergySword
   - type: Reflect
-    reflectProb: 0.5
+    reflectProb: 0.35 #LuaM 0.5 > 0.35
     reflects:
     - Energy
+    - NonEnergy # LuaM add
   - type: MeleeWeapon
     heavyStaminaCost: 2.5 # goob edit
     wideAnimationRotation: -135
