@@ -1,0 +1,1 @@
+shuttle-desc-scorpion = A widespread variant of a maneuverable vessel for working in groups on a large target, thanks to its well-protected engines, gives it a chance to successfully evade the enemy at any moment of the battle.
