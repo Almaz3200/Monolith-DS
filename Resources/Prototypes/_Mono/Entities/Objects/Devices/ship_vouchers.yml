@@ -443,7 +443,7 @@
   parent: BaseShipLPC
   id: ShipVoucherScorpion
   name: PDV Scorpion LPC [T1]
-  description: Ваучер что дарит возможность ощутить скорость Скорпиона - одного из лучших истребителей из резерва флагмана.
+  description: Ваучер что дарит возможность ощутить скорость Скорпиона - одного из лучших истребителей в резервах флагмана.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Misc/lpcnew.rsi
