@@ -2,9 +2,9 @@
 # Вдохновлён шаттлом "scorpion" от Starch
 
 - type: vessel
-  id: Scorpion
+  id: ScorpionLuaM
   parent: BaseVesselAntag
-  name: PDV "Скорпион"
+  name: PDV Scorpion
   description: Широко распространенный вариант маневренного судна для групповой работы по крупной цели, благодаря хорошо защищенным двигателям, дает шанс успешно слинять от противника в любой момент боя.
   price: 120000
   purchasable: false # voucher only
@@ -20,12 +20,12 @@
   - Bananium
 
 - type: gameMap
-  id: Scorpion
+  id: ScorpionLuaM
   mapName: 'PDV Scorpion'
   mapPath: /Maps/_LuaM/Shuttles/PDV/Tier1/Scorpion.yml
   minPlayers: 0
   stations:
-    Scorpion:
+    ScorpionLuaM:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
