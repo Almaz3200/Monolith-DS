@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseShipLPC
-  id: ShipVoucherScorpionLuaM
+  id: ShipVoucherScorpion
   name: PDV Scorpion LPC [T1]
   description: The voucher provides an opportunity to sit at the "Scorpion" consoles, one of the fastest fighters in the flagship's reserves. # LuaM An unusual variant from the same shipyards manufacturing Anacondas, using a mix of missile pods and 2 large-caliber cannons
   components:
