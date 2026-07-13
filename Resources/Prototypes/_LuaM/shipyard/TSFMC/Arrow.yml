@@ -1,0 +1,41 @@
+#Author: almaz3200(discord)
+
+- type: vessel
+  id: TSFMCArrow
+  parent: BaseVesselAntag
+  name: TSF-VSK Стрела
+  description: Необычный шаттл, вобравший в себя черты Стража и Флиссы, пусть и не может похвастаться богатым вооружением, но по праву занимает своё место во флоте.
+  limit: 2
+  price: 320000
+  purchasable: false # voucher only
+  category: Large
+  group: Security
+  access: Armory
+  shuttlePath: /Maps/_LuaM/Shuttles/TSFMC/Arrow.yml
+  guidebookPage: Null
+  class:
+  - Frigate
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: TSFMCArrow
+  mapName: 'Arrow'
+  mapPath: /Maps/_LuaM/Shuttles/TSFMC/Arrow.yml
+  minPlayers: 0
+  stations:
+    TSFMCArrow:
+      stationProto: StandardFrontierSecurityVessel
+      gridComponents:
+      - type: VesselInfo
+        description: "Че"
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Стрела TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Deputy: [ 0, 0 ]
+          TsfBorg: [ 0, 0 ]
