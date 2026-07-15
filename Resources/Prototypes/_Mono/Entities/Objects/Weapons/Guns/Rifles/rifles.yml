@@ -600,8 +600,8 @@
       offset: 0.21870, 0 # Reduce by 0.0005 to prevent gaps
     - map: ["opticAttachment"]
   - type: GunWieldBonus
-    minAngle: -21
-    maxAngle: -47
+    minAngle: -20 # LuaM: -21 > -20
+    maxAngle: -56 # LuaM: -47 > -56
   - type: Gun
     minAngle: 21
     maxAngle: 58
@@ -609,7 +609,7 @@
     angleDecay: 20
     fireRate: 7
     selectedMode: FullAuto
-    damageModifier: 0.95 # Brings it down to 152.95 DPS from 161 DPS (assuming perfect accuracy with FMJ on an unarmored target); Lecter has less DPS, but Lecter also has really fucking good accuracy and is free roundstart.
+    damageModifier: 1.0 # Brings it down to 152.95 DPS from 161 DPS (assuming perfect accuracy with FMJ on an unarmored target); Lecter has less DPS, but Lecter also has really fucking good accuracy and is free roundstart. # LuaM: 0.95 > 1.0
     availableModes:
     - SemiAuto
     - FullAuto

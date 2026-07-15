@@ -47,7 +47,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHelmetHardsuitSyndieElite, ShowSecurityIcons]
+  parent: [ClothingHeadHelmetHardsuitSyndieElite, ShowSecurityIcons, ShowMedicalIcons ] # LuaM add ShowMedicalIcons
   id: ClothingHeadHelmetHardsuitAshenElite
   name: PDV CV-53 combat tacsuit helmet
   description: Based off of the CV-32 hardsuit, this tacsuit sacrifices heavy armor plates for environmental protection.
@@ -59,7 +59,7 @@
     sprite: _Mono/Clothing/Head/Hardsuits/syndieelite.rsi
 
 - type: entity
-  parent: [ClothingHeadHelmetHardsuitSyndieElite, ShowSecurityIcons]
+  parent: [ClothingHeadHelmetHardsuitSyndieElite, ShowSecurityIcons, ShowMedicalIcons ] # LuaM add ShowMedicalIcons
   id: ClothingHeadHelmetHardsuitVizier
   name: PDV CV-67 combat hardsuit helmet
   description: An adorned tacsuit designed with an imperfect nanolaminate composition. High maneuverability, sturdy armor.

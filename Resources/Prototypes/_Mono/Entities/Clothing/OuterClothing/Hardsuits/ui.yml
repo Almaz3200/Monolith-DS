@@ -38,7 +38,7 @@
     coefficient: 0.55
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, EnergyShieldClothing, BaseFactionGearOtherFactionT2 ]
+  parent: [ ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2 ] # LuaM: removed EnergyShieldClothing
   id: ClothingOuterHardsuitUIEnforcerMKII
   name: U.I. ENFORCER MKII combat tacsuit
   description: Based off of the infamous MKI design with versatility in mind. This is Ullman Industries' top of the line combat suit. Whether it be slipping away from the feds, taking out the competition, or serving your corporate overlords, this marvel of engineering will make sure that you get it done.
@@ -55,34 +55,34 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.75
-        Piercing: 0.6
+        Blunt: 0.5 # LuaM 0.7 > 0.5
+        Slash: 0.5 # LuaM 0.75 > 0.5
+        Piercing: 0.5 # LuaM 0.6 > 0.5
         Heat: 0.5
         Radiation: 0.6
         Caustic: 0.7
-  - type: Blocking
-    passiveBlockModifier:
-      coefficients:
-        Blunt: 0.4
-        Slash: 0.25
-        Piercing: 0.5
-        Heat: 0.3
-      flatReductions:
-        Heat: 15
-        Piercing: 5
-    passiveBlockFraction: 0.5
-    activeBlockFraction: 1.0
-    isClothing: true
-  - type: Battery
-    maxCharge: 15
-    startingCharge: 15
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 0.1
+#  - type: Blocking # Commented by LuaM
+#    passiveBlockModifier:
+#      coefficients:
+#        Blunt: 0.4
+#        Slash: 0.25
+#        Piercing: 0.5
+#        Heat: 0.3
+#      flatReductions:
+#        Heat: 15
+#        Piercing: 5
+#    passiveBlockFraction: 0.5
+#    activeBlockFraction: 1.0
+#    isClothing: true
+#  - type: Battery # Commented by LuaM
+#    maxCharge: 15
+#    startingCharge: 15
+#  - type: BatterySelfRecharger # Commented by LuaM
+#    autoRecharge: true
+#    autoRechargeRate: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 0.85 # Temporary till shield toggling doesnt break movement speed modifiers
+    walkModifier: 0.9 # LuaM 1 > 0.9
+    sprintModifier: 0.9 # Temporary till shield toggling doesnt break movement speed modifiers # LuaM 0.85 > 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
