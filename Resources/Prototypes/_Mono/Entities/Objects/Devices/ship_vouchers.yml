@@ -295,7 +295,7 @@
     deleteSpawnerAfterSpawn: true
     prototypes:
     - ShipVoucherAndromeda
-    - ShipVoucherArrow
+    - ShipVoucherArrow # LuaM
 
 # end T2
 
