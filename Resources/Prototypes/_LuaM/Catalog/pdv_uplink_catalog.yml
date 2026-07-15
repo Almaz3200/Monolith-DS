@@ -2,7 +2,8 @@
   id: UplinkPirateWhitePhosphorusGrenade
   name: uplink-pirate-white-phosphorus-name
   description: uplink-pirate-white-phosphorus-desc
-  productEntity: WhitePhosphorusGrenade
+  productEntity: BoxWhitePhosphorusGrenades
+  icon: { sprite: _LuaM/Objects/Weapons/Grenades/white_phosphorus.rsi, state: icon}
   cost:
     Doubloon: 35
   categories:
@@ -17,10 +18,10 @@
 # T1
 
 - type: listing
-  id: UplinkSecurityT1VoucherScorpionLuaM
+  id: UplinkSecurityT1VoucherScorpion
   name:  uplink-pdv-t1-scorpion-voucher-name
   description: uplink-pdv-t1-scorpion-voucher-desc
-  productEntity: ShipVoucherScorpionLuaM
+  productEntity: ShipVoucherScorpion
   cost:
     Doubloon: 100
   categories:
