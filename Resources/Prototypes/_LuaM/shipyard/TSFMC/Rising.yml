@@ -3,8 +3,8 @@
 - type: vessel
   id: TSFMCRising
   parent: BaseVesselAntag
-  name: TSF-VSK Восход
-  description: Некогда флагманский корабль собранный по древним чертежам найденным в одном из предприятий Grand Gefest
+  name: vessel-rising-name
+  description: vessel-rising-desc
   limit: 1
   price: 320000
   purchasable: false # voucher only
