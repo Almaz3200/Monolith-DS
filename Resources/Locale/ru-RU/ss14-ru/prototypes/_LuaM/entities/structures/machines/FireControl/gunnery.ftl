@@ -1,2 +1,2 @@
 ent-GunneryServerExtra = экстрамощный сервер управления орудиями
-    .desc = Обеспечивает дистанционное управление корабельным оружием.
+    .desc = { ent-GunneryServerBase.desc }
