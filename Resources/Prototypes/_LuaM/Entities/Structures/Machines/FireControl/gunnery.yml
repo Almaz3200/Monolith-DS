@@ -1,6 +1,6 @@
 - type: entity
   id: GunneryServerExtra
-  parent: [GunneryServerBase]
+  parent: GunneryServerBase
   name: Extra-high-power gunnery control server
   components:
   - type: Machine
