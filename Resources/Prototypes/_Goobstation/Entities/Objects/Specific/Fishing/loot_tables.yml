@@ -38,7 +38,7 @@
     children:
     - id: FishAlien
     - id: FishBingle
-    - id: FishBoyFisher
+    # - id: FishBoyFisher # LuaM commented - femboys belong in the fire
     - id: FishNukeDisk
     - id: FishGib
     - id: FishMutant
@@ -61,6 +61,7 @@
     - id: FishSilver
     - id: FishTropicalSun
     - id: FishTropical
+    - id: BullShark # LuaM
 
 # Items from Water
 - type: entityTable
