@@ -10,10 +10,14 @@
   name: fish
   description: Water-born creature from the infinite sea... Or toilet.
   components:
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodCuredCarp
+      amount: 2
   - type: Fish
     difficulty: 0.029
   - type: StaticPrice
-    price: 250
+    price: 750 # LuaM 250 >750
 
 - type: entity
   id: BaseFishRare
@@ -25,7 +29,7 @@
   - type: Fish
     difficulty: 0.038
   - type: StaticPrice
-    price: 750
+    price: 2250 # LuaM 750 > 2250
 
 - type: entity
   id: FishAlien
@@ -50,6 +54,12 @@
     state: angler
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodMeatXeno
+      amount: 2 
+    - id: MaterialToothSpaceCarp1
+      amount: 2 
 
 - type: entity
   id: FishBass
@@ -146,6 +156,12 @@
     state: disk
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: NukeDiskFake
+      amount: 1
+    - id: ToyFigurineCaptain
+      amount: 1
 
 - type: entity
   id: FishGib
@@ -158,6 +174,10 @@
     state: gib
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodMeatGoliath
+      amount: 2
 
 - type: entity
   id: FishMutant
@@ -170,6 +190,12 @@
     state: mutant
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: UraniumOre5
+      amount: 1
+    - id: FoodMeatRotten
+      amount: 1
 
 - type: entity
   id: FishNuker
@@ -182,6 +208,12 @@
     state: nuker
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: ToySword
+      amount: 1
+    - id: ToyFigurineNukieCommander
+      amount: 1
 
 - type: entity
   id: FishPuffer
@@ -194,6 +226,10 @@
     state: pufferfish
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
 
 - type: entity
   id: FishSilver
@@ -206,6 +242,12 @@
     state: silverfish
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodCuredCarp
+      amount: 2
+    - id: SilverOre5
+      amount: 2
 
 - type: entity
   id: FishTropicalSun
@@ -218,6 +260,10 @@
     state: sun_tropical
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodCuredCarp
+      amount: 1
 
 - type: entity
   id: FishToxic
@@ -230,6 +276,12 @@
     state: toxic
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodMeatSlime
+      amount: 2
+    - id: FoodMeatRotten
+      amount: 1
 
 - type: entity
   id: FishTropical
@@ -249,6 +301,12 @@
   name: ian fish
   description: Water-born ian from the sea.
   components:
+  - type: Butcherable # LuaM
+    spawned:
+    - id: FoodCuredCarp
+      amount: 1
+    - id: FoodMeatCorgi
+      amount: 1
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: ian

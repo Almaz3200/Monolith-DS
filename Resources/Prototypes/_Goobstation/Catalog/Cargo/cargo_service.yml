@@ -9,6 +9,6 @@
     sprite: _Goobstation/Objects/Specific/Fishing/fishing_rod.rsi
     state: icon
   product: CrateFishingGoodies
-  cost: 1000
+  cost: 3000 # LuaM 1000 > 3000
   category: cargoproduct-category-name-service
   group: market
