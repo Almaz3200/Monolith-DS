@@ -1,0 +1,36 @@
+- type: vessel
+  id: Fisherman
+  parent: BaseVessel
+  name: vessel-fisherman-name
+  description: vessel-fisherman-desc
+  price: 125000
+  category: Large
+  group: Shipyard
+  shuttlePath: /Maps/_LuaM/Shuttles/Civilian/fisherman.yml
+  guidebookPage: null
+  class:
+    - Civilian
+    - Botany
+    - Kitchen
+  engine:
+    - AME
+
+- type: gameMap
+  id: Fisherman
+  mapName: 'UI Fisherman'
+  mapPath: /Maps/_LuaM/Shuttles/Civilian/fisherman.yml
+  minPlayers: 0
+  stations:
+    Fisherman:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Fisherman CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]
