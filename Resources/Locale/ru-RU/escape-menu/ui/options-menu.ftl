@@ -260,6 +260,7 @@ cmd-options-help = Использование: options [tab]
 ui-options-enable-color-name = Цветные имена персонажей
 ui-options-colorblind-friendly = Режим для дальтоников
 ui-options-reduced-motion = Снижение интенсивности визуальных эффектов
+ui-options-disable-nv-noise = Эффект шума у очков ночного видения
 ui-options-chat-window-opacity = Прозрачность окна чата
 ui-options-screen-shake-intensity = Интенсивность дрожания экрана
 ui-options-show-offer-mode-indicators = Показывать индикатор передачи предмета

@@ -17,6 +17,18 @@
         Blunt: 0.85
         Slash: 0.85
         Piercing: 0.85
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: HideLayerClothing
     slots:
     - Hair

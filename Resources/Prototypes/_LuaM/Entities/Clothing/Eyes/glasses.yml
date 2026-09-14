@@ -8,9 +8,6 @@
     sprite:  _LuaM/Clothing/Eyes/Glasses/contractor_glasses.rsi
   - type: Clothing
     sprite: _LuaM/Clothing/Eyes/Glasses/contractor_glasses.rsi
-  - type: NightVision
-    flashDurationMultiplier: 2
-    isEquipment: true
   - type: IdentityBlocker
     coverage: EYES
   - type: ThermalVision
@@ -18,3 +15,13 @@
     pulseTime: 2
     isEquipment: true
     toggleAction: PulseThermalVision
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c6612f"
+    lightingColor: "#ff5500"
+    amplification: 2.0

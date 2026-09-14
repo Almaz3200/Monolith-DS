@@ -46,7 +46,7 @@
     - RogueHardsuit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndie, BaseFactionGearPDVT2, MonoEnergyShieldClothing ] # LuaM add: MonoEnergyShieldClothing 
+  parent: [ ClothingOuterHardsuitSyndie, BaseFactionGearPDVT2, MonoEnergyShieldClothing ] # LuaM add: MonoEnergyShieldClothing
   id: ClothingOuterHardsuitAshen
   name: PDV CV-32 combat hardsuit
   description: A combat hardsuit designed by the Phaethon Dynasty. A heavier but still general-purpose hardsuit, effective but not stellar against most damage types.
@@ -87,20 +87,22 @@
     tags:
     - RogueHardsuit
 # LuaM-start:
-  - type: PersonalShield 
+  - type: PersonalShield
     color: "#ff0000"
     shield:
-      maxCharge: 400 
+      maxCharge: 400
       regenRate: 6
-      spinupTime: 5 
-      breakCooldown: 30
+      spinupTime: 0.5
+      breakCooldown: 25
       powerDraw: 0.5
   - type: Battery
-    maxCharge: 60
-    startingCharge: 60
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 0.1
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
 # LuaM-end.
 
 - type: entity
@@ -192,20 +194,22 @@
     tags:
     - RogueHardsuit
 # # LuaM-start:
-  - type: PersonalShield 
+  - type: PersonalShield
     color: "#ff0000"
     shield:
-      maxCharge: 450 
+      maxCharge: 450
       regenRate: 6
-      spinupTime: 5 
-      breakCooldown: 30
+      spinupTime: 0.5
+      breakCooldown: 25
       powerDraw: 0.5
   - type: Battery
-    maxCharge: 60
-    startingCharge: 60
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 0.1
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
 # LuaM-end.
 
 
@@ -249,20 +253,22 @@
     tags:
     - RogueHardsuit
 # LuaM-start:
-  - type: PersonalShield 
+  - type: PersonalShield
     color: "#ff0000"
     shield:
-      maxCharge: 350 #LuaM 600 < 500
+      maxCharge: 350
       regenRate: 6
-      spinupTime: 5 #LuaM 1 < 5
-      breakCooldown: 30
+      spinupTime: 0.5
+      breakCooldown: 20
       powerDraw: 0.5
   - type: Battery
-    maxCharge: 60
-    startingCharge: 60
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 0.1
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
 # LuaM-end.
   # Shielding
 #  - type: Blocking # Commented by LuaM

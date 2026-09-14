@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\\bin\\Content.Server\\</OutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <NoWarn>1998</NoWarn>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+  </PropertyGroup>
+  <Import Project="../MSBuild/Content.props" />
+  <Import Project="..\\RobustToolbox\\Imports\\Shared.props" />
+  <ItemGroup>
+    <ProjectReference Include="..\\Content.Server\\Content.Server.csproj" />
+  </ItemGroup>
+  <Import Project="..\\RobustToolbox\\MSBuild\\Robust.Properties.targets" />
+</Project>

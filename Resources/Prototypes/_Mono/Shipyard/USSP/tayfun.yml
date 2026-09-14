@@ -5,7 +5,7 @@
   parent: BaseVesselAntag
   name: vessel-tayfun-name # LuaM-locale
   description: vessel-tayfun-desc # LuaM-locale
-  price: 138000 # LuaM: 74200 > 138000 Я ОСТАПА РОТ ЭБАЛ
+  price: 205850 # LuaM: 74200 > 205850 Я ОСТАПА РОТ ЭБАЛ
   category: Medium
   group: Ussp
   access: Mercenary

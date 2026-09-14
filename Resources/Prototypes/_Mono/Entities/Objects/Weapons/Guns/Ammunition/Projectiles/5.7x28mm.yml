@@ -8,7 +8,7 @@
     damage:
       types:
         Piercing: 23 # LuaM: 20 > 23
-    armorPenetration: 0.075
+    armorPenetration: 0.3
 
 - type: entity
   id: Bullet57x28mmPractice
@@ -110,4 +110,4 @@
       types:
         Piercing: 9 # LuaM: 7 > 9
         Structural: 40
-    armorPenetration: 0.8 # LuaM: 0.7 > 0.8
+    armorPenetration: 0.8

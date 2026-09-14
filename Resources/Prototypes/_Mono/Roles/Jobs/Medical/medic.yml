@@ -18,8 +18,8 @@
   - GeneralAccess
   - Medical
   special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, TrackingImplant ]
+#  - !type:AddImplantSpecial  # LuaM commented
+#    implants: [ MindShieldImplant, TrackingImplant ]
   - !type:AddComponentSpecial
     components:
       - type: NpcFactionMember

@@ -1,133 +1,147 @@
+using System.Numerics;
 using Content.Shared._Crescent.ShipShields;
-using Robust.Client.ResourceManagement;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Physics.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
-using System.Numerics;
-using Content.Client.Resources;
-using Robust.Client.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
-using System.Runtime.InteropServices;
-using Robust.Client.GameObjects;
 
 namespace Content.Client._Crescent.ShipShields;
 
+// LuaM-start: port the animated shader-based shuttle shield visual from Sector Frontier.
 public sealed class ShipShieldOverlay : Overlay
 {
+    private static readonly ProtoId<ShaderPrototype> ShaderId = "PersonalShieldSkin";
     private readonly FixtureSystem _fixture;
     private readonly SharedPhysicsSystem _physics;
-    private readonly IResourceCache _resourceCache;
     private readonly IEntityManager _entManager;
-    private readonly ShaderInstance _unshadedShader;
-    private readonly List<DrawVertexUV2D> _verts = new(128); // Mono
-    private readonly Texture _shieldTexture;
+    private readonly ShaderInstance _baseShader;
+    private readonly Dictionary<EntityUid, ShaderInstance> _shaders = new();
+    private readonly HashSet<EntityUid> _seen = new();
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowWorld;
 
-    public ShipShieldOverlay(IEntityManager entityManager, IPrototypeManager prototypeManager, IResourceCache resourceCache)
+    public ShipShieldOverlay(IEntityManager entityManager, IPrototypeManager prototypeManager)
     {
-        _resourceCache = resourceCache;
         _entManager = entityManager;
-        _fixture = _entManager.EntitySysManager.GetEntitySystem<FixtureSystem>();
-        _physics = _entManager.EntitySysManager.GetEntitySystem<Robust.Client.Physics.PhysicsSystem>();
-        _shieldTexture = _resourceCache.GetTexture("/Textures/_Crescent/ShipShields/shieldtex.png");
-
-        _unshadedShader = prototypeManager.Index<ShaderPrototype>("unshaded").Instance();
-
+        _fixture = _entManager.System<FixtureSystem>();
+        _physics = _entManager.System<Robust.Client.Physics.PhysicsSystem>();
+        _baseShader = prototypeManager.Index(ShaderId).Instance().Duplicate();
         ZIndex = 8;
+    }
+
+    protected override void DisposeBehavior()
+    {
+        base.DisposeBehavior();
+        foreach (var shader in _shaders.Values)
+            shader.Dispose();
+        _shaders.Clear();
+        _baseShader.Dispose();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        if (args.MapId == MapId.Nullspace)
+            return;
+
         var handle = args.WorldHandle;
-
-        handle.UseShader(_unshadedShader);
-
+        _seen.Clear();
         var enumerator = _entManager.AllEntityQueryEnumerator<ShipShieldVisualsComponent, FixturesComponent, TransformComponent>();
         while (enumerator.MoveNext(out var uid, out var visuals, out var fixtures, out var xform))
         {
-
-            if (xform.MapID != args.MapId)
+            if (xform.MapID != args.MapId || visuals.Form <= 0f && visuals.Shatter <= 0f)
                 continue;
 
             var fixture = _fixture.GetFixtureOrNull(uid, "shield", fixtures);
-
             if (fixture is not { Shape: ChainShape chain })
                 continue;
 
-            // Mono: No need to draw the shield locally if its out of range.
             var transform = _physics.GetPhysicsTransform(uid, xform);
-            var worldBounds = new Box2();
-            foreach (var vertex in chain.Vertices)
-            {
-                var worldPos = VertexToWorldPos(vertex, transform);
-                worldBounds = worldBounds.ExtendToContain(worldPos);
-            }
-            if (!args.WorldAABB.Intersects(worldBounds))
+            if (!TryGetChainLocalBounds(chain, out var localBounds))
                 continue;
 
-            DrawShield(handle, chain, transform, _shieldTexture, visuals.ShieldColor, _verts);
-            _verts.Clear(); // Clear for next shield - Mono
+            var worldCenter = Transform.Mul(transform, localBounds.Center);
+            var worldBounds = Box2.CenteredAround(worldCenter, localBounds.Size);
+            var cullPad = MathF.Max(localBounds.Width, localBounds.Height) * 0.15f;
+            if (!args.WorldAABB.Intersects(worldBounds.Enlarged(cullPad)))
+                continue;
+
+            var size = localBounds.Size;
+            if (size.X <= 0f || size.Y <= 0f)
+                continue;
+
+            var color = visuals.ShieldColor;
+            if (color.A >= 1f)
+                color = color.WithAlpha(0.92f);
+
+            var shader = GetShader(uid);
+            _seen.Add(uid);
+            shader.SetParameter("progress", visuals.Shatter > 0f ? 1f + MathF.Min(visuals.Shatter, 1f) : visuals.Form);
+            shader.SetParameter("skin_color", color);
+            shader.SetParameter("brightness", visuals.Brightness);
+            shader.SetParameter("pixel_grid", visuals.PixelGrid);
+            shader.SetParameter("hex_density", visuals.HexDensity);
+            shader.SetParameter("form_origin", visuals.FormOrigin);
+            shader.SetParameter("fill_level", visuals.FillLevel);
+            shader.SetParameter("line_level", visuals.LineLevel);
+            shader.SetParameter("rim_level", visuals.RimLevel);
+            shader.SetParameter("core_fade", visuals.CoreFade);
+            shader.SetParameter("shard_scale", visuals.ShardScale);
+            shader.SetParameter("alpha_bands", visuals.AlphaBands);
+            shader.SetParameter("breath_depth", visuals.BreathDepth);
+
+            handle.UseShader(shader);
+            var angle = new Angle(MathF.Atan2(transform.Quaternion2D.S, transform.Quaternion2D.C));
+            handle.SetTransform(Matrix3Helpers.CreateTransform(transform.Position, angle));
+            handle.DrawTextureRect(Texture.White, Box2.CenteredAround(Vector2.Zero, size));
         }
+
+        PruneShaders();
+        handle.SetTransform(Matrix3x2.Identity);
+        handle.UseShader(null);
     }
 
-    private void DrawShield(
-        DrawingHandleWorld handle,
-        ChainShape chain,
-        Transform transform,
-        Texture tex,
-        Color color,
-        List<DrawVertexUV2D> verts)
+    private ShaderInstance GetShader(EntityUid uid)
     {
-        // The vertices of this fixture are defined relative to local position,
-        // so we'll have to add them to this and then use the matrix to put them back in world position.
-        // If "Transforms" ever get deprecated go ahead and check how DebugPHysicsSystem is drawing chains in this hellworld future
+        if (_shaders.TryGetValue(uid, out var existing))
+            return existing;
+        var shader = _baseShader.Duplicate();
+        _shaders[uid] = shader;
+        return shader;
+    }
 
-        // Mono Update: Just use transform.Position for world position already for corners
-
-        for (int i = 1; i < chain.Count; i++)
+    private void PruneShaders()
+    {
+        List<EntityUid>? remove = null;
+        foreach (var uid in _shaders.Keys)
         {
-            // top left corner
-            var leftVertex = VertexToWorldPos(chain.Vertices[i - 1], transform);
-
-            // top right corner
-            var rightVertex = VertexToWorldPos(chain.Vertices[i], transform);
-
-            // bottom left corner
-            var leftCorner = Corner(leftVertex, transform);
-
-            // bottom right corner
-            var rightCorner = Corner(rightVertex, transform);
-
-            // Assemble 2 triangles.
-
-            // Triangle one: top left, top right, bottom left
-            verts.Add(new DrawVertexUV2D(leftVertex, new Vector2(0, 1)));
-            verts.Add(new DrawVertexUV2D(rightVertex, new Vector2(1, 1)));
-            verts.Add(new DrawVertexUV2D(leftCorner, Vector2.Zero));
-
-            // Triangle two: top right, bottom left, bottom right
-            verts.Add(new DrawVertexUV2D(rightVertex, new Vector2(1, 1)));
-            verts.Add(new DrawVertexUV2D(leftCorner, Vector2.Zero));
-            verts.Add(new DrawVertexUV2D(rightCorner, new Vector2(1, 0)));
+            if (_seen.Contains(uid))
+                continue;
+            remove ??= new List<EntityUid>();
+            remove.Add(uid);
         }
 
-        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, texture: tex, CollectionsMarshal.AsSpan(verts), color);
+        if (remove == null)
+            return;
+        foreach (var uid in remove)
+        {
+            _shaders[uid].Dispose();
+            _shaders.Remove(uid);
+        }
     }
 
-    private static Vector2 VertexToWorldPos(Vector2 vertexPos, Transform transform)
+    private static bool TryGetChainLocalBounds(ChainShape chain, out Box2 localBounds)
     {
-        return Transform.Mul(transform, vertexPos);
-    }
-
-    private static Vector2 Corner(Vector2 vertexPos, Transform transform, float radius = 1.3f)
-    {
-        var cornerPos = Vector2.Subtract(vertexPos, transform.Position);
-        cornerPos.Normalize();
-        cornerPos *= radius;
-
-        return Vector2.Subtract(vertexPos, cornerPos);
+        localBounds = default;
+        if (chain.Count < 2)
+            return false;
+        localBounds = Box2.CenteredAround(chain.Vertices[0], Vector2.Zero);
+        for (var i = 0; i < chain.Count; i++)
+            localBounds = localBounds.ExtendToContain(chain.Vertices[i]);
+        return localBounds.Width > 0f && localBounds.Height > 0f;
     }
 }
+// LuaM-end

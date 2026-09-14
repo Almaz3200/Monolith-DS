@@ -168,7 +168,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 4500
+        damage: 13800 # LuaM: 4500 > 13800
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -177,7 +177,7 @@
           collection: MetalSlam
     - trigger:
         !type:DamageTrigger
-        damage: 4000
+        damage: 13300 # LuaM: 4000 > 13300
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -336,13 +336,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 15100
+        damage: 30100 # LuaM 15100 > 30100
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 15000
+        damage: 30000 # LuaM 15000 > 30000
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -369,13 +369,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 10100
+        damage: 30100 # LuaM 10100 > 30100
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 10000
+        damage: 30000 # LuaM 10000 > 30000
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -430,13 +430,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 2100
+        damage: 13800 # LuaM 2100 > 13800
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 2000
+        damage: 13300 # LuaM: 2000 > 13300
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:

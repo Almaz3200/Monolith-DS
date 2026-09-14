@@ -329,6 +329,6 @@
     shape:
       - 0, 0, 4, 4
       - 0, 3, 6, 5
-  # Mono
-  - type: ShipNpcTarget
-    needGrid: NoGrid
+# Mono
+  # - type: ShipNpcTarget # Commented by LuaM
+  #   needGrid: NoGrid

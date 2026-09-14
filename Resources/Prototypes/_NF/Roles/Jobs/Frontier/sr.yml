@@ -32,7 +32,7 @@
   - HeadOfPersonnel #Mono
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ] # Mono - remove TSFMC implant
+    implants: [ FreelanceTrackingImplant , TrackingImplant ] # Mono - remove TSFMC implant # LuaM: MindShieldImplant > FreelanceTrackingImplant , TrackingImplant
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff

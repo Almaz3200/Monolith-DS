@@ -130,7 +130,7 @@
   - type: SurgerySpeedModifier
     speedModifier: 1.5
 
-- type: roleLoadout
-  id: RoleSurvivalTankOnly
-  groups:
-  - GroupEVATank
+#- type: roleLoadout # LuaM: replaced to _LuaM/Entities/Mobs/Ghostroles/DeadSquadNord/roles.yml
+#  id: RoleSurvivalTankOnly
+#  groups:
+#  - GroupEVATank

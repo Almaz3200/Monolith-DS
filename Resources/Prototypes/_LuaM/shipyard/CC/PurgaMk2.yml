@@ -1,0 +1,41 @@
+- type: vessel
+  id: PurgaMk2
+  parent: BaseVesselAntag
+  name: vessel-PurgaMk2-name
+  description: vessel-PurgaMk2-desc
+  price: 176000
+  purchasable: true
+  category: Medium
+  group: Sr
+  access: Security
+  mapchecker_group_override: Security
+  shuttlePath: /Maps/_LuaM/Shuttles/CC/PurgaMk2.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  - Corvette
+  engine:
+  - Bananium
+  addComponents:
+    - type: IFF
+      color: "#009900"
+
+- type: gameMap
+  id: PurgaMk2
+  mapName: 'PurgaMk2'
+  mapPath: /Maps/_LuaM/Shuttles/CC/PurgaMk2.yml
+  minPlayers: 0
+  stations:
+    PurgaMk2:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'PurgaMk2 SEC{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]
+          Borg: [ 0, 0 ]
+          SecurityGuard: [ 0, 0 ]

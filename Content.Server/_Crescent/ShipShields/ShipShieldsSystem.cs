@@ -39,6 +39,8 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        UpdateShieldVisuals(frameTime); // LuaM
+
         var query = EntityQueryEnumerator<ShipShieldEmitterComponent, ApcPowerReceiverComponent>();
         while (query.MoveNext(out var uid, out var emitter, out var power))
         {
@@ -109,6 +111,33 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             // Forge-Change-End
         }
     }
+
+    // LuaM-start: animate shuttle shield formation and destruction.
+    private void UpdateShieldVisuals(float frameTime)
+    {
+        var query = EntityQueryEnumerator<ShipShieldVisualsComponent>();
+        while (query.MoveNext(out var uid, out var visuals))
+        {
+            if (visuals.Shatter > 0f)
+            {
+                visuals.Shatter += frameTime / MathF.Max(visuals.ShatterTime, 0.01f);
+                Dirty(uid, visuals);
+
+                if (visuals.Shatter >= 1f)
+                    TryQueueDel(uid);
+
+                continue;
+            }
+
+            if (visuals.Form >= 1f)
+                continue;
+
+            visuals.Form = MathF.Min(visuals.Form + frameTime / MathF.Max(visuals.SpinupTime, 0.01f), 1f);
+            Dirty(uid, visuals);
+        }
+    }
+    // LuaM-end
+
     public override void Initialize()
     {
         base.Initialize();
@@ -204,11 +233,18 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
         // Copy shield color from the generator to the shield visuals
         var shieldVisuals = EnsureComp<ShipShieldVisualsComponent>(shield);
+        // LuaM-start: initialize shader animation state.
+        shieldVisuals.Form = 0f;
+        shieldVisuals.Shatter = 0f;
         if (source != null && TryComp<ShipShieldEmitterComponent>(source.Value, out var emitter))
         {
-            shieldVisuals.ShieldColor = emitter.ShieldColor;
-            Dirty(shield, shieldVisuals);
+            var color = emitter.ShieldColor;
+            if (color.A >= 1f)
+                color = color.WithAlpha(0.92f);
+            shieldVisuals.ShieldColor = color;
         }
+        Dirty(shield, shieldVisuals);
+        // LuaM-end
 
         var gridCenter = new EntityCoordinates(entity, mapGrid.LocalAABB.Center);
         _transformSystem.SetCoordinates(shield, gridCenter);
@@ -253,10 +289,40 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         if (!Resolve(uid, ref component, false))
             return false;
 
-        TryQueueDel(component.Shield);
+        // LuaM-start: keep the visual entity briefly for the shatter animation.
+        var shield = component.Shield;
         RemComp<ShipShieldedComponent>(uid);
+
+        if (TryComp<ShipShieldVisualsComponent>(shield, out var visuals) && visuals.Shatter <= 0f)
+        {
+            visuals.Shatter = float.Epsilon;
+            Dirty(shield, visuals);
+            SoftenShieldCollision(shield);
+            return true;
+        }
+
+        TryQueueDel(shield);
+        // LuaM-end
         return true;
     }
+
+    // LuaM-start: a shattering shield must no longer block projectiles.
+    private void SoftenShieldCollision(EntityUid shield)
+    {
+        if (!TryComp<FixturesComponent>(shield, out var fixtures) || !TryComp<PhysicsComponent>(shield, out var physics))
+            return;
+
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            _physicsSystem.SetHard(shield, fixture, false, fixtures);
+        }
+
+        _physicsSystem.WakeBody(shield, body: physics);
+    }
+    // LuaM-end
 
     private ChainShape GenerateOvalFixture(EntityUid uid, string name, PhysicsComponent physics, MapGridComponent mapGrid, float padding)
     {

@@ -5,7 +5,7 @@
   parent: BaseVesselAntag
   name: vessel-drakon-name # LuaM-locale
   description: vessel-drakon-desc # LuaM-locale
-  price: 134550 # LuaM: 85290 > 134550
+  price: 203550 # LuaM: 85290 > 203550
   category: Medium
   group: Ussp
   access: Mercenary

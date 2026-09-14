@@ -488,6 +488,9 @@
     pack: NFPTechNfsdInventory
   - type: AccessReader
     access: [["HeadOfSecurity"]]
+  - type: CompanyAccessReader # LuaM add
+    requiredCompanies:
+    - TSF
 
 # Punk stuff
 - type: entity

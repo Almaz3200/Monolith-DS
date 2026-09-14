@@ -43,9 +43,10 @@ public sealed partial class FireControlWindow : FancyWindow
 
         IFFToggle.OnToggled += OnIFFTogglePressed;
         IFFToggle.Pressed = NavRadar.ShowIFF;
-
-        DockToggle.OnToggled += OnDockTogglePressed;
-        DockToggle.Pressed = NavRadar.ShowDocks;
+        // LuaM-comented-start:
+        // DockToggle.OnToggled += OnDockTogglePressed;
+        // DockToggle.Pressed = NavRadar.ShowDocks;
+        // LuaM-comented-end
     }
 
     private void SelectAllWeapons(BaseButton.ButtonEventArgs args)
@@ -147,14 +148,19 @@ public sealed partial class FireControlWindow : FancyWindow
     private void OnIFFTogglePressed(BaseButton.ButtonEventArgs args)
     {
         NavRadar.ShowIFF ^= true;
+        NavRadar.ShowDocks = NavRadar.ShowIFF; // LuaM ShowDocks
         args.Button.Pressed = NavRadar.ShowIFF;
     }
 
+// LuaM-comented-start:
+/*
     private void OnDockTogglePressed(BaseButton.ButtonEventArgs args)
     {
         NavRadar.ShowDocks ^= true;
         args.Button.Pressed = NavRadar.ShowDocks;
     }
+*/
+// LuaM-comented-end
 
     /// <summary>
     /// Updates the text of a weapon button based on its selection state and manual reload status.
@@ -286,9 +292,9 @@ public sealed partial class FireControlWindow : FancyWindow
                 {
                     ToggleMode = true,
                     Text = controllable.Name,
-                    StyleClasses = { "ButtonSquare OpenRight" },
+                    StyleClasses = { "ButtonSquare" },// LuaM "ButtonSquare OpenRight" > "ButtonSquare"
                     HorizontalExpand = true,
-                    Margin = new Thickness(4, 1)
+                    Margin = new Thickness(4, 2) // LuaM (4, 1) > (4, 2)
                 };
 
                 button.OnToggled += _ =>

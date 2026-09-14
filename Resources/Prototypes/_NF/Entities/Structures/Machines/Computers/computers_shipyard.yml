@@ -49,8 +49,8 @@
   id: ComputerShipyard
   components:
   - type: ShipyardConsole
-    newJobTitle: Captain
-  # - type: CompanyAccessReader # LuaM delete
+#    newJobTitle: Captain # Commented by LuaM
+  # - type: CompanyAccessReader # Commented by LuaM
   #   requiredCompanies:
   #   - TSF
   #   - PDV
@@ -109,6 +109,9 @@
   - type: ShipyardConsole
     shipyardChannel: Nfsd
     newAccessLevels: [Captain, Security, Brig]
+  - type: CompanyAccessReader # LuaM add
+    requiredCompanies:
+    - TSF
 
 - type: entity
   id: ComputerShipyardSyndicate
@@ -171,6 +174,9 @@
       BlackMarket: 0.30 # Made BM - Mono
     ignoreBaseSaleRate: true # Fixed 70% sale rate.
     canTransferDeed: false
+  - type: CompanyAccessReader # LuaM add
+    requiredCompanies:
+    - PDV
 
 - type: entity
   id: ComputerShipyardExpedition

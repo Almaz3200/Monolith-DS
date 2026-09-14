@@ -49,9 +49,9 @@
   description: Shootouts with syndicate agents are just another Tuesday for this HoS. This mantle is a symbol of commitment to the station.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/mantles/hosmantle.rsi
+    sprite: _Corvax/Forge/Clothing/Neck/mantles/hosmantle.rsi #LuaM: Clothing/Neck/mantles/hosmantle.rsi < _Corvax/Forge/Clothing/Neck/mantles/hosmantle.rsi
   - type: Clothing
-    sprite: Clothing/Neck/mantles/hosmantle.rsi
+    sprite: _Corvax/Forge/Clothing/Neck/mantles/hosmantle.rsi #LuaM: Clothing/Neck/mantles/hosmantle.rsi < _Corvax/Forge/Clothing/Neck/mantles/hosmantle.rsi
 
 - type: entity
   parent: ClothingNeckBase

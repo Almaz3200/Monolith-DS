@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBase]
   id: ClothingHeadHelmetHardsuitM82
   name: M82 helmet
   description: The interchangeable helmet system for the majority of M82 hardsuits. Outfitted with a basic NVG system.
@@ -12,9 +12,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
   - type: Armor
     modifiers:
       coefficients:
@@ -28,6 +25,18 @@
     - Snout
     - HeadTop
     - HeadSide
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#337a98"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
 
 - type: entity
   parent: [ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons ] # LuaM add ShowSecurityIcons
@@ -42,10 +51,7 @@
     sprite: _Mono/Clothing/Head/Hardsuits/m86.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: NightVision
-    flashDurationMultiplier: 2.25
-    isEquipment: true
+    lowPressureMultiplier: 1000.
   - type: Armor
     modifiers:
       coefficients:
@@ -59,6 +65,37 @@
     - Snout
     - HeadTop
     - HeadSide
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#337a98"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
+
+# MARSOC helmet
+- type: entity
+  parent: ClothingHeadHelmetHardsuitM86
+  id: ClothingHeadHelmetHardsuitM86Mk4
+  categories: [ HideSpawnMenu ]
+  components:
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#337a98"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
 
 - type: entity
   parent: [NFClothingHeadHardsuitWithLightBaseNfsd, ShowMedicalIcons, ShowSecurityIcons]
@@ -93,9 +130,6 @@
     lowPressureMultiplier: 1000
   - type: EyeProtection
     protectionTime: 15
-  - type: NightVision
-    flashDurationMultiplier: 2.75
-    isEquipment: true
   - type: Armor
     modifiers:
       coefficients:
@@ -103,6 +137,18 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#337a98"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
 
 #Security Command Hardsuit
 - type: entity

@@ -1,0 +1,25 @@
+- type: entity
+  name: Three barreled sawed off shotgun (4 gauge)
+  parent: BaseWeaponShotgun
+  id: WeaponTBShotgunSawn
+  description: Yarggh... This is a cutdown, but it fires a .4 caliber; a file and the skilled hands of pirates brought it to this state.
+  components:
+  - type: Sprite
+    sprite: _DV/Objects/Weapons/Guns/Shotguns/sawn.rsi
+  - type: Clothing
+    sprite: _DV/Objects/Weapons/Guns/Shotguns/sawn.rsi
+  - type: Item
+    size: Small
+    sprite: _DV/Objects/Weapons/Guns/Shotguns/sawn.rsi
+  - type: Gun
+    fireRate: 4
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - ShellShotgun23x75mmBuckshot
+    capacity: 3
+    proto: ShellShotgun23x75mmBuckshot
+  - type: GunSpreadModifier
+    spread: 1.4
+  - type: StaticPrice
+    price: 300

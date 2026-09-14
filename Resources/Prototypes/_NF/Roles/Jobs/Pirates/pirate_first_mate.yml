@@ -34,6 +34,8 @@
       - PirateNF
   - !type:AddImplantSpecial
     implants: [ FreelanceTrackingImplant ]
+  - !type:AddImplantSpecial # LuaM add
+    implants: [ RadioImplantFreelance ]
   - !type:AddLanguageSpecial # Monolith - Languages
     languagesSpoken:
     - Freespeak

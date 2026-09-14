@@ -118,15 +118,17 @@
     shield:
       maxCharge: 450
       regenRate: 6
-      spinupTime: 5
-      breakCooldown: 30
+      spinupTime: 0.5
+      breakCooldown: 25
       powerDraw: 0.5
   - type: Battery
-    maxCharge: 60
-    startingCharge: 60
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 0.1
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
 # LuaM-end.
 
 - type: entity
@@ -174,15 +176,17 @@
     shield:
       maxCharge: 350
       regenRate: 6
-      spinupTime: 5
-      breakCooldown: 30
+      spinupTime: 0.5
+      breakCooldown: 25
       powerDraw: 0.5
   - type: Battery
-    maxCharge: 60
-    startingCharge: 60
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 0.1
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
 # LuaM-end.
 
 - type: entity
@@ -238,15 +242,17 @@
     shield:
       maxCharge: 500
       regenRate: 6
-      spinupTime: 5
-      breakCooldown: 30
+      spinupTime: 0.5
+      breakCooldown: 20
       powerDraw: 0.5
   - type: Battery
-    maxCharge: 60
-    startingCharge: 60
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 0.1
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
 # LuaM-end.
 
 #  - type: Blocking # Commented by LuaM
@@ -311,19 +317,29 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.1 # LuaM: 0.9 > 1.1
     sprintModifier: 1.1 # LuaM: 0.875 > 1.1
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitM86Mk4
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
 # LuaM-start:
   - type: PersonalShield
     color: "#FF00FFFF"
     shield:
       maxCharge: 500
       regenRate: 6
-      spinupTime: 5
-      breakCooldown: 30
+      spinupTime: 0.5
+      breakCooldown: 20
       powerDraw: 0.5
   - type: Battery
-    maxCharge: 60
-    startingCharge: 60
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 0.1
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
 # LuaM-end.

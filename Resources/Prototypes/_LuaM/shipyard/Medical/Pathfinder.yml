@@ -10,6 +10,7 @@
   limit: 2
   price: 264000
   category: Medium
+  access: Medical
   group: Medical
   shuttlePath: /Maps/_LuaM/Shuttles/Medical/Pathfinder.yml
   guidebookPage: null

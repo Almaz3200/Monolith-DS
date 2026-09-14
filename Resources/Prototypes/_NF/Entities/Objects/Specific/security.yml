@@ -81,6 +81,9 @@
   - type: Tag
     tags:
     - SecurityUplink
+  - type: CompanyAccessReader # LuaM add
+    requiredCompanies:
+    - TSF
 
 - type: entity
   parent: BaseSecurityUplinkRadio
@@ -98,7 +101,7 @@
   components:
   - type: Store
     balance:
-      FederationMilitaryCredit: 125
+      FederationMilitaryCredit: 35 # LuaM: 75 > 35
   - type: Tag
     tags:
       - SecurityUplink
@@ -111,7 +114,7 @@
   components:
   - type: Store
     balance:
-      FederationMilitaryCredit: 100
+      FederationMilitaryCredit: 30 # LuaM: 75 > 30
 
 - type: entity
   parent: BaseSecurityUplinkRadio
@@ -120,7 +123,7 @@
   components:
   - type: Store
     balance:
-      FederationMilitaryCredit: 75
+      FederationMilitaryCredit: 25 # LuaM: 75 > 25
 
 #Mono
 
@@ -131,7 +134,7 @@
   components:
   - type: Store
     balance:
-      FederationMilitaryCredit: 75
+      FederationMilitaryCredit: 25 # LuaM: 75 > 25
 
 #Mono End
 

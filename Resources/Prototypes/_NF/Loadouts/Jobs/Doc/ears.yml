@@ -1,4 +1,4 @@
 - type: loadout
   id: DocClothingHeadsetDoc
   equipment:
-    ears: ClothingHeadsetDoc
+    ears: ClothingHeadsetAltCentComSR # LuaM: ClothingHeadsetDoc > ClothingHeadsetAltCentComSR

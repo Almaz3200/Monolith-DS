@@ -85,6 +85,10 @@
   - type: EmitSoundOnLand
     sound:
       collection: PistolsDrop
+  - type: Multishot
+    missChance: 0.175 # LuaM: 0.4 > 0.175
+    spreadMultiplier: 0.75 # LuaM: 2 > 0.75
+    spreadAddition: 15 # LuaM: 40 > 15
   # Goobstation edit end
 
 - type: entity
@@ -258,7 +262,7 @@
   - type: AmmoCounter
 
 - type: entity
-  name: CS PT-72 cobra (635x40mm)
+  name: CS PT-72 cobra (6.35x40mm)
   parent: BaseWeaponPistol
   id: WeaponPistolCobra
   description: A rugged, robust spec-ops handgun with an inbuilt silencer. Uses 6.35x40mm Caseless ammo. A common sight among Phaethon imperials, they are the most commonly seen sidearm among boarding crews or agents.

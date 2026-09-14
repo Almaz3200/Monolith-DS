@@ -1,0 +1,13 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMantleUI
+  name: mantle U.I.
+  description: Mantle that covers the right side of the body, possibly under a hood or other equipment.
+  components:
+  - type: Sprite
+    sprite: _Corvax/Forge/Clothing/Neck/mantles/ui_mantle.rsi
+  - type: Clothing
+    sprite: _Corvax/Forge/Clothing/Neck/mantles/ui_mantle.rsi
+  - type: StaticPrice
+    price: 50
+    vendPrice: 100

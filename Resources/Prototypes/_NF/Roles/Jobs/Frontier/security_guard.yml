@@ -24,16 +24,11 @@
   - Captain
   - Frontier
   special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ] # Mono - remove TSFMC implant
+#  - !type:AddImplantSpecial  # LuaM Commented
+#    implants: [ MindShieldImplant ] # Mono - remove TSFMC implant
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday
     prototype: FrontierBirthdayGift
-  - !type:AddLanguageSpecial # LuaM
-    languagesSpoken:
-    - SolCommon
-    languagesUnderstood:
-    - SolCommon
 
 - type: startingGear
   id: SecurityGuardGear

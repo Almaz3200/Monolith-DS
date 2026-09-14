@@ -15,7 +15,7 @@
   minimumDistance: 3400
   maximumDistance: 5800
   spawnGroup: RestStop
-  gridPath: /Maps/_NF/POI/tinnia.yml
+  gridPath: /Maps/_LuaM/POI/TiniaLuaM.yml #LuaM: /Maps/_NF/POI/tinnia.yml > /Maps/_LuaM/POI/TiniaLuaM.yml
   addComponents:
   - type: StationTransit
   - type: SolarPoweredGrid
@@ -25,7 +25,7 @@
 - type: gameMap
   id: Tinnia
   mapName: "Tinnia's Rest"
-  mapPath: /Maps/_NF/POI/tinnia.yml
+  mapPath: /Maps/_LuaM/POI/TiniaLuaM.yml #LuaM: /Maps/_NF/POI/tinnia.yml > /Maps/_LuaM/POI/TiniaLuaM.yml
   minPlayers: 0
   stations:
     Tinnia:

@@ -145,20 +145,23 @@ public sealed partial class DockingScreen : BoxContainer
             if (!dock.Connected || dock.GridDockedWith == null || !_ourDockButtons.TryGetValue(dock.Entity, out var button))
                 continue;
 
-            if (button.ChildCount == 0)
-                continue;
+            button.ModulateSelfOverride = enabled ? Color.Red : null; // LuaM
+            // LuaM-comented-start:
+            // if (button.ChildCount == 0)
+            //     continue;
 
-            var buttonContainer = button.GetChild(0) as BoxContainer;
-            if (buttonContainer == null || buttonContainer.ChildCount < 2)
-                continue;
+            // var buttonContainer = button.GetChild(0) as BoxContainer;
+            // if (buttonContainer == null || buttonContainer.ChildCount < 2)
+            //     continue;
 
-            var lockIndicator = buttonContainer.GetChild(1) as Label;
-            if (lockIndicator == null)
-                continue;
+            // var lockIndicator = buttonContainer.GetChild(1) as Label;
+            // if (lockIndicator == null)
+            //     continue;
 
-            // Use the pressed button state to update indicators
-            lockIndicator.Text = enabled ? "LOCKED" : "UNLOCKED";
-            lockIndicator.FontColorOverride = enabled ? Color.Red : Color.Green;
+            // // Use the pressed button state to update indicators
+            // lockIndicator.Text = enabled ? "LOCKED" : "UNLOCKED";
+            // lockIndicator.FontColorOverride = enabled ? Color.Red : Color.Green;
+            // LuaM-comented-end
         }
     }
 
@@ -280,27 +283,31 @@ public sealed partial class DockingScreen : BoxContainer
         {
             if (!_ourDockButtons.TryGetValue(dock.Entity, out var button))
                 continue;
+            // LuaM-comented-start:
+            // // Find the lock indicator label in the button's children
+            // if (button.ChildCount == 0)
+            //     continue;
 
-            // Find the lock indicator label in the button's children
-            if (button.ChildCount == 0)
-                continue;
-
-            var buttonContainer = button.GetChild(0) as BoxContainer;
-            if (buttonContainer == null)
-                continue;
+            // var buttonContainer = button.GetChild(0) as BoxContainer;
+            // if (buttonContainer == null)
+            //     continue;
+            // LuaM-comented-end
 
             // Only update if connected to another grid
             if (!dock.Connected || dock.GridDockedWith == null)
             {
-                // If there's a lock indicator but no connection anymore, remove it
-                if (buttonContainer.ChildCount > 1)
-                {
-                    var existingIndicator = buttonContainer.GetChild(1);
-                    if (existingIndicator != null)
-                    {
-                        buttonContainer.RemoveChild(existingIndicator);
-                    }
-                }
+                // LuaM-comented-start:
+                // // If there's a lock indicator but no connection anymore, remove it
+                // if (buttonContainer.ChildCount > 1)
+                // {
+                //     var existingIndicator = buttonContainer.GetChild(1);
+                //     if (existingIndicator != null)
+                //     {
+                //         buttonContainer.RemoveChild(existingIndicator);
+                //     }
+                // }
+                // LuaM-comented-end
+                button.ModulateSelfOverride = null; // LuaM return color
                 continue;
             }
 
@@ -310,35 +317,39 @@ public sealed partial class DockingScreen : BoxContainer
 
             var dockedEntity = _entManager.GetEntity(dock.GridDockedWith.Value);
 
-            // Log the actual state we're seeing vs what we're showing
+             // Log the actual state we're seeing vs what we're showing
             if (_entManager.TryGetComponent<FTLLockComponent>(dockedEntity, out var lockComp))
             {
                 Logger.DebugS("shuttle", $"UpdateDockLockIndicators: Entity {dockedEntity} component says FTLLock.Enabled = {lockComp.Enabled}, UI showing = {isLocked}");
             }
 
-            // Get or create lock indicator
-            Label? lockIndicator = null;
-            if (buttonContainer.ChildCount > 1)
-            {
-                lockIndicator = buttonContainer.GetChild(1) as Label;
-            }
+            button.ModulateSelfOverride = isLocked ? Color.Red : null; // LuaM
 
-            if (lockIndicator == null)
-            {
-                // Create new lock indicator if it doesn't exist
-                lockIndicator = new Label
-                {
-                    HorizontalAlignment = Control.HAlignment.Right,
-                    VerticalAlignment = Control.VAlignment.Center,
-                    Margin = new Thickness(2f, 0f),
-                    MinWidth = 70
-                };
-                buttonContainer.AddChild(lockIndicator);
-            }
+            // LuaM-comented-start:
+            // // Get or create lock indicator
+            // Label? lockIndicator = null;
+            // if (buttonContainer.ChildCount > 1)
+            // {
+            //     lockIndicator = buttonContainer.GetChild(1) as Label;
+            // }
 
-            // Update the lock indicator
-            lockIndicator.Text = isLocked ? "LOCKED" : "UNLOCKED";
-            lockIndicator.FontColorOverride = isLocked ? Color.Red : Color.Green;
+            // if (lockIndicator == null)
+            // {
+            //     // Create new lock indicator if it doesn't exist
+            //     lockIndicator = new Label
+            //     {
+            //         HorizontalAlignment = Control.HAlignment.Right,
+            //         VerticalAlignment = Control.VAlignment.Center,
+            //         Margin = new Thickness(2f, 0f),
+            //         MinWidth = 70
+            //     };
+            //     buttonContainer.AddChild(lockIndicator);
+            // }
+
+            // // Update the lock indicator
+            // lockIndicator.Text = isLocked ? "LOCKED" : "UNLOCKED";
+            // lockIndicator.FontColorOverride = isLocked ? Color.Red : Color.Green; 
+            // LuaM-comented-end
         }
     }
 
@@ -409,18 +420,19 @@ public sealed partial class DockingScreen : BoxContainer
                 {
                     Logger.DebugS("shuttle", $"Dock {dock.Name} connected to entity {dockedEntity}: Component says FTLLock.Enabled = {lockComp.Enabled}, UI button state = {isLocked}");
                 }
-
-                // Add a lock icon/indicator for the connected grid
-                var lockIndicator = new Label
-                {
-                    Text = isLocked ? "LOCKED" : "UNLOCKED",
-                    HorizontalAlignment = Control.HAlignment.Right,
-                    VerticalAlignment = Control.VAlignment.Center,
-                    Margin = new Thickness(2f, 0f),
-                    FontColorOverride = isLocked ? Color.Red : Color.Green,
-                    MinWidth = 70
-                };
-                buttonContainer.AddChild(lockIndicator);
+                // LuaM-comented-start:
+                // // Add a lock icon/indicator for the connected grid
+                // var lockIndicator = new Label
+                // {
+                //     Text = isLocked ? "LOCKED" : "UNLOCKED",
+                //     HorizontalAlignment = Control.HAlignment.Right,
+                //     VerticalAlignment = Control.VAlignment.Center,
+                //     Margin = new Thickness(2f, 0f),
+                //     FontColorOverride = isLocked ? Color.Red : Color.Green,
+                //     MinWidth = 70
+                // };
+                // buttonContainer.AddChild(lockIndicator);
+                // LuaM-comented-end
             }
 
             var button = new Button()
@@ -428,8 +440,17 @@ public sealed partial class DockingScreen : BoxContainer
                 ToggleMode = true,
                 Group = buttonGroup,
                 Margin = new Thickness(0f, 3f),
-                HorizontalExpand = true
+                HorizontalExpand = true,
+                StyleClasses = { "ButtonSquare" } // LuaM square button
             };
+
+            // LuaM-start: | painting button
+            if (dock.Connected && dock.GridDockedWith != null)
+            {
+                bool isLocked = FTLLockEnabledButton.Pressed;
+                button.ModulateSelfOverride = isLocked ? Color.Red : null;
+            }
+            // Lua-end
 
             // Add the container with text and lock indicator to the button
             button.AddChild(buttonContainer);

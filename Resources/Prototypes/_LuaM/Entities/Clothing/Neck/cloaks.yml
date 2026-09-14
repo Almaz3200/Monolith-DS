@@ -1,0 +1,108 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakBlueStar
+  name: the cloak of the Blue Star
+  description: A warm, cozy cloak that has a woolen layer inside to shield against the cold. On the back, however, an emblem in the shape of a four-pointed star was displayed.
+  components:
+  - type: Sprite
+    sprite: _LuaM/Clothing/Necks/AkiPlash/AkiPlash-base.rsi
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakBlueStarRed
+  name: the сloak of the Crimson Star.
+  description: A warm, cozy cloak that has a woolen layer inside to shield against the cold. On the back, however, an emblem in the shape of a four-pointed star was displayed.
+  components:
+  - type: Sprite
+    sprite:  _LuaM/Clothing/Necks/AkiPlash/Akiplash-red.rsi
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakBlueStarHoscloack
+  name: shoulder cloak of the Blue Star.
+  description: A warm, cozy cloak that has a woolen layer inside to shield against the cold. On the back, however, an emblem in the shape of a four-pointed star was displayed.
+  components:
+  - type: Sprite
+    sprite:  _LuaM/Clothing/Necks/AkiPlash/Akiplash-hoscloakforma.rsi
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakBlueStarBlack
+  name: the cloak of the Dark Star.
+  description: A warm, cozy cloak that has a woolen layer inside to shield against the cold. On the back, however, an emblem in the shape of a four-pointed star was displayed.
+  components:
+  - type: Sprite
+    sprite:  _LuaM/Clothing/Necks/AkiPlash/Akiplash-black.rsi
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakBlueStarWhite
+  name: cape of the Polar Star.
+  description: A warm, cozy cloak that has a woolen layer inside to shield against the cold. On the back, however, an emblem in the shape of a four-pointed star was displayed.
+  components:
+  - type: Sprite
+    sprite:  _LuaM/Clothing/Necks/AkiPlash/Akiplash-white.rsi
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakBlueStarPROBA
+  suffix: Admem
+  name: the cloak of the Blue Star
+  description: A warm, cozy cloak that has a woolen layer inside to shield against the cold. On the back, however, an emblem in the shape of a four-pointed star was displayed.
+  components:
+  - type: Sprite
+    sprite:  _LuaM/Clothing/Necks/AkiPlash/AkiPlash-base.rsi
+  - type: ToggleableClothing         
+    clothingPrototypes:              
+      head: ClothingHeadHatHoodBlueStar 
+    requiredSlot:                     
+    - neck                            
+  - type: UserInterface               
+    interfaces:                        
+      enum.ToggleClothingUiKey.Key:    
+        type: ToggleableClothingBoundUserInterface  
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container {}  
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodBlueStar
+  categories: [ HideSpawnMenu ]
+  name: Blue Star Hood
+  description: The hood is warm enough to cover your eyes, but it still allows you to see clearly.
+  components:
+  - type: Sprite
+    sprite:  _LuaM/Clothing/Necks/AkiPlash/AkiPlash-helmet.rsi
+  - type: Clothing
+    sprite:  _LuaM/Clothing/Necks/AkiPlash/AkiPlash-helmet.rsi

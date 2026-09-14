@@ -26,6 +26,18 @@
     pulseTime: 1
     isEquipment: true
     toggleAction: PulseThermalVision
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
   - type: RadarConsole
     followEntity: true
     noRotate: true

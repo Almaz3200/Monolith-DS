@@ -137,6 +137,7 @@
 #  - ClothingUniformRandomPunkCroptopShorts # Commented by LuaM
 #  - ClothingOuterCoatLettermanRandomized # Commented by LuaM
 #  - ClothingOuterCoatBomberRandomized # Commented by LuaM
+  - ClothingBackpackJack
 ## EVA / Hardsuits
   - ClothingOuterHardsuitCap
   - ClothingOuterHardsuitMercenary
@@ -180,7 +181,6 @@
   - WeaponXrayCannon
 #Mono start
   - WeaponLMGRatel
-  - WeaponRifleIroh
   - WeaponShotgunBigBuddy
   - WeaponShotgunBigJohnny
   - WeaponShotgunEnforcerMerc
@@ -207,6 +207,7 @@
   - UllmanWeaponPulseRifle
   - UllmanWeaponPulseSniper
   - UllmanMeleePlasmaBlade
+  - WeaponShotgunJack
   ## LPC
   - BalorDroneVoucherMerc
 #Mono end

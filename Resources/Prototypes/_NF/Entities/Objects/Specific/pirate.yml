@@ -85,6 +85,9 @@
   - type: Tag
     tags:
     - PirateUplink
+  - type: CompanyAccessReader # LuaM add
+    requiredCompanies:
+    - PDV
 
 - type: entity
   parent: BasePirateUplink
@@ -102,7 +105,7 @@
   components:
   - type: Store
     balance:
-      Doubloon: 125
+      Doubloon: 35 # LuaM: 125 > 35
   - type: Tag
     tags:
     - PirateUplink
@@ -115,7 +118,7 @@
   components:
   - type: Store
     balance:
-      Doubloon: 75
+      Doubloon: 25 # LuaM: 75 > 25
 
 - type: entity
   parent: BasePirateUplink
@@ -124,4 +127,4 @@
   components:
   - type: Store
     balance:
-      Doubloon: 100
+      Doubloon: 30 # LuaM: 100 > 30

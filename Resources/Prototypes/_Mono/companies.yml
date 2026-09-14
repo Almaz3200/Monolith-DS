@@ -10,27 +10,27 @@
 
 - type: company
   id: TSF
-  name: TSF
+  name: Корпус Морпехов ТСФ # LuaM: TSF > Корпус Морпехов ТСФ
   color: "#047ABD"
   disabled: true
   companyUplinkCurrency: FederationMilitaryCredit
 
 - type: company
   id: PDV
-  name: PDV
-  color: "#D2B48C"
+  name: Авангард «Нордфолл» # LuaM: PDV > Vanguard Nordfall Locale: «Авангард Нордфолл»
+  color: "#E03131FF" # LuaM: #D2B48C > #E03131FF
   disabled: true
   companyUplinkCurrency: Doubloon
 
 - type: company
   id: MD
-  name: MED
+  name: Медицинский Персонал # LuaM: MED > Медицинский Персонал
   color: "#3B8EEA"
   disabled: true
 
 - type: company
   id: Colonial
-  name: Colonial Staff
+  name: Персонал Колосса # LuaM: Colonial Staff > Персонал Колосса
   color: "#279659"
   disabled: true
 
@@ -169,12 +169,13 @@
   name: The Hive
   description: The-Hive-description
   color: "#5918a8"
+  disabled: true # LuaM add
 
 # Black Market Companies
 
 - type: company
   id: paycheckbratva
-  name: Paycheck Bratva
+  name: Пайчек Братва # LuaM: Paycheck Bratva > Пайчек Братва
   description: paycheck-bratva-description
   color: "#7a0303"
 
@@ -192,7 +193,7 @@
   description: viper-group-description
   color: "#B82121"
   image: /Textures/_Mono/Companies/thevipergroup.png # Example
-  whitelisted: true
+  whitelisted: false # LuaM: true > false
 
 - type: company
   id: RedSailCorsairs

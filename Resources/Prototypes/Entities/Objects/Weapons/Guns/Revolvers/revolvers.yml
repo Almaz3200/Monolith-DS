@@ -68,6 +68,10 @@
   - type: EmitSoundOnLand
     sound:
       collection: RevolversDrop
+  - type: Multishot
+    missChance: 0.25 # LuaM: 0.4 > 0.25
+    spreadMultiplier: 2 # LuaM: 3 > 2
+    spreadAddition: 25 # LuaM: 40 > 25
   # Goobstation edit end
 
 - type: entity

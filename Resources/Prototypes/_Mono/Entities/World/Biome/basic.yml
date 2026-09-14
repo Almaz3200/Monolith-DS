@@ -135,6 +135,7 @@
   id: MonoWildsCore
   parent: NFBiomeBase
   priority: 700
+  needDroneTarget: true # LuaM 
   minX: 68 # 8448m
   maxX: 72 # 9728m
   minY: -63 # -8578
@@ -247,6 +248,7 @@
   id: MonoWilds
   parent: NFBiomeBase
   priority: 500 # avg center coords is about 9088, -7552
+  needDroneTarget: true # LuaM
   minX: 64 # 8448m
   maxX: 76 # 9728m
   minY: -67 # -8578
@@ -359,6 +361,7 @@
   id: MonoWildsOutskirts
   parent: NFBiomeBase
   priority: 100
+  needDroneTarget: true # LuaM
   minX: 56
   maxX: 84
   minY: -75
@@ -622,6 +625,7 @@
   id: MonoWorldgenVeryFarT1
   parent: NFBiomeBase
   priority: -1
+  needDroneTarget: true # LuaM
   distanceRange: 18000, 22000
   chunkComponents:
   - type: DebrisFeaturePlacerController
@@ -746,10 +750,11 @@
       prob: 3
       orGroup: wreck
 
+
 - type: spaceBiome
   id: MonoWorldgenVeryFarT2Inner
   parent: MonoWorldgenVeryFarT1
-  priority: -2
+  priority: -3 #LuaM -2 > -3
   distanceRange: 22000, 25000
   chunkComponents:
   - type: NoiseDrivenDebrisSelector
@@ -777,7 +782,7 @@
 - type: spaceBiome
   id: MonoWorldgenVeryFarT2Middle
   parent: MonoWorldgenVeryFarT1
-  priority: -3
+  priority: -5 # LuaM -3 > -5
   distanceRange: 25000, 30000
   chunkComponents:
   - type: NoiseDrivenDebrisSelector
@@ -802,10 +807,11 @@
       prob: 1.5
       orGroup: wreck
 
+
 - type: spaceBiome
   id: MonoWorldgenVeryFarT2Far
   parent: MonoWorldgenVeryFarT1
-  priority: -4
+  priority: -7 # LuaM -4 > -7
   distanceRange: null
   chunkComponents:
   - type: DebrisFeaturePlacerController

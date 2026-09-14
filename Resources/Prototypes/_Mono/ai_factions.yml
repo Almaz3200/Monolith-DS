@@ -20,12 +20,12 @@
   friendly:
   - TSFMC
   neutral:
-  - CC
-  - NanoTrasen
+#  - CC # LuaM Commented
+#  - NanoTrasen # LuaM Commented
   - Cat
   - PetsNT
-  - SimpleNeutral
-  - MD
+#  - SimpleNeutral # LuaM Commented
+#  - MD # LuaM Commented
   - ContrabandDetection
   - Mouse
   defaultHostile: true

@@ -7,8 +7,9 @@
   cost: 25000
   recipeUnlocks:
   - WeaponLMGRatel
-  - WeaponRifleIroh
   - WeaponShotgunBigBuddy
+  - WeaponShotgunJack
+  - ClothingBackpackJack
   technologyPrerequisites:
   - MercArmementSimple
 #  - AdvancedParts # Commented by LuaM

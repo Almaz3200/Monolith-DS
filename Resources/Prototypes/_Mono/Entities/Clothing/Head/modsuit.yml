@@ -10,13 +10,25 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.9 # LuaM 0.95 > 0.9
+        Slash: 0.9 # LuaM 0.95 > 0.9
+        Piercing: 0.9 # LuaM 0.95 > 0.9
+        Heat: 0.9 # LuaM 0.95 > 0.9
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: PointLight
     enabled: false
     radius: 5
@@ -59,11 +71,23 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.9 # LuaM 0.95 > 0.9
+        Slash: 0.9 # LuaM 0.95 > 0.9
+        Piercing: 0.9 # LuaM 0.95 > 0.9
+        Heat: 0.9 # LuaM 0.95 > 0.9
         Radiation: 0.8
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: ComponentToggler
     components:
     - type: BreathMask
@@ -139,9 +163,18 @@
     pulseTime: 2
     isEquipment: true
     toggleAction: PulseThermalVision
+# LuaM start
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
   - type: ComponentToggler
     components:
     - type: FlashImmunity
@@ -241,6 +274,18 @@
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
     netsync: false
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#337a98"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
   - type: HandheldLight
     addPrefix: true
     blinkingBehaviourId: blinking
@@ -305,6 +350,18 @@
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
     netsync: false
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: HandheldLight
     addPrefix: true
     blinkingBehaviourId: blinking

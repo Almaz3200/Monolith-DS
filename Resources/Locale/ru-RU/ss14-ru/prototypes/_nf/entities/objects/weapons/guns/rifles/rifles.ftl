@@ -1,6 +1,4 @@
-ent-WeaponRifleLecter = M-6 «Лектер»
-    .desc = Проект нового стандартного ружья для вооружённых сил ТСФ. Точное и удобное, стреляет безгильзовым 6,8×52 мм STANAG; также принимает магазины 5,56×45 мм для унификации боекомплекта.
-ent-WeaponRifleLecterRubber = M-6 «Лектер»
+ent-WeaponRifleLecterRubber = QBZ-410 «Лектер»
     .suffix = Травматический
     .desc = { ent-WeaponRifleLecter.desc }
 ent-WeaponRifleNovaliteC1Rubber = { ent-WeaponRifleNovaliteC1 }

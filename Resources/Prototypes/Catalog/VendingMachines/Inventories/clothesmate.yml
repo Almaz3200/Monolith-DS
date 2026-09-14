@@ -112,4 +112,8 @@
     ClothingUniformJumpskirtTacticool: 1
     ToyFigurinePassenger: 1
     ToyFigurineGreytider: 1
+    #LuaM Start:
+    ADTClothingUniformJumpsuitTurtleneckTactick: 1
+    ClothingUniformJumpskirtElegantMaid: 1
+    #LuaM Stop
   # DO NOT ADD MORE, USE UNIFORM DYING

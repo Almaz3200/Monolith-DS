@@ -1,7 +1,7 @@
 - type: job
   id: TsfMarsocFTL
   name: ghost-role-information-marsoc-ftl-name
-  description: ghost-role-information-marsoc-description
+  # description: ghost-role-information-marsoc-description # Commented by LuaM
   playTimeTracker: JobTsfMarsocFTL
   requirements:
   - !type:OverallPlaytimeRequirement
@@ -33,7 +33,7 @@
 - type: job
   id: TsfMarsoc
   name: ghost-role-information-marsoc-operative-name
-  description: ghost-role-information-marsoc-description
+#  description: ghost-role-information-marsoc-description # Commented by LuaM
   playTimeTracker: JobTsfMarsoc
   requirements:
   - !type:OverallPlaytimeRequirement

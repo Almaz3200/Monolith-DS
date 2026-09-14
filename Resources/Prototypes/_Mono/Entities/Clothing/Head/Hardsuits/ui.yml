@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBase]
   id: ClothingHelmetHardsuitUIEnforcer
   name: U.I. ENFORCER MKI helmet
   description: Flash-proof lining, in built night vision system, and looks good as hell. Other than information display port being snapped, what's more to ask for?
@@ -13,9 +13,18 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: FlashImmunity
+# LuaM start
   - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: Armor
     modifiers:
       coefficients:
@@ -58,9 +67,18 @@
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
   - type: FlashImmunity
+# LuaM start
   - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: Armor
     modifiers:
       coefficients:
@@ -79,7 +97,7 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBase]
   id: ClothingHelmetHardsuitUIEngineer
   name: U.I. engineering helmet
   description: A cheap and effective hardsuit helmet, just with an extra black market touch.
@@ -92,9 +110,18 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
+# LuaM start
   - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: Armor
     modifiers:
       coefficients:
@@ -113,7 +140,7 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBase]
   id: ClothingHelmetHardsuitUIPilot
   name: U.I. pilot helmet
   description: A helmet for Ullman Industry pilots.
@@ -126,9 +153,18 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
+# LuaM start
   - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: Armor
     modifiers:
       coefficients:
@@ -172,9 +208,18 @@
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
   - type: FlashImmunity
+# LuaM start
   - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 4.0
+# LuaM end
   - type: Armor
     modifiers:
       coefficients:

@@ -260,3 +260,76 @@
   - type: Sprite
     sprite: _LuaM/Objects/Fun/seal.rsi
     state: seal_bread
+
+# Next Plushies below made by Maksimvini (Discord)
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieMaksimvini22T
+  name: plushie drunkman toy
+  description: "Whiskey empty again, bring me more! - this is what written on one of the side lables of it. Looks like, it will be a great company to any bar companies."
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fun/plushie.rsi
+    state: plushie_maksimvini
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieAziDragon22T
+  name: plushie cheap-quality felinid-man
+  description: "Upon looking at it, you think how this bastard will behave. And you hate it. Also, its pretty cheap low-quality."
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fun/plushie.rsi
+    state: plushie_AziDragon
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieMeowonty22T
+  name: plushie cheap-quality felinid-girl
+  description: "Pretty squishy to hold, pretty cheap to amaze, just a felinid toy."
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fun/plushie.rsi
+    state: plushie_Meowonty
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieBomidor22T
+  name: plushie low quality vulpakin toy
+  description: "Upon looking at it, you have uneasy and unsteady feelings. Maybe, getting rid of it is worth it?"
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fun/plushie.rsi
+    state: plushie_Bomidor
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieKard22T
+  name: plushie homeless man
+  description: "Upon looking at that, you think of a bum, associating it with somewhat a Homeless cosmic guy will look like. Also on side of it texted ADOPT ME"
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fun/plushie.rsi
+    state: plushie_Kard
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieHeadWalker22T
+  name: plushie horror headwalker abomination
+  description: "It definitely will come for you. And you will not be able to laugh and joke, when it gets to you in dead-end corner in some dark alley.."
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fun/plushie.rsi
+    state: plushie_HeadWalker
+
+- type: entity
+  parent: BasePlushie
+  id: PlushiePurpleGhost22T
+  name: plushie purple ghost-guy
+  description: "you`ve definitely seen it somewhere. Also he is pretty squishy. Squishy-squish.."
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fun/plushie.rsi
+    state: plushie_PurpleGhost
+# Next Plushies above made by Maksimvini (Discord)

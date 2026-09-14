@@ -33,6 +33,8 @@
   - WeaponLauncherTSFOsiris
   - WeaponLauncherTSFAnubis
   - WeaponAMRShenzhenTSF
+  - WeaponRifleRiversongTSF
+  - WeaponRifleDragonfangTSF
 
 - type: latheRecipePack
   id: MonoTSFVouchersDynamic

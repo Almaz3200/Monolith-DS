@@ -68,9 +68,15 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: NightVision # Goobstation - Nigthvision
-    activateSound: null
-    deactivateSound: null
+  - type: NightVision # LuaM edit start:
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 880
+    viewCircleCount: 1
+    viewCircleSpacing: 1
+    action: ActionToggleNightVision
+    phosphorColor: "#986033"
+    lightingColor: "#ffffff52" #LuaM edit end.
 
 - type: entity
   name: bee
@@ -1934,9 +1940,15 @@
       Taco: RatTaco
       Burger: RatBurger
       Skewer: RatSkewer
-  - type: NightVision # Goobstation - Nigthvision
-    activateSound: null
-    deactivateSound: null
+  - type: NightVision # LuaM edit start:
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 880
+    viewCircleCount: 1
+    viewCircleSpacing: 1
+    action: ActionToggleNightVision
+    phosphorColor: "#986033"
+    lightingColor: "#ffffff52" #LuaM edit end.
 
 - type: entity
   parent: MobMouse
@@ -2607,9 +2619,15 @@
       groups:
         Brute: -0.07
         Burn: -0.07
-  - type: NightVision # Goobstation - Nigthvision
-    activateSound: null
-    deactivateSound: null
+  - type: NightVision # LuaM edit start:
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 880
+    viewCircleCount: 1
+    viewCircleSpacing: 1
+    action: ActionToggleNightVision
+    phosphorColor: "#986033"
+    lightingColor: "#ffffff52" #LuaM edit end.
 
 - type: entity
   parent: MobSpiderBase

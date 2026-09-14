@@ -56,11 +56,13 @@
     proto: 40mmGrenadeFragmentation
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-  - type: Tag # LuaM
+# LuaM-start:
+  - type: Tag
     tags:
     - GrenadeLauncher
-
-    
+  - type: HoloCigarBlacklist
+  - type: GunRequiresWield
+# LuaM-end.
 
 - type: entity
   name: PA RPG-7
@@ -95,9 +97,13 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
-  - type: Tag # LuaM
+# LuaM-start:
+  - type: Tag
     tags:
     - GrenadeLauncher
+  - type: HoloCigarBlacklist
+  - type: GunRequiresWield
+# LuaM-end.
 
 - type: entity
   name: multiple rocket launcher
@@ -301,6 +307,11 @@
     - type: Tag # Frontier
       tags: # Frontier
       - Sidearm # Frontier
+    - type: PhysicalComposition # LuaM recyclable
+      materialComposition:
+        Steel: 500
+        Glass: 400
+        Gold: 100
 
 # Admeme
 - type: entity
