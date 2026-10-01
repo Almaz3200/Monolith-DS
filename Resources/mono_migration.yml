@@ -78,3 +78,7 @@ BalorCarrierComputer: null
 # 25/09/2026 - Bounty rework
 ComputerPirateBountyRedemption: BaseComputer # no longer has a purpose
 ComputerPirateBountyRedemptionTabletop: ComputerTabletopFrame # ditto
+
+# Lua: wallening (#4485) reverted - map new salvage airlocks back to pre-wallening ones
+AirlockSalvage: AirlockMining
+AirlockSalvageGlass: AirlockMiningGlass
