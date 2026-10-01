@@ -24,7 +24,6 @@
     node: tubeLight
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/light_tube.rsi
-    offset: 0, 1
     drawdepth: WallMountedItems
     layers:
     - map: ["enum.PoweredLightLayers.Base"]
@@ -38,7 +37,7 @@
     energy: 0.8
     radius: 10
     softness: 1
-    offset: "0, 0.495"
+    offset: "0, -0.5"
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -103,11 +102,9 @@
   components:
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/light_tube.rsi
-    offset: 0, 1
     state: empty
   - type: PointLight
     enabled: false
-    offset: "0, 0.495"
   - type: PoweredLight
     bulb: Tube
   - type: ContainerContainer
@@ -331,7 +328,7 @@
     enabled: false
   - type: PointLight
     enabled: false
-    offset: "0, 0.495"
+    offset: "0, -0.5"
   - type: ContainerContainer
     containers:
       light_bulb: !type:ContainerSlot
@@ -455,7 +452,7 @@
     enabled: false
     radius: 5
     energy: 0.6
-    offset: "0, 0.25"
+    offset: "0, 0.4"
     color: "#7CFC00"
     mask: /Textures/Effects/LightMasks/double_cone.png
   - type: ApcPowerReceiver
@@ -468,7 +465,6 @@
     speed: 40
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/emergency_light.rsi
-    offset: 0, 1
     layers:
     - state: base
       map: [ "enum.EmergencyLightVisualLayers.Base" ]

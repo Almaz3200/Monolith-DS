@@ -802,11 +802,6 @@
 - type: Tag
   id: Unstashable
 
-# Map migration tags for door autorotation thing.
-
-- type: Tag
-  id: DoorAutorotate
-
 # Signal flare cartridge tag
 
 - type: Tag

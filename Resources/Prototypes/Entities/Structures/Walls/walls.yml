@@ -158,7 +158,7 @@
     node: clockworkWall
   - type: IconSmooth
     key: walls
-    base: brass
+    base: clock
   - type: RCDDeconstructable # Frontier
     cost: 6 # Frontier
     delay: 8 # Frontier
