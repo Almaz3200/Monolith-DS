@@ -2,10 +2,10 @@
 - type: holiday
   id: FrontierBirthday
   name: holiday-name-frontier-birthday
-  beginDay: 16
-  beginMonth: January
-  endDay: 18
-  endMonth: January
+  beginDay: 1
+  beginMonth: July
+  endDay: 3
+  endMonth: July
   greet:
     !type:Custom
     text: holiday-custom-frontier-birthday

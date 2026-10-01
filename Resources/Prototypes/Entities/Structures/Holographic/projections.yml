@@ -156,5 +156,3 @@
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
-  - type: Damageable
-    damageContainer: StructuralInorganic

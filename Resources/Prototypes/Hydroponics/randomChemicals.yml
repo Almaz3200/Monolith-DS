@@ -10,9 +10,6 @@
     - Honk
     - BuzzochloricBees
     - Stimulants
-    - JuiceThatMakesYouHew
-    - NitrousOxide
-    - Ichor
   - quantity: 5
     weight: 1
     reagents:
@@ -34,9 +31,6 @@
     - ChangelingSting
     - CogChamp
     - JuiceThatMakesYouWeh
-    - Fresium
-    - Phlogiston
-    - Fentanyl
   - quantity: 5
     weight: 2
     reagents:
@@ -63,10 +57,6 @@
     - Cola
     - Diphenhydramine
     - Iron
-    - Carpetium
-    - SpaceGlue
-    - Happiness
-    - Mesophenerol
   - quantity: 10
     weight: 3
     reagents:
@@ -101,7 +91,6 @@
     - Potassium
     - Fluorine
     - Aluminium
-    - Laughter
   - quantity: 10
     weight: 3.5
     reagents:

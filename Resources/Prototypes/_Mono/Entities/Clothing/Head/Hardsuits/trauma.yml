@@ -10,9 +10,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Head/Hardsuits/trauma.rsi
   - type: PointLight
-    color: "#d4c57b"
-    radius: 5 # 5->6 Mono
-    energy: 2 # 2->3 Mono
+    color: "#4e88a6"
 # LuaM start
   - type: NightVision
     relayOverlay: true
@@ -59,7 +57,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons, ClothingHeadSuitWithLightBase ]
+  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitTraumaLeader
   name: armed trauma unit T-53 tacsuit helmet
   description: The commander's tacsuit in the Armed Trauma Unit, outfitted with a medical and long-range radar hud as well as thermals and night vision.
@@ -70,9 +68,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Head/Hardsuits/trauma_leader.rsi
   - type: PointLight
-    radius: 6 # 5->6 Mono
-    energy: 3 # 2->3 Mono
-    color: "#00ffff"
+    color: "#4e88a6"
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000

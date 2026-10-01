@@ -10,7 +10,6 @@
   - CowCube
   - GoatCube
   - MothroachCube
-  - MothroachMustardCube
   - MouseCube
   - CockroachCube
 
@@ -20,7 +19,6 @@
   - AbominationCube
   - SpaceCarpCube
   - SpaceTickCube
-  - OwOroachCube
 
 - type: latheRecipePack
   id: SpeciesCubesStatic

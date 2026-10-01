@@ -14,9 +14,6 @@
       "name": "pdv-unshaded"
     },
     {
-      "name": "mmc-unshaded"
-    },
-    {
       "name": "off"
     },
     {
@@ -24,9 +21,6 @@
     },
     {
       "name": "pdv"
-    },
-    {
-      "name": "mmc"
     },
     {
       "name": "broken"

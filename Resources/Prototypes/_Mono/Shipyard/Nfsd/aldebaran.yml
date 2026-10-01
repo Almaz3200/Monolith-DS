@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Aldebaran
-  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
+  parent: BaseVesselAntag
   name: vessel-aldebaran-name # LuaM-locale
   description: vessel-aldebaran-desc # LuaM-locale
   price: 160200

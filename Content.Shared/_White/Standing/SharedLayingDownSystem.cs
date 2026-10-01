@@ -5,7 +5,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Content.Shared.Traits.Assorted; //Mono: Wheelchair user check
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
@@ -58,9 +57,6 @@ public abstract partial class SharedLayingDownSystem : EntitySystem
             return;
 
         var uid = args.SenderSession.AttachedEntity.Value;
-
-        if (HasComp<LegsParalyzedComponent>(uid)) //Mono: Stop wheelchair user trait from standing
-            return;
 
         // TODO: Wizard
         //if (HasComp<FrozenComponent>(uid))
@@ -116,8 +112,7 @@ public abstract partial class SharedLayingDownSystem : EntitySystem
         // If the entity is not on a grid, try to make it stand up to avoid issues
         if (!TryComp<StandingStateComponent>(uid, out var standingState)
             || standingState.CurrentState is StandingState.Standing
-            || CanLieDown(uid) // Mono
-            || HasComp<LegsParalyzedComponent>(uid)) // Mono
+            || CanLieDown(uid)) // Mono
         {
             return;
         }

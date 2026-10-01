@@ -8,9 +8,6 @@
     sprite: _NF/Clothing/Eyes/Hud/nfsd_hud.rsi
   - type: Clothing
     sprite: _NF/Clothing/Eyes/Hud/nfsd_hud.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingEyesBase
@@ -23,10 +20,7 @@
   - type: Clothing
     sprite: _NF/Clothing/Eyes/Hud/mail.rsi
   - type: ShowJobIcons
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: [ClothingEyesHudMedical, ClothingEyesHudNfsd]
   id: ClothingEyesHudNfsdMed
@@ -40,10 +34,7 @@
   - type: Construction
     graph: HudMedSec
     node: medsecHud
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingEyesHudSecurity
   id: ClothingEyesHudNfsdPatch
@@ -54,10 +45,7 @@
     sprite: _NF/Clothing/Eyes/Hud/nfsd_patch.rsi
   - type: Clothing
     sprite: _NF/Clothing/Eyes/Hud/nfsd_patch.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingEyesHudSecurity
   id: ClothingEyesHudBountyHunter
@@ -67,7 +55,3 @@
   - type: ShowHealthBars
     damageContainers:
     - Biological
-  - type: Tag
-    tags:
-    - PetWearable
-    

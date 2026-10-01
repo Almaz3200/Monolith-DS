@@ -108,7 +108,7 @@
     - id: WeaponShotgunBlunderbuss
       prob: 0.15
       orGroup: gun
-    - id: WeaponRevolverMateba
+    - id: WeaponRevolverPirate
       prob: 0.15
       orGroup: gun
     - id: WeaponProtoKineticAccelerator

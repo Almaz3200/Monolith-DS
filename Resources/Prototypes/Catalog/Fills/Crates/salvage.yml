@@ -67,12 +67,14 @@
 #        prob: 0.1 # Frontier
         # Interesting (1%)
         #  - Ammo
-      - id: AmmoBox357_magnumFMJ
+      - id: AmmoBox45_magnumFMJ
         prob: 0.01
       - id: ResearchDisk65000
         prob: 0.01
         # Just no (0.1%)
         #  - Working guns
+      - id: WeaponRevolverDeckard
+        prob: 0.001
       - id: WeaponRevolverInspector
         prob: 0.001
       - id: ClothingShoesBootsMagBlinding

@@ -26,11 +26,9 @@
   - AllAccessMono #Mono
   access:
   - ChiefMedicalOfficer #Mono
-  guides:
-  - Caelestinus
   special:
-# - !type:AddImplantSpecial
-#   implants: [ MindShieldImplant ] # Mono - remove TSFMC implants
+  - !type:AddImplantSpecial
+    implants: [ FreelanceTrackingImplant , TrackingImplant ] # Mono - remove TSFMC implant # LuaM: MindShieldImplant > FreelanceTrackingImplant , TrackingImplant
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
@@ -39,8 +37,6 @@
         - MD # mono faction
       - type: SurgerySpeedModifier
         SpeedModifier: 2
-      - type: ChatRank
-        rank: md-doc
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday
     prototype: FrontierBirthdayGift

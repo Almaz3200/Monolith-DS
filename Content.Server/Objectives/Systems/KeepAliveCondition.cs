@@ -38,16 +38,16 @@ public sealed partial class KeepAliveConditionSystem : EntitySystem
     private void OnAssigned(EntityUid uid, RandomTraitorAliveComponent comp, ref ObjectiveAssignedEvent args)
     {
         // invalid prototype
-        if (!TryComp<TargetObjectiveComponent>(uid, out var target) || !TryComp<MindComponent>(args.MindId, out var mind)) // Mono - return if no mind
+        if (!TryComp<TargetObjectiveComponent>(uid, out var target))
         {
             args.Cancelled = true;
             return;
         }
 
-        var traitors = _traitorRule.GetOtherTraitorMindsAliveAndConnected(mind).ToHashSet();
+        var traitors = _traitorRule.GetOtherTraitorMindsAliveAndConnected(args.Mind).ToHashSet();
 
         // Can't have multiple objectives to help/save the same person
-        foreach (var objective in mind.Objectives)
+        foreach (var objective in args.Mind.Objectives)
         {
             if (HasComp<RandomTraitorAliveComponent>(objective) || HasComp<RandomTraitorProgressComponent>(objective))
             {

@@ -146,6 +146,7 @@
         Piercing: 0.65
         Radiation: 0.25 #salv is supposed to have radiation hazards in the future
         Caustic: 0.45
+        Poison: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.87
@@ -469,7 +470,7 @@
         Slash: 0.8
         Piercing: 0.85
         Heat: 0.35
-        Radiation: 0.1 # Mono 0.0 -> 0.1
+        Radiation: 0.01 # Mono 0.0 -> 0.01
         Caustic: 0.7
   - type: ClothingSpeedModifier
     walkModifier: 0.8
@@ -507,6 +508,7 @@
         Slash: 0.9
         Piercing: 0.9
         Caustic: 0.1
+        Poison: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 1.10 # 0.9-> 1.10 - Mono
     sprintModifier: 1.10 # 0.95-> 1.10 - Mono
@@ -543,7 +545,7 @@
         Slash: 0.65 # Mono 0.65 < 0.8
         Piercing: 0.65 # Mono 0.65 < 0.9
         Heat: 0.3
-        Radiation: 0.1
+        Radiation: 0.01 # Mono 0.1 -> 0.0 -> 0.01
         Caustic: 0.2
   - type: ExplosionResistance
     damageCoefficient: 0.1
@@ -570,8 +572,7 @@
   - type: StaticPrice
     price: 750
   - type: StealTarget
-    stealGroup:
-    - ClothingOuterHardsuitRd
+    stealGroup: ClothingOuterHardsuitRd
   - type: PirateBountyItem # Frontier
     id: ClothingOuterHardsuitRd # Frontier
   - type: StaminaDamageResistance # Mono - Stamres
@@ -659,7 +660,7 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT3]
+  parent: [ClothingOuterHardsuitBase]
   id: ClothingOuterHardsuitSyndie
   name: blood-red hardsuit
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
@@ -706,7 +707,7 @@
 
 # Syndicate Medic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitSyndie, BaseFactionGearOtherFactionT1]
+  parent: [ClothingOuterHardsuitSyndie]
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
@@ -742,7 +743,7 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT3]
+  parent: [ClothingOuterHardsuitBase]
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
@@ -768,7 +769,7 @@
         Slash: 0.5 # LuaM: 0.6 > 0.5
         Piercing: 0.5 # LuaM: 0.6 > 0.5
         Heat: 0.35
-        Radiation: 0.1 # Mono: 0.01 -> 0.1
+        Radiation: 0.01
         Caustic: 0.5
   - type: Item
     size: Huge
@@ -868,7 +869,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
 #      helmetattachment: ClothingHeadHelmetAttachmentBlock # Commented by LuaM
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.6
+    coefficient: 0.4
   - type: FootstepModifier # LuaM
     footstepSoundCollection:
       collection: FootstepHeavySuit

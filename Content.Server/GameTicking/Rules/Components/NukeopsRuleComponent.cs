@@ -93,7 +93,7 @@ public sealed partial class NukeopsRuleComponent : Component
     public EntityUid? TargetStation;
 
     [DataField]
-    public ProtoId<NpcFactionPrototype> Faction= "PirateNF"; // Mono
+    public ProtoId<NpcFactionPrototype> Faction = "Syndicate";
 
     /// <summary>
     ///     Path to antagonist alert sound.
@@ -126,27 +126,13 @@ public enum WinType : byte
     ///     Crew major win. This means they either killed all nukies,
     ///     or the bomb exploded too far away from the station, or on the nukie moon.
     /// </summary>
-    CrewMajor,
-
-    // Mono start
-    /// <summary>
-    ///     The nuke exploded on the TSF station.
-    /// </summary>
-    TSFMajor,
-
-    /// <summary>
-    ///     The nuke exploded on the PDV station.
-    /// </summary>
-    PDVMajor,
-    // Mono end
+    CrewMajor
 }
 
 public enum WinCondition : byte
 {
     NukeExplodedOnCorrectStation,
     NukeExplodedOnNukieOutpost,
-    NukeExplodedOnTSFStation,
-    NukeExplodedOnPDVStation,
     NukeExplodedOnIncorrectLocation,
     NukeActiveInStation,
     NukeActiveAtCentCom,

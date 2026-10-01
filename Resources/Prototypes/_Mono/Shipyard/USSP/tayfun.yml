@@ -2,20 +2,18 @@
 
 - type: vessel
   id: Tayfun
-  parent: BaseVesselIFFDisabled
+  parent: BaseVesselAntag
   name: vessel-tayfun-name # LuaM-locale
   description: vessel-tayfun-desc # LuaM-locale
   price: 205850 # LuaM: 74200 > 205850 Я ОСТАПА РОТ ЭБАЛ
-  purchasable: false # voucher only
   category: Medium
   group: Ussp
-  access: USSP
+  access: Mercenary
   shuttlePath: /Maps/_LuaM/Shuttles/USSP/TayfunLuaM.yml # LuaM: /Maps/_Mono/Shuttles/USSP/tayfun.yml > /Maps/_LuaM/Shuttles/USSP/TayfunLuaM.yml
   guidebookPage: Null
   class:
   - Pursuit
   - Patrol
-  - Escort
   - Corvette
   engine:
   - AME
@@ -30,11 +28,11 @@
       stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Tayfun USSP{1}'
+          mapNameTemplate: 'Tayfun MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]
+            Pilot: [ 0, 0 ]

@@ -304,8 +304,8 @@
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
-  id: ThermobathMachineCircuitboard
-  result: ThermobathMachineCircuitboard
+  id: HotplateMachineCircuitboard
+  result: HotplateMachineCircuitboard
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe

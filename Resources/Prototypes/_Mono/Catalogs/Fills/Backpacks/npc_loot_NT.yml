@@ -1,9 +1,9 @@
 #NT security lootbox
 - type: entity
   parent: RogueSiliconGiftBox
-  name: wayward security equipment crate
+  name: NT Security equipement crate
   id: ClothingBackpackRogueNanotrasenT1
-  description: An ominous security forces gear crate.
+  description: A Nanotrasen security forces gear crate.
   suffix: NPC Loot, T1
   # categories: [ HideSpawnMenu ] #Mono: spawnable for easier testing, why tf wasnt it spawnable anyway
   components:
@@ -22,6 +22,9 @@
       amount: 2
     - id: WeaponSubMachineGunVectorNtsfHclm
       prob: 0.2
+    - id: Magazine45_magnumPistolHighCapacityFMJ
+      prob: 0.2
+      amount: 2
     - id: WeaponRifleNtsfLtr
       prob: 0.05
     - id: Magazine556x45mmPlasteelAP
@@ -70,9 +73,9 @@
 #NT navy lootbox
 - type: entity
   parent: RogueSiliconGiftBox
-  name: wayward navy equipment crate
+  name: NT Navy equipement crate
   id: ClothingBackpackRogueNanotrasenT2
-  description: An ominous navy gear crate.
+  description: A Nanotrasen corporate navy gear crate.
   suffix: NPC Loot, T2
   # categories: [ HideSpawnMenu ] #Mono: spawnable for easier testing, why tf wasnt it spawnable anyway
   components:
@@ -81,8 +84,14 @@
   - type: SpawnItemsOnUse
     items:
     #Weapons/ammo/gears
-    - id: WeaponRevolverMateba
+    - id: WeaponPistolN1984
       prob: 0.4
+    - id: Magazine45_magnumPistolPlasteelAP
+      prob: 0.2
+      amount: 2
+    - id: Magazine45_magnumPistolFMJ
+      prob: 0.4
+      amount: 2
     - id: WeaponPulsePistol
       prob: 0.2
     - id: WeaponPulseCarbine
@@ -123,9 +132,9 @@
 #NT special operation lootbox
 - type: entity
   parent: RogueSiliconGiftBox
-  name: wayward spec ops equipment crate
+  name: NT Spec Ops equipement crate
   id: ClothingBackpackRogueNanotrasenT3
-  description: An ominous special operations gear crate.
+  description: A Nanotrasen special operation gear crate.
   suffix: NPC Loot, T3
   # categories: [ HideSpawnMenu ] #Mono: spawnable for easier testing, why tf wasnt it spawnable anyway
   components:
@@ -138,7 +147,7 @@
       prob: 0.1
     - id: WeaponRevolverMateba
       prob: 0.2
-    - id: AmmoBox357_magnumAP
+    - id: AmmoBox45_magnumAP
       amount: 2
       prob: 0.2
     - id: WeaponLRC21PPL
@@ -163,8 +172,8 @@
     - id: CartridgeMPSSMMissile
       amount: 3
       prob: 0.09
-    #- id: WeaponHeavyPulseCannon
-    #  prob: 0.005
+    - id: WeaponHeavyPulseCannon
+      prob: 0.005
     - id: MedkitCombatFilled
       prob: 0.5
     #Clothings

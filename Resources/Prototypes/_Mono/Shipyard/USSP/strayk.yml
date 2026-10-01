@@ -2,18 +2,17 @@
 
 - type: vessel
   id: Strayk
-  parent: BaseVesselIFFDisabled
+  parent: BaseVesselAntag
   name: vessel-strayk-name # LuaM-locale
   description: vessel-strayk-desc # LuaM-locale
-  price: 66109
+  price: 45820
   category: Small
   group: Ussp
-  access: USSP
-  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/strayk.yml
+  access: Mercenary
+  shuttlePath: /Maps/_Mono/Shuttles/USSP/strayk.yml
   guidebookPage: Null
   class:
   - Pursuit
-  - AntiShipMissileCarrier
   engine:
   - Uranium
   cloakHunter: true
@@ -21,18 +20,18 @@
 - type: gameMap
   id: Strayk
   mapName: 'Strayk'
-  mapPath: /SharedMaps/_Mono/Shuttles/USSP/strayk.yml
+  mapPath: /Maps/_Mono/Shuttles/USSP/strayk.yml
   minPlayers: 0
   stations:
     Strayk:
       stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Strayk USSP{1}'
+          mapNameTemplate: 'Strayk MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]
+            Pilot: [ 0, 0 ]

@@ -30,9 +30,6 @@
       path: /Audio/Items/flashlight_on.ogg
     soundDeactivate:
       path: /Audio/Items/flashlight_off.ogg
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckBase
@@ -45,10 +42,7 @@
   - type: Clothing
     sprite: Clothing/Neck/Misc/stethoscope.rsi
   - type: Stethoscope
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckBling
@@ -59,10 +53,7 @@
     sprite: Clothing/Neck/Misc/bling.rsi
   - type: Clothing
     sprite: Clothing/Neck/Misc/bling.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckLawyerbadge
@@ -75,10 +66,7 @@
     sprite: Clothing/Neck/Misc/lawyerbadge.rsi
   - type: TypingIndicatorClothing
     proto: lawyer
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   id: ActionStethoscope
   name: Listen with stethoscope
@@ -106,4 +94,3 @@
     tags:
     - Trash
     - WhitelistChameleon
-    - PetWearable

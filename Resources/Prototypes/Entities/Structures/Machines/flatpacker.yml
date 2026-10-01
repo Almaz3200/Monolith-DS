@@ -32,11 +32,9 @@
           False: { visible: false }
   - type: FlatpackCreator
     baseMachineCost:
-      Steel: 1000
+      Steel: 750
       Silver: 100
-      Gold: 500
-      Lithium: 500 # Mono
-      Copper: 500 # Mono
+      Gold: 50
     baseComputerCost:
       Steel: 500
       Glass: 250

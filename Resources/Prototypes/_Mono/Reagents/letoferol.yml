@@ -42,32 +42,15 @@
           invert: true
       - !type:PopupMessage
         conditions:
-        - !type:OrganType
-          type: Chimera
-          shouldHave: false
         - !type:ReagentThreshold
-          min: 4
+          min: 2
         type: Local
-        visualType: MediumCaution
-        messages: [ "generic-reagent-effect-nauseous", "generic-reagent-effect-sick", "generic-reagent-effect-parched" ]
-        probability: 0.2
-      - !type:PopupMessage
-        conditions:
-        - !type:OrganType
-          type: Chimera
-          shouldHave: false
-        - !type:ReagentThreshold
-          min: 6
-        type: Local
-        visualType: LargeCaution
-        messages: [ "generic-reagent-effect-slicing-insides" ]
-        probability: 0.1
+        visualType: Medium
+        messages: [ "generic-reagent-effect-nauseous" ]
+        probability: 0.25
       - !type:Drunk
         boozePower: 15
         conditions:
-        - !type:OrganType
-          type: Chimera
-          shouldHave: false
         - !type:ReagentThreshold
           min: 8
 
@@ -120,45 +103,28 @@
         - !type:HasTag
           tag: Chimera
           invert: true
-#      - !type:Polymorph
-#        prototype: LetoferolMutationBeastNatural
-#        conditions:
-#        - !type:ReagentThreshold
-#          min: 10 # less for non-humanoids
-#        - !type:HasTag
-#          tag: Humanoid
-#          invert: true
-#        - !type:HasTag
-#          tag: Chimera
-#          invert: true
+      - !type:Polymorph
+        prototype: LetoferolMutationBeastNatural
+        conditions:
+        - !type:ReagentThreshold
+          min: 10 # less for non-humanoids
+        - !type:HasTag
+          tag: Humanoid
+          invert: true
+        - !type:HasTag
+          tag: Chimera
+          invert: true
       - !type:PopupMessage
         conditions:
-        - !type:OrganType
-          type: Chimera
-          shouldHave: false
         - !type:ReagentThreshold
           min: 4
         type: Local
-        visualType: MediumCaution
-        messages: [ "generic-reagent-effect-nauseous", "generic-reagent-effect-sick", "generic-reagent-effect-parched" ]
+        visualType: Medium
+        messages: [ "generic-reagent-effect-nauseous" ]
         probability: 0.2
-      - !type:PopupMessage
-        conditions:
-        - !type:OrganType
-          type: Chimera
-          shouldHave: false
-        - !type:ReagentThreshold
-          min: 6
-        type: Local
-        visualType: LargeCaution
-        messages: [ "generic-reagent-effect-slicing-insides" ]
-        probability: 0.1
       - !type:Drunk
         boozePower: 15
         conditions:
-        - !type:OrganType
-          type: Chimera
-          shouldHave: false
         - !type:ReagentThreshold
           min: 10
 

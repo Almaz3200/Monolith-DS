@@ -1,4 +1,4 @@
-# # Clutter
+# Clutter
 - type: entity
   name: random clutter
   id: SpawnDungeonClutterMedical
@@ -745,7 +745,7 @@
     - CryoPodMachineCircuitboard
     - DiagnoserMachineCircuitboard
     - ElectrolysisUnitMachineCircuitboard
-    - ThermobathMachineCircuitboard
+    - HotplateMachineCircuitboard
     - MedicalScannerMachineCircuitboard
     - StasisBedMachineCircuitboard
     - VaccinatorMachineCircuitboard
@@ -778,7 +778,7 @@
     - MachineElectrolysisUnitFlatpack
     - BaseGasCondenserFlatpack
     - MachineCentrifugeFlatpack
-    - MachineThermobathFlatpack
+    - ChemistryHotplateFlatpack
     - KitchenReagentGrinderFlatpack
     - ComputerCrewMonitoringFlatpack
     - VendingMachineMedicalFlatpack

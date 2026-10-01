@@ -27,8 +27,3 @@
   price: 100 # LuaM
   equipment:
     neck: ClothingNeckCloakPdvPurple
-
-- type: loadout
-  id: PDVClothingNeckWearableCameraPDV
-  equipment:
-    neck: ClothingNeckWearableCameraPDV

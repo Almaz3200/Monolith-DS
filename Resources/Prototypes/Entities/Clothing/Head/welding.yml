@@ -20,7 +20,6 @@
     tags:
     - WhitelistChameleon
     - WeldingMask
-    - PetWearable
   - type: HideLayerClothing
     slots:
     - Snout
@@ -40,7 +39,6 @@
     - HamsterWearable
     - WhitelistChameleon
     - WeldingMask
-    - PetWearable
 
 - type: entity
   parent: WeldingMaskBase
@@ -52,9 +50,6 @@
     sprite: Clothing/Head/Welding/flame_welding_mask.rsi
   - type: Clothing
     sprite: Clothing/Head/Welding/flame_welding_mask.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: WeldingMaskBase
@@ -66,10 +61,7 @@
     sprite: Clothing/Head/Welding/blue_flame_welding_mask.rsi
   - type: Clothing
     sprite: Clothing/Head/Welding/blue_flame_welding_mask.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: WeldingMaskBase
   id: ClothingHeadHatWeldingMaskPainted
@@ -80,7 +72,3 @@
     sprite: Clothing/Head/Welding/paintedwelding.rsi
   - type: Clothing
     sprite: Clothing/Head/Welding/paintedwelding.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    

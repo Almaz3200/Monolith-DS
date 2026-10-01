@@ -16,10 +16,3 @@
       Steel: 5
       Plasma: 3
       CableHV: 2
-    tagRequirements:
-      MicroprocessorEconomy1:
-        amount: 2
-        defaultPrototype: MicroprocessorEconomy1
-      MotorEconomy1:
-        amount: 1
-        defaultPrototype: MotorEconomy1

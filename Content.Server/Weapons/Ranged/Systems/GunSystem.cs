@@ -47,9 +47,6 @@ public sealed partial class GunSystem : SharedGunSystem
     private EntityQuery<AutoShootGunComponent> _autoShootGunQuery; // Mono
     private EntityQuery<DamageableComponent> _damageableQuery; // Mono
 
-    [Dependency] private EntityQuery<ProjectileComponent> _projectileQuery = default!; // Mono
-    [Dependency] private EntityQuery<HitscanBasicDamageComponent> _hitscanDamageQuery = default!; // Mono
-
     private const float DamagePitchVariation = 0.05f;
 
     public override void Initialize()
@@ -141,11 +138,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     if (!cartridge.Spent)
                     {
                         var uid = Spawn(cartridge.Prototype, fromEnt);
-                        // Mono - check for muzzle flash of gun
-                        var muzzleFlash = cartridge.MuzzleFlash;
-                        if (gun.MuzzleFlash != null)
-                            muzzleFlash = gun.MuzzleFlash;
-                        CreateAndFireProjectiles(uid, offset, muzzleFlash, cartridge.SoundGunshot);
+                        CreateAndFireProjectiles(uid, cartridge, offset);
 
                         RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
                         {
@@ -173,20 +166,30 @@ public sealed partial class GunSystem : SharedGunSystem
                 case AmmoComponent newAmmo:
                     if (ent == null)
                         break;
-                    // Mono - check for muzzle flash of gun
-                    var newMuzzleFlash = newAmmo.MuzzleFlash;
-                    if (gun.MuzzleFlash != null)
-                        newMuzzleFlash = gun.MuzzleFlash;
-                    CreateAndFireProjectiles(ent.Value, offset, newMuzzleFlash);
+                    CreateAndFireProjectiles(ent.Value, newAmmo, offset);
 
                     break;
 
                 case HitscanAmmoComponent hitscanammo:
                     if (ent == null)
                         break;
-                    CreateAndFireProjectiles(ent.Value, offset);
 
+                    var hitscanEv = new HitscanTraceEvent
+                    {
+                        FromCoordinates = fromCoordinates,
+                        ShotDirection = mapDirection.Normalized(),
+                        Gun = gunUid,
+                        Shooter = user,
+                        Target = gun.Target,
+                    };
+                    RaiseLocalEvent(ent.Value, ref hitscanEv);
+
+                    Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
+                    // Mono start
+                    if (hitscanammo.CasingPrototype != null)
+                        Spawn(hitscanammo.CasingPrototype, fromEnt);
                     Del(ent);
+                    // Mono end
                     break;
 
                 default:
@@ -199,7 +202,7 @@ public sealed partial class GunSystem : SharedGunSystem
             FiredProjectiles = shotProjectiles,
         });
 
-        void CreateAndFireProjectiles(EntityUid ammoEnt, float offset = 0f, EntProtoId? muzzle = null, SoundSpecifier? sound = null)
+        void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp, float offset = 0f)
         {
             if (TryComp<ProjectileSpreadComponent>(ammoEnt, out var ammoSpreadComp))
             {
@@ -209,28 +212,29 @@ public sealed partial class GunSystem : SharedGunSystem
                 var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
                     mapAngle + spreadEvent.Spread / 2, ammoSpreadComp.Count);
 
-                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user, offset, fromCoordinates);
+                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user, offset);
                 shotProjectiles.Add(ammoEnt);
 
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = Spawn(ammoSpreadComp.Proto, fromEnt);
-                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, offset, fromCoordinates);
+                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, offset);
                     shotProjectiles.Add(newuid);
                 }
             }
             else
             {
-                ShootOrThrow(ammoEnt, mapDirection, gunVelocity, gun, gunUid, user, offset, fromCoordinates);
+                ShootOrThrow(ammoEnt, mapDirection, gunVelocity, gun, gunUid, user, offset);
                 shotProjectiles.Add(ammoEnt);
             }
-            MuzzleFlash(gunUid, muzzle, mapDirection.ToAngle(), user);
-            Audio.PlayPredicted(sound ?? gun.SoundGunshotModified, gunUid, user);
+
+            MuzzleFlash(gunUid, ammoComp, mapDirection.ToAngle(), user);
+            Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
         }
     }
 
     private void ShootOrThrow(EntityUid uid, Vector2 mapDirection, Vector2 gunVelocity, GunComponent gun, EntityUid gunUid, EntityUid? user,
-                              float offset = 0f, EntityCoordinates? fromCoordinates = null) // Mono - add offset and fromCoordinates
+                              float offset = 0f) // Mono - add offset
     {
         if (gun.Target is { } target && !TerminatingOrDeleted(target))
         {
@@ -239,28 +243,8 @@ public sealed partial class GunSystem : SharedGunSystem
             Dirty(uid, targeted);
         }
 
-        // mono
-        var damageModifier = new GunDamageModifierEvent(gun.DamageModifier);
-        RaiseLocalEvent(gunUid, ref damageModifier);
-
-        if (HasComp<HitscanAmmoComponent>(uid))
-        {
-            if (_hitscanDamageQuery.TryComp(uid, out var hitscanDamageComp))
-                hitscanDamageComp.Damage *= damageModifier.Modifier;
-
-            ShootHitscan(
-                uid,
-                fromCoordinates,
-                mapDirection,
-                gunUid,
-                user,
-                gun.Target);
-
-            return;
-        }
-
         // Do a throw
-        if (!_projectileQuery.TryComp(uid, out var projectileComp))
+        if (!TryComp(uid, out ProjectileComponent? projectileComp))
         {
             RemoveShootable(uid);
             // TODO: Someone can probably yeet this a billion miles so need to pre-validate input somewhere up the call stack.
@@ -276,17 +260,11 @@ public sealed partial class GunSystem : SharedGunSystem
             predicted.ClientEnt = user;
         }
 
-        projectileComp.Damage *= damageModifier.Modifier;
-
-        ShootProjectile(uid,
-            mapDirection,
-            gunVelocity,
-            gunUid,
-            user,
-            gun.ProjectileSpeedModified,
-            offset); // Mono - add offset
-
-        if (HasComp<FireControllableComponent>(gunUid)) {
+        projectileComp.Damage *= gun.DamageModifier;
+        ShootProjectile(uid, mapDirection, gunVelocity, gunUid, user, gun.ProjectileSpeedModified, offset); // Mono - add offset
+        // Mono
+        if (HasComp<FireControllableComponent>(gunUid))
+        {
             EnsureComp<ProjectileGridPhaseComponent>(uid);
         }
     }

@@ -106,7 +106,7 @@
 - type: entity
   id: DefibrillatorSyndicate
   parent: DefibrillatorCompact
-  name: advanced defibrillator
+  name: interdyne defibrillator
   description: Doubles as a self-defense weapon against war-crime inclined tiders.
   components:
   - type: Sprite

@@ -13,8 +13,7 @@
     tags:
     - HighRiskItem
   - type: StealTarget
-    stealGroup:
-    - HandTeleporter
+    stealGroup: HandTeleporter
 
 - type: entity
   id: HandTeleporterAdmeme

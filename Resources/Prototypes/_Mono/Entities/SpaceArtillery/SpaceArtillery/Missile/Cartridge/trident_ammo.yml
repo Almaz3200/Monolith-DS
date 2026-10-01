@@ -35,7 +35,6 @@
     maxIntensity: 250
     intensitySlope: 30
     totalIntensity: 2500
-    tileBreakScale: 3
   - type: MiningGatheringSoft
   - type: MiningGatheringHard
   - type: TargetSeeking
@@ -86,7 +85,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 250
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -138,7 +137,6 @@
     maxIntensity: 250
     intensitySlope: 30
     totalIntensity: 2500
-    tileBreakScale: 3
   - type: MiningGatheringSoft
   - type: MiningGatheringHard
   - type: TargetGuided
@@ -189,7 +187,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 250
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -249,7 +247,6 @@
     maxIntensity: 30
     intensitySlope: 100
     totalIntensity: 100
-    tileBreakScale: 3
   - type: Destructible
     thresholds:
     - trigger:
@@ -290,7 +287,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 250
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -342,7 +339,6 @@
     maxIntensity: 50
     intensitySlope: 4
     totalIntensity: 150
-    tileBreakScale: 3
   - type: MiningGatheringSoft
   - type: MiningGatheringHard
   - type: TargetSeeking
@@ -400,7 +396,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 250
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]

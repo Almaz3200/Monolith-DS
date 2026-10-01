@@ -46,7 +46,7 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 22
+        Heat: 20
         Structural: 10
   - type: HitscanBasicVisuals
     muzzleFlash:

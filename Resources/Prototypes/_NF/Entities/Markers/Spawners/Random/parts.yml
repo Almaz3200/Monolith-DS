@@ -14,20 +14,7 @@
     - AdvancedCapacitorStockPart
     - NanoManipulatorStockPart
     - AdvancedMatterBinStockPart
-    - ComponentBrickEconomy1 # Mono
-    - ElectromagnetEconomy1 # Mono
-    - RadioEconomy1 # Mono
-    - OpticsEconomy1 # Mono
-    - CameraEconomy1 # Mono
-    - MotorEconomy1 # Mono
-    - MatterBinEconomy1 # Mono
-    - MicroprocessorEconomy1 # Mono
-    - CapacitorEconomy1 # Mono
-    - ArmorPlateEconomy1 # Mono
     chance: 0.95
-    rarePrototypes:
-    - SalvagePartsT3Spawner # Mono
-    rareChance: 0.05
     offset: 0.5
 
 - type: entity
@@ -45,25 +32,7 @@
     - SuperCapacitorStockPart
     - PicoManipulatorStockPart
     - SuperMatterBinStockPart
-    - ComponentBrickEconomy1 # Mono
-    - ComponentBrickEconomy2 # Mono
-    - ElectromagnetEconomy1 # Mono
-    - ElectromagnetEconomy2 # Mono
-    - RadioEconomy1 # Mono
-    - RadioEconomy2 # Mono
-    - OpticsEconomy1 # Mono
-    - OpticsEconomy2 # Mono
-    - MotorEconomy1 # Mono
-    - MatterBinEconomy1 # Mono
-    - MatterBinEconomy2 # Mono
-    - MicroprocessorEconomy2 # Mono
-    - CapacitorEconomy2 # Mono
-    - ArmorPlateEconomy1 # Mono
-    - ArmorPlateEconomy2 # Mono
     chance: 0.95
-    rarePrototypes:
-    - SalvagePartsT3T4Spawner # Mono
-    rareChance: 0.05
     offset: 0.5
 
 - type: entity
@@ -81,17 +50,11 @@
     - SuperCapacitorStockPart
     - PicoManipulatorStockPart
     - SuperMatterBinStockPart
-    - ComponentBrickEconomy2 # Mono
-    - ElectromagnetEconomy2 # Mono
-    - RadioEconomy1 # Mono
-    - OpticsEconomy2 # Mono
-    - MatterBinEconomy2 # Mono
-    - MicroprocessorEconomy2 # Mono
-    - CapacitorEconomy3 # Mono
-    - ArmorPlateEconomy2 # Mono
     chance: 0.95
     rarePrototypes:
-    - SalvagePartsT4Spawner # Mono - better and easier way to do this
+    - QuadraticCapacitorStockPart
+    - FemtoManipulatorStockPart
+    - BluespaceMatterBinStockPart
     rareChance: 0.05
     offset: 0.5
 
@@ -110,12 +73,5 @@
     - QuadraticCapacitorStockPart
     - PicoManipulatorStockPart
     - BluespaceMatterBinStockPart
-    - ComponentBrickEconomy3 # Mono
-    - ElectromagnetEconomy3 # Mono
-    - MicroprocessorEconomy3 # Mono
-    - MatterBinEconomy3 # Mono
-    - RadioEconomy2 # Mono
-    - ArmorPlateEconomy3 # Mono
-    - ArmorPlateEconomy4 # Mono
     chance: 0.95
     offset: 0.5

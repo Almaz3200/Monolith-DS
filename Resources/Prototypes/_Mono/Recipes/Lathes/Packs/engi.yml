@@ -21,5 +21,4 @@
   id: RCD
   recipes:
   - RCD
-  - RPD # Mono
   - RCDAmmo

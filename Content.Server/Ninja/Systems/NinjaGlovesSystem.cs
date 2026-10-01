@@ -40,7 +40,7 @@ public sealed partial class NinjaGlovesSystem : SharedNinjaGlovesSystem
                 continue;
             }
 
-            if (!_objectives.IsCompleted(obj.Value))
+            if (!_objectives.IsCompleted(obj.Value, (mindId, mind)))
                 EntityManager.AddComponents(user, ability.Components);
         }
 

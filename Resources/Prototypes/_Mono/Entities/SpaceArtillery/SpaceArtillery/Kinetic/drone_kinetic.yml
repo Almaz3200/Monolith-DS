@@ -26,7 +26,7 @@
     maxAngle: 0
     shootThermalSignature: 300000
     soundGunshot:
-      collection: ShipGunMjolnir
+      path: /Audio/_Mono/Weapons/Guns/Gunshots/autopulse_laser_fire_01.ogg
     soundEmpty:
       path: /Audio/Weapons/click.ogg
   - type: SpaceArtillery
@@ -54,9 +54,6 @@
     shipType: Ballistic
   - type: ShipGunClass
     shipClass: Light
-  - type: HardpointAnchorableOnly
-    class: Ballistic
-    size: Light
 
 - type: entity
   id: WeaponTurretFragment
@@ -103,9 +100,6 @@
       bounds: "-1,-1.5,1,1.5"
   - type: ShipGunClass
     shipClass: Medium
-  - type: HardpointAnchorableOnly
-    class: Ballistic
-    size: Light
 
 - type: entity
   id: WeaponTurretPinhole
@@ -140,7 +134,7 @@
     selectedMode: Burst
     availableModes: Burst
     soundGunshot:
-      collection: ShipGunMjolnir
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/click.ogg
   - type: SpaceArtillery
@@ -169,6 +163,3 @@
     shipType: Ballistic
   - type: ShipGunClass
     shipClass: Medium
-  - type: HardpointAnchorableOnly
-    class: Ballistic
-    size: Heavy

@@ -14,6 +14,18 @@
 
 - type: entity
   parent: WeaponCaseShort
+  id: WeaponCaseShortN1984Expedition
+  suffix: Dungeon, N1984
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolN1984
+      amount: 1
+    - id: Magazine45_magnumPistolFMJ
+      amount: 2
+
+- type: entity
+  parent: WeaponCaseShort
   id: WeaponCaseShortViper
   suffix: Dungeon, Viper
   components:
@@ -87,6 +99,18 @@
 
 - type: entity
   parent: WeaponCaseShort
+  id: WeaponCaseShortDeckardExpedition
+  suffix: Dungeon, Deckard
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRevolverDeckardExpedition
+      amount: 1
+    - id: SpeedLoader45_magnumFMJ
+      amount: 2
+
+- type: entity
+  parent: WeaponCaseShort
   id: WeaponCaseShortPython
   suffix: Dungeon, Python
   components:
@@ -94,7 +118,7 @@
     contents:
     - id: WeaponRevolverPython
       amount: 1
-    - id: SpeedLoader357_magnumFMJ
+    - id: SpeedLoader45_magnumFMJ
       amount: 2
 
 - type: entity
@@ -106,7 +130,55 @@
     contents:
     - id: WeaponRevolverMatebaExpedition
       amount: 1
-    - id: SpeedLoader357_magnumFMJ
+    - id: SpeedLoader45_magnumFMJ
+      amount: 2
+
+- type: entity
+  parent: WeaponCaseShort
+  id: WeaponCaseShortFitzExpedition
+  suffix: Dungeon, Fitz
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRevolverFitzExpedition
+      amount: 1
+    - id: SpeedLoader45_magnumFMJ
+      amount: 2
+
+- type: entity
+  parent: WeaponCaseShort
+  id: WeaponCaseShortFaithExpedition
+  suffix: Dungeon, Faith
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRevolverFaithExpedition
+      amount: 1
+    - id: SpeedLoader45_magnumFMJ
+      amount: 2
+
+- type: entity
+  parent: WeaponCaseShort
+  id: WeaponCaseShortLuckyExpedition
+  suffix: Dungeon, Lucky 37
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRevolverLuckyExpedition
+      amount: 1
+    - id: SpeedLoader45_magnumFMJ
+      amount: 2
+
+- type: entity
+  parent: WeaponCaseShort
+  id: WeaponCaseShortRevolverPirate
+  suffix: Dungeon, Pirate Revolver
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRevolverPirateExpedition
+      amount: 1
+    - id: SpeedLoader45_magnumFMJ
       amount: 2
 
 # Shotguns
@@ -471,7 +543,7 @@
     contents:
     - id: WeaponSniperRepeater
       amount: 1
-    - id: AmmoBox357_magnumFMJ
+    - id: AmmoBox45_magnumFMJ
       amount: 2
 
 - type: entity
@@ -856,7 +928,7 @@
   - StorageFillAmmoBoxFlareShotgun
   id: WeaponCaseShortAmmoBoxFlareShotgun
 
-## .357 magnum ammo
+## .45 magnum ammo
 - type: entity
   parent:
   - WeaponCaseShortAmmo

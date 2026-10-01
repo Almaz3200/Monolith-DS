@@ -75382,7 +75382,7 @@ entities:
     - type: Transform
       pos: 19.386444,169.56036
       parent: 2
-- proto: MachineThermobath
+- proto: ChemistryHotplate
   entities:
   - uid: 22855
     components:
@@ -140843,7 +140843,7 @@ entities:
     - type: Transform
       pos: 0.5,-3.5
       parent: 36996
-- proto: AmmoBox357_magnumPractice
+- proto: AmmoBox45_magnumPractice
   entities:
   - uid: 5301
     components:

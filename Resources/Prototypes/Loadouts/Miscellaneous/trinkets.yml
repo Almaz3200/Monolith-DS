@@ -51,12 +51,6 @@
     - CandleBlue
     - CandleGreenSmall
 
-- type: loadout
-  id: BikeHorn
-  storage:
-    back:
-    - BikeHorn
-
 # Smokeables
 - type: loadout
   id: Lighter

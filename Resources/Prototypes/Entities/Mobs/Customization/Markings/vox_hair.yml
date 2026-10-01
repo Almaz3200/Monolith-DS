@@ -17,15 +17,6 @@
       state: braid_s
 
 - type: marking
-  id: VoxHairBushy
-  bodyPart: Hair
-  markingCategory: Hair
-  speciesRestriction: [Vox]
-  sprites:
-    - sprite: Mobs/Customization/vox_hair.rsi
-      state: bushy_s
-
-- type: marking
   id: VoxHairCrestedQuills
   bodyPart: Hair
   markingCategory: Hair
@@ -60,15 +51,6 @@
   sprites:
     - sprite: Mobs/Customization/vox_hair.rsi
       state: hawk_s
-
-- type: marking
-  id: VoxHairHedgehog
-  bodyPart: Hair
-  markingCategory: Hair
-  speciesRestriction: [Vox]
-  sprites:
-    - sprite: Mobs/Customization/vox_hair.rsi
-      state: hedgehog_s
 
 - type: marking
   id: VoxHairHorns
@@ -116,15 +98,6 @@
       state: long_braid_s
 
 - type: marking
-  id: VoxHairMadScientist
-  bodyPart: Hair
-  markingCategory: Hair
-  speciesRestriction: [Vox]
-  sprites:
-    - sprite: Mobs/Customization/vox_hair.rsi
-      state: mad_scientist_s
-
-- type: marking
   id: VoxHairMange
   bodyPart: Hair
   markingCategory: Hair
@@ -132,7 +105,7 @@
   sprites:
     - sprite: Mobs/Customization/vox_hair.rsi
       state: mange_s
-
+      
 - type: marking
   id: VoxHairMohawk
   bodyPart: Hair
@@ -197,15 +170,6 @@
       state: shortquills_s
 
 - type: marking
-  id: VoxHairSlick
-  bodyPart: Hair
-  markingCategory: Hair
-  speciesRestriction: [Vox]
-  sprites:
-    - sprite: Mobs/Customization/vox_hair.rsi
-      state: slick_s
-
-- type: marking
   id: VoxHairSpotty
   bodyPart: Hair
   markingCategory: Hair
@@ -240,7 +204,7 @@
   sprites:
     - sprite: Mobs/Customization/vox_hair.rsi
       state: wise_braid_s
-
+      
 - type: marking
   id: VoxHairYasu
   bodyPart: Hair

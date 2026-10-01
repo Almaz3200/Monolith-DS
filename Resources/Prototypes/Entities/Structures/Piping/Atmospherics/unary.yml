@@ -304,8 +304,7 @@
     - type: DeviceNetwork
       prefix: device-address-prefix-freezer
     - type: StealTarget
-      stealGroup:
-      - FreezerHeater
+      stealGroup: FreezerHeater
 
 - type: entity
   parent: GasThermoMachineFreezer
@@ -350,8 +349,7 @@
     - type: DeviceNetwork
       prefix: device-address-prefix-heater
     - type: StealTarget
-      stealGroup:
-      - FreezerHeater
+      stealGroup: FreezerHeater
 
 - type: entity
   parent: GasThermoMachineHeater

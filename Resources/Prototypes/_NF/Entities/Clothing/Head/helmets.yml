@@ -12,9 +12,6 @@
     sprite: _NF/Clothing/Head/Helmets/ert_mailcarrier.rsi
   - type: Clothing
     sprite: _NF/Clothing/Head/Helmets/ert_mailcarrier.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingHeadHelmetBasic
@@ -26,9 +23,6 @@
     sprite: _NF/Clothing/Head/Helmets/nfsd.rsi
   - type: Clothing
     sprite: _NF/Clothing/Head/Helmets/nfsd.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 #Mercenary Helmet
 - type: entity
@@ -41,6 +35,3 @@
     sprite: _NF/Clothing/Head/Helmets/mercenary_black.rsi
   - type: Clothing
     sprite: _NF/Clothing/Head/Helmets/mercenary_black.rsi
-  - type: Tag
-    tags:
-    - PetWearable

@@ -27,8 +27,6 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
     private Dictionary<string, CyborgControlData> _cyborgs = new();
 
     public EntityUid Entity;
-	
-    private bool _allowBorgControl = true;
 
     public RoboticsConsoleWindow()
     {
@@ -74,7 +72,6 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
     public void UpdateState(RoboticsConsoleState state)
     {
         _cyborgs = state.Cyborgs;
-        _allowBorgControl = state.AllowBorgControl;
 
         // clear invalid selection
         if (_selected is {} selected && !_cyborgs.ContainsKey(selected))
@@ -98,8 +95,8 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
         PopulateData();
 
         var locked = _lock.IsLocked(Entity);
-        DangerZone.Visible = !locked && _allowBorgControl;
-        LockedMessage.Visible = locked && _allowBorgControl; // Only show if locked AND control is allowed
+        DangerZone.Visible = !locked;
+        LockedMessage.Visible = locked;
     }
 
     private void PopulateCyborgs()
@@ -150,8 +147,7 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
         BorgInfo.SetMessage(text);
 
         // how the turntables
-        DisableButton.Disabled = !_allowBorgControl || !(data.HasBrain && data.CanDisable);
-        DestroyButton.Disabled = !_allowBorgControl;
+        DisableButton.Disabled = !(data.HasBrain && data.CanDisable);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

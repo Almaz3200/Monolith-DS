@@ -192,14 +192,6 @@
   equipment:
     suitstorage: OxygenTankFilled
 
-- type: loadout
-  id: LoadoutSpeciesEVAWaterVapor
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: WaterBreather
-  equipment:
-    suitstorage: WaterVaporTankFilled
-
 # Species-appropriate Double Emergency Tank in Pocket 1
 - type: loadout
   id: LoadoutSpeciesPocketDoubleNitrogen
@@ -216,14 +208,6 @@
     proto: OxygenBreatherNF
   equipment:
     pocket1: DoubleEmergencyOxygenTankFilled
-
-- type: loadout
-  id: LoadoutSpeciesPocketDoubleWaterVapor
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: WaterBreather
-  equipment:
-    pocket1: DoubleEmergencyWaterVaporTankFilled
 
 # Tank Harness
 - type: loadout

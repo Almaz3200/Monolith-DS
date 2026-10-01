@@ -1,3 +1,4 @@
+
 - type: technology
   id: PdvTierOneVouchers
   name: research-technology-rogue-tier-one-vouchers
@@ -7,7 +8,10 @@
   cost: 40000
   recipeUnlocks:
   - ShipVoucherPdvT0Recipe
-  - ShipVoucherPdvT1Recipe
+  - ShipVoucherPdvT1RandomRecipe
+  - InertiaVoucherRogue
+  - MockVoucherRogue
+  - SnakeletVoucherRogue
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   - Shuttlecraft # LuaM
@@ -16,15 +20,12 @@
 - type: technology
   id: PdvTierTwoVouchers
   name: research-technology-rogue-tier-two-vouchers
-  entityIcon: ShipVoucherPdvT2
+  entityIcon: ShipVoucherPdvT2Random
   discipline: RogueShipyard
   tier: 1
   cost: 60000
   recipeUnlocks:
-  - ShipVoucherPdvT2Recipe
-  - InertiaVoucherRogue
-  - MockVoucherRogue
-  - SnakeletVoucherRogue
+  - ShipVoucherPdvT2RandomRecipe
   technologyPrerequisites:
   - PdvTierOneVouchers
   - UniversalMaterialResearchT2
@@ -37,11 +38,10 @@
   entityIcon: ShipVoucherSaturn
   discipline: RogueShipyard
   tier: 3
-  cost: 150000
+  cost: 80000
   recipeUnlocks:
-  - ShipVoucherKortikT3Recipe
-  - ShipVoucherEuropaT3Recipe
-  - ShipVoucherSaturnRecipe
+  - SaintieVoucherRogue
+  - SaturnVoucherRogue
   technologyPrerequisites:
   - PdvTierTwoVouchers
   - UniversalMaterialResearchT3
@@ -115,26 +115,10 @@
   cost: 10000
   recipeUnlocks:
   - BasicBorgCombatModulePDV
-  - BorgIFFPDV
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   - RogueJaws # LuaM
   position: 8, 11 # LuaM: 12, -4 > 8, 11
-
-- type: technology
-  id: PDVBasicBionics
-  name: research-technology-pdv-ias
-  entityIcon: OrganInternalAirSystem
-  discipline: RogueGear
-  tier: 2
-  cost: 20000
-  recipeUnlocks:
-  - AutosurgeonIASPDV
-  - AutosurgeonAdvHeartPDV
-  - AutosurgeonDermalArmorPDV
-  technologyPrerequisites:
-  - UniversalMaterialResearchT2
-  position: -3, -21
 
 - type: technology
   id: PDVAdvancedBorgModule
@@ -146,6 +130,7 @@
   recipeUnlocks:
   - AdvancedBorgCombatModulePDV
   technologyPrerequisites:
+  - UniversalMaterialResearchT3
   - PDVBasicBorgModule
   - MechBasic # LuaM
   position: 8, 9 # LuaM: 12, 15 > 8, 9

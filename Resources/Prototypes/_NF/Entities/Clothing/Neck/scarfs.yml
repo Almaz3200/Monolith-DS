@@ -7,7 +7,6 @@
   - type: Tag
     tags:
     - ObjectOfSpiritualSignificance
-    - PetWearable
   - type: Sprite
     sprite: _NF/Clothing/Neck/Scarfs/chaplain_stole.rsi
   - type: Clothing
@@ -23,6 +22,3 @@
     sprite: _NF/Clothing/Neck/Scarfs/pilot.rsi
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/pilot.rsi
-  - type: Tag
-    tags:
-    - PetWearable

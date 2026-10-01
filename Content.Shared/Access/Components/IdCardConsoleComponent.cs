@@ -90,9 +90,6 @@ public sealed partial class IdCardConsoleComponent : Component
     "Pirate", //Frontier //PDV base access
     "PDVCommand", //Mono, PDV leadership (Denasvar, Asvaran, Vizier)
     "GrandVizier",//Mono, PDV Vizier
-    "Mieyo", // Mono
-    "MieyoSecurity", // Mono
-    "MieyoLiason", // Mono
     };
 
     [Serializable, NetSerializable]

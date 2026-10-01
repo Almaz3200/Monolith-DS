@@ -25,8 +25,6 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
         SubscribeLocalEvent<ClothingSpeedModifierComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<ClothingSpeedModifierComponent, ComponentHandleState>(OnHandleState);
         SubscribeLocalEvent<ClothingSpeedModifierComponent, InventoryRelayedEvent<RefreshMovementSpeedModifiersEvent>>(OnRefreshMoveSpeed);
-        SubscribeLocalEvent<ClothingSpeedModifierComponent, InventoryRelayedEvent<RefreshFrictionModifiersEvent>>(OnRefreshFriction); // Mono
-        SubscribeLocalEvent<ClothingSpeedModifierComponent, InventoryRelayedEvent<RefreshWeightlessModifiersEvent>>(OnRefreshWeightless); // Mono
         SubscribeLocalEvent<ClothingSpeedModifierComponent, GetVerbsEvent<ExamineVerb>>(OnClothingVerbExamine);
         SubscribeLocalEvent<ClothingSpeedModifierComponent, ItemToggledEvent>(OnToggled);
     }
@@ -51,7 +49,7 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
         // We'll still set the values in case they're slightly different but within tolerance.
         if (diff && _container.TryGetContainingContainer((uid, null, null), out var container))
         {
-            _movementSpeed.RefreshMovementSpeedModifiers(container.Owner, alsoFriction: true); // Mono
+            _movementSpeed.RefreshMovementSpeedModifiers(container.Owner);
         }
     }
 
@@ -73,42 +71,6 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
             args.Args.ModifySpeed(component.WalkModifier, component.SprintModifier);
         }
         // DeltaV End - Introduce ClothingSlowResistance to Species
-    }
-
-    // Mono
-    private void OnRefreshFriction(Entity<ClothingSpeedModifierComponent> ent, ref InventoryRelayedEvent<RefreshFrictionModifiersEvent> args)
-    {
-        if (!_toggle.IsActivated(ent.Owner))
-            return;
-
-        if (_container.TryGetContainingContainer(ent.Owner, out var container))
-        {
-            var ev = new ModifyClothingSlowdownEvent(ent.Comp.WalkModifier, ent.Comp.SprintModifier);
-            RaiseLocalEvent(container.Owner, ref ev);
-            args.Args.ModifyAcceleration(ev.RunModifier);
-        }
-        else
-        {
-            args.Args.ModifyAcceleration(ent.Comp.SprintModifier);
-        }
-    }
-
-    // Mono
-    private void OnRefreshWeightless(Entity<ClothingSpeedModifierComponent> ent, ref InventoryRelayedEvent<RefreshWeightlessModifiersEvent> args)
-    {
-        if (!_toggle.IsActivated(ent.Owner))
-            return;
-
-        if (_container.TryGetContainingContainer(ent.Owner, out var container))
-        {
-            var ev = new ModifyClothingSlowdownEvent(ent.Comp.WalkModifier, ent.Comp.SprintModifier);
-            RaiseLocalEvent(container.Owner, ref ev);
-            args.Args.ModifyAcceleration(ev.RunModifier);
-        }
-        else
-        {
-            args.Args.ModifyAcceleration(ent.Comp.SprintModifier);
-        }
     }
 
     private void OnClothingVerbExamine(EntityUid uid, ClothingSpeedModifierComponent component, GetVerbsEvent<ExamineVerb> args)
@@ -166,12 +128,12 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
     private void OnToggled(Entity<ClothingSpeedModifierComponent> ent, ref ItemToggledEvent args)
     {
         // make sentient boots slow or fast too
-        _movementSpeed.RefreshMovementSpeedModifiers(ent, alsoFriction: true); // Mono
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
         if (_container.TryGetContainingContainer((ent.Owner, null, null), out var container))
         {
             // inventory system will automatically hook into the event raised by this and update accordingly
-            _movementSpeed.RefreshMovementSpeedModifiers(container.Owner, alsoFriction: true); // Mono
+            _movementSpeed.RefreshMovementSpeedModifiers(container.Owner);
         }
     }
 }

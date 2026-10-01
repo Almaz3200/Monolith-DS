@@ -1,3 +1,5 @@
+// Labeling this as MIT since no changes made from the PR, just all original wizden code.
+
 using System.Numerics;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
@@ -44,11 +46,6 @@ public sealed class SegmentDisplay : Control
     private byte?[] _bitmaskOverrides = new byte?[4];
     private byte? _globalBitmaskOverride;
 
-    private int[] _cachedDigits = new int[4];
-    private bool _digitsCacheDirty = true;
-
-    private readonly Vector2[] _segmentPoints = new Vector2[6];
-
     [ViewVariables, PublicAPI]
     public int Value
     {
@@ -63,7 +60,6 @@ public sealed class SegmentDisplay : Control
                 return;
 
             _value = newValue;
-            _digitsCacheDirty = true;
             InvalidateMeasure();
         }
     }
@@ -115,8 +111,6 @@ public sealed class SegmentDisplay : Control
             _digitCount = value;
 
             Array.Resize(ref _bitmaskOverrides, _digitCount);
-            Array.Resize(ref _cachedDigits, _digitCount);
-            _digitsCacheDirty = true;
 
             // Reclamp the value to fit within the new digit count
             Value = _value;
@@ -199,12 +193,7 @@ public sealed class SegmentDisplay : Control
 
         handle.DrawRect(PixelSizeBox, BackgroundColor);
 
-        // Update cached digits if needed
-        if (_digitsCacheDirty)
-        {
-            UpdateDigitsCache();
-            _digitsCacheDirty = false;
-        }
+        var digits = GetDigits(_value);
 
         var digitWidth = PixelWidth / _digitCount;
         var segmentHeight = PixelHeight * 0.9f;
@@ -229,7 +218,7 @@ public sealed class SegmentDisplay : Control
             }
             else
             {
-                var digit = _cachedDigits[i];
+                var digit = digits[i];
                 pattern = digit is >= 0 and <= 9
                     ? DigitPatterns[digit]
                     : (byte)0;
@@ -341,37 +330,44 @@ public sealed class SegmentDisplay : Control
         if (horizontal)
         {
             var endBevel = height * 0.5f;
-            _segmentPoints[0] = new(x + endBevel, y); // Top left
-            _segmentPoints[1] = new(x + width - endBevel, y); // Top right
-            _segmentPoints[2] = new(x + width, y + height * 0.5f); // Mid right point
-            _segmentPoints[3] = new(x + width - endBevel, y + height); // Bottom right
-            _segmentPoints[4] = new(x + endBevel, y + height); // Bottom left
-            _segmentPoints[5] = new(x, y + height * 0.5f); // Mid left point
+            var points = new Vector2[]
+            {
+                new(x + endBevel, y), // Top left
+                new(x + width - endBevel, y), // Top right
+                new(x + width, y + height * 0.5f), // Mid right point
+                new(x + width - endBevel, y + height), // Bottom right
+                new(x + endBevel, y + height), // Bottom left
+                new(x, y + height * 0.5f) // Mid left point
+            };
 
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, _segmentPoints, color);
+            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, points, color);
         }
         else
         {
             var endBevel = width * 0.5f;
-            _segmentPoints[0] = new(x + width * 0.5f, y); // Top mid point
-            _segmentPoints[1] = new(x + width, y + endBevel); // Top right
-            _segmentPoints[2] = new(x + width, y + height - endBevel); // Bottom right
-            _segmentPoints[3] = new(x + width * 0.5f, y + height); // Bottom mid point
-            _segmentPoints[4] = new(x, y + height - endBevel); // Bottom left
-            _segmentPoints[5] = new(x, y + endBevel); // Top left
+            var points = new Vector2[]
+            {
+                new(x + width * 0.5f, y), // Top mid point
+                new(x + width, y + endBevel), // Top right
+                new(x + width, y + height - endBevel), // Bottom right
+                new(x + width * 0.5f, y + height), // Bottom mid point
+                new(x, y + height - endBevel), // Bottom left
+                new(x, y + endBevel) // Top left
+            };
 
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, _segmentPoints, color);
+            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, points, color);
         }
     }
 
-    private void UpdateDigitsCache()
+    private int[] GetDigits(int value)
     {
-        var value = _value;
+        var digits = new int[_digitCount];
         for (var i = 0; i < _digitCount; i++)
         {
-            _cachedDigits[_digitCount - 1 - i] = value % 10;
+            digits[_digitCount - 1 - i] = value % 10;
             value /= 10;
         }
+        return digits;
     }
 
     protected override Vector2 MeasureOverride(Vector2 availableSize)

@@ -88,11 +88,9 @@
   loadouts:
   - NfsdBoxSurvivalNfsdOxygen
   - NfsdBoxSurvivalNfsdNitrogen
-  - NfsdBoxSurvivalNfsdVapor
   fallbacks:
   - NfsdBoxSurvivalNfsdOxygen
   - NfsdBoxSurvivalNfsdNitrogen
-  - NfsdBoxSurvivalNfsdVapor
 
 - type: loadoutGroup
   id: NfsdFace

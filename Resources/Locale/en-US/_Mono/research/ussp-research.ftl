@@ -1,4 +1,7 @@
-research-discipline-ussp = USSP
+research-discipline-ussp-weaponry = USSP Arsenal
+research-discipline-ussp-gear = USSP Gear
+research-discipline-ussp-equipment = USSP Equipment
+research-discipline-ussp-shipyard = USSP Heavy Industry
 
 # T1 USSP
 research-technology-ussp-ships-basic = USSP Tier I Ships

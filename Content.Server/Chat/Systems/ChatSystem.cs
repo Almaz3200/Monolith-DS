@@ -555,7 +555,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         else
         {
             var nameEv = new TransformSpeakerNameEvent(source, Name(source));
-            nameEv.FromRadio = true; //Mono
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
             // Check for a speech verb override

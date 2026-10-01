@@ -21,9 +21,6 @@ using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared.Sticky.Components;
-using Content.Server._Mono.Overwatch.Components;
-using Content.Shared.Sticky;
 
 namespace Content.Server._Rat.Overwatch;
 
@@ -98,10 +95,6 @@ public sealed class OverwatchSystem : EntitySystem
         SubscribeLocalEvent<CompanyComponent, ComponentShutdown>(OnFactionComponentShutdown);
         SubscribeLocalEvent<SquadComponent, ComponentInit>(OnSquadComponentInit);
         SubscribeLocalEvent<SquadComponent, ComponentShutdown>(OnSquadComponentShutdown);
-        SubscribeLocalEvent<JamOverwatchOnStuckComponent, EntityStuckEvent>(OnEntityStuck);
-
-        // Mono: overwatch jamming
-        SubscribeLocalEvent<CompanyComponent, GridUidChangedEvent>(OnGridUidChanged);
 
         Subs.BuiEvents<OverwatchConsoleComponent>(OverwatchUiKey.Key, subs =>
         {
@@ -184,18 +177,6 @@ public sealed class OverwatchSystem : EntitySystem
 
         StopWatching(ent.Owner, ent.Comp);
         RemComp<RatOverwatchWatchingComponent>(ent.Owner);
-    }
-
-    /// <summary>
-    /// Mono: Clears the cache of a faction if an overwatch jammer has been applied.
-    /// </summary>
-    /// <param name="args"></param>
-    private void OnEntityStuck(Entity<JamOverwatchOnStuckComponent> ent, ref EntityStuckEvent args)
-    {
-        if (!TryComp<CompanyComponent>(args.Target, out var comp))
-            return;
-
-        _factionMembersCache.Remove(comp.CompanyName);
     }
 
     /// <summary>
@@ -657,15 +638,6 @@ public sealed class OverwatchSystem : EntitySystem
         }
     }
 
-    /// <summary>
-    /// Mono: This is so that overwatch console jamming components on grids can function as intended.
-    /// </summary> 
-    private void OnGridUidChanged(Entity<CompanyComponent> ent, ref GridUidChangedEvent args)
-    {
-        if (_factionMembersCache.Keys.Contains(ent.Comp.CompanyName))
-            _factionMembersCache.Remove(ent.Comp.CompanyName); // clear cache to allow overwatch jamming to function
-    }
-
     /// <inheritdoc/>
     public override void Update(float frameTime)
     {
@@ -713,23 +685,11 @@ public sealed class OverwatchSystem : EntitySystem
         if (_factionMembersCache.TryGetValue(faction, out var cached))
             return cached;
 
-        // Mono: overwatch jamming
-        var jammedPlayers = new List<EntityUid>();
-        var jamQuery = EntityQueryEnumerator<StickyComponent, JamOverwatchOnStuckComponent>();
-        while (jamQuery.MoveNext(out _, out var sticky, out _))
-        {
-            if (sticky.StuckTo != null)
-                jammedPlayers.Add(sticky.StuckTo.Value);
-        }
-        // Mono end
-
         var members = new List<EntityUid>();
         var query = EntityQueryEnumerator<CompanyComponent>();
         while (query.MoveNext(out var uid, out var factionComp))
         {
-            if (Transform(uid).GridUid != null && TryComp<JamOverwatchComponent>(Transform(uid).GridUid, out var jamComp) && !jamComp.ExcludedFactions.Contains(faction)) // Mono: grids can jam the overwatch console to prevent coordinates leaks.
-                continue;
-            if (factionComp.CompanyName == faction && !HasComp<ShuttleComponent>(uid) && !jammedPlayers.Contains(uid))
+            if (factionComp.CompanyName == faction && !HasComp<ShuttleComponent>(uid))
                 members.Add(uid);
         }
 

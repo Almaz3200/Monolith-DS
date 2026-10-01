@@ -130,9 +130,6 @@ public abstract partial class SharedStationSpawningSystem : EntitySystem
     {
         EquipStartingGear(entity, loadout.StartingGear, raiseEvent);
         EquipStartingGear(entity, (IEquipmentLoadout) loadout, raiseEvent);
-
-        // Mono - loadout comps
-        EntityManager.AddComponents(entity, loadout.Components);
     }
 
     /// <summary>

@@ -666,7 +666,7 @@
 - type: entity
   id: TowelColorNT
   name: NanoTrasen brand towel
-  parent: [BaseTowel, BaseFactionGearOtherFactionT1]
+  parent: BaseTowel
   components:
   - type: Sprite
     layers:

@@ -175,11 +175,3 @@
   materials:
     Biomass: 70
     Plasma: 250
-
-- type: latheRecipe
-  id: FeroxiCube
-  result: FeroxiCube
-  completetime: 30
-  materials:
-    Biomass: 70
-    Plasma: 250

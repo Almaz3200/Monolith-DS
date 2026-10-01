@@ -25,9 +25,6 @@
     rarePrototypes:
     - CommsComputerCircuitboard
     - ShuttleConsoleCircuitboard
-    - ShuttleConsoleCircuitboardTSFN # Mono
-    - ShuttleConsoleCircuitboardKPV63RWR # Mono
-    - ShuttleConsoleCircuitboardANALR67RWR # Mono
     - ComputerMassMediaCircuitboard
     - AutolatheMachineCircuitboard
     - ProtolatheMachineCircuitboard

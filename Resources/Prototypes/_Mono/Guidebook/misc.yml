@@ -6,7 +6,6 @@
   children:
   - GridClaimer
   - ArmorExplanation
-  - Economy
 
 - type: guideEntry
   id: GridClaimer

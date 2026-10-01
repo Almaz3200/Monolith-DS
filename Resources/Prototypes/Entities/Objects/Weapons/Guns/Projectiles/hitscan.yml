@@ -70,13 +70,10 @@
   id: RedHeavyLaser
   categories: [ HideSpawnMenu ]
   components:
-  - type: HitscanJump # Mono
-    count: 2
-    range: 5
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 25 # Mono
+        Heat: 32 # Mono
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
@@ -127,8 +124,8 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 20 # Mono
-        Shock: 8 # Mono
+        Heat: 28 # Mono
+        Shock: 7
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi

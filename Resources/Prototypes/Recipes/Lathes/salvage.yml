@@ -25,8 +25,8 @@
   - Tools
   completetime: 1
   materials:
-    Steel: 125 # Mono
-    Cloth: 350 # Mono
+    Steel: 200
+    Cloth: 500
 
 - type: latheRecipe
   id: FultonBeacon

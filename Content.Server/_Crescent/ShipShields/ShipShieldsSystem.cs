@@ -16,7 +16,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing; // LuaM
 using System.Numerics;
-using Content.Server._Crescent.ShipShields.Components;
 
 
 namespace Content.Server._Crescent.ShipShields;
@@ -100,13 +99,12 @@ public sealed partial class ShipShieldsSystem : EntitySystem
                 }
                 _audio.PlayGlobal(emitter.PowerUpSound, filter, true, emitter.PowerUpSound.Params);
             }
-            else if ((emitter.Recharging || emitter.OverloadAccumulator > 0) && emitter.Shield is not null || HasComp<ShipShieldDisabledGridComponent>(Transform(uid).GridUid))
+            else if ((emitter.Recharging || emitter.OverloadAccumulator > 0) && emitter.Shield is not null)
             {
                 UnshieldEntity(parent.Value);
                 emitter.Shield = null;
                 emitter.Shielded = null;
-                if (!HasComp<ShipShieldDisabledGridComponent>(Transform(uid).GridUid))
-                    _audio.PlayGlobal(emitter.PowerDownSound, filter, true, emitter.PowerDownSound.Params); // LuaM: PowerUpSound.Params > PowerDownSound.Params
+                _audio.PlayGlobal(emitter.PowerDownSound, filter, true, emitter.PowerDownSound.Params); // LuaM: PowerUpSound.Params > PowerDownSound.Params
             }
 
             // Forge-Change-Start
@@ -224,7 +222,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         if (TryComp<ShipShieldedComponent>(entity, out var existingShielded))
             return existingShielded.Shield;
 
-        if (!Resolve(entity, ref mapGrid, false) || HasComp<ShipShieldDisabledGridComponent>(Transform(entity).GridUid))
+        if (!Resolve(entity, ref mapGrid, false))
             return EntityUid.Invalid;
 
         var prototype = ShipShieldPrototype;

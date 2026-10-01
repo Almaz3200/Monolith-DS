@@ -197,8 +197,8 @@ public partial class SharedBodySystem
 
         foreach (var slotId in part.Organs.Keys)
         {
-            if (InsertOrgan(partId, organId, slotId, part, organ))
-                return true;
+            InsertOrgan(partId, organId, slotId, part, organ);
+            return true;
         }
 
         return false;

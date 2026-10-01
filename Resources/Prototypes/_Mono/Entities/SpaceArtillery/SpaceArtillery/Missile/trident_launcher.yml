@@ -21,7 +21,7 @@
     recoil: 10
     shootThermalSignature: 16000000 # 4000m after firing
     soundGunshot:
-      path: /Audio/_Mono/Weapons/Guns/Gunshots/towfire.ogg
+      path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
   - type: SpaceArtillery
@@ -47,9 +47,6 @@
   - type: ShipRepairable
     repairTime: 30
     repairCost: 100
-  - type: HardpointAnchorableOnly
-    class: Missile
-    size: Heavy
 
 - type: entity
   id: WeaponTurretASM220Station
@@ -69,6 +66,3 @@
     proto: Asm220TorpedoHE
   - type: ShipGunClass
     shipClass: Heavy
-  - type: HardpointAnchorableOnly
-    class: Missile
-    size: Superheavy

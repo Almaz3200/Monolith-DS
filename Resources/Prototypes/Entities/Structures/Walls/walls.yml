@@ -65,10 +65,6 @@
   id: WallBrick
   name: brick wall
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
   - type: Sprite
     sprite: Structures/Walls/brick.rsi
   - type: Icon
@@ -78,68 +74,8 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: walls
+    key: bricks
     base: brick
-
-# HALF MONO BUT ITS RLLY JUST UPSTREAM CONTENT....
-- type: entity
-  parent: BaseWallTierFour # Mono
-  id: WallConcrete
-  name: concrete wall
-  components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
-  - type: Sprite
-    sprite: Structures/Walls/concrete.rsi
-  - type: Icon
-    sprite: Structures/Walls/concrete.rsi
-  - type: IconSmooth
-    key: walls
-    base: concrete
-
-- type: entity
-  parent: BaseWall
-  id: WallConcreteIndestructible
-  name: concrete wall
-  description: Skub knows this wall is too hard to destroy. # Frontier
-  suffix: indestructible
-  components:
-  - type: Tag
-    tags:
-    - Wall
-  - type: Sprite
-    sprite: Structures/Walls/concrete.rsi
-  - type: Icon
-    sprite: Structures/Walls/concrete.rsi
-  - type: IconSmooth
-    key: walls
-    base: concrete
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        mask:
-        - FullTileMask
-        layer:
-        - WallLayer
-        density: 9000
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallicStrong
-  - type: RadiationBlocker
-    resistance: 5
-  - type: StaticPrice
-    price: 110 # Mono
-  - type: ArmorThickness
-    canBePierced: false
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -314,10 +250,6 @@
   id: WallIce
   name: ice wall
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactIce
   - type: Tag
     tags:
     - Wall
@@ -334,10 +266,6 @@
   id: WallPlasma
   name: plasma wall
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactGlass
   - type: Tag
     tags:
     - Wall
@@ -657,10 +585,6 @@
   id: WallSandstone
   name: sandstone wall
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
   - type: Tag
     tags:
     - Wall
@@ -988,34 +912,6 @@
     graph: Girder
     node: reinforcedWallChitin
 
-# Xenoborg walls
-- type: entity
-  parent: WallPlastitanium
-  id: WallXenoborg
-  name: xenoborg wall
-  components:
-  - type: Sprite
-    sprite: Structures/Walls/xenoborg.rsi
-  - type: Icon
-    sprite: Structures/Walls/xenoborg.rsi
-  - type: IconSmooth
-    key: walls
-    base: xenoborg
-
-- type: entity
-  parent: WallPlastitaniumDiagonal
-  id: WallXenoborgDiagonal
-  name: xenoborg wall
-  suffix: diagonal
-  components:
-  - type: Sprite
-    drawdepth: Walls
-    sprite: Structures/Walls/xenoborg_diagonal.rsi
-    state: state0
-  - type: Icon
-    sprite: Structures/Walls/xenoborg_diagonal.rsi
-    state: state0
-
 - type: entity
   parent: BaseWallTierOne # Mono
   id: WallUranium
@@ -1055,10 +951,6 @@
   name: wood wall
   description: The traditional greytide defense.
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactWood
   - type: Sprite
     sprite: Structures/Walls/wood.rsi
   - type: Icon
@@ -1213,10 +1105,6 @@
   id: WallVaultRock
   name: rock vault wall
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
   - type: Sprite
     sprite: Structures/Walls/vault.rsi
     state: rockvault
@@ -1229,10 +1117,6 @@
   id: WallVaultSandstone
   name: sandstone vault wall
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
   - type: Sprite
     sprite: Structures/Walls/vault.rsi
     state: sandstonevault
@@ -1336,10 +1220,6 @@
   name: snow brick wall
   description: A cold, not-so-impenetrable wall.
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactIce
   - type: Sprite
     sprite: Structures/Walls/cobblebrick_snow.rsi
   - type: Icon

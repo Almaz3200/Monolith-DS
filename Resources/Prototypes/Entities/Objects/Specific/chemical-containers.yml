@@ -31,7 +31,6 @@
     - type: InjectableSolution
       solution: beaker
     - type: SolutionTransfer
-      transferAmount: 25 # Mono
       canChangeTransferAmount: true
     - type: SolutionItemStatus
       solution: beaker

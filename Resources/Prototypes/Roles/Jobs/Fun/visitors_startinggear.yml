@@ -1865,7 +1865,7 @@
   parent: PirateScoonerAltA
   equipment:
     head: ClothingHeadHatPirateTricord
-    pocket1: WeaponRevolverMateba
+    pocket1: WeaponRevolverPirate
 
 - type: startingGear
   id: PirateCaptainScooner
@@ -1875,7 +1875,7 @@
     ears: ClothingHeadsetAltFreelancer
     neck: ClothingNeckCloakPirateCap
     outerClothing: ClothingOuterVestWeb
-    pocket1: WeaponRevolverMateba
+    pocket1: WeaponRevolverPirate
 
 ### Other
 

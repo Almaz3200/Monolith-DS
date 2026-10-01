@@ -38,7 +38,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 33 # Mono 20 > 33
+        Blunt: 20
         Structural: 25
   - type: PhysicalComposition
     materialComposition:

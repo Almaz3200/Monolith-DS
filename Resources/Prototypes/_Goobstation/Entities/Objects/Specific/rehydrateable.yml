@@ -159,12 +159,3 @@
   - type: Rehydratable
     possibleSpawns:
     - MobTajaranRandom
-
-- type: entity
-  parent: MonkeyCube
-  id: FeroxiCube
-  name: feroxi cube
-  components:
-  - type: Rehydratable
-    possibleSpawns:
-    - MobFeroxiRandom

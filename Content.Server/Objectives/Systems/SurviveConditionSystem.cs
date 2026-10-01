@@ -20,8 +20,6 @@ public sealed partial class SurviveConditionSystem : EntitySystem
 
     private void OnGetProgress(EntityUid uid, SurviveConditionComponent comp, ref ObjectiveGetProgressEvent args)
     {
-        // Mono - Check for mind, to slightly less hardcode it. I need objectives for other things too!
-        if (TryComp<MindComponent>(uid, out var mind))
-            args.Progress = _mind.IsCharacterDeadIc(mind) ? 0f : 1f;
+        args.Progress = _mind.IsCharacterDeadIc(args.Mind) ? 0f : 1f;
     }
 }

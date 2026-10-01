@@ -12,7 +12,6 @@
     tags:
     - ClothMade
     - WhitelistChameleon # We do a little bit of trolling.
-    - PetWearable
 
 - type: entity
   parent: [ClothingHeadBase]
@@ -28,8 +27,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadSanabi
@@ -42,6 +40,3 @@
     sprite: _Goobstation/Clothing/Head/Hats/sanabi.rsi
   - type: StaticPrice # Monolith
     vendPrice: 220
-  - type: Tag
-    tags:
-    - PetWearable

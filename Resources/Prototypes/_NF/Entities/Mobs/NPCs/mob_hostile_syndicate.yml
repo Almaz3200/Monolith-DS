@@ -1,13 +1,12 @@
 - type: entity
-  name: wayward naval agent
-  description: Long gone from home, hollowed out from emissions. Expect a fight.
+  name: syndicate naval agent
   abstract: true
   categories: [ HideSpawnMenu ]
   parent:
+  - MobHumanoidHostileBase
   - MobHumanoidInvetory
   - MobHumanoidHostileAISimpleRanged
   - NFMobRestrictions
-  - MobHumanoidHostileBaseShade # Mono: MobHumanoidHostileBase -> MobHumanoidHostileBaseShade
   id: MobSyndicateNavalBase
   components:
   - type: Body
@@ -16,13 +15,13 @@
   - type: NpcFactionMember
     factions:
     - SyndicateNF
-  #- type: RandomHumanoidAppearance # Mono: Removed random appearance
-  #  randomizeName: false
-  #- type: RandomMetadata
-  #  nameSegments:
-  #  - SyndicateNamesPrefix
-  #  - SyndicateNamesNormal
-  #  - SyndicateNamesElite
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - SyndicateNamesPrefix
+    - SyndicateNamesNormal
+#    - SyndicateNamesElite # Commented by LuaM
   #- type: AutoImplant
     #implants:
     #- DeathRattleImplant
@@ -37,12 +36,12 @@
     pack: syndicatehumanoidchatter
     minimumWait: 30
     maximumWait: 120
-    nextAdvertisementTime: 0
+    nextAdvertisementTime: 10
   - type: AutoWakeUp
   - type: TriggerOnBeingGibbed
   - type: GibOnTrigger
     deleteItems: true
-    deleteOrgans: false
+    deleteOrgans: true
     gib: false
     useArgumentEntity: true
   - type: MovementSpeedModifier
@@ -52,10 +51,10 @@
 # Humans
 # Syndicate Captain, "armed" with AP Python
 - type: entity
-  name: wayward captain
+  name: syndicate captain
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalCaptainA
-  description: Long gone from home, hollowed out from emissions. Expect a fight. Seems to be armed with a revolver.
+  description: The executive officer in lieu of the commander, syndicate captains ensure operations onboard go smoothly. Equipped with a 45_magnum revolver.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -66,7 +65,7 @@
       rechargeSound:
         path: /Audio/_NF/Effects/silence.ogg
     - type: BasicEntityAmmoProvider
-      proto: Bullet357_magnumAP
+      proto: Bullet45_magnumAP
       capacity: 1
       count: 1
     - type: Gun
@@ -86,7 +85,7 @@
       prototypes:
         - SyndicateNavalCaptainGearB
     - type: BasicEntityAmmoProvider
-      proto: Bullet357_magnumFMJ
+      proto: Bullet45_magnumFMJ
       capacity: 1
       count: 1
 
@@ -99,7 +98,7 @@
       prototypes:
         - SyndicateNavalCaptainGearC
     - type: BasicEntityAmmoProvider
-      proto: Bullet357_magnumFMJ
+      proto: Bullet45_magnumFMJ
       capacity: 1
       count: 1
 
@@ -112,16 +111,16 @@
       prototypes:
         - SyndicateNavalCaptainGearD
     - type: BasicEntityAmmoProvider
-      proto: Bullet357_magnumFMJ
+      proto: Bullet45_magnumFMJ
       capacity: 1
       count: 1
 
 # Syndicate Engineer, "armed" with shotgun
 - type: entity
-  name: wayward engineer
+  name: syndicate engineer
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalEngineerA
-  description: Long gone from home, hollowed out from emissions. Expect a fight. Seems to be armed with a shotgun.
+  description: On a shuttle, the engineer has the annoying job of making sure absolutely everything is running correctly. Syndicate shuttles are no different.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -181,10 +180,10 @@
 # Syndicate "Medic", throws poisoned darts laced with 2u of Impedrezene (hallucinogenic, deals minor poison damage, makes you barf and slows you down)
 # Look for darts here: /Resources/Prototypes/_NF/Entities/Objects/Weapons/Throwable/throwable_weapons.yml
 - type: entity
-  name: wayward medic
+  name: syndicate medic
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalMedicA
-  description: Long gone from home, hollowed out from emissions. Expect a fight. Seems to have a pouch of darts.
+  description: Medical specialist. Knows how to treat patients humanely and how to treat prisoners inhumanely. Uses darts laced with harmful chemicals - impedrezene or chloral hydrate.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -244,10 +243,10 @@
 
 # Second Officer, "armed" with Advanced Laser Pistol
 - type: entity
-  name: wayward second officer
+  name: syndicate second officer
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalSecondOfficerA
-  description: Long gone from home, hollowed out from emissions. Expect a fight. Seems to be armed with a laser pistol.
+  description: The captain's right hand is entrusted with relaying the captain's orders to the crew and ensuring they are carried out promptly. Carries a laser pistol for self-defense.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -302,10 +301,11 @@
 
 # Syndicate Security Operative, "armed" with Atreides SMG
 - type: entity
-  name: wayward operative
+  name: syndicate operative
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalOperatorA
-  description: Long gone from home, hollowed out from emissions. Expect a fight. Looks to have an SMG.
+  description: |-
+   "Everything is a nail if you have a hammer." In this case, everything is a target because he has an SMG and an itchy trigger finger.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -360,10 +360,11 @@
 
 # Syndicate Grenadier, "armed" with china lake
 - type: entity
-  name: wayward grenadier
+  name: syndicate grenadier
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalGrenadierA
-  description: Long gone from home, hollowed out from emissions. Expect a fight. HOLY SHIT, THAT GUY HAS A BOMB!
+  description: |-
+   "Huh? Say it louder! I can't hear you!" Equipped with the infamous China Lake, grenadiers have immense destructive capability, and should be priority targets.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -429,10 +430,10 @@
 
 # Syndicate Saboteur, "armed" with EMP Viper
 - type: entity
-  name: wayward saboteur
+  name: syndicate saboteur
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalSaboteurA
-  description: Long gone from home, hollowed out from emissions. Seems armed with a shocking gun.
+  description: Specialist trained in the art of sabotaging NT shuttles and facilities. Equipped with EMP rounds, take caution.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -483,10 +484,9 @@
 
 # Hostile Victim of Experimentation, "armed" with shiv
 - type: entity
-  name: wayward captive
-  description: Long gone from home, hollowed out from emissions and whatever their captors did to them.
+  name: captive
   parent:
-  - MobHumanoidHostileBaseShade # Mono: MobHumanoidHostileBase -> MobHumanoidHostileBaseShade
+  - MobHumanoidHostileBase
   - MobHumanoidHostileAISimpleMelee
   - NFMobRestrictions
   id: MobExperimentationVictim
@@ -517,13 +517,13 @@
 
 # Syndicate Commander, "armed" with AK
 - type: entity
-  name: wayward commander # Mega Fauna for Dungeons
+  name: syndicate commander # Mega Fauna for Dungeons
   parent:
   - MobSyndicateNavalBase
   #- MobLaserReflect # Added to prevent laser abuse from players
   - NFMobBossRestrictions
   id: MobSyndicateNavalCommanderA
-  description: Long gone from home, hollowed out from emissions. Your target.
+  description: A regional commander of Syndicate operations, this officer holds ultimate local command and responsibility. Armed with an assault rifle and heavily armored.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -591,10 +591,10 @@
 
 # Syndicate Deckhand, "armed" with Viper
 - type: entity
-  name: wayward deckhand
+  name: syndicate deckhand
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalDeckhandA
-  description: Long gone from home, hollowed out from emissions. Looks like it has a gun.
+  description: Lowest ranking member of the Syndicate Naval Forces. Your regular "Johnny-on-the-spot" when it comes to menial tasks.
   categories: [ HideSpawnMenu ]
   components:
     - type: Loadout
@@ -645,8 +645,7 @@
 
 # Syndicate Mime, melee, "armed" with chainsaw
 - type: entity
-  name: wayward mime
-  description: Long gone from home, hollowed out from emissions... or was it always this way?
+  name: syndicate mime
   parent:
   - MobSyndicateNavalBase
   - MobHumanoidHostileAISimpleMelee
@@ -670,10 +669,10 @@
 # Syndicate Chemwarrior, shoots healthy mixes of chems
 # Look for chems here: /Resources/Prototypes/_NF/Entities/Objects/Weapons/Ammunition/Projectiles/chem.yml
 - type: entity
-  name: wayward chemwarrior
+  name: syndicate chemwarrior
   parent: MobSyndicateNavalBase
   id: MobSyndicateNavalChemwarriorA
-  description: Long gone from home, hollowed out from emissions. Seems to have janitorial equipment..?
+  description: Carrying tanks filled with dangerous chemicals, chemwarriors attack their enemies with a noxious spray.
   categories: [ HideSpawnMenu ]
   components:
   - type: Loadout
@@ -737,7 +736,7 @@
 # Void Troopers
 # Syndicate Captain, "armed" with Python
 - type: entity
-  name: wayward captain
+  name: syndicate captain
   parent:
   - MobSyndicateNavalCaptainA
   #- MobLaserReflect # Added to prevent laser abuse from players
@@ -748,7 +747,7 @@
       prototypes:
         - SyndicateNavalCaptainVoidGear
     - type: BasicEntityAmmoProvider
-      proto: Bullet357_magnumFMJ
+      proto: Bullet45_magnumFMJ
       capacity: 1
       count: 1
 

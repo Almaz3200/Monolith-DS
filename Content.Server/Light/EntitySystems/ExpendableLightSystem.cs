@@ -48,8 +48,6 @@ namespace Content.Server.Light.EntitySystems
         private void UpdateLight(Entity<ExpendableLightComponent> ent, float frameTime)
         {
             var component = ent.Comp;
-            if (component.ActivateOnSpawn) // Mono
-                TryActivate(ent);
             if (!component.Activated)
                 return;
 

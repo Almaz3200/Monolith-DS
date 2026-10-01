@@ -7,8 +7,3 @@
   id: PDVJackboots
   equipment:
     shoes: ClothingShoesBootsJackFilled
-
-- type: loadout
-  id: PDVAdvancedTacticalMagboots
-  equipment:
-    shoes: ClothingShoesBootsMagPDVAdvanced

@@ -9,17 +9,14 @@
   startingGear: USSPRiflemanGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
-  icon: "JobIconUSSPRifleman"
+  icon: "JobIconSecurityCadet" # TODO - new USSP icons
   supervisors: job-supervisors-ussp-sergeant
-  assignedCompany: USSP
   canBeAntag: false
   weight: 10
   displayWeight: 10
-  guides:
-  - USSP_Entry
   special:
   - !type:AddImplantSpecial
-    implants: [ UsspTrackingImplant ]
+    implants: [ MindShieldImplant, UsspTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled
@@ -45,4 +42,3 @@
   storage:
     back:
     - RadioHandheldNF
-    - BookUSSPLaw

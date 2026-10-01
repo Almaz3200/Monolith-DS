@@ -233,8 +233,8 @@
 - type: entity
   id: ComputerPirateBounty
   parent: BaseComputer
-  name: PDV heretic console # Mono
-  description: Shows the identities of all heretics known to the Sultanate in the Colossus sector, as well as the rewards for sending their remains to the Sultanate via data exchange pallet. # Mono
+  name: PDV bounty console # Mono
+  description: Pull up active contracts, track targets, and get paid in chits.
   components:
   - type: Sprite
     sprite: _NF/Structures/Machines/computers.rsi
@@ -247,13 +247,18 @@
       state: piratebounty
     - map: ["computerLayerKeys"]
       state: blackmarket_key
-  - type: HereticConsole
+  - type: PirateBountyConsole
+    spawnChestSound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+      params:
+        volume: -5
+        variation: 0.2
   - type: ActivatableUI
-    key: enum.HereticConsoleUiKey.Heretics # Mono
+    key: enum.PirateConsoleUiKey.Bounty
   - type: UserInterface
     interfaces:
-      enum.HereticConsoleUiKey.Heretics: # Mono
-        type: HereticConsoleBoundUserInterface # Mono
+      enum.PirateConsoleUiKey.Bounty:
+        type: PirateBountyConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Computer
@@ -262,7 +267,6 @@
     radius: 1.5
     energy: 1.6
     color: "#b89f25"
-  - type: HereticDetector # Mono
   # - type: GuideHelp # Frontier
   #   guides: # Frontier
   #   - Pirate # Frontier: eventually?  maybe?

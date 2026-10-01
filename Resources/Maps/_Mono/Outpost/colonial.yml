@@ -4470,6 +4470,8 @@ entities:
       id: Frontier
     - type: ForceAnchor
     - type: StationTransit
+    - type: IFF
+      readOnly: True
     - type: ProtectedGrid
       preventArtifactTriggers: True
       preventEmpEvents: True

@@ -26,8 +26,3 @@
   id: TsfmcDiagnostic
   equipment:
     eyes: ClothingEyesHudDiagnostic
-
-- type: loadout
-  id: TsfmcCommanderGlasses
-  equipment:
-    eyes: ClothingEyesTSFOfficerGlasses

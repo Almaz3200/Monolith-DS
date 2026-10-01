@@ -29,9 +29,6 @@
     damageContainers:
     - Inorganic
     - Silicon
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
@@ -46,7 +43,6 @@
   - type: Tag
     tags:
     - HudMedical
-    - PetWearable
   - type: StaticPrice # Frontier
     price: 30 # Frontier
 
@@ -63,7 +59,6 @@
   - type: Tag
     tags:
     - HudSecurity
-    - PetWearable
 
 - type: entity
   parent: ClothingEyesBase
@@ -76,9 +71,6 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/command.rsi
   - type: ShowJobIcons
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingEyesBase
@@ -92,12 +84,8 @@
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
   - type: ShowThirstIcons
   - type: StealTarget
-    stealGroup:
-    - ClothingEyesHudBeer
+    stealGroup: ClothingEyesHudBeer
   - type: SolutionScanner
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingEyesBase
@@ -122,9 +110,6 @@
     flavors:
       - onion
       - greasey
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingEyesBase
@@ -138,9 +123,6 @@
     sprite: Clothing/Eyes/Hud/onionbeer.rsi
   - type: ShowHungerIcons
   - type: ShowThirstIcons
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
@@ -153,9 +135,6 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/medonion.rsi
   - type: ShowHungerIcons
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
@@ -169,9 +148,6 @@
     sprite: Clothing/Eyes/Hud/medonionbeer.rsi
   - type: ShowHungerIcons
   - type: ShowThirstIcons
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
@@ -186,9 +162,6 @@
   - type: Construction
     graph: HudMedSec
     node: medsecHud
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
@@ -205,9 +178,6 @@
     - Biological
     - Inorganic
   - type: ShowSyndicateIcons
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
@@ -226,12 +196,9 @@
   - type: ShowHungerIcons
   - type: ShowThirstIcons
   - type: ShowSyndicateIcons
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseFactionGearOtherFactionT1]
+  parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesHudSyndicate
   name: syndicate visor
   description: The syndicate's professional head-up display, designed for better detection of humanoids and their subsequent elimination.
@@ -241,9 +208,6 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/synd.rsi
   - type: ShowSyndicateIcons
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]
@@ -257,9 +221,6 @@
     sprite: Clothing/Eyes/Hud/syndagent.rsi
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesGlassesSunglasses, ShowSecurityIcons]
@@ -276,9 +237,6 @@
     sprite: Clothing/Eyes/Hud/medpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/medpatch.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesEyepatchHudMedical, ClothingHeadEyeBaseFlipped]
@@ -295,9 +253,6 @@
     sprite: Clothing/Eyes/Hud/secpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/secpatch.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesEyepatchHudSecurity,  ClothingHeadEyeBaseFlipped]
@@ -314,9 +269,6 @@
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesEyepatchHudBeer, ClothingHeadEyeBaseFlipped]
@@ -333,9 +285,6 @@
     sprite: Clothing/Eyes/Hud/diagpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/diagpatch.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: [ClothingEyesEyepatchHudDiag, ClothingHeadEyeBaseFlipped]

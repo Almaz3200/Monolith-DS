@@ -1,6 +1,5 @@
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
-using Content.Server.Radio;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Interaction;
 using Content.Shared.PowerCell.Components;
@@ -52,103 +51,70 @@ public sealed partial class JammerSystem : SharedJammerSystem
                     };
                     ChangeChargeLevel(uid, chargeLevel);
                 }
+
             }
+
         }
     }
 
     private void OnActivate(Entity<RadioJammerComponent> ent, ref ActivateInWorldEvent args)
     {
-
         if (args.Handled || !args.Complex)
             return;
 
-    var activated = !HasComp<ActiveRadioJammerComponent>(ent) &&
-        _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) &&
-        battery.CurrentCharge > GetCurrentWattage(ent);
-
-    if (activated)
-    {
-        ChangeLEDState(ent.Owner, true);
-
-        EnsureComp<ActiveRadioJammerComponent>(ent);
-        EnsureComp<DeviceNetworkJammerComponent>(ent, out var jammingComp);
-
-        _jammer.SetRange((ent, jammingComp), GetCurrentRange(ent));
-
-        _jammer.AddJammableNetwork(
-            (ent, jammingComp),
-            DeviceNetworkComponent.DeviceNetIdDefaults.Wireless.ToString()
-        );
-
-        /// Sync excluded frequencies from RadioJammerComponent
-        /// into DeviceNetworkJammerComponen
-
-        _jammer.ClearExcludedFrequency((ent, jammingComp));
-
-        foreach (var freq in ent.Comp.FrequenciesExcluded)
+        var activated = !HasComp<ActiveRadioJammerComponent>(ent) &&
+            _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) &&
+            battery.CurrentCharge > GetCurrentWattage(ent);
+        if (activated)
         {
-            _jammer.AddExcludedFrequency((ent, jammingComp), (uint) freq);
+            ChangeLEDState(ent.Owner, true);
+            EnsureComp<ActiveRadioJammerComponent>(ent);
+            EnsureComp<DeviceNetworkJammerComponent>(ent, out var jammingComp);
+            _jammer.SetRange((ent, jammingComp), GetCurrentRange(ent));
+            _jammer.AddJammableNetwork((ent, jammingComp), DeviceNetworkComponent.DeviceNetIdDefaults.Wireless.ToString());
         }
+        else
+        {
+            ChangeLEDState(ent.Owner, false);
+            RemCompDeferred<ActiveRadioJammerComponent>(ent);
+            RemCompDeferred<DeviceNetworkJammerComponent>(ent);
+        }
+        var state = Loc.GetString(activated ? "radio-jammer-component-on-state" : "radio-jammer-component-off-state");
+        var message = Loc.GetString("radio-jammer-component-on-use", ("state", state));
+        Popup.PopupEntity(message, args.User, args.User);
+        args.Handled = true;
     }
-    else
+
+    private void OnPowerCellChanged(Entity<ActiveRadioJammerComponent> ent, ref PowerCellChangedEvent args)
     {
-        ChangeLEDState(ent.Owner, false);
-
-        RemCompDeferred<ActiveRadioJammerComponent>(ent);
-        RemCompDeferred<DeviceNetworkJammerComponent>(ent);
-    }
-
-    var state = Loc.GetString(activated
-        ? "radio-jammer-component-on-state"
-        : "radio-jammer-component-off-state");
-
-    var message = Loc.GetString(
-        "radio-jammer-component-on-use",
-        ("state", state)
-    );
-
-    Popup.PopupEntity(message, args.User, args.User);
-    args.Handled = true;
+        if (args.Ejected)
+        {
+            ChangeLEDState(ent.Owner, false);
+            RemCompDeferred<ActiveRadioJammerComponent>(ent);
+        }
     }
 
     private void OnRadioSendAttempt(ref RadioSendAttemptEvent args)
     {
-        
-    if (!TryComp<TransformComponent>(args.RadioSource, out var sourceTransform))
-        return;
-
-    var source = sourceTransform.Coordinates;
-
-    var query = EntityQueryEnumerator<
-        ActiveRadioJammerComponent,
-        RadioJammerComponent,
-        TransformComponent>();
-
-    while (query.MoveNext(out var uid, out _, out var jammer, out var transform))
-    {
-        // Excluded channels are allowed through.
-        if (jammer.FrequenciesExcluded.Contains(args.Frequency))
-            continue;
-
-        if (_transform.InRange(
-                source,
-                transform.Coordinates,
-                GetCurrentRange((uid, jammer))))
+        if (ShouldCancelSend(args.RadioSource))
         {
             args.Cancelled = true;
-            return;
         }
     }
-}
 
-    private void OnPowerCellChanged(Entity<ActiveRadioJammerComponent> ent, ref PowerCellChangedEvent args)
+    private bool ShouldCancelSend(EntityUid sourceUid)
     {
+        var source = Transform(sourceUid).Coordinates;
+        var query = EntityQueryEnumerator<ActiveRadioJammerComponent, RadioJammerComponent, TransformComponent>();
 
-        if (args.Ejected)
+        while (query.MoveNext(out var uid, out _, out var jam, out var transform))
         {
-            ChangeLEDState(ent.Owner, false);
-            RemCompDeferred<ActiveRadioJammerComponent>(ent.Owner);
-            RemCompDeferred<DeviceNetworkJammerComponent>(ent.Owner);
+            if (_transform.InRange(source, transform.Coordinates, GetCurrentRange((uid, jam))))
+            {
+                return true;
+            }
         }
+
+        return false;
     }
 }

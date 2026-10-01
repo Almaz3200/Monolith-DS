@@ -24,9 +24,8 @@ public sealed partial class GunSystem
         // TODO: Combine with TakeAmmo
         if (component.Entities.Count > 0)
         {
-            var index = component.FireInLoadOrder ? 0 : component.Entities.Count - 1;
-            var existing = component.Entities[index];
-            component.Entities.RemoveAt(index);
+            var existing = component.Entities[^1];
+            component.Entities.RemoveAt(component.Entities.Count - 1);
             DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
 
             Containers.Remove(existing, component.Container);

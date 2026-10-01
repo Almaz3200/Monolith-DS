@@ -1,11 +1,10 @@
 using Content.Server.Botany.Systems;
-using Content.Server._Mono.Botany.PlantAnalyzer;
 using Content.Shared.Botany.Components;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.Botany.Components
 {
-    [RegisterComponent, Access(typeof(BotanySystem), typeof(PlantAnalyzerSystem))]
+    [RegisterComponent, Access(typeof(BotanySystem))]
     public sealed partial class SeedComponent : SharedSeedComponent
     {
         /// <summary>

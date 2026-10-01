@@ -177,8 +177,7 @@
   suffix: Dirty Water, StealTarget
   components:
   - type: StealTarget
-    stealGroup:
-    - ToiletGoldenDirtyWater
+    stealGroup: ToiletGoldenDirtyWater
   - type: SolutionContainerManager
     solutions:
       drainBuffer:

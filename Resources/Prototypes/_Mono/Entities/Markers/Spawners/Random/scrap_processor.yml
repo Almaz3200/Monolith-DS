@@ -136,15 +136,21 @@
         - id: MatterBinStockPart
       - !type:GroupSelector
         children:
-        - id: SalvagePartsT2Spawner
+        - id: AdvancedCapacitorStockPart
+        - id: NanoManipulatorStockPart
+        - id: AdvancedMatterBinStockPart
       - !type:GroupSelector
         weight: 0.5
         children:
-        - id: SalvagePartsT3Spawner
+        - id: SuperCapacitorStockPart
+        - id: PicoManipulatorStockPart
+        - id: SuperMatterBinStockPart
       - !type:GroupSelector
         weight: 0.5
         children:
-        - id: SalvagePartsT4Spawner
+        - id: QuadraticCapacitorStockPart
+        - id: FemtoManipulatorStockPart
+        - id: BluespaceMatterBinStockPart
    - !type:GroupSelector
      weight: 0.75
      children:
@@ -154,7 +160,6 @@
      - id: WelderExperimental
      - id: ClothingEyesGlassesMesonTray
      - id: RCD
-     - id: RPD
      - id: ShipRepairDeviceEmpty
 # Scrap
 - type: entityTable
@@ -264,7 +269,6 @@
     - id: MaterialReclaimerMachineCircuitboard
     - id: OreProcessorIndustrialMachineCircuitboard
     - id: OreProcessorMachineCircuitboard
-    - id: OreMagnetMachineCircuitboard # Mono
     - id: ShredderMachineCircuitboard
     - id: ShuttleGunKineticCircuitboard
     - id: NFScrapProcessorCircuitboard
@@ -302,7 +306,7 @@
     - id: CryoPodMachineCircuitboard
     - id: CondenserMachineCircuitBoard
     - id: ElectrolysisUnitMachineCircuitboard
-    - id: ThermobathMachineCircuitboard
+    - id: HotplateMachineCircuitboard
     - id: ReagentGrinderMachineCircuitboard
     - id: StasisBedMachineCircuitboard
     - id: BiomassReclaimerMachineCircuitboard

@@ -1667,21 +1667,6 @@
   - type: Stack
     stackType: FloorTileXenoMaint
 
-# Xenoborg Floor Tile
-- type: entity
-  id: FloorTileItemXenoborg
-  parent: FloorTileItemBase
-  name: xenoborg floor
-  components:
-  - type: Sprite
-    state: xenoborg-floor
-  - type: FloorTile
-    outputs:
-    - Plating
-    - FloorXenoborg
-  - type: Stack
-    stackType: FloorTileXenoborg
-
 - type: entity
   parent: FloorTileItemDark
   id: FloorTileItemDarkSquiggly

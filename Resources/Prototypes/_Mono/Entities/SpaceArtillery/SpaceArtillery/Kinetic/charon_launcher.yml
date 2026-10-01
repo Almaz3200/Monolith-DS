@@ -61,9 +61,6 @@
   - type: ShipRepairable
     repairTime: 45
     repairCost: 300
-  - type: HardpointAnchorableOnly
-    class: Ballistic
-    size: Superheavy
 
 # Station one w/ infinite ammo
 

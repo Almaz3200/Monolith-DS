@@ -66,7 +66,6 @@
   - type: Tag
     tags:
     - WhitelistChameleon
-    - PetWearable
 
 - type: entity
   parent: ClothingHeadHatHardhatBase
@@ -78,9 +77,6 @@
     sprite: Clothing/Head/Hardhats/blue.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/blue.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingHeadHatHardhatBase
@@ -92,10 +88,7 @@
     sprite: Clothing/Head/Hardhats/orange.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/orange.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatRed
@@ -106,10 +99,7 @@
     sprite: Clothing/Head/Hardhats/red.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/red.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatWhite
@@ -120,10 +110,7 @@
     sprite: Clothing/Head/Hardhats/white.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/white.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatYellow
@@ -134,10 +121,7 @@
     sprite: Clothing/Head/Hardhats/yellow.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/yellow.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatYellowDark
@@ -148,10 +132,7 @@
     sprite: Clothing/Head/Hardhats/dark_yellow.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/dark_yellow.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatArmored
@@ -169,7 +150,3 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.8
-  - type: Tag
-    tags:
-    - PetWearable
-    

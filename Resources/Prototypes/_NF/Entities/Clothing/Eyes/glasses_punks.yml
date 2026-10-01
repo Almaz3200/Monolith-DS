@@ -51,10 +51,6 @@
       Decor: CyberpunkDark
   # LuaM-end
 
-  - type: Tag
-    tags:
-    - PetWearable
-    
 # HUDs
 - type: entity
   id: ClothingEyesPunkInfoShades
@@ -118,7 +114,3 @@
     - Inorganic
     - Silicon
     - Biological
-  - type: Tag
-    tags:
-    - PetWearable
-    

@@ -17,9 +17,6 @@
             "name": "armor2"
         },
         {
-            "name": "armor2_unfinished"
-        },
-        {
             "name": "armor2_broken"
         },
         {
@@ -33,9 +30,6 @@
         },
         {
             "name": "armor4"
-        },
-        {
-            "name": "armor4_unfinished"
         },
         {
             "name": "armor4_broken"
@@ -53,33 +47,10 @@
             "name": "canister_open"
         },
         {
-            "name": "canisterfill1"
-        },
-        {
-            "name": "canisterfill2"
-        },
-        {
             "name": "canister2"
         },
         {
             "name": "canister2_open"
-        },
-        {
-            "name": "canister2fill1"
-        },
-        {
-            "name": "canister2fill2"
-        },
-        {
-            "name": "canister3",
-            "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
         },
         {
             "name": "capacitor1"
@@ -88,15 +59,7 @@
             "name": "capacitor2"
         },
         {
-            "name": "capacitor3",
-            "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
+            "name": "capacitor3"
         },
         {
             "name": "componentbrick1"
@@ -117,13 +80,7 @@
             "name": "electromagnet2"
         },
         {
-            "name": "electromagnet2_unfinished"
-        },
-        {
             "name": "electromagnet3"
-        },
-        {
-            "name": "electromagnet3_unfinished"
         },
         {
             "name": "microprocessor1"

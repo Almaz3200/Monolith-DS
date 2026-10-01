@@ -12,13 +12,13 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: GunWieldBonus
-    minAngle: -10
-    maxAngle: -10
+    minAngle: -14
+    maxAngle: -17
   - type: Gun
-    minAngle: 12
-    maxAngle: 50
-    angleIncrease: 6
-    angleDecay: 80
+    minAngle: 18
+    maxAngle: 35
+    angleIncrease: 4
+    angleDecay: 40
     fireRate: 11 # 660 rpm
     shotsPerBurst: 3
     availableModes:
@@ -70,62 +70,54 @@
 
 - type: entity
   name: TCA QBZ-410 Lecter (6.8x52mm Caseless)
-  parent: [BaseWeaponRifle, BaseFactionGearTSFT1]
+  parent: BaseWeaponRifle
   id: WeaponRifleLecter
-  description: The result of a project to make a new standard rifle for the branches of the TSF military. Highly accurate and easy to use, but poor damage output. Also accepts 5.56x45mm magazines to assist with standardization. The barrel is threaded for suppressors, and an Erebus railmount is on the bottom for grips.
+  description: The result of a project to make a new standard rifle for the branches of the TSF military. Accurate, easy to use, and firing the 6.8x52mm STANAG round. Also accepts 5.56x45mm magazines to assist with standardization. The barrel is threaded for suppressors, and an Erebus railmount is on the bottom for grips.
   components:
-  - type: Item
+  - type: Item # Mono
     size: Huge
     sprite: _Mono/Objects/Weapons/Guns/Rifles/lecter_inhands_32x.rsi
-    shape:
-    - 0,0,3,2 # 4x3
   - type: Sprite
-    sprite: _Mono/Objects/Weapons/Guns/Rifles/lecter.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/lecter.rsi # Mono
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
-    - map: ["gripAttachment"]
-    - map: ["barrelAttachment"]
-    - map: ["opticAttachment"]
+    - map: ["gripAttachment"] # Mono
+    - map: ["barrelAttachment"] # Mono
+    - map: ["opticAttachment"] # Mono
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/lecter_inhands_32x.rsi
-  - type: ChamberMagazineAmmoProvider
+  - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
-  - type: GunWieldBonus
-    minAngle: -18
-    maxAngle: -17
   - type: Gun
-    minAngle: 18
-    maxAngle: 35
-    angleIncrease: 1
-    angleDecay: 15
-    fireRate: 8
+    fireRate: 6 # Mono
     soundGunshot:
-      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg # Mono
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: Magazine68x52mmCaseless
-        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg
-        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg
+        startingItem: Magazine68x52mmCaseless # Mono
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg # Mono
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg # Mono
         priority: 2
         whitelist:
           tags:
-          - Magazine68x52mmCaseless
-          - Magazine556x45mmFMJ
+          - Magazine68x52mmCaseless # Mono
+          - Magazine556x45mmFMJ # Mono
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: Cartridge68x52mmCaseless
+        startingItem: Cartridge68x52mmCaseless # Mono
         priority: 1
         whitelist:
           tags:
-          - Cartridge68x52mmCaseless
-          - Cartridge556x45mmFMJ
+          - Cartridge68x52mmCaseless # Mono
+          - Cartridge556x45mmFMJ # Mono
+      # Mono
       attachment_grip:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -133,6 +125,7 @@
         whitelist:
           tags:
           - MonoGripErebusRailmount
+      # Mono
       attachment_barrel:
         insertSound: /Audio/Items/screwdriver.ogg
         ejectSound: /Audio/Items/screwdriver.ogg
@@ -140,6 +133,7 @@
         whitelist:
           tags:
           - MonoSuppressorMulticalRifle
+      # Mono
       attachment_optic:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -151,9 +145,10 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-      attachment_grip: !type:ContainerSlot
-      attachment_barrel: !type:ContainerSlot
-      attachment_optic: !type:ContainerSlot
+      attachment_grip: !type:ContainerSlot # Mono
+      attachment_barrel: !type:ContainerSlot # Mono
+      attachment_optic: !type:ContainerSlot # Mono
+      # Mono start
   - type: ESAttachableGun
     slots:
     - name: es-gun-attachments-slot-name-barrel
@@ -219,51 +214,45 @@
         whitelist:
           tags:
           - MonoOptic8x
+  # Mono end
   - type: MagazineVisuals
     magState: mag
     steps: 1
     zeroVisible: true
   - type: Appearance
-  - type: StaticPrice
+  - type: StaticPrice # Mono
     price: 750
-  - type: PirateBountyItem
+  - type: PirateBountyItem # Mono
     id: StandardFactionLongarm
 
 - type: entity
   name: TCA QBZ-430 Annie (7.62x39mm)
-  parent: [BaseWeaponRifle, BaseFactionGearTSFT2]
+  parent: [BaseWeaponRifle, BaseFactionGearTSFT2] # Mono
   id: WeaponRifleAnnie
-  description: A CQB beast designed to shoulder the weight of impossible missions. Uses 7.62x39mm ammo. The barrel is threaded for suppressors, and an Erebus railmount is present on the receiver and handguard for optics/grips.
+  description: A beast designed to shoulder the weight of impossible missions. Uses 7.62x39mm ammo. The barrel is threaded for suppressors, and an Erebus railmount is present on the receiver and handguard for optics/grips. # mono
   components:
   - type: Sprite
-    sprite: _Mono/Objects/Weapons/Guns/Rifles/annie.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/annie.rsi # Mono
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
-    - map: ["gripAttachment"]
-    - map: ["barrelAttachment"]
-    - map: ["opticAttachment"]
-  - type: Item
+    - map: ["gripAttachment"] # Mono
+    - map: ["barrelAttachment"] # Mono
+    - map: ["opticAttachment"] # Mono
+  - type: Item # Mono
     sprite: _Mono/Objects/Weapons/Guns/Rifles/annie_inhands_32x.rsi
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/annie_inhands_32x.rsi
-  - type: GunWieldBonus
-    minAngle: -18
-    maxAngle: -47
   - type: Gun
-    minAngle: 18
-    maxAngle: 54
-    angleIncrease: 3
-    angleDecay: 15
     availableModes:
     - FullAuto
     - Burst
     burstFireRate: 12
     burstCooldown: 0.8
     shotsPerBurst: 4
-    fireRate: 7.3
+    fireRate: 7
     projectileSpeed: 50 # LuaM: 42.5 > 50
     soundGunshot:
       path: /Audio/_Goobstation/Weapons/Guns/Gunshots/thock.ogg
@@ -275,8 +264,8 @@
       gun_magazine:
         name: Magazine
         startingItem: Magazine762x39mmFMJ
-        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/amr_magin.ogg
-        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/cm82_magout.ogg
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/amr_magin.ogg # Mono
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/cm82_magout.ogg # Mono
         priority: 2
         whitelist:
           tags:
@@ -289,6 +278,7 @@
         whitelist:
           tags:
           - Cartridge762x39mmFMJ
+      # Mono
       attachment_grip:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -296,6 +286,7 @@
         whitelist:
           tags:
           - MonoGripErebusRailmount
+      # Mono
       attachment_barrel:
         insertSound: /Audio/Items/screwdriver.ogg
         ejectSound: /Audio/Items/screwdriver.ogg
@@ -303,6 +294,7 @@
         whitelist:
           tags:
           - MonoSuppressorMulticalRifle
+      # Mono
       attachment_optic:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -314,9 +306,10 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-      attachment_grip: !type:ContainerSlot
-      attachment_barrel: !type:ContainerSlot
-      attachment_optic: !type:ContainerSlot
+      attachment_grip: !type:ContainerSlot # Mono
+      attachment_barrel: !type:ContainerSlot # Mono
+      attachment_optic: !type:ContainerSlot # Mono
+      # Mono start
   - type: ESAttachableGun
     slots:
     - name: es-gun-attachments-slot-name-barrel
@@ -382,12 +375,13 @@
         whitelist:
           tags:
           - MonoOptic8x
+  # Mono end
   - type: MagazineVisuals
     magState: mag
     steps: 1
     zeroVisible: true
   - type: Appearance
-  - type: PirateBountyItem
+  - type: PirateBountyItem # Mono
     id: ExperimentalFactionWeapon
   - type: GunRequiresWield
 
@@ -417,38 +411,32 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -40
   - type: Gun
-    minAngle: 6
-    maxAngle: 45
-    angleIncrease: 3
-    angleDecay: 15
-    fireRate: 7.5
+    fireRate: 6
     soundGunshot:
-      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg # Mono
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: Magazine68x52mmCaseless
-        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg
-        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg
+        startingItem: Magazine68x52mmCaseless # Mono
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg # Mono
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg # Mono
         priority: 2
         whitelist:
           tags:
-          - Magazine68x52mmCaseless
-          - Magazine556x45mmFMJ
+          - Magazine68x52mmCaseless # Mono
+          - Magazine556x45mmFMJ # Mono
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: Cartridge68x52mmCaseless
+        startingItem: Cartridge68x52mmCaseless # Mono
         priority: 1
         whitelist:
           tags:
-          - Cartridge68x52mmCaseless
-          - Cartridge556x45mmFMJ
+          - Cartridge68x52mmCaseless # Mono
+          - Cartridge556x45mmFMJ # Mono
+      # Mono
       attachment_grip:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -456,6 +444,7 @@
         whitelist:
           tags:
           - MonoGripErebusRailmount
+      # Mono
       attachment_barrel:
         insertSound: /Audio/Items/screwdriver.ogg
         ejectSound: /Audio/Items/screwdriver.ogg
@@ -463,6 +452,7 @@
         whitelist:
           tags:
           - MonoSuppressorMulticalRifle
+      # Mono
       attachment_optic:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -474,9 +464,10 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-      attachment_grip: !type:ContainerSlot
-      attachment_barrel: !type:ContainerSlot
-      attachment_optic: !type:ContainerSlot
+      attachment_grip: !type:ContainerSlot # Mono
+      attachment_barrel: !type:ContainerSlot # Mono
+      attachment_optic: !type:ContainerSlot # Mono
+      # Mono start
   - type: ESAttachableGun
     slots:
     - name: es-gun-attachments-slot-name-barrel
@@ -542,14 +533,15 @@
         whitelist:
           tags:
           - MonoOptic8x
+  # Mono end
   - type: MagazineVisuals
     magState: mag
     steps: 1
     zeroVisible: true
   - type: Appearance
-  - type: StaticPrice
+  - type: StaticPrice # Mono
     price: 1750
-  - type: PirateBountyItem
+  - type: PirateBountyItem # Mono
     id: StandardFactionLongarm
 
 # The Bigger Riversong, Dragonfang, Think of the old M-90 but one handed. Also goes in bag.
@@ -570,24 +562,23 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
-    - map: ["gripAttachment"]
-    - map: ["barrelAttachment"]
-    - map: ["opticAttachment"]
+    - map: ["gripAttachment"] # Mono
+    - map: ["barrelAttachment"] # Mono
+    - map: ["opticAttachment"] # Mono
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/dragonfang_inhands_32x.rsi
-  - type: ChamberMagazineAmmoProvider
+  - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
   - type: GunWieldBonus
-    minAngle: -32
-    maxAngle: -65 # 65 65 65
+    minAngle: -8
+    maxAngle: -30
   - type: Gun
-    minAngle: 32
-    maxAngle: 75
+    minAngle: 12
+    maxAngle: 33
     angleIncrease: 4
-    angleDecay: 10
-    fireRate: 4.5
-    damageModifier: 1.3 # very slightly out DPS'd by M-90 still
+    angleDecay: 40
+    fireRate: 4
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
   - type: ItemSlots
@@ -610,6 +601,7 @@
         whitelist:
           tags:
           - Cartridge762x51mmFMJ
+      # Mono
       attachment_grip:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -617,6 +609,7 @@
         whitelist:
           tags:
           - MonoGripErebusRailmount
+      # Mono
       attachment_barrel:
         insertSound: /Audio/Items/screwdriver.ogg
         ejectSound: /Audio/Items/screwdriver.ogg
@@ -624,6 +617,7 @@
         whitelist:
           tags:
           - MonoSuppressorMulticalRifle
+      # Mono
       attachment_optic:
         insertSound: /Audio/Items/screwdriver2.ogg
         ejectSound: /Audio/Items/screwdriver2.ogg
@@ -708,7 +702,7 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
-  - type: StaticPrice
+  - type: StaticPrice # Mono
     price: 2500
-  - type: PirateBountyItem
+  - type: PirateBountyItem # Mono
     id: StandardFactionLongarm

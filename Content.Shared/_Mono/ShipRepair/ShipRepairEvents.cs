@@ -24,9 +24,6 @@ public sealed partial class ShipRepairDoAfterEvent : SimpleDoAfterEvent
     // if we're repairing an entity, store what we're repairing
     public int? RepairId = null;
 
-    [NonSerialized]
-    public EntityUid? TargetGrid = null;
-
     public override bool IsDuplicate(DoAfterEvent other)
     {
         if (other is not ShipRepairDoAfterEvent cast)

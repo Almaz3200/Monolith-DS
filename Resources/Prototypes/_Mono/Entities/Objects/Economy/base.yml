@@ -3,7 +3,6 @@
   description: Used to keeo the ol' rust belt rolling.
   parent: BaseItem
   id: BaseEconomyGood
-  abstract: true
   components:
   - type: Tag
     tags:
@@ -30,24 +29,31 @@
 # Cherry picked base item things
   - type: EmitSoundOnPickup
     sound:
-      path: /Audio/_Goobstation/Items/handling/phone_pickup.ogg
+      collection: GenericPickup
       params:
-        volume: -2
+        volume: -7
   - type: EmitSoundOnDrop
     sound:
-      path: /Audio/_Goobstation/Items/handling/phone_drop.ogg
+      collection: GenericDrop
       params:
-        volume: -2
+        volume: -7
+  - type: Animateable
+  - type: Clickable
+  - type: InteractionOutline
+  - type: MovedByPressure
+  - type: EmitSoundOnCollide
+    sound:
+      collection: WeakHit
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Effects/drop.ogg
       params:
         volume: 2
-  - type: GuideHelp
-    guides:
-    - Economy
-  - type: StaticPrice
-    price: 300
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Pullable
+  - type: DamageExaminable
 
 - type: entity
   name: base economy item
@@ -56,6 +62,9 @@
   id: BaseEconomyGoodTier1
   abstract: true
   suffix: T1
+  components:
+  - type: StaticPrice
+    price: 1000
 
 - type: entity
   name: base economy item
@@ -64,6 +73,9 @@
   id: BaseEconomyGoodTier2
   abstract: true
   suffix: T2
+  components:
+  - type: StaticPrice
+    price: 3000
 
 - type: entity
   name: base economy item
@@ -72,6 +84,9 @@
   id: BaseEconomyGoodTier3
   abstract: true
   suffix: T3
+  components:
+  - type: StaticPrice
+    price: 6000
 
 - type: entity
   name: base economy item
@@ -80,3 +95,6 @@
   id: BaseEconomyGoodTier4
   abstract: true
   suffix: T4
+  components:
+  - type: StaticPrice
+    price: 9000

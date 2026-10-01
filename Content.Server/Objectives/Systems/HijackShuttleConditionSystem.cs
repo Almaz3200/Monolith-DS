@@ -28,9 +28,7 @@ public sealed partial class HijackShuttleConditionSystem : EntitySystem
 
     private void OnGetProgress(EntityUid uid, HijackShuttleConditionComponent comp, ref ObjectiveGetProgressEvent args)
     {
-        // Mono - Check for mind, to slightly less hardcode it. I need objectives for other things too!
-        if (TryComp<MindComponent>(args.MindId, out var mindComponent))
-            args.Progress = GetProgress(args.MindId, mindComponent);
+        args.Progress = GetProgress(args.MindId, args.Mind);
     }
 
     private float GetProgress(EntityUid mindId, MindComponent mind)

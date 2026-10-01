@@ -1,4 +1,3 @@
-using Content.Server._Crescent.ShipShields.Components;
 using Content.Shared._Crescent.ShipShields;
 using Content.Server.Power.Components;
 using Content.Shared.Projectiles;
@@ -62,8 +61,6 @@ public partial class ShipShieldsSystem
             return;
 
         args.PushMarkup(Loc.GetString("shield-emitter-examine", ("basedraw", component.BaseDraw), ("additional", CalculateLoadDamage(component))));
-        if (HasComp<ShipShieldDisabledGridComponent>(Transform(uid).GridUid))
-            args.PushMarkup(Loc.GetString("shield-emitter-examine-invalid-grid"));
     }
 
     private static float CalculateLoadDamage(ShipShieldEmitterComponent emitter)

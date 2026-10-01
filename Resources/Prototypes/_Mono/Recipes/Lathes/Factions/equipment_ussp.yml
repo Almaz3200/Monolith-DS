@@ -62,8 +62,3 @@
     Durathread: 3000
     Silver: 5000
     Plastic: 2500
-
-- type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
-  id: USSPTechfabMachineCircuitboard
-  result: USSPTechfabMachineCircuitboard

@@ -11,10 +11,7 @@
     sprite: _Mono/Clothing/Mask/gasdi.rsi
   - type: IdentityBlocker
     coverage: MOUTH
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: [ ClothingMaskDrakeIndustries  ]
   id: ClothingMaskDrakeIndustriesWatchdog
@@ -29,10 +26,7 @@
     coverage: MOUTH
   - type: EyeProtection
     protectionTime: 5
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingMaskGasExplorer
   id: ClothingMaskCOG
@@ -45,10 +39,7 @@
     sprite: _Mono/Clothing/Mask/cogmask.rsi
   - type: IdentityBlocker
     coverage: MOUTH
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 #tactical gas masks
 
 - type: entity
@@ -66,10 +57,7 @@
     sprite: _Mono/Clothing/Mask/SOM40.rsi
   - type: IdentityBlocker
     coverage: MOUTH
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingMaskGasExplorer
   id: ClothingMaskSOM41
@@ -85,10 +73,7 @@
     sprite: _Mono/Clothing/Mask/SOM41.rsi
   - type: IdentityBlocker
     coverage: MOUTH
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingMaskGasExplorer
   id: ClothingMaskSOM42
@@ -104,7 +89,3 @@
     sprite: _Mono/Clothing/Mask/SOM42.rsi
   - type: IdentityBlocker
     coverage: MOUTH
-  - type: Tag
-    tags:
-    - PetWearable
-    

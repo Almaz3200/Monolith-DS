@@ -40,9 +40,6 @@
   - type: Tag
     tags:
     - Structure
-  - type: ShipRepairable # Mono
-    repairTime: 1
-    repairCost: 5
 
 - type: entity
   id: SignalButton
@@ -107,9 +104,6 @@
   - type: Tag
     tags:
     - Structure
-  - type: ShipRepairable # Mono
-    repairTime: 1
-    repairCost: 5
 
 - type: entity
   id: ApcNetSwitch
@@ -200,9 +194,6 @@
     - type: Tag
       tags:
       - Structure
-    - type: ShipRepairable # Mono
-      repairTime: 1
-      repairCost: 5
 
 #directional
 

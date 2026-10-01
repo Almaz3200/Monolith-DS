@@ -5,29 +5,19 @@
   hidden: true
   loadouts:
   - PDVClothingJumpsuit
-
-- type: loadoutGroup
-  id: PDVInfantryJumpsuit
-  name: loadout-group-contractor-jumpsuit
-  minLimit: 1
-  hidden: true
-  loadouts:
-  - PDVClothingJumpsuitInfantryCrocus
-
 - type: loadoutGroup
   id: PDVNeck
   name: loadout-group-contractor-neck
 #  hidden: true # Commented by LuaM
   minLimit: 0 # LuaM: 1 > 0
   loadouts:
-  - PDVClothingNeckWearableCameraPDV
-
+  - PDVClothingNeckIFFOrange
 - type: loadoutGroup
   id: PDVCommanderNeck
   name: loadout-group-contractor-neck
   minLimit: 0 # LuaM: 1 > 0
   loadouts:
-  - PDVClothingNeckWearableCameraPDV
+  - PDVClothingNeckIFFOrange
   - PDVClothingNeckCloakCommander
   - PDVClothingNeckCloakVizier
   - PDVClothingNeckMantleVizier
@@ -42,26 +32,6 @@
   - PDVClothingOuterArmorBPVestMedium
   fallbacks:
   - PDVClothingOuterArmorBPVestLight
-
-- type: loadoutGroup
-  id: PDVOuterClothingVizier
-  name: loadout-group-contractor-outerclothing
-  minLimit: 1
-  loadouts:
-  - PDVClothingOuterArmorCV67
-  fallbacks:
-  - PDVClothingOuterArmorCV67
-
-- type: loadoutGroup
-  id: PDVInfantryOuterClothing
-  name: loadout-group-contractor-outerclothing
-  hidden: true
-  minLimit: 1
-  loadouts:
-  - PDVClothingOuterArmorInfantry
-  fallbacks:
-  - PDVClothingOuterArmorInfantry
-
 - type: loadoutGroup
   id: PDVGloves
   name: loadout-group-contractor-gloves
@@ -69,7 +39,6 @@
   minLimit: 1
   loadouts:
   - PDVCombatGloves
-
 - type: loadoutGroup
   id: PDVHud
   name: loadout-group-contractor-glasses
@@ -79,7 +48,6 @@
   - PDVClothingEyesHudSecurity
   fallbacks:
   - PDVClothingEyesHudSecurity
-
 - type: loadoutGroup
   id: PDVShoes
   name: loadout-group-contractor-shoes
@@ -89,16 +57,6 @@
   - PDVJackboots
   fallbacks:
   - PDVCombatBoots
-
-- type: loadoutGroup
-  id: PDVShoesVizier
-  name: loadout-group-contractor-shoes
-  minLimit: 1
-  loadouts:
-  - PDVAdvancedTacticalMagboots
-  fallbacks:
-  - PDVAdvancedTacticalMagboots
-
 - type: loadoutGroup
   id: PDVFace
   name: loadout-group-contractor-face
@@ -109,7 +67,6 @@
   - PDVGasmask
   fallbacks:
   - PDVGaiter
-
 - type: loadoutGroup
   id: PDVBackpack
   name: loadout-group-contractor-backpack
@@ -121,34 +78,12 @@
   - PDVClothingDuffel
   fallbacks:
   - PDVClothingBackpack
-
-- type: loadoutGroup
-  id: PDVInfantryBackpack
-  name: loadout-group-contractor-backpack
-  minLimit: 1
-  maxLimit: 1
-  loadouts:
-  - MonoSecurityGuardBackpack
-  - MonoSecurityGuardSatchel
-  - MonoSecurityGuardDuffel
-  fallbacks:
-  - PDVClothingBackpack
-
 - type: loadoutGroup
   id: PDVHead
   name: loadout-group-contractor-head
   minLimit: 0
   loadouts:
   - PDVBeret
-
-- type: loadoutGroup
-  id: PDVInfantryHead
-  name: loadout-group-contractor-head
-  minLimit: 1
-  hidden: true
-  loadouts:
-  - PDVInfantryHelmet
-
 - type: loadoutGroup
   id: PDVCommanderHead
   name: loadout-group-contractor-head
@@ -159,7 +94,6 @@
   - PDVCapVizierPurple
   fallbacks:
   - PDVCommanderBeret
-
 - type: loadoutGroup
   id: PDVBelt
   name: loadout-group-contractor-belt
@@ -171,13 +105,3 @@
   fallbacks:
   - PDVClothingBeltWebbingsNormalBlack
 
-- type: loadoutGroup
-  id: PDVInfantryBelt
-  name: loadout-group-contractor-belt
-  minLimit: 1
-  maxLimit: 1
-  hidden: true
-  loadouts:
-  - PDVClothingBeltWebbingInfantry
-  fallbacks:
-  - PDVClothingBeltWebbingInfantry

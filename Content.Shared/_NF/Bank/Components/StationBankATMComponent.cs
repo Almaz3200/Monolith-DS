@@ -36,6 +36,5 @@ public enum SectorBankAccount : byte
     Frontier,
     Nfsd,
     Medical,
-    Mieyo,
     BlackMarket,
 }

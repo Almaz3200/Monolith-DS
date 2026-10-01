@@ -334,13 +334,3 @@
 - type: entity
   parent: [ SuitStorageWallmount, SuitStorageM86 ]
   id: SuitStorageWallmountM86
-
-# Viper Group
-
-- type: entity
-  parent: [ SuitStorageWallmount, SuitStorageViperWL ]
-  id: SuitStorageWallmountViperWL
-
-- type: entity
-  parent: [ SuitStorageWallmount, SuitStorageViperJackal ]
-  id: SuitStorageWallmountViperJackal

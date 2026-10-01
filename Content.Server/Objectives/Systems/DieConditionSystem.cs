@@ -17,8 +17,6 @@ public sealed partial class DieConditionSystem : EntitySystem
 
     private void OnGetProgress(EntityUid uid, DieConditionComponent comp, ref ObjectiveGetProgressEvent args)
     {
-        // Mono - Check for mind, to slightly less hardcode it. I need objectives for other things too!
-        if (TryComp<MindComponent>(uid, out var mindComponent))
-            args.Progress = _mind.IsCharacterDeadIc(mindComponent) ? 1f : 0f;
+        args.Progress = _mind.IsCharacterDeadIc(args.Mind) ? 1f : 0f;
     }
 }

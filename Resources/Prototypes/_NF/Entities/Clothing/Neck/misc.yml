@@ -18,7 +18,6 @@
     tags:
     - ObjectOfSpiritualSignificance
     - Crucifix
-    - PetWearable
 
 - type: entity
   parent:
@@ -48,7 +47,6 @@
   - type: Tag
     tags:
     - ObjectOfSpiritualSignificance
-    - PetWearable
   - type: PirateBountyItem
     id: ClothingNeckAmuletBloodCult
 
@@ -75,9 +73,6 @@
       - state: equipped-NECK-on
         color: "#a9b6bd"
         shader: unshaded
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckIFFNeutral
@@ -99,9 +94,6 @@
       - state: equipped-NECK-on
         color: "#33cc00"
         shader: unshaded
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckIFFNeutral
@@ -123,9 +115,6 @@
       - state: equipped-NECK-on
         color: "#990000"
         shader: unshaded
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckIFFNeutral
@@ -147,9 +136,6 @@
       - state: equipped-NECK-on
         color: "#0055cc"
         shader: unshaded
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckIFFNeutral
@@ -171,9 +157,6 @@
       - state: equipped-NECK-on
         color: "#47f8ff"
         shader: unshaded
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckIFFNeutral
@@ -195,9 +178,6 @@
       - state: equipped-NECK-on
         color: "#ff8227"
         shader: unshaded
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckIFFNeutral
@@ -219,6 +199,3 @@
       - state: equipped-NECK-on
         color: "#9c0de1"
         shader: unshaded
-  - type: Tag
-    tags:
-    - PetWearable

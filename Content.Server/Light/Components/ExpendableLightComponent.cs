@@ -15,11 +15,5 @@ namespace Content.Server.Light.Components
         public bool Activated => CurrentState is ExpendableLightState.Lit or ExpendableLightState.Fading;
 
         [ViewVariables] public float StateExpiryTime = default;
-
-        /// <summary>
-        /// Mono: Automatically activate on spawn
-        /// </summary>
-        [DataField("activateOnSpawn")]
-        public bool ActivateOnSpawn = false;
     }
 }

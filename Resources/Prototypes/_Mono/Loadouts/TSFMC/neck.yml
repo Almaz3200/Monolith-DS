@@ -15,8 +15,3 @@
   price: 100 # LuaM
   equipment:
     neck: ClothingNeckIFFNeutral
-
-- type: loadout
-  id: TsfmcClothingNeckWearableCameraTSF
-  equipment:
-    neck: ClothingNeckWearableCameraTSF

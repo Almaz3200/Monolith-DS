@@ -12,7 +12,7 @@
     whitelist:
       tags:
         - ShellShotgun12_gaugeBuckshot
-    capacity: 12
+    capacity: 8
     soundRack:
       path: /Audio/Weapons/Guns/Cock/smg_cock.ogg
   - type: Item

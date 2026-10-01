@@ -306,8 +306,7 @@
   - type: StaticPrice
     price: 750
   - type: StealTarget
-    stealGroup:
-    - FoodMeatCorgi
+    stealGroup: FoodMeatCorgi
 
 - type: entity
   name: raw crab meat

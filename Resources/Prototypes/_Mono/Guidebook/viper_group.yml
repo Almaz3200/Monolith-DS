@@ -1,9 +1,0 @@
-- type: entity
-  parent: PosterBase
-  id: CompanyLogoViperGroup
-  name: viper group logo
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Mono/Companies/viper_group.rsi
-    state: thevipergroup

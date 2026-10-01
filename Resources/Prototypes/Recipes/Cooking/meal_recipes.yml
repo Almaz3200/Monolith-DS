@@ -415,7 +415,6 @@
   id: RecipeMothRoachburger
   name: mothroachburger recipe
   result: FoodBurgerMothRoach
-  time: 10
   group: Savory
   solids:
     FoodBreadBun: 1

@@ -17,30 +17,22 @@ public sealed partial class HitscanBasicDamageSystem : EntitySystem
 
     private void OnHitscanHit(Entity<HitscanBasicDamageComponent> ent, ref HitscanRaycastFiredEvent args)
     {
-        if (args.Canceled) // Mono
+        if (args.Canceled || args.HitEntity == null)
             return;
 
         var dmg = ent.Comp.Damage * _damage.UniversalHitscanDamageModifier;
 
-        foreach (var hitEntity in args.HitEntities) // Mono edit
+        var damageDealt = _damage.TryChangeDamage(args.HitEntity, dmg, origin: args.Gun, armorPenetration: ent.Comp.ArmorPenetration, ignoreResistances: ent.Comp.IgnoreResistances); // Mono - AP
+
+        if (damageDealt == null)
+            return;
+
+        var damageEvent = new HitscanDamageDealtEvent
         {
-            var damageDealt = _damage.TryChangeDamage(hitEntity,
-                dmg,
-                origin: args.Gun,
-                tool: ent.Owner, // Mono - we need this
-                armorPenetration: ent.Comp.ArmorPenetration,
-                ignoreResistances: ent.Comp.IgnoreResistances); // Mono - AP
+            Target = args.HitEntity.Value,
+            DamageDealt = damageDealt,
+        };
 
-            if (damageDealt == null)
-                continue;
-
-            var damageEvent = new HitscanDamageDealtEvent
-            {
-                Target = hitEntity, // Mono
-                DamageDealt = damageDealt,
-            };
-
-            RaiseLocalEvent(ent, ref damageEvent);
-        }
+        RaiseLocalEvent(ent, ref damageEvent);
     }
 }

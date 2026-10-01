@@ -11,7 +11,7 @@
     sprite: Objects/Misc/Handy_Flags/blank_handy_flag.rsi
 
 - type: entity
-  parent: [BaseItem, RecyclableItemClothSmall, BaseFactionGearOtherFactionT1] # Frontier: added RecyclableItemClothSmall
+  parent: [BaseItem, RecyclableItemClothSmall] # Frontier: added RecyclableItemClothSmall
   id: NTHandyFlag
   name: Nanotrasen handheld flag
   description: "Glory to TSF-NT!"
@@ -23,10 +23,10 @@
     sprite: Objects/Misc/Handy_Flags/NT_handy_flag.rsi
 
 - type: entity
-  parent: [BaseItem, RecyclableItemClothSmall, BaseFactionGearOtherFactionT1]
+  parent: [BaseItem, RecyclableItemClothSmall]
   id: SyndieHandyFlag
   name: syndicate handheld flag
-  description: "For truly rebellious patriots."
+  description: "For truly rebellious patriots. Death to NT!"
   components:
   - type: Sprite
     sprite: Objects/Misc/Handy_Flags/syndie_handy_flag.rsi

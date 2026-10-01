@@ -24,7 +24,7 @@
   - type: SolutionContainerManager
     solutions:
       beaker:
-        maxVol: 60 # Mono
+        maxVol: 50
   - type: MixableSolution
     solution: beaker
   - type: FitsInDispenser
@@ -40,7 +40,6 @@
   - type: InjectableSolution
     solution: beaker
   - type: SolutionTransfer
-    transferAmount: 30 # Mono
     canChangeTransferAmount: true
   - type: SolutionItemStatus
     solution: beaker
@@ -190,10 +189,10 @@
   - type: SolutionContainerManager
     solutions:
       beaker:
-        maxVol: 60 # Mono
+        maxVol: 50
         reagents:
         - ReagentId: Cryoxadone
-          Quantity: 60 # Mono
+          Quantity: 50
 
 - type: entity
   name: large beaker
@@ -216,7 +215,7 @@
   - type: SolutionContainerManager
     solutions:
       beaker:
-        maxVol: 120 # Mono
+        maxVol: 100
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 6

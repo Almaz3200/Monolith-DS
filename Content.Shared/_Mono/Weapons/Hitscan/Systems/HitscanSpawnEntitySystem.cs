@@ -20,15 +20,14 @@ public sealed partial class HitscanSpawnEntitySystem : EntitySystem
 
     private void OnHitscanHit(Entity<HitscanSpawnEntityComponent> ent, ref HitscanRaycastFiredEvent args)
     {
-        if (args.Canceled)
+        if (args.Canceled || args.HitEntity == null)
             return;
 
         if (_net.IsClient)
             return;
 
-        foreach (var hitEntity in args.HitEntities)
-        {
-            Spawn(ent.Comp.SpawnedEntity, Transform(hitEntity).Coordinates);
-        }
+        var entity = Spawn(ent.Comp.SpawnedEntity, Transform(args.HitEntity.Value).Coordinates);
+
+        // TODO: maybe split up the effects component or something - this wont play sounds and stuff (maybe that's ok?)
     }
 }

@@ -54,8 +54,8 @@
 - type: entity
   parent: BaseFlatpack
   id: AmePartFlatpack
-  name: IRE flatpack
-  description: A flatpack used for constructing an isotopes reaction engine (IRE).
+  name: AME flatpack
+  description: A flatpack used for constructing an antimatter engine reactor.
   components:
   - type: Sprite
     layers:
@@ -69,8 +69,7 @@
     - AME
     - Power
   - type: StealTarget
-    stealGroup:
-    - AmePartFlatpack
+    stealGroup: AmePartFlatpack
 
 - type: entity
   parent: BaseFlatpack

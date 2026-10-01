@@ -634,8 +634,7 @@
     - Folder
     - HighRiskItem
   - type: StealTarget
-    stealGroup:
-    - BoxFolderQmClipboard
+    stealGroup: BoxFolderQmClipboard
 
 - type: entity
   parent: Paper # eat or burn your damn piece of paper damn thieves
@@ -713,7 +712,6 @@
     tags:
     - Trash
     - Document
-    - Unstashable # Mono - deposit box currency bypass
   #- type: Appearance, hide stamp marks until we have some kind of displacement
   - type: Flammable
     fireSpread: true

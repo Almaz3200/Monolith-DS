@@ -11,7 +11,6 @@ using Content.Shared.Maps;
 using Newtonsoft.Json;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.UnitTesting.Pool;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Webp;
 
@@ -36,8 +35,7 @@ namespace Content.MapRenderer
             {
                 Console.WriteLine("Didn't specify any maps to paint! Loading the map list...");
 
-                var testContext = new ExternalTestContext("Content.MapRenderer", Console.Out);
-                await using var pair = await PoolManager.GetServerClient(null, testContext);
+                await using var pair = await PoolManager.GetServerClient();
                 var mapIds = pair.Server
                     .ResolveDependency<IPrototypeManager>()
                     .EnumeratePrototypes<GameMapPrototype>()
@@ -117,8 +115,7 @@ namespace Content.MapRenderer
                     Console.WriteLine("Retrieving map ids by map file names...");
 
                     Console.Write("Fetching map prototypes... ");
-                    var testContext = new ExternalTestContext("Content.MapRenderer", Console.Out);
-                    await using var pair = await PoolManager.GetServerClient(null, testContext);
+                    await using var pair = await PoolManager.GetServerClient();
                     var mapPrototypes = pair.Server
                         .ResolveDependency<IPrototypeManager>()
                         .EnumeratePrototypes<GameMapPrototype>()

@@ -24,8 +24,7 @@
     - Bartender
     - Drinks
   - type: StealTarget
-    stealGroup:
-    - BoozeDispenser
+    stealGroup: BoozeDispenser
   - type: PirateBountyItem # Frontier
     id: BoozeDispenser # Frontier
 

@@ -1,14 +1,14 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "by zeranov (disc:core_mene), tweaked by Onezero0",
+  "copyright": "by zeranov (disc:core_mene), modified by Avalon-Proto",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "icon"
+      "name": "open"
     },
     {
       "name": "base"
@@ -17,23 +17,13 @@
       "name": "closed"
     },
     {
-      "name": "open"
+      "name": "icon"
+    },
+    {
+      "name": "sparking"
     },
     {
       "name": "welded"
-    },
-    {
-      "name": "sparking",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
     }
   ]
 }

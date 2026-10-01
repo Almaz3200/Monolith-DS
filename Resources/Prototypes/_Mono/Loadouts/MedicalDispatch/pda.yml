@@ -1,9 +1,9 @@
 - type: loadout
   id: MdMedicMedicalPDA
   equipment:
-    id: ERMedicalPDA
+    id: MedicalPDA
 
 - type: loadout
   id: MdMedicSeniorPhysicianPDA
   equipment:
-    id: ERSeniorPhysicianPDA
+    id: SeniorPhysicianPDA

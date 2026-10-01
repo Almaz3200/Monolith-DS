@@ -393,7 +393,6 @@
     moduleId: RCD # Frontier
     items:
     - RCDRecharging
-    - RPDRecharging # Goob
     - ShipRepairDeviceRecharging # Mono
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: rcd-module }

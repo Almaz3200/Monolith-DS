@@ -118,7 +118,7 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
         //return CheckRoleRequirements(reqs, profile, out reason); // Frontier: old implementation
 
         // Frontier: alternate role time checks
-        if (CheckRoleRequirements(reqs, profile, out reason, job.EnforcedPlayTime)) // Mono
+        if (CheckRoleRequirements(reqs, profile, out reason))
             return true;
 
         var altReqs = job.AlternateRequirementSets;
@@ -127,7 +127,7 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
             foreach (var alternateSet in altReqs.Values)
             {
                 // Suppress reasons on alternate requirement sets
-                if (CheckRoleRequirements(alternateSet, profile, out var altReason, job.EnforcedPlayTime)) // Mono
+                if (CheckRoleRequirements(alternateSet, profile, out var altReason))
                 {
                     return true;
                 }
@@ -141,11 +141,11 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
         // End Frontier: alternate role time checks
     }
 
-    public bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason, bool enforcedPlayTime = false) // Mono
+    public bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
 
-        if (requirements == null || (!_cfg.GetCVar(CCVars.GameRoleTimers) && !enforcedPlayTime)) // Mono - checking strict job playtime enforcement
+        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
         var reasons = new List<string>();

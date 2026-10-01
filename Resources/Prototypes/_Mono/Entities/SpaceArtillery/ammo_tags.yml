@@ -1,4 +1,4 @@
-# 14x97mm
+# 20mm
 
 - type: Tag
   id: Magazine20mm
@@ -6,7 +6,7 @@
 - type: Tag
   id: 20mmCartridge
 
-# 20x141mm
+# 30mm
 
 - type: Tag
   id: Magazine30mm
@@ -14,15 +14,7 @@
 - type: Tag
   id: 30mmCartridge
 
-# 25x170mm
-
-- type: Tag
-  id: Magazine35mm
-
-- type: Tag
-  id: 35mmCartridge
-
-# 40x360mm
+# 57mm
 
 - type: Tag
   id: Magazine57mm
@@ -30,7 +22,7 @@
 - type: Tag
   id: 57mmCartridge
 
-# 57x460mm
+# 90mm
 
 - type: Tag
   id: Magazine90mm
@@ -40,14 +32,10 @@
   
 # 120mm
 
-# 140mm
-
-# 100x650mm
-
 - type: Tag
   id: 120mmCartridge
-
-# 85x680mm
+  
+# 140mm
 
 - type: Tag
   id: Magazine140mm
@@ -55,17 +43,17 @@
 - type: Tag
   id: 140mmCartridge
 
-# 130x820mm
+# 220mm
 
 - type: Tag
   id: 220mmCartridge
 
-# 203x940mm
+# 255mm
 
 - type: Tag
   id: 255mmCartridge
 
-# 90x630mm
+# 150mm
 
 - type: Tag
   id: 150mmShell
@@ -102,9 +90,6 @@
 
 - type: Tag
   id: Asm220Torpedo
-
-- type: Tag
-  id: SandboxCruiseMissiles
 
 - type: Tag
   id: LightFighterOrdinance

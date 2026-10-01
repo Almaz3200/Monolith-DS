@@ -195,7 +195,7 @@ public abstract partial class InventorySystem
 
         Dirty(target, inventory);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(target, alsoFriction: true); // Mono
+        _movementSpeed.RefreshMovementSpeedModifiers(target);
 
         return true;
     }
@@ -519,7 +519,7 @@ public abstract partial class InventorySystem
 
         Dirty(target, inventory);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(target, alsoFriction: true); // Mono
+        _movementSpeed.RefreshMovementSpeedModifiers(target);
 
         return true;
     }

@@ -102,8 +102,7 @@
       - TEG
       - Power
     - type: StealTarget
-      stealGroup:
-      - Teg
+      stealGroup: Teg
 
 - type: entity
   id: TegCirculator
@@ -185,8 +184,7 @@
     - type: PipeRestrictOverlap
     - type: TegCirculator
     - type: StealTarget
-      stealGroup:
-      - Teg
+      stealGroup: Teg
 
 - # Spawned by the client-side circulator examine code to indicate the inlet/outlet direction.
   type: entity

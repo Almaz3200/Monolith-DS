@@ -1,13 +1,6 @@
-# Mono - heavy changes.
-
 - type: latheRecipe
   id: SheetSteel
-  name: materials-steel
-  icon:
-    sprite: Objects/Materials/Sheets/metal.rsi
-    state: steel
-  materialResult:
-    Steel: 100
+  result: SheetSteel1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawIron: 100
@@ -15,8 +8,7 @@
 
 - type: latheRecipe
   id: SheetSteel30
-  materialResult:
-    Steel: 3000
+  result: SheetSteel
   completetime: 2
   materials:
     RawIron: 3000
@@ -24,20 +16,14 @@
 
 - type: latheRecipe
   id: SheetGlass1
-  name: materials-glass
-  icon:
-    sprite: Objects/Materials/Sheets/glass.rsi
-    state: glass
-  materialResult:
-    Glass: 100
+  result: SheetGlass1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawQuartz: 100
 
 - type: latheRecipe
   id: SheetGlass30
-  materialResult:
-    Glass: 3000
+  result: SheetGlass
   completetime: 2
   materials:
     RawQuartz: 3000
@@ -45,12 +31,7 @@
 # This version is for the autolathe
 - type: latheRecipe
   id: SheetRGlass
-  name: materials-reinforced-glass
-  icon:
-    sprite: Objects/Materials/Sheets/glass.rsi
-    state: rglass
-  materialResult:
-    ReinforcedGlass: 100
+  result: SheetRGlass1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     Glass: 100
@@ -59,12 +40,7 @@
 # This version is for the ore processor
 - type: latheRecipe
   id: SheetRGlassRaw
-  name: materials-reinforced-glass
-  icon:
-    sprite: Objects/Materials/Sheets/glass.rsi
-    state: rglass
-  materialResult:
-    ReinforcedGlass: 100
+  result: SheetRGlass1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawQuartz: 100
@@ -73,8 +49,7 @@
 
 - type: latheRecipe
   id: SheetRGlass30
-  materialResult:
-    ReinforcedGlass: 3000
+  result: SheetRGlass
   completetime: 2
   materials:
     RawQuartz: 3000
@@ -83,12 +58,7 @@
 
 - type: latheRecipe
   id: SheetPGlass1
-  name: materials-plasma-glass
-  icon:
-    sprite: Objects/Materials/Sheets/glass.rsi
-    state: pglass
-  materialResult:
-    PlasmaGlass: 100
+  result: SheetPGlass1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawQuartz: 100
@@ -96,8 +66,7 @@
 
 - type: latheRecipe
   id: SheetPGlass30
-  materialResult:
-    PlasmaGlass: 3000
+  result: SheetPGlass
   completetime: 2
   materials:
     RawQuartz: 3000
@@ -105,12 +74,7 @@
 
 - type: latheRecipe
   id: SheetRPGlass1
-  name: materials-reinforced-plasma-glass
-  icon:
-    sprite: Objects/Materials/Sheets/glass.rsi
-    state: rpglass
-  materialResult:
-    ReinforcedPlasmaGlass: 100
+  result: SheetRPGlass1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawQuartz: 100
@@ -120,8 +84,7 @@
 
 - type: latheRecipe
   id: SheetRPGlass30
-  materialResult:
-    ReinforcedPlasmaGlass: 3000
+  result: SheetRPGlass
   completetime: 2
   materials:
     RawQuartz: 3000
@@ -131,32 +94,21 @@
 
 - type: latheRecipe
   id: SheetPlasma1
-  name: materials-plasma
-  icon:
-    sprite: Objects/Materials/Sheets/other.rsi
-    state: plasma
-  materialResult:
-    Plasma: 100
+  result: SheetPlasma1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawPlasma: 100
 
 - type: latheRecipe
   id: SheetPlasma30
-  materialResult:
-    Plasma: 3000
+  result: SheetPlasma
   completetime: 2
   materials:
     RawPlasma: 3000
 
 - type: latheRecipe
   id: SheetPlasteel1
-  name: materials-plasteel
-  icon:
-    sprite: Objects/Materials/Sheets/metal.rsi
-    state: steel
-  materialResult:
-    Plasteel: 100
+  result: SheetPlasteel1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawPlasma: 100
@@ -165,8 +117,7 @@
 
 - type: latheRecipe
   id: SheetPlasteel30
-  materialResult:
-    Plasteel: 3000
+  result: SheetPlasteel
   completetime: 2 # Frontier: 5<2
   materials:
     RawPlasma: 3000
@@ -175,20 +126,14 @@
 
 - type: latheRecipe
   id: SheetUranium30
-  materialResult:
-    Uranium: 3000
+  result: SheetUranium
   completetime: 2
   materials:
     RawUranium: 3000
 
 - type: latheRecipe
   id: SheetUGlass1
-  name: materials-uranium-glass
-  icon:
-    sprite: Objects/Materials/Sheets/glass.rsi
-    state: uglass
-  materialResult:
-    UraniumGlass: 100
+  result: SheetUGlass1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawUranium: 100
@@ -196,8 +141,7 @@
 
 - type: latheRecipe
   id: SheetUGlass30
-  materialResult:
-    UraniumGlass: 3000
+  result: SheetUGlass
   completetime: 2
   materials:
     RawUranium: 3000
@@ -205,12 +149,7 @@
 
 - type: latheRecipe
   id: SheetRUGlass1
-  name: materials-reinforced-uranium-glass
-  icon:
-    sprite: Objects/Materials/Sheets/glass.rsi
-    state: ruglass
-  materialResult:
-    ReinforcedUraniumGlass: 100
+  result: SheetRUGlass1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawUranium: 100
@@ -220,8 +159,7 @@
 
 - type: latheRecipe
   id: SheetRUGlass30
-  materialResult:
-    ReinforcedUraniumGlass: 3000
+  result: SheetRUGlass
   completetime: 2
   materials:
     RawUranium: 3000
@@ -231,77 +169,54 @@
 
 - type: latheRecipe
   id: IngotGold30
-  materialResult:
-    Gold: 3000
+  result: IngotGold
   completetime: 2
   materials:
     RawGold: 3000
 
 - type: latheRecipe
   id: IngotSilver30
-  materialResult:
-    Silver: 3000
+  result: IngotSilver
   completetime: 2
   materials:
     RawSilver: 3000
 
 - type: latheRecipe
   id: MaterialBananium10
-  materialResult:
-    Bananium: 3000
+  result: MaterialBananium
   completetime: 2
   materials:
     RawBananium: 3000
 
 - type: latheRecipe
   id: MaterialDiamond
-  name: materials-diamond
-  icon:
-    sprite: Objects/Materials/materials.rsi
-    state: diamond
-  materialResult:
-    Diamond: 100
+  result: MaterialDiamond1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawDiamond: 100
 
 - type: latheRecipe
   id: SheetUranium1
-  name: materials-uranium
-  icon:
-    sprite: Objects/Materials/Sheets/other.rsi
-    state: uranium
-  materialResult:
-    Uranium: 100
+  result: SheetUranium1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawUranium: 100
 
 - type: latheRecipe
   id: IngotGold1
-  name: materials-gold
-  icon:
-    sprite: Objects/Materials/ingots.rsi
-    state: gold
-  materialResult:
-    Gold: 100
+  result: IngotGold1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawGold: 100
 
 - type: latheRecipe
   id: IngotSilver1
-  name: materials-silver
-  icon:
-    sprite: Objects/Materials/ingots.rsi
-    state: silver
-  materialResult:
-    Silver: 100
+  result: IngotSilver1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawSilver: 100
 
-- type: latheRecipe # mono - what the fuck were you trying to do here
+- type: latheRecipe
   id: SheetPlastic
   result: SheetPlastic1
   materialDiscountScale: 0
@@ -311,12 +226,7 @@
 
 - type: latheRecipe
   id: MaterialBananium1
-  name: materials-bananium
-  icon:
-    sprite: Objects/Materials/materials.rsi
-    state: bananium
-  materialResult:
-    Bananium: 100
+  result: MaterialBananium1
   completetime: 0.06 # Frontier: 0<0.06 (~2/30)
   materials:
     RawBananium: 100

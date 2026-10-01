@@ -7,7 +7,6 @@
   - Controls
   - CharacterCreation
   - StartingGear # Frontier
-  - BeginnerGuide # Mono
 
 - type: guideEntry
   id: Controls

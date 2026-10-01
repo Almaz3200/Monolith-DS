@@ -11,6 +11,7 @@ ILLEGAL_MATCHES = [
     "APCHyperCapacity",
     "PDA",
     "SpawnPointPassenger",
+    "Python",
     "SalvageShuttleMarker",
     "FTLPoint",
 ]

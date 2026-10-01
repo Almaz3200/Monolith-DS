@@ -125,9 +125,6 @@
   id: LaserLMGBackpack
 
 - type: Tag
-  id: MantisBlade
-
-- type: Tag
   id: MilitaryPowerCell
 
 - type: Tag
@@ -192,9 +189,3 @@
 
 - type: Tag
   id: MagazineSmartLMG
-
-- type: Tag
-  id: FoodTinMRE
-
-- type: Tag
-  id: EmergencyWaterVaporTank

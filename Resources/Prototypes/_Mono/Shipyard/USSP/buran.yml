@@ -2,20 +2,17 @@
 
 - type: vessel
   id: Buran
-  parent: BaseVesselIFFDisabled
+  parent: BaseVesselAntag
   name: vessel-buran-name # LuaM-locale
   description: vessel-buran-desc # LuaM-locale
-  limit: 2
   price: 410000 # LuaM: 320000 > 410000
-  purchasable: false # voucher only
   category: Large
   group: Ussp
-  access: USSP
+  access: Mercenary
   shuttlePath: /Maps/_LuaM/Shuttles/USSP/BuranLuaM.yml # LuaM: /Maps/_Mono/Shuttles/USSP/buran.yml > /Maps/_LuaM/Shuttles/USSP/BuranLuaM.yml
   guidebookPage: ShipyardNFROperation
   class:
   - Frigate
-  - Brawler
   engine:
   - AME # LuaM: NFR > AME
 
@@ -32,12 +29,12 @@
         description: "Outdated, yet still reliable."
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Buran USSP{1}'
+          mapNameTemplate: 'Buran MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
 

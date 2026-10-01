@@ -12,12 +12,10 @@
 
 - type: latheRecipe
   id: BluespaceCrystal
-  name: materials-bluespace
   icon:
     sprite: Nyanotrasen/Objects/Materials/materials.rsi
     state: bluespace
-  materialResult:
-    Bluespace: 100
+  result: MaterialBluespace1
   completetime: 0.06
   materials:
     RawBluespace: 100

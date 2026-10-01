@@ -20,16 +20,26 @@ namespace Content.Client._NF.Kitchen.UI
         [ViewVariables]
         private readonly Dictionary<int, ReagentQuantity> _reagents = new();
 
-        private readonly string? _menuTitle;
-        private readonly string? _leftFlavorText;
+        private readonly string _menuTitle;
+        private readonly string _leftFlavorText;
 
         public AssemblerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
-            if (EntMan.TryGetComponent(owner, out MicrowaveComponent? component))
+            if ((MicrowaveUiKey)uiKey == MicrowaveUiKey.MedicalAssemblerKey)
             {
-                _menuTitle = component.MenuTitle;
-                _leftFlavorText = component.FlavorText;
+                _menuTitle = "assembler-menu-medical-title";
+                _leftFlavorText = "assembler-menu-medical-footer-flavor-left";
             }
+            else if ((MicrowaveUiKey)uiKey == MicrowaveUiKey.ArcFurnaceKey) // Mono - added arc furnace key
+            {
+                _menuTitle = "assembler-menu-arc-furnace-title";
+                _leftFlavorText = "assembler-menu-arc-furnace-footer-flavor-left";
+            }
+            else
+            {
+                _menuTitle = "assembler-menu-title";
+                _leftFlavorText = "assembler-menu-footer-flavor-left";
+            } // End mono
         }
 
         protected override void Open()
@@ -43,8 +53,8 @@ namespace Content.Client._NF.Kitchen.UI
                 SendPredictedMessage(new MicrowaveEjectSolidIndexedMessage(EntMan.GetNetEntity(_solids[args.ItemIndex])));
             };
 
-            _menu.Title = Loc.GetString(_menuTitle ?? string.Empty);
-            _menu.LeftFooter.Text = Loc.GetString(_leftFlavorText ?? string.Empty);
+            _menu.Title = Loc.GetString(_menuTitle);
+            _menu.LeftFooter.Text = Loc.GetString(_leftFlavorText);
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)

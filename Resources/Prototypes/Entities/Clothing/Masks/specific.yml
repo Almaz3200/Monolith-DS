@@ -42,7 +42,6 @@
     - type: Tag
       tags:
       - IPCMaskWearable # EE - IPCs
-      - PetWearable
 
 - type: entity
   parent: ClothingMaskBase

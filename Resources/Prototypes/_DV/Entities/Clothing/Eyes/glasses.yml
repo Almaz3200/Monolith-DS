@@ -18,7 +18,3 @@
     sprite: _DV/Clothing/Eyes/Glasses/traymeson.rsi
   - type: Clothing
     sprite: _DV/Clothing/Eyes/Glasses/traymeson.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-  

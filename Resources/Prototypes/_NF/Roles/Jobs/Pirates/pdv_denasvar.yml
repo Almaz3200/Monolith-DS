@@ -24,10 +24,6 @@
     - !type:RoleTimeRequirement
       role: JobPirate
       time: 36000 # 10 hours
-    - !type:TraitsRequirement # The trait doesn't do anything if you're PDV anyways, but this is 1 step closer to letting it actually give you points
-      inverted: true
-      traits:
-      - Heretic
   startingGear: PDVDenasvarGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
@@ -44,14 +40,9 @@
   - Mercenary
   accessGroups:
   - GeneralAccess
-  guides:
-  - PDV_Entry
   special:
   - !type:AddComponentSpecial
     components:
-    - type: MailDisabled
-    - type: SpecialSectorStationRecord
-      recordGeneration: FalseRecord
     - type: NpcFactionMember
       factions:
       - PirateNF

@@ -8,9 +8,6 @@
     sprite: Clothing/Head/Misc/bunny.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/bunny.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -22,10 +19,7 @@
     sprite: Clothing/Head/Misc/cake.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/cake.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatChickenhead
@@ -38,10 +32,7 @@
     sprite: Clothing/Head/Misc/chickenhead.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatFlowerWreath
@@ -58,10 +49,7 @@
   - type: Construction
     graph: flowerwreath
     node: flowerwreath
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadLightBase
   id: ClothingHeadHatPumpkin
@@ -86,10 +74,7 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatPwig
@@ -100,10 +85,7 @@
     sprite: _NF/Clothing/Head/Misc/pwig.rsi # Frontier: add _NF prefix
   - type: Clothing
     sprite: _NF/Clothing/Head/Misc/pwig.rsi # Frontier: add _NF prefix
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadMirror
@@ -114,10 +96,7 @@
     sprite: Clothing/Head/Misc/head_mirror.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/head_mirror.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatRichard
@@ -130,10 +109,7 @@
     sprite: Clothing/Head/Misc/richard.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatSkub
@@ -146,10 +122,7 @@
     sprite: Clothing/Head/Misc/skubhead.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatShrineMaidenWig
@@ -164,7 +137,6 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
-    - PetWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -183,9 +155,6 @@
       Plastic: 100
   - type: StaticPrice
     price: 25
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -201,10 +170,7 @@
     price: 3000
   - type: AddAccentClothing
     accent: MobsterAccent
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatCatEars
@@ -265,10 +231,7 @@
     sprite: Clothing/Head/Hats/dogears.rsi
   - type: AddAccentClothing
     accent: BarkAccent
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatSquid
@@ -281,10 +244,7 @@
     sprite: Clothing/Head/Misc/squiddy.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatRedRacoon
@@ -295,10 +255,7 @@
     sprite: Clothing/Head/Misc/red_racoon.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/red_racoon.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: Clothing
   id: WaterDropletHat
@@ -354,7 +311,6 @@
   - type: Tag
     tags:
       - WhitelistChameleon
-      - PetWearable
   - type: StaticPrice
     price: 1
 
@@ -368,6 +324,3 @@
     sprite: Clothing/Head/Misc/hairflower.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/hairflower.rsi
-  - type: Tag
-    tags:
-    - PetWearable

@@ -141,9 +141,9 @@ namespace Content.Shared.Maps
         [DataField("sturdy")] public bool Sturdy { get; private set; } = true;
 
         /// <summary>
-        /// Can weather affect this tile. - Mono - set to true because like, implicit roof.
+        /// Can weather affect this tile.
         /// </summary>
-        [DataField("weather")] public bool Weather = true;
+        [DataField("weather")] public bool Weather = false;
 
         /// <summary>
         /// Is this tile immune to RCD deconstruct.

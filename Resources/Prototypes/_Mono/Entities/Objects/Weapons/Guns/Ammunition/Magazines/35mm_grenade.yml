@@ -1,7 +1,6 @@
 - type: entity
   id: BaseMagazine35mmGrenade
   name: "base magazine (35x53mm grenade)"
-  description: A magazine for the QLU-907 Anubis launcher. Accepts dedicated 35mm grenades, along with a few select portable ones.
   parent: [ BaseItem, RecyclableItemSteelTiny ] # LuaM: BaseCartridge > BaseItem
   abstract: true
   components:
@@ -13,7 +12,6 @@
     whitelist:
       tags:
       - Cartridge35mmGrenade
-      - GrenadeLaunchable
     proto: Cartridge35mmGrenadeSAPHE
     capacity: 6
   - type: Item
@@ -46,21 +44,11 @@
     capacity: 6
 
 - type: entity
-  id: Magazine35mmGrenadeStinger
-  name: "magazine (35x53mm grenade FL/ST)"
-  parent: BaseMagazine35mmGrenade
-  abstract: false
-  components:
-  - type: BallisticAmmoProvider
-    proto: Cartridge35mmGrenadeStinger
-    capacity: 6
-
-- type: entity
   id: Magazine35mmGrenadeEmpty
   name: "magazine (35x53mm grenade any)"
   parent: BaseMagazine35mmGrenade
   abstract: false
   components:
   - type: BallisticAmmoProvider
-    proto: null
-    capacity: 6
+    proto: Cartridge35mmGrenadeSAPHE
+    capacity: 0

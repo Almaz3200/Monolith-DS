@@ -10,30 +10,30 @@
 - type: entity
   id: TurbineTSF
   parent: Turbine
-  suffix: TSF Locked
-  description: A large turbine used for generating power using hot gas. Locked to the TSF.
+  suffix: TSF FTL Locked
+  description: A large turbine used for generating power using hot gas. Locked to the TSF fireteam leaders.
   components:
   - type: AccessReader
-    access: [["Security"]]
+    access: [["Armory"]]
 
 - type: entity
   id: TurbinePDV
   parent: Turbine
-  suffix: PDV Locked
-  description: A large turbine used for generating power using hot gas. Locked to the PDV.
+  suffix: PDV Denasvar Locked
+  description: A large turbine used for generating power using hot gas. Locked to the PDV Denasvars.
   components:
   - type: AccessReader
-    access: [["Pirate"]]
+    access: [["PDVCommand"]]
 
 # No use really, but just in case.
 - type: entity
   id: TurbineUSSP
   parent: Turbine
-  suffix: USSP Locked
-  description: A large turbine used for generating power using hot gas. Locked to the USSP.
+  suffix: USSP Serzhant Locked
+  description: A large turbine used for generating power using hot gas. Locked to the USSP Serzhants.
   components:
   - type: AccessReader
-    access: [["USSP"]]
+    access: [["USSPHigh"]]
 
 # No use really, but just in case.
 - type: entity
@@ -61,30 +61,30 @@
 - type: entity
   id: TurbineTSFSmall
   parent: TurbineSmall
-  suffix: TSF Locked
-  description: A large turbine used for generating power using hot gas. Locked to the TSF.
+  suffix: TSF FTL Locked
+  description: A large turbine used for generating power using hot gas. Locked to the TSF fireteam leaders.
   components:
   - type: AccessReader
-    access: [["Security"]]
+    access: [["Armory"]]
 
 - type: entity
   id: TurbinePDVSmall
   parent: TurbineSmall
-  suffix: PDV Locked
-  description: A large turbine used for generating power using hot gas. Locked to the PDV.
+  suffix: PDV Denasvar Locked
+  description: A large turbine used for generating power using hot gas. Locked to the PDV Denasvars.
   components:
   - type: AccessReader
-    access: [["Pirate"]]
+    access: [["PDVCommand"]]
 
 # No use really, but just in case.
 - type: entity
   id: TurbineUSSPSmall
   parent: TurbineSmall
-  suffix: USSP Locked
-  description: A large turbine used for generating power using hot gas. Locked to the USSP.
+  suffix: USSP Serzhant Locked
+  description: A large turbine used for generating power using hot gas. Locked to the USSP Serzhants.
   components:
   - type: AccessReader
-    access: [["USSP"]]
+    access: [["USSPHigh"]]
 
 # No use really, but just in case.
 - type: entity

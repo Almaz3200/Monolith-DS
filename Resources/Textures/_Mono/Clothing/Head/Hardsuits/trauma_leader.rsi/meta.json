@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprites made by @plethorian on discord for Monolith, vulpkanin Resprited and edited by Asagao, Vox states by 10KE.",
+  "copyright": "Sprites made by @plethorian on discord for Monolith. Vox states by 10KE.",
   "size": {
     "x": 32,
     "y": 32
@@ -11,38 +11,15 @@
       "name": "icon"
     },
     {
-      "name": "icon-flash"
-    },
-    {
-      "name": "off-equipped-HELMET",
+      "name": "equipped-HELMET",
       "directions": 4
     },
     {
-      "name": "on-equipped-HELMET-hydrakin",
-      "directions": 4
-    },
-	{
-      "name": "off-equipped-HELMET-hydrakin",
+      "name": "equipped-HELMET-vox",
       "directions": 4
     },
     {
-      "name": "on-equipped-HELMET",
-      "directions": 4
-    },
-    {
-      "name": "off-equipped-HELMET-vox",
-      "directions": 4
-    },
-    {
-      "name": "on-equipped-HELMET-vox",
-      "directions": 4
-    },
-    {
-      "name": "off-equipped-HELMET-vulpkanin",
-      "directions": 4
-    },
-    {
-      "name": "on-equipped-HELMET-vulpkanin",
+      "name": "equipped-HELMET-vulpkanin",
       "directions": 4
     }
   ]

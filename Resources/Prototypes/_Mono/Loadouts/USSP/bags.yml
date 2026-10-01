@@ -18,3 +18,9 @@
   price: 75000
   equipment:
     back: ClothingModsuitUSSPZastavnikPowerCell
+  
+- type: loadout
+  id: USSPModsuitUSSPVaryag
+  price: 50000
+  equipment:
+    back: ClothingModsuitUSSPVaryagPowerCell

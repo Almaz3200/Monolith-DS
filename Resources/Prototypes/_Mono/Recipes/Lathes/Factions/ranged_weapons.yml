@@ -90,7 +90,9 @@
   - Ballistic
   - Weapons
   materials:
-    PdvComposite: 1000
+    Steel: 1500
+    Plasteel: 1200
+    Plastic: 1500
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -145,7 +147,9 @@
   - Ballistic
   - Weapons
   materials:
-    PdvComposite: 1000
+    Steel: 1500
+    Plasteel: 800
+    Plastic: 1200
 
 # TSF MR-8
 
@@ -200,7 +204,7 @@
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
   id: WeaponLauncherTSFAnubis
-  result: WeaponLauncherTSFAnubisEmpty
+  result: WeaponLauncherTSFAnubis
   categories:
   - AntiMaterial
   - Antitank
@@ -209,6 +213,7 @@
   materials:
     Steel: 12000
     Plasteel: 4000
+    Plastitanium: 2000
     Silver: 500
 
 # TSF Shenzhen
@@ -216,7 +221,7 @@
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
   id: WeaponAMRShenzhenTSF
-  result: WeaponAMRShenzhenEmpty
+  result: WeaponAMRShenzhen
   categories:
   - AntiMaterial
   - Weapons
@@ -230,8 +235,6 @@
     Gold: 500
     Silver: 500
     UraniumDepleted: 120 # For the mag it comes with + the bullet in the chamber. 20 DU per round, if you're adding any recipes yourself.
-
-# TSF Shenzhen
 
 # TSF energy
 
@@ -275,9 +278,10 @@
   - Energy
   - Weapons
   materials:
-    PdvComposite: 1000
-
-# PDV basic
+    Steel: 500
+    Plasteel: 1500
+    Silver: 250
+    Uranium: 250
 
 # PDV basic
 
@@ -349,7 +353,7 @@
   materials:
     Steel: 700
     Plasteel: 750
-    Plastic: 500
+    Plastic: 1000
     Wood: 500
 
 - type: latheRecipe
@@ -361,7 +365,10 @@
   - Ballistic
   - Weapons
   materials:
-    PdvComposite: 1000
+    Steel: 1800
+    Plasteel: 800
+    Plastic: 1200
+    Silver: 100
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -372,7 +379,9 @@
   - Ballistic
   - Weapons
   materials:
-    PdvComposite: 750
+    Steel: 1200
+    Plasteel: 1500
+    Plastic: 1750
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -383,7 +392,10 @@
   - Ballistic
   - Weapons
   materials:
-    PdvComposite: 1000
+    Steel: 2500
+    Plasteel: 1200
+    Plastic: 800
+    Silver: 200
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -394,7 +406,7 @@
   - Weapons
   - Antitank
   materials:
-    Steel: 1700
+    Steel: 2000
     Plasteel: 500
     Plastic: 500
     Silver: 200
@@ -411,7 +423,6 @@
   - Ballistic
   - Weapons
   materials:
-    PdvComposite: 2000
     Steel: 3500
     Plasteel: 2500
     Plastitanium: 1500
@@ -432,9 +443,7 @@
   materials:
     Steel: 3000
     Plasteel: 2500
-    Plastitanium: 500
-    PdvComposite: 2000
-
+    Plastitanium: 2000
     Plastic: 800
     Silver: 700
     Gold: 650
@@ -444,7 +453,7 @@
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
   id: WeaponSniperHristovRogue
-  result: WeaponSniperHristovEmpty
+  result: WeaponSniperHristov
   categories:
   - DMRs
   - AntiMaterial
@@ -452,7 +461,11 @@
   - Weapons
   - Antitank
   materials:
-    PdvComposite: 2000
+    Steel: 7500
+    Plasteel: 3000
+    Plastic: 1000
+    Silver: 2000
+    Uranium: 400
 
 # Ussp guns
 
@@ -609,85 +622,3 @@
     Plasteel: 3500
     Plastic: 500
     Plasma: 1000
-
-# Mieyo
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponSubMachineGunMasamuneMMC
-  result: WeaponSubMachineGunMasamune
-  categories:
-  - SMGs
-  - Ballistic
-  - Weapons
-  materials:
-    Steel: 1000
-    Plasteel: 500
-    Plastic: 600
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponSubMachineGunSakuraMMC
-  result: WeaponSubMachineGunSakura
-  categories:
-  - SMGs
-  - SmartGuns
-  - Ballistic
-  - Weapons
-  materials:
-    Steel: 2500
-    Plasteel: 1500
-    Plastic: 1000
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponPistolKuosameMMC
-  result: WeaponPistolKuosame
-  categories:
-  - Sidearms
-  - Ballistic
-  - Weapons
-  materials:
-    Steel: 400
-    Plasteel: 100
-    Plastic: 400
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponRifleOsakaMMC
-  result: WeaponRifleOsaka
-  categories:
-  - Rifles
-  - Ballistic
-  - Weapons
-  materials:
-    Steel: 1200
-    Plasteel: 1000
-    Plastic: 900
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponShotgunMayonakaMMC
-  result: WeaponShotgunMayonaka
-  categories:
-  - Shotguns
-  - Ballistic
-  - Weapons
-  materials:
-    Steel: 1200
-    Plasteel: 1000
-    Plastic: 900
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponRifleIzumoMMC
-  result: WeaponRifleIzumo
-  categories:
-  - Rifles
-  - DMRs
-  - Ballistic
-  - Weapons
-  materials:
-    Steel: 1600
-    Plasteel: 2000
-    Plastic: 1000

@@ -169,7 +169,6 @@
     - id: ConstructionBag # Mono
     #    - id: DoorRemoteEngineering # Frontier
     - id: RCD # Mono
-    - id: RPD # Goob
     - id: RCDAmmo # Mono
     - id: RubberStampCE
     #    - id: ShipyardRCD # Mono
@@ -405,7 +404,7 @@
     access: [ [ "Command" ] ]
   - type: StorageFill
     contents:
-    - id: WeaponRevolverMateba
+    - id: WeaponRevolverDeckard
     - id: ClothingOuterHardsuitBasic
     - id: JetpackBlue
     - id: SpaceCash1000

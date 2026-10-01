@@ -28,7 +28,6 @@ public sealed partial class DashAbilitySystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private PullingSystem _pullingSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private SharedActionsSystem _actions = default!; // Mono
 
     public override void Initialize()
     {
@@ -37,8 +36,6 @@ public sealed partial class DashAbilitySystem : EntitySystem
         SubscribeLocalEvent<DashAbilityComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<DashAbilityComponent, DashEvent>(OnDash);
         SubscribeLocalEvent<DashAbilityComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<DashAbilityComponent, ComponentInit>(OnComponentInit); // Mono
-        SubscribeLocalEvent<DashAbilityComponent, ComponentShutdown>(OnComponentShutdown); // Mono
     }
 
     private void OnMapInit(Entity<DashAbilityComponent> ent, ref MapInitEvent args)
@@ -48,23 +45,12 @@ public sealed partial class DashAbilitySystem : EntitySystem
         Dirty(uid, comp);
     }
 
-    private void OnComponentInit(EntityUid uid, DashAbilityComponent comp, ref ComponentInit args)
-    {
-        if (comp.IsUser)
-            comp.DashActionEntity = _actions.AddAction(uid, comp.DashAction);
-    }
-
-    private void OnComponentShutdown(EntityUid uid, DashAbilityComponent comp, ref ComponentShutdown args)
-    {
-        if (comp.IsUser)
-            _actions.RemoveAction(comp.DashActionEntity);
-    }
-
     private void OnGetActions(Entity<DashAbilityComponent> ent, ref GetItemActionsEvent args)
     {
         if (CheckDash(ent, args.User))
             args.AddAction(ent.Comp.DashActionEntity);
     }
+
     /// <summary>
     /// Handle charges and teleport to a visible location.
     /// </summary>
@@ -78,7 +64,7 @@ public sealed partial class DashAbilitySystem : EntitySystem
         if (!CheckDash(uid, user))
             return;
 
-        if (ent.Comp.RequireItem && !_hands.IsHolding(user, uid, out var _) && ent.Owner != args.Performer) // Mono
+        if (!_hands.IsHolding(user, uid, out var _))
         {
             _popup.PopupClient(Loc.GetString("dash-ability-not-held", ("item", uid)), user, user);
             return;

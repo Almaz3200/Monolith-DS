@@ -73,8 +73,8 @@
         - id: WeaponRifleVulcanFCMC
         - id: WeaponSubMachineGunAK220
         - id: WeaponSubMachineGunFirestarter
-        - id: WeaponRevolverMateba
-        - id: WeaponRevolverInspector
+        - id: WeaponPistolN1984
+        - id: WeaponRevolverDeckard
         - id: WeaponRifleLecter
         - id: WeaponSubMachineGunDrozd
         - id: WeaponRifleAK502
@@ -164,6 +164,7 @@
         - id: Magazine8x65mmSKR
         - id: Magazine9x19mmPistolHighCapacityFMJ
         - id: Magazine45_ACPPistolHighCapacityFMJ
+        - id: Magazine45_magnumPistolFMJ
         - id: Magazine68x52mmCaseless
         - id: Magazine762x54mmRFMJ
         - id: Magazine762x51mmFMJ
@@ -178,6 +179,7 @@
         weight: 0.4
         children:
         - id: Magazine45_ACPSubMachineGunEmp
+        - id: Magazine45_magnumPistolAP
         - id: Magazine55_SAMPistolHighCapacity
         - id: Magazine127x99mm
         - id: Magazine762x39mmBox
@@ -251,7 +253,7 @@
         - id: AmmoBox8x65mmSKR
         - id: AmmoBox127x99mm
         - id: AmmoBox145x114mm
-        - id: AmmoBox357_magnumFMJ
+        - id: AmmoBox45_magnumFMJ
         - id: AmmoBox68x52mmCaseless
       - !type:GroupSelector
         weight: 0.4
@@ -272,7 +274,7 @@
       - !type:GroupSelector
         weight: 0.05
         children:
-        - id: AmmoBox357_magnumAP
+        - id: AmmoBox45_magnumAP
         - id: AmmoBox127x99mmExplosive
         - id: AmmoBox8x65mmSKRIncendiary
         - id: AmmoBox635x40mmCaselessBig

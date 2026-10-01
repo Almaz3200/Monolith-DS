@@ -19,7 +19,7 @@
     maxAngle: 62
     angleIncrease: 0.2
     angleDecay: 17
-    fireRate: 6.8
+    fireRate: 5.4
     selectedMode: FullAuto
     damageModifier: 1.2
     availableModes:
@@ -89,7 +89,7 @@
     angleDecay: 17
     fireRate: 3
     selectedMode: SemiAuto
-    damageModifier: 3 # insane
+    damageModifier: 2
     availableModes:
     - SemiAuto
     soundGunshot:

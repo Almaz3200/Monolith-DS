@@ -4,9 +4,9 @@ using Content.Shared.Remotes.Components;
 
 namespace Content.Shared.Remotes.EntitySystems;
 
-public abstract class SharedDoorRemoteSystem : EntitySystem
+public abstract partial class SharedDoorRemoteSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     public override void Initialize()
     {
@@ -31,14 +31,9 @@ public abstract class SharedDoorRemoteSystem : EntitySystem
 
             // Skip ToggleEmergencyAccess mode and move on from there (to door toggle)
             case OperatingMode.ToggleEmergencyAccess:
-                entity.Comp.Mode = OperatingMode.ToggleOvercharge;
-                switchMessageId = "door-remote-toggle-eletrify-text";
-                break;
-            // Skip ToggleEmergencyAccess mode and move on from there (to door toggle)
-            case OperatingMode.ToggleOvercharge:
                 entity.Comp.Mode = OperatingMode.OpenClose;
-                switchMessageId = "door-remote-switch-state-open-close";   
-                break;        
+                switchMessageId = "door-remote-switch-state-open-close";
+                break;
             default:
                 throw new InvalidOperationException(
                     $"{nameof(DoorRemoteComponent)} had invalid mode {entity.Comp.Mode}");

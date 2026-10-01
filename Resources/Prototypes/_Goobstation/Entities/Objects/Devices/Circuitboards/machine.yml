@@ -12,9 +12,11 @@
       Manipulator: 4
     stackRequirements:
       Steel: 6
-      Copper: 2
-      Lithium: 2
       Cable: 5
+    tagRequirements:
+      BorgArm:
+        amount: 2
+        defaultPrototype: LeftArmBorg
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -32,6 +34,10 @@
     stackRequirements:
       Steel: 10
       Cable: 5
+    tagRequirements:
+      BorgArm:
+        amount: 4
+        defaultPrototype: LeftArmBorg
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -61,6 +67,8 @@
       Manipulator: 4
     stackRequirements:
       Plastic: 4
-      Copper: 2
-      Lithium: 2
       Cable: 5
+    tagRequirements:
+      BorgArm:
+        amount: 1
+        defaultPrototype: LeftArmBorg

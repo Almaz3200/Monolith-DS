@@ -59,10 +59,10 @@
       points: 3
       required: false
     Legs:
-      points: 8 # imp/mono 2<8
+      points: 2
       required: false
     Arms:
-      points: 8 # imp/mono 2<8
+      points: 2
       required: false
 
 - type: humanoidBaseSprite

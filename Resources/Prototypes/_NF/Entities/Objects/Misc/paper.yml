@@ -94,8 +94,8 @@
 - type: entity
   id: PaperDeadDropHint
   parent: Paper
-  name: phaethon dynasty note
-  description: A crinkled sheet with scribbles on it. Despite the elegant handwriting, you can still tell it was written in a hurry.
+  name: suspicious note
+  description: A crinkled sheet with scribbles on it. Seems to have been written in a hurry.
   categories: [ HideSpawnMenu ]
   components:
   - type: DeadDropHint
@@ -103,17 +103,14 @@
     content: deaddrop-faxed-hint-content # Default contents, will be edited.
     stampedBy:
     - stampedName: deaddrop-faxed-hint-signature
-      stampedColor: "#44105e"
+      stampedColor: "#850000"
     stampState: null
 
 - type: entity
   id: PaperDeadDropFax
   parent: PaperDeadDropHint
-  name: phaethon dynasty fax
+  name: suspicious fax
   description: A sheet with blurry, crooked text on it. Seems to have been copied in a hurry.
   components:
   - type: Paper
-    stampedBy:
-    - stampedName: deaddrop-faxed-hint-signature
-      stampedColor: "#44105e"
-    stampState: null
+    stampState: paper_stamp-syndicate

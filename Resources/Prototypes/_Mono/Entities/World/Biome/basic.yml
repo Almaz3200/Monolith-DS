@@ -237,8 +237,11 @@
     - id: NFWreckDebrisBrassMedium
       prob: 0.006
       orGroup: wreck
-    - id: MonoDroneSpawnerT0
-      prob: 0.075
+    - id: MonoDroneSpawnerT1
+      prob: 0.05
+      orGroup: wreck
+    - id: MonoDroneSpawnerT2Inner
+      prob: 0.025
       orGroup: wreck
 
 - type: spaceBiome
@@ -803,6 +806,7 @@
     - id: MonoDroneSpawnerT2Middle
       prob: 1.5
       orGroup: wreck
+
 
 - type: spaceBiome
   id: MonoWorldgenVeryFarT2Far

@@ -28,7 +28,6 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Physics;
 using Content.Shared.Tools.Systems;
-using Content.Shared.Turrets;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -71,7 +70,6 @@ public sealed partial class NPCUtilitySystem : EntitySystem
     [Dependency] private DestructibleSystem _destructible = default!; // Mono
     [Dependency] private GunSystem _gun = default!; // Mono
     [Dependency] private NPCCombatSystem _npcCombat = default!;
-    [Dependency] private TurretTargetSettingsSystem _turretTargetSettings = default!;
 
     private EntityQuery<PuddleComponent> _puddleQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -402,14 +400,6 @@ public sealed partial class NPCUtilitySystem : EntitySystem
                 {
                     return melee.Damage.GetTotal().Float() * melee.AttackRate / 100f;
                 }
-
-                return 0f;
-            }
-            case TurretTargetingCon:
-            {
-                if (!TryComp<TurretTargetSettingsComponent>(owner, out var turretTargetSettings) ||
-                    _turretTargetSettings.EntityIsTargetForTurret((owner, turretTargetSettings), targetUid))
-                    return 1f;
 
                 return 0f;
             }

@@ -323,7 +323,7 @@
     - id: AmmoBox12_gaugeFlare
       amount: 2
 
-# .357 magnum ammo
+# .45 magnum ammo
 - type: entity # Lethal
   abstract: true
   id: StorageFillAmmoBoxLethal45
@@ -331,7 +331,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: AmmoBox357_magnumFMJ
+    - id: AmmoBox45_magnumFMJ
       amount: 4
 
 - type: entity # Rubber
@@ -341,7 +341,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: AmmoBox357_magnumRubber
+    - id: AmmoBox45_magnumRubber
       amount: 4
 
 - type: entity # Practice
@@ -351,7 +351,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: AmmoBox357_magnumPractice
+    - id: AmmoBox45_magnumPractice
       amount: 4
 
 - type: entity # Incendiary
@@ -361,7 +361,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: AmmoBox357_magnumIncendiary
+    - id: AmmoBox45_magnumIncendiary
       amount: 4
 
 - type: entity # Uranium
@@ -371,5 +371,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: AmmoBox357_magnumUranium
+    - id: AmmoBox45_magnumUranium
       amount: 4

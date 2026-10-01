@@ -18,7 +18,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.UnitTesting.Pool;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
@@ -32,7 +31,6 @@ namespace Content.MapRenderer.Painters
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            var testContext = new ExternalTestContext("Content.MapRenderer", Console.Out);
             await using var pair = await PoolManager.GetServerClient(new PoolSettings
             {
                 DummyTicker = false,
@@ -40,7 +38,7 @@ namespace Content.MapRenderer.Painters
                 Fresh = true,
                 // Seriously whoever made MapPainter use GameMapPrototype I wish you step on a lego one time.
                 Map = map,
-            }, testContext);
+            });
             pair.ServerLogHandler.FailureLevel = LogLevel.Fatal;
             pair.ClientLogHandler.FailureLevel = LogLevel.Fatal;
 
@@ -54,13 +52,12 @@ namespace Content.MapRenderer.Painters
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            var testContext = new ExternalTestContext("Content.MapRenderer", Console.Out);
             await using var pair = await PoolManager.GetServerClient(new PoolSettings
             {
                 DummyTicker = false,
                 Connected = true,
                 Fresh = false,
-            }, testContext);
+            });
             pair.ServerLogHandler.FailureLevel = LogLevel.Fatal;
             pair.ClientLogHandler.FailureLevel = LogLevel.Fatal;
 

@@ -12,10 +12,7 @@
     layers: []
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_bronze_badge.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckNfsdBadge
   id: ClothingNeckNfsdBadgeSecurityCadet
@@ -32,9 +29,6 @@
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_silver_badge.rsi
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_silver_badge.rsi
-  - type: Tag
-    tags:
-    - PetWearable
 
 - type: entity
   parent: ClothingNeckNfsdBadge
@@ -46,10 +40,7 @@
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_silvercross_badge.rsi
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_silvercross_badge.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckNfsdBadge
   id: ClothingNeckNfsdBadgeDetective
@@ -60,10 +51,7 @@
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_silver_badge.rsi
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_silver_badge.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckNfsdBadge
   id: ClothingNeckNfsdBadgeSeniorOfficer
@@ -74,10 +62,7 @@
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_gold_badge.rsi
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_gold_badge.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckNfsdBadge
   id: ClothingNeckNfsdBadgeWarden
@@ -88,10 +73,7 @@
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_gold_badge.rsi
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_gold_badge.rsi
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckNfsdBadge
   id: ClothingNeckNfsdBadgeSheriff
@@ -103,10 +85,7 @@
   - type: Clothing
     sprite: _NF/Clothing/Neck/Scarfs/nfsd_star_badge.rsi
   - type: EmbeddableProjectile # pointy
-  - type: Tag
-    tags:
-    - PetWearable
-    
+
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckPublicAffairsLiaisonBadge
@@ -120,7 +99,3 @@
     sprite: _NF/Clothing/Neck/Misc/palbadge.rsi
   - type: TypingIndicatorClothing
     proto: pal
-  - type: Tag
-    tags:
-    - PetWearable
-    

@@ -388,7 +388,7 @@
     - type: NFSalvageMobRestrictions # Frontier: SalvageMobRestrictions<NFSalvageMobRestrictions
 
 - type: entity
-  parent: [SimpleSpaceMobBase, ProximityShootOverBase] #Mono: Shootover
+  parent: SimpleSpaceMobBase
   id: MobSnail
   name: snail
   description: Revolting unless you're french.

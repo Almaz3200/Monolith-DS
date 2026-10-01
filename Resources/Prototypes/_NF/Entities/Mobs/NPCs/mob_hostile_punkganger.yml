@@ -15,7 +15,7 @@
   name: punk
   abstract: true
   parent:
-  - MobHumanoidHostileBaseShade # Mono: MobHumanoidHostileBase -> MobHumanoidHostileBaseShade
+  - MobHumanoidHostileBase
   - MobVandalizer
   - MobHumanoidInvetory
   - NFMobRestrictions

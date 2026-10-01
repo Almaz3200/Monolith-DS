@@ -1,5 +1,0 @@
-- type: entity
-  parent: SurgeryStepInsertOrgan
-  id: SurgeryStepInsertPump
-  name: Add servopump
-  categories: [ HideSpawnMenu ]

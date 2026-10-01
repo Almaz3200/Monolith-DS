@@ -26,7 +26,7 @@ public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
     {
         if (_uiSystem.TryGetOpenUi<VendingMachineBoundUserInterface>(uid, VendingMachineUiKey.Key, out var bui))
         {
-            bui.Update();
+            bui.Refresh();
         }
     }
 
@@ -35,7 +35,7 @@ public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
     {
         if (_uiSystem.TryGetOpenUi<VendingMachineBoundUserInterface>(ent.Owner, VendingMachineUiKey.Key, out var bui))
         {
-            bui.Update();
+            bui.Refresh();
         }
     }
 
@@ -43,7 +43,7 @@ public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
     {
         if (_uiSystem.TryGetOpenUi<VendingMachineBoundUserInterface>(ent.Owner, VendingMachineUiKey.Key, out var bui))
         {
-            bui.Update();
+            bui.Refresh();
         }
     }
     // End Frontier

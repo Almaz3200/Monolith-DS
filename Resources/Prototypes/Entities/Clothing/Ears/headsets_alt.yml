@@ -88,8 +88,7 @@
   - type: Clothing
     sprite: Clothing/Ears/Headsets/medical.rsi
   - type: StealTarget
-    stealGroup:
-    - ClothingHeadsetAltMedical
+    stealGroup: ClothingHeadsetAltMedical
 
 - type: entity
   parent: ClothingHeadsetAlt
@@ -124,7 +123,7 @@
     sprite: Clothing/Ears/Headsets/science.rsi
 
 - type: entity
-  parent: [ClothingHeadsetAlt, BaseFactionGearOtherFactionT1]
+  parent: [ClothingHeadsetAlt]
   id: ClothingHeadsetAltSyndicate
   name: blood-red over-ear headset
   description: An updated, modular syndicate intercom that fits over the head and takes encryption keys (there are 5 key slots.).

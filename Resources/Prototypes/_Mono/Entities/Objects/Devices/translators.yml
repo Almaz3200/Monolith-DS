@@ -19,7 +19,8 @@
   id: NovaCygniTranslator
   parent: [ TranslatorPoweredBase ]
   name: Nova Cygni translator
-  description: Translates speech between Nova Cygni and Andromeda Standard. You probably already know the word for comrade.
+  description: Translates speech between Nova Cygni and Andromeda Standard.  
+    Find out that all the average Radnik says is comrade and glory to the USSP.
   components:
   - type: HandheldTranslator
     spoken:

@@ -23,7 +23,6 @@ using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Kitchen.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Audio;
 using Content.Server.Lightning;

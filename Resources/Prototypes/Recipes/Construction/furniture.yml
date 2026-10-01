@@ -290,23 +290,6 @@
     - !type:TileNotBlocked
 
 - type: construction
-  name: steel table (black)
-  id: TableBlack
-  graph: Table
-  startNode: start
-  targetNode: TableBlack
-  category: construction-category-furniture
-  description: A square piece of metal standing on four metal legs.
-  icon:
-    sprite: Structures/Furniture/Tables/genericblack.rsi
-    state: full
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
   name: reinforced steel table
   id: TableReinforced
   graph: Table
@@ -316,23 +299,6 @@
   description: A square piece of metal standing on four metal legs. Extra robust.
   icon:
     sprite: Structures/Furniture/Tables/reinforced.rsi
-    state: full
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
-  name: reinforced steel table
-  id: TableReinforcedBlack
-  graph: Table
-  startNode: start
-  targetNode: TableReinforcedBlack
-  category: construction-category-furniture
-  description: A square piece of metal standing on four metal legs. Extra robust.
-  icon:
-    sprite: Structures/Furniture/Tables/reinforcedblack.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -367,23 +333,6 @@
   description: A square piece of glass, standing on four metal legs. Extra robust.
   icon:
     sprite: Structures/Furniture/Tables/r_glass.rsi
-    state: full
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
-  name: reinforced glass table
-  id: TableReinforcedGlassBlack
-  graph: Table
-  startNode: start
-  targetNode: TableReinforcedGlassBlack
-  category: construction-category-furniture
-  description: A square piece of glass, standing on four metal legs. Extra robust.
-  icon:
-    sprite: Structures/Furniture/Tables/r_glassblack.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -783,7 +732,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
+    
 - type: construction
   id: CurtainsBlack
   name: black curtains
@@ -813,7 +762,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
+    
 - type: construction
   id: CurtainsCyan
   name: cyan curtains
@@ -828,7 +777,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
+    
 - type: construction
   id: CurtainsGreen
   name: green curtains
@@ -843,7 +792,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
+    
 - type: construction
   id: CurtainsOrange
   name: orange curtains
@@ -858,7 +807,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
+    
 - type: construction
   id: CurtainsPink
   name: pink curtains
@@ -873,7 +822,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
+    
 - type: construction
   id: CurtainsPurple
   name: purple curtains
@@ -888,7 +837,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
+    
 - type: construction
   id: CurtainsRed
   name: red curtains

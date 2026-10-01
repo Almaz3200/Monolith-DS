@@ -145,6 +145,38 @@
 #           - SecurityUplink
 
 - type: listing
+  id: UplinkSecurityVulcan
+  name:  uplink-security-vulcan-name
+  description: uplink-security-vulcan-desc
+  productEntity: WeaponRifleVulcan
+  icon: { sprite: _DV/Objects/Weapons/Guns/Rifles/vulcan.rsi, state: icon }
+  cost:
+    FederationMilitaryCredit: 15
+  categories:
+    - UplinkSecurityWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+
+- type: listing
+  id: UplinkSecurityLaserCarbine
+  name:  uplink-security-lasercarbine-name
+  description: uplink-security-lasercarbine-desc
+  productEntity: WeaponLaserCarbine
+  icon: { sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi, state: icon }
+  cost:
+    FederationMilitaryCredit: 5 # GARBAGE!!!
+  categories:
+    - UplinkSecurityWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+
+- type: listing
   id: UplinkSecurityDisablerSMG
   name:  uplink-security-disablersmg-name
   description: uplink-security-disablersmg-desc
@@ -168,6 +200,22 @@
   icon: { sprite: Objects/Weapons/Melee/e_sword.rsi, state: e_sword }
   cost:
     FederationMilitaryCredit: 30
+  categories:
+    - UplinkSecurityWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+
+- type: listing
+  id: UplinkSecurityWT550
+  name:  uplink-security-wt550-name
+  description: uplink-security-wt550-desc
+  productEntity: WeaponSubMachineGunWt550
+  icon: { sprite: Objects/Weapons/Guns/SMGs/wt550.rsi, state: icon }
+  cost:
+    FederationMilitaryCredit: 20
   categories:
     - UplinkSecurityWeapons
   conditions:
@@ -709,7 +757,7 @@
   productEntity: SyringeAmbuzol
   icon: { sprite: Objects/Specific/Chemistry/syringe.rsi, state: syringe_base0 }
   cost:
-    FederationMilitaryCredit: 15 # mono: 5 -> 15 (1 FMC per 1 unit)
+    FederationMilitaryCredit: 5
   categories:
     - UplinkSecurityUtility
   conditions:
@@ -831,7 +879,7 @@
   productEntity: WeaponPulsePistol
   icon: { sprite: Objects/Weapons/Guns/Battery/pulse_pistol.rsi, state: base }
   cost:
-    FederationMilitaryCredit: 85
+    FederationMilitaryCredit: 60
   categories:
     - UplinkSecurityWeapons
   conditions:
@@ -899,22 +947,6 @@
           - SecurityUplink
 
 - type: listing
-  id: UplinkSecurityImplanterTSF
-  name: uplink-security-implanter-tsf-name
-  description: uplink-security-implanter-tsf-desc
-  icon: { sprite: _NF/Objects/Devices/encryption_keys.rsi, state: nfsd_label }
-  productEntity: RadioImplanterTsf
-  cost:
-    FederationMilitaryCredit: 10
-  categories:
-  - UplinkSecurityUtility
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - SecurityUplink
-
-- type: listing
   id: UplinkSecurityEnergyShield
   name:  uplink-security-energyshield-name
   description: uplink-security-energyshield-desc
@@ -955,8 +987,8 @@
   id: UplinkSecuritySpeedloader
   name:  uplink-security-speedloader-name
   description: uplink-security-speedloader-desc
-  productEntity: SpeedLoader357_magnumFMJ
-  icon: { sprite: _Mono/Objects/Weapons/Guns/Ammunition/SpeedLoaders/357_magnum/357_magnum_speed_loader.rsi, state: base }
+  productEntity: SpeedLoader45_magnumFMJ
+  icon: { sprite: _Mono/Objects/Weapons/Guns/Ammunition/SpeedLoaders/45_magnum/45_magnum_speed_loader.rsi, state: base }
   cost:
     FederationMilitaryCredit: 5
   categories:
@@ -971,8 +1003,8 @@
   id: UplinkSecuritySpeedloaderRubber
   name:  uplink-security-speedloaderrubber-name
   description: uplink-security-speedloaderrubber-desc
-  productEntity: SpeedLoader357_magnumRubber
-  icon: { sprite: _Mono/Objects/Weapons/Guns/Ammunition/SpeedLoaders/357_magnum/357_magnum_speed_loader.rsi, state: base }
+  productEntity: SpeedLoader45_magnumRubber
+  icon: { sprite: _Mono/Objects/Weapons/Guns/Ammunition/SpeedLoaders/45_magnum/45_magnum_speed_loader.rsi, state: base }
   cost:
     FederationMilitaryCredit: 5
   categories:
@@ -1067,10 +1099,10 @@
   id: UplinkSecuritySmokeGrenadeBox
   name:  uplink-security-smokegrenade-box-name
   description: uplink-security-smokegrenade-box-desc
-  productEntity: SmokeGrenade
+  productEntity: BoxSmokeGrenades
   icon: { sprite: Objects/Weapons/Grenades/smoke.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 2
+    FederationMilitaryCredit: 5
   categories:
     - UplinkSecurityExplosives # Moved to Explosives - Mono
   conditions:
@@ -1083,10 +1115,10 @@
   id: UplinkSecurityTeargasGrenadeBox
   name:  uplink-security-teargasgrenade-box-name
   description: uplink-security-teargasgrenade-box-desc
-  productEntity: TearGasGrenade
+  productEntity: BoxTeargasGrenades
   icon: { sprite: Objects/Weapons/Grenades/tear_gas.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 2
+    FederationMilitaryCredit: 10
   categories:
     - UplinkSecurityExplosives # Moved to Explosives - Mono
   conditions:
@@ -1099,10 +1131,10 @@
   id: UplinkSecurityFlashbangGrenadeBox
   name:  uplink-security-flashbanggrenade-box-name
   description: uplink-security-flashbanggrenade-box-desc
-  productEntity: GrenadeFlashBang
+  productEntity: BoxFlashBangGrenades
   icon: { sprite: Objects/Weapons/Grenades/flashbang.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 2
+    FederationMilitaryCredit: 5
   categories:
     - UplinkSecurityExplosives # Moved to Explosives - Mono
   conditions:
@@ -1115,10 +1147,10 @@
   id: UplinkSecurityStingerGrenadeBox
   name:  uplink-security-stingergrenade-box-name
   description: uplink-security-stingergrenade-box-desc
-  productEntity: GrenadeStinger
+  productEntity: BoxStingerGrenadesNfsd
   icon: { sprite: Objects/Weapons/Grenades/stingergrenade.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 3
+    FederationMilitaryCredit: 10
   categories:
     - UplinkSecurityExplosives # Moved to Explosives - Mono
   conditions:
@@ -1131,10 +1163,10 @@
   id: UplinkSecurityEmpGrenadeBox
   name:  uplink-security-empgrenade-box-name
   description: uplink-security-empgrenade-box-desc
-  productEntity: EmpGrenadeNfsd
+  productEntity: BoxEMPGrenadesNfsd
   icon: { sprite: Objects/Weapons/Grenades/empgrenade.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 3
+    FederationMilitaryCredit: 10
   categories:
     - UplinkSecurityExplosives
   conditions:
@@ -1144,13 +1176,13 @@
           - SecurityUplink
 
 - type: listing
-  id: UplinkSecurityExplosiveGrenade
+  id: UplinkSecurityExplosiveGrenadeBox
   name:  uplink-security-explosivegrenade-box-name
   description: uplink-security-explosivegrenade-box-desc
-  productEntity: ExGrenadeNfsd
+  productEntity: BoxExplosiveGrenadesNfsd
   icon: { sprite: Objects/Weapons/Grenades/grenade.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 5
+    FederationMilitaryCredit: 15
   categories:
     - UplinkSecurityExplosives
   conditions:
@@ -1160,29 +1192,13 @@
           - SecurityUplink
 
 - type: listing
-  id: UplinkSecurityMobBoomroach
-  name: uplink-security-MobBoomroach-name
-  description: uplink-security-MobBoomroach-desc
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-boomroach }
-  productEntity: ReinforcementRadioTSFBoomRoach
-  cost:
-    FederationMilitaryCredit: 30
-  categories:
-    - UplinkSecurityExplosives
-  conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - SecurityUplink
-
-- type: listing
-  id: UplinkSecurityIncendiaryGrenade
+  id: UplinkSecurityIncendiaryGrenadeBox
   name:  uplink-security-incendiarygrenade-box-name
   description: uplink-security-incendiarygrenade-box-desc
-  productEntity: GrenadeIncendiaryNfsd
+  productEntity: BoxIncendiaryGrenadesNfsd
   icon: { sprite: Objects/Weapons/Grenades/pyrogrenade.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 4 # Mono 3->2->10->4
+    FederationMilitaryCredit: 10 # Mono 3->2
   categories:
     - UplinkSecurityExplosives
   conditions:
@@ -1195,10 +1211,10 @@
   id: UplinkSecurityShrapnelGrenadeBox
   name:  uplink-security-shrapnelgrenade-box-name
   description: uplink-security-shrapnelgrenade-box-desc
-  productEntity: GrenadeShrapnelNfsd
+  productEntity: BoxShrapnelGrenadesNfsd
   icon: { sprite: Objects/Weapons/Grenades/shrapnelgrenade.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 4
+    FederationMilitaryCredit: 10
   categories:
     - UplinkSecurityExplosives
   conditions:
@@ -1211,10 +1227,10 @@
   id: UplinkSecurityBreachingChargesBox
   name:  uplink-security-breachingcharge-box-name
   description: uplink-security-breachingcharge-box-desc
-  productEntity: BreachingCharge
+  productEntity: BoxBreachingCharges
   icon: { sprite: _DV/Objects/Weapons/Bombs/breaching.rsi, state: icon}
   cost:
-    FederationMilitaryCredit: 5
+    FederationMilitaryCredit: 15
   categories:
     - UplinkSecurityExplosives
   conditions:
@@ -1239,21 +1255,21 @@
         tags:
           - SecurityUplink
 
-#- type: listing
-#  id: UplinkSecurityLethalArmory
-#  name:  uplink-security-lethalarmory-name
-#  description: uplink-security-lethalarmory-desc
-#  productEntity: CrateArmoryLethalNfsd
-#  icon: { sprite: _NF/Structures/Storage/Crates/nfsd_secure2.rsi, state: icon }
-#  cost:
-#    FederationMilitaryCredit: 75
-#  categories:
-#    - UplinkSecurityBundles
-#  conditions:
-#    - !type:StoreWhitelistCondition
-#      whitelist:
-#        tags:
-#          - SecurityUplink
+- type: listing
+  id: UplinkSecurityLethalArmory
+  name:  uplink-security-lethalarmory-name
+  description: uplink-security-lethalarmory-desc
+  productEntity: CrateArmoryLethalNfsd
+  icon: { sprite: _NF/Structures/Storage/Crates/nfsd_secure2.rsi, state: icon }
+  cost:
+    FederationMilitaryCredit: 75
+  categories:
+    - UplinkSecurityBundles
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
 
 - type: listing
   id: UplinkSecurityTrackingBundle
@@ -1287,22 +1303,21 @@
         tags:
           - SecurityUplink
 
-# Mono: Commented out
-#- type: listing
-#  id: UplinkSecurityNonLethalArmory
-#  name:  uplink-security-nonlethalarmory-name
-#  description: uplink-security-nonlethalarmory-desc
-#  productEntity: CrateArmoryNonLethalNfsd
-#  icon: { sprite: _NF/Structures/Storage/Crates/nfsd_secure1.rsi, state: icon }
-#  cost:
-#    FederationMilitaryCredit: 50
-#  categories:
-#    - UplinkSecurityBundles
-#  conditions:
-#    - !type:StoreWhitelistCondition
-#      whitelist:
-#        tags:
-#          - SecurityUplink
+- type: listing
+  id: UplinkSecurityNonLethalArmory
+  name:  uplink-security-nonlethalarmory-name
+  description: uplink-security-nonlethalarmory-desc
+  productEntity: CrateArmoryNonLethalNfsd
+  icon: { sprite: _NF/Structures/Storage/Crates/nfsd_secure1.rsi, state: icon }
+  cost:
+    FederationMilitaryCredit: 50
+  categories:
+    - UplinkSecurityBundles
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
 
 - type: listing
   id: UplinkSecurityEmpGrenadeAmmo

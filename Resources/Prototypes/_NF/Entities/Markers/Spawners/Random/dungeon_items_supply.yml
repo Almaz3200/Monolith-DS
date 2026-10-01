@@ -277,7 +277,6 @@
     - SalvageTechFabCircuitboardNF
     - AutolatheMachineCircuitboard
     - OreProcessorMachineCircuitboard
-    - OreMagnetMachineCircuitboard
     # Machines
     - MaterialReclaimerMachineCircuitboard
     - SpaceHeaterMachineCircuitBoard

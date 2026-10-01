@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 # Eyes
+
 - type: marking
   id: HydrakinEyesDefault
   bodyPart: Head
@@ -67,6 +68,7 @@
     state: eyes_seer
 
 # Tails
+
 - type: marking
   id: HydrakinTailDefault
   bodyPart: Tail
@@ -168,6 +170,7 @@
     state: tail_feathers_seer
 
 # Ears
+
 - type: marking
   id: HydrakinEarsDefault
   bodyPart: HeadTop
@@ -269,6 +272,7 @@
     state: ears_seer_overlay
 
 # Cyber-proto-esque sprites
+
 - type: marking
   id: HydrakinProtoFace1
   bodyPart: Head
@@ -500,6 +504,7 @@
     state: hydra_seer_leg_right
 
 # Hydraking Mystic Markings
+
 - type: marking
   id: HydrakinMysticHead
   bodyPart: Head
