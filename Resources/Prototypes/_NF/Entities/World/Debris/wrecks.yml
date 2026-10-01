@@ -120,14 +120,16 @@
           prob: 0.3
         - id: WallClock
           prob: 0.3
-        - id: Window
+        - id: ClockworkWindow
           prob: 0.2
+        - id: PinionAirlock
+          prob: 0.01
         - id: WindoorClockwork
           prob: 0.005
         # Floor loot
         - id: SalvageSpawnerScrapBrass75
           prob: 1
-        - id: SalvageSpawnerPlastitaniumCommon # mono
+        - id: SalvageSpawnerPlastitaniumCommon ## mono
           prob: 0.2
         # Mono - Traps
         - id: LandMineExplosive
@@ -180,9 +182,9 @@
       FloorBrassReebe:
         - prob: 1 # Intentional blank.
         # Walls
-        - id: Grille
+        - id: ClockworkGrille
           prob: 0.75
-        - id: GrilleBroken
+        - id: ClockworkGrilleBroken
           prob: 0.25
   - type: IFF
     color: "#E1C16E"

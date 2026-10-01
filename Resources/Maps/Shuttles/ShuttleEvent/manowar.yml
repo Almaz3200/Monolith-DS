@@ -2398,7 +2398,7 @@ entities:
     - type: Transform
       pos: 3.4522347,0.5183484
       parent: 1
-- proto: Window
+- proto: MiningWindow
   entities:
   - uid: 9
     components:

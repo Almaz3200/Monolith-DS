@@ -1505,7 +1505,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -1.5,-3.5
       parent: 1
-- proto: WallShuttle
+- proto: WallShuttleInterior
   entities:
   - uid: 6
     components:
