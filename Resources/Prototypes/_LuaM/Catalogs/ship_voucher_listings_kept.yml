@@ -1,0 +1,160 @@
+# LuaM: uplink listings for Lua-kept ship vouchers
+
+- type: listing
+  id: UplinkSecurityT1VoucherAldebaran
+  name:  uplink-security-t1-aldebaran-voucher-name
+  description: uplink-security-t1-aldebaran-voucher-desc
+  productEntity: ShipVoucherAldebaran
+  cost:
+    FederationMilitaryCredit: 90
+  categories:
+  - UplinkSecurityVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
+
+# end T1
+
+- type: listing
+  id: UplinkSecurityT1VoucherSentinel
+  name:  uplink-security-t1-sentinel-voucher-name
+  description: uplink-security-t1-sentinel-voucher-desc
+  productEntity: ShipVoucherSentinel
+  cost:
+    FederationMilitaryCredit: 110
+  categories:
+  - UplinkSecurityVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
+
+- type: listing
+  id: UplinkSecurityT2VoucherAndromeda
+  name:  uplink-security-t2-andromeda-voucher-name
+  description: uplink-security-t2-andromeda-voucher-desc
+  productEntity: ShipVoucherAndromeda
+  cost:
+    FederationMilitaryCredit: 180
+  categories:
+  - UplinkSecurityVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
+
+# end T2
+
+- type: listing
+  id: UplinkSecurityT3VoucherAltair
+  name:  uplink-security-t3-altair-voucher-name
+  description: uplink-security-t3-altair-voucher-desc
+  productEntity: ShipVoucherAltair
+  cost:
+    FederationMilitaryCredit: 400
+  categories:
+  - UplinkSecurityVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
+
+# end T3
+
+- type: listing
+  id: UplinkSecurityFlyssaVoucher
+  name:  uplink-security-flyssa-voucher-name
+  description: uplink-security-flyssa-voucher-desc
+  productEntity: ShipVoucherFlyssa
+  cost:
+    FederationMilitaryCredit: 750
+  categories:
+  - UplinkSecurityVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink # LuaM: FactionStaticUplinkTsf > SecurityUplink
+
+# end T4
+
+- type: listing
+  id: UplinkSecurityT1VoucherBastion
+  name:  uplink-pdv-t1-bastion-voucher-name
+  description: uplink-pdv-t1-bastion-voucher-desc
+  productEntity: ShipVoucherBastion
+  cost:
+    Doubloon: 110
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - PirateUplink # LuaM FactionStaticUplinkPdv > PirateUplink
+
+- type: listing
+  id: UplinkSecurityT1VoucherFenrir
+  name:  uplink-pdv-t1-fenrir-voucher-name
+  description: uplink-pdv-t1-fenrir-voucher-desc
+  productEntity: ShipVoucherFenrir
+  cost:
+    Doubloon: 100
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - PirateUplink # LuaM FactionStaticUplinkPdv > PirateUplink
+
+#- type: listing # Commented by LuaM
+#  id: UplinkSecurityT1VoucherScorpion
+#  name:  uplink-pdv-t1-scorpion-voucher-name
+#  description: uplink-pdv-t1-scorpion-voucher-desc
+#  productEntity: ShipVoucherScorpion
+#  cost:
+#    Doubloon: 120
+#  categories:
+#  - UplinkPdvVouchers
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+
+- type: listing
+  id: UplinkSecurityT3VoucherSaintie
+  name:  uplink-pdv-t3-saintie-voucher-name
+  description: uplink-pdv-t3-saintie-voucher-desc
+  productEntity: ShipVoucherSaintie
+  cost:
+    Doubloon: 400
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - PirateUplink # LuaM FactionStaticUplinkPdv > PirateUplink
+
+# end T3
+
+- type: listing
+  id: UplinkSecurityT2VoucherVulture
+  name:  uplink-pdv-t2-vulture-voucher-name
+  description: uplink-pdv-t2-vulture-voucher-desc
+  productEntity: ShipVoucherVulture
+  cost:
+    Doubloon: 200
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - PirateUplink # LuaM FactionStaticUplinkPdv > PirateUplink

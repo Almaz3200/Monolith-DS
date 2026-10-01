@@ -1,0 +1,41 @@
+- type: vessel
+  id: Dagger
+  parent: BaseVesselIFFDisabled
+  name: vessel-dagger-name # LuaM-locale
+  description: vessel-dagger-desc # LuaM-locale
+  limit: 3
+  hyperwarLimit: 6
+  price: 150000
+  purchasable: false # voucher only
+  category: Medium
+  group: Security
+  access: Security
+  shuttlePath: /SharedMaps/_Mono/Shuttles/TSF/dagger.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  - Escort
+  engine:
+  - AME
+  addComponents: # LuaM add
+    - type: IFF
+      color: "#047ABDFF"
+- type: gameMap
+  id: Dagger
+  mapName: 'Dagger'
+  mapPath: /SharedMaps/_Mono/Shuttles/TSF/dagger.yml
+  minPlayers: 0
+  stations:
+    Dagger:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Dagger TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Deputy: [ 0, 0 ]
+          TsfBorg: [ 0, 0 ]
+

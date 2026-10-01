@@ -1,6 +1,6 @@
 - type: vessel
   id: Flyssa
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-flyssa-name # LuaM-locale
   description: vessel-flyssa-desc # LuaM-locale
   limit: 1

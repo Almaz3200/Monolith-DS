@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Akula
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-akula-name # LuaM-locale
   description: vessel-akula-desc # LuaM-locale
   price: 78000 # LuaM: 64000 > 78000
