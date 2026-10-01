@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Bastion
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-bastion-name # LuaM-locale
   description: vessel-bastion-desc # LuaM-locale
   price: 95500
@@ -23,7 +23,7 @@
 - type: gameMap
   id: Bastion
   mapName: 'AN Bastion' # LuaM: 'PDV Bastion' > 'AN Bastion'
-  mapPath: /Maps/_Mono/Shuttles/BlackMarket/bastion.yml
+  mapPath: /Maps/_LuaM/Shuttles/PDV/bastionLuaM.yml # LuaM: /Maps/_Mono/Shuttles/BlackMarket/bastion.yml > /Maps/_LuaM/Shuttles/PDV/bastionLuaM.yml
   minPlayers: 0
   stations:
     Bastion:

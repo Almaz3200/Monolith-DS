@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Europa
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-europa-name # LuaM-locale
   description: vessel-europa-desc # LuaM-locale
   limit: 3

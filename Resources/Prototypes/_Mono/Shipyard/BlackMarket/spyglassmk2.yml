@@ -2,7 +2,7 @@
 
 - type: vessel
   id: SpyglassMKII
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-spyglassmkii-name # LuaM-locale
   description: vessel-spyglassmkii-desc # LuaM-locale
   price: 62500

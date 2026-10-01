@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Sulak
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-sulak-name # LuaM-locale
   description: vessel-sulak-desc # LuaM-locale
   price: 212000 # LuaM: 142500 > 212000

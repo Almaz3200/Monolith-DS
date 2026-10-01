@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Sekunda
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-sekunda-name # LuaM-locale
   description: vessel-sekunda-desc # LuaM-locale
   price: 60000
@@ -21,7 +21,7 @@
 - type: gameMap
   id: Sekunda
   mapName: 'Sekunda'
-  mapPath: /Maps/_Mono/Shuttles/USSP/sekunda.yml # LuaM: /Maps/_Mono/Shuttles/USSP/sekunda.yml > /Maps/_LuaM/Shuttles/USSP/SekundaLuaM.yml
+  mapPath: /Maps/_LuaM/Shuttles/USSP/SekundaLuaM.yml # LuaM: /Maps/_Mono/Shuttles/USSP/sekunda.yml > /Maps/_LuaM/Shuttles/USSP/SekundaLuaM.yml
   minPlayers: 0
   stations:
     Sekunda:
