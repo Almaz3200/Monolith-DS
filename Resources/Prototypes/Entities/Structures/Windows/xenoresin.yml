@@ -46,7 +46,6 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls # Mono
-    base: xwindow
   - type: Construction
     graph: Window
     node: reinforcedWindow
