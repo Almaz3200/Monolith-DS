@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Sentinel
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-sentinel-name # LuaM-locale
   description: vessel-sentinel-desc # LuaM-locale
   price: 210200 # Appraises around 100k, but marked up since appraisegrid is too stupid to realize the true value of my creations (plastitanium walls probably has their value set really low)

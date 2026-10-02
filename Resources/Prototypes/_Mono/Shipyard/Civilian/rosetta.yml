@@ -1,0 +1,40 @@
+# Author Info
+# GitHub: The-Aisen
+# Discord: ich_bin_aisenberg
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Rosetta
+  parent: BaseVessel
+  name: vessel-rosetta-name # LuaM-locale
+  description: vessel-rosetta-desc # LuaM-locale
+  price: 128131
+  category: Medium
+  group: Shipyard
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Civilian/rosetta.yml
+  guidebookPage: Null
+  class:
+  - Science
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: Rosetta
+  mapName: 'NOV-Rosetta'
+  mapPath: /SharedMaps/_Mono/Shuttles/Civilian/rosetta.yml
+  minPlayers: 0
+  stations:
+    Rosetta:
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Rosetta CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            # Pilot: [ 0, 0 ]
+            # Mercenary: [ 0, 0 ]

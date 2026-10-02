@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Andromeda
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-andromeda-name # LuaM-locale
   description: vessel-andromeda-desc # LuaM-locale
   limit: 2 # LuaM 3 > 2

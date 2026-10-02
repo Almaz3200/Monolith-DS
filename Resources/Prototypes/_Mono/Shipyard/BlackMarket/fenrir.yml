@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Fenrir
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-fenrir-name # LuaM-locale
   description: vessel-fenrir-desc # LuaM-locale
   price: 150750

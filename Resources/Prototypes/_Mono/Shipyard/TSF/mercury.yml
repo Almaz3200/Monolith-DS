@@ -1,0 +1,41 @@
+- type: vessel
+  id: Mercury
+  parent: BaseVesselIFFDisabled
+  name: vessel-mercury-name # LuaM-locale
+  description: vessel-mercury-desc # LuaM-locale
+  price: 500000
+  purchasable: false # voucher only
+  category: Medium
+  group: Security
+  access: Security
+  shuttlePath: /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml # LuaM: /Maps/_Mono/Shuttles/Nfsd/mercury.yml > /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  - AntiShipMissileCarrier
+  - Brawler
+  - Corvette
+  engine:
+  - AME
+  addComponents: # LuaM add
+    - type: IFF
+      color: "#047ABDFF"
+- type: gameMap
+  id: Mercury
+  mapName: 'Mercury'
+  mapPath: /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml # LuaM: /Maps/_Mono/Shuttles/Nfsd/mercury.yml > /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml
+  minPlayers: 0
+  stations:
+    Mercury:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Mercury TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Deputy: [ 0, 0 ]
+          TsfBorg: [ 0, 0 ]
+

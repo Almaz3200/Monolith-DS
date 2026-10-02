@@ -1,0 +1,43 @@
+# Author Info
+# GitHub: tsunameme
+# Discord: tsunameme
+
+# Shuttle Notes:
+#
+
+- type: vessel
+  id: Zeros
+  parent: BaseVessel
+  name: vessel-zeros-name # LuaM-locale
+  description: vessel-zeros-desc # LuaM-locale
+  price: 153578
+  category: Large
+  group: Shipyard
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Civilian/zeros.yml
+  guidebookPage: null
+  class:
+  - Civilian
+  - Kitchen
+  - Botany
+  engine:
+  - AME
+
+- type: gameMap
+  id: Zeros
+  mapName: 'JIN Zeros'
+  mapPath: /SharedMaps/_Mono/Shuttles/Civilian/zeros.yml
+  minPlayers: 0
+  stations:
+    Zeros:
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Zeros CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            # Pilot: [ 0, 0 ]
+            # Mercenary: [ 0, 0 ]

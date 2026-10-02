@@ -2,7 +2,7 @@
 
 - type: vessel
   id: Ledokol
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled # LuaM: BaseVesselAntag > BaseVesselIFFDisabled (renamed upstream)
   name: vessel-ledokol-name # LuaM-locale
   description: vessel-ledokol-desc # LuaM-locale
   # limit: 1 # Commented by LuaM
@@ -24,7 +24,7 @@
 - type: gameMap
   id: Ledokol
   mapName: 'Ledokol'
-  mapPath: /Maps/_Mono/Shuttles/USSP/Ledokol/ledokol.yml
+  mapPath: /Maps/_LuaM/Shuttles/USSP/LedokolLuaM.yml # LuaM: /Maps/_Mono/Shuttles/USSP/Ledokol/ledokol.yml > /Maps/_LuaM/Shuttles/USSP/LedokolLuaM.yml
   minPlayers: 0
   stations:
     Ledokol:
