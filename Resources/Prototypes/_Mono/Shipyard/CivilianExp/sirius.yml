@@ -1,8 +1,8 @@
 - type: vessel
   id: Sirius
   parent: BaseVessel
-  name: vessel-sirius-name # LuaM-locale
-  description: vessel-sirius-desc # LuaM-locale
+  name: SKR Sirius
+  description: A basic expeditionary ship with moderately-decent armor and armaments for it's size, and a full chemistry suite on top of it all.
   price: 95000
   category: Medium
   group: Expedition

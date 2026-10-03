@@ -7,8 +7,8 @@
 - type: vessel
   id: Mite
   parent: BaseVessel
-  name: vessel-mite-name # LuaM-locale
-  description: vessel-mite-desc # LuaM-locale
+  name: Mite
+  description: A heap of scrap of unknown origin, seemingly retrofitted by salvagers into a military ship using salvage weaponry. Was found as a derelict in space and now is being resold without even as much as a cleanup.
   price: 69166 # it's a heap of scrap
   category: Small
   group: Scrap
@@ -27,7 +27,7 @@
   minPlayers: 0
   stations:
     Mite:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Mite MIL{1}'

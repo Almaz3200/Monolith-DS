@@ -1,8 +1,8 @@
 - type: vessel
   id: Noble
   parent: BaseVessel
-  name: vessel-noble-name # LuaM-locale
-  description: vessel-noble-desc # LuaM-locale
+  name: SKR Noble
+  description: A slightly heavier mining craft, equipped with 4 mining pulsers and a magnet, but no self defense and poor armor.
   price: 94365
   category: Small
   group: Shipyard
@@ -20,7 +20,7 @@
   minPlayers: 0
   stations:
     Noble:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Noble CIV{1}'

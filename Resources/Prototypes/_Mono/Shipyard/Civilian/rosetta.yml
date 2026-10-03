@@ -7,8 +7,8 @@
 - type: vessel
   id: Rosetta
   parent: BaseVessel
-  name: vessel-rosetta-name # LuaM-locale
-  description: vessel-rosetta-desc # LuaM-locale
+  name: NOV-Rosetta
+  description: A science vessel built by the enigmatic "System" the Rosetta model is a heavy duty, yet luxurious xenoarcheological ship. A hulking laboratory with enough firepower to persuade the undesired (and stationary) "customer" to leave.
   price: 128131
   category: Medium
   group: Shipyard
@@ -26,7 +26,7 @@
   minPlayers: 0
   stations:
     Rosetta:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Rosetta CIV{1}'

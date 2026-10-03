@@ -1,8 +1,8 @@
 - type: vessel
   id: Autumn
   parent: BaseVessel
-  name: vessel-autumn-name # LuaM: TSF-SKR Autumn > vessel-autumn-name
-  description: vessel-autumn-desc # LuaM: A long-range cargo freighter. The cargo bay is (relatively) heavily armored with a plastitanium inner layer, and the ship is equipped with a heavy FTL drive. Armed with 4x 57mms. > vessel-autumn-desc
+  name: SKR Autumn
+  description: An updated production variant of the Autumn cargo freighter. Comes with a shield generator and a few 90mms.
   price: 224831
   category: Large
   group: Shipyard
@@ -20,7 +20,7 @@
   minPlayers: 0
   stations:
     Autumn:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Autumn CIV{1}'
