@@ -3,7 +3,7 @@
   name: job-name-vg-commander
   description: job-description-vg-commander
   playTimeTracker: JobVGCommander
-  whitelisted: true # I'm not certain who gets this.
+  whitelisted: false # LuaM: true > false
   startingGear: ViperCommanderGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true

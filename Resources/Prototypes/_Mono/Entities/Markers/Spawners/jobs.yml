@@ -4,9 +4,10 @@
   id: SpawnPointTSFCivilian
   parent: SpawnPointJobBase
   name: TSF Civilian Spawn
+  categories: [ HideSpawnMenu ] # LuaM
   components:
   - type: SpawnPoint
-    job_id: TsfCivilian
+    # job_id: TsfCivilian # LuaM: role is disabled
   - type: Sprite
     sprite: _NF/Structures/Decoration/banner.rsi
     state: banner-blue
@@ -38,9 +39,10 @@
   id: SpawnPointPDVInfantry
   parent: SpawnPointJobBase
   name: PDV Infantry
+  categories: [ HideSpawnMenu ] # LuaM
   components:
   - type: SpawnPoint
-    job_id: PdvInfantry
+    # job_id: PdvInfantry # LuaM: role is disabled
   - type: Sprite
     sprite: Structures/Decoration/banner.rsi
     state: banner-red
@@ -162,9 +164,10 @@
   id: SpawnPointTsfInfantry
   parent: SpawnPointJobBase
   name: TSF Infantry
+  categories: [ HideSpawnMenu ] # LuaM
   components:
   - type: SpawnPoint
-    job_id: TsfInfantry
+    # job_id: TsfInfantry # LuaM: role is disabled
   - type: Sprite
     sprite: _NF/Markers/jobs.rsi
     layers:

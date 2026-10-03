@@ -3,6 +3,7 @@
   name: job-name-pdv-tarkhan
   description: job-description-pdv-tarkhan
   playTimeTracker: JobPDVTarkhan
+  whitelisted: true # LuaM
   requirements:
   - !type:DepartmentTimeRequirement # Requires time in both factions
     department: Security

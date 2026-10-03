@@ -3,6 +3,7 @@
   name: job-name-tsf-marsoc
   description: job-description-tsf-marsoc
   playTimeTracker: JobTsfMarsoc
+  whitelisted: true # LuaM
   requirements:
   - !type:DepartmentTimeRequirement # Requires time in both factions
     department: Antag

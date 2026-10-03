@@ -227,52 +227,54 @@
   - FactionArmorPlates
   canCustomizeName: true
 
-- type: roleLoadout
-  id: JobTsfCivilian # Civvie
-  groups:
-  - MercenaryHead
-  - ContractorNeck
-  - MercenaryJumpsuit
-  - MercenaryGloves
-  - MercenaryBackpack
-  - ContractorOuterClothing
-  - MercenaryShoes
-  - MercenaryFace
-  - MercenaryGlasses
-  - MercenaryBelt
-  - MercenaryEars
-  - ContractorEncryptionKey
-  - ContractorBoxSurvival
-  - ContractorPDA
-  - ContractorWallet
-  - ContractorCartridge
-  - ContractorImplanter
-  - ContractorUtility
-  - ContractorFun
-  - ContractorTrinkets
-  - ContractorBureaucracy
-  - NFSpeciesSpecific
-  - MercenaryBalaclava # Mono
-  - CivGunCaseSpecial # Mono
-  - ContractorArmorPlates # Mono
-  - TsfmcSidearm
-  - TsfmcSidearmAmmo
-  canCustomizeName: true
+# Commented by LuaM: TSF civilian role is disabled
+#- type: roleLoadout
+#  id: JobTsfCivilian # Civvie
+#  groups:
+#  - MercenaryHead
+#  - ContractorNeck
+#  - MercenaryJumpsuit
+#  - MercenaryGloves
+#  - MercenaryBackpack
+#  - ContractorOuterClothing
+#  - MercenaryShoes
+#  - MercenaryFace
+#  - MercenaryGlasses
+#  - MercenaryBelt
+#  - MercenaryEars
+#  - ContractorEncryptionKey
+#  - ContractorBoxSurvival
+#  - ContractorPDA
+#  - ContractorWallet
+#  - ContractorCartridge
+#  - ContractorImplanter
+#  - ContractorUtility
+#  - ContractorFun
+#  - ContractorTrinkets
+#  - ContractorBureaucracy
+#  - NFSpeciesSpecific
+#  - MercenaryBalaclava # Mono
+#  - CivGunCaseSpecial # Mono
+#  - ContractorArmorPlates # Mono
+#  - TsfmcSidearm
+#  - TsfmcSidearmAmmo
+#  canCustomizeName: true
 
-- type: roleLoadout
-  id: JobTsfInfantry
-  groups:
-  - TsfmcInfantryHead
-  - TsfmcInfantryJumpsuit
-  - TsfmcGloves
-  - TsfmcBackpack
-  - TsfmcOuterClothing
-  - TsfmcShoes
-  - TsfmcBalaclava
-  - TsfmcInfantryBelt
-  - TsfmcEars
-  - DeputyPDA
-  - NfsdSpeciesSpecific
-  - FactionArmorPlates
-  - TsfmcRanksEnlisted
-  canCustomizeName: true
+# Commented by LuaM: infantry roles and Crocus mode are disabled
+#- type: roleLoadout
+#  id: JobTsfInfantry
+#  groups:
+#  - TsfmcInfantryHead
+#  - TsfmcInfantryJumpsuit
+#  - TsfmcGloves
+#  - TsfmcBackpack
+#  - TsfmcOuterClothing
+#  - TsfmcShoes
+#  - TsfmcBalaclava
+#  - TsfmcInfantryBelt
+#  - TsfmcEars
+#  - DeputyPDA
+#  - NfsdSpeciesSpecific
+#  - FactionArmorPlates
+#  - TsfmcRanksEnlisted
+#  canCustomizeName: true

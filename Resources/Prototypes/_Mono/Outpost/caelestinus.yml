@@ -48,8 +48,8 @@
             #CCServiceWorker: [ 2, 2 ]
             #NFJanitor: [ 2, 2 ]
             #MailCarrier: [ 2, 2 ]
-            DirectorOfCare: [ 1, 1 ]
-            MdMedic: [ -1, -1 ]
+            # DirectorOfCare: [ 1, 1 ] # Commented by LuaM
+            # MdMedic: [ -1, -1 ] # Commented by LuaM
           tags:
           - HeadOfPersonnel
           - HeadOfSecurity
