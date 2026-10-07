@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/24/2026 17:52:06
-  entityCount: 10046
+  entityCount: 10031
 maps:
 - 1
 grids:
@@ -24600,28 +24600,6 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-- proto: ComputerShipyardMedical
-  entities:
-  - uid: 3284
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -26.5,55.5
-      parent: 2
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-  - uid: 3285
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -5.5,55.5
-      parent: 2
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
 - proto: ComputerShipyardScrap
   entities:
   - uid: 3286
@@ -44986,13 +44964,6 @@ entities:
     - type: Transform
       pos: -12.5,41.5
       parent: 2
-- proto: LockerChiefMedicalOfficerFilled
-  entities:
-  - uid: 616
-    components:
-    - type: Transform
-      pos: -19.5,56.5
-      parent: 2
 - proto: LockerEvidence
   entities:
   - uid: 5984
@@ -45137,18 +45108,6 @@ entities:
     components:
     - type: Transform
       pos: -21.5,42.5
-      parent: 2
-- proto: MachineMedicalBountyRedemption
-  entities:
-  - uid: 6001
-    components:
-    - type: Transform
-      pos: -26.5,33.5
-      parent: 2
-  - uid: 6002
-    components:
-    - type: Transform
-      pos: -26.5,37.5
       parent: 2
 - proto: MachineOutpostCore
   entities:
@@ -56128,13 +56087,6 @@ entities:
     - type: Transform
       pos: 11.5,11.5
       parent: 2
-- proto: SpawnPointDirectorOfCare
-  entities:
-  - uid: 7628
-    components:
-    - type: Transform
-      pos: -13.5,57.5
-      parent: 2
 - proto: SpawnPointLatejoin
   entities:
   - uid: 7629
@@ -56173,28 +56125,6 @@ entities:
     components:
     - type: Transform
       pos: -34.5,30.5
-      parent: 2
-- proto: SpawnPointMdMedic
-  entities:
-  - uid: 7636
-    components:
-    - type: Transform
-      pos: -7.5,53.5
-      parent: 2
-  - uid: 7637
-    components:
-    - type: Transform
-      pos: -8.5,53.5
-      parent: 2
-  - uid: 7638
-    components:
-    - type: Transform
-      pos: -10.5,54.5
-      parent: 2
-  - uid: 7639
-    components:
-    - type: Transform
-      pos: -10.5,55.5
       parent: 2
 - proto: SpawnPointMercenary
   entities:
@@ -56420,18 +56350,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -17.5,9.5
-      parent: 2
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-- proto: StationAdminBankATMMedical
-  entities:
-  - uid: 7677
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -14.5,58.5
       parent: 2
     - type: ApcPowerReceiver
       powerLoad: 5
@@ -56894,28 +56812,6 @@ entities:
     components:
     - type: Transform
       pos: -23.5,26.5
-      parent: 2
-- proto: SuitStorageTrauma
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      pos: -9.5,55.5
-      parent: 2
-  - uid: 4
-    components:
-    - type: Transform
-      pos: -11.5,54.5
-      parent: 2
-  - uid: 5
-    components:
-    - type: Transform
-      pos: -9.5,54.5
-      parent: 2
-  - uid: 7
-    components:
-    - type: Transform
-      pos: -11.5,55.5
       parent: 2
 - proto: SuitStorageTraumaLeader
   entities:

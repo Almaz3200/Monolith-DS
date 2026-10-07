@@ -1,12 +1,12 @@
 - type: vessel
   id: Dagger
   parent: BaseVesselIFFDisabled
-  name: vessel-dagger-name # LuaM-locale
-  description: vessel-dagger-desc # LuaM-locale
+  name: TSF-SKR Dagger
+  description: Straight from the shipyards of Sol, this ship is equipped with a single M381 mass driver as its main armament for long-range fire support. Don't let them get close.
   limit: 3
   hyperwarLimit: 6
   price: 150000
-  purchasable: false # voucher only
+  purchasable: false # voucher only - T1
   category: Medium
   group: Security
   access: Security
@@ -17,9 +17,7 @@
   - Escort
   engine:
   - AME
-  addComponents: # LuaM add
-    - type: IFF
-      color: "#047ABDFF"
+
 - type: gameMap
   id: Dagger
   mapName: 'Dagger'

@@ -79,11 +79,11 @@ BalorCarrierComputer: null
 ComputerPirateBountyRedemption: BaseComputer # no longer has a purpose
 ComputerPirateBountyRedemptionTabletop: ComputerTabletopFrame # ditto
 
-# Lua: wallening (#4485) reverted - map new salvage airlocks back to pre-wallening ones
+# LuaM: wallening (#4485) reverted - map new salvage airlocks back to pre-wallening ones
 AirlockSalvage: AirlockMining
 AirlockSalvageGlass: AirlockMiningGlass
 
-# Lua: content removed upstream (Monolith #4624 shipyard refactor, #4018 USSP update)
+# LuaM: content removed upstream (Monolith #4624 shipyard refactor, #4018 USSP update)
 LedokolAttatchmentComputer: null
 SpawnPointUSSPCorporal: SpawnPointUSSPRifleman
 SpawnPointUSSPMedic: SpawnPointUSSPRifleman
@@ -100,3 +100,7 @@ ShipVoucherVulture: ShipVoucherPdvT2
 ShipVoucherScorpionART: ShipVoucherPdvT1
 ShipVoucherScorpionMSL: ShipVoucherPdvT1
 ShipVoucherArrow: ShipVoucherTsfT2
+# LuaM: disabled role spawn points are kept (HideSpawnMenu), so they are not migrated away
+# SpawnPointTSFCivilian:
+# SpawnPointPDVInfantry:
+# SpawnPointTsfInfantry:

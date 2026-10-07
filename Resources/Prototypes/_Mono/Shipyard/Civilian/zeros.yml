@@ -8,8 +8,8 @@
 - type: vessel
   id: Zeros
   parent: BaseVessel
-  name: vessel-zeros-name # LuaM-locale
-  description: vessel-zeros-desc # LuaM-locale
+  name: JIN Zeros
+  description: A truck stop diner ship designed to resemble a semi-truck, complete with a EVA accessable dining room and a small cargo bay.
   price: 153578
   category: Large
   group: Shipyard
@@ -29,7 +29,7 @@
   minPlayers: 0
   stations:
     Zeros:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Zeros CIV{1}'

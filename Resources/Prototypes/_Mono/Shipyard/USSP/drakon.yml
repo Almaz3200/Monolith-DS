@@ -3,14 +3,14 @@
 - type: vessel
   id: Drakon
   parent: BaseVesselIFFDisabled
-  name: vessel-drakon-name # LuaM-locale
-  description: vessel-drakon-desc # LuaM-locale
-  price: 203550 # LuaM: 85290 > 203550
+  name: NCS Drakon
+  description: A fast brawler with heavy armor and ballistic armaments.
+  price: 112753
   purchasable: false # voucher only
   category: Medium
   group: Ussp
   access: USSP
-  shuttlePath: /Maps/_LuaM/Shuttles/USSP/DrakonLuaM.yml # LuaM: /Maps/_Mono/Shuttles/USSP/drakon.yml > /Maps/_LuaM/Shuttles/USSP/DrakonLuaM.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/drakon.yml
   guidebookPage: Null
   class:
   - Pursuit
@@ -22,11 +22,11 @@
 - type: gameMap
   id: Drakon
   mapName: 'Drakon'
-  mapPath: /Maps/_LuaM/Shuttles/USSP/DrakonLuaM.yml # LuaM: /Maps/_Mono/Shuttles/USSP/drakon.yml > /Maps/_LuaM/Shuttles/USSP/DrakonLuaM.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/USSP/drakon.yml
   minPlayers: 0
   stations:
     Drakon:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Drakon USSP{1}'

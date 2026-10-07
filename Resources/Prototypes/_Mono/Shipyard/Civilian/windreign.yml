@@ -7,8 +7,8 @@
 - type: vessel
   id: Windreign
   parent: BaseVessel
-  name: vessel-windreign-name # LuaM-locale
-  description: vessel-windreign-desc # LuaM-locale
+  name: HES Windreign
+  description: A large, purpose-built shuttle designed for atmospheric technicians. Armed with 3x AK570, some PD and a heavy ballistic mount.
   price: 220000
   category: Large
   group: Shipyard
@@ -26,7 +26,7 @@
   minPlayers: 0
   stations:
     Windreign:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       gridComponents:
       - type: VesselInfo
         description: "The air smells of plasma and sulfur.."

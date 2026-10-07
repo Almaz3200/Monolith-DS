@@ -216,18 +216,19 @@
   - PortstrikeAnnounceRuleHour2
   - StarSystemKyphrus
 
-- type: gamePreset
-  id: MonoCrocus
-  alias:
-  - crocus
-  - monocrocus
-  name: mono-crocus-title
-  description: mono-crocus-description
-  showInVote: false
-  weight: 0.2 # Giant majority needed
-  supportedMaps: CrocusMapPool
-  rules:
-  - PDVObjectivesCrocus
-  - RoundEndRuleHour2
-  - CrocusAnnouncementMinuteRoundStart
-  - CrocusAnnouncementMinute10m
+# Commented by LuaM: infantry roles and Crocus mode are disabled
+#- type: gamePreset
+#  id: MonoCrocus
+#  alias:
+#  - crocus
+#  - monocrocus
+#  name: mono-crocus-title
+#  description: mono-crocus-description
+#  showInVote: false
+#  weight: 0.2 # Giant majority needed
+#  supportedMaps: CrocusMapPool
+#  rules:
+#  - PDVObjectivesCrocus
+#  - RoundEndRuleHour2
+#  - CrocusAnnouncementMinuteRoundStart
+#  - CrocusAnnouncementMinute10m

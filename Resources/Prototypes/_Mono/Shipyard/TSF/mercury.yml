@@ -1,14 +1,14 @@
 - type: vessel
   id: Mercury
   parent: BaseVesselIFFDisabled
-  name: vessel-mercury-name # LuaM-locale
-  description: vessel-mercury-desc # LuaM-locale
+  name: TSF-SKR Mercury
+  description: Naval designation Type-32D Guided Missile Corvette. Equipped with 4 heavy frontal facing Paladin AShM pods, and 2 light PD guns.
   price: 500000
-  purchasable: false # voucher only
+  purchasable: false # voucher only - T2
   category: Medium
   group: Security
   access: Security
-  shuttlePath: /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml # LuaM: /Maps/_Mono/Shuttles/Nfsd/mercury.yml > /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/TSF/mercury.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -17,13 +17,11 @@
   - Corvette
   engine:
   - AME
-  addComponents: # LuaM add
-    - type: IFF
-      color: "#047ABDFF"
+
 - type: gameMap
   id: Mercury
   mapName: 'Mercury'
-  mapPath: /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml # LuaM: /Maps/_Mono/Shuttles/Nfsd/mercury.yml > /Maps/_LuaM/Shuttles/TSFMC/MercuryLuaM.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/TSF/mercury.yml
   minPlayers: 0
   stations:
     Mercury:

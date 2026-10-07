@@ -2,8 +2,8 @@
 - type: vessel
   id: Xiphos
   parent: BaseVesselIFFDisabled
-  name: vessel-jaguar-name # LuaM-locale
-  description: vessel-jaguar-desc # LuaM-locale
+  name: TSF-ELF Xiphos
+  description: A rapid-response patrol craft with EMP capabilities. Equipped with a holding cell to transport prisoners.
   price: 120000
   category: Small
   group: Security
@@ -16,9 +16,7 @@
   - Plasma
   company:
   - TSF
-  addComponents: # LuaM add
-    - type: IFF
-      color: "#047ABDFF"
+
 - type: gameMap
   id: Xiphos
   mapName: 'Xiphos'

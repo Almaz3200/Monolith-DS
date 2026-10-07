@@ -35,7 +35,7 @@
   - Mercenary # Frontier
   # - Pilot # Frontier
   - Borg # Frontier
-  - TsfCivilian
+  # - TsfCivilian # Commented by LuaM
   - PdvCivilian
 
 - type: department
@@ -129,9 +129,9 @@
   - PublicAffairsLiaison # Frontier
   - TsfEngineer # Mono
   - TsfMarsoc # Mono
-  - TsfInfantry # Mono
+  # - TsfInfantry # Mono # Commented by LuaM
   - TsfBorg # Mono
-  - TsfCivilian
+  # - TsfCivilian # Commented by LuaM
 
 - type: department
   id: Science

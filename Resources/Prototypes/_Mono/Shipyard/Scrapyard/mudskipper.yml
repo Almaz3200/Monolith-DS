@@ -6,8 +6,8 @@
 - type: vessel
   id: Mudskipper
   parent: BaseVessel
-  name: vessel-mudskipper-name # LuaM-locale
-  description: vessel-mudskipper-desc # LuaM-locale
+  name: SKR Mudskipper
+  description: A heavily modified Peregrine for combat usage. The inner bays have had the outermost layers collapsed for an additional layer of armor, the interior has been rearranged for a shield generator, and the weapon mounts now carry 4 Draupnir rotary cannons.
   price: 108304
   category: Medium
   group: Scrap
@@ -26,7 +26,7 @@
   minPlayers: 0
   stations:
     Mudskipper:
-      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel
+      stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Mudskipper SRP{1}'
