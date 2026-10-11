@@ -44,10 +44,7 @@
   - WeaponShotgunSultanPulsar
   - WeaponLightMachineGunL6Rogue
   - WeaponRifleBurnerRogue
-
-  - WeaponLightMachineGunL6Rogue
-  - WeaponRifleBurnerRogue
-
+  - WeaponLMGPKMSPDV # LuaM
 
 - type: latheRecipePack
   id: MonoRogueVouchersDynamic

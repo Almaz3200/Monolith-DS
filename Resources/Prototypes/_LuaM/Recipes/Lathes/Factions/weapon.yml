@@ -1,0 +1,13 @@
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLMGPKMSPDV
+  result: WeaponLMGPKMS
+  categories:
+  - GPMGs
+  - MGs
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 3500
+    Plasteel: 2000
+    Plastic: 1200

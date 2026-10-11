@@ -13,9 +13,9 @@
   - ClothingHeadHelmetMercenary
   - ClothingHeadHelmetMercenaryBlack
   - ClothingHeadHelmetBasic
-  technologyPrerequisites:
-  - BasicParts
-  position: 2, 13
+  # technologyPrerequisites: # Commented by LuaM
+  # - BasicParts
+  position: 2, 12
 
 - type: technology
   id: PunkGear
@@ -44,7 +44,7 @@
   - ClothingOuterCoatBomberRandomized
   technologyPrerequisites:
   - ArmorBasic
-  position: 1, 12
+  position: 1, 11
 
 - type: technology
   id: ArmorAdvanced
@@ -61,7 +61,7 @@
   - ClothingHeadHelmetRiot
   technologyPrerequisites:
   - ArmorBasic
-  position: 2, 10
+  position: 2, 9
 
 - type: technology
   id: GlassesContractor
@@ -74,6 +74,6 @@
   - ClothingEyesGlassesContractor
   technologyPrerequisites:
   - HardsuitsArmoredAdvanced
-  - ThermalVisionTech
-  - CyberneticEnhancements
-  position: 4, 5
+  # - ThermalVisionTech # Comented by LuaM
+  # - CyberneticEnhancements # Comented by LuaM
+  position: 4, 4

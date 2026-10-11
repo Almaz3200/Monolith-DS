@@ -55,7 +55,7 @@
     Doubloon: 5
   categories:
   - UplinkPirateMedical
-  - UplinkPdvMaterials
+  # - UplinkPdvMaterials # Commented by LuaM
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:

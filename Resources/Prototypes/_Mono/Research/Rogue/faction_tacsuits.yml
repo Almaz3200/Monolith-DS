@@ -11,39 +11,50 @@
   - ClothingOuterVestWebRogue
   - ClothingOuterVestWebEliteRogue
   technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  - HardsuitsArmored # LuaM
-  position: 8, 10 # LuaM: 12, 7 > 8, 10
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - RogueJaws # LuaM
+  position: 5, 7 # LuaM: 12, 1 > 5, 7
 
 - type: technology
   id: RogueAdvancedEquipment
   name: research-technology-rogue-advanced-equipment
-  entityIcon: ClothingOuterHardsuitAshen
+  entityIcon: ClothingOuterHardsuitPDVMedic # LuaM ClothingOuterHardsuitAshen > ClothingOuterHardsuitPDVMedic
   discipline: RogueEquipment
   tier: 2
   cost: 35000
   recipeUnlocks:
-  - ClothingOuterHardsuitSyndieRogue
-  - ClothingOuterHardsuitSyndieEliteRogue
+  - ClothingOuterHardsuitPDVMedic # LuaM
   - ClothingShoesBootsMagSyndieRogue
   - ClothingMaskGasSyndicateRogue
   - MechIFFPDV
   technologyPrerequisites:
   - RogueBasicEquipment
-  position: -2, -23
+  position: 4, 8 # LuaM: 12, 7 > 8, 10
 
 - type: technology
   id: RogueSyndicateTacsuits
   name: research-technology-rogue-syndicate-tacsuits
-  entityIcon: ClothingOuterHardsuitJuggernaut
+  entityIcon: ClothingOuterHardsuitAshen
   discipline: RogueEquipment
   tier: 2
-  cost: 75000
+  cost: 50000
   recipeUnlocks:
-  - ClothingOuterHardsuitPDVMedic
+  - ClothingOuterHardsuitSyndieRogue
+  - ClothingOuterHardsuitSyndieEliteRogue
+  technologyPrerequisites:
+  - RogueAdvancedEquipment
+  position: 4, 9 # LuaM: 12, 12 > 8, 7
+
+- type: technology
+  id: RogueSuperArmor
+  name: research-technology-rogue-super-armor
+  entityIcon: ClothingOuterHardsuitCybersunStealth
+  discipline: RogueEquipment
+  tier: 2
+  cost: 40000 # LuaM: 20000 > 40000
+  recipeUnlocks:
   - ClothingOuterHardsuitCybersunStealthRogue
   - ClothingOuterHardsuitJuggernautRogue
   technologyPrerequisites:
-  - RogueAdvancedEquipment
-  - UniversalMaterialResearchT3
-  position: -2, -29
+  - RogueAdvancedEquipment # LuaM: RogueSyndicateTacsuits > RogueAdvancedEquipment
+  position: 3, 9 # LuaM: 13, 12 > 3, 9
