@@ -29,8 +29,6 @@
   stations:
     Hokkaido:
       stationProto: RecordsFrontierOutpostCargo
-      gridComponents:
-        - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
           mapNameTemplate: 'MMC Hokkaido'
