@@ -106,12 +106,11 @@
   completetime: 30
   materialDiscountScale: 0.2
   materials:
-    Steel: 2000
-    Copper: 1500
-    Plasteel: 2500
-    Glass: 1500
+    Steel: 5000
+    Copper: 5000
+    Plasteel: 5000
+    Glass: 5000
     Plasma: 2500
-    PdvComposite: 500
 
 - type: latheRecipe
   parent: BaseVoucherRecipe
@@ -120,26 +119,8 @@
   completetime: 50
   materialDiscountScale: 0.2
   materials:
-    Steel: 2500
-    Copper: 2500
-    Plasteel: 2500
-    Lithium: 2500
-    Glass: 2500
-    Plasma: 2500
-    Gold: 2500
-    Silver: 2500
-    UraniumDepleted: 500
-    PdvComposite: 1000
-
-- type: latheRecipe
-  parent: BaseVoucherRecipe
-  id: ShipVoucherPdvT2Recipe
-  result: ShipVoucherPdvT2
-  completetime: 100
-  materialDiscountScale: 0.2
-  materials:
-    Steel: 5000
-    Copper: 5000
+    Steel: 10000
+    Copper: 10000
     Plasteel: 5000
     Lithium: 5000
     Glass: 5000
@@ -147,8 +128,23 @@
     Gold: 5000
     Silver: 5000
     UraniumDepleted: 1000
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: ShipVoucherPdvT2Recipe
+  result: ShipVoucherPdvT2
+  completetime: 100
+  materials:
+    Steel: 10000
+    Copper: 10000
+    Plasteel: 5000
+    Lithium: 10000
+    Glass: 5000
+    Plasma: 5000
+    Gold: 5000
+    Silver: 5000
+    UraniumDepleted: 1000
     UraniumFissile: 250
-    PdvComposite: 2000
 
 - type: latheRecipe
   parent: BaseVoucherRecipe
@@ -166,7 +162,6 @@
     UraniumDepleted: 4000
     Silver: 5000
     Gold: 5000
-    PdvComposite: 2000
 
 - type: latheRecipe
   parent: BaseVoucherRecipe
@@ -192,16 +187,15 @@
   completetime: 240
   materialDiscountScale: 0.2
   materials:
-    Steel: 50000
-    Plasteel: 50000
-    Plastic: 6000
-    Glass: 6000
-    Plasma: 5000
+    Steel: 60000
+    Plasteel: 85000
+    Plastic: 50000
+    Glass: 10000
+    Plasma: 7500
     UraniumFissile: 1000
     UraniumDepleted: 5000
-    Silver: 7000
-    Gold: 7000
-    PdvComposite: 6000
+    Silver: 10000
+    Gold: 10000
 
 - type: latheRecipe
   parent: BaseVoucherRecipe

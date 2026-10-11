@@ -18,8 +18,6 @@
   - type: IFF
     color: "#DE9E59"
     readOnly: true # mono
-    flags:
-    - HideLabelAlways # hidden
   - type: WorldGenDistanceCarver
     distanceThresholds:
     # drones no droning
