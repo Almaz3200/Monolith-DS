@@ -12,10 +12,10 @@
   - EnergyDaggerRogue
   technologyPrerequisites:
   - UniversalMaterialResearchT2
-# LuaM-start:
+  # LuaM-start:
   - RogueAdvancedGuns
   - AdvancedRiotControl
-# LuaM-end.
+  # LuaM-end.
   position: 10, 10 # LuaM: 12, 9 > 10, 10
 
 - type: technology
@@ -52,12 +52,14 @@
 - type: technology
   id: RogueAdvancedGuns
   name: research-technology-rogue-advanced-guns
-  entityIcon: WeaponLauncherPanzero
+  entityIcon: WeaponRifleM90
   discipline: RogueWeaponry
   tier: 2
   cost: 50000 # LuaM: 55000 > 50000
   recipeUnlocks:
+  - WeaponSubMachineGunAtreidesRogue
   - WeaponRifleM90Rogue
+  - WeaponShotgunBulldogRogue
   - WeaponLauncherPanzeroRogue
   technologyPrerequisites:
   - UniversalMaterialResearchT2
@@ -70,8 +72,9 @@
   entityIcon: WeaponLightMachineGunL6
   discipline: RogueWeaponry
   tier: 3
-  cost: 20000
+  cost: 75000
   recipeUnlocks:
+  - WeaponSniperHristovRogue
   - WeaponLightMachineGunL6Rogue
   - WeaponRifleBurnerRogue
   - Magazine762x39mmBox
@@ -80,6 +83,7 @@
   - AmmoBox145x114mm
   - AmmoBox145x114mmEMP
   - AmmoBox145x114mmBig
+  - WeaponDEWBasilisk
   - Magazine10Phz # for basilisk
   - AmmoBox10Phz # for basilisk
   technologyPrerequisites:
@@ -93,10 +97,12 @@
   entityIcon: WeaponSubMachineGunMla73
   discipline: RogueWeaponry
   tier: 2
-  cost: 10000
+  cost: 35000
   recipeUnlocks:
+  - WeaponRifleWSPRRogue
   - Magazine762x39mmSubsonic
   - AmmoBox762x39mmSubsonic
+  - WeaponSubMachineGunMla73Rogue
   - Magazine635x40mmCaseless
   - AmmoBox635x40mmCaseless
   - MagazineAsmgtUniversal635x40mm
