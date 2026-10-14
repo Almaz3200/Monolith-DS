@@ -163,36 +163,47 @@
     runningState: icon
     staticPacks:
     - NFNfsdTechfabDeprecatedStatic
-    - StaticAmmoRecipePack
-    - RoundstartShipgunAmmo # Mono
+    # - StaticAmmoRecipePack # Commented by LuaM
+    # - RoundstartShipgunAmmo # Mono # Commented by LuaM
     - StaticGrenades
     - MonoAttachmentsStatic # Mono
     - ReportingStatic # DeltaV
     dynamicPacks:
     - NFNfsdTechfabDeprecated
-    - DynamicAmmoRecipePack
+    # - DynamicAmmoRecipePack # Commented by LuaM
     # Mono start
     - MonoTSFWeaponsDynamicMelee
     - MonoTSFWeaponsDynamicRanged
     - MonoTSFMiscDynamic
-    - UniversalShellAmmo
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalOrdinance
+    # LuaM-comment-start:
+    # - UniversalShellAmmo
+    # - UniversalRailgunAmmo
+    # - UniversalMissileAmmo
+    # - UniversalOrdinance
+    # LuaM-comment-end
     - ResearchedExplosives
     # Mono end
 # LuaM-start:
+    - MonoTSFVouchersDynamic
+    - MonoTSFGearDynamic
     - ArmorBasic
     - ArmorAdvanced
-    - PunkGear
+    - TechDiskRecipes
     - BluespaceAirTanks
     - GlassesContractor
+    - NFMercenaryTechfabDeprecated
+    - SecurityEquipment
+    - SmartGun
 # LuaM-end.
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NFNfsdTechfabDeprecatedEmag
   - type: PirateBountyItem # Mono
     id: Techfab
+  - type: CompanyAccessReader # LuaM
+    requiredCompanies:
+    - TSF
+    - TSFHighComm
 
 - type: entity
   id: MercenaryTechFab
@@ -220,30 +231,34 @@
     runningState: icon
     staticPacks:
     - NFMercenaryTechfabDeprecatedStatic
-    - StaticAmmoRecipePack
+    # - StaticAmmoRecipePack # Commented by LuaM
     - MonoRestraintsStatic # Mono
-    - RoundstartShipgunAmmo # Mono
+    # - RoundstartShipgunAmmo # Mono # Commented by LuaM
     - StaticGrenades
     - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFMercenaryTechfabDeprecated
-    - DynamicAmmoRecipePack
+    # LuaM-comment-start:
+    # - DynamicAmmoRecipePack
     # Mono start
-    - MonoTSFWeaponsDynamicMelee
-    - MonoTSFWeaponsDynamicRanged
-    - MonoTSFMiscDynamic
-    - MonoRogueWeaponsDynamicMelee
-    - MonoRogueWeaponsDynamicRanged
-    - MonoRogueMiscDynamic
+    # - MonoTSFWeaponsDynamicMelee
+    # # - MonoTSFWeaponsDynamicRanged
+    # - MonoTSFMiscDynamic
+    # - MonoRogueWeaponsDynamicMelee
+    # - MonoRogueWeaponsDynamicRanged
+    # - MonoRogueMiscDynamic
     # Universal shit (stuff like shipgun ammo)
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalShellAmmo
-    - UniversalOrdinance
+    # - UniversalRailgunAmmo
+    # - UniversalMissileAmmo
+    # - UniversalShellAmmo
+    # - UniversalOrdinance
+    # LuaM-comment-end
     - SecurityEquipment
     - SmartGun #Smart SMG
     # Mono end
 # LuaM-start:
+    - ResearchedExplosives
+    - TechDiskRecipes
     - ArmorBasic
     - ArmorAdvanced
     - PunkGear
