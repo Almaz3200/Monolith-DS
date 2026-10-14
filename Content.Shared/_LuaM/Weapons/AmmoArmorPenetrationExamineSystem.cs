@@ -43,16 +43,17 @@ public sealed class AmmoArmorPenetrationExamineSystem : EntitySystem
 
     private bool TryGetArmorPenetration(EntityPrototype proto, ProjectileSpreadComponent? spread, out float penetration)
     {
+        // Rounds ignoring resistances go through armor entirely, whatever their armor penetration says.
         if (proto.TryGetComponent<ProjectileComponent>(out var projectile, _factory))
         {
-            penetration = projectile.ArmorPenetration;
+            penetration = projectile.IgnoreResistances ? 1f : projectile.ArmorPenetration;
             return true;
         }
 
         // Ballistic hitscan rounds (e.g. 14.5x114mm) deal their damage through HitscanBasicDamage.
         if (proto.TryGetComponent<HitscanBasicDamageComponent>(out var hitscan, _factory))
         {
-            penetration = hitscan.ArmorPenetration;
+            penetration = hitscan.IgnoreResistances ? 1f : hitscan.ArmorPenetration;
             return true;
         }
 
