@@ -43,6 +43,7 @@
   # - BorgChargerCircuitboard
 # LuaM-commented-end
   - WeaponCapacitorRechargerCircuitboard
+  - AmmoTechFabCircuitboardLuaM # LuaM
   # - AirTank # Commented by LuaM: removed base recipes
 # Mercenary techfab
 ## Clothing / Armor
