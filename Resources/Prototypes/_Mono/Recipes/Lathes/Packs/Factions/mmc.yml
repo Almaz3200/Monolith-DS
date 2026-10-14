@@ -2,6 +2,7 @@
   id: MonoMMCUtilityStatic
   recipes:
   - MotionDetectorMMC
+  - ClothingNeckWearableCameraMMC # LuaM
   - RCDMMC
   - RPDMMC
   - RCDAmmo
@@ -59,3 +60,4 @@
   - AutosurgeonLeftMantisBladeMMC
   - ShipVoucherMieyoYukikaze
   - ShipVoucherMieyoSenkusha
+

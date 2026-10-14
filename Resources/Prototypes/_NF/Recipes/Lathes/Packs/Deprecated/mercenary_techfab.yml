@@ -59,6 +59,7 @@
   # - ClothingOuterVestWebMercenary
   # - ClothingOuterVestWebMercenaryBlack
 # LuaM-commented-end
+  - ClothingNeckWearableCamera # LuaM
   - ClothingBeltMercenaryWebbing
   - ClothingBeltMilitaryWebbing
   # - ClothingHandsMercenaryGlovesCombat # Commented by LuaM: removed base recipes
