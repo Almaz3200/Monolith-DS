@@ -39,6 +39,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.GameObjects;
 using Content.Shared._Crescent.SpaceBiomes;
+using Content.Server._LuaM.Salvage; // LuaM
 
 namespace Content.Server.Salvage;
 
@@ -342,6 +343,8 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
             default:
                 throw new NotImplementedException();
         }
+
+        _entManager.System<ExpeditionHudSystem>().Setup(mapUid); // LuaM: expedition HUD
 
         // Handle loot
         // We'll always add this loot if possible
