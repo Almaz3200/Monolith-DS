@@ -201,22 +201,40 @@
   parent: BaseVoucherRecipe
   id: MockVoucherRogue
   result: ShipVoucherMock
-  materials:
-    PdvComposite: 250
+  completetime: 30 # LuaM
+  materialDiscountScale: 0.2 # LuaM
+  materials: # LuaM: replased PdvComposite
+    Steel: 5000
+    Copper: 5000
+    Plasteel: 5000
+    Glass: 5000
+    Plasma: 2500
 
 - type: latheRecipe
   parent: BaseVoucherRecipe
   id: InertiaVoucherRogue
   result: ShipVoucherInertia
-  materials:
-    PdvComposite: 250
+  completetime: 30
+  materialDiscountScale: 0.2
+  materials: # LuaM: replased PdvComposite
+    Steel: 5000
+    Copper: 5000
+    Plasteel: 5000
+    Glass: 5000
+    Plasma: 2500
 
 - type: latheRecipe
   parent: BaseVoucherRecipe
   id: SnakeletVoucherRogue
   result: ShipVoucherSnakelet
-  materials:
-    PdvComposite: 250
+  completetime: 30 # LuaM
+  materialDiscountScale: 0.2 # LuaM
+  materials: # LuaM: replased PdvComposite
+    Steel: 5000
+    Copper: 5000
+    Plasteel: 5000
+    Glass: 5000
+    Plasma: 2500
 
 #USSP
 
