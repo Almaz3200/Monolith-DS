@@ -37,6 +37,8 @@
   - WeaponDP29USSP
   - MagazineDP29
   - WeaponShotgunBigLeadyUSSP
+  - WeaponLMGHammerUSSP # LuaM
+  - Magazine762x39mmBox # LuaM
   technologyPrerequisites:
   - UsspAk410
   position: 9, 6 # LuaM: 12, 13 > 9, 6
