@@ -6,7 +6,7 @@
   price: 125000
   category: Large
   group: Shipyard
-  shuttlePath: /Maps/_LuaM/Shuttles/Civilian/fisherman.yml
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/Civilian/fisherman.yml
   guidebookPage: null
   class:
     - Civilian
@@ -18,7 +18,7 @@
 - type: gameMap
   id: Fisherman
   mapName: 'UI Fisherman'
-  mapPath: /Maps/_LuaM/Shuttles/Civilian/fisherman.yml
+  mapPath: /SharedMaps/_LuaM/Shuttles/Civilian/fisherman.yml
   minPlayers: 0
   stations:
     Fisherman:

@@ -365,7 +365,7 @@
         fractalType: Ridged
         octaves: 1
       entities:
-      - FloorLiquidPlasmaEntityExpeditionm # LuaM FloorLiquidPlasmaEntity > FloorLiquidPlasmaEntityExpedition
+      - FloorLiquidPlasmaEntityExpedition # LuaM FloorLiquidPlasmaEntity > FloorLiquidPlasmaEntityExpedition
     - !type:BiomeDummyLayer
       id: Loot
     - !type:BiomeTileLayer
