@@ -83,18 +83,40 @@
   id: LavaFishingLootTable
   table: !type:GroupSelector
     children:
-      # TODO: lava/plasma fish
       - !type:NestedSelector
         tableId: BasicFishingLootTable
+        weight: 80
+      - !type:GroupSelector
+        weight: 40
+        children:
+          - id: MobRogueSiliconHunter
+          - id: MobRogueSiliconDroneLethals
+          - id: MobRogueSiliconDroneNonLethals
+          - id: MobRogueSiliconDroneScience
+          - id: MobRogueSiliconScrapThrusters
+          - id: MobRogueSiliconScrapThrustersRanged
+      - id: MobRogueSiliconGuardian
+        weight: 5
 
 # Items from Plasma
 - type: entityTable
   id: PlasmaFishingLootTable
   table: !type:GroupSelector
     children:
-    # TODO: lava/plasma fish
       - !type:NestedSelector
         tableId: BasicFishingLootTable
+        weight: 80
+      - !type:GroupSelector
+        weight: 40
+        children:
+          - id: MobRogueSiliconHunter
+          - id: MobRogueSiliconDroneLethals
+          - id: MobRogueSiliconDroneNonLethals
+          - id: MobRogueSiliconDroneScience
+          - id: MobRogueSiliconScrapThrusters
+          - id: MobRogueSiliconScrapThrustersRanged
+      - id: MobRogueSiliconGuardian
+        weight: 5
 
 # Items from Toilets
 - type: entityTable
