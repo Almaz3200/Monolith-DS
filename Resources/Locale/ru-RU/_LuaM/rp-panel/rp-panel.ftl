@@ -52,6 +52,7 @@ rp-custom-emote-kind = Группа
 rp-custom-emote-kind-tooltip = Грубые действия недоступны, когда вы или цель связаны, оглушены или спите.
 rp-custom-emote-sound = Звук
 rp-custom-emote-sound-none = Без звука
+rp-custom-emote-sound-preview = Прослушать (слышите только вы)
 rp-custom-emote-mode-target = На цель
 rp-custom-emote-mode-self = На себя
 rp-custom-emote-message-placeholder = обнимает { "{target}" }.

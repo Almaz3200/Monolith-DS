@@ -19,6 +19,7 @@ public static class RpPanelStyles
     public const string Text = "RpPanelText";
     public const string Muted = "RpPanelMuted";
     public const string Heading = "RpPanelHeading";
+    public const string Toggle = "RpPanelToggle";
 
     public static readonly Color HeaderBg = Color.FromHex("#202631F5");
     public static readonly Color HeaderBorder = Color.FromHex("#5D6A7C");
@@ -94,6 +95,17 @@ public static class RpPanelStyles
                 .Prop(Label.StylePropertyFontColor, TextMuted),
             Element<Label>().Class(Heading)
                 .Prop(Label.StylePropertyFont, resCache.NotoStack(variation: "Bold", size: 12))
+                .Prop(Label.StylePropertyFontColor, TextColor),
+
+            Element<Button>().Class(Toggle).Pseudo(ContainerButton.StylePseudoClassPressed)
+                .Prop(ContainerButton.StylePropertyStyleBox, new StyleBoxFlat(option)
+                {
+                    BackgroundColor = HoverBorder.WithAlpha(0.55f),
+                    BorderColor = AccentColor,
+                }),
+            Child().Parent(Element<Button>().Class(Toggle).Pseudo(ContainerButton.StylePseudoClassPressed))
+                .Child(Element<Label>())
+                .Prop(Label.StylePropertyFont, resCache.NotoStack(variation: "Bold"))
                 .Prop(Label.StylePropertyFontColor, TextColor),
         ];
     }

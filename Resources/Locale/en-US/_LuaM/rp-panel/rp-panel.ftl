@@ -51,6 +51,7 @@ rp-custom-emote-kind = Group
 rp-custom-emote-kind-tooltip = Harmful actions are unavailable while you or your target are cuffed, stunned or asleep.
 rp-custom-emote-sound = Sound
 rp-custom-emote-sound-none = No sound
+rp-custom-emote-sound-preview = Preview (only you hear it)
 rp-custom-emote-mode-target = On target
 rp-custom-emote-mode-self = On self
 rp-custom-emote-message-placeholder = hugs { "{target}" }.

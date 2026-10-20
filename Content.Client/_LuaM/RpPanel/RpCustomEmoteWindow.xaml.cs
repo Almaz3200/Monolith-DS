@@ -5,6 +5,8 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -20,8 +22,10 @@ public sealed partial class RpCustomEmoteWindow : DefaultWindow
     private static readonly RpInteractionKind[] Kinds = Enum.GetValues<RpInteractionKind>();
 
     private readonly SpriteSystem _sprite;
+    private readonly SharedAudioSystem _audio;
     private readonly List<RpInteractionCategoryPrototype> _categories;
     private readonly List<RpCustomSoundPrototype> _sounds;
+    private EntityUid? _preview;
 
     public RpCustomEmote? Editing { get; private set; }
 
@@ -34,6 +38,7 @@ public sealed partial class RpCustomEmoteWindow : DefaultWindow
         IoCManager.InjectDependencies(this);
 
         _sprite = _entManager.System<SpriteSystem>();
+        _audio = _entManager.System<SharedAudioSystem>();
 
         NameInput.IsValid = text => text.Length <= RpCustomEmote.MaxNameLength;
         MessageInput.IsValid = text => text.Length <= RpCustomEmote.MaxMessageLength;
@@ -67,6 +72,8 @@ public sealed partial class RpCustomEmoteWindow : DefaultWindow
         };
         KindSelector.OnItemSelected += args => KindSelector.SelectId(args.Id);
         SoundSelector.OnItemSelected += args => SoundSelector.SelectId(args.Id);
+        SoundSelector.OnPreview += PreviewSound;
+        OnClose += () => _preview = _audio.Stop(_preview);
 
         CloseOnSecondClick(CategorySelector);
         CloseOnSecondClick(KindSelector);
@@ -169,6 +176,15 @@ public sealed partial class RpCustomEmoteWindow : DefaultWindow
 
             keepClosed = false;
         };
+    }
+
+    private void PreviewSound(int id)
+    {
+        if (id < 0 || id >= _sounds.Count)
+            return;
+
+        _audio.Stop(_preview);
+        _preview = _audio.PlayGlobal(_sounds[id].Sound, Filter.Local(), false)?.Entity;
     }
 
     private static string GetSoundName(RpCustomSoundPrototype sound)

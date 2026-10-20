@@ -1,5 +1,6 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:rp="clr-namespace:Content.Client._LuaM.RpPanel"
                x:Class="Content.Client._LuaM.RpPanel.RpCustomEmoteWindow"
                HeaderClass="DS14MenuHeader"
                TitleClass="DS14MenuTitle"
@@ -30,7 +31,7 @@
                                   HorizontalExpand="True"
                                   ToolTip="{Loc rp-custom-emote-kind-tooltip}"/>
                     <Label Text="{Loc rp-custom-emote-sound}" StyleClasses="RpPanelMuted"/>
-                    <OptionButton Name="SoundSelector" StyleClasses="RpPanelOption" HorizontalExpand="True"/>
+                    <rp:RpSoundOptionButton Name="SoundSelector" StyleClasses="RpPanelOption" HorizontalExpand="True"/>
                 </GridContainer>
             </BoxContainer>
 
@@ -38,12 +39,12 @@
                 <Button Name="TargetModeButton"
                         ToggleMode="True"
                         HorizontalExpand="True"
-                        StyleClasses="DS14MenuProfileControl"
+                        StyleClasses="DS14MenuProfileControl RpPanelToggle"
                         Text="{Loc rp-custom-emote-mode-target}"/>
                 <Button Name="SelfModeButton"
                         ToggleMode="True"
                         HorizontalExpand="True"
-                        StyleClasses="DS14MenuProfileControl"
+                        StyleClasses="DS14MenuProfileControl RpPanelToggle"
                         Text="{Loc rp-custom-emote-mode-self}"/>
             </BoxContainer>
             <LineEdit Name="MessageInput"
