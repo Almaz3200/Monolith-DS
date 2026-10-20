@@ -38,6 +38,10 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     private readonly SharedTransformSystem _transform;
     private readonly RadarBlipsSystem _blips;
 
+    protected override bool AllowResize => true; // Lua
+    protected override bool ScaleWithControlSize => true; // Lua
+    protected override Vector2 MidPointVector => new Vector2(PixelWidth * 0.5f, PixelHeight * 0.5f); // LuaM: centered when the area isn't square
+
     /// <summary>
     /// Used to transform all of the radar objects. Typically is a shuttle console parented to a grid.
     /// </summary>
@@ -433,6 +437,8 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         base.MouseMove(args);
         if (_isMouseInside)
             _lastMousePos = args.RelativePosition;
+
+        UpdateGunneryCursor(); // Lua: guided missiles follow the cursor
 
         if (!_draggin || _coordinates == null)
             return;
@@ -838,6 +844,8 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             }
         }
         #endregion
+
+        DrawGunneryLines(handle, worldToView, xform.MapID); // Lua: shuttle console gunnery
     }
 
     private void DrawGrids(List<Entity<MapGridComponent>> _grids, DrawingHandleScreen handle, Entity<MapGridComponent>? ourGrid, bool renderFill)
@@ -854,17 +862,29 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         var shuttleToView = Matrix3x2.CreateScale(new Vector2(MinimapScale, -MinimapScale)) * Matrix3x2.CreateTranslation(MidPointVector);
         var worldToView = worldToShuttle * shuttleToView;
 
-        var viewBounds = new Box2Rotated(new Box2(-WorldRange, -WorldRange, WorldRange, WorldRange).Translated(mapPos.Position), worldRot, mapPos.Position);
+//        var viewBounds = new Box2Rotated(new Box2(-WorldRange, -WorldRange, WorldRange, WorldRange).Translated(mapPos.Position), worldRot, mapPos.Position); // Commented by LuaM
+// LuaM-start: the view box covers the whole control, the radar can be wider than tall now
+        var viewHalfExtents = MinimapScale > 0f
+            ? new Vector2(PixelWidth, PixelHeight) * 0.5f / MinimapScale
+            : new Vector2(WorldRange, WorldRange);
+        var viewBounds = new Box2Rotated(new Box2(-viewHalfExtents, viewHalfExtents).Translated(mapPos.Position), worldRot, mapPos.Position);
+// LuaM-end
         var viewAABB = viewBounds.CalcBoundingBox();
 
         foreach (var grid in _grids)
         {
             if (renderFill)
             {
+// LuaM-start: grids off the screen aren't filled (this pass used to build and draw every grid in radar range)
+                var curGridToWorld = _transform.GetWorldMatrix(grid.Owner);
+                if (!curGridToWorld.TransformBox(grid.Comp.LocalAABB).Intersects(viewAABB))
+                    continue;
+// LuaM-end
+
                 var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(grid.Owner);
                 var blipOnly = detectionLevel != DetectionLevel.Detected; // don't show outline outside of detection radius even if IFF on
 
-                var curGridToWorld = _transform.GetWorldMatrix(grid.Owner);
+//                var curGridToWorld = _transform.GetWorldMatrix(grid.Owner); // Commented by LuaM: moved up
                 var curGridToView = curGridToWorld * worldToView;
 
                 var gridBody = bodyQuery.GetComponent(grid.Owner);
@@ -1090,7 +1110,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 }
 
                 // Frontier Don't skip drawing blips if they're out of range.
-                NfDrawBlips(handle, _tempBlipDataList);
+//                NfDrawBlips(handle, _tempBlipDataList); // Commented by LuaM: redrew every blip so far after each grid, all of them are drawn once after the loop
 
                 // Detailed view
                 var gridAABB = curGridToWorld.TransformBox(grid.Comp.LocalAABB);

@@ -1,5 +1,6 @@
 using System.Buffers;
 using System.Numerics;
+using Content.Client._Lua.UserInterface; // Lua
 using Content.Client.Shuttles.Systems;
 using Content.Shared._Mono.Company;
 using Content.Shared._Mono.Detection;
@@ -36,6 +37,10 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
     protected override bool Draggable => true;
 
     protected override float ScrollSensitivity => 4f;
+
+    protected override bool AllowResize => true; // Lua
+    protected override bool ScaleWithControlSize => true; // Lua
+    protected override Vector2 MidPointVector => new Vector2(PixelWidth * 0.5f, PixelHeight * 0.5f); // Lua
 
     public bool ShowBeacons = true;
     public MapId ViewingMap = MapId.Nullspace;
@@ -90,10 +95,11 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
     private readonly List<IMapObject> _mapObjects = new();
     private readonly Dictionary<Color, List<Vector2>> _verts = new();
     private readonly Dictionary<Color, List<Vector2>> _edges = new();
-    private readonly Dictionary<Color, List<(Vector2, string, bool)>> _strings = new();
+    private readonly Dictionary<Color, List<(Vector2, string, bool, bool)>> _strings = new(); // LuaM: + selected
     private readonly List<ShuttleExclusionObject> _viewportExclusions = new();
+    private readonly List<(Vector2 Position, Color Color)> _beaconGlyphs = new(); // Lua
 
-    public ShuttleMapControl() : base(256f, 4096f, 512f)
+    public ShuttleMapControl() : base(256f, 10240f, 512f) // LuaM: max zoom out 4096 > 10240
     {
         RobustXamlLoader.Load(this);
         _detection = EntManager.System<DetectionSystem>(); // Mono
@@ -103,7 +109,8 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 
         _physicsQuery = EntManager.GetEntityQuery<PhysicsComponent>();
 
-        _font = new VectorFont(cache.GetResource<FontResource>("/EngineFonts/NotoSans/NotoSans-Regular.ttf"), 10);
+//        _font = new VectorFont(cache.GetResource<FontResource>("/EngineFonts/NotoSans/NotoSans-Regular.ttf"), 10); // Commented by Lua
+        _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 9); // Lua
     }
 
     public void SetMap(MapId mapId, Vector2 offset, bool recentering = false)
@@ -155,6 +162,10 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
                 }
             }
         }
+
+        // LuaM: a plain click on the map drops the selected label
+        if (!FtlMode && args.Function == EngineKeyFunctions.UIClick)
+            SelectMapObject(null);
 
         base.KeyBindUp(args);
     }
@@ -274,12 +285,14 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
             return;
         }
 
-        DrawParallax(handle);
+//        DrawParallax(handle); // Commented by Lua
 
         var viewedMapUid = _mapManager.GetMapEntityId(ViewingMap);
         var matty = Matrix3Helpers.CreateInverseTransform(Offset, Angle.Zero);
         var realTime = _timing.RealTime;
-        var viewBox = new Box2(Offset - WorldRangeVector, Offset + WorldRangeVector);
+//        var viewBox = new Box2(Offset - WorldRangeVector, Offset + WorldRangeVector); // Commented by Lua
+        var viewBox = GetVisibleWorldBox(); // Lua
+        DrawTacticalMapBackground(handle, matty, viewBox); // Lua
         var viewportObjects = GetViewportMapObjects(matty, mapObjects);
         _viewportExclusions.Clear();
 
@@ -302,7 +315,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 
                 var range = _shuttles.GetFTLRange(gridUid);
                 range *= MinimapScale;
-                handle.DrawCircle(gridUiPos, range, Color.Gold, filled: false);
+                LunaDraw.Circle(handle, gridUiPos, range, Color.Gold, filled: false); // Lua
             }
         }
 
@@ -327,8 +340,8 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 
             var adjustedPos = Vector2.Transform(mapCoords.Position, matty);
             var localPos = ScalePosition(adjustedPos with { Y = -adjustedPos.Y });
-            handle.DrawCircle(localPos, exclusion.Range * MinimapScale, exclusionColor.WithAlpha(0.05f));
-            handle.DrawCircle(localPos, exclusion.Range * MinimapScale, exclusionColor, filled: false);
+            LunaDraw.Circle(handle, localPos, exclusion.Range * MinimapScale, exclusionColor.WithAlpha(0.05f)); // Lua
+            LunaDraw.Circle(handle, localPos, exclusion.Range * MinimapScale, exclusionColor, filled: false); // Lua
 
             _viewportExclusions.Add(exclusion);
         }
@@ -336,6 +349,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         _verts.Clear();
         _edges.Clear();
         _strings.Clear();
+        _beaconGlyphs.Clear(); // Lua
 
         // Add beacons if relevant.
         var beaconsOnly = _shuttles.IsBeaconMap(viewedMapUid);
@@ -368,9 +382,10 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 
                 AddMapObject(existingEdges, existingVerts, mapObject);
                 _beacons.Add(mapO);
+                _beaconGlyphs.Add((beaconUiPos, displayColor)); // Lua
 
                 var existingStrings = _strings.GetOrNew(displayColor);
-                existingStrings.Add((beaconUiPos, beaconName, true));
+                existingStrings.Add((beaconUiPos, beaconName, true, IsSelectedMapObject(mapO))); // LuaM: + selected
             }
         }
 
@@ -431,8 +446,14 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
             if (string.IsNullOrEmpty(iffText))
                 continue;
 
-            var existingStrings = _strings.GetOrNew(gridColor);
-            existingStrings.Add((gridUiPos, iffText, !hideLabel));
+            // LuaM-start: the label takes the company color of its own grid, like on the radar
+            var labelColor = gridColor;
+            if (!hideLabel && TryGetCompanyColor(grid.Owner, out var companyColor))
+                labelColor = companyColor;
+            // LuaM-end
+
+            var existingStrings = _strings.GetOrNew(labelColor); // LuaM: gridColor > labelColor
+            existingStrings.Add((gridUiPos, iffText, !hideLabel, IsSelectedMapObject(gridObj))); // LuaM: + selected
         }
 
         // Batch the colors whoopie
@@ -444,57 +465,82 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 
         foreach (var (color, sendEdges) in _edges)
         {
-            handle.DrawPrimitives(DrawPrimitiveTopology.LineList, sendEdges, color);
+//            handle.DrawPrimitives(DrawPrimitiveTopology.LineList, sendEdges, color); // Commented by Lua
+// Lua-start
+            var edgeColor = color.WithAlpha(0.78f);
+            for (var i = 0; i + 1 < sendEdges.Count; i += 2)
+                LunaDraw.Line(handle, sendEdges[i], sendEdges[i + 1], edgeColor);
+// Lua-end
         }
 
+// Lua-start
+        foreach (var (position, color) in _beaconGlyphs)
+            DrawBeaconGlyph(handle, position, color.WithAlpha(0.96f));
+// Lua-end
+
+        var labelMouse = GetMapLabelMouse(); // LuaM
+        for (var labelPass = 0; labelPass < 2; labelPass++) // LuaM: small labels first, the hovered or selected ones on top
         foreach (var (color, sendStrings) in _strings)
         {
             var adjustedColor = Color.FromSrgb(color);
 
-            foreach (var (gridUiPos, iffText, hasLabel) in sendStrings)
+            foreach (var (gridUiPos, iffText, hasLabel, selected) in sendStrings) // LuaM: + selected
             {
                 var textWidth = handle.GetDimensions(_font, iffText, 1f);
 
                 // Split text into lines
                 var lines = iffText.Split('\n');
                 var mainLabel = lines[0];
-                var mainTextWidth = handle.GetDimensions(_font, mainLabel, 1f);
+// LuaM-start: full size only for the hovered or selected object
+                var emphasized = selected || IsMapLabelHovered(handle, gridUiPos, mainLabel, labelMouse) || MatchesMapSearch(mainLabel);
+                if (emphasized != (labelPass == 1))
+                    continue;
+
+                var labelFont = emphasized ? _font : MapLabelSmallFont;
+// LuaM-end
+                var mainTextWidth = handle.GetDimensions(labelFont, mainLabel, 1f); // LuaM: _font > labelFont
 
                 // Get company color if entity has CompanyComponent
                 var displayColor = adjustedColor;
-                if (hasLabel)
-                {
-                    foreach (var mapObj in viewportObjects)
-                    {
-                        if (mapObj is GridMapObject gridObj &&
-                            EntManager.TryGetComponent(gridObj.Entity, out Shared._Mono.Company.CompanyComponent? companyComp) &&
-                            !string.IsNullOrEmpty(companyComp.CompanyName) &&
-                            IoCManager.Resolve<IPrototypeManager>().TryIndex<CompanyPrototype>(companyComp.CompanyName, out var gridCompanyProto))
-                        {
-                            displayColor = Color.FromSrgb(gridCompanyProto.Color);
-                            break;
-                        }
-                    }
-                }
+// LuaM-commented-start: took the company of the first grid on screen for every label, the color is picked per grid above now
+//                if (hasLabel)
+//                {
+//                    foreach (var mapObj in viewportObjects)
+//                    {
+//                        if (mapObj is GridMapObject gridObj &&
+//                            EntManager.TryGetComponent(gridObj.Entity, out Shared._Mono.Company.CompanyComponent? companyComp) &&
+//                            !string.IsNullOrEmpty(companyComp.CompanyName) &&
+//                            IoCManager.Resolve<IPrototypeManager>().TryIndex<CompanyPrototype>(companyComp.CompanyName, out var gridCompanyProto))
+//                        {
+//                            displayColor = Color.FromSrgb(gridCompanyProto.Color);
+//                            break;
+//                        }
+//                    }
+//                }
+// LuaM-commented-end
 
                 // Draw main ship label with company color if available
-                handle.DrawString(_font, gridUiPos + mainTextWidth with { X = -mainTextWidth.X / 2f, Y = mainTextWidth.Y * UIScale }, mainLabel, displayColor);
+//                handle.DrawString(_font, gridUiPos + mainTextWidth with { X = -mainTextWidth.X / 2f, Y = mainTextWidth.Y * UIScale }, mainLabel, displayColor); // Commented by Lua
+                DrawSoftMapText(handle, labelFont, mainLabel, gridUiPos + mainTextWidth with { X = -mainTextWidth.X / 2f, Y = mainTextWidth.Y * UIScale }, 1f, displayColor.WithAlpha(0.92f), Color.Black.WithAlpha(0.48f)); // Lua // LuaM: + labelFont
 
                 // Draw company label if present
                 if (hasLabel && lines.Length > 1)
                 {
                     var companyLabel = lines[1];
-                    var companyTextWidth = handle.GetDimensions(_font, companyLabel, 1f);
+                    var companyTextWidth = handle.GetDimensions(labelFont, companyLabel, 1f); // LuaM: _font > labelFont
                     var companyLabelOffset = mainTextWidth with
                     {
                         X = -companyTextWidth.X / 2f,
                         Y = mainTextWidth.Y * 2 * UIScale
                     };
 
-                    handle.DrawString(_font, gridUiPos + companyLabelOffset, companyLabel, displayColor);
+//                    handle.DrawString(_font, gridUiPos + companyLabelOffset, companyLabel, displayColor); // Commented by Lua
+                    DrawSoftMapText(handle, labelFont, companyLabel, gridUiPos + companyLabelOffset, 1f, displayColor.WithAlpha(0.78f), Color.Black.WithAlpha(0.42f)); // Lua // LuaM: + labelFont
                 }
             }
         }
+
+        DrawMapTarget(handle, matty); // LuaM: console marker
 
         var mousePos = _inputs.MouseScreenPosition;
         var mouseLocalPos = GetLocalPosition(mousePos);
@@ -539,24 +585,24 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
                     // Draw FTL buffer around the mouse.
                     var ourFTLBuffer = _shuttles.GetFTLBufferRange(_shuttleEntity.Value, grid);
                     ourFTLBuffer *= MinimapScale;
-                    handle.DrawCircle(mouseLocalPos, ourFTLBuffer, Color.Magenta.WithAlpha(0.01f));
-                    handle.DrawCircle(mouseLocalPos, ourFTLBuffer, Color.Magenta, filled: false);
+                    LunaDraw.Circle(handle, mouseLocalPos, ourFTLBuffer, Color.Magenta.WithAlpha(0.01f)); // Lua
+                    LunaDraw.Circle(handle, mouseLocalPos, ourFTLBuffer, Color.Magenta, filled: false); // Lua
 
                     // Draw line from our shuttle to target
                     // Might need to clip the line if it's too far? But my brain wasn't working so F.
-                    handle.DrawDottedLine(gridUiPos, mouseLocalPos, color, (float)realTime.TotalSeconds * 30f);
+                    LunaDraw.DashedLine(handle, gridUiPos, mouseLocalPos, color, dashLength: 8f, gapLength: 2f, offset: (float) realTime.TotalSeconds * 30f); // Lua
 
                     // Draw shuttle pre-vis
                     var mouseVerts = GetMapObject(mouseLocalPos, -_ftlAngle, scale: MinimapScale); // Mono Edit: UI controls and the map are in different coordinate orientations, so the angle has to be negated. (shuttle Y is UI control -Y)
 
                     handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, mouseVerts.Span, color.WithAlpha(0.05f));
-                    handle.DrawPrimitives(DrawPrimitiveTopology.LineLoop, mouseVerts.Span, color);
+                    DrawMapObjectOutline(handle, mouseVerts, color); // Lua
 
                     // Draw a notch indicating direction.
                     var ftlLength = GetMapObjectRadius() + 16f;
                     var ftlEnd = mouseLocalPos + (-_ftlAngle).RotateVec(new Vector2(0f, -ftlLength)); // Mono Edit: UI controls and the map are in different coordinate orientations, so the angle has to be negated. (shuttle Y is UI control -Y)
 
-                    handle.DrawLine(mouseLocalPos, ftlEnd, color);
+                    LunaDraw.Line(handle, mouseLocalPos, ftlEnd, color); // Lua
                 }
             }
         }
@@ -724,10 +770,11 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
     /// </summary>
     protected void DrawData(DrawingHandleScreen handle, string text, Color color)
     {
-        var margin = 5f;
+        var margin = 15f; // Lua: 5 > 15
         var font = _font;
         var dimensions = handle.GetDimensions(font, text, 1f);
         var position = new Vector2(margin, PixelHeight - dimensions.Y - margin);
-        handle.DrawString(font, position, text, color);
+//        handle.DrawString(font, position, text, color); // Commented by Lua
+        DrawSoftMapText(handle, text, position, 1f, color.WithAlpha(0.9f), Color.Black.WithAlpha(0.5f)); // Lua
     }
 }
