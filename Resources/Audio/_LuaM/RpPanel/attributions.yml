@@ -25,5 +25,5 @@
   - stretch_neck.ogg
   - vine_boom.ogg
   license: "CC-BY-SA-3.0"
-  copyright: "Sounds taken from the Arcane fork together with the interaction panel. Ported to Lua (Monolith) as the SFW RP panel by c_quarian (Discord)."
+  copyright: "Sounds taken from the Arcane fork together with the interaction panel. Ported and refactored to LuaM (Monolith) as the SFW RP panel by c_quarian (Discord)."
   source: "https://github.com/ArcaneSS14/arcane"
