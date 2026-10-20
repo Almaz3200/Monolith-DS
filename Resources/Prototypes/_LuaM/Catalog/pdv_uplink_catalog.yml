@@ -40,7 +40,7 @@
   description: uplink-combat-medipen-implanter-desc
   productEntity: CombatMedipenImplanter
   cost:
-    Doubloon: 50
+    Doubloon: 20
   categories:
   - UplinkPirateMedical
   conditions:
@@ -55,7 +55,7 @@
   description: uplink-stimulant-implanter-desc
   productEntity: StimulantImplanter
   cost:
-    Doubloon: 50
+    Doubloon: 20
   categories:
   - UplinkPirateMedical
   conditions:

@@ -42,7 +42,7 @@
   description: uplink-combat-medipen-implanter-desc
   productEntity: CombatMedipenImplanter
   cost:
-    FederationMilitaryCredit: 50
+    FederationMilitaryCredit: 20
   categories:
   - UplinkSecurityUtility
   conditions:
@@ -57,7 +57,7 @@
   description: uplink-stimulant-implanter-desc
   productEntity: StimulantImplanter
   cost:
-    FederationMilitaryCredit: 50
+    FederationMilitaryCredit: 20
   categories:
   - UplinkSecurityUtility
   conditions:
