@@ -2,7 +2,7 @@
 job-name-bailiff = Капитан ТСФ
 job-name-brigmedic = Фельдшер ТСФ
 job-name-cadet-nf = Кадет ТСФ
-job-name-contractor = Авантюрист
+job-name-contractor = Наёмник
 job-name-deputy = Рядовой ТСФ
 job-name-nf-detective = Детектив ТСФ
 job-name-ertmailcarrier = Почтальон ОБР
@@ -44,7 +44,7 @@ JobSeniorEngineer = Ведущий Инженер
 JobSeniorOfficer = Сержант
 JobSeniorPhysician = Старший Врач
 JobSeniorResearcher = Ведущий Учёный
-job-name-contractor-interview = Кандидат на аванюриста
+job-name-contractor-interview = Кандидат на наёмника
 job-name-mercenary-interview = Кандидат на наемника
 job-name-pilot-interview = Кандидат на пилота
 job-name-nf-pirate = Оперативник Авангарда
@@ -55,14 +55,14 @@ job-name-plant-technician = Инженер электростанции
 job-title-ert-mail-carrier = Почтальон ОБР
 
 # Role timers - Keep these alphabetical, please
-JobContractorInterview = Кандидат на аванюриста
+JobContractorInterview = Кандидат на наёмника
 JobMercenaryInterview = Кандидат на наемника
 JobPilotInterview = Кандидат на пилота
 JobparaMedicalInterview = Кандидат на парамедика
 JobPlantManager = Директор электростанции
 JobPlantTechnician = Инженер электростанции
 JobPublicAffairsLiaison = Представитель ЮД
-job-name-pdv-tarkhan = Телхранитель Авангарда
+job-name-pdv-tarkhan = Паладин Авангарда
 job-name-pdv-infantry = Пехота Авангарда
 job-name-tsf-marsoc = Оперативник МАРСОК ТСФ
 job-name-tsf-infantry = Пехота ТСФ

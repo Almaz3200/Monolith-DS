@@ -102,12 +102,12 @@
 
 - type: guideEntry
   id: MMC
-  name: Mieyo Manufacturing Concern
-  text: "/ServerInfo/_Mono/Guidebook/Factions/mmc.xml"
+  name: guide-entry-mmc # LuaM: Mieyo Manufacturing Concern > guide-entry-mmc
+  text: "/ServerInfo/_LuaM/Guidebook/Factions/mmc.xml" # LuaM: _Mono > _LuaM, russian page
   priority: 12
 
 - type: guideEntry
   id: Caelestinus
-  name: Caelestinus
-  text: "/ServerInfo/_Mono/Guidebook/Factions/caelestinus.xml"
+  name: guide-entry-caelestinus # LuaM: Caelestinus > guide-entry-caelestinus
+  text: "/ServerInfo/_LuaM/Guidebook/Factions/caelestinus.xml" # LuaM: _Mono > _LuaM, russian page
   priority: 4

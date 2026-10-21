@@ -5,5 +5,5 @@ chat-radio-cortical-borer = Рой Бореров
 chat-radio-remnants = Предтеч
 chat-radio-monolithic = Монолит
 chat-radio-viper = Viper
-chat-radio-mieyo = Мийо
-chat-radio-mieyo-command = Командование Мийо
+chat-radio-mieyo = ММС
+chat-radio-mieyo-command = Командование ММС

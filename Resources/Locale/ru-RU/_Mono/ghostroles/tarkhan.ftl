@@ -1,5 +1,5 @@
-ghost-role-information-tarkhan-leader-name = Телхранитель Авангарда
-ghost-role-information-tarkhan-operative-name = Телхранитель Авангарда
+ghost-role-information-tarkhan-leader-name = Паладин Авангарда
+ghost-role-information-tarkhan-operative-name = Паладин Авангарда
 ghost-role-information-tarkhan-description = Член элитных оперативников Авангарда.
 ghost-role-information-tarkhan-rules = Вы — член [color=red][bold]Авангарда[/bold][/color]. Как правило, вы не должны стремиться причинять вред своим товарищам по фракции или их кораблям.
                                              Как член [color=orange][bold]телхранителей PDV[/bold][/color], вы подчиняетесь только [color=orange][bold]высшему командованию PDV[/bold][/color].
