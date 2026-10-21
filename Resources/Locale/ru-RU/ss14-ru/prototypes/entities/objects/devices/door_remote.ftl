@@ -19,3 +19,7 @@ ent-DoorRemoteEngineering = пульт от шлюзов инженерного 
 ent-DoorRemoteAll = супер-пульт от шлюзов
     .suffix = Адмемы
     .desc = { ent-DoorRemoteDefault.desc }
+ent-DoorRemoteCanEletrifyDoors = { ent-DoorRemoteDefault }
+    .desc = { ent-DoorRemoteDefault.desc }
+ent-DoorRemoteXenoborg = xenoborg door remote
+    .desc = { ent-DoorRemoteCanEletrifyDoors.desc }

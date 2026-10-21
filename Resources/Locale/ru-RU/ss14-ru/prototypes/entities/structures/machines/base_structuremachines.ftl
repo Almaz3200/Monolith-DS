@@ -6,3 +6,5 @@ ent-ConstructibleMachine = { "" }
     .desc = { "" }
 ent-SmallConstructibleMachine = { ent-ConstructibleMachine }
     .desc = { ent-ConstructibleMachine.desc }
+ent-BaseMachineIndestructible = { ent-BaseStructure }
+    .desc = { ent-BaseStructure.desc }

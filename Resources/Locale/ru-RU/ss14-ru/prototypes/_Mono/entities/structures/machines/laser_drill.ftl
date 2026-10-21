@@ -29,3 +29,5 @@ ent-LithiumOre15 = литиевая руда
 ent-CopperOre15 = малахит
     .suffix = 15
     .desc = { ent-CopperOre.desc }
+ent-LaserDrillBase = { ent-BaseMachine }
+    .desc = { ent-BaseMachine.desc }

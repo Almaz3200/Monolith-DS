@@ -4,3 +4,7 @@ ent-CrateNanotrasen = ящик Nanotrasen
     .desc = Бело-синий ящик с символом Nanotrasen.
 ent-CrateNanotrasenDS = зловещий ящик Nanotrasen
     .desc = Красно-чёрный ящик с пугающей аурой - от одного взгляда по спине пробегает холод.
+ent-CrateMilitaryEquipment = military equipment crate
+    .desc = { ent-CrateGenericSteel.desc }
+ent-CratePDVEquippment = PDV equipment crate
+    .desc = A black and brown crate used by the Vanguard, used to store miscellaneous equippment.

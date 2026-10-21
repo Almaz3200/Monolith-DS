@@ -48,3 +48,7 @@ ent-LightTubeCrystalRed = красная кристальная лампа-тр�
     .desc = { ent-LightTubeCrystalCyan.desc }
 ent-LightTubeCrystalGreen = зелёная кристальная лампа-трубка
     .desc = { ent-LightTubeCrystalCyan.desc }
+ent-BaseLightTubeCrystal = crystal light tube
+    .desc = A high power high energy bulb which has a small colored crystal inside.
+ent-BaseLightbulbCrystal = crystal light bulb
+    .desc = A high power high energy bulb which has a small colored crystal inside.

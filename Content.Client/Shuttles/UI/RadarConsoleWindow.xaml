@@ -10,4 +10,31 @@
                          HorizontalExpand = "True"
                          VerticalExpand = "True"/>
     </LayoutContainer>
+    <!-- Mono - IFF Settings -->
+    <!-- LuaM: Dead Space 14 menu look like the AHelp, the window shell and header are set in code -->
+    <BoxContainer Orientation="Vertical"
+                Margin="2 2 2 2"
+                VerticalExpand="True"
+                HorizontalExpand="True">
+
+        <Button Name="IFFDetailedToggle"
+        Text="{Loc 'shuttle-console-iff-detailed-short'}"
+        TextAlign="Center"
+        StyleClasses="LuaMConsoleButton"
+        ToggleMode="True"
+        VerticalExpand="False"
+        HorizontalAlignment="Left"
+        Pressed="True"/>
+
+        <Button Name="IFFToggle"
+        Text="{Loc 'shuttle-console-iff-toggle-short'}"
+        TextAlign="Center"
+        StyleClasses="LuaMConsoleButton"
+        ToggleMode="True"
+        VerticalExpand="False"
+        HorizontalAlignment="Left"
+        Pressed="True"/>
+
+
+    </BoxContainer>
 </controls:FancyWindow>

@@ -1,3 +1,9 @@
 ent-HighSecUSSPSecureLocked = USSP Secure, Locked
 ent-HighSecUSSPCommandLocked = USSP Command, Locked
 ent-HighSecUSSPLocked = USSP, Locked
+ent-HighSecViperLocked = { ent-HighSecDoor }
+    .desc = { ent-HighSecDoor.desc }
+    .suffix = Viper Group, Locked
+ent-HighSecViperCommandLocked = { ent-HighSecDoor }
+    .desc = { ent-HighSecDoor.desc }
+    .suffix = Viper Group Command, Locked
