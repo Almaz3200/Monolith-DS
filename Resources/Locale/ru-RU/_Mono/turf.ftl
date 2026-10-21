@@ -14,3 +14,11 @@ tiles-maint-floor-grid-dark = тёмный решётчатый пол техо�
 
 tiles-catwalk-floor-tile-horizontal = горизонтальная плитка настила
 tiles-catwalk-floor-tile-vertical = вертикальная плитка настила
+
+tiles-bedrock-crocus = скальная порода Кросуса
+tiles-dirt-crocus = земля Кросуса
+tiles-grass-crocus = трава Кросуса
+tiles-redgrass-crocus = красная трава Кросуса
+tiles-concrete-crocus = бетон Кросуса
+tiles-concrete-smooth-crocus = гладкий бетон Кросуса
+tiles-concrete-mono-crocus = бетонная плита Кросуса

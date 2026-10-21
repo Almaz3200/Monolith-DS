@@ -269,8 +269,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void TurnOnOnWielded(Entity<ItemToggleComponent> ent, ref ItemWieldedEvent args)
     {
-        // FIXME: for some reason both client and server play sound
-        TryActivate((ent, ent.Comp));
+        TryActivate((ent, ent.Comp), args.User); // LuaM: added args.User
     }
 
     public bool IsActivated(Entity<ItemToggleComponent?> ent)
@@ -294,6 +293,10 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void UpdateActiveSound(Entity<ItemToggleActiveSoundComponent> ent, ref ItemToggledEvent args)
     {
+        // LuaM: the loop is owned by the server only, a predicted stream can't be stored and stopped reliably
+        if (_netManager.IsClient)
+            return;
+
         var (uid, comp) = ent;
         if (!args.Activated)
         {
@@ -304,9 +307,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
         if (comp.ActiveSound != null && comp.PlayingStream == null)
         {
             var loop = comp.ActiveSound.Params.WithLoop(true);
-            var stream = args.Predicted
-                ? _audio.PlayPredicted(comp.ActiveSound, uid, args.User, loop)
-                : _audio.PlayPvs(comp.ActiveSound, uid, loop);
+            var stream = _audio.PlayPvs(comp.ActiveSound, uid, loop); // LuaM: PlayPredicted/PlayPvs > PlayPvs
             if (stream?.Entity is {} entity)
                 comp.PlayingStream = entity;
         }

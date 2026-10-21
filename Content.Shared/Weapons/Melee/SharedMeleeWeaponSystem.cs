@@ -373,6 +373,16 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         return AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(targetXform.Coordinates)), null, attackerOverride);
     }
 
+    // Goobstation
+    public bool AttemptHeavyAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, List<EntityUid> targets, EntityCoordinates coordinates)
+    {
+        return AttemptAttack(user,
+            weaponUid,
+            weapon,
+            new HeavyAttackEvent(GetNetEntity(weaponUid), GetNetEntityList(targets), GetNetCoordinates(coordinates)),
+            null);
+    }
+
     public bool AttemptDisarmAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target,
         EntityUid? attackerOverride = null) // Mono
     {
@@ -395,6 +405,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             return false;
 
         if (!CombatMode.IsInCombatMode(user))
+            return false;
+
+        if (!GetCoordinates(attack.Coordinates).IsValid(EntityManager)) // LuaM
             return false;
 
         var attacker = attackerOverride ?? user; // Mono
@@ -429,6 +442,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             default:
                 if (!Blocker.CanAttack(attacker, weapon: (weaponUid, weapon)))
                     return false;
+
+                if (weaponUid == target) // Goobstatiom
+                    return false;
                 break;
         }
 
@@ -445,6 +461,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             weapon.NextAttack += fireRate;
             swings++;
         }
+
+        if (weapon.SwingBeverage) // LuaM
+            weapon.SwingLeft = !weapon.SwingLeft; // LuaM
 
         Dirty(weaponUid, weapon);
 
@@ -471,13 +490,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             {
                 case LightAttackEvent light:
                     DoLightAttack(attacker, light, weaponUid, weapon, session, user);
-                    animation = weapon.Animation;
+                    animation = GetLightAnimation(user, attacker, weaponUid, weapon); // LuaM: weapon.Animation > GetLightAnimation
                     break;
                 case DisarmAttackEvent disarm:
-                    if (!DoDisarm(attacker, disarm, weaponUid, weapon, session))
-                        return false;
+                    DoDisarm(user, disarm, weaponUid, weapon, session); // Goob edit
 
-                    animation = weapon.Animation;
+                    animation = GetLightAnimation(user, attacker, weaponUid, weapon); // LuaM: weapon.Animation > GetLightAnimation
                     break;
                 case HeavyAttackEvent heavy:
                     if (!DoHeavyAttack(attacker, heavy, weaponUid, weapon, session, user))
@@ -602,6 +620,14 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
+
+    private static EntProtoId GetLightAnimation(EntityUid user, EntityUid attacker, EntityUid weaponUid, MeleeWeaponComponent weapon) // LuaM
+    {
+        if (weapon.Animation == MeleeWeaponComponent.ItemLightAnimation && (weaponUid == user || weaponUid == attacker))
+            return MeleeWeaponComponent.UnarmedLightAnimation;
+
+        return weapon.Animation;
+    }
 
     private bool DoHeavyAttack(EntityUid user, HeavyAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session,
         EntityUid? realUser = null) // Mono
@@ -779,7 +805,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         return true;
     }
 
-    protected HashSet<EntityUid> ArcRayCast(Vector2 position, Angle angle, Angle arcWidth, float range, MapId mapId, EntityUid ignore)
+    public HashSet<EntityUid> ArcRayCast(Vector2 position, Angle angle, Angle arcWidth, float range, MapId mapId, EntityUid ignore) // Goob edit
     {
         // TODO: This is pretty sucky.
         var widthRad = arcWidth;

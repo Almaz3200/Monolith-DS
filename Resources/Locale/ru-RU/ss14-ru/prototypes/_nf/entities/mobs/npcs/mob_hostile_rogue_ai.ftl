@@ -52,3 +52,5 @@ ent-MobRogueSiliconScrapThrustersAsteroid = malfunctionnig scrap unit
 ent-MobRogueSiliconScrapAsteroid = malfunctionnig scrap unit
 ent-MobRogueSiliconScrapThreadsAsteroid = malfunctionnig scrap unit
 ent-TeslaGunBulletRogueSilicon = tesla gun lightning
+ent-RogueSiliconT1LootLoadout = { "" }
+    .desc = { "" }

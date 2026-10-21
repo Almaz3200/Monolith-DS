@@ -1,0 +1,12 @@
+ent-SpawnerSupplyCratePlastic = { ent-MarkerBasePlaceFree }
+    .desc = { ent-MarkerBasePlaceFree.desc }
+    .suffix = 900 Plastic, 15 minute interval
+ent-SpawnerSupplyCrateTextiles = { ent-MarkerBasePlaceFree }
+    .desc = { ent-MarkerBasePlaceFree.desc }
+    .suffix = 600 Cloth, 300 Durathread, 15 minute interval
+ent-SpawnerSupplyCratePlastitanium = { ent-MarkerBasePlaceFree }
+    .desc = { ent-MarkerBasePlaceFree.desc }
+    .suffix = 270 Plastitanium, 15 minute interval
+ent-SpawnerSupplyCrateAdamantite = { ent-MarkerBasePlaceFree }
+    .desc = { ent-MarkerBasePlaceFree.desc }
+    .suffix = 2500 DC, 250 adamantite, 15 minute interval

@@ -81,7 +81,6 @@
     lightingColor: "#0EFFFFFF"
     amplification: 1.0
 # LuaM end
-
 - type: entity
   parent: [ClothingHeadHelmetHardsuitSyndieElite, ShowSecurityIcons, ShowMedicalIcons ] # LuaM add ShowMedicalIcons
   id: ClothingHeadHelmetHardsuitVizier
@@ -93,6 +92,30 @@
     sprite: _LuaM/Clothing/Head/Hardsuits/pdv_vizier.rsi # LuaM: _Mono/Clothing/Head/Hardsuits/pdv_vizier.rsi -> _LuaM/Clothing/Head/Hardsuits/pdv_vizier.rsi
   - type: Clothing
     sprite: _LuaM/Clothing/Head/Hardsuits/pdv_vizier.rsi # LuaM: _Mono/Clothing/Head/Hardsuits/pdv_vizier.rsi -> _LuaM/Clothing/Head/Hardsuits/pdv_vizier.rsi
+# LuaM start
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    viewCircleRadius: 1000
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.0
+# LuaM end
+
+- type: entity
+  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons]
+  id: ClothingHeadHelmetHardsuitTarkhan
+  name: "PDV CV-280 'Basilisk' combat hardsuit helmet"
+  description: A combat hardsuit helmet designed by the Phaethon Dynasty for Tarkhans. A full gen-4 NVD suite is installed.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Head/Hardsuits/basilisk.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Head/Hardsuits/basilisk.rsi
 # LuaM start
   - type: NightVision
     relayOverlay: true

@@ -1,2 +1,14 @@
 ent-MilitaryTechfabMachineCircuitboard = плата военного многоцелевого сборщика
     .desc = Печатная плата для военного сборщика.
+ent-SecurityTechFabCaelestinusMachineCircuitboard = { ent-SecurityTechFabCircuitboard }
+    .desc = { ent-SecurityTechFabCircuitboard.desc }
+    .suffix = { ent-SecurityTechFabCircuitboard.suffix }
+ent-USSPTechfabMachineCircuitboard = USSP field assembler machine board
+    .desc = A machine printed circuit board for a USSP assembler.
+    .suffix = { ent-BaseMachineCircuitboard.suffix }
+ent-VGTechfabMachineCircuitboard = Viper Group precision lathe machine board
+    .desc = A machine printed circuit board for a VG precision lathe.
+    .suffix = { ent-BaseMachineCircuitboard.suffix }
+ent-MMCTechfabMachineCircuitboard = MMC multipurpose assembler machine board
+    .desc = A machine printed circuit board for a MMC multipurpose assembler.
+    .suffix = { ent-BaseMachineCircuitboard.suffix }

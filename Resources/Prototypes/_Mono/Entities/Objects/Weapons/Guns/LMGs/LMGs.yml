@@ -20,10 +20,10 @@
     sprite: _Mono/Objects/Weapons/Guns/LMGs/ratel/Ratel-inhands.rsi
   - type: GunWieldBonus
     minAngle: -25
-    maxAngle: -35
+    maxAngle: -45
   - type: Gun
     minAngle: 25
-    maxAngle: 40
+    maxAngle: 60
     angleIncrease: 7
     angleDecay: 28
     fireRate: 6 # 360 rpm
@@ -78,8 +78,8 @@
   - type: StaticPrice
     price: 2500
   - type: SpeedModifiedOnWield
-    walkModifier: 0.8 # LuaM: 0.6 > 0.8
-    sprintModifier: 0.8 # lower firerate than grizzly but more accurate and bit more damage # LuaM: 0.5 > 0.8
+    walkModifier: 0.6
+    sprintModifier: 0.5 # lower firerate than grizzly but more accurate and bit more damage
   #- type: WieldDelay # Commented by LuaM
   #  baseDelay: 0.8
   #  modifiedDelay: 0.8

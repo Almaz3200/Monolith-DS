@@ -5,15 +5,16 @@ using Content.Server._Mono.Ships.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._Mono.FireControl;
+using Content.Shared._Mono.Ships.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
-using Content.Shared._Mono.Ships.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -36,6 +37,7 @@ public sealed partial class FireControlSystem : EntitySystem
     [Dependency] private IMapManager _mapMan = default!;
 
     private bool _completedCheck = false;
+    private readonly HashSet<EntityUid> _pendingUiConsoles = new(); // LuaM
 
     private void InitializeConsole()
     {
@@ -138,6 +140,7 @@ public sealed partial class FireControlSystem : EntitySystem
             return;
 
         // Fire the actual weapons
+        ForgetShuttleConsoleWeapons(args.Selected); // Lua
         FireWeapons((EntityUid)component.ConnectedServer, args.Selected, args.Coordinates, server);
         if ((component.NextLog == null || component.NextLog < _timing.CurTime) && args.Selected.Any())
         {
@@ -160,13 +163,50 @@ public sealed partial class FireControlSystem : EntitySystem
 
             component.NextLog = _timing.CurTime + component.LogSpacing;
         }
-
-        UpdateUi(uid, component);
+//        UpdateUi(uid, component); // Commented by LuaM
+// LuaM-start:
+        if (args.Selected.Count > 0)
+            QueueUiUpdate(uid, component);
+// LuaM-end.
 
         // Raise an event to track the cursor position even when not firing
         var fireEvent = new FireControlConsoleFireEvent(args.Coordinates, args.Selected);
         RaiseLocalEvent(uid, fireEvent);
     }
+
+// LuaM-start:
+    public void QueueUiUpdate(EntityUid uid, FireControlConsoleComponent component) // LuaM: public for the reload display
+    {
+        if (component.NextUiUpdate == null || component.NextUiUpdate <= _timing.CurTime)
+        {
+            component.NextUiUpdate = _timing.CurTime + component.UiUpdateSpacing;
+            UpdateUi(uid, component);
+            return;
+        }
+
+        _pendingUiConsoles.Add(uid);
+    }
+
+    private void UpdatePendingConsoleUi() // LuaM
+    {
+        if (_pendingUiConsoles.Count == 0)
+            return;
+
+        var now = _timing.CurTime;
+        _pendingUiConsoles.RemoveWhere(uid =>
+        {
+            if (!TryComp<FireControlConsoleComponent>(uid, out var component))
+                return true;
+
+            if (component.NextUiUpdate > now)
+                return false;
+
+            component.NextUiUpdate = now + component.UiUpdateSpacing;
+            UpdateUi(uid, component);
+            return true;
+        });
+    }
+// LuaM-end.
 
     public void OnUIOpened(EntityUid uid, FireControlConsoleComponent component, BoundUIOpenedEvent args)
     {
@@ -272,40 +312,79 @@ public sealed partial class FireControlSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+// LuaM-start:
+        if (!_ui.IsUiOpen(uid, FireControlConsoleUiKey.Key))
+            return;
+// LuaM-end.
+
         NavInterfaceState navState = _shuttleConsoleSystem.GetNavState(uid, _shuttleConsoleSystem.GetAllDocks());
 
-        List<FireControllableEntry> controllables = new();
+        var array = Array.Empty<FireControllableEntry>(); // Lua: entries are built in BuildControllableEntries
         if (component.ConnectedServer != null && TryComp<FireControlServerComponent>(component.ConnectedServer, out var server))
         {
             if (!server.Consoles.Contains(uid))
                 return;
 
-            foreach (var controllable in server.Controlled)
-            {
-                var controlled = new FireControllableEntry();
-                controlled.NetEntity = EntityManager.GetNetEntity(controllable);
-                controlled.Coordinates = GetNetCoordinates(Transform(controllable).Coordinates);
-                controlled.Name = MetaData(controllable).EntityName;
-
-                var (ammoCount, hasManualReload) = GetWeaponAmmunitionInfo(controllable);
-                controlled.AmmoCount = ammoCount;
-                controlled.HasManualReload = hasManualReload;
-
-                controllables.Add(controlled);
-            }
+            array = BuildControllableEntries(server); // Lua
         }
-
-        var array = controllables.ToArray();
 
         var state = new FireControlConsoleBoundInterfaceState(component.ConnectedServer != null, array, navState);
         _ui.SetUiState(uid, FireControlConsoleUiKey.Key, state);
     }
+
+    // Lua-start: shared by the gunnery console and the shuttle console
+    /// <summary>
+    /// Builds the weapon list a console shows for this fire control server.
+    /// </summary>
+    public FireControllableEntry[] BuildControllableEntries(FireControlServerComponent server)
+    {
+        var controllables = new List<FireControllableEntry>();
+        foreach (var controllable in server.Controlled)
+        {
+            var controlled = new FireControllableEntry();
+            controlled.NetEntity = EntityManager.GetNetEntity(controllable);
+            controlled.Coordinates = GetNetCoordinates(Transform(controllable).Coordinates);
+            controlled.Name = MetaData(controllable).EntityName;
+            TryComp<FireControllableComponent>(controllable, out var fcComp);
+            controlled.IgnoresLos = fcComp != null ? fcComp.IgnoreLos : false;
+
+            var (ammoCount, hasManualReload) = GetWeaponAmmunitionInfo(controllable);
+            controlled.AmmoCount = ammoCount;
+            controlled.HasManualReload = hasManualReload;
+
+            // LuaM: reload progress, from the last shot until the weapon may fire again
+            var reloadEnd = fcComp?.NextFire ?? TimeSpan.Zero;
+            if (_gunQuery.TryComp(controllable, out var gun) && gun.NextFire > reloadEnd)
+                reloadEnd = gun.NextFire;
+
+            if (fcComp != null && fcComp.LastShot > TimeSpan.Zero && reloadEnd > _timing.CurTime && fcComp.LastShot < reloadEnd)
+            {
+                controlled.ReloadStart = fcComp.LastShot;
+                controlled.ReloadEnd = reloadEnd;
+            }
+            // End LuaM
+
+            controllables.Add(controlled);
+        }
+
+        return controllables.ToArray();
+    }
+    // Lua-end
 
     /// <summary>
     /// Gets ammo information for a weapon to determine if it has manual reload.
     /// </summary>
     private (int? ammoCount, bool hasManualReload) GetWeaponAmmunitionInfo(EntityUid weaponEntity)
     {
+        // LuaM: battery weapons first. Energy artillery also inherits an empty grenade slot (BallisticAmmoProvider)
+        // from the base launcher, which made them always show 0 ammo.
+        if (TryComp<ProjectileBatteryAmmoProviderComponent>(weaponEntity, out var projectileBattery))
+            return (projectileBattery.Shots, true);
+
+        if (TryComp<HitscanBatteryAmmoProviderComponent>(weaponEntity, out var hitscanBattery))
+            return (hitscanBattery.Shots, true);
+        // End LuaM
+
         if (TryComp<BasicEntityAmmoProviderComponent>(weaponEntity, out var basicAmmo))
         {
             var hasRecharge = HasComp<RechargeBasicEntityAmmoComponent>(weaponEntity);
@@ -337,6 +416,15 @@ public sealed partial class FireControlSystem : EntitySystem
                     return (magazineBasicAmmo.Count, !hasRecharge);
                 }
             }
+        }
+
+        if (TryComp<ProjectileBatteryAmmoProviderComponent>(weaponEntity, out _)
+            || TryComp<HitscanBatteryAmmoProviderComponent>(weaponEntity, out _)
+            )
+        {
+            var amm = new GetAmmoCountEvent();
+            RaiseLocalEvent(weaponEntity, ref amm, false);
+            return (amm.Count, true);
         }
 
         return (null, false);

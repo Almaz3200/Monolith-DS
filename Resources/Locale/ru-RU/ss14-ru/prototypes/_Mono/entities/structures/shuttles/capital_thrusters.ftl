@@ -3,3 +3,6 @@ ent-ThrusterLarge = большой ракетный двигатель
 ent-ThrusterLargePartsT2 = { ent-ThrusterLarge }
     .suffix = T2
     .desc = { ent-Thruster.desc }
+ent-ThrusterLargeSecurity = { ent-ThrusterLarge }
+    .desc = { ent-ThrusterLarge.desc }
+    .suffix = Security

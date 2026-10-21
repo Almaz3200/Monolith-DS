@@ -214,6 +214,7 @@ public sealed partial class SalvageSystem
 
         expedition.EndTime = newEndTime;
         expedition.Stage = ExpeditionStage.FinalCountdown;
+        _expeditionHud.SetEndTime(map.Value, newEndTime); // LuaM: expedition HUD
 
         Announce(map.Value, Loc.GetString("salvage-expedition-announcement-early-finish", ("departTime", departTime)));
     }

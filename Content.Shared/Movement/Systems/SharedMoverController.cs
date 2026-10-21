@@ -11,6 +11,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Tag;
+using Content.Shared.Throwing; // LuaM
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -52,6 +53,7 @@ public abstract partial class SharedMoverController : VirtualController
     [Dependency] private   IEntityManager _entities = default!; // Delta V-NoShoesSilentFootstepsComponent
 
     protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery;
+    protected EntityQuery<ThrownItemComponent> ThrownItemQuery; // LuaM
     protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery;
     protected EntityQuery<FTLComponent> FTLQuery;
     protected EntityQuery<InputMoverComponent> MoverQuery;
@@ -97,6 +99,7 @@ public abstract partial class SharedMoverController : VirtualController
         XformQuery = GetEntityQuery<TransformComponent>();
         NoRotateQuery = GetEntityQuery<NoRotateOnMoveComponent>();
         CanMoveInAirQuery = GetEntityQuery<CanMoveInAirComponent>();
+        ThrownItemQuery = GetEntityQuery<ThrownItemComponent>(); // LuaM
         FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
         MapGridQuery = GetEntityQuery<MapGridComponent>();
         MapQuery = GetEntityQuery<MapComponent>();
@@ -217,7 +220,8 @@ public abstract partial class SharedMoverController : VirtualController
         var weightless = _gravity.IsWeightless(uid);
         var inAirHelpless = false;
 
-        if (physicsComponent.BodyStatus != BodyStatus.OnGround && !CanMoveInAirQuery.HasComponent(uid))
+        // LuaM: thrown mobs (jumps, dashes) can't steer in the air, otherwise ground friction eats the throw
+        if (physicsComponent.BodyStatus != BodyStatus.OnGround && (!CanMoveInAirQuery.HasComponent(uid) || ThrownItemQuery.HasComponent(uid))) // LuaM: added ThrownItemQuery check
         {
             if (!weightless)
             {

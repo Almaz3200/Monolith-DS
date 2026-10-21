@@ -18,3 +18,7 @@ ent-DebugGyroscope = { ent-Gyroscope }
     .desc = { ent-Gyroscope.desc }
 ent-GyroscopeSyndicate = гироскоп 
     .desc = Модифицированная Синдикатом версия гироскопа. Улучшения позволили удешивить модификацию.
+ent-ThrusterXenoborg = { ent-Thruster }
+    .desc = { ent-Thruster.desc }
+ent-RustedThruster = rusted thruster
+    .desc = An unrepairable thruster, broken down from wear and tear. Only useful for scrapping.

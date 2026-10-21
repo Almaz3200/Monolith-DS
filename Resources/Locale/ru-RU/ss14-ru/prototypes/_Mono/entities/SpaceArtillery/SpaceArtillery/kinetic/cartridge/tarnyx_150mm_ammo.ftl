@@ -18,3 +18,5 @@ ent-150mmApheShell = бронебойно-фугасный снаряд 150 мм
     .ammo-loader-type = Боеприпас (бронебойно-фугасный)
     .ammo-loader-caliber = 150 мм
     .ammo-loader-weight = 17 кг
+ent-ShipTarnyxApheProjectile = TARNYX 90x630mm APHE projectile
+    .desc = { ent-BaseBulletTrigger.desc }

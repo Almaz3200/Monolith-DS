@@ -14,18 +14,32 @@
       tags:
       - PirateUplink
 
-# Utilities
+# Implants
 
 - type: listing
-  id: UplinkPirateFactionHoloCigar
-  name: uplink-holo-cigar-name
-  description: uplink-holo-cigar-desc
-  productEntity: HoloCigar
+  id: UplinkPirateCombatMedipenImplanter
+  name: uplink-combat-medipen-implanter-name
+  description: uplink-combat-medipen-implanter-desc
+  productEntity: CombatMedipenImplanter
   cost:
-    Doubloon: 350
+    Doubloon: 20
   categories:
-  - UplinkPirateUtility
-  restockTime: 12600
+  - UplinkPirateMedical
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - PirateUplink
+
+- type: listing
+  id: UplinkPirateStimulantImplanter
+  name: uplink-stimulant-implanter-name
+  description: uplink-stimulant-implanter-desc
+  productEntity: StimulantImplanter
+  cost:
+    Doubloon: 20
+  categories:
+  - UplinkPirateMedical
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:

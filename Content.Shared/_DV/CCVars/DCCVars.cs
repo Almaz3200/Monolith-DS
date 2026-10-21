@@ -41,6 +41,12 @@ public sealed class DCCVars
         CVarDef.Create("accessibility.no_vision_filters", false, CVar.CLIENTONLY | CVar.ARCHIVE); // Mono - false by default
 
     /// <summary>
+    /// What year it is in the game. Actual value shown in game is server date + this value.
+    /// </summary>
+    public static readonly CVarDef<int> YearOffset =
+        CVarDef.Create("game.current_year_offset", 764, CVar.SERVERONLY); // LuaM: 867 > 764 (2026 + 764 = 2790)
+
+    /// <summary>
     /// Whether the Shipyard is enabled.
     /// </summary>
     //public static readonly CVarDef<bool> Shipyard =

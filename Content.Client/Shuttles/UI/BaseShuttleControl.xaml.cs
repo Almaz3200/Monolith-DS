@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._LuaM.Shuttles; // LuaM
 using Content.Client.UserInterface.Controls;
 using Content.Shared._Mono.GridEdgeMarker; // Mono
 using Content.Shared.Maps; // Mono
@@ -34,7 +35,9 @@ public partial class BaseShuttleControl : MapGridControl
     private GridDrawJob _drawJob;
 
     // Cache grid drawing data as it can be expensive to build
-    public readonly Dictionary<EntityUid, GridDrawData> GridData = new();
+//    public readonly Dictionary<EntityUid, GridDrawData> GridData = new(); // Commented by LuaM
+    public Dictionary<EntityUid, GridDrawData> GridData => _gridCache.GridData; // LuaM: shared by every radar, opening a console no longer rebuilds every grid
+    private readonly RadarGridCacheSystem _gridCache; // LuaM
 
     // Per-draw caching
     private readonly Dictionary<Vector2i, ContentTileDefinition> _gridTileList = new(); // Mono
@@ -58,6 +61,7 @@ public partial class BaseShuttleControl : MapGridControl
     {
         RobustXamlLoader.Load(this);
         Maps = EntManager.System<SharedMapSystem>();
+        _gridCache = EntManager.System<RadarGridCacheSystem>(); // LuaM
         _lookup = EntManager.System<EntityLookupSystem>(); // Mono
         _xformQuery = EntManager.GetEntityQuery<TransformComponent>(); // Mono
         Font = new VectorFont(IoCManager.Resolve<IResourceCache>().GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 12);
@@ -71,7 +75,7 @@ public partial class BaseShuttleControl : MapGridControl
 
         for (var i = 0; i < 4; i++)
         {
-            var dir = (DirectionFlag) Math.Pow(2, i);
+            var dir = (DirectionFlag)Math.Pow(2, i);
             var dirVec = dir.AsDir().ToIntVec();
             _neighborDirections[i] = (dir, dirVec);
         }
@@ -420,16 +424,16 @@ public partial class BaseShuttleControl : MapGridControl
     private static Vector2 GetAzimuthDirection(Angle baseAngle, float azimuthDegrees)
     {
         var angle = baseAngle + Angle.FromDegrees(azimuthDegrees);
-        var radians = (float) angle.Theta - MathF.PI / 2f;
+        var radians = (float)angle.Theta - MathF.PI / 2f;
         return new Vector2(MathF.Cos(radians), MathF.Sin(radians));
     }
     // End Mono
 
-    protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 gridToView, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f)
+    protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 gridToView, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f, bool drawFill = false)
     {
         var rator = Maps.GetAllTilesEnumerator(grid.Owner, grid.Comp);
         var minimapScale = MinimapScale;
-        var midpoint = new Vector2(MidPoint, MidPoint);
+        var midpoint = MidPointVector; // LuaM: new Vector2(MidPoint, MidPoint) > MidPointVector, the radar can be non-square now
         var tileSize = grid.Comp.TileSize;
 
         // Check if we even have data
@@ -670,17 +674,23 @@ public partial class BaseShuttleControl : MapGridControl
 
         _parallel.ProcessNow(_drawJob, totalData);
 
-        const float BatchSize = 3f * 4096;
-
-        for (var i = 0; i < Math.Ceiling(triCount / BatchSize); i++)
+        if (drawFill)
         {
-            var start = (int) (i * BatchSize);
-            var end = (int) Math.Min(triCount, start + BatchSize);
-            var count = end - start;
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, new Span<Vector2>(_allVertices, start, count), color.WithAlpha(alpha));
-        }
+            const float BatchSize = 3f * 4096;
+            var fillColor = Color.ToSrgb(Color.InterpolateBetween(BackingColor, color, alpha)).WithAlpha(1f);
 
-        handle.DrawPrimitives(DrawPrimitiveTopology.LineList, new Span<Vector2>(_allVertices, gridData.EdgeIndex, edgeCount), color);
+            for (var i = 0; i < Math.Ceiling(triCount / BatchSize); i++)
+            {
+                var start = (int)(i * BatchSize);
+                var end = (int)Math.Min(triCount, start + BatchSize);
+                var count = end - start;
+                handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, new Span<Vector2>(_allVertices, start, count), fillColor);
+            }
+        }
+        else
+        {
+            handle.DrawPrimitives(DrawPrimitiveTopology.LineList, new Span<Vector2>(_allVertices, gridData.EdgeIndex, edgeCount), color);
+        }
     }
 
     private static int GetDirIndex(Vector2i dir)

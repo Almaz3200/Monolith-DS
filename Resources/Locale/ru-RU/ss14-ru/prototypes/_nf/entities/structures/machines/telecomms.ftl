@@ -13,3 +13,6 @@ ent-TelecomServerFilledFreelance = { ent-TelecomServer }
 ent-TelecomServerFilledNfsd = { ent-TelecomServer }
     .suffix = ТСФ
     .desc = { ent-TelecomServer.desc }
+ent-NFTelecomServerFilled = { ent-TelecomServer }
+    .desc = { ent-TelecomServer.desc }
+    .suffix = Filled All

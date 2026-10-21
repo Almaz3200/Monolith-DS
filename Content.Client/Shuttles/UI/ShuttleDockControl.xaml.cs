@@ -56,6 +56,10 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
     public event Action<NetEntity, NetEntity>? DockRequest;
     public event Action<NetEntity>? UndockRequest;
 
+    protected override bool AllowResize => true; // Lua
+    protected override bool ScaleWithControlSize => true; // Lua
+    protected override Vector2 MidPointVector => new Vector2(PixelWidth * 0.5f, PixelHeight * 0.5f); // LuaM: centered when the area isn't square
+
     public ShuttleDockControl() : base(2f, 32f, 8f)
     {
         RobustXamlLoader.Load(this);

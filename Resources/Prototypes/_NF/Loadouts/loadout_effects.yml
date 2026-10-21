@@ -31,6 +31,8 @@
     - Yowie # Goob
     - Tajaran # Goob
     - Hydrakin # Mono
+    - Avali # LuaM
+    - Ariral # LuaM
 
 - type: loadoutEffectGroup
   id: ShoesCapableNF
@@ -58,6 +60,10 @@
     - Diona # Mono
     - Demon # Wega
     - Hydrakin # Mono
+    - Feroxi # Mono/DV
+    - Avali # LuaM
+    - Shark # LuaM
+    - Ariral # LuaM
 
 - type: loadoutEffectGroup
   id: NFNotDocOrStc

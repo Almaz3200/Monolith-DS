@@ -3,12 +3,11 @@
               HorizontalAlignment="Stretch"
               HorizontalExpand="True"
               Margin="0 0 0 5">
-    <BoxContainer Name="ReactantsContainer" Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
-        <RichTextLabel Name="ReactantsLabel"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Access="Public"
-                       Visible="False"/>
+    <!-- Lua: one link per reagent instead of a single label -->
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
+        <BoxContainer Name="ReactantsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <!-- Reactants will be added as children here -->
+        </BoxContainer>
     </BoxContainer>
     <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextureRect TexturePath="/Textures/Interface/Misc/beakerlarge.png"
@@ -21,10 +20,8 @@
                        Margin="2 0 0 0"/>
     </BoxContainer>
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
-        <RichTextLabel Name="ProductsLabel"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Access="Public"
-                       Visible="False"/>
+        <BoxContainer Name="ProductsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <!-- Products will be added as children here -->
+        </BoxContainer>
     </BoxContainer>
 </BoxContainer>
