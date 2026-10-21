@@ -333,5 +333,6 @@
       - 0, 0, 4, 4
       - 0, 3, 6, 5
 # Mono
-  # - type: ShipNpcTarget # Commented by LuaM
-  #   needGrid: NoGrid
+  - type: ShipNpcTarget
+    needGrid: NoGrid
+    maxTargetRange: 50
