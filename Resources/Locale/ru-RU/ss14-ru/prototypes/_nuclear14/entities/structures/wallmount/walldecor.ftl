@@ -1,0 +1,15 @@
+ent-N14SignBase = { ent-BaseSign }
+    .desc = { ent-BaseSign.desc }
+ent-N14FlagWallChina = flag
+    .desc = A Chinese flag.
+    .suffix = China
+ent-N14WallDecorClock = clock
+    .desc = A clock. Don't think it works.
+ent-N14WallDecorCalendar = calendar
+    .desc = A calendar for some forgotten year.
+ent-N14WallDecorCalendar1 = calendar
+    .desc = A blank calendar for some forgotten year.
+ent-N14WallDecorCross = cross
+    .desc = A symbol from another time.
+ent-N14WallDecorWallscreen = wall screen
+    .desc = A cluster of monitors hung on the wall.

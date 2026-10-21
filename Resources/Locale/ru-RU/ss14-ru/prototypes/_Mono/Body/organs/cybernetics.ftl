@@ -1,0 +1,12 @@
+ent-OrganHeartTSFSandevistan = TSF WJY-21X "Leuko" implant suite
+    .desc = An experimental piece of cyberware developed under contract by Erebus HI that replaces the heart. Equipped with an experimental reverse-engineered slower-recharging design of a MMC sandevistan.
+ent-OrganHeartTSFShunt = TSF KR-22 "Zenit" implant suite
+    .desc = A highly experimental piece of cyberware developed in some hellish TSF blacksite that replaces the heart. Allows the user to do a short localized teleport to any position in their line of sight.
+ent-OrganInternalAirSystem = PD-VI LS-210 IAS
+    .desc = A cybernetic organ that replaces the lungs with a suite of filters and other devices. Not enough to keep you breathing in space, but filters out toxic gases and makes you need a little less to breathe.
+ent-OrganPDVAdvancedHeart = PD-VI VV/KE prosthetic heart
+    .desc = A fast-pumping compact artifical heart. Can process a lot of reagents at once, and lets you take more damage before going down, but lowers your stamina and processes medicine slower.
+ent-OrganHeartMMCSakimoto = MMC EVT-001 "Sakimoto" replacement heart
+    .desc = A strange piece of cybernetic hardware designed to replace the heart. The exact manner of how is unknown, but it allows the user to channel a form of latent energy into a single hit.
+ent-OrganHeartMMCSandevistan = MMC EVT-002 "Lotus" replacement heart
+    .desc = It's a sterile bag full of a series of autoinjectors, electroneural/cardiovascular links, and thermomachines designed to allow the user to push themselves to the limit.

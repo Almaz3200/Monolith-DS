@@ -1,4 +1,4 @@
-﻿ent-RubberStampPaycheckBratva = штамп Paycheck Bratva
+ent-RubberStampPaycheckBratva = штамп Paycheck Bratva
     .desc = Резиновый штамп для зарплатных чеков братвы.
 ent-RubberStampWinterSolstice = штамп ОСО
     .desc = Официальный штамп командования локальных операций Транс-Солнечной Федерации.
@@ -18,3 +18,5 @@ ent-RubberStampUSSPTaccomm = штамп тактического командо�
     .desc = Штамп Тактического Командования Союза Советских Социалистических Планет.
 ent-RubberStampUSSPStratcomm = штамп стратегического командования СССП
     .desc = Штамп Стратегического Командования Союза Советских Социалистических Планет.
+ent-RubberStampMMCLiason = MMC liason rubber stamp
+    .desc = { ent-RubberStampBase.desc }

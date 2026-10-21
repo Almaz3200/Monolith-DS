@@ -23,3 +23,7 @@ ent-DehydratedSpaceCarp = обезвоженный космический кар
 ent-SyndicateSponge = обезьяний кубик
     .desc = Просто добавь воды!
     .suffix = Синдикат
+ent-MothroachMustardCube = mustard mothroach cube
+    .desc = { ent-MonkeyCube.desc }
+ent-OwOroachCube = OwOroach cube
+    .desc = { ent-MonkeyCube.desc }

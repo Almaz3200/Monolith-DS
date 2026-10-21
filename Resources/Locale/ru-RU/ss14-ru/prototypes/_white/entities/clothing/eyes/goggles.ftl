@@ -1,0 +1,12 @@
+ent-ClothingEyesNightVisionGogglesGen1 = night vision goggles (GEN1)
+    .desc = { ent-ClothingEyesNightVisionGoggles.desc }
+    .suffix = DEBUG
+ent-ClothingEyesNightVisionGogglesGen2 = night vision goggles (GEN2)
+    .desc = { ent-ClothingEyesNightVisionGoggles.desc }
+    .suffix = DEBUG
+ent-ClothingEyesNightVisionGogglesGen3 = night vision goggles (GEN3)
+    .desc = { ent-ClothingEyesNightVisionGoggles.desc }
+    .suffix = DEBUG
+ent-ClothingEyesNightVisionGogglesGen4 = night vision goggles (GEN4)
+    .desc = { ent-ClothingEyesNightVisionGoggles.desc }
+    .suffix = DEBUG

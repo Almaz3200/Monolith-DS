@@ -13,3 +13,7 @@ ent-UnknownShuttleRazorApoc = неизвестный шаттл ИИ
 ent-UnknownShuttleWyvernApoc = неизвестный шаттл ИИ
     .suffix = Wyvern, Апокалипсис
     .desc = { ent-BaseRandomShuttleRule.desc }
+ent-UnknownShuttleWyrmApoc = { ent-BaseRandomShuttleRule }
+    .desc = { ent-BaseRandomShuttleRule.desc }
+ent-UnknownShuttleRazorNApoc = { ent-BaseRandomShuttleRule }
+    .desc = { ent-BaseRandomShuttleRule.desc }

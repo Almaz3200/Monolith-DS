@@ -1,0 +1,15 @@
+ent-AirlockHeavyUSSPSecureLocked = { ent-AirlockHeavyUSSP }
+    .desc = { ent-AirlockHeavyUSSP.desc }
+    .suffix = USSP Secure, Locked
+ent-AirlockHeavyViperLocked = { ent-AirlockHeavyCommand }
+    .desc = { ent-AirlockHeavyCommand.desc }
+    .suffix = Viper Group, Locked
+ent-AirlockHeavyViperCommandLocked = { ent-AirlockHeavyViperLocked }
+    .desc = { ent-AirlockHeavyViperLocked.desc }
+    .suffix = Viper Group Command, Locked
+ent-AirlockHeavyMieyoLocked = { ent-AirlockHeavyCommand }
+    .desc = { ent-AirlockHeavyCommand.desc }
+    .suffix = Mieyo Security, Locked
+ent-AirlockHeavyMieyoLiasonLocked = { ent-AirlockHeavyMieyoLocked }
+    .desc = { ent-AirlockHeavyMieyoLocked.desc }
+    .suffix = Mieyo Liason, Locked
