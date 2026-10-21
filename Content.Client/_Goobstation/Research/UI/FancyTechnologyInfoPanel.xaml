@@ -37,10 +37,14 @@
                     HorizontalExpand="True"/>
             <RichTextLabel Name="TechnologyCostLabel"
                     HorizontalExpand="True"/>
-            <Button Name="ResearchButton"
-                    Text="{Loc 'research-console-menu-server-research-button'}"
-                    HorizontalAlignment="Left"
-                    Margin="0 4"/>
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 4">
+                <Button Name="ResearchButton"
+                        Text="{Loc 'research-console-menu-server-research-button'}"/>
+                <!-- LuaM: research the technology with every prerequisite it is missing -->
+                <Button Name="UnlockWithPrerequisitesButton"
+                        Text="{Loc 'research-console-unlock-with-prerequisites-button'}"
+                        Margin="5 0 0 0"/>
+            </BoxContainer>
         </BoxContainer>
         <Control SizeFlagsStretchRatio="1"
                  HorizontalExpand="True"/>

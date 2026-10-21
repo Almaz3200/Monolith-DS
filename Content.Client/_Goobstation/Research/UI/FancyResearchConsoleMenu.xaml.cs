@@ -1,8 +1,10 @@
+using System.Linq; // LuaM
 using System.Numerics;
 using Content.Client.Parallax; // Frontier: Parallax control for the background
 using Content.Client.Research;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._Goobstation.Research;
+using Content.Shared._LuaM.Research; // LuaM
 using Content.Shared.Access.Systems;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
@@ -23,6 +25,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 {
     public Action<string>? OnTechnologyCardPressed;
     public Action? OnServerButtonPressed;
+    public Action<ProtoId<TechDisciplinePrototype>?>? OnUnlockAllPressed; // LuaM: null discipline means every discipline
+    public Action<ProtoId<TechnologyPrototype>>? OnUnlockWithPrerequisitesPressed; // LuaM
 
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
@@ -63,6 +67,11 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     /// If the branch is null, the user is on the branch selection screen.
     /// </summary>
     private ProtoId<TechDisciplinePrototype>? _selectedDiscipline;
+
+    /// <summary>
+    /// Info panel of the selected technology, if any.
+    /// </summary>
+    private FancyTechnologyInfoPanel? _infoPanel;
 // LuaM-end.
 
     /// <summary>
@@ -151,6 +160,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         RecenterButton.OnPressed += _ => Recenter();
 */
         BackToDisciplinesButton.OnPressed += _ => ShowDisciplineSelection(); // LuaM
+        UnlockAllButton.OnPressed += _ => OnUnlockAllPressed?.Invoke(null); // LuaM
+        UnlockDisciplineButton.OnPressed += _ => OnUnlockAllPressed?.Invoke(_selectedDiscipline); // LuaM
 
         // Empty initialization
         UpdatePanels(List);
@@ -186,6 +197,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 // LuaM-start:
         if (_selectedDiscipline != null)
             PopulateResearchField();
+
+        UpdateUnlockAllButtons();
 // LuaM-end.
     }
 
@@ -197,6 +210,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         amountMsg.AddMarkupOrThrow(Loc.GetString("research-console-menu-research-points-text",
             ("points", points)));
         ResearchAmountLabel.SetMessage(amountMsg);
+
+        UpdateUnlockAllButtons(); // LuaM: affordability depends on the points
 
         if (!_entity.TryGetComponent(Entity, out TechnologyDatabaseComponent? database))
             return;
@@ -348,7 +363,99 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         _selectedDiscipline = disciplineId;
         DisciplineSelectionScreen.Visible = false;
         ResearchFieldScreen.Visible = true;
+        UnlockAllButton.Visible = false; // the field has its own "research the whole branch" button
         PopulateResearchField();
+        UpdateUnlockAllButtons();
+    }
+
+    /// <summary>
+    /// Shows what the "research everything" buttons would unlock and cost, and disables them when they can't be used.
+    /// </summary>
+    private void UpdateUnlockAllButtons()
+    {
+        if (!TryGetUnlockState(out var researched, out var supported))
+        {
+            UnlockAllButton.Disabled = true;
+            UnlockDisciplineButton.Disabled = true;
+            _infoPanel?.UpdateUnlockWithPrerequisites(false, false, null);
+            return;
+        }
+
+        var all = ResearchUnlockAll.Plan(_prototype, researched, supported, null);
+        UpdateUnlockButton(UnlockAllButton, all, null);
+
+        if (_selectedDiscipline != null)
+        {
+            var discipline = ResearchUnlockAll.Plan(_prototype, researched, supported, _selectedDiscipline);
+            UpdateUnlockButton(UnlockDisciplineButton, discipline, _selectedDiscipline);
+        }
+
+        if (_infoPanel != null)
+        {
+            var tech = _infoPanel.Prototype;
+            var plan = ResearchUnlockAll.PlanFor(_prototype, researched, supported, tech);
+            var cost = ResearchUnlockAll.TotalCost(plan);
+            _infoPanel.UpdateUnlockWithPrerequisites(
+                !researched.Contains(tech.ID),
+                CanUnlock(plan, cost),
+                plan.Count == 0
+                    ? Loc.GetString("research-console-unlock-with-prerequisites-impossible")
+                    : GetUnlockTooltip(plan, cost, tech.Discipline));
+        }
+    }
+
+    private void UpdateUnlockButton(Button button, List<TechnologyPrototype> plan, ProtoId<TechDisciplinePrototype>? discipline)
+    {
+        var cost = ResearchUnlockAll.TotalCost(plan);
+        button.Disabled = !CanUnlock(plan, cost);
+        button.ToolTip = plan.Count == 0
+            ? Loc.GetString("research-console-unlock-all-nothing")
+            : GetUnlockTooltip(plan, cost, discipline);
+    }
+
+    /// <summary>
+    /// Researched technologies and supported disciplines of the console, false without its database.
+    /// </summary>
+    private bool TryGetUnlockState(out HashSet<string> researched, out List<string> supported)
+    {
+        researched = new HashSet<string>();
+        supported = new List<string>();
+
+        if (!_entity.TryGetComponent(Entity, out TechnologyDatabaseComponent? database))
+            return false;
+
+        // The console's database can lag a tick behind the interface state, so count both as researched.
+        researched.UnionWith(database.UnlockedTechnologies);
+        researched.UnionWith(List.Where(t => t.Value == ResearchAvailability.Researched).Select(t => t.Key));
+        supported.AddRange(database.SupportedDisciplines);
+        return true;
+    }
+
+    private bool CanUnlock(List<TechnologyPrototype> plan, int cost)
+    {
+        return plan.Count > 0
+               && cost <= Points
+               && _player.LocalEntity is { } user
+               && _accessReader.IsAllowed(user, Entity);
+    }
+
+    /// <summary>
+    /// How many technologies get researched and for how much. With a discipline, technologies of other disciplines
+    /// that are needed on the way are counted apart.
+    /// </summary>
+    private string GetUnlockTooltip(List<TechnologyPrototype> plan, int cost, ProtoId<TechDisciplinePrototype>? discipline)
+    {
+        var own = discipline == null ? plan.Count : plan.Count(t => t.Discipline == discipline.Value);
+        var other = plan.Count - own;
+
+        var count = other == 0
+            ? Loc.GetString("research-console-unlock-all-count", ("count", own))
+            : Loc.GetString("research-console-unlock-all-count-other", ("count", own), ("other", other));
+
+        return Loc.GetString("research-console-unlock-all-tooltip",
+            ("count", count),
+            ("cost", cost),
+            ("points", Points));
     }
 // LuaM-end.
 
@@ -371,8 +478,10 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         CurrentTech = null;
         DisciplineSelectionScreen.Visible = true;
         ResearchFieldScreen.Visible = false;
+        UnlockAllButton.Visible = true;
         DragContainer.RemoveAllChildren();
         InfoContainer.RemoveAllChildren();
+        _infoPanel = null; // LuaM
         InfoContainer.AddChild(new Control
         {
             Margin = new Thickness(5),
@@ -395,6 +504,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     {
         DragContainer.RemoveAllChildren();
         InfoContainer.RemoveAllChildren();
+        _infoPanel = null; // LuaM
         InfoContainer.AddChild(new Control
         {
             Margin = new Thickness(5),
@@ -435,14 +545,53 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     public void SelectTech(TechnologyPrototype proto, ResearchAvailability availability)
     {
         InfoContainer.RemoveAllChildren();
+        _infoPanel = null; // LuaM
         if (!_player.LocalEntity.HasValue)
             return;
 
         CurrentTech = proto.ID;
         var control = new FancyTechnologyInfoPanel(proto, _accessReader.IsAllowed(_player.LocalEntity.Value, Entity), availability, _sprite);
         control.BuyAction += args => OnTechnologyCardPressed?.Invoke(args.ID);
+        control.PrerequisiteSelected += GoToTechnology; // LuaM
+        control.UnlockWithPrerequisitesAction += args => OnUnlockWithPrerequisitesPressed?.Invoke(args.ID); // LuaM
         InfoContainer.AddChild(control);
+        _infoPanel = control; // LuaM
+        UpdateUnlockAllButtons(); // LuaM
+
+        // LuaM: highlight the selected technology on the field
+        foreach (var child in DragContainer.Children)
+        {
+            if (child is FancyResearchConsoleItem item)
+                item.IsSelected = item.Prototype.ID == proto.ID;
+        }
+        // End LuaM
     }
+
+    // LuaM
+    /// <summary>
+    /// Opens a technology, switching to its discipline if it is from another one.
+    /// </summary>
+    private void GoToTechnology(TechnologyPrototype proto)
+    {
+        var availability = List.GetValueOrDefault(proto.ID, ResearchAvailability.Unavailable);
+
+        // Technologies of disciplines this console can't research aren't on any field, just show their info.
+        // The database only allows reading its fields here, so the list is taken out before searching it.
+        var supported = _entity.TryGetComponent(Entity, out TechnologyDatabaseComponent? database)
+            ? database.SupportedDisciplines
+            : null;
+
+        if (proto.Discipline == _selectedDiscipline || supported == null || !supported.Contains(proto.Discipline))
+        {
+            SelectTech(proto, availability);
+            return;
+        }
+
+        // Filling the field of the other discipline selects CurrentTech in it.
+        CurrentTech = proto.ID;
+        OnDisciplineSelected(proto.Discipline);
+    }
+    // End LuaM
 
 // Commented by LuaM
 /*
@@ -471,10 +620,12 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
         DragContainer.RemoveAllChildren();
         InfoContainer.RemoveAllChildren();
+        _infoPanel = null; // LuaM
 //	      _firstInitialization = true; // Commented by LuaM
         _selectedDiscipline = null;
         DisciplineSelectionScreen.Visible = true;
         ResearchFieldScreen.Visible = false;
+        UnlockAllButton.Visible = true; // LuaM
     }
 
     private sealed partial class DisciplineButton(TechDisciplinePrototype proto) : Button
