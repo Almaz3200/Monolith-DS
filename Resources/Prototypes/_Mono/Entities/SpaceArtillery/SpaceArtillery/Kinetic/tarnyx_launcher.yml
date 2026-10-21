@@ -26,7 +26,7 @@
     range: 500
   - type: GunSignalControl
   - type: Gun
-    fireRate: 0.066
+    fireRate: 0.1
     projectileSpeed: 400
     shootThermalSignature: 8000000 # ~2.8km after firing - relatively low
     soundGunshot:
@@ -82,7 +82,7 @@
     range: 500
   - type: GunSignalControl
   - type: Gun
-    fireRate: 0.066
+    fireRate: 0.1
     projectileSpeed: 400
     shootThermalSignature: 8000000 # ~2.8km after firing - relatively low
     soundGunshot:
@@ -130,7 +130,7 @@
     layers:
     - state: space_artillery
   - type: Gun
-    fireRate: 0.075 # 3.96 rpm > 4.5
+    fireRate: 0.1 # 3.96 rpm > 4.5
   - type: BallisticAmmoProvider
     whitelist:
       tags:

@@ -104,7 +104,10 @@
     vessels:
     - Calypso
     - Dagger
-    - Fracture
+       # LuaM Start
+    #- Fracture
+    - VSKFracture
+       # LuaM End
 
 - type: entity
   parent: ShipVoucherTsfT0
@@ -131,7 +134,11 @@
     - Mercury
     - Spekter
     - Cinquedea
-    - TSFMCArrow # LuaM
+        # LuaM Start
+    - TSFMCArrow
+    - VSKSentinelDRG
+    - VSKSentinelEMP
+        # LuaM End
 
 - type: entity
   parent: BaseShipLPCRenewable
