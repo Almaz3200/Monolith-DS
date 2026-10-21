@@ -24,9 +24,7 @@ public sealed partial class ShuttleSystem
     // LuaM-start:
     private readonly Dictionary<EntityUid, TimeSpan> _unmannedSince = new();
     private static readonly TimeSpan UnmannedGracePeriod = TimeSpan.FromSeconds(3);
-    private static readonly TimeSpan UnmannedDampenPeriod = TimeSpan.FromSeconds(5);
-    private static readonly TimeSpan UnmannedCheckInterval = TimeSpan.FromSeconds(1);
-    private TimeSpan _nextUnmannedCheck;
+    private static readonly TimeSpan UnmannedDampenPeriod = TimeSpan.FromSeconds(4);
     // LuaM-end
     private void NfInitialize()
     {
@@ -168,14 +166,6 @@ public sealed partial class ShuttleSystem
     private void UpdateUnmannedShuttles()
     {
         var now = _gameTiming.CurTime;
-
-        // LuaM-start:
-        if (now < _nextUnmannedCheck)
-            return;
-
-        _nextUnmannedCheck = now + UnmannedCheckInterval;
-        // LuaM-end
-
         var query = AllEntityQuery<ShuttleComponent, PhysicsComponent, TransformComponent>();
 
         while (query.MoveNext(out var uid, out var shuttle, out var physics, out var xform))

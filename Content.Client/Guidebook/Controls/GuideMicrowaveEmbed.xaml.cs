@@ -20,13 +20,15 @@ namespace Content.Client.Guidebook.Controls;
 /// Control for embedding a microwave recipe into a guidebook.
 /// </summary>
 [UsedImplicitly, GenerateTypedNameReferences]
-public sealed partial class GuideMicrowaveEmbed : PanelContainer, IDocumentTag, ISearchableControl
+public sealed partial class GuideMicrowaveEmbed : PanelContainer, IDocumentTag, ISearchableControl, IPrototypeRepresentationControl // Lua: IPrototypeRepresentationControl
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private ILogManager _logManager = default!;
     private readonly SpriteSystem _sprite = default!; // Frontier
 
     private ISawmill _sawmill = default!;
+
+    public IPrototype? RepresentedPrototype { get; private set; } // Lua: target of guidebook prototype links
 
     public GuideMicrowaveEmbed()
     {
@@ -83,6 +85,8 @@ public sealed partial class GuideMicrowaveEmbed : PanelContainer, IDocumentTag, 
     {
         var entity = _prototype.Index<EntityPrototype>(recipe.Result);
 
+        RepresentedPrototype = entity; // Lua
+
         IconContainer.AddChild(new GuideEntityEmbed(recipe.Result, false, false));
         ResultName.SetMarkup(Loc.GetString("guidebook-microwave-recipe-name-display", ("amount", recipe.ResultCount), ("name", entity.Name))); // Mono
         ResultDescription.SetMarkup(entity.Description);
@@ -102,8 +106,9 @@ public sealed partial class GuideMicrowaveEmbed : PanelContainer, IDocumentTag, 
             solidNameMsg.AddMarkupOrThrow(Loc.GetString("guidebook-microwave-solid-name-display", ("ingredient", ingredient.Name)));
             solidNameMsg.Pop();
 
-            var solidNameLabel = new RichTextLabel();
+            var solidNameLabel = new GuidebookRichPrototypeLink(); // Lua: RichTextLabel > GuidebookRichPrototypeLink
             solidNameLabel.SetMessage(solidNameMsg);
+            solidNameLabel.LinkedPrototype = ingredient; // Lua
 
             IngredientsGrid.AddChild(solidNameLabel);
 
@@ -132,9 +137,10 @@ public sealed partial class GuideMicrowaveEmbed : PanelContainer, IDocumentTag, 
             liquidColorMsg.AddMarkupOrThrow(Loc.GetString("guidebook-microwave-reagent-color-display", ("color", reagent.SubstanceColor)));
             liquidColorMsg.Pop();
 
-            var liquidColorLabel = new RichTextLabel();
+            var liquidColorLabel = new GuidebookRichPrototypeLink(); // Lua: RichTextLabel > GuidebookRichPrototypeLink
             liquidColorLabel.SetMessage(liquidColorMsg);
             liquidColorLabel.HorizontalAlignment = Control.HAlignment.Center;
+            liquidColorLabel.LinkedPrototype = reagent; // Lua
 
             IngredientsGrid.AddChild(liquidColorLabel);
 
@@ -144,8 +150,9 @@ public sealed partial class GuideMicrowaveEmbed : PanelContainer, IDocumentTag, 
             liquidNameMsg.AddMarkupOrThrow(Loc.GetString("guidebook-microwave-reagent-name-display", ("reagent", reagent.LocalizedName)));
             liquidNameMsg.Pop();
 
-            var liquidNameLabel = new RichTextLabel();
+            var liquidNameLabel = new GuidebookRichPrototypeLink(); // Lua: RichTextLabel > GuidebookRichPrototypeLink, the name links too
             liquidNameLabel.SetMessage(liquidNameMsg);
+            liquidNameLabel.LinkedPrototype = reagent; // Lua
 
             IngredientsGrid.AddChild(liquidNameLabel);
 

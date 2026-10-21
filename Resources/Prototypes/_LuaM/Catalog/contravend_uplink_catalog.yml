@@ -1,0 +1,31 @@
+# Implants
+
+- type: listing
+  id: UplinkContrabandCombatMedipenImplanter
+  name: uplink-combat-medipen-implanter-name
+  description: uplink-combat-medipen-implanter-desc
+  productEntity: CombatMedipenImplanter
+  cost:
+    Telecrystal: 25
+  categories:
+  - UplinkImplants
+  conditions:
+  - !type:StoreWhitelistCondition # ContraVend only
+    whitelist:
+      components:
+      - VendingMachine
+
+- type: listing
+  id: UplinkContrabandStimulantImplanter
+  name: uplink-stimulant-implanter-name
+  description: uplink-stimulant-implanter-desc
+  productEntity: StimulantImplanter
+  cost:
+    Telecrystal: 25
+  categories:
+  - UplinkImplants
+  conditions:
+  - !type:StoreWhitelistCondition # ContraVend only
+    whitelist:
+      components:
+      - VendingMachine

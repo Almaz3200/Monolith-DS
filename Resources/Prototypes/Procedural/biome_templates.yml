@@ -213,7 +213,7 @@
       allowedTiles:
         - FloorBasalt
       entities:
-        - FloorLavaEntity
+        - FloorLavaEntityExpedition # LuaM FloorLavaEntity > FloorLavaEntityExpedition
     # Rock formations
     - !type:BiomeEntityLayer
       allowedTiles:
@@ -365,7 +365,7 @@
         fractalType: Ridged
         octaves: 1
       entities:
-      - FloorLiquidPlasmaEntity
+      - FloorLiquidPlasmaEntityExpedition # LuaM FloorLiquidPlasmaEntity > FloorLiquidPlasmaEntityExpedition
     - !type:BiomeDummyLayer
       id: Loot
     - !type:BiomeTileLayer

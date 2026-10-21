@@ -1,3 +1,4 @@
+using Content.Shared._LuaM.Radio; // LuaM
 using Content.Server._NF.Radio; // Frontier
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -66,6 +67,10 @@ public sealed partial class RadioSystem : EntitySystem
     /// </summary>
     public int GetFrequency(EntityUid source, RadioChannelPrototype channel)
     {
+        // LuaM: headsets tune their built-in radio channel on their own
+        if (TryComp<HeadsetTunableRadioComponent>(source, out var tunable) && tunable.Channel == channel.ID)
+            return tunable.Frequency;
+
         if (TryComp<RadioMicrophoneComponent>(source, out var radioMicrophone))
             return radioMicrophone.Frequency;
 

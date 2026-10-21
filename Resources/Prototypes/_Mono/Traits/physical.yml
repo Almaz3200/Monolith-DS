@@ -323,7 +323,7 @@
   components:
   - type: DamageProtectionBuff
     modifiers:
-      dermal:
+      lymphocytes: # LuaM: dermal > lymphocytes, so the dermal armor implant does not replace it
         id: HardenedLymphocytesTrait
         flatReductions:
           Radiation: 1
@@ -413,6 +413,9 @@
   - Dwarf
   - SlimePerson
   - Felinid
+  - Avali # LuaM
+  - Shark # LuaM
+  - Ariral # LuaM
   - Tajaran
   - Feroxi
   - Demon # Forge Change

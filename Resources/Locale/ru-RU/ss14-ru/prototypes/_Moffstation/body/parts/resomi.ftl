@@ -18,3 +18,5 @@ ent-LeftFootResomi = левая стопа резоми
     .desc = { ent-BaseLeftFoot.desc }
 ent-RightFootResomi = правая стопа резоми
     .desc = { ent-BaseRightFoot.desc }
+ent-PartResomi = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }

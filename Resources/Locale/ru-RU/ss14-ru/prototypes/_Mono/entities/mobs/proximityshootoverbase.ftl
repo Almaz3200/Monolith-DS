@@ -1,0 +1,2 @@
+ent-ProximityShootOverBase = { "" }
+    .desc = { "" }

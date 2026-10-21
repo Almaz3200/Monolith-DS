@@ -42,10 +42,8 @@
     sprite: _NF/Clothing/Uniforms/Jumpskirt/mercenary.rsi
   - type: Clothing
     sprite: _NF/Clothing/Uniforms/Jumpskirt/mercenary.rsi
-  - type: SuitSensor # LuaM 
-    mode: SensorCords 
-  - type: ToggleableSignature # LuaM
-    enabled: false
+  - type: SuitSensor # LuaM
+    mode: SensorCords
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -68,10 +66,8 @@
     sprite: _NF/Clothing/Uniforms/Jumpskirt/nfsd_skirt.rsi
   - type: Clothing
     sprite: _NF/Clothing/Uniforms/Jumpskirt/nfsd_skirt.rsi
-  - type: SuitSensor # LuaM 
+  - type: SuitSensor # LuaM
     mode: SensorVitals
-  - type: ToggleableSignature # LuaM
-    enabled: false
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -83,10 +79,8 @@
     sprite: _NF/Clothing/Uniforms/Jumpskirt/nfsd_skirt_short.rsi
   - type: Clothing
     sprite: _NF/Clothing/Uniforms/Jumpskirt/nfsd_skirt_short.rsi
-  - type: SuitSensor # LuaM 
-    mode: SensorVitals 
-  - type: ToggleableSignature # LuaM
-    enabled: false
+  - type: SuitSensor # LuaM
+    mode: SensorVitals
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -109,10 +103,8 @@
     sprite: _NF/Clothing/Uniforms/Jumpskirt/private_security.rsi
   - type: Clothing
     sprite: _NF/Clothing/Uniforms/Jumpskirt/private_security.rsi
-  - type: SuitSensor # LuaM 
-    mode: SensorCords 
-  - type: ToggleableSignature # LuaM
-    enabled: false
+  - type: SuitSensor # LuaM
+    mode: SensorCords
 
 - type: entity
   parent: ClothingUniformJumpskirtHoP

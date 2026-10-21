@@ -11,6 +11,7 @@ using Content.Server.Speech;
 using Content.Server._EinsteinEngines.Language;
 using Content.Shared.Chat;
 using Content.Shared.Radio.EntitySystems;
+using Content.Shared._LuaM.Radio; // LuaM
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -46,20 +47,39 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
         if (!Resolve(uid, ref keyHolder))
             return;
 
-        if (keyHolder.Channels.Count == 0)
+        // LuaM start: channels switched off in the headset UI are not heard
+        var channels = new HashSet<string>(keyHolder.Channels);
+        if (TryComp<HeadsetChannelToggleComponent>(uid, out var toggle))
+            channels.ExceptWith(toggle.DisabledChannels);
+
+        if (channels.Count == 0)
             RemComp<ActiveRadioComponent>(uid);
         else
-            EnsureComp<ActiveRadioComponent>(uid).Channels = new(keyHolder.Channels);
+            EnsureComp<ActiveRadioComponent>(uid).Channels = channels;
+        // LuaM end
+    }
+
+    /// <summary>
+    /// LuaM: re-applies the heard channels of a worn headset, e.g. after channels were switched off.
+    /// </summary>
+    public void RefreshRadioChannels(EntityUid uid, HeadsetComponent? headset = null)
+    {
+        if (!Resolve(uid, ref headset) || !headset.IsEquipped)
+            return;
+
+        UpdateRadioChannels(uid, headset);
     }
 
     private void OnSpeak(EntityUid uid, WearingHeadsetComponent component, EntitySpokeEvent args)
     {
         if (args.Channel != null
             && TryComp(component.Headset, out EncryptionKeyHolderComponent? keys)
-            && keys.Channels.Contains(args.Channel.ID))
+            && keys.Channels.Contains(args.Channel.ID)
+            && !(TryComp<HeadsetChannelToggleComponent>(component.Headset, out var toggle) && toggle.DisabledChannels.Contains(args.Channel.ID))) // LuaM: switched off channels don't transmit
         {
             _punishment.Punish(uid, component.Headset, args.Message);
-            _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset, language: args.Language); // Corvax-TTS: added language: args.Language)
+            _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset, language: args.Language, // Corvax-TTS: added language: args.Language)
+                frequency: _radio.GetFrequency(component.Headset, args.Channel)); // LuaM: tunable headset frequency
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
