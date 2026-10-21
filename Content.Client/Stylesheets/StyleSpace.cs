@@ -10,12 +10,12 @@ namespace Content.Client.Stylesheets
 {
     public sealed class StyleSpace : StyleBase
     {
-        public static readonly Color SpaceRed = Color.FromHex("#9b2236");
+        public static readonly Color SpaceRed = LuaMPalette.AccentText; // LuaM: #9b2236 > palette
 
-        public static readonly Color ButtonColorDefault = Color.FromHex("#363636");
-        public static readonly Color ButtonColorHovered = Color.FromHex("#878787");
-        public static readonly Color ButtonColorPressed = Color.FromHex("#212121");
-        public static readonly Color ButtonColorDisabled = Color.FromHex("#1B1D1F");
+        public static readonly Color ButtonColorDefault = LuaMPalette.Button; // LuaM: #363636 > palette
+        public static readonly Color ButtonColorHovered = LuaMPalette.ButtonHover; // LuaM: #878787 > palette
+        public static readonly Color ButtonColorPressed = LuaMPalette.ButtonPressed; // LuaM: #212121 > palette
+        public static readonly Color ButtonColorDisabled = LuaMPalette.ButtonDisabled; // LuaM: #1B1D1F > palette
 
         public static readonly Color ButtonColorCautionDefault = Color.FromHex("#ab3232");
         public static readonly Color ButtonColorCautionHovered = Color.FromHex("#cf2f2f");
@@ -49,7 +49,7 @@ namespace Content.Client.Stylesheets
 
             var progressBarBackground = new StyleBoxFlat
             {
-                BackgroundColor = new Color(0.25f, 0.25f, 0.25f)
+                BackgroundColor = LuaMPalette.PanelDeep // LuaM: (0.25f, 0.25f, 0.25f) > palette
             };
             progressBarBackground.SetContentMarginOverride(StyleBox.Margin.Vertical, 14.5f);
 
@@ -64,9 +64,9 @@ namespace Content.Client.Stylesheets
             var tabContainerPanel = new StyleBoxTexture();
             tabContainerPanel.SetPatchMargin(StyleBox.Margin.All, 2);
 
-            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = new Color(64, 64, 64)};
+            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = LuaMPalette.Selected}; // LuaM: (64, 64, 64) > palette
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
-            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = new Color(32, 32, 32)};
+            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = LuaMPalette.PanelRaised}; // LuaM: (32, 32, 32) > palette
             tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
 
             Stylesheet = new Stylesheet(BaseRules.Concat(new StyleRule[]
@@ -88,7 +88,7 @@ namespace Content.Client.Stylesheets
                 Element<PanelContainer>().Class(ClassLowDivider)
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
-                        BackgroundColor = Color.FromHex("#444"),
+                        BackgroundColor = LuaMPalette.Border, // LuaM: #444 > palette
                         ContentMarginLeftOverride = 2,
                         ContentMarginBottomOverride = 2
                     }),

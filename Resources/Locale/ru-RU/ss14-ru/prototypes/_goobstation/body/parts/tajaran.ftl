@@ -20,3 +20,5 @@ ent-LeftFootTajaran = левая ступня таярана
     .desc = { ent-PartTajaran.desc }
 ent-RightFootTajaran = правая ступня таярана
     .desc = { ent-PartTajaran.desc }
+ent-TorsoTajaran = торс таярана
+    .desc = { ent-PartTajaran.desc }

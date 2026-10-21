@@ -58,7 +58,7 @@ public sealed partial class MapScreen : BoxContainer
     private float _minMapDequeue = 0.05f;
     private float _maxMapDequeue = 0.10f; // Frontier: 0.25 -> 0.10
 
-    private StyleBoxFlat _ftlStyle;
+//    private StyleBoxFlat _ftlStyle; // Commented by Lua
 
     public event Action<MapCoordinates, Angle>? RequestFTL;
     public event Action<NetEntity, Angle>? RequestBeaconFTL;
@@ -74,7 +74,7 @@ public sealed partial class MapScreen : BoxContainer
     /// <summary>
     /// Store the names of map object controls for re-sorting later.
     /// </summary>
-    private Dictionary<Control, string> _mapObjectControls = new();
+    private Dictionary<Control, MapObjectSortKey> _mapObjectControls = new(); // Lua: string > MapObjectSortKey
 
     private List<Control> _sortChildren = new();
 
@@ -89,15 +89,18 @@ public sealed partial class MapScreen : BoxContainer
         _shuttles = _entManager.System<ShuttleSystem>();
         _xformSystem = _entManager.System<SharedTransformSystem>();
 
-        MapRebuildButton.OnPressed += MapRebuildPressed;
+//        MapRebuildButton.OnPressed += MapRebuildPressed; // Commented by LuaM
+        InitializeMapTarget(); // LuaM
+        InitializeMapSearch(); // LuaM
 
         OnVisibilityChanged += OnVisChange;
 
         MapFTLButton.OnToggled += FtlPreviewToggled;
         MapAutopilotButton.OnToggled += AutopilotPreviewToggled; // Mono
 
-        _ftlStyle = new StyleBoxFlat(Color.LimeGreen);
-        FTLBar.ForegroundStyleBoxOverride = _ftlStyle;
+//        _ftlStyle = new StyleBoxFlat(Color.LimeGreen); // Commented by Lua
+//        FTLBar.ForegroundStyleBoxOverride = _ftlStyle; // Commented by Lua
+        InitializeLuaMap(); // Lua
 
         // Just pass it on up.
         MapRadar.RequestFTL += (coords, angle) =>
@@ -128,6 +131,7 @@ public sealed partial class MapScreen : BoxContainer
     {
         // Only network the accumulator due to ping making the thing fonky.
         // This should work better with predicting network states as they come in.
+        var previousState = _state; // Lua
         _beacons = state.Destinations;
         _exclusions = state.Exclusions;
         _state = state.FTLState;
@@ -149,45 +153,51 @@ public sealed partial class MapScreen : BoxContainer
         {
             case FTLState.Available:
                 SetFTLAllowed(true);
-                _ftlStyle.BackgroundColor = Color.FromHex("#80C71F");
+                FTLBar.SetColor(Color.FromHex("#80C71F")); // Lua
                 MapRadar.InFtl = false;
                 break;
             case FTLState.Starting:
                 SetFTLAllowed(false);
-                _ftlStyle.BackgroundColor = Color.FromHex("#169C9C");
+                FTLBar.SetColor(Color.FromHex("#169C9C")); // Lua
                 break;
             case FTLState.Travelling:
                 SetFTLAllowed(false);
-                _ftlStyle.BackgroundColor = Color.FromHex("#8932B8");
+                FTLBar.SetColor(Color.FromHex("#8932B8")); // Lua
                 break;
             case FTLState.Arriving:
                 SetFTLAllowed(false);
-                _ftlStyle.BackgroundColor = Color.FromHex("#F9801D");
+                FTLBar.SetColor(Color.FromHex("#F9801D")); // Lua
                 break;
             case FTLState.Cooldown:
                 SetFTLAllowed(false);
                 // Scroll to the FTL spot
-                if (_entManager.TryGetComponent(_shuttleEntity, out TransformComponent? shuttleXform))
+                if (_entManager.TryGetComponent(_shuttleEntity, out TransformComponent? shuttleXform)
+                    && shuttleXform.MapID != MapId.Nullspace) // Lua
                 {
                     var targetOffset = _maps.GetGridPosition(_shuttleEntity.Value);
-                    MapRadar.SetMap(shuttleXform.MapID, targetOffset, recentering: true);
+//                    MapRadar.SetMap(shuttleXform.MapID, targetOffset, recentering: true); // Commented by Lua
+// Lua-start: recenter once, so the map can still be panned during the cooldown
+                    if (MapRadar.ViewingMap != shuttleXform.MapID || previousState != FTLState.Cooldown)
+                        MapRadar.SetMap(shuttleXform.MapID, targetOffset, recentering: true);
+// Lua-end
                 }
 
-                _ftlStyle.BackgroundColor = Color.FromHex("#B02E26");
+                FTLBar.SetColor(Color.FromHex("#B02E26")); // Lua
                 MapRadar.InFtl = false;
                 break;
             // Fallback in case no FTL state or the likes.
             default:
                 SetFTLAllowed(false);
-                _ftlStyle.BackgroundColor = Color.FromHex("#B02E26");
+                FTLBar.SetColor(Color.FromHex("#B02E26")); // Lua
                 MapRadar.InFtl = false;
                 break;
         }
 
         if (IsFTLBlocked())
         {
-            MapRebuildButton.Disabled = true;
+//            MapRebuildButton.Disabled = true; // Commented by LuaM
             ClearMapObjects();
+            RequestMapRefresh(); // LuaM: rescan as soon as FTL is available again
         }
     }
 
@@ -260,6 +270,8 @@ public sealed partial class MapScreen : BoxContainer
             var mapPos = _xformSystem.GetMapCoordinates(_shuttleEntity.Value);
             MapRadar.SetMap(mapPos.MapId, mapPos.Position);
         }
+
+        RequestMapRefresh(); // LuaM
     }
 
     /// <summary>
@@ -282,7 +294,7 @@ public sealed partial class MapScreen : BoxContainer
         _pendingMapObjects.Clear();
 
         _nextPing = _timing.CurTime + _pingCooldown;
-        MapRebuildButton.Disabled = true;
+//        MapRebuildButton.Disabled = true; // Commented by LuaM
     }
 
     private void BumpMapDequeue()
@@ -290,14 +302,16 @@ public sealed partial class MapScreen : BoxContainer
         _nextMapDequeue = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(_minMapDequeue, _maxMapDequeue));
     }
 
-    private void MapRebuildPressed(BaseButton.ButtonEventArgs obj)
-    {
-        MapRadar.ShowFTLRangeOnly = true;
-        PingMap();
+// LuaM-commented-start: the scan button is gone
+//    private void MapRebuildPressed(BaseButton.ButtonEventArgs obj)
+//    {
+//        MapRadar.ShowFTLRangeOnly = true;
+//        PingMap();
 
-        // Reset range back after map pinging is complete.
-        MapRadar.ShowFTLRangeOnly = !MapFTLButton.Pressed;
-    }
+//        // Reset range back after map pinging is complete.
+//        MapRadar.ShowFTLRangeOnly = !MapFTLButton.Pressed;
+//    }
+// LuaM-commented-end
 
     /// <summary>
     /// Clears all sector objects across all maps (e.g. if we start FTLing or need to re-ping).
@@ -344,14 +358,15 @@ public sealed partial class MapScreen : BoxContainer
 
             var heading = new CollapsibleHeading(mapName);
 
-            heading.MinHeight = 32f;
+//            heading.MinHeight = 32f; // Commented by Lua
             heading.AddStyleClass(ContainerButton.StyleClassButton);
-            heading.AddStyleClass(StyleBase.ButtonSquare); // LuaM
+            heading.AddStyleClass(ConsoleStyles.Button); // LuaM // LuaM: ButtonSquare > console button
             heading.HorizontalAlignment = HAlignment.Stretch;
             heading.Label.HorizontalAlignment = HAlignment.Center;
             heading.Label.HorizontalExpand = true;
             heading.HorizontalExpand = true;
             heading.Margin = new Thickness(0, 4, 0, 0); // LuaM
+            StyleMapHeading(heading); // Lua
 
             var gridContents = new BoxContainer()
             {
@@ -488,6 +503,8 @@ public sealed partial class MapScreen : BoxContainer
         {
             case FTLState.Available:
                 return false;
+            case FTLState.Cooldown: // Lua: the map stays scanned after a jump
+                return false;
             default:
                 return true;
         }
@@ -499,6 +516,7 @@ public sealed partial class MapScreen : BoxContainer
             return;
 
         var coordinates = _shuttles.GetMapCoordinates(mapObject);
+        MapRadar.SelectMapObject(mapObject); // LuaM: full size label for the picked object
 
         // If it's our map then scroll, otherwise just set position there.
         MapRadar.SetMap(coordinates.MapId, coordinates.Position, recentering: true);
@@ -530,54 +548,61 @@ public sealed partial class MapScreen : BoxContainer
 
         var gridContents = _mapHeadings[mapId];
 
-        var gridButton = new Button()
-        {
-            Text = mapObj.Name,
-            HorizontalExpand = true,
-            SizeFlagsStretchRatio = 4, // Frontier
-        };
-        gridButton.AddStyleClass(StyleBase.ButtonSquare); // LuaM 
+// Lua-commented-start:
+//        var gridButton = new Button()
+//        {
+//            Text = mapObj.Name,
+//            HorizontalExpand = true,
+//            SizeFlagsStretchRatio = 4, // Frontier
+//        };
+//        gridButton.AddStyleClass(StyleBase.ButtonSquare); // LuaM 
 
-        var gridContainer = new BoxContainer()
-        {
-            Margin = new Thickness(2, 2), // LuaM
-            Children =
-            {
-                // LuaM-comented-start:
-                // new Control()
-                // {
-                //     MinWidth = 32f,
-                // },
-                // LuaM-comented-end
-                gridButton
-            }
-        };
+//        var gridContainer = new BoxContainer()
+//        {
+//            Margin = new Thickness(2, 2), // LuaM
+//            Children =
+//            {
+//                // LuaM-comented-start:
+//                // new Control()
+//                // {
+//                //     MinWidth = 32f,
+//                // },
+//                // LuaM-comented-end
+//                gridButton
+//            }
+//        };
 
-        _mapObjectControls.Add(gridContainer, mapObj.Name);
+//        _mapObjectControls.Add(gridContainer, mapObj.Name);
+//        gridContents.AddChild(gridContainer);
+
+//        gridButton.OnPressed += args =>
+//        {
+//            OnMapObjectPress(mapObj);
+//        };
+
+//        // Frontier: tracking button handler
+//        if (mapObj is GridMapObject gridObj)
+//        {
+//            var trackButton = new Button()
+//            {
+//                Text = Loc.GetString("shuttle-console-map-track"),
+//                HorizontalExpand = true,
+//                SizeFlagsStretchRatio = 1,
+//            };
+//            trackButton.AddStyleClass(StyleBase.ButtonSquare); //  LuaM
+//            trackButton.OnPressed += args =>
+//            {
+//                OnMapObjectTrackPress(mapObj);
+//            };
+//            gridContainer.AddChild(trackButton);
+//        }
+//        // End Frontier: tracking button handler
+// Lua-commented-end
+// Lua-start: rows with icons, the track button lives in the row as well
+        var gridContainer = CreateMapObjectRow(mapObj);
+        _mapObjectControls.Add(gridContainer, GetMapObjectSortKey(mapObj));
         gridContents.AddChild(gridContainer);
-
-        gridButton.OnPressed += args =>
-        {
-            OnMapObjectPress(mapObj);
-        };
-
-        // Frontier: tracking button handler
-        if (mapObj is GridMapObject gridObj)
-        {
-            var trackButton = new Button()
-            {
-                Text = Loc.GetString("shuttle-console-map-track"),
-                HorizontalExpand = true,
-                SizeFlagsStretchRatio = 1,
-            };
-            trackButton.AddStyleClass(StyleBase.ButtonSquare); //  LuaM
-            trackButton.OnPressed += args =>
-            {
-                OnMapObjectTrackPress(mapObj);
-            };
-            gridContainer.AddChild(trackButton);
-        }
-        // End Frontier: tracking button handler
+// Lua-end
 
         if (gridContents.ChildCount > 1)
         {
@@ -597,10 +622,11 @@ public sealed partial class MapScreen : BoxContainer
 
             _sortChildren.Sort((x, y) =>
             {
-                var xText = _mapObjectControls[x];
-                var yText = _mapObjectControls[y];
+//                var xText = _mapObjectControls[x];
+//                var yText = _mapObjectControls[y];
 
-                return string.Compare(xText, yText, StringComparison.CurrentCultureIgnoreCase);
+//                return string.Compare(xText, yText, StringComparison.CurrentCultureIgnoreCase); // Commented by Lua
+                return CompareMapObjectSortKeys(_mapObjectControls[x], _mapObjectControls[y]); // Lua
             });
 
             foreach (var control in _sortChildren)
@@ -625,13 +651,16 @@ public sealed partial class MapScreen : BoxContainer
         //     BumpMapDequeue();
         // }
 
-        if (!IsFTLBlocked() && _nextPing < curTime)
-        {
-            MapRebuildButton.Disabled = false;
-        }
+// LuaM-commented-start:
+//        if (!IsFTLBlocked() && _nextPing < curTime)
+//        {
+//            MapRebuildButton.Disabled = false;
+//        }
+// LuaM-commented-end
+        UpdateMapAutoRefresh(curTime); // LuaM
 
         var progress = _ftlTime.ProgressAt(curTime);
-        FTLBar.Value = float.IsFinite(progress) ? progress : 1;
+        FTLBar.SetProgress(float.IsFinite(progress) ? progress : 1); // Lua
     }
 
     protected override void Draw(DrawingHandleScreen handle)

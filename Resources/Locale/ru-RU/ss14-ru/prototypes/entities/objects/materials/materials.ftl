@@ -102,3 +102,5 @@ ent-MaterialGoliathHide = пластины голиафа
 ent-MaterialGoliathHide1 = { ent-MaterialGoliathHide }
     .suffix = 1
     .desc = { ent-MaterialGoliathHide.desc }
+ent-MaterialBaseDestructible = { ent-MaterialBase }
+    .desc = { ent-MaterialBase.desc }

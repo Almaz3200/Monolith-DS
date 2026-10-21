@@ -8,3 +8,5 @@ ent-ClothingModsuitChestplateVolta = Volta Modsuit Chestplate
     .desc = Усиленная военная модификация сапёрного модкостюма с повышенной пулестойкостью.
 ent-ClothingModsuitChestplateGalloglass = торс модкостюма «Галлоглас»
     .desc = Лёгкий модкостюм, который жертвует защитой от взрывов и тепла ради энергетического щита и скорости.
+ent-ClothingModsuitChestplateMercenary = mercenary modsuit chestplate
+    .desc = A well rounded modsuit that focuses on mobility with its Actuator Enhancement System allowing its wearer to leap across the battlefield for rapid redeployment.

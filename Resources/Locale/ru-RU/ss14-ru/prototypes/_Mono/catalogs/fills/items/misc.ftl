@@ -7,3 +7,6 @@ ent-WeaponCaseHeavyAmmo150EMP = { ent-WeaponCaseHeavyAmmo }
 ent-WeaponCaseHeavyAmmo150AP = { ent-WeaponCaseHeavyAmmo }
     .suffix = Тяжёлый, Корабельный, 150 мм, Бронебойный
     .desc = { ent-WeaponCaseHeavyAmmo.desc }
+ent-WeaponCaseHeavyAmmo150APHE = { ent-WeaponCaseHeavyAmmo }
+    .desc = { ent-WeaponCaseHeavyAmmo.desc }
+    .suffix = Heavy, Ship, 90x630mm APHE

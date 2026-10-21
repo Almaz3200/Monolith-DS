@@ -264,3 +264,5 @@ ent-CMSemioticEight = знак восьмёрки
 
 ent-CMSemioticNine = знак девятки
     .desc = Стандартное обозначение числа девять.
+ent-CMSemioticBase = { ent-BaseSign }
+    .desc = { ent-BaseSign.desc }
