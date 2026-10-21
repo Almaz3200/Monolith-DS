@@ -87,7 +87,7 @@
       jumpsuit:
         sizeMaps:
           32:
-            sprite: _White/Mobs/Species/displacement.rsi
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit-female
       shoes:
         sizeMaps:
@@ -98,7 +98,7 @@
       jumpsuit:
         sizeMaps:
           32:
-            sprite: _White/Mobs/Species/displacement.rsi
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit
       shoes:
         sizeMaps:
@@ -122,7 +122,7 @@
       jumpsuit:
         sizeMaps:
           32:
-            sprite: _White/Mobs/Species/displacement.rsi
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit-female
       shoes:
         sizeMaps:
@@ -133,7 +133,7 @@
       jumpsuit:
         sizeMaps:
           32:
-            sprite: _White/Mobs/Species/displacement.rsi
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit
       shoes:
         sizeMaps:

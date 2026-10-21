@@ -20,7 +20,8 @@
     requiredLegs: 2
   - type: Hunger
   - type: Thirst
-    baseDecayRate: 0.2
+  - type: Puller
+    needsHands: false
   - type: FeroxiDehydrate
     hydratedMetabolizer: Feroxi
     dehydratedMetabolizer: FeroxiDehydrated
