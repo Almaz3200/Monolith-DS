@@ -343,7 +343,7 @@
       allowedTiles:
         - FloorBasalt
       entities:
-        - FloorLavaEntity
+        - FloorLavaEntityExpedition # LuaM FloorLavaEntity > FloorLavaEntityExpedition
     # Rock formations
     - !type:BiomeEntityLayer
       allowedTiles:
