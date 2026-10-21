@@ -5,5 +5,5 @@ gun-examine-recoil = - [color={$color}]Recoil[/color]: [color=lightblue]{$value}
 gun-examine-stability = - [color={$color}]Stability[/color]: [color=lightblue]{$value}°[/color] per second
 gun-examine-max-angle = - [color={$color}]Maximum spread[/color]: [color=lightblue]{$value}°[/color]
 gun-examine-min-angle = - [color={$color}]Minimum spread[/color]: [color=lightblue]{$value}°[/color]
-gun-examine-fire-rate = - [color={$color}]Fire rate[/color]: [color=lightblue]{$value} RPS[/color]
+gun-examine-fire-rate = - [color={$color}]Fire rate[/color]: [color=lightblue]{$value} RPS[/color] | [color=lightblue]{$perMinute} RPM[/color]
 gun-examine-muzzle-velocity = - [color={$color}]Muzzle velocity[/color]: [color=lightblue]{$value} m/s[/color]

@@ -128,14 +128,17 @@ public class SharedHardpointSystem : EntitySystem
     /// <param name="args"></param>
     public void OnShipgunRemove(EntityUid uid, HardpointAnchorableOnlyComponent component, ComponentRemove args)
     {
-        if (component.anchoredTo is null || TerminatingOrDeleted(uid))
+        // LuaM: the gun being deleted (destroyed, deconstructed, sold) is exactly when the hardpoint must be freed.
+        // Bailing out on TerminatingOrDeleted(uid) left the hardpoint taken by a deleted gun, so no new gun could mount it.
+        if (component.anchoredTo is null || TerminatingOrDeleted(component.anchoredTo.Value))
         {
             return;
         }
         var gridUid = Transform(component.anchoredTo.Value).GridUid;
         if (gridUid is null)
             return;
-        var hardpointComp = Comp<HardpointComponent>(component.anchoredTo.Value);
+        if (!TryComp<HardpointComponent>(component.anchoredTo.Value, out var hardpointComp)) // LuaM
+            return;
         var hardpointUid = component.anchoredTo.Value;
         hardpointComp.anchoring = null;
         HardpointCannonDeanchoredEvent arg = new();
@@ -143,7 +146,8 @@ public class SharedHardpointSystem : EntitySystem
         arg.gridUid = gridUid.Value;
         RaiseLocalEvent(hardpointUid, arg);
         component.anchoredTo = null;
-        DirtyEntity(uid);
+        if (!TerminatingOrDeleted(uid)) // LuaM: no need to dirty a gun that is going away
+            DirtyEntity(uid);
         DirtyEntity(hardpointUid);
         //Dirty(arg.CannonUid, component);
     }
@@ -174,7 +178,7 @@ public class SharedHardpointSystem : EntitySystem
         {
             if (!TryComp<HardpointComponent>(entity, out var hardComp))
                 continue;
-            if (hardComp.anchoring is not null)
+            if (hardComp.anchoring is not null && !IsStaleAnchoring(entity, hardComp)) // LuaM: free hardpoints taken by gone guns
                 continue;
             if ((hardComp.CompatibleTypes & component.CompatibleTypes) == 0)
                 continue;
@@ -186,6 +190,21 @@ public class SharedHardpointSystem : EntitySystem
 
         return false;
     }
+
+    // LuaM
+    /// <summary>
+    /// Whether the hardpoint still points to a gun that was deleted or no longer sits on it.
+    /// </summary>
+    private bool IsStaleAnchoring(EntityUid hardpoint, HardpointComponent comp)
+    {
+        if (comp.anchoring is not { } gun || TerminatingOrDeleted(gun))
+            return true;
+
+        return !TryComp<HardpointAnchorableOnlyComponent>(gun, out var gunComp)
+               || gunComp.anchoredTo != hardpoint
+               || !Transform(gun).Anchored;
+    }
+    // End LuaM
 
     private void OnExamined(Entity<HardpointAnchorableOnlyComponent> ent, ref ExaminedEvent args)
     {

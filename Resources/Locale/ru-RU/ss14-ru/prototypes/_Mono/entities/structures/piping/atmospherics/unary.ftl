@@ -1,0 +1,12 @@
+ent-GasVentScrubberAlt1 = { ent-GasVentScrubber }
+    .desc = { ent-GasVentScrubber.desc }
+    .suffix = Secondary Configuration
+ent-GasVentScrubberAlt2 = { ent-GasVentScrubber }
+    .desc = { ent-GasVentScrubber.desc }
+    .suffix = Tertiary Configuration
+ent-GasVentPumpAlt1 = { ent-GasVentPump }
+    .desc = { ent-GasVentPump.desc }
+    .suffix = Secondary Configuration
+ent-GasVentPumpAlt2 = { ent-GasVentPump }
+    .desc = { ent-GasVentPump.desc }
+    .suffix = Tertiary Configuration

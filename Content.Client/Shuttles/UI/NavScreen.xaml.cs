@@ -39,6 +39,8 @@ public sealed partial class NavScreen : BoxContainer
         DockToggle.Pressed = NavRadar.ShowDocks;
 
         NfInitialize(); // Frontier Initialization for the NavScreen
+        InitializeGunnery(); // Lua
+        InitializeTargetControls(); // LuaM
     }
 
     // Frontier - IFF search
@@ -124,6 +126,7 @@ public sealed partial class NavScreen : BoxContainer
         ShieldPanel.Visible = scc.ShieldState.HasShield;
         ShieldBar.SetState(scc.ShieldState);
         // Forge-Change-End
+        UpdateWeaponsPanelVisibility(); // Lua: the shield sits in the gunnery panel now
 
         NfUpdateState(scc); // Frontier Update State
     }

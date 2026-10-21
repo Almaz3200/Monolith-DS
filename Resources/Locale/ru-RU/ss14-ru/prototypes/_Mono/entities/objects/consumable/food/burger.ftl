@@ -1,0 +1,16 @@
+ent-FoodBurgerMustardMothRoach = mustard mothroachburger
+    .desc = The last lamp it saw was the one inside the microwave.
+ent-FoodBurgerBoomRoach = boom roachburger
+    .desc = The last lamp it saw was the one inside the microwave.
+ent-FoodBurgerImperiRoach = imperi roachburger
+    .desc = The last lamp it saw was the one inside the microwave.
+ent-FoodBurgerOwORoach = OwO roachburger
+    .desc = The last lamp it saw was the one inside the microwave.
+ent-FoodBurgerMopRoach = mop roachburger
+    .desc = The last lamp it saw was the one inside the microwave.
+ent-FoodBurgerCecropiaMothRoach = cecropia mothroachburger
+    .desc = The last lamp it saw was the one inside the microwave.
+ent-FoodBurgerLeopardMothRoach = leopard mothroachburger
+    .desc = The last lamp it saw was the one inside the microwave.
+ent-FoodBurgerLunarMothRoach = lunar mothroachburger
+    .desc = The last lamp it saw was the one inside the microwave.

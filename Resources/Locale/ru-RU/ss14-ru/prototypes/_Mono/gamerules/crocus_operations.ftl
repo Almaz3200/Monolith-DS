@@ -1,0 +1,10 @@
+ent-BaseFactionalObjectives = { ent-BaseGameRule }
+    .desc = { ent-BaseGameRule.desc }
+ent-PDVObjectivesCrocus = { ent-BaseFactionalObjectives }
+    .desc = { ent-BaseFactionalObjectives.desc }
+ent-PDVCrocusObjectiveBase = { ent-BaseStealObjective }
+    .desc = { ent-BaseStealObjective.desc }
+ent-PDVCrocusObjectiveNanites = { ent-PDVCrocusObjectiveBase }
+    .desc = { ent-PDVCrocusObjectiveBase.desc }
+ent-PDVCrocusObjectivePDAs = { ent-PDVCrocusObjectiveBase }
+    .desc = { ent-PDVCrocusObjectiveBase.desc }

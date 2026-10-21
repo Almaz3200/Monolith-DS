@@ -16,3 +16,7 @@ ent-FoamedIronMetal = вспененное железо
     .desc = Для заделывания пробоин в корпусе.
 ent-FoamedAluminiumMetal = вспененный алюминий
     .desc = Для заделывания пробоин в корпусе.
+ent-WizardSmoke = smoke
+    .desc = { ent-Smoke.desc }
+ent-ReactionFlash = { "" }
+    .desc = { "" }

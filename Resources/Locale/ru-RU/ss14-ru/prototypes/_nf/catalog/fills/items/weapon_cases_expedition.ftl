@@ -296,3 +296,6 @@ ent-WeaponCaseShortAmmoAmmoBox12_gaugeBuckshotgun = { ent-WeaponCaseShortAmmo }
 ent-WeaponCaseShortAntiqueLaserExpedition = { ent-WeaponCaseShort }
     .desc = { ent-WeaponCaseShort.desc }
     .suffix = Экспедиция, Антиквар, EXL-14
+ent-WeaponCaseLongIrohExpedition = { ent-WeaponCaseLong }
+    .desc = { ent-WeaponCaseLong.desc }
+    .suffix = Dungeon, Iroh

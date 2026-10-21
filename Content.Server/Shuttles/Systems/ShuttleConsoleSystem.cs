@@ -110,6 +110,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         InitializeFTL();
 
         InitializeNFDrone(); // Frontier: add our drone subscriptions
+        InitializeFireControl(); // Lua
     }
 
     private void OnFtlDestStartup(EntityUid uid, FTLDestinationComponent component, ComponentStartup args)
@@ -439,7 +440,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
         if (_ui.HasUi(consoleUid, ShuttleConsoleUiKey.Key))
         {
-            _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState));
+            _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, WithFireControl(consoleUid, new ShuttleBoundUserInterfaceState(navState, mapState, dockState))); // Lua: fire control
         }
     }
 

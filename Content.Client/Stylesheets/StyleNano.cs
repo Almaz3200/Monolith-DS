@@ -119,20 +119,20 @@ namespace Content.Client.Stylesheets
         public const string StyleClassPopupMessageLarge = "PopupMessageLarge";
         public const string StyleClassPopupMessageLargeCaution = "PopupMessageLargeCaution";
 
-        public static readonly Color PanelDark = Color.FromHex("#1E1E1E");
+        public static readonly Color PanelDark = LuaMPalette.Panel; // LuaM: #1E1E1E > palette
 
-        public static readonly Color NanoGold = Color.FromHex("#bdbdbd");
+        public static readonly Color NanoGold = LuaMPalette.AccentText; // LuaM: #bdbdbd > palette
         public static readonly Color GoodGreenFore = Color.FromHex("#31843E");
         public static readonly Color ConcerningOrangeFore = Color.FromHex("#A5762F");
         public static readonly Color DangerousRedFore = Color.FromHex("#BB3232");
         public static readonly Color DisabledFore = Color.FromHex("#5A5A5A");
 
-        public static readonly Color ButtonColorDefault = Color.FromHex("#363636");
+        public static readonly Color ButtonColorDefault = LuaMPalette.Button; // LuaM: #363636 > palette
         public static readonly Color ButtonColorDefaultRed = Color.FromHex("#D43B3B");
-        public static readonly Color ButtonColorHovered = Color.FromHex("#878787");
+        public static readonly Color ButtonColorHovered = LuaMPalette.ButtonHover; // LuaM: #878787 > palette
         public static readonly Color ButtonColorHoveredRed = Color.FromHex("#DF6B6B");
-        public static readonly Color ButtonColorPressed = Color.FromHex("#212121");
-        public static readonly Color ButtonColorDisabled = Color.FromHex("#1B1D1F");
+        public static readonly Color ButtonColorPressed = LuaMPalette.ButtonPressed; // LuaM: #212121 > palette
+        public static readonly Color ButtonColorDisabled = LuaMPalette.ButtonDisabled; // LuaM: #1B1D1F > palette
 
         public static readonly Color ButtonColorCautionDefault = Color.FromHex("#ab3232");
         public static readonly Color ButtonColorCautionHovered = Color.FromHex("#cf2f2f");
@@ -150,20 +150,20 @@ namespace Content.Client.Stylesheets
 
         // Context menu button colors
         public static readonly Color ButtonColorContext = Color.FromHex("#1119");
-        public static readonly Color ButtonColorContextHover = Color.FromHex("#4a4a4a");
-        public static readonly Color ButtonColorContextPressed = Color.FromHex("#888888");
+        public static readonly Color ButtonColorContextHover = LuaMPalette.ButtonHover; // LuaM: #4a4a4a > palette
+        public static readonly Color ButtonColorContextPressed = LuaMPalette.ButtonPressed; // LuaM: #888888 > palette
         public static readonly Color ButtonColorContextDisabled = Color.Black;
 
         // Examine button colors
         public static readonly Color ExamineButtonColorContext = Color.Transparent;
-        public static readonly Color ExamineButtonColorContextHover = Color.FromHex("#4a4a4a");
-        public static readonly Color ExamineButtonColorContextPressed = Color.FromHex("#888888");
+        public static readonly Color ExamineButtonColorContextHover = LuaMPalette.ButtonHover; // LuaM: #4a4a4a > palette
+        public static readonly Color ExamineButtonColorContextPressed = LuaMPalette.ButtonPressed; // LuaM: #888888 > palette
         public static readonly Color ExamineButtonColorContextDisabled = Color.FromHex("#5A5A5A");
 
         // Fancy Tree elements
-        public static readonly Color FancyTreeEvenRowColor = Color.FromHex("#242424");
+        public static readonly Color FancyTreeEvenRowColor = LuaMPalette.PanelRaised; // LuaM: #242424 > palette
         public static readonly Color FancyTreeOddRowColor = FancyTreeEvenRowColor * new Color(0.8f, 0.8f, 0.8f);
-        public static readonly Color FancyTreeSelectedRowColor = new Color(63, 63, 63);
+        public static readonly Color FancyTreeSelectedRowColor = LuaMPalette.Selected; // LuaM: (63, 63, 63) > palette
 
         //Used by the APC and SMES menus
         public const string StyleClassPowerStateNone = "PowerStateNone";
@@ -215,13 +215,22 @@ namespace Content.Client.Stylesheets
             var robotoMonoBold12 = resCache.GetFont("/Fonts/RobotoMono/RobotoMono-Bold.ttf", size: 12);
             var robotoMonoBold14 = resCache.GetFont("/Fonts/RobotoMono/RobotoMono-Bold.ttf", size: 14);
             var windowHeaderTex = resCache.GetTexture("/Textures/Interface/Nano/window_header.png");
-            var windowHeader = new StyleBoxTexture
+//            var windowHeader = new StyleBoxTexture
+//            {
+//                Texture = windowHeaderTex,
+//                PatchMarginBottom = 3,
+//                ExpandMarginBottom = 3,
+//                ContentMarginBottomOverride = 0
+//            }; // Commented by LuaM
+// LuaM-start: palette window header
+            var windowHeader = new StyleBoxFlat
             {
-                Texture = windowHeaderTex,
-                PatchMarginBottom = 3,
-                ExpandMarginBottom = 3,
-                ContentMarginBottomOverride = 0
+                BackgroundColor = LuaMPalette.Header,
+                BorderColor = LuaMPalette.Border,
+                BorderThickness = new Thickness(0, 0, 0, 1),
             };
+            windowHeader.SetContentMarginOverride(StyleBox.Margin.All, 0);
+// LuaM-end
             var windowHeaderAlertTex = resCache.GetTexture("/Textures/Interface/Nano/window_header_alert.png");
             var windowHeaderAlert = new StyleBoxTexture
             {
@@ -231,25 +240,52 @@ namespace Content.Client.Stylesheets
                 ContentMarginBottomOverride = 0
             };
             var windowBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/window_background.png");
-            var windowBackground = new StyleBoxTexture
+//            var windowBackground = new StyleBoxTexture
+//            {
+//                Texture = windowBackgroundTex,
+//            };
+//            windowBackground.SetPatchMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2); // Commented by LuaM
+// LuaM-start: palette window body
+            var windowBackground = new StyleBoxFlat
             {
-                Texture = windowBackgroundTex,
+                BackgroundColor = LuaMPalette.Panel,
+                BorderColor = LuaMPalette.Border,
+                BorderThickness = new Thickness(1, 0, 1, 1),
             };
-            windowBackground.SetPatchMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
-            windowBackground.SetExpandMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
+            windowBackground.SetContentMarginOverride(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
+            windowBackground.SetContentMarginOverride(StyleBox.Margin.Top, 0);
+// LuaM-end
+//            windowBackground.SetExpandMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2); // Commented by LuaM: flat boxes have no expand margin
 
             var borderedWindowBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/window_background_bordered.png");
-            var borderedWindowBackground = new StyleBoxTexture
-            {
-                Texture = borderedWindowBackgroundTex,
-            };
-            borderedWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
+//            var borderedWindowBackground = new StyleBoxTexture
+//            {
+//                Texture = borderedWindowBackgroundTex,
+//            };
+//            borderedWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
 
-            var contextMenuBackground = new StyleBoxTexture
+//            var contextMenuBackground = new StyleBoxTexture
+//            {
+//                Texture = borderedWindowBackgroundTex,
+//            };
+//            contextMenuBackground.SetPatchMargin(StyleBox.Margin.All, ContextMenuElement.ElementMargin); // Commented by LuaM
+// LuaM-start: palette bordered panels and context menus
+            var borderedWindowBackground = new StyleBoxFlat
             {
-                Texture = borderedWindowBackgroundTex,
+                BackgroundColor = LuaMPalette.Panel,
+                BorderColor = LuaMPalette.Border,
+                BorderThickness = new Thickness(1),
             };
-            contextMenuBackground.SetPatchMargin(StyleBox.Margin.All, ContextMenuElement.ElementMargin);
+            borderedWindowBackground.SetContentMarginOverride(StyleBox.Margin.All, 2);
+
+            var contextMenuBackground = new StyleBoxFlat
+            {
+                BackgroundColor = LuaMPalette.Panel,
+                BorderColor = LuaMPalette.Border,
+                BorderThickness = new Thickness(1),
+            };
+            contextMenuBackground.SetContentMarginOverride(StyleBox.Margin.All, ContextMenuElement.ElementMargin);
+// LuaM-end
 
             var invSlotBgTex = resCache.GetTexture("/Textures/Interface/Inventory/inv_slot_background.png");
             var invSlotBg = new StyleBoxTexture
@@ -267,11 +303,20 @@ namespace Content.Client.Stylesheets
             handSlotHighlight.SetPatchMargin(StyleBox.Margin.All, 2);
 
             var borderedTransparentWindowBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/transparent_window_background_bordered.png");
-            var borderedTransparentWindowBackground = new StyleBoxTexture
+//            var borderedTransparentWindowBackground = new StyleBoxTexture
+//            {
+//                Texture = borderedTransparentWindowBackgroundTex,
+//            };
+//            borderedTransparentWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2); // Commented by LuaM
+// LuaM-start: palette, see-through
+            var borderedTransparentWindowBackground = new StyleBoxFlat
             {
-                Texture = borderedTransparentWindowBackgroundTex,
+                BackgroundColor = LuaMPalette.Panel.WithAlpha(0.75f),
+                BorderColor = LuaMPalette.Border,
+                BorderThickness = new Thickness(1),
             };
-            borderedTransparentWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
+            borderedTransparentWindowBackground.SetContentMarginOverride(StyleBox.Margin.All, 2);
+// LuaM-end
 
             var hotbarBackground = new StyleBoxTexture
             {
@@ -388,11 +433,20 @@ namespace Content.Client.Stylesheets
             var textureInvertedTriangle = resCache.GetTexture("/Textures/Interface/Nano/inverted_triangle.svg.png");
 
             var lineEditTex = resCache.GetTexture("/Textures/Interface/Nano/lineedit.png");
-            var lineEdit = new StyleBoxTexture
+//            var lineEdit = new StyleBoxTexture
+//            {
+//                Texture = lineEditTex,
+//            };
+//            lineEdit.SetPatchMargin(StyleBox.Margin.All, 3); // Commented by LuaM
+// LuaM-start: palette input
+            var lineEdit = new StyleBoxFlat
             {
-                Texture = lineEditTex,
+                BackgroundColor = LuaMPalette.PanelDeep,
+                BorderColor = LuaMPalette.Border,
+                BorderThickness = new Thickness(1),
             };
-            lineEdit.SetPatchMargin(StyleBox.Margin.All, 3);
+            lineEdit.SetContentMarginOverride(StyleBox.Margin.Vertical, 3);
+// LuaM-end
             lineEdit.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
 
             var chatBg = new StyleBoxFlat
@@ -415,20 +469,29 @@ namespace Content.Client.Stylesheets
             actionSearchBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
 
             var tabContainerPanelTex = resCache.GetTexture("/Textures/Interface/Nano/tabcontainer_panel.png");
-            var tabContainerPanel = new StyleBoxTexture
+//            var tabContainerPanel = new StyleBoxTexture
+//            {
+//                Texture = tabContainerPanelTex,
+//            };
+//            tabContainerPanel.SetPatchMargin(StyleBox.Margin.All, 2); // Commented by LuaM
+// LuaM-start: palette tab panel
+            var tabContainerPanel = new StyleBoxFlat
             {
-                Texture = tabContainerPanelTex,
+                BackgroundColor = LuaMPalette.Panel,
+                BorderColor = LuaMPalette.Border,
+                BorderThickness = new Thickness(1),
             };
-            tabContainerPanel.SetPatchMargin(StyleBox.Margin.All, 2);
+            tabContainerPanel.SetContentMarginOverride(StyleBox.Margin.All, 2);
+// LuaM-end
 
-            var tabContainerBoxActive = new StyleBoxFlat { BackgroundColor = new Color(64, 64, 64) };
+            var tabContainerBoxActive = new StyleBoxFlat { BackgroundColor = LuaMPalette.Selected }; // LuaM: (64, 64, 64) > palette
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
-            var tabContainerBoxInactive = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 32) };
+            var tabContainerBoxInactive = new StyleBoxFlat { BackgroundColor = LuaMPalette.PanelRaised }; // LuaM: (32, 32, 32) > palette
             tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
 
             var progressBarBackground = new StyleBoxFlat
             {
-                BackgroundColor = new Color(0.25f, 0.25f, 0.25f)
+                BackgroundColor = LuaMPalette.PanelDeep // LuaM: (0.25f, 0.25f, 0.25f) > palette
             };
             progressBarBackground.SetContentMarginOverride(StyleBox.Margin.Vertical, 14.5f);
 
@@ -469,13 +532,13 @@ namespace Content.Client.Stylesheets
             placeholder.SetExpandMargin(StyleBox.Margin.All, -5);
             placeholder.Mode = StyleBoxTexture.StretchMode.Tile;
 
-            var itemListBackgroundSelected = new StyleBoxFlat { BackgroundColor = new Color(75, 75, 86) };
+            var itemListBackgroundSelected = new StyleBoxFlat { BackgroundColor = LuaMPalette.Selected }; // LuaM: (75, 75, 86) > palette
             itemListBackgroundSelected.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListBackgroundSelected.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
-            var itemListItemBackgroundDisabled = new StyleBoxFlat { BackgroundColor = new Color(10, 10, 12) };
+            var itemListItemBackgroundDisabled = new StyleBoxFlat { BackgroundColor = LuaMPalette.PanelDeep }; // LuaM: (10, 10, 12) > palette
             itemListItemBackgroundDisabled.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListItemBackgroundDisabled.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
-            var itemListItemBackground = new StyleBoxFlat { BackgroundColor = new Color(54, 54, 54) };
+            var itemListItemBackground = new StyleBoxFlat { BackgroundColor = LuaMPalette.PanelRaised }; // LuaM: (54, 54, 54) > palette
             itemListItemBackground.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListItemBackground.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
             var itemListItemBackgroundTransparent = new StyleBoxFlat { BackgroundColor = Color.Transparent };
@@ -519,7 +582,7 @@ namespace Content.Client.Stylesheets
             var sliderFillBox = new StyleBoxTexture
             {
                 Texture = sliderFillTex,
-                Modulate = Color.FromHex("#3E6C45")
+                Modulate = LuaMPalette.Accent // LuaM: #3E6C45 > palette
             };
 
             var sliderBackBox = new StyleBoxTexture
@@ -531,7 +594,7 @@ namespace Content.Client.Stylesheets
             var sliderForeBox = new StyleBoxTexture
             {
                 Texture = sliderOutlineTex,
-                Modulate = Color.FromHex("#363636")
+                Modulate = LuaMPalette.Border // LuaM: #363636 > palette
             };
 
             var sliderGrabBox = new StyleBoxTexture
@@ -554,7 +617,7 @@ namespace Content.Client.Stylesheets
             var insetBack = new StyleBoxTexture
             {
                 Texture = buttonTex,
-                Modulate = Color.FromHex("#292929"),
+                Modulate = LuaMPalette.PanelDeep, // LuaM: #292929 > palette
             };
             insetBack.SetPatchMargin(StyleBox.Margin.All, 10);
 
@@ -868,19 +931,19 @@ namespace Content.Client.Stylesheets
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassNormal)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(65, 65, 65)),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.Button), // LuaM: (65, 65, 65) > palette
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassHover)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(78, 78, 78)),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.ButtonHover), // LuaM: (78, 78, 78) > palette
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassPressed)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(78, 78, 78)),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.ButtonPressed), // LuaM: (78, 78, 78) > palette
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassDisabled)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(10, 10, 12)),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.ButtonDisabled), // LuaM: (10, 10, 12) > palette
 
                 // Main menu: Make those buttons bigger.
                 new StyleRule(new SelectorChild(
@@ -1096,7 +1159,7 @@ namespace Content.Client.Stylesheets
                 new StyleRule(new SelectorElement(typeof(ItemList), null, null, null), new[]
                 {
                     new StyleProperty(ItemList.StylePropertyBackground,
-                        new StyleBoxFlat {BackgroundColor = new Color(37, 37, 37)}),
+                        new StyleBoxFlat {BackgroundColor = LuaMPalette.PanelDeep}), // LuaM: (37, 37, 37) > palette
                     new StyleProperty(ItemList.StylePropertyItemBackground,
                         itemListItemBackground),
                     new StyleProperty(ItemList.StylePropertyDisabledItemBackground,
@@ -1133,10 +1196,10 @@ namespace Content.Client.Stylesheets
                 new StyleRule(new SelectorElement(typeof(Tree), null, null, null), new[]
                 {
                     new StyleProperty(Tree.StylePropertyBackground,
-                        new StyleBoxFlat {BackgroundColor = new Color(37, 37, 37)}),
+                        new StyleBoxFlat {BackgroundColor = LuaMPalette.PanelDeep}), // LuaM: (37, 37, 37) > palette
                     new StyleProperty(Tree.StylePropertyItemBoxSelected, new StyleBoxFlat
                     {
-                        BackgroundColor = new Color(70, 70, 70),
+                        BackgroundColor = LuaMPalette.Selected, // LuaM: (70, 70, 70) > palette
                         ContentMarginLeftOverride = 4
                     })
                 }),
@@ -1436,7 +1499,7 @@ namespace Content.Client.Stylesheets
                 }),
 
                 Element<PanelContainer>().Class(OptionButton.StyleClassOptionsBackground)
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(Color.FromHex("#292929"))),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(LuaMPalette.Panel)), // LuaM: #292929 > palette
 
                 new StyleRule(new SelectorElement(typeof(PanelContainer), new []{ ClassHighDivider}, null, null), new []
                 {
@@ -1458,22 +1521,22 @@ namespace Content.Client.Stylesheets
                 // Different Background shapes ---
                 Element<PanelContainer>().Class(ClassAngleRect)
                     .Prop(PanelContainer.StylePropertyPanel, BaseAngleRect)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#292929")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.Panel), // LuaM: #292929 > palette
 
                 Element<PanelContainer>().Class("BackgroundOpenRight")
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenRight)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#292929")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.Panel), // LuaM: #292929 > palette
 
                 Element<PanelContainer>().Class("BackgroundOpenLeft")
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenLeft)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#292929")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.Panel), // LuaM: #292929 > palette
                 // ---
 
                 // Dividers
                 Element<PanelContainer>().Class(ClassLowDivider)
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
-                        BackgroundColor = Color.FromHex("#444"),
+                        BackgroundColor = LuaMPalette.Border, // LuaM: #444 > palette
                         ContentMarginLeftOverride = 2,
                         ContentMarginBottomOverride = 2
                     }),
@@ -1485,7 +1548,7 @@ namespace Content.Client.Stylesheets
 
                 Element<PanelContainer>().Class("WindowHeadingBackground")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenLeft) { Padding = default })
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#191919")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.Header), // LuaM: #191919 > palette
 
                 Element<PanelContainer>().Class("WindowHeadingBackgroundLight")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenLeft) { Padding = default }),
@@ -1504,15 +1567,15 @@ namespace Content.Client.Stylesheets
                 //The lengths you have to go through to change a background color smh
                 Element<PanelContainer>().Class("PanelBackgroundBaseDark")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenBoth) { Padding = default })
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#212121")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.PanelDeep), // LuaM: #212121 > palette
 
                 Element<PanelContainer>().Class("PanelBackgroundBaseLight") // Goob Station
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenBoth) { Padding = default })
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#2d2d39")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.PanelRaised), // LuaM: #2d2d39 > palette
 
                 Element<PanelContainer>().Class("PanelBackgroundLight")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenBoth) { Padding = default })
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#454545")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.Button), // LuaM: #454545 > palette
 
                 // Window Footer
                 Element<TextureRect>().Class("NTLogoDark")
@@ -1639,7 +1702,7 @@ namespace Content.Client.Stylesheets
                 //PDA - Backgrounds
                 Element<PanelContainer>().Class("PdaContentBackground")
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenBoth)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#262626")),
+                    .Prop(Control.StylePropertyModulateSelf, LuaMPalette.Panel), // LuaM: #262626 > palette
 
                 Element<PanelContainer>().Class("PdaBackground")
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenBoth)
@@ -1653,7 +1716,7 @@ namespace Content.Client.Stylesheets
                     .Prop(PanelContainer.StylePropertyPanel, AngleBorderRect),
 
                 Element<PanelContainer>().Class("BackgroundDark")
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(Color.FromHex("#242424"))),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(LuaMPalette.PanelDeep)), // LuaM: #242424 > palette
 
                 //PDA - Buttons
                 Element<PdaSettingsButton>().Pseudo(ContainerButton.StylePseudoClassNormal)
@@ -1806,7 +1869,7 @@ namespace Content.Client.Stylesheets
                         Modulate = ButtonColorGoodDefault
                     }),
 //            }).ToList()); // Commented by LuaM
-            }).Concat(DeadSpaceAHelpStyles.GetRules(resCache)).ToList()); // LuaM: register the Dead Space 14 AHelp visual rules in the legacy stylesheet pipeline.
+            }).Concat(DeadSpaceAHelpStyles.GetRules(resCache)).Concat(ConsoleStyles.GetRules(resCache)).ToList()); // LuaM: register the Dead Space 14 AHelp visual rules in the legacy stylesheet pipeline. // LuaM: + console styles
         }
     }
 }

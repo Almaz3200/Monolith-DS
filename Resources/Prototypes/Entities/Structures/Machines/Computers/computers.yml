@@ -263,6 +263,9 @@
         params:
           loop: true
           volume: 1
+  - type: ShipNpcTarget # LuaM
+    needPower: true
+    maxTargetRange: 75
 
 - type: entity
   parent: BaseComputerShuttle

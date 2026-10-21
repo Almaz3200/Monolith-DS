@@ -44,3 +44,19 @@ analysis-console-info-durability-triggered = [font="Monospace" size=11][color={ 
     }[/color][/font]
 analysis-console-info-effect-unknown = Неизвестно
 
+analysis-console-scan-button = Сканировать
+analysis-console-scan-tooltip-info = Сканируйте артефакты, чтобы узнать информацию об их структуре.
+analysis-console-print-button = Печать
+analysis-console-print-tooltip-info = Распечатать текущую информацию об артефакте.
+analysis-console-extract-button-info = Извлечь очки из артефакта на основе недавно исследованных узлов.
+analysis-console-bias-up = Вверх
+analysis-console-bias-down = Вниз
+analysis-console-bias-button-info-up = Переключает смещение артефакта при перемещении между узлами. Вверх ведёт к нулевой глубине.
+analysis-console-bias-button-info-down = Переключает смещение артефакта при перемещении между узлами. Вниз ведёт ко всё большим глубинам.
+analysis-console-no-server-connected = Невозможно извлечь. Сервер не подключён.
+analysis-console-no-artifact-placed = На сканере нет артефакта.
+analysis-console-no-points-to-extract = Нет очков для извлечения.
+analyzer-artifact-component-upgrade-analysis = длительность анализа
+analysis-console-print-popup = Консоль распечатала отчёт.
+analysis-report-title = Отчёт об артефакте: Узел { $id }
+artifact-analyzer-upgrade-duration = Задержка сканирования

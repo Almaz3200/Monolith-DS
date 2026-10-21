@@ -77,3 +77,5 @@ ent-PlasmaGlassReactorHeatExchanger = стержень теплообменни�
     .desc = { ent-BaseReactorHeatExchanger.desc }
 ent-DiamondReactorHeatExchanger = алмазный стержень теплообменника
     .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-BaseReactorPart = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }

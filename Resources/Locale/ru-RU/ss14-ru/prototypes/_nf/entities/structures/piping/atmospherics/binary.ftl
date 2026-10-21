@@ -18,3 +18,15 @@ ent-Gaslock = { ent-BasePressurePumpGaslock }
 
 ent-GaslockFrame = переносной газовый шлюз
     .desc = Осуществляет подачу газа. Принимает стыковку, но не может стыковаться сам. Для подачи газа необходимо, чтобы обе стороны были соединены и газ перемещался в одном направлении.
+ent-GasPressurePumpAlt1On = { ent-GasPressurePumpOn }
+    .desc = { ent-GasPressurePumpOn.desc }
+    .suffix = { ent-GasPressurePumpOn.suffix }
+ent-GasPressurePumpAlt2On = { ent-GasPressurePumpOn }
+    .desc = { ent-GasPressurePumpOn.desc }
+    .suffix = { ent-GasPressurePumpOn.suffix }
+ent-GasVolumePumpAlt1On = { ent-GasVolumePumpOn }
+    .desc = { ent-GasVolumePumpOn.desc }
+    .suffix = { ent-GasVolumePumpOn.suffix }
+ent-GasVolumePumpAlt2On = { ent-GasVolumePumpOn }
+    .desc = { ent-GasVolumePumpOn.desc }
+    .suffix = { ent-GasVolumePumpOn.suffix }
