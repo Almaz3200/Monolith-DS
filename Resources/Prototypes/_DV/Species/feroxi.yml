@@ -1,7 +1,7 @@
 - type: species
   id: Feroxi
   name: species-name-feroxi
-#  roundStart: true # Commented by LuaM
+  roundStart: false # LuaM: true > false
   prototype: MobFeroxi
   sprites: MobFeroxiSprites
   defaultSkinTone: "#8DB9D6"

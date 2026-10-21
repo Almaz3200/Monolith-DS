@@ -44,6 +44,9 @@ public sealed partial class TraitPrototype : IPrototype
     [DataField]
     public ComponentRegistry Components { get; private set; } = default!;
 
+    [DataField] // LuaM
+    public ComponentRegistry RemoveComponents { get; private set; } = new(); // LuaM
+
     /// <summary>
     /// Gear that is given to the player, when they pick this trait.
     /// </summary>
