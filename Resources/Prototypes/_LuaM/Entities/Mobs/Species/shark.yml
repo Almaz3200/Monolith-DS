@@ -20,6 +20,21 @@
     requiredLegs: 2
   - type: Hunger
   - type: Thirst
+    baseDecayRate: 0.2
+  - type: FeroxiDehydrate
+    hydratedMetabolizer: Feroxi
+    dehydratedMetabolizer: FeroxiDehydrated
+    dehydrationThreshold: 150
+  - type: Speech
+    speechVerb: Feroxi
+    allowedEmotes: ['Gnash']
+  - type: Vocal
+    sounds:
+      Male: MaleFeroxi
+      Female: FemaleFeroxi
+      Unsexed: MaleFeroxi
+  - type: TypingIndicator
+    proto: feroxi
   - type: Carriable
   - type: Damageable
     damageContainer: Biological
@@ -27,9 +42,9 @@
   - type: MeleeWeapon
     hidden: true
     soundHit:
-      path: /Audio/Weapons/pierce.ogg
+      path: /Audio/Effects/bite.ogg
     angle: 30
-    animation: WeaponArcPunch
+    animation: WeaponArcBite
     damage:
       types:
         Piercing: 5

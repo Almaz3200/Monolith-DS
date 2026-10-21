@@ -20,8 +20,8 @@
       - head
       organs:
         heart: OrganAnimalHeart
-        lungs: OrganHumanLungs
-        stomach: OrganAnimalStomach
+        lungs: OrganFeroxiLungs
+        stomach: OrganFeroxiStomach
         liver: OrganAnimalLiver
         kidneys: OrganHumanKidneys
     right arm:

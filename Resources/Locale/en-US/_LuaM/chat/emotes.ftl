@@ -9,3 +9,5 @@ chat-emote-msg-felinid-meow = meows.
 chat-emote-msg-felinid-mew = mews.
 chat-emote-msg-felinid-growl = growls.
 chat-emote-msg-felinid-purr = purrs.
+
+chat-emote-msg-gnash = gnashes.

@@ -82,4 +82,8 @@ public sealed partial class InteractionPopupComponent : Component
     /// </summary>
     [DataField]
     public bool OnActivate;
+
+    // -- компонент не сетевой: если сервер подменяет его (трейты, лоадауты), предсказание надо выключать
+    [DataField] // LuaM
+    public bool Predict = true; // LuaM
 }
