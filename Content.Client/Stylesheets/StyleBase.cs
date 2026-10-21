@@ -133,12 +133,12 @@ namespace Content.Client.Stylesheets
             };
             var vScrollBarGrabberHover = new StyleBoxFlat
             {
-                BackgroundColor = new Color(140, 140, 140).WithAlpha(0.35f), ContentMarginLeftOverride = DefaultGrabberSize,
+                BackgroundColor = LuaMPalette.Scrollbar.WithAlpha(0.35f), ContentMarginLeftOverride = DefaultGrabberSize, // LuaM: (140, 140, 140) > palette
                 ContentMarginTopOverride = DefaultGrabberSize
             };
             var vScrollBarGrabberGrabbed = new StyleBoxFlat
             {
-                BackgroundColor = new Color(160, 160, 160).WithAlpha(0.35f), ContentMarginLeftOverride = DefaultGrabberSize,
+                BackgroundColor = LuaMPalette.ScrollbarHover.WithAlpha(0.35f), ContentMarginLeftOverride = DefaultGrabberSize, // LuaM: (160, 160, 160) > palette
                 ContentMarginTopOverride = DefaultGrabberSize
             };
 
@@ -148,11 +148,11 @@ namespace Content.Client.Stylesheets
             };
             var hScrollBarGrabberHover = new StyleBoxFlat
             {
-                BackgroundColor = new Color(140, 140, 140).WithAlpha(0.35f), ContentMarginTopOverride = DefaultGrabberSize
+                BackgroundColor = LuaMPalette.Scrollbar.WithAlpha(0.35f), ContentMarginTopOverride = DefaultGrabberSize // LuaM: (140, 140, 140) > palette
             };
             var hScrollBarGrabberGrabbed = new StyleBoxFlat
             {
-                BackgroundColor = new Color(160, 160, 160).WithAlpha(0.35f), ContentMarginTopOverride = DefaultGrabberSize
+                BackgroundColor = LuaMPalette.ScrollbarHover.WithAlpha(0.35f), ContentMarginTopOverride = DefaultGrabberSize // LuaM: (160, 160, 160) > palette
             };
 
 
