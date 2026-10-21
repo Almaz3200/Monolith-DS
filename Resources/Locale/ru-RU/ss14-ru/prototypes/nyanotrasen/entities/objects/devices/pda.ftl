@@ -10,3 +10,5 @@ ent-MartialArtistPDA = КПК мастера боевых искусств
     .desc = { ent-BoxerPDA.desc }
 ent-MailCarrierPDA = КПК почтальона
 ent-GuardPDA = КПК охранника
+ent-CCServiceWorkerPDA = colossus sector service PDA
+    .desc = A personal digital assistant belonging to a service worker in the Colossus Sector.

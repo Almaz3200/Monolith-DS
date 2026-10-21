@@ -2,7 +2,7 @@ research-console-unlocks-text = Открытые рецепты:
 research-console-required-text = Необходимо:
 research-console-no-tech-requirements = [color=green]Эта технология ничего не требует для открытия![/color]
 research-console-menu-recenter-button = Центрировать
-research-console-menu-server-researched-button = Изученные
+research-console-menu-server-researched-button = Исследовано
 research-console-tech-progress-rp = { $percent }% ОИ
 research-console-tech-progress-prereqs = { $percent }%
 research-console-menu-back-button = Назад

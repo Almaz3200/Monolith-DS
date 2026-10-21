@@ -11,6 +11,7 @@
     sprite: _NF/Objects/Specific/Research/rped.rsi
     size: Normal
   - type: PartExchanger
+  - type: RpedPickupMode # LuaM
   - type: Storage
     grid:
     - 0,0,3,3 # Upstream (when it existed): 0,0,15,5 - area: 144 < 16
@@ -19,4 +20,5 @@
     whitelist:
       components:
       - MachinePart
+      - PowerCell # LuaM: batteries for RpedPickupMode
   # - type: Dumpable  # Mono

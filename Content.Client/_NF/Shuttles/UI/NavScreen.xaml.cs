@@ -107,6 +107,7 @@ namespace Content.Client.Shuttles.UI
             }
 
             // Frontier target
+            TargetHide.Pressed = state.HideTarget; // LuaM: stays in sync with the map marker
             if (!_targetCoordsModified)
             {
                 if (state.Target != null)

@@ -1,6 +1,6 @@
 - type: listing
   id: UplinkWearableCameraSolarianTSF
-  name:  uplink-security-wearable-cameratsf-name
+  name: uplink-security-wearable-cameratsf-name
   description: uplink-security-wearable-cameratsf-desc
   productEntity: ClothingNeckWearableCameraTSF
   cost:

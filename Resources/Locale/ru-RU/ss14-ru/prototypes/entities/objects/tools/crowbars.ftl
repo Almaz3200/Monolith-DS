@@ -5,3 +5,5 @@ ent-CrowbarYellow = жёлтая монтировка
 ent-CrowbarOrange = оранжевая монтировка
     .desc = Многофункциональный инструмент для открывания дверей и борьбы с межпространственными захватчиками.
 ent-CrowbarPocket = карманная монтировка
+ent-BaseCrowbar = crowbar
+    .desc = { ent-BaseItem.desc }

@@ -15,6 +15,7 @@ public sealed partial class RadarConsoleWindow : FancyWindow,
     public RadarConsoleWindow()
     {
         RobustXamlLoader.Load(this);
+        UseDeadSpaceMenuStyle(); // LuaM
 
     // Mono
         IFFToggle.OnToggled += OnIFFTogglePressed;

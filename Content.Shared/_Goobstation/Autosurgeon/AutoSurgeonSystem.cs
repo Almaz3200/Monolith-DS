@@ -3,6 +3,7 @@ using Content.Shared._Shitmed.BodyEffects;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
+using Content.Shared.Damage.Components; // LuaM
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Forensics;
@@ -254,7 +255,12 @@ public sealed class AutoSurgeonSystem : EntitySystem
         {
             var newComp = (Component)_componentFactory.GetComponent(name);
             if (HasComp(ent, newComp.GetType()))
+            {
+                // LuaM: implanted damage protection replaces the same one from a trait instead of being skipped
+                if (newComp is DamageProtectionBuffComponent && MergeDamageProtection(ent, newComp, data))
+                    result.Add(name, data);
                 continue;
+            }
 
             newComp.Owner = ent;
             object? temp = newComp;
@@ -266,4 +272,27 @@ public sealed class AutoSurgeonSystem : EntitySystem
 
         return result;
     }
+
+    // LuaM-start
+    /// <summary>
+    /// Writes the implant's damage modifiers into the protection the user already has.
+    /// A modifier under the same key, like the dermal armor trait, gets replaced.
+    /// </summary>
+    private bool MergeDamageProtection(EntityUid ent, Component newComp, EntityPrototype.ComponentRegistryEntry data)
+    {
+        if (!TryComp<DamageProtectionBuffComponent>(ent, out var existing))
+            return false;
+
+        object? temp = newComp;
+        _serializationManager.CopyTo(data.Component, ref temp);
+        if (temp is not DamageProtectionBuffComponent implant)
+            return false;
+
+        foreach (var (key, modifier) in implant.Modifiers)
+            existing.Modifiers[key] = modifier;
+
+        Dirty(ent, existing);
+        return true;
+    }
+    // LuaM-end
 }

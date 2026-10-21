@@ -17,4 +17,9 @@ ent-PigCubeWrapped = свиной кубик
 ent-CowCubeWrapped = коровий кубик
     .suffix = Завёрнутый
     .desc = Распакуй его, чтобы получить кубик коровы.
+ent-MustardMothroachCubeBox = mustard mothroach cube box
+    .desc = A box of ruminant cubes: a cow, a pig and goats! Just add water!
+ent-MothroachMustardCubeWrapped = mustard mothroach cube
+    .desc = Unwrap this to get a cow cube.
+    .suffix = Wrapped
 

@@ -36,6 +36,7 @@
   accessGroups:
   - GeneralAccess
   - USSPLow
+  - ViperLow # LuaM: VG and USSP share their access
 
 - type: startingGear
   id: USSPRiflemanGear

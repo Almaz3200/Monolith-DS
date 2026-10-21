@@ -1,0 +1,106 @@
+- type: entity
+  name: raw shark meat
+  parent: FoodMeatRawBase
+  id: FoodMeatBullShark
+  description: A slab of raw shark meat.
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Consumable/Meet/bull_shark_meat.rsi
+    state: meat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 9
+        - ReagentId: Fat
+          Quantity: 5
+  - type: InternalTemperature
+    conductivity: 0.43
+  - type: Construction
+    graph: BullSharkSteak
+    node: start
+    defaultTarget: cooked shark meat
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: cooked shark meat
+  parent: FoodMeatBase
+  id: FoodMeatBullSharkCooked
+  description: A cooked slab of shark meat.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+  - type: Sprite
+    sprite: _LuaM/Objects/Consumable/Meet/bull_shark_meat.rsi
+    state: meat-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7
+        - ReagentId: Protein
+          Quantity: 5
+  - type: Construction
+    graph: BullSharkSteak
+    node: cooked shark meat
+
+- type: entity
+  name: raw shark fillet
+  parent: FoodMeatRawBase
+  id: FoodMeatBullSharkFillet
+  description: A raw shark fillet.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Cutlet
+    - Meat
+  - type: Sprite
+    sprite: _LuaM/Objects/Consumable/Meet/bull_shark_meat.rsi
+    state: fillet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: Fat
+          Quantity: 2
+  - type: InternalTemperature
+    conductivity: 0.43
+  - type: Construction
+    graph: BullSharkFillet
+    node: start
+    defaultTarget: cooked shark fillet
+
+- type: entity
+  name: shark fillet
+  parent: FoodMeatBase
+  id: FoodMeatBullSharkFilletCooked
+  description: A cooked shark fillet.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Cutlet
+    - Meat
+  - type: Sprite
+    sprite: _LuaM/Objects/Consumable/Meet/bull_shark_meat.rsi
+    state: fillet-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Protein
+          Quantity: 4
+  - type: Construction
+    graph: BullSharkFillet
+    node: cooked shark fillet

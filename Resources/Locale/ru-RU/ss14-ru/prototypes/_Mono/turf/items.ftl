@@ -10,3 +10,7 @@ ent-FloorTileItemSteelDarkMonoCommercial = коммерческий моно-т�
 ent-FloorTileItemTechMaintAlt = механический пол техобслуживания
 ent-FloorTileItemGreySteelCommercial = коммерческий серый стальной пол
 ent-FloorTileItemSteelGreyMonoCommercial = коммерческий моно-серый стальной пол
+ent-FloorTileItemCatwalkHorizontal = horizontal catwalk tile
+    .desc = { ent-FloorTileItemBase.desc }
+ent-FloorTileItemCatwalkVertical = vertical catwalk tile
+    .desc = { ent-FloorTileItemBase.desc }

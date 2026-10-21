@@ -20,3 +20,5 @@ ent-LeftFootRodentia = левая ступня раткина
     .desc = { ent-PartRodentia.desc }
 ent-RightFootRodentia = правая ступня раткина
     .desc = { ent-PartRodentia.desc }
+ent-PartRodentiaBase = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }

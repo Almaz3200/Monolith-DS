@@ -1,0 +1,14 @@
+ent-N14ClosetSafe = safe
+    .desc = Might be filled with valuables.
+ent-N14LootClosetSafe = { ent-N14ClosetSafe }
+    .desc = { ent-N14ClosetSafe.desc }
+    .suffix = Loot, Random Military
+ent-N14LootClosetSafeCurrency = { ent-N14ClosetSafe }
+    .desc = { ent-N14ClosetSafe.desc }
+    .suffix = Loot, Currency one stack random
+ent-N14LootClosetSafePrewar = { ent-N14ClosetSafe }
+    .desc = { ent-N14ClosetSafe.desc }
+    .suffix = Loot, safe pre-war
+ent-N14ClosetSafeSpinner = { ent-N14ClosetSafe }
+    .desc = { ent-N14ClosetSafe.desc }
+    .suffix = spinner

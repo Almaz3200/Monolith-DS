@@ -45,6 +45,10 @@ public sealed partial class TraitSystem : EntitySystem
                 _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, args.Mob))
                 continue;
 
+            EntityManager.RemoveComponents(args.Mob, traitPrototype.RemoveComponents); // LuaM
+
+            MergeDamageProtection(args.Mob, traitPrototype.Components); // LuaM
+
             // Add all components required by the prototype
             EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
 

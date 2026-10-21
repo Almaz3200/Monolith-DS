@@ -228,7 +228,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [gnashes.]
+  chatMessages: [chat-emote-msg-gnash] # LuaM: gnashes. > chat-emote-msg-gnash
   chatTriggers:
     - gnash
     - gnashes

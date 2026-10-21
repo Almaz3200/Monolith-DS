@@ -5,7 +5,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: MachineBoard
-    prototype: OmniThrusterLua
+    prototype: OmniThrusterCicads
     requirements:
       Capacitor: 7
     stackRequirements:

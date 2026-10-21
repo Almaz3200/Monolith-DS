@@ -5,3 +5,4 @@
   - !type:SpeciesLoadoutEffect
     species:
     - Feroxi
+    - Shark # LuaM

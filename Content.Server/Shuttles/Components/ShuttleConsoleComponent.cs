@@ -70,6 +70,12 @@ namespace Content.Server.Shuttles.Components
         // LuaM-start: 
         [ViewVariables(VVAccess.ReadWrite)]
         public float? AutopilotMaxSpeed;
+
+        /// <summary>
+        /// Set while the autopilot is stopped on purpose, so it doesn't report an arrival.
+        /// </summary>
+        [ViewVariables]
+        public bool AutopilotStopping;
         // LuaM-end
 
         // Network Port Button Source Ports
