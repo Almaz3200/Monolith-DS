@@ -20,7 +20,4 @@ comms-console-war-declaration-auto-warning = Если другая сторон�
 comms-console-war-declaration-auto-sender = Сектор Колосс
 comms-console-war-declaration-auto = Внимание! {$faction} не ответил на объявление войны. Война объявлена автоматически.
 
-comp-pda-ui-station-war-level-pre = УРОВЕНЬ ВОЙНЫ: [color=cornflowerblue]ХОЛОДНЫЙ[/color]
 comp-pda-ui-station-war-level-pending = УРОВЕНЬ ВОЙНЫ: [color=yellow]ТЁПЛЫЙ[/color]
-comp-pda-ui-station-war-level-post = УРОВЕНЬ ВОЙНЫ: [color=crimson]ГОРЯЧИЙ[/color]
-comp-pda-ui-station-war-level-unknown = УРОВЕНЬ ВОЙНЫ: [color=white]НЕИЗВЕСТЕН[/color]

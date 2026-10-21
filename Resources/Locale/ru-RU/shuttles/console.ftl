@@ -69,6 +69,4 @@ shuttle-console-travel-state-launching = Запуск ({ $countdown })
 shuttle-console-track-unknown-label = ID СЛЕЖЕНИЯ НЕИЗВЕСТЕН
 shuttle-console-track-label = ID СЛЕЖЕНИЯ
 shuttle-console-iff-detailed = Подробный БСС
-shuttle-console-iff-toggle-short = БСС
-shuttle-console-iff-detailed-short = П.БСС
 shuttle-console-dock-toggle-short = СТЫКОВКИ
