@@ -12,11 +12,13 @@ public sealed partial class ShipNpcTargetComponent : Component
     [DataField]
     public NpcTargetGridMode NeedGrid = NpcTargetGridMode.OnGrid;
 
+// LuaM-start:
     /// <summary>
-    /// LuaM: Maximum distance at which drones can consider this entity a target.
+    /// Maximum distance at which drones can consider this entity a target.
     /// </summary>
     [DataField]
     public float? MaxTargetRange = null;
+// LuaM-end.
 }
 
 public enum NpcTargetGridMode
