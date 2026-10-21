@@ -400,3 +400,8 @@ reagent-effect-guidebook-add-to-chemicals =
         [1] в
         *[-1] из
     } раствор
+
+# Lua start
+reagent-effect-guidebook-artifact-durability-restore =
+    Восстанавливает {$restored} ед. прочности активных узлов инопланетного артефакта.
+# Lua end
