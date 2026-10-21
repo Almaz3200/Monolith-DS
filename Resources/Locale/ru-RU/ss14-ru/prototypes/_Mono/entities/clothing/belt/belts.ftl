@@ -29,5 +29,5 @@ ent-ClothingBeltPDVInfantry = PD infantry webbing
 ent-ClothingBeltSheathVizierFilled = { ent-ClothingBeltSheathVizier }
     .desc = { ent-ClothingBeltSheathVizier.desc }
     .suffix = Filled
-ent-ClothingBeltWebbingsPDVTarkhan = tarkhan chest rig
-    .desc = A set of tactical webbing worn by Tarkhans.
+ent-ClothingBeltWebbingsPDVTarkhan = РПС паладина
+    .desc = Тактическая разгрузка, которую носят паладины.

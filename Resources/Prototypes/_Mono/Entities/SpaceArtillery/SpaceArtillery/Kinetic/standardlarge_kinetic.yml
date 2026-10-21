@@ -86,7 +86,7 @@
     repairCost: 150
   - type: HardpointAnchorableOnly
     class: Ballistic
-    size: Heavy # doesnt match who cares
+    size: Superheavy # LuaM: Heavy > Superheavy
 
 - type: entity
   id: WeaponTurretCyrexaHomingCluster
@@ -123,11 +123,12 @@
 # AK820 120mm
 
 - type: entity
-  id: WeaponTurretAk820
+  id: WeaponTurretAk820Base # LuaM: WeaponTurretAk820 > WeaponTurretAk820Base, shared by AK820 and AK800
+  abstract: true # LuaM
   name: AK820 100mm autocannon
   parent:
   - BallisticArtilleryCartridge
-  - BallisticArtilleryUnanchorableCartridge
+  # - BallisticArtilleryUnanchorableCartridge # LuaM: its RequiresGrid deleted the gun once dragged off the grid
   - BallisticArtilleryTier4HP
   suffix: Large, T4
   description: Large hard hitting naval gun for steady damage. Fires APHEDS rounds, allowing for enhanced penetration, but not as much explosive power as full-sized APHE rounds. Feeds from an 96 round internal magazine.
@@ -200,15 +201,22 @@
   - type: ShipRepairable
     repairTime: 30
     repairCost: 150
+
+# LuaM-start: AK820 needs a superheavy hardpoint, AK800 does not
+- type: entity
+  id: WeaponTurretAk820
+  parent: WeaponTurretAk820Base
+  components:
   - type: HardpointAnchorableOnly
     class: Ballistic
-    size: Heavy # doesnt match who cares
+    size: Superheavy
+# LuaM-end
 
 - type: entity
   id: WeaponTurretAk800
   name: AK800 100mm autocannon
   parent:
-  - WeaponTurretAk820
+  - WeaponTurretAk820Base # LuaM: WeaponTurretAk820 > WeaponTurretAk820Base, no hardpoint needed
   suffix: Large, T4
   description: A single-barreled variant of the AK820 autocannon, with less GCS strain but lower firerate. Large hard hitting naval gun for steady damage. Fires APHEDS rounds, allowing for enhanced penetration, but not as much explosive power as full-sized APHE rounds. Feeds from an 96 round internal magazine.
   components:
@@ -303,7 +311,7 @@
     repairCost: 150
   - type: HardpointAnchorableOnly
     class: Ballistic
-    size: Heavy # doesnt match who cares
+    size: Superheavy # LuaM: Heavy > Superheavy
 
 # HADES 203x940mm
 
@@ -311,11 +319,16 @@
   id: WeaponTurretHades
   name: HADES 203mm cannon
   parent:
-  - BallisticArtilleryUnanchorable
+  - BallisticArtilleryBase # LuaM: BallisticArtilleryUnanchorable > BallisticArtilleryBase, its RequiresGrid deleted the gun once dragged off the grid
   - BallisticArtilleryTier5HP
   suffix: Capital/Station, T4
   description: One of the largest chemical-based kinetic weapons in the sector. Its power is only rivaled by mass drivers such as the M381. Automatically reloads full-power 203x940mm shells.
   components:
+# LuaM-start: can be unanchored
+  - type: Anchorable
+    delay: 30
+  - type: Pullable
+# LuaM-end
   - type: StaticPrice
     price: 30000
   - type: Sprite
@@ -463,9 +476,9 @@
   - type: ShipRepairable
     repairTime: 45
     repairCost: 200
-  - type: HardpointAnchorableOnly
-    class: Ballistic
-    size: Heavy # doesnt match who cares
+  # - type: HardpointAnchorableOnly # Commented by LuaM: only superheavy weapons need a hardpoint
+  #   class: Ballistic
+  #   size: Heavy # doesnt match who cares
 
 - type: entity
   id: WeaponTurretR300
@@ -473,7 +486,7 @@
   parent:
   - WeaponTurretR300Base
   - BallisticArtilleryCartridge
-  - BallisticArtilleryUnanchorableCartridge
+  # - BallisticArtilleryUnanchorableCartridge # LuaM: its RequiresGrid deleted the gun once dragged off the grid
   - BallisticArtilleryTier5HP
   suffix: Capital, T4
   description: A giant, stupid howitzer. A stupid low velocity, a stupid long reload, and a stupidly powerful explosion if you can get it to hit. No AP whatsover.

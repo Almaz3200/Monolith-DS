@@ -25,5 +25,5 @@ ent-ClothingNeckWearableCameraPDV = бодикамера Авангарда
     .suffix = Хамелеон
 ent-ClothingNeckWearableCameraTSF = бодикамера ТСФ
     .desc = { ent-ClothingNeckWearableCamera.desc }
-ent-ClothingNeckWearableCameraMMC = бодикамера ПКМ
+ent-ClothingNeckWearableCameraMMC = бодикамера ММС
     .desc = { ent-ClothingNeckWearableCamera.desc }

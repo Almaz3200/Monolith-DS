@@ -44,5 +44,5 @@ ent-PrecisionAssemblerEconomyCompact = compact precision assembler
     .desc = A high-accuracy microfabricator capable of manipulating almost all forms of matter in the right circumstances. Astoundingly useful for creating advanced components of all kinds. This one is slower and has less space inside.
 ent-CentrifugeLathe = industrial uranium processing centrifuge
     .desc = A large sized industrial gas centrifuge for bulk processing isotopes, materials and generally making things go spinny. Much more efficient at producing fissile uranium than the miniature ones. Not equipped to reprocess nuclear fuel.
-ent-SecurityTechFabCaelestinus = caelestinus security techfab
-    .desc = A techfab used by members of the Caelestinus Security Detachment.
+ent-SecurityTechFabCaelestinus = охранный ТехФаб Колосса
+    .desc = ТехФаб, которым пользуются сотрудники охраны Колосса.

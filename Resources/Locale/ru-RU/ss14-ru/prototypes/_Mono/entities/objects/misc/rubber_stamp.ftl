@@ -18,5 +18,5 @@ ent-RubberStampUSSPTaccomm = штамп тактического командо�
     .desc = Штамп Тактического Командования Союза Советских Социалистических Планет.
 ent-RubberStampUSSPStratcomm = штамп стратегического командования СССП
     .desc = Штамп Стратегического Командования Союза Советских Социалистических Планет.
-ent-RubberStampMMCLiason = MMC liason rubber stamp
+ent-RubberStampMMCLiason = штамп директора ММС
     .desc = { ent-RubberStampBase.desc }

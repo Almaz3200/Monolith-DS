@@ -1,4 +1,4 @@
-research-discipline-viper-group = Группировка «Viper»
+research-discipline-viper-group = ЧВК Viper Group
 
 # T1 VG
 research-technology-viper-group-apparel = Базовое снаряжение «Viper»

@@ -21,5 +21,5 @@ ent-ClothingBackpackSatchelPDV = тактическая полевая сумк�
 
 ent-ClothingBackpackJack = хранилище боеприпасов GS-004
     .desc = Огромный рюкзак, предназначенный для хранения боеприпасов и снабжения сверх-тяжёлого дробовика GS-004.
-ent-ClothingBackpackPDVTarkhan = tarkhan advanced tactical backpack
-    .desc = A large bag used by Tarkhans.
+ent-ClothingBackpackPDVTarkhan = продвинутый тактический рюкзак паладина
+    .desc = Вместительный рюкзак, который носят паладины.

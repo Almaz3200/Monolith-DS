@@ -9,7 +9,7 @@ job-name-ussp-rifleman = Стрелок СССП
 job-name-md-medic = Парамедик
 
 # MARK: ТСФ
-job-name-tsf-engineer = Инженер ТСФ
+job-name-tsf-engineer = Инженер ТСФdotnet build -c release
 job-name-tsf-borg = Киборг ТСФ
 job-name-tsf-civilian = Подрядчик ТСФ
 
@@ -19,14 +19,14 @@ job-name-pdv-civilian = Сотрудник Нордфолла
 job-name-pdv-ambassador = Посол Авангарда
 job-name-pdv-prince = Руководитель Авангарда
 
-job-name-vg-infanteer = Пехотинец группировки «Viper»
-job-name-vg-lieutenant = Лейтинант группировки «Viper»
-job-name-vg-commander = Командир группировки «Viper»
+job-name-vg-infanteer = Пехотинец «Viper Group»
+job-name-vg-lieutenant = Лейтенант «Viper Group»
+job-name-vg-commander = Командир «Viper Group»
 
-job-name-mmc-liason = Связной ПКМ
-job-name-mmc-security = Охранник ПКМ
-job-name-mmc-employee = Сотрудник ПКМ
-job-supervisors-mmc-highcomm = Руководитель ПКМ
+job-name-mmc-liason = Директор ММС
+job-name-mmc-security = Охранник ММС
+job-name-mmc-employee = Сотрудник ММС
+job-supervisors-mmc-highcomm = Руководитель ММС
 
-job-supervisors-mmc-liason = корпоративного связного
+job-supervisors-mmc-liason = директора ММС
 job-name-crocus-dockworker = Докер Цзянхуэй

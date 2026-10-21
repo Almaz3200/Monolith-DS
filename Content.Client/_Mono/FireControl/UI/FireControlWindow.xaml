@@ -56,7 +56,7 @@
 
                 <!-- IFF-and-Dock-toggles -->
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="4">
-                    <Button Name="IFFToggle" Access="Public" Text="{Loc 'shuttle-console-iff-toggle-short'}"
+                    <Button Name="IFFToggle" Access="Public" Text="{Loc 'gunnery-iff-short'}"
                             StyleClasses="LuaMConsoleButton" HorizontalExpand="True" ToggleMode="True"/>
                     <Button Name="IFFDetailedToggle" Access="Public" Text="{Loc 'shuttle-console-iff-detailed-short'}"
                             StyleClasses="LuaMConsoleButton" HorizontalExpand="True" ToggleMode="True"/>
