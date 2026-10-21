@@ -1,4 +1,4 @@
-ent-ClothingBackpackMessengerContractor = мессенджер авантюриста
+ent-ClothingBackpackMessengerContractor = мессенджер наёмника
     .desc = Модная сумка-мессенджер в стильной цветовой гамме.
 ent-ClothingBackpackMessenger = мессенджер
     .desc = Модный мессенджер.

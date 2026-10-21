@@ -22967,18 +22967,6 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-- proto: ComputerPalletConsoleNFHighMarket
-  entities:
-  - uid: 3712
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,3.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
 - proto: ComputerPowerMonitoring
   entities:
   - uid: 3713
@@ -27783,6 +27771,18 @@ entities:
     - type: Transform
       pos: -4.5,51.5
       parent: 1
+- proto: LuaMComputerPalletConsoleStationMarket
+  entities:
+  - uid: 3712
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,3.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
 - proto: filingCabinetDrawerRandom
   entities:
   - uid: 4340

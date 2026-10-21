@@ -1,4 +1,4 @@
 holopad-ussp-baikal = Станция СССП
 holopad-ussp-commissar = Комиссар СССП
 holopad-pdv-jupiter = Шаттл Авангарда класса "Юпитер"
-holopad-vg = Группировка «Viper»
+holopad-vg = ЧВК Viper Group

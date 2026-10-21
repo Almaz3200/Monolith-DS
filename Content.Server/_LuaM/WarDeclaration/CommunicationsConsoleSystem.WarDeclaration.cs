@@ -21,6 +21,17 @@ public sealed partial class CommunicationsConsoleSystem
     private void InitializeWarDeclaration()
     {
         SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleDeclareWarMessage>(OnDeclareWarMessage);
+
+        // The console is built before the round rules start, so its first state has no war button.
+        Subs.BuiEvents<CommunicationsConsoleComponent>(CommunicationsConsoleUiKey.Key, subs =>
+        {
+            subs.Event<BoundUIOpenedEvent>(OnConsoleUiOpened);
+        });
+    }
+
+    private void OnConsoleUiOpened(EntityUid uid, CommunicationsConsoleComponent comp, BoundUIOpenedEvent args)
+    {
+        UpdateCommsConsoleInterface(uid, comp);
     }
 
     private void FillWarDeclarationState(EntityUid uid, CommunicationsConsoleInterfaceState state)

@@ -4,7 +4,7 @@
 - type: pointOfInterest
   id: Hokkaido
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'MMC Hokkaido'
+  name: 'ММС «Хоккайдо»' # LuaM: 'MMC Hokkaido' > 'ММС «Хоккайдо»'
   minimumDistance: 2000
   maximumDistance: 8000
   spawnGroup: Required
@@ -23,7 +23,7 @@
 
 - type: gameMap
   id: Hokkaido
-  mapName: 'MMC Hokkaido'
+  mapName: 'ММС «Хоккайдо»' # LuaM: 'MMC Hokkaido' > 'ММС «Хоккайдо»'
   mapPath: /Maps/_Mono/POI/hokkaido.yml
   minPlayers: 0
   stations:
@@ -33,7 +33,7 @@
         - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'MMC Hokkaido'
+          mapNameTemplate: 'ММС «Хоккайдо»' # LuaM: 'MMC Hokkaido' > 'ММС «Хоккайдо»'
         - type: ExtraStationInformation
           icon: /Textures/_Mono/Interface/Misc/LateJoin/lathe.png
           stationSubtext: 'frontier-lobby-hokkaido-subtext'

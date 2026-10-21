@@ -1,4 +1,4 @@
-research-discipline-mieyo = Производственный концерн «Мийо»
+research-discipline-mieyo = Производственный концерн ММС
 research-technology-mieyo-press = ММС | Гидравлика
 research-technology-mieyo-goods = ММС | Торговые товары
 research-technology-mieyo-breaching-gear = ММС | Пробивное снаряжение
