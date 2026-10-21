@@ -3,7 +3,7 @@
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
                       xmlns:goob="clr-namespace:Content.Client._Goobstation.Research.UI"
                       Title="{Loc 'research-console-menu-title'}"
-                      SetSize="1450 1025"
+                      SetSize="1600 1025"
                       MinSize="600 400"> <!-- Frontier: add MinSize--> <!-- LuaM: SetSize= "1260 850" > "1450 1025"-->
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
@@ -19,11 +19,16 @@
                 <BoxContainer Name="TierDisplayContainer" Orientation="Horizontal" HorizontalExpand="True" VerticalAlignment="Bottom"/>
                 <!-- This is where we put all of the little graphics that display discipline tiers!-->
             </BoxContainer>
-            <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalAlignment="Right">
-                <Button Name="ServerButton" Text="{Loc 'research-console-menu-server-selection-button'}" MinHeight="40"/>
-            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalAlignment="Right"> <!-- LuaM: Orientation=Vertical > Orientation=Horizontal -->
+                <!-- LuaM-start: research every discipline at once, shown on the discipline selection screen -->
+                <Button Name="UnlockAllButton"
+                        Text="{Loc 'research-console-unlock-all-button'}"
+                        MinHeight="40"
+                        VerticalAlignment="Top"
+                        Margin="0 0 5 0"/>
+                <Button Name="ServerButton" Text="{Loc 'research-console-menu-server-selection-button'}" MinHeight="40" VerticalAlignment="Top"/>
+			</BoxContainer>
         </BoxContainer>
-        <!-- LuaM-start:-->
         <PanelContainer Name="DisciplineSelectionScreen"
                         VerticalExpand="True"
                         HorizontalExpand="True"
@@ -64,12 +69,19 @@
                         <gfx:StyleBoxFlat BackgroundColor="#222226FF" />
                     </PanelContainer.PanelOverride>
 				    <!-- LuaM-start:-->
-                    <Button Name="BackToDisciplinesButton"
-                            Text="{Loc 'research-console-menu-back-button'}"
-                            MinHeight="40"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Margin="5 5"/>
+                    <BoxContainer Orientation="Horizontal"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Margin="5 5">
+                        <Button Name="BackToDisciplinesButton"
+                                Text="{Loc 'research-console-menu-back-button'}"
+                                MinHeight="40"/>
+                        <!-- LuaM: research the open discipline with all of its prerequisites -->
+                        <Button Name="UnlockDisciplineButton"
+                                Text="{Loc 'research-console-unlock-discipline-button'}"
+                                MinHeight="40"
+                                Margin="5 0 0 0"/>
+                    </BoxContainer>
 					<!-- LuaM-end:-->
                     <goob:ResearchesContainerPanel
                         HorizontalExpand="True"

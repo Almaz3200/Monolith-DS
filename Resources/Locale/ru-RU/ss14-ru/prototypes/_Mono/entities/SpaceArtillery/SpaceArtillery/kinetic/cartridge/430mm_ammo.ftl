@@ -5,3 +5,5 @@ ent-R300ShellHE = фугасный снаряд 430 мм
     .ammo-loader-weight = 48 кг
 
 ent-R300BulletHE = фугасный снаряд 430 мм
+ent-MuzzleFlashEffectR300 = { "" }
+    .desc = { "" }

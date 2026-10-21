@@ -40,6 +40,9 @@ public sealed partial class ShuttleConsoleAutopilotSystem : EntitySystem
 
     private void OnSteeringDone(Entity<ShuttleConsoleComponent> ent, ref SteeringDoneEvent args)
     {
+        if (ent.Comp.AutopilotStopping) // LuaM: stopped, not arrived
+            return;
+
         _audio.PlayPvs(ent.Comp.AutopilotDoneSound, ent);
         _popup.PopupEntity(Loc.GetString("shuttle-console-autopilot-popup-done"), ent, PopupType.Medium);
     }

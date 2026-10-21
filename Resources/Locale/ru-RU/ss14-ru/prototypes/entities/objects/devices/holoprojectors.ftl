@@ -21,3 +21,5 @@ ent-HoloprojectorSecurity = проектор голобарьера
 ent-HoloprojectorSecurityEmpty = { ent-HoloprojectorSecurity }
     .suffix = Пустой
     .desc = { ent-HoloprojectorSecurity.desc }
+ent-HoloprojectorFieldTSF = TSFMC force field projector
+    .desc = Creates an impassable forcefield that won't let anything through. Close proximity may or may not cause cancer.

@@ -9,3 +9,6 @@ ent-BoxSurvivalMonoOxygenExtended = аварийная коробка выжив
 ent-BoxSurvivalMonoNitrogenExtended = аварийная коробка выживания
     .suffix = Азот
     .desc = { ent-BoxBaseSurvivalMono.desc }
+ent-BoxSurvivalMonoVaporExtended = { ent-BoxBaseSurvivalMono }
+    .desc = { ent-BoxBaseSurvivalMono.desc }
+    .suffix = Vapor

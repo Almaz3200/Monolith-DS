@@ -6,3 +6,7 @@ ent-EmblemSteelHammer = эмблема Steel Hammer Manufacturing
     .desc = Эмблема Steel Hammer Manufacturing, выполненная из окрашенной пластали - прямо как их корпуса.
 ent-EmblemBrokenSteelHammer = серебристые металлические куски
     .desc = Несколько ломов сколотой краски и разбитого металла, остатки пласталевого символа.
+ent-EmblemBase = { ent-BaseSign }
+    .desc = { ent-BaseSign.desc }
+ent-EmblemBroken = { ent-EmblemBase }
+    .desc = { ent-EmblemBase.desc }

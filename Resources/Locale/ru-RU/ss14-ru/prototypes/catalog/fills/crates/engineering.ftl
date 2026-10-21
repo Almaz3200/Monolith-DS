@@ -34,3 +34,6 @@ ent-CrateEngineeringSpaceHeater = ящик с термостатом
     .desc = Содержит термостат для климат-контроля.
 ent-CrateTechBoardRandom = излишки плат
     .desc = Откуда-то взятые излишки плат.
+ent-CrateRPD = RPD crate
+    .desc = A crate containing a single rapid piping device.
+    .suffix = { ent-CrateEngineeringSecure.suffix }
