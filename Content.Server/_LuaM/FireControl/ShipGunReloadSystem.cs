@@ -43,5 +43,9 @@ public sealed class ShipGunReloadSystem : EntitySystem
             if (TryComp<FireControlConsoleComponent>(console, out var consoleComp))
                 _fireControl.QueueUiUpdate(console, consoleComp);
         }
+
+        // Shuttle consoles of the same grid also show the weapons.
+        if (Transform(ent).GridUid is { } grid)
+            _fireControl.QueueShuttleConsoleUpdates(grid);
     }
 }

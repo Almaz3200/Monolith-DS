@@ -1,4 +1,4 @@
-ent-ActionDashMuscleFibersImplant = muscle fibers dash
-    .desc = Use your muscle fibers implant to do a quick dash.
-ent-ActionEnergyCyberneticsShuntTSF = KR-22 implant shunt
-    .desc = Teleport to anywhere you can see.
+ent-ActionDashMuscleFibersImplant = рывок мышечных волокон
+    .desc = Используйте имплант мышечных волокон, чтобы совершить быстрый рывок.
+ent-ActionEnergyCyberneticsShuntTSF = шунт-имплант KR-22
+    .desc = Телепортироваться в любую точку, которую вы видите.

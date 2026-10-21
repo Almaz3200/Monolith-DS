@@ -1551,6 +1551,10 @@ public sealed partial class ShuttleSystem
         if (comp.LinkedShuttle.HasValue)
             return;
         var xform = _xformQuery.GetComponent(entity);
+
+        if (TrySkipHyperspace(entity, xform)) // Lua: instant jump
+            return;
+
         DoTheDinosaur(xform);
 
         comp.State = FTLState.Travelling;

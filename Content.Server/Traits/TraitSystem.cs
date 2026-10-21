@@ -47,6 +47,8 @@ public sealed partial class TraitSystem : EntitySystem
 
             EntityManager.RemoveComponents(args.Mob, traitPrototype.RemoveComponents); // LuaM
 
+            MergeDamageProtection(args.Mob, traitPrototype.Components); // LuaM
+
             // Add all components required by the prototype
             EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
 
