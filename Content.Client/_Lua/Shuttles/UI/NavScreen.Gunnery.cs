@@ -41,6 +41,7 @@ public sealed partial class NavScreen
     {
         _gunneryConnected = connected;
         _weapons = connected ? weapons : null;
+        UpdateReloads(_weapons); // LuaM
 
         GunneryHeader.Visible = connected;
         GunneryControls.Visible = connected;
@@ -135,14 +136,15 @@ public sealed partial class NavScreen
             };
             button.OnToggled += _ => UpdateGunnerySelection();
 
-            GunneryWeaponsBox.AddChild(button);
+            GunneryWeaponsBox.AddChild(WithReloadBar(weapon.NetEntity, button)); // LuaM: button > button with its reload bar
             _weaponButtons.Add(weapon.NetEntity, button);
         }
 
         foreach (var weapon in toRemove)
         {
             if (_weaponButtons.Remove(weapon, out var button))
-                GunneryWeaponsBox.RemoveChild(button);
+                GunneryWeaponsBox.RemoveChild(button.Parent ?? button); // LuaM: the button sits in a row with its reload bar
+            _reloadBars.Remove(weapon); // LuaM
         }
 
         var hasWeapons = _weaponButtons.Count > 0;
