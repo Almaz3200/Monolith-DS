@@ -24,4 +24,4 @@ loadout-group-contractor-backpack-items = Предметы в рюкзаке
 loadout-group-contractor-hand-items = Предметы в руке
 loadout-group-contractor-armorplates = Бронеплиты
 loadout-group-merc-utility = Вооружение
-loadout-group-mieyo-products = Продукция ПКМ
+loadout-group-mieyo-products = Продукция ММС

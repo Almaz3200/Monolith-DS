@@ -23,10 +23,10 @@ job-name-vg-infanteer = Пехотинец группировки «Viper»
 job-name-vg-lieutenant = Лейтинант группировки «Viper»
 job-name-vg-commander = Командир группировки «Viper»
 
-job-name-mmc-liason = Связной ПКМ
-job-name-mmc-security = Охранник ПКМ
-job-name-mmc-employee = Сотрудник ПКМ
-job-supervisors-mmc-highcomm = Руководитель ПКМ
+job-name-mmc-liason = Связной ММС
+job-name-mmc-security = Охранник ММС
+job-name-mmc-employee = Сотрудник ММС
+job-supervisors-mmc-highcomm = Руководитель ММС
 
 job-supervisors-mmc-liason = корпоративного связного
 job-name-crocus-dockworker = Докер Цзянхуэй

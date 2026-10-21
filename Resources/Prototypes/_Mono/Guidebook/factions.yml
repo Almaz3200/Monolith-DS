@@ -108,6 +108,6 @@
 
 - type: guideEntry
   id: Caelestinus
-  name: Caelestinus
-  text: "/ServerInfo/_Mono/Guidebook/Factions/caelestinus.xml"
+  name: guide-entry-caelestinus # LuaM: Caelestinus > guide-entry-caelestinus
+  text: "/ServerInfo/_LuaM/Guidebook/Factions/caelestinus.xml" # LuaM: _Mono > _LuaM, russian page
   priority: 4

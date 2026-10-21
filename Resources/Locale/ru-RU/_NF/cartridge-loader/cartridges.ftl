@@ -43,7 +43,7 @@ ledger-entry-type-StationWithdrawalOther = Прочее
 # Fallback, if this displays, something's wrong.
 ledger-entry-type-PowerTransmission = Экспорт энергии
 ledger-tab-BlackMarket = Чёрный рынок
-ledger-tab-Mieyo = ПКМ
+ledger-tab-Mieyo = ММС
 ledger-entry-type-AtmTax = Налоги банкоматов
 ledger-entry-type-ShipyardTax = Налоги верфей
 ledger-entry-type-BlackMarketSales = Продажи контрабанды
