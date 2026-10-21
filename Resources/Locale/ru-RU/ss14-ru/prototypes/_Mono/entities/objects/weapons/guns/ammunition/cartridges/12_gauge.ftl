@@ -26,3 +26,5 @@ ent-ShellShotgun12_gaugeSlugAP = дробовой патрон (12 калибр 
     .desc = { ent-BaseShellShotgun12_gauge.desc }
 ent-ShellShotgun12_gaugeFlechette = дробовой патрон (12 калибр флешеттный)
     .desc = { ent-BaseShellShotgun12_gauge.desc }
+ent-ShellShotgun12_gaugeBlank = shotgun shell (12 gauge blank)
+    .desc = Someone forgot the gunpowder.

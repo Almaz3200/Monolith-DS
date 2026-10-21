@@ -7,4 +7,7 @@ ent-PinpointerDeadDropHint = пинпоинтер на подсказку для
 ent-PinpointerDeadDrop = пинпоинтер скрытых тайников
     .suffix = DEBUG
     .desc = Указывает на скрытый тайник.
+ent-PinpointerSyndicatePOI = { ent-PinpointerSyndicateNuclear }
+    .desc = Pointing to some unknown place.
+    .suffix = Syndicate FOB
 

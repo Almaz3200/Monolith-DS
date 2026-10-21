@@ -65,6 +65,11 @@ public sealed partial class FireControlSystem
 
         // Find the controlling console for position updates if this is a fire controllable
         EntityUid? controllingConsole = null;
+// Lua-start: weapons last fired from a shuttle console follow its cursor
+        if (TryGetShuttleConsoleGuidance(uid, targetCoords.Value, out var shuttleConsole))
+            controllingConsole = shuttleConsole;
+        else
+// Lua-end
         if (TryComp<FireControllableComponent>(uid, out var fireControllable) &&
             fireControllable.ControllingServer != null)
         {
@@ -170,6 +175,7 @@ public sealed partial class FireControlSystem
         base.Update(frameTime);
 
         UpdatePendingConsoleUi(); // LuaM
+        UpdatePendingShuttleConsoles(); // Lua
 
 // LuaM-start:
         if (_activeMissiles.Count == 0 && _consoleMousePositions.Count == 0)

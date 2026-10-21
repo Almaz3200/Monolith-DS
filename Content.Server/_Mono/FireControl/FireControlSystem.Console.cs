@@ -140,6 +140,7 @@ public sealed partial class FireControlSystem : EntitySystem
             return;
 
         // Fire the actual weapons
+        ForgetShuttleConsoleWeapons(args.Selected); // Lua
         FireWeapons((EntityUid)component.ConnectedServer, args.Selected, args.Coordinates, server);
         if ((component.NextLog == null || component.NextLog < _timing.CurTime) && args.Selected.Any())
         {
@@ -318,34 +319,45 @@ public sealed partial class FireControlSystem : EntitySystem
 
         NavInterfaceState navState = _shuttleConsoleSystem.GetNavState(uid, _shuttleConsoleSystem.GetAllDocks());
 
-        List<FireControllableEntry> controllables = new();
+        var array = Array.Empty<FireControllableEntry>(); // Lua: entries are built in BuildControllableEntries
         if (component.ConnectedServer != null && TryComp<FireControlServerComponent>(component.ConnectedServer, out var server))
         {
             if (!server.Consoles.Contains(uid))
                 return;
 
-            foreach (var controllable in server.Controlled)
-            {
-                var controlled = new FireControllableEntry();
-                controlled.NetEntity = EntityManager.GetNetEntity(controllable);
-                controlled.Coordinates = GetNetCoordinates(Transform(controllable).Coordinates);
-                controlled.Name = MetaData(controllable).EntityName;
-                TryComp<FireControllableComponent>(controllable, out var fcComp);
-                controlled.IgnoresLos = fcComp != null ? fcComp.IgnoreLos : false;
-
-                var (ammoCount, hasManualReload) = GetWeaponAmmunitionInfo(controllable);
-                controlled.AmmoCount = ammoCount;
-                controlled.HasManualReload = hasManualReload;
-
-                controllables.Add(controlled);
-            }
+            array = BuildControllableEntries(server); // Lua
         }
-
-        var array = controllables.ToArray();
 
         var state = new FireControlConsoleBoundInterfaceState(component.ConnectedServer != null, array, navState);
         _ui.SetUiState(uid, FireControlConsoleUiKey.Key, state);
     }
+
+    // Lua-start: shared by the gunnery console and the shuttle console
+    /// <summary>
+    /// Builds the weapon list a console shows for this fire control server.
+    /// </summary>
+    public FireControllableEntry[] BuildControllableEntries(FireControlServerComponent server)
+    {
+        var controllables = new List<FireControllableEntry>();
+        foreach (var controllable in server.Controlled)
+        {
+            var controlled = new FireControllableEntry();
+            controlled.NetEntity = EntityManager.GetNetEntity(controllable);
+            controlled.Coordinates = GetNetCoordinates(Transform(controllable).Coordinates);
+            controlled.Name = MetaData(controllable).EntityName;
+            TryComp<FireControllableComponent>(controllable, out var fcComp);
+            controlled.IgnoresLos = fcComp != null ? fcComp.IgnoreLos : false;
+
+            var (ammoCount, hasManualReload) = GetWeaponAmmunitionInfo(controllable);
+            controlled.AmmoCount = ammoCount;
+            controlled.HasManualReload = hasManualReload;
+
+            controllables.Add(controlled);
+        }
+
+        return controllables.ToArray();
+    }
+    // Lua-end
 
     /// <summary>
     /// Gets ammo information for a weapon to determine if it has manual reload.

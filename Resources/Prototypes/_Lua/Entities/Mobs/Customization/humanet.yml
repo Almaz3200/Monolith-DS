@@ -1,0 +1,149 @@
+# LuaWorld - This file is licensed under AGPLv3
+# Copyright (c) 2025 LuaWorld Contributors
+# See AGPLv3.txt for details.
+
+- type: marking
+  id: HumanNewSharkEar
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _Lua/tails32x32.rsi
+      state: datashark_ears
+    - sprite: _Lua/tails32x32.rsi
+      state: datashark_ears_inner
+
+- type: marking
+  id: HumanNewEar
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: vulp
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: vulp-inner
+
+- type: marking
+  id: HumanNewEarFade
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: vulp
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: vulp-fade
+
+- type: marking
+  id: HumanNewEarSharp
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: vulp
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: vulp-sharp
+
+- type: marking
+  id: HumanNewEarJackal
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: jackal
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: jackal-inner
+
+- type: marking
+  id: HumanNewEarTerrier
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: terrier
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: terrier-inner
+
+- type: marking
+  id: HumanNewEarWolf
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: wolf
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: wolf-inner
+
+- type: marking
+  id: HumanNewEarFennec
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: fennec
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: fennec-inner
+
+- type: marking
+  id: HumanNewEarFox
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: fox
+
+- type: marking
+  id: HumanNewEarOtie
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: otie
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: otie-inner
+
+- type: marking
+  id: HumanNewEarTajaran
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: msai
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: msai-inner
+
+- type: marking
+  id: HumanNewEarShock
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: shock
+
+- type: marking
+  id: HumanNewEarCoyote
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: coyote
+
+- type: marking
+  id: HumanNewEarDalmatian
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: dalmatian

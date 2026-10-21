@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._LuaM.Shuttles; // LuaM
 using Content.Client.UserInterface.Controls;
 using Content.Shared._Mono.GridEdgeMarker; // Mono
 using Content.Shared.Maps; // Mono
@@ -34,7 +35,9 @@ public partial class BaseShuttleControl : MapGridControl
     private GridDrawJob _drawJob;
 
     // Cache grid drawing data as it can be expensive to build
-    public readonly Dictionary<EntityUid, GridDrawData> GridData = new();
+//    public readonly Dictionary<EntityUid, GridDrawData> GridData = new(); // Commented by LuaM
+    public Dictionary<EntityUid, GridDrawData> GridData => _gridCache.GridData; // LuaM: shared by every radar, opening a console no longer rebuilds every grid
+    private readonly RadarGridCacheSystem _gridCache; // LuaM
 
     // Per-draw caching
     private readonly Dictionary<Vector2i, ContentTileDefinition> _gridTileList = new(); // Mono
@@ -58,6 +61,7 @@ public partial class BaseShuttleControl : MapGridControl
     {
         RobustXamlLoader.Load(this);
         Maps = EntManager.System<SharedMapSystem>();
+        _gridCache = EntManager.System<RadarGridCacheSystem>(); // LuaM
         _lookup = EntManager.System<EntityLookupSystem>(); // Mono
         _xformQuery = EntManager.GetEntityQuery<TransformComponent>(); // Mono
         Font = new VectorFont(IoCManager.Resolve<IResourceCache>().GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 12);
@@ -429,7 +433,7 @@ public partial class BaseShuttleControl : MapGridControl
     {
         var rator = Maps.GetAllTilesEnumerator(grid.Owner, grid.Comp);
         var minimapScale = MinimapScale;
-        var midpoint = new Vector2(MidPoint, MidPoint);
+        var midpoint = MidPointVector; // LuaM: new Vector2(MidPoint, MidPoint) > MidPointVector, the radar can be non-square now
         var tileSize = grid.Comp.TileSize;
 
         // Check if we even have data

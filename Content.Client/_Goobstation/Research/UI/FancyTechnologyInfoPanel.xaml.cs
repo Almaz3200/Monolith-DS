@@ -23,6 +23,8 @@ public sealed partial class FancyTechnologyInfoPanel : Control
     private ISawmill _sawmill = default!; // Frontier: added debug log
     public TechnologyPrototype Prototype;
     public Action<TechnologyPrototype>? BuyAction;
+    public Action<TechnologyPrototype>? PrerequisiteSelected; // LuaM: a required technology was clicked
+    public Action<TechnologyPrototype>? UnlockWithPrerequisitesAction; // LuaM
 
     public FancyTechnologyInfoPanel(TechnologyPrototype proto, bool hasAccess, ResearchAvailability availability, SpriteSystem sprite)
     {
@@ -107,8 +109,19 @@ public sealed partial class FancyTechnologyInfoPanel : Control
             }
         };
 
+        UnlockWithPrerequisitesButton.OnPressed += _ => UnlockWithPrerequisitesAction?.Invoke(proto); // LuaM
+
         _sawmill.Debug($"Created tech panel: {proto.ID}, availability: {availability}, button disabled: {ResearchButton.Disabled}");
     }
+
+    // LuaM-start:
+    public void UpdateUnlockWithPrerequisites(bool visible, bool enabled, string? tooltip)
+    {
+        UnlockWithPrerequisitesButton.Visible = visible;
+        UnlockWithPrerequisitesButton.Disabled = !enabled;
+        UnlockWithPrerequisitesButton.ToolTip = tooltip;
+    }
+    // LuaM-end.
 
     private void InitializePrerequisites(TechnologyPrototype proto, ResearchSystem research, SpriteSystem sprite)
     {
@@ -124,7 +137,13 @@ public sealed partial class FancyTechnologyInfoPanel : Control
         {
             var tech = _proto.Index(techId);
             var description = research.GetTechnologyDescription(tech, true, false, true);
-            RequiredTechContainer.AddChild(new MiniTechnologyCardControl(tech, _proto, sprite, description));
+			// RequiredTechContainer.AddChild(new MiniTechnologyCardControl(tech, _proto, sprite, description)); // Commented by LuaM
+            // LuaM-start: clicking a required technology goes to it
+            var card = new MiniTechnologyCardControl(tech, _proto, sprite, description);
+            card.MakeSelectable();
+            card.OnSelected += selected => PrerequisiteSelected?.Invoke(selected);
+            RequiredTechContainer.AddChild(card);
+            // LuaM-end.
         }
     }
 

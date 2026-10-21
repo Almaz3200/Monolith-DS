@@ -1,4 +1,4 @@
-﻿ent-EncryptionKeyUssp = ключ шифрования СССП
+ent-EncryptionKeyUssp = ключ шифрования СССП
     .desc = Ключ шифрования для тактического канала связи СССП.
 ent-EncryptionKeyUsspCommand = командный ключ шифрования USSP
     .desc = Ключ шифрования для командного канала USSP. Из-за неработоспособности высокоуровневой сети USSP вместо этого предоставляет доступ к тактическому командованию.
@@ -9,3 +9,11 @@ ent-EncryptionKeyDiplomacy = дипломатический ключ шифро�
 # mono
 ent-EncryptionKeyVanguardCommand = ключ шифрования командования Vanguard
     .desc = Ключ шифрования, используемый офицерами Vanguard.
+ent-EncryptionKeyViper = ViperGroup encryption key
+    .desc = An encryption key for the Viper Group tactical-level communications channel.
+ent-EncryptionKeyFreeport = Freeport encryption key
+    .desc = A worn encryption key for Freeport communications, allowing the varied groups of Freeport to engage in diplomacy or yell insults, likely the latter.
+ent-EncryptionKeyMieyo = MMC encryption key
+    .desc = An encryption key for Mieyo corporate communications.
+ent-EncryptionKeyMieyoCommand = MMC command encryption key
+    .desc = An encryption key for Mieyo command communications.

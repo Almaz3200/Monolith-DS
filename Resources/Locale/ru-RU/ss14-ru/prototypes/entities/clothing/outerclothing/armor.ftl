@@ -33,3 +33,5 @@ ent-ClothingOuterArmorBone = костяной доспех
     .desc = Сидит на вас как вторая кожа.
 ent-ClothingOuterArmorPodWars = броня Броненосец II
     .desc = Переделанный бронескафандр Броненосец II, реликвия войн подов.
+ent-ClothingOuterArmorBase = armor vest
+    .desc = A standard Type I armored vest that provides decent protection against most types of damage.
