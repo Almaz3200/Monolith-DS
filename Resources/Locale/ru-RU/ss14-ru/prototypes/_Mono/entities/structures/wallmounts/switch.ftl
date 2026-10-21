@@ -6,4 +6,4 @@ ent-LockableButtonViper = { ent-LockableButton }
     .suffix = Viper
 ent-LockableButtonMieyo = { ent-LockableButton }
     .desc = { ent-LockableButton.desc }
-    .suffix = Mieyo
+    .suffix = ММС

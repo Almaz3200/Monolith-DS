@@ -34,4 +34,4 @@ ent-AirlockHeavyAssemblyUSSP = { ent-AirlockHeavyAssembly }
     .suffix = СССП
 ent-AirlockHeavyAssemblyMieyo = { ent-AirlockHeavyAssembly }
     .desc = { ent-AirlockHeavyAssembly.desc }
-    .suffix = Mieyo
+    .suffix = ММС

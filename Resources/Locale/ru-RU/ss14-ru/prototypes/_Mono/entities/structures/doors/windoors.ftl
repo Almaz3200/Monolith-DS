@@ -3,4 +3,4 @@ ent-PlasmaWindoorSecureRogueLocked = { ent-WindoorSecurePlasma }
     .desc = { ent-WindoorSecurePlasma.desc }
 ent-WindoorSecureMieyoLocked = { ent-WindoorSecure }
     .desc = { ent-WindoorSecure.desc }
-    .suffix = Mieyo, Locked
+    .suffix = ММС, Закрыт

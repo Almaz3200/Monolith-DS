@@ -41,3 +41,4 @@
   accessGroups:
   - GeneralAccess
   - ViperHigh
+  - USSPHigh # LuaM: VG and USSP share their access

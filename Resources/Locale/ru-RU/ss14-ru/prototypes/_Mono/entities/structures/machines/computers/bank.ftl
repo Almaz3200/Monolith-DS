@@ -1,3 +1,3 @@
 ent-StationAdminBankATMMMC = { ent-BaseStationAdminBankATM }
-    .desc = Used to transfer funds to and from the local MMC account.
-    .suffix = Mieyo
+    .desc = Используется для перевода средств на счёт ММС и обратно.
+    .suffix = ММС

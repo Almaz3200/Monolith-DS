@@ -41,6 +41,7 @@
   accessGroups:
   - GeneralAccess
   - ViperHigh
+  - USSPAA # LuaM: VG and USSP share their access, the commander gets the commissar access
 
 - type: startingGear
   id: ViperCommanderGear
