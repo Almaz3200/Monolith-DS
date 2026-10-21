@@ -54,3 +54,7 @@ ent-Magazine45_ACPSubMachineGunTopMountedFMJ = надствольный мага
 ent-Magazine45_ACPSubMachineGunTopMountedEmpty = надствольный магазин (.45 ACP)
     .desc = Надствольный магазин для пистолета-пулемёта, использующий патроны калибра .45 ACP.
     .suffix= Пустой
+ent-BaseMagazine45_ACPPistolHighCapacityFMJ = machine pistol magazine (.45 ACP FMJ)
+    .desc = { ent-BaseItem.desc }
+ent-BaseMagazine45_ACPSubMachineGunFMJ = SMG magazine (.45 ACP FMJ)
+    .desc = { ent-BaseItem.desc }

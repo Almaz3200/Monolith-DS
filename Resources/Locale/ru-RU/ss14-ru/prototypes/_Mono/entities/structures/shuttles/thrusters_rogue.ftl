@@ -7,3 +7,6 @@ ent-DebugThrusterRogue = { ent-ThrusterRogue }
 ent-ThrusterLargeRogue = большой ракетный двигатель Авангарда
     .desc = { ent-Thruster.desc }
     .suffix = Авангард
+ent-ThrusterRogueStealth = stealth thruster
+    .desc = A thruster with a reduced drive-plume and thermal output, but significantly less thrust.
+    .suffix = Rogue, Stealth

@@ -1,4 +1,5 @@
 using Content.Server.Chemistry.TileReactions;
+using Content.Shared._LuaM.Weapons; // LuaM
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Examine;
@@ -72,5 +73,7 @@ public sealed partial class GunSystem
         {
             args.PushMarkup(Loc.GetString("gun-cartridge-unspent"));
         }
+
+        EntityManager.System<AmmoArmorPenetrationExamineSystem>().AddExamine(args, component.Prototype); // LuaM
     }
 }

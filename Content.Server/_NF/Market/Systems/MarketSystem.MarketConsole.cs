@@ -12,6 +12,9 @@ using Content.Shared.Power;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Materials;
+using Content.Shared.Item; // LuaM
+using Content.Shared.Tag; // LuaM
+using Content.Shared.Whitelist; // LuaM
 using Robust.Shared.Prototypes;
 
 
@@ -42,12 +45,9 @@ public sealed partial class MarketSystem
     /// <param name="entitySoldEvent">The details of the event</param>
     private void OnEntitySoldEvent(ref EntitySoldEvent entitySoldEvent)
     {
-        var station = _station.GetOwningStation(entitySoldEvent.Grid);
-        if (station is null ||
-            !_entityManager.TryGetComponent<CargoMarketDataComponent>(station, out var market))
-        {
+        // LuaM: sales anywhere go into the shared buyback pool
+        if (!TryGetSaleMarket(entitySoldEvent.Grid, out var market))
             return;
-        }
 
         foreach (var sold in entitySoldEvent.Sold)
         {
@@ -188,6 +188,10 @@ public sealed partial class MarketSystem
             if (!entProto.TryGetComponent<PhysicalCompositionComponent>(out var composition))
                 continue;
 
+            // LuaM: same market whitelist/blacklist as single sold items, e.g. no fissile uranium out of a sold silo
+            if (!IsMarketAllowed(marketDataComponent, entProto))
+                continue;
+
             var materialPerStack = composition.MaterialComposition[material.ID];
             var amountToSpawn = amount / materialPerStack;
             var price = material.Price * materialPerStack;
@@ -199,10 +203,58 @@ public sealed partial class MarketSystem
             _sharedMaterialStorageSystem.TrySetMaterialAmount(sold, materialProto, overflowMaterial, materialStorageComponent);
 
 
+            // LuaM: use the stack prototype, not the sheet entity id, so buyback spawns proper stacks
+            string? stackPrototypeId = null;
+            if (entProto.TryGetComponent<StackComponent>(out var stack))
+                stackPrototypeId = stack.StackTypeId;
+
             // Increase the count in the MarketData for this material
-            marketDataComponent.MarketDataList.Upsert(entProto.ID, amountToSpawn, price, material.StackEntity);
+            marketDataComponent.MarketDataList.Upsert(entProto.ID, amountToSpawn, price, stackPrototypeId); // LuaM: material.StackEntity > stackPrototypeId
         }
     }
+
+    // LuaM-start: whitelist checks for materials that only exist as numbers inside a material storage
+    private bool IsMarketAllowed(CargoMarketDataComponent market, EntityPrototype proto)
+    {
+        return (market.Whitelist == null || IsPrototypeValid(market.Whitelist, proto)) &&
+               (market.Blacklist == null || !IsPrototypeValid(market.Blacklist, proto)) ||
+               market.WhitelistOverride == null ||
+               IsPrototypeValid(market.WhitelistOverride, proto);
+    }
+
+    /// <summary>
+    /// Prototype version of <see cref="EntityWhitelistSystem.IsValid(EntityWhitelist, EntityUid)"/>.
+    /// </summary>
+    private bool IsPrototypeValid(EntityWhitelist list, EntityPrototype proto)
+    {
+        if (list.Components != null)
+        {
+            foreach (var name in list.Components)
+            {
+                if (proto.Components.ContainsKey(name))
+                {
+                    if (!list.RequireAll)
+                        return true;
+                }
+                else if (list.RequireAll)
+                    return false;
+            }
+        }
+
+        if (list.Sizes != null && proto.TryGetComponent<ItemComponent>(out var item) && list.Sizes.Contains(item.Size))
+            return true;
+
+        if (list.Tags != null)
+        {
+            var tags = proto.TryGetComponent<TagComponent>(out var tag) ? tag.Tags : new HashSet<ProtoId<TagPrototype>>();
+            return list.RequireAll
+                ? list.Tags.All(tags.Contains)
+                : list.Tags.Any(tags.Contains);
+        }
+
+        return list.RequireAll;
+    }
+    // LuaM-end
 
     /// <summary>
     /// Calculates the total number of entities in the market data list, taking into account the maximum stack count for stackable items.

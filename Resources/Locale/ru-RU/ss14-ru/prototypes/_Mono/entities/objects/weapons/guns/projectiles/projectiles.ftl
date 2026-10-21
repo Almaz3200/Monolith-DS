@@ -8,3 +8,5 @@ ent-BulletMonolithicGestalt = gestalt bolt
     .desc = Ззз...ть?
 ent-BulletMonolithicGolomRanged = golum spike
     .desc = Кристалл из наночастиц, похоже на энергию жёсткого света. Изучение могло бы перевернуть не одну отрасль. К сожалению, он летит прямо в тебя!
+ent-BulletEnergyGun357_magnum = 357_magnum bolt
+    .desc = { ent-BaseBullet.desc }

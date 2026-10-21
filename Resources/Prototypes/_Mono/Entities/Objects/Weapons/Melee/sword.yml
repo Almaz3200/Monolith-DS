@@ -213,6 +213,9 @@
     malus: 0.6
   - type: Execution
     doAfterDuration: 4.0
+  - type: Tag # LuaM
+    tags:
+    - SafetyDepositBlacklist # LuaM: can't be kept in safety deposit boxes
 
 # Ullman Blade
 

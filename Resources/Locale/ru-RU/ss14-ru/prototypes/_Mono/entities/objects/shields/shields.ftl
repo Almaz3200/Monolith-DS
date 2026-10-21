@@ -1,2 +1,4 @@
-﻿ent-HardlightShield = хардлайт-щит
+ent-HardlightShield = хардлайт-щит
     .desc = Хардлайт-щит производства Z-22, в сложенном виде помещается даже в карман. Более излучающий, чем отражающий, в отличие от своих синих собратьев.
+ent-HeavyBallisticShield = heavy ballistic shield
+    .desc = { ent-BaseShield.desc }

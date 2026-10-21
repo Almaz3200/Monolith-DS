@@ -1,3 +1,4 @@
+using Content.Shared._LuaM.Radio; // LuaM
 using System.Linq;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
@@ -78,6 +79,10 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 component.DefaultChannel ??= key.DefaultChannel;
             }
         }
+
+        // LuaM: built-in, non-removable key of headsets
+        if (TryComp<HeadsetTunableRadioComponent>(uid, out var tunable))
+            component.Channels.Add(tunable.Channel);
 
         RaiseLocalEvent(uid, new EncryptionChannelsChangedEvent(component));
     }

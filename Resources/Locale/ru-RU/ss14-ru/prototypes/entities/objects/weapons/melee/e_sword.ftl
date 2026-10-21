@@ -19,3 +19,7 @@ ent-EnergyPickaxeNF = энергетическая кирка
     .desc = Голографический инструмент для добычи полезных ископаемых с лезвиями, сделанными из твёрдого света. Хотя он и не обладает такой разрушительной силой, как энергетическое оружие, в выключенном состоянии он более компактен, чем большинство других инструментов для добычи полезных ископаемых.
 ent-CyborgEnergySwordDouble = { ent-EnergySwordDouble }
     .desc = Интерны Командования Синдиката решили, что одного лезвия на энергетическом мече недостаточно. Специальная разработка для киборгов Синдиката.
+ent-BaseMeleeWeaponEnergy = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }
+ent-HyperEutacticBlade = hypereutactic-blade
+    .desc = A supermassive weapon envisioned to cleave the very fabric of space and time itself in twain, the hypereutactic blade dynamically flash-forges a hypereutactic crystaline nanostructure capable of passing through most known forms of matter like a hot knife through butter.
