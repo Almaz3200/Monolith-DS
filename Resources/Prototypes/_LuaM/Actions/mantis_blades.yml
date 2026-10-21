@@ -1,0 +1,17 @@
+- type: entity
+  id: ActionMantisBladeDash
+  name: mantis blade dash
+  description: Dash forward with both mantis blades extended.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    checkCanAccess: false
+    range: 0
+    useDelay: 30
+    icon: { sprite: _Goobstation/Objects/Weapons/Melee/mantis_blade.rsi, state: icon }
+    itemIconStyle: NoItem
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Weapons/MantisBlades/mantis_extend.ogg
+    event: !type:DashActionEvent
+      distance: 4
+      affectedBySpeed: false
