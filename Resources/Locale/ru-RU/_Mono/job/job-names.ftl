@@ -9,7 +9,7 @@ job-name-ussp-rifleman = Стрелок СССП
 job-name-md-medic = Парамедик
 
 # MARK: ТСФ
-job-name-tsf-engineer = Инженер ТСФdotnet build -c release
+job-name-tsf-engineer = Инженер ТСФ
 job-name-tsf-borg = Киборг ТСФ
 job-name-tsf-civilian = Подрядчик ТСФ
 

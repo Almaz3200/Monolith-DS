@@ -668,12 +668,30 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (cartridge.DeleteOnSpawn) // Mono - No need to update appearance if cartridge is getting deleted anyways
             return;
 
-        if (cartridge.AutoTimedDespawn != 0)
+        if (cartridge.AutoTimedDespawn != 0 && !IsInGunOrMagazine(uid)) // LuaM: casings left in guns/magazines don't despawn
             EnsureComp<TimedDespawnComponent>(uid).Lifetime = cartridge.AutoTimedDespawn;
         // End mono
 
         Appearance.SetData(uid, AmmoVisuals.Spent, spent);
     }
+
+    // LuaM
+    /// <summary>
+    /// Whether the cartridge sits in a gun's chamber or cylinder, or in a magazine, speedloader or ammo box.
+    /// Spent casings there must not despawn: the gun would keep pointing at a deleted entity and jam for good.
+    /// </summary>
+    public bool IsInGunOrMagazine(EntityUid uid)
+    {
+        if (!Containers.TryGetContainingContainer((uid, null, null), out var container))
+            return false;
+
+        var owner = container.Owner;
+        return HasComp<GunComponent>(owner)
+            || HasComp<BallisticAmmoProviderComponent>(owner)
+            || HasComp<RevolverAmmoProviderComponent>(owner)
+            || HasComp<ContainerAmmoProviderComponent>(owner);
+    }
+    // End LuaM
 
     /// <summary>
     /// Drops a single cartridge / shell
