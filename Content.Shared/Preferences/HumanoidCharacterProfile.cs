@@ -817,17 +817,22 @@ namespace Content.Shared.Preferences
             var groups = new Dictionary<string, int>();
             var result = new List<ProtoId<TraitPrototype>>();
 
-            var ordered = new List<TraitPrototype>(); // LuaM
-            foreach (var trait in traits) // LuaM
+            // LuaM-start: traits are checked from the cheapest, so the most expensive ones get dropped when points run out
+            var ordered = new List<TraitPrototype>();
+            foreach (var trait in traits)
             {
-                if (protoManager.TryIndex(trait, out var indexed)) // LuaM
-                    ordered.Add(indexed); // LuaM
+                if (protoManager.TryIndex(trait, out var indexed))
+                    ordered.Add(indexed);
             }
 
-            ordered.Sort((a, b) => a.Cost != b.Cost ? a.Cost.CompareTo(b.Cost) : string.CompareOrdinal(a.ID, b.ID)); // LuaM
+            ordered.Sort((a, b) => a.Cost != b.Cost ? a.Cost.CompareTo(b.Cost) : string.CompareOrdinal(a.ID, b.ID));
+            // LuaM-end
 
+//            foreach (var trait in traits) // Commented by LuaM
             foreach (var traitProto in ordered) // LuaM: traits > ordered
             {
+//                if (!protoManager.TryIndex(trait, out var traitProto)) // Commented by LuaM
+//                    continue; // Commented by LuaM
                 ProtoId<TraitPrototype> trait = traitProto.ID; // LuaM
 
                 // Always valid.

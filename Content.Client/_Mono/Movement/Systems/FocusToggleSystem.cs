@@ -1,3 +1,29 @@
+// LuaM-start: the old look ahead asked the server to add the offset component, commented out
+// using Content.Client.Movement.Components;
+// using Content.Shared._Mono.Movement.Systems;
+//
+// namespace Content.Client._Mono.Movement.Systems;
+//
+// public sealed class FocusToggleSystem : SharedFocusToggleSystem
+// {
+//     protected override bool HasCompEyeCursorOffset(EntityUid uid)
+//     {
+//         return HasComp<EyeCursorOffsetComponent>(uid);
+//     }
+//
+//     protected override void AddCompEyeCursorOffset(EntityUid uid)
+//     {
+//         EnsureComp<EyeCursorOffsetComponent>(uid);
+//     }
+//
+//     protected override void RemCompEyeCursorOffset(EntityUid uid)
+//     {
+//         RemComp<EyeCursorOffsetComponent>(uid);
+//     }
+// }
+// LuaM-end
+
+// LuaM-start: look ahead runs on the client only, without a request to the server
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Camera;
@@ -123,3 +149,4 @@ public sealed class FocusToggleSystem : EntitySystem
         return true;
     }
 }
+// LuaM-end
