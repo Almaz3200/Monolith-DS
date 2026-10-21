@@ -14,6 +14,6 @@
   - PrintableBombCollar
   - PrintableBombCollarSealer
   technologyPrerequisites:
-  # - UniversalPlastitaniumCore # Commented by LuaM
+  - UniversalPlastitaniumCore
   - ExplosiveTechnology # LuaM
   position: 9, 10 # LuaM: 7,7 > 9, 10

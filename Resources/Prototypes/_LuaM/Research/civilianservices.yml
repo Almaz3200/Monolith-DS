@@ -29,7 +29,7 @@
   - NFBlueprintPlantBagOfHolding
   technologyPrerequisites:
   - Hydroponics
-  # - AdvancedParts # Commented by LuaM
+  - AdvancedParts
   position: 4, 10
 
 - type: technology

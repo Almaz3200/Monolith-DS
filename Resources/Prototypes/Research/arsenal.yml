@@ -68,8 +68,8 @@
   - WeaponDisabler # Mono
   - WeaponMechCombatDisabler # Goobstation
   - ClothingBackpackElectropack # Mono
-  # technologyPrerequisites: # Commented by LuaM
-  # - BasicParts
+  technologyPrerequisites:
+  - BasicParts
   position: 7, 12 # LuaM: 2, 2 > 7, 12
 
 - type: technology
@@ -89,7 +89,7 @@
   - ChemicalPayload
   - NFBlueprintSignallerAdvanced # Frontier
   technologyPrerequisites:
-  # - SuperParts # Commented by LuaM
+  - SuperParts
   - WeaponizedLaserManipulation # LuaM
   position: 10, 10 # LuaM: 1, 14 > 10, 10
 
@@ -179,7 +179,7 @@
   - WeaponMechCombatImmolationGun # Goobstation
   technologyPrerequisites:
   - ConcentratedLaserWeaponry
-  # - SuperParts # Commented by LuaM
+  - SuperParts
   position: 11, 7 # LuaM: 4, 3 > 11, 7
 
 # Mono edit - research consolidation

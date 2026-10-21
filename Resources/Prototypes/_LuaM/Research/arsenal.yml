@@ -13,8 +13,8 @@
   - ClothingHeadHelmetMercenary
   - ClothingHeadHelmetMercenaryBlack
   - ClothingHeadHelmetBasic
-  # technologyPrerequisites: # Commented by LuaM
-  # - BasicParts
+  technologyPrerequisites:
+  - BasicParts
   position: 2, 12
 
 - type: technology
@@ -74,6 +74,6 @@
   - ClothingEyesGlassesContractor
   technologyPrerequisites:
   - HardsuitsArmoredAdvanced
-  # - ThermalVisionTech # Comented by LuaM
-  # - CyberneticEnhancements # Comented by LuaM
+  - ThermalVisionTech
+  - CyberneticEnhancements
   position: 4, 4

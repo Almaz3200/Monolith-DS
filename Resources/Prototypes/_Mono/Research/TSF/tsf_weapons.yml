@@ -54,6 +54,7 @@
   - AmmoBoxShenzhenBig
   technologyPrerequisites:
   - TsfAdvancedWeapons
+  - UniversalPlastitaniumCore # LuaM
   # - UniversalMaterialResearchT3 # Commented by LuaM
   position: 4, 10 # LuaM: 2, -30 > 4, 10
 

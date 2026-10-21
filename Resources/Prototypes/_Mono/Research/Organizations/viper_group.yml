@@ -13,7 +13,7 @@
   - ClothingUniformJumpsuitViperGroupTurtleneck
   technologyPrerequisites:
   - UsspMediumGuns
-  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - UniversalMaterialResearchT1
   position: 6, 8 # LuaM 7, -8 > 6, 8
 
 # T2

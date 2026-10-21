@@ -17,8 +17,8 @@
   - ServiceSelectiveDropper # Mono
   - KitchenAssemblerMachineCircuitboard # Mono
   - ElectricRangeMachineCircuitboard # Mono
-  # technologyPrerequisites: # Commented by LuaM
-  # - BasicParts
+  technologyPrerequisites:
+  - BasicParts
   position: 3, 12 # LuaM: -3, -2 > 3, 12
 
 - type: technology
@@ -48,8 +48,8 @@
   - NFPouchCaptain
   - NFPouchCargo
   - MedicalPouch # LuaM add
-  # technologyPrerequisites: # Commented by LuaM
-  # - BasicParts
+  technologyPrerequisites:
+  - BasicParts
   position: 12, 11 # LuaM: 3, -3 > 12, 11
 
 # Tier 2
@@ -86,8 +86,8 @@
   - BiogeneratorMachineCircuitboard
   - BiofabricatorMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
-  # technologyPrerequisites: # Commented by LuaM
-  # - AdvancedParts
+  technologyPrerequisites:
+  - AdvancedParts
   position: 8, 12 # LuaM: -2, 10 > 8, 12
 
 - type: technology

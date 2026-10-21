@@ -26,8 +26,8 @@
   recipeUnlocks:
   - IndustrialPressEconomyElectronicsMMCMachineCircuitboard
   - IndustrialPressEconomyPlatesMMCMachineCircuitboard
-  # technologyPrerequisites: # Commented by LuaM
-  # - UniversalMaterialResearchT1
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
   position: 7, 6 # LuaM -6, -8 > 7, 6
 
 - type: technology

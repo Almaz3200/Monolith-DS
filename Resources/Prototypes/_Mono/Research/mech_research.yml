@@ -23,8 +23,8 @@
   - ClarkeTreads
   - ClarkeCentralElectronics
   - ClarkePeripheralsElectronics
-  # technologyPrerequisites: # Comented by LuaM
-  # - AdvancedParts
+  technologyPrerequisites:
+  - AdvancedParts
   position: 8, 12 # LuaM: 2, 10 > 8, 12
 
 # - type: technology
@@ -74,7 +74,7 @@
   - WeaponMechCombatShotgunIncendiary
   - WeaponMechChainSword
   technologyPrerequisites:
-  # - SuperParts # Comented by LuaM
+  - SuperParts
   - MechBasic
   position: 8, 10 # LuaM: 2, 11 > 8, 10
 

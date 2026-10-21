@@ -11,8 +11,8 @@
   # - ClothingEyesNightVisionGoggles # Commented by LuaM
   - MotionDetectorTSF
   - CrowbarPocketTSF
-  # technologyPrerequisites: # Commented by LuaM
-  # - UniversalMaterialResearchT1
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
   position: 7, 7 # LuaM: 12, -1 > 7, 7
 
 - type: technology
@@ -75,7 +75,7 @@
   technologyPrerequisites:
   - TsfTierTwoVouchers
   # - UniversalMaterialResearchT3 # Commented by LuaM
-  # - UniveralSandboxCruiseMissiles # Commented by LuaM
+  - UniveralSandboxCruiseMissiles
   position: 4, 6 # LuaM: 11, 12 > 4, 6
 
 - type: technology
@@ -89,7 +89,7 @@
   - SutureTSF
   - MeshTSF
   technologyPrerequisites:
-  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - UniversalMaterialResearchT1
   - AdvancedTreatment # LuaM
   position: 4, 9 # LuaM: 12, -2 > 4, 9
 

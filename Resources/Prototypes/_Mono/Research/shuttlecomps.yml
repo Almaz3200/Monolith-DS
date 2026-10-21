@@ -18,7 +18,7 @@
   - LargeThrusterMachineCircuitboard
   technologyPrerequisites:
   - Shuttlecraft
-  # - SuperParts # Commented by LuaM
+  - SuperParts
   position: 6, 10 # LuaM: -6, 7 > 6, 10
 
 - type: technology

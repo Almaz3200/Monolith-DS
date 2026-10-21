@@ -8,8 +8,8 @@
   recipeUnlocks:
   - WeaponRifleAK502USSP
   - WeaponRevolverMatebaUSSP
-  # technologyPrerequisites:
-  # - UniversalMaterialResearchT1
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
   position: 7, 7 # LuaM 12, 2 > 7, 7
 
 - type: technology

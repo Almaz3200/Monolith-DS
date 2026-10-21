@@ -87,6 +87,7 @@
   technologyPrerequisites:
   # - UniversalMaterialResearchT3 # Commented by LuaM
   - RogueAdvancedGuns
+  - UniversalPlastitaniumCore # LuaM
   position: 4, 4 # LuaM: 12, 13 > 4, 4
 
 - type: technology

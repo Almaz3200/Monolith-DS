@@ -35,7 +35,7 @@
   - WeaponShotgunKammererNF
   - WeaponSniperRepeater
   technologyPrerequisites:
-  # - BasicParts # Commented by LuaM
+  - BasicParts
   - WeaponizedLaserManipulation # LuaM
   position: 12, 10 # LuaM: 2, 1 > 12, 10
 

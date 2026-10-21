@@ -55,9 +55,9 @@
   recipeUnlocks:
   - ClothingShoesBootsMagSecurity
   - ClothingShoesBootsMagMercenary
-#   technologyPrerequisites: # Commented by LuaM
-#   - MagnetsTech
-#   - AdvancedParts
+  technologyPrerequisites:
+  - MagnetsTech
+  # - AdvancedParts # Commented by LuaM
   position: 4, 12 # LuaM: -3, -1 > 4, 12
 
 - type: technology
@@ -124,5 +124,6 @@
   - BlueprintClothingOuterHardsuitScaf
   technologyPrerequisites:
   - HardsuitsArmored
-  # - SuperParts # Commented by LuaM
+  - SuperParts
+  - HardsuitsAdvanced # LuaM
   position: 4, 6 # LuaM: 3, 7 > 4, 6
