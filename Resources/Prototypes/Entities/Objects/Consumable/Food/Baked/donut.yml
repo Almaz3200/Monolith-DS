@@ -74,6 +74,10 @@
   parent: FoodDonutBase
   id: FoodDonutHomer
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyDonut
   - type: FlavorProfile
     flavors:
       - pink
@@ -88,6 +92,10 @@
   id: FoodDonutChaos
   description: Like life, it never quite tastes the same.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyChaosDonut
   - type: FlavorProfile
     flavors:
       - sweet
@@ -113,6 +121,7 @@
     tags:
     - Meat
     - Donut # Frontier
+    - BountyMeatDonut # Mono
 # Tastes like meat.
 
 - type: entity
@@ -121,6 +130,10 @@
   id: FoodDonutPink
   description: Goes great with a soy latte.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyPinkDonut
   - type: FlavorProfile
     flavors:
       - pink
@@ -135,6 +148,10 @@
   id: FoodDonutSpaceman
   description: Goes great with a cold beaker of malk.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountySpacemansDonut
   - type: Sprite
     state: purple
 # Tastes like donut, violets.
@@ -145,6 +162,10 @@
   id: FoodDonutApple
   description: Goes great with a shot of cinnamon schnapps.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyAppleDonut
   - type: FlavorProfile
     flavors:
       - sweet
@@ -159,6 +180,10 @@
   id: FoodDonutCaramel
   description: Goes great with a mug of hot coco.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyCaramelDonut
   - type: Sprite
     state: beige
 # Tastes like donut, buttery sweetness.
@@ -169,6 +194,10 @@
   id: FoodDonutChocolate
   description: Goes great with a glass of warm milk.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyChocolateDonut
   - type: FlavorProfile
     flavors:
       - chocolate
@@ -191,6 +220,10 @@
   id: FoodDonutBluePumpkin
   description: Goes great with a mug of soothing drunken blue pumpkin.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyBluePumpkinDonut
   - type: FlavorProfile
     flavors:
       - sweet
@@ -205,6 +238,10 @@
   id: FoodDonutBungo
   description: Goes great with a mason jar of hippie's delight.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyBungoDonut
   - type: FlavorProfile
     flavors:
       - sweet
@@ -219,6 +256,10 @@
   id: FoodDonut
   description: The L-theanine in this donut is relaxing, yet not euphoric. Goes great with a cup of tea.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyMatchaDonut
   - type: FlavorProfile
     flavors:
       - tea
@@ -232,6 +273,10 @@
   id: FoodDonutSweetpea
   description: Goes great with a bottle of Bastion Burbon!
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountySweetPeaDonut
   - type: Sprite
     state: laugh
 # Tastes like donut, fizzy tutti frutti.
@@ -244,6 +289,10 @@
   id: FoodDonutJellyHomer
   description: You jelly?
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyJellyDonut
   - type: Sprite
     state: jelly-homer
   - type: Item
@@ -264,6 +313,10 @@
   id: FoodDonutJellyPink
   description: Goes great with a soy latte.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyPinkJellyDonut
   - type: Sprite
     state: jelly-pink
   - type: Item
@@ -284,6 +337,10 @@
   id: FoodDonutJellySpaceman
   description: Goes great with a cold beaker of malk.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountySpacemansJellyDonut
   - type: Sprite
     state: jelly-purple
   - type: SolutionContainerManager
@@ -318,6 +375,7 @@
     tags:
     - Fruit
     - Donut # Frontier
+    - BountyAppleJellyDonut # Mono
 # Tastes like jelly-donut, green apples.
 
 - type: entity
@@ -326,6 +384,10 @@
   id: FoodDonutJellyCaramel
   description: Goes great with a mug of hot coco.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyCaramelJellyDonut
   - type: Sprite
     state: jelly-beige
   - type: SolutionContainerManager
@@ -345,6 +407,10 @@
   id: FoodDonutJellyChocolate
   description: Goes great with a glass of warm milk.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyChocolateJellyDonut
   - type: Sprite
     state: jelly-choc
   - type: SolutionContainerManager
@@ -385,6 +451,7 @@
     tags:
     - Fruit
     - Donut # Frontier
+    - BountyBluePumpkinJellyDonut # Mono
 # Tastes like jelly-donut, blue pumpkin.
 
 - type: entity
@@ -408,6 +475,7 @@
     tags:
     - Fruit # Apparently this is a fruit. Huh.
     - Donut # Frontier
+    - BountyBungoJellyDonut # Mono
 # Tastes like jelly-donut, tropical sweetness.
 
 - type: entity
@@ -416,6 +484,10 @@
   id: FoodDonutJelly
   description: The L-theanine in this jelly-donut is relaxing, yet not euphoric. Goes great with a cup of tea.
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountyMatchaJellyDonut
   - type: Sprite
     state: jelly-olive
   - type: SolutionContainerManager
@@ -435,6 +507,10 @@
   id: FoodDonutJellySweetpea
   description: Goes great with a bottle of Bastion Burbon!
   components:
+  - type: Tag # Mono
+    tags:
+    - Donut
+    - BountySweetPeaJellyDonut
   - type: Sprite
     state: jelly-laugh
   - type: SolutionContainerManager
