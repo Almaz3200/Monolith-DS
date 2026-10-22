@@ -12,6 +12,8 @@
     color: "#047abd"
     flags: [HideLabel]
     readOnly: true
+  - type: Company # TSF sees the cruiser through its hidden IFF
+    companyName: TSF
 
 - type: gameMap
   id: TSFMCOutpost

@@ -28,7 +28,7 @@ public abstract partial class SharedShuttleSystem
         return component.Color;
     }
 
-    public string? GetIFFLabel(EntityUid gridUid, bool self = false, IFFComponent? component = null)
+    public string? GetIFFLabel(EntityUid gridUid, bool self = false, IFFComponent? component = null, bool ignoreHidden = false) // LuaM: ignoreHidden
     {
         var entName = MetaData(gridUid).EntityName;
 
@@ -37,7 +37,7 @@ public abstract partial class SharedShuttleSystem
             return entName;
         }
 
-        if (Resolve(gridUid, ref component, false) && (component.Flags & (IFFFlags.HideLabel | IFFFlags.Hide)) != 0x0)
+        if (!ignoreHidden && Resolve(gridUid, ref component, false) && (component.Flags & (IFFFlags.HideLabel | IFFFlags.Hide)) != 0x0) // LuaM: ignoreHidden
         {
             return null;
         }

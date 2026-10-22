@@ -23,6 +23,8 @@
   - type: IFF
     color: "#047abd"
     readOnly: true
+  - type: Company # LuaM: faction outpost
+    companyName: TSF
   - type: SolarPoweredGrid
     doNotCull: true
   - type: WorldGenDistanceCarver
@@ -89,6 +91,8 @@
   - type: IFF
     color: "#047abd"
     readOnly: true
+  - type: Company # LuaM: faction outpost
+    companyName: TSF
   - type: SolarPoweredGrid
     doNotCull: true
 

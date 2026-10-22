@@ -11,8 +11,10 @@
   gridPath: /Maps/_Mono/POI/hokkaido.yml
   addComponents:
   - type: IFF
-    color: "#EEEEEE"
+    color: "#fca503" # LuaM: #EEEEEE > #fca503 (MMC color)
     readOnly: true # mono
+  - type: Company # LuaM: faction outpost
+    companyName: MMC
   - type: WorldGenDistanceCarver
     distanceThresholds:
     # Dead zone
