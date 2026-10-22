@@ -34,7 +34,7 @@
     collection: RpPat
   messages: RpPullWingMessages
   icon: _LuaM/Interface/RpPanel/pat-wings.png
-  userRequirements:
+  targetRequirements:
   - !type:SpeciesRequirement
     species:
     - Harpy

@@ -107,9 +107,9 @@
     count: 6
 
 - type: localizedDataset
-  id: RpKissForeheadMessages
+  id: RpKissMessages
   values:
-    prefix: rp-interaction-kiss-forehead-
+    prefix: rp-interaction-kiss-
     count: 6
 
 - type: localizedDataset
@@ -123,12 +123,6 @@
   values:
     prefix: rp-interaction-high-five-
     count: 3
-
-- type: localizedDataset
-  id: RpKissHandMessages
-  values:
-    prefix: rp-interaction-kiss-hand-
-    count: 5
 
 - type: localizedDataset
   id: RpPushUpsFloorSelfMessages
@@ -164,12 +158,6 @@
   id: RpTapCrownMessages
   values:
     prefix: rp-interaction-tap-crown-
-    count: 6
-
-- type: localizedDataset
-  id: RpKissBackOfHeadMessages
-  values:
-    prefix: rp-interaction-kiss-back-of-head-
     count: 6
 
 - type: localizedDataset

@@ -5,7 +5,6 @@ using Content.Client.Stylesheets;
 using Content.Shared._LuaM.CCVar;
 using Content.Shared._LuaM.RpPanel;
 using Content.Shared._LuaM.RpPanel.Requirements;
-using Content.Shared.ActionBlocker;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
@@ -45,7 +44,6 @@ public sealed partial class RpPanelWindow : DefaultWindow
 
     private readonly SpriteSystem _sprite;
     private readonly SharedInteractionSystem _interaction;
-    private readonly ActionBlockerSystem _actionBlocker;
     private readonly MobStateSystem _mobState;
 
     private readonly Dictionary<float, bool> _rangeCache = new();
@@ -66,6 +64,7 @@ public sealed partial class RpPanelWindow : DefaultWindow
     private List<string> _currentInteractions = new();
     private bool _hasInitializedCategories;
     private bool _reloadQueued;
+    private bool _incapacitated;
     private RpCustomEmoteWindow? _editor;
 
     public event Action<string, bool>? OnSendEmote;
@@ -78,7 +77,6 @@ public sealed partial class RpPanelWindow : DefaultWindow
 
         _sprite = _entManager.System<SpriteSystem>();
         _interaction = _entManager.System<SharedInteractionSystem>();
-        _actionBlocker = _entManager.System<ActionBlockerSystem>();
         _mobState = _entManager.System<MobStateSystem>();
 
         TargetView.OverrideDirection = Direction.South;
@@ -107,20 +105,35 @@ public sealed partial class RpPanelWindow : DefaultWindow
         _customEmotes = RpCustomEmoteStorage.Load(_resources, _prototypeManager);
         CreateEmoteButton.OnPressed += _ => OpenEditor(null);
         UpdateCreateEmoteButton();
-        OnClose += () => _editor?.Close();
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _editor?.Close();
     }
 
     public void SetTarget(NetEntity user, NetEntity target)
     {
-        _currentUser = _entManager.GetEntity(user);
-        _currentTarget = _entManager.GetEntity(target);
         _currentInteractions.Clear();
         _openedCategories.Clear();
         _hasInitializedCategories = false;
 
-        if (_currentUser == null || _currentTarget == null)
+        if (!_entManager.TryGetEntity(user, out var userUid) || !_entManager.TryGetEntity(target, out var targetUid))
+        {
+            _currentUser = null;
+            _currentTarget = null;
+            TargetView.SetEntity(null);
+            HeaderLabel.Text = string.Empty;
+            HeaderLabel.ToolTip = null;
+            _incapacitated = false;
+            _availableCustomEmotes.Clear();
+            ReloadInteractions(new List<RpInteractionPrototype>());
             return;
+        }
 
+        _currentUser = userUid;
+        _currentTarget = targetUid;
         TargetView.SetEntity(_currentTarget);
 
         var targetName = Identity.Name(_currentTarget.Value, _entManager, _currentUser.Value);
@@ -205,17 +218,12 @@ public sealed partial class RpPanelWindow : DefaultWindow
 
         _rangeCache.Clear();
         _availableCustomEmotes.Clear();
-        if (_mobState.IsIncapacitated(user) || _mobState.IsIncapacitated(target))
+        _incapacitated = _mobState.IsIncapacitated(user) || _mobState.IsIncapacitated(target);
+        if (_incapacitated)
             return interactions;
-
-        var softOnly = !_actionBlocker.CanInteract(user, target) ||
-                       user != target && !_actionBlocker.CanInteract(target, null);
 
         foreach (var interaction in _prototypeManager.EnumeratePrototypes<RpInteractionPrototype>())
         {
-            if (softOnly && interaction.Kind != RpInteractionKind.Soft)
-                continue;
-
             if (!IsInteractionAvailable(user, target, interaction))
                 continue;
 
@@ -228,9 +236,6 @@ public sealed partial class RpPanelWindow : DefaultWindow
         foreach (var emote in _customEmotes)
         {
             if (emote.Self != (user == target) || emote.Message.Length == 0)
-                continue;
-
-            if (softOnly && emote.Kind != RpInteractionKind.Soft)
                 continue;
 
             if (!IsInRange(user, target, RpCustomEmote.Range))
@@ -573,9 +578,9 @@ public sealed partial class RpPanelWindow : DefaultWindow
         InteractionScroll.Visible = hasInteractions;
         EmptyStateContainer.Visible = !hasInteractions;
         EmptyStateLabel.Text = Loc.GetString(
-            string.IsNullOrWhiteSpace(SearchInput.Text)
-                ? "rp-panel-empty-available"
-                : "rp-panel-empty-search");
+            !string.IsNullOrWhiteSpace(SearchInput.Text) ? "rp-panel-empty-search"
+            : _incapacitated ? "rp-panel-empty-incapacitated"
+            : "rp-panel-empty-available");
 
         ExpandAllButton.Disabled = _categoryControls.Count == 0;
         CollapseAllButton.Disabled = _categoryControls.Count == 0;

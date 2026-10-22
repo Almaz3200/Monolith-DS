@@ -55,6 +55,8 @@
   - !type:SpeciesRequirement
     species:
     - Felinid
+    - Rodentia
+    - Tajaran
     - Vulpkanin
 
 - type: rpInteraction
@@ -94,10 +96,10 @@
   icon: _LuaM/Interface/RpPanel/cry.png
 
 - type: rpInteraction
-  id: KissForehead
+  id: Kiss
   category: Face
   kind: Soft
   sound:
-    collection: RpFriction
-  messages: RpKissForeheadMessages
-  icon: _LuaM/Interface/RpPanel/kiss_forehead.png
+    collection: RpKiss
+  messages: RpKissMessages
+  icon: _LuaM/Interface/RpPanel/kiss.png

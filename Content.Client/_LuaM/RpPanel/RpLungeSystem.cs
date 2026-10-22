@@ -9,10 +9,10 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._LuaM.RpPanel;
 
-public sealed class RpLungeSystem : EntitySystem
+public sealed partial class RpLungeSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
 
     private const string LungeKey = "rp-lunge";
 

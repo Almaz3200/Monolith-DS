@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
@@ -6,11 +7,15 @@ using Content.Shared._LuaM.CCVar;
 using Content.Shared._LuaM.RpPanel;
 using Content.Shared._LuaM.RpPanel.Requirements;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Bed.Sleep;
 using Content.Shared.Chat;
+using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -23,21 +28,22 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._LuaM.RpPanel;
 
-public sealed class RpPanelSystem : EntitySystem
+public sealed partial class RpPanelSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetConfigurationManager _netCfg = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private INetConfigurationManager _netCfg = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private static readonly SpriteSpecifier VerbIcon =
         new SpriteSpecifier.Texture(new ResPath("/Textures/_LuaM/Interface/RpPanel/friendly.png"));
@@ -60,8 +66,10 @@ public sealed class RpPanelSystem : EntitySystem
 
     private void OnMapInit(Entity<RpPanelOwnerComponent> entity, ref MapInitEvent args)
     {
+        // --  движок молча режет сообщения связанного/оглушённого игрока; проверяем сами в CanAct, чтобы показать попап
         var interfaceData = new InterfaceData(
-            clientType: "Content.Client._LuaM.RpPanel.RpPanelBoundUserInterface"
+            clientType: "Content.Client._LuaM.RpPanel.RpPanelBoundUserInterface",
+            requireInputValidation: false
         );
 
         _ui.SetUi(entity.Owner, RpPanelKey.Key, interfaceData);
@@ -69,13 +77,24 @@ public sealed class RpPanelSystem : EntitySystem
 
     private void OnOpenPanel(Entity<RpPanelOwnerComponent> entity, ref RpPanelOpenEvent args)
     {
-        if (!_interaction.IsAccessible(entity.Owner, args.Target))
+        var user = entity.Owner;
+        if (!IsValidUi(user, args.Target))
             return;
 
-        if (!TryOpenPanel(entity.Owner, args.Target))
+        if (!_interaction.IsAccessible(user, args.Target))
+        {
+            Popup(user, "rp-panel-out-of-reach");
+            return;
+        }
+
+        if (!CanAct(user, args.Target))
+            return;
+
+        if (!_ui.TryOpenUi(user, RpPanelKey.Key, user))
             return;
 
         entity.Comp.Target = args.Target;
+        _ui.SetUiState(user, RpPanelKey.Key, new RpPanelBuiState(GetNetEntity(user), GetNetEntity(args.Target)));
     }
 
     private void OnBoundUIClosed(Entity<RpPanelOwnerComponent> entity, ref BoundUIClosedEvent args)
@@ -88,8 +107,7 @@ public sealed class RpPanelSystem : EntitySystem
 
     private void OnSendMessage(Entity<RpPanelOwnerComponent> entity, ref RpPanelSendMessage args)
     {
-        var target = entity.Comp.Target;
-        if (target == null || args.Actor != entity.Owner)
+        if (!TryGetTarget(entity, args.Actor, out var target))
             return;
 
         ProcessInteraction(args.Actor, target.Value, args.Interaction, args.PrivateMode);
@@ -97,11 +115,24 @@ public sealed class RpPanelSystem : EntitySystem
 
     private void OnCustomEmote(Entity<RpPanelOwnerComponent> entity, ref RpPanelCustomEmoteMessage args)
     {
-        var target = entity.Comp.Target;
-        if (target == null || args.Actor != entity.Owner)
+        if (!TryGetTarget(entity, args.Actor, out var target))
             return;
 
         ProcessCustomInteraction(args.Actor, target.Value, args.Emote, args.PrivateMode);
+    }
+
+    private bool TryGetTarget(Entity<RpPanelOwnerComponent> entity, EntityUid actor, [NotNullWhen(true)] out EntityUid? target)
+    {
+        target = entity.Comp.Target;
+        if (target == null || actor != entity.Owner)
+            return false;
+
+        if (!TerminatingOrDeleted(target.Value))
+            return true;
+
+        entity.Comp.Target = null;
+        target = null;
+        return false;
     }
 
     private void OnGetVerbs(Entity<RpPanelOwnerComponent> ent, ref GetVerbsEvent<Verb> args)
@@ -137,10 +168,13 @@ public sealed class RpPanelSystem : EntitySystem
         if (!_prototype.TryIndex(messagesId, out var messages))
             return;
 
+        if (!CanRunInteraction(user, target, interaction.Range, out var userPanel))
+            return;
+
         var message = Loc.GetString(_random.Pick(messages.Values),
             ("target", Identity.Name(target, EntityManager, user)));
 
-        RunInteraction(user, target, interaction.Kind, interaction.Range, interaction.Sound, message, privateMode);
+        RunInteraction(user, target, userPanel, interaction.Sound, message, privateMode);
     }
 
     public void ProcessCustomInteraction(EntityUid user, EntityUid target, RpCustomEmote emote, bool privateMode)
@@ -161,26 +195,22 @@ public sealed class RpPanelSystem : EntitySystem
             sound = soundProto.Sound;
         }
 
+        if (!CanRunInteraction(user, target, RpCustomEmote.Range, out var userPanel))
+            return;
+
         message = message.Replace(RpCustomEmote.TargetPlaceholder, Identity.Name(target, EntityManager, user));
 
-        RunInteraction(user, target, emote.Kind, RpCustomEmote.Range, sound, message, privateMode);
+        RunInteraction(user, target, userPanel, sound, message, privateMode);
     }
 
     private void RunInteraction(
         EntityUid user,
         EntityUid target,
-        RpInteractionKind kind,
-        float range,
+        RpPanelOwnerComponent userPanel,
         SoundSpecifier? sound,
         string message,
         bool privateMode)
     {
-        if (!TryComp<RpPanelOwnerComponent>(user, out var userPanel))
-            return;
-
-        if (!IsValidInteraction(user, target, kind, range, userPanel))
-            return;
-
         Filter? privateFilter = privateMode
             ? Filter.Entities(user, target)
             : null;
@@ -196,7 +226,7 @@ public sealed class RpPanelSystem : EntitySystem
     {
         if (privateFilter == null)
         {
-            _chat.TrySendInGameICMessage(source, message, InGameICChatType.Emote, false);
+            _chat.TrySendInGameICMessage(source, message, InGameICChatType.Emote, false, checkRadioPrefix: false);
             return;
         }
 
@@ -239,18 +269,6 @@ public sealed class RpPanelSystem : EntitySystem
             privateFilter ?? Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    private bool TryOpenPanel(EntityUid user, EntityUid target)
-    {
-        if (!IsValidUi(user, target))
-            return false;
-
-        _ui.TryOpenUi(user, RpPanelKey.Key, user);
-
-        var state = new RpPanelBuiState(GetNetEntity(user), GetNetEntity(target));
-        _ui.SetUiState(user, RpPanelKey.Key, state);
-        return true;
-    }
-
     private bool IsValidUi(EntityUid user, EntityUid target)
     {
         if (!HasComp<RpPanelOwnerComponent>(user) || !HasComp<RpPanelOwnerComponent>(target))
@@ -262,29 +280,79 @@ public sealed class RpPanelSystem : EntitySystem
         return !_mobState.IsIncapacitated(user) && !_mobState.IsIncapacitated(target);
     }
 
-    private bool IsValidInteraction(
+    private bool CanRunInteraction(
         EntityUid user,
         EntityUid target,
-        RpInteractionKind kind,
         float range,
-        RpPanelOwnerComponent userPanel)
+        [NotNullWhen(true)] out RpPanelOwnerComponent? userPanel)
     {
+        if (!TryComp(user, out userPanel))
+            return false;
+
         if (userPanel.LastInteraction + RpPanelOwnerComponent.Cooldown > _timing.CurTime)
             return false;
 
-        if (!_interaction.InRangeAndAccessible(user, target, range))
-            return false;
-
         if (!IsValidUi(user, target))
+        {
+            Popup(user, "rp-panel-target-unavailable");
+            return false;
+        }
+
+        if (!CanAct(user, target))
             return false;
 
-        return kind == RpInteractionKind.Soft || CanActFreely(user, target);
+        if (!_interaction.InRangeAndAccessible(user, target, range))
+        {
+            Popup(user, "rp-panel-out-of-reach");
+            return false;
+        }
+
+        return true;
     }
 
-    private bool CanActFreely(EntityUid user, EntityUid target)
+    private bool CanAct(EntityUid user, EntityUid target)
     {
-        return _actionBlocker.CanInteract(user, target)
-               && (user == target || _actionBlocker.CanInteract(target, null));
+        if (!_actionBlocker.CanInteract(user, null) || !_actionBlocker.CanEmote(user))
+        {
+            Popup(user, $"rp-panel-blocked-self-{GetBlockReason(user)}");
+            return false;
+        }
+
+        if (user == target)
+            return true;
+
+        if (!_actionBlocker.CanInteract(target, null))
+        {
+            Popup(user, $"rp-panel-blocked-target-{GetBlockReason(target)}");
+            return false;
+        }
+
+        if (!_actionBlocker.CanInteract(user, target))
+        {
+            Popup(user, "rp-panel-blocked-target-busy");
+            return false;
+        }
+
+        return true;
+    }
+
+    private string GetBlockReason(EntityUid uid)
+    {
+        if (TryComp<CuffableComponent>(uid, out var cuffable) && !cuffable.CanStillInteract)
+            return "cuffed";
+
+        if (HasComp<SleepingComponent>(uid))
+            return "asleep";
+
+        if (HasComp<StunnedComponent>(uid))
+            return "stunned";
+
+        return "busy";
+    }
+
+    private void Popup(EntityUid user, string locId)
+    {
+        _popup.PopupEntity(Loc.GetString(locId), user, user, PopupType.SmallCaution);
     }
 
     private bool IsPanelEnabled(EntityUid uid)

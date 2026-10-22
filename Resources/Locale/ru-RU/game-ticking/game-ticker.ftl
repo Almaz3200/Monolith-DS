@@ -22,7 +22,7 @@ game-ticker-get-info-preround-text =
         [one] готов
        *[other] готовы
     })
-	Текущая карта: [color=white]{ $mapName }[/color]
+    Текущая карта: [color=white]{ $mapName }[/color]
     Текущий режим игры: [color=white]{ $gmTitle }[/color]
     > [color=yellow]{ $desc }[/color]
 game-ticker-no-map-selected = [color=red]Карта ещё не выбрана![/color]

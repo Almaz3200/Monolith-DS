@@ -15,7 +15,19 @@ rp-panel-results =
     }
 rp-panel-empty-search = No results found for your query.
 rp-panel-empty-available = No actions available right now.
+rp-panel-empty-incapacitated = Actions are unavailable while one of you is unconscious.
 rp-panel-interaction-cooldown-tooltip = Wait { $seconds } s.
+
+rp-panel-out-of-reach = The target is out of reach.
+rp-panel-target-unavailable = This is unavailable right now.
+rp-panel-blocked-self-cuffed = You can't do that while restrained.
+rp-panel-blocked-self-asleep = You can't do that while asleep.
+rp-panel-blocked-self-stunned = You can't do that while stunned.
+rp-panel-blocked-self-busy = You can't do that right now.
+rp-panel-blocked-target-cuffed = You can't do that while the target is restrained.
+rp-panel-blocked-target-asleep = You can't do that while the target is asleep.
+rp-panel-blocked-target-stunned = You can't do that while the target is stunned.
+rp-panel-blocked-target-busy = You can't do that to the target right now.
 
 rp-panel-private-mode-label = Private
 rp-panel-private-mode-tooltip = Action messages and sounds are only seen and heard by you and your target.
@@ -48,7 +60,7 @@ rp-custom-emote-title-edit = Edit emote
 rp-custom-emote-name = Name
 rp-custom-emote-body-part = Body part
 rp-custom-emote-kind = Group
-rp-custom-emote-kind-tooltip = Harmful actions are unavailable while you or your target are cuffed, stunned or asleep.
+rp-custom-emote-kind-tooltip = Harmful actions are highlighted in red in the panel.
 rp-custom-emote-sound = Sound
 rp-custom-emote-sound-none = No sound
 rp-custom-emote-sound-preview = Preview (only you hear it)

@@ -10,6 +10,7 @@
   - !type:SpeciesRequirement
     species:
     - Demon
+    - Oni
 
 - type: rpInteraction
   id: PetHead
@@ -46,12 +47,3 @@
     collection: RpFriction
   messages: RpTapCrownMessages
   icon: _LuaM/Interface/RpPanel/pat_back_of_head.png
-
-- type: rpInteraction
-  id: KissBackOfHead
-  category: Head
-  kind: Soft
-  sound:
-    collection: RpFriction
-  messages: RpKissBackOfHeadMessages
-  icon: _LuaM/Interface/RpPanel/kiss_back_of_head.png

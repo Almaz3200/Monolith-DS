@@ -19,15 +19,6 @@
   icon: _LuaM/Interface/RpPanel/high_five.png
 
 - type: rpInteraction
-  id: KissHand
-  category: Hands
-  kind: Soft
-  sound:
-    collection: RpKiss
-  messages: RpKissHandMessages
-  icon: _LuaM/Interface/RpPanel/kiss_hand.png
-
-- type: rpInteraction
   id: PushUpsFloor
   category: Hands
   kind: Soft

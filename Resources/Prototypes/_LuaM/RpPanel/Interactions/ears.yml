@@ -11,6 +11,8 @@
     species:
     - Demon
     - Felinid
+    - Rodentia
+    - Tajaran
     - Vulpkanin
 
 - type: rpInteraction
@@ -26,6 +28,8 @@
     species:
     - Demon
     - Felinid
+    - Rodentia
+    - Tajaran
     - Vulpkanin
 
 - type: rpInteraction
