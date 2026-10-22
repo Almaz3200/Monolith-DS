@@ -44,3 +44,7 @@ ent-NFBlueprintAmmoBox45_magnumUranium = чертёж урановых патр�
     .desc = Чертёж со схемой урановых патронов .45 магнум. Его можно вставить в автолат или техфаб.
 ent-NFBlueprintAmmoBox556x45mmUranium = чертёж урановых патронов 5.56x45 мм
     .desc = Чертёж со схемой урановых патронов 5.56x45 мм. Его можно вставить в автолат или техфаб.
+ent-NFBlueprintAmmoBox357_magnumUranium = uranium .357 magnum ammo blueprint
+    .desc = A blueprint with a schematic of an uranium .357 magnum ammo. It can be inserted into an autolathe or a techfab.
+ent-NFBlueprintAmmoBox357_magnumIncendiary = incendiary .357 magnum ammo blueprint
+    .desc = A blueprint with a schematic of an incendiary .357 magnum ammo. It can be inserted into an autolathe or a techfab.

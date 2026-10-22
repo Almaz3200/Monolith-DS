@@ -1,237 +1,258 @@
 <controls:BoxContainer Visible="False"
               HorizontalExpand="True"
+              VerticalExpand="True"
+              Align="Center"
               xmlns:controls="https://spacestation14.io"
               xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
-              xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
-              xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI"
-              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+              xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI">
+                <!-- LuaM: Align="Center" on the root, nothing in this row stretches anymore -->
+                <!-- LuaM: Dead Space 14 menu colors (LuaMConsole* style classes) -->
+                <!-- Lua-start: NAV layout from sector-frontier; gunnery and shield on the left, flat settings column on the right -->
+                <controls:BoxContainer Name="WeaponsPanel"
+                                       Visible="False"
+                                       Orientation="Vertical"
+                                       MinWidth="280"
+                                       MaxWidth="280"
+                                       HorizontalExpand="False"
+                                       Margin="0 0 6 0">
+                    <controls:PanelContainer StyleClasses="LuaMConsoleSection" VerticalExpand="True" HorizontalExpand="True">
+                        <controls:BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="4">
+                            <!-- Gunnery status -->
+                            <controls:BoxContainer Name="GunneryHeader" Orientation="Vertical" SeparationOverride="4">
+                                <controls:PanelContainer StyleClasses="LuaMConsoleHeader">
+                                    <controls:Label Name="GunneryStatus" Text="{controls:Loc 'gunnery-window-disconnected'}"
+                                                    StyleClasses="LuaMConsoleHeaderLabel" HorizontalAlignment="Center"/>
+                                </controls:PanelContainer>
+                                <controls:Button Name="GunneryRefreshButton" Text="{controls:Loc admin-logs-refresh}"
+                                                 StyleClasses="LuaMConsoleButton"/>
+                            </controls:BoxContainer>
+                            <!-- Forge-Change-Start -->
+                            <controls:PanelContainer Name="ShieldPanel" Visible="False" StyleClasses="LuaMConsoleInset" HorizontalExpand="True">
+                                <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="6 4 6 6">
+                                    <controls:Label Text="{controls:Loc 'shuttle-console-shield-label'}"/>
+                                    <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" MinHeight="20"/>
+                                </controls:BoxContainer>
+                            </controls:PanelContainer>
+                            <!-- Forge-Change-End -->
+                            <!-- Gunnery weapons -->
+                            <controls:BoxContainer Name="GunneryControls" Orientation="Vertical" VerticalExpand="True" SeparationOverride="4">
+                                <controls:PanelContainer StyleClasses="LuaMConsoleHeader">
+                                    <controls:Label Text="{controls:Loc 'gunnery-guns'}" HorizontalAlignment="Center" StyleClasses="LuaMConsoleHeaderLabel"/>
+                                </controls:PanelContainer>
+                                <controls:BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                                    <controls:Button Name="GunnerySelectAllButton" Text="{controls:Loc 'gunnery-select-all'}"
+                                                     StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+                                    <controls:Button Name="GunneryUnselectAllButton" Text="{controls:Loc 'gunnery-unselect-all'}"
+                                                     StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+                                </controls:BoxContainer>
+                                <controls:PanelContainer StyleClasses="LuaMConsoleInset" HorizontalExpand="True">
+                                    <controls:BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="4">
+                                        <controls:Button Name="GunneryBallisticButton" Text="{controls:Loc 'gunnery-select-ballistic'}"
+                                                         StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+                                        <controls:Button Name="GunneryEnergyButton" Text="{controls:Loc 'gunnery-select-energy'}"
+                                                         StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+                                        <controls:Button Name="GunneryMissileButton" Text="{controls:Loc 'gunnery-select-missiles'}"
+                                                         StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+                                    </controls:BoxContainer>
+                                </controls:PanelContainer>
+                                <controls:PanelContainer StyleClasses="LuaMConsoleInset" VerticalExpand="True">
+                                    <controls:ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                                        <controls:BoxContainer Name="GunneryWeaponsBox" Orientation="Vertical"
+                                                               HorizontalExpand="True" Margin="4"/>
+                                    </controls:ScrollContainer>
+                                </controls:PanelContainer>
+                            </controls:BoxContainer>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                </controls:BoxContainer>
+
                 <!-- Mono - wrap -->
-                <controls:LayoutContainer Margin="5 4 10 5">
+                <controls:LayoutContainer Margin="0 0 6 0" HorizontalExpand="True" VerticalExpand="True"> <!-- Lua: the radar fills the free space -->
                     <ui:ShuttleNavControl Name="NavRadar"
                                      MouseFilter="Stop"
                                      VerticalAlignment="Stretch"
                                      VerticalExpand="True"
                                      HorizontalExpand="True"/>
                 </controls:LayoutContainer>
+
                 <!-- Nav controls -->
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="0" BackgroundColor="Transparent"/>
-                    </controls:PanelContainer.PanelOverride>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
+                <controls:PanelContainer StyleClasses="LuaMConsoleSection" VerticalExpand="True" HorizontalExpand="False">
                 <controls:BoxContainer Name="RightDisplayNav"
-                      VerticalAlignment="Top"
-                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Right"
                       VerticalExpand="True"
-                      MinWidth="266"
-                      MaxWidth="266"
-                      Margin="5 5 5 5"
+                      MinWidth="256"
+                      MaxWidth="256"
+                      Margin="4"
+                      SeparationOverride="4"
                       Orientation="Vertical">
-                    <controls1:StripeBack
-                        MinSize="48 48">
+                    <controls:PanelContainer StyleClasses="LuaMConsoleHeader">
                         <controls:Label Name="NavDisplayLabel" Text="{controls:Loc 'shuttle-console-display-label'}"
-                               VerticalExpand="True"
+                               StyleClasses="LuaMConsoleHeaderLabel"
                                HorizontalAlignment="Center"/>
-                    </controls1:StripeBack>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
-                        </controls:PanelContainer.PanelOverride>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="8 8 8 8">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
-                        </controls:PanelContainer.PanelOverride>
+                    </controls:PanelContainer>
+                    <controls:PanelContainer StyleClasses="LuaMConsoleInset">
                     <controls:GridContainer Columns="2"
                                    HorizontalAlignment="Stretch"
                                    VerticalAlignment="Top"
                                    HorizontalExpand="True"
-                                   Margin="6 6 6 6"
+                                   Margin="6 4 6 4"
                                    Name="ReadonlyDisplay">
-                        <controls:Label Text="{controls:Loc 'shuttle-console-designation'}" FontColorOverride="#00ff2a"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-designation'}"/>
                         <controls:Label Name="ShuttleDesignation"
                                Text="{controls:Loc 'shuttle-console-designation-unknown'}"
                                HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-position'}" FontColorOverride="#00ff2a"/>
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-position'}"/>
                         <controls:Label Name="GridPosition"
                                Text="0.0, 0.0"
                                HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-orientation'}" FontColorOverride="#00ff2a"/>
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-orientation'}"/>
                         <controls:Label Name="GridOrientation"
                                Text="0.0"
                                HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-linear-velocity'}" FontColorOverride="#00ff2a"/>
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-linear-velocity'}"/>
                         <controls:Label Name="GridLinearVelocity"
                                Text="0.0, 0.0"
                                HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-angular-velocity'}" FontColorOverride="#00ff2a"/>
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-angular-velocity'}"/>
                         <controls:Label Name="GridAngularVelocity"
                                Text="0.0"
                                HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
+                               Align="Right"/>
                         <!-- Mono: z-level altimeter -->
                         <controls:Label Name="GridAltitudeCaption"
                                Text="{controls:Loc 'shuttle-console-altitude'}"
-                               FontColorOverride="#00ff2a"
                                Visible="False"/>
                         <controls:Label Name="GridAltitude"
                                Text="-"
                                HorizontalExpand="True"
                                Align="Right"
-                               FontColorOverride="#00ff2a"
                                Visible="False"/>
                         <controls:Label Name="GridVerticalVelocityCaption"
                                Text="{controls:Loc 'shuttle-console-vertical-velocity'}"
-                               FontColorOverride="#00ff2a"
                                Visible="False"/>
                         <controls:Label Name="GridVerticalVelocity"
                                Text="-"
                                HorizontalExpand="True"
                                Align="Right"
-                               FontColorOverride="#00ff2a"
                                Visible="False"/>
                         <controls:Label Name="GridTravelStateCaption"
                                Text="{controls:Loc 'shuttle-console-travel-state'}"
-                               FontColorOverride="#00ff2a"
                                Visible="False"/>
                         <controls:Label Name="GridTravelState"
                                Text="-"
                                HorizontalExpand="True"
                                Align="Right"
-                               FontColorOverride="#00ff2a"
                                Visible="False"/>
                     </controls:GridContainer>
                     </controls:PanelContainer>
+                    <controls:PanelContainer StyleClasses="LuaMConsoleHeader">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-nav-settings'}"
+                               StyleClasses="LuaMConsoleHeaderLabel"
+                               HorizontalAlignment="Center"/>
                     </controls:PanelContainer>
-                    <!-- Forge-Change-Start -->
-                    <controls:PanelContainer Name="ShieldPanel" Visible="False" VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
-                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 4 4 4">
-                            <controls:Label Text="{controls:Loc 'shuttle-console-shield-label'}"/>
-                            <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" MinHeight="20"/>
-                        </controls:BoxContainer>
-                    </controls:PanelContainer>
-                    <!-- Forge-Change-End -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
-                        <controls:BoxContainer Orientation="Vertical"
-                                               Margin="2 2 2 2">
-                    <controls:Button Name="IFFToggle"
-                            Text="{controls:Loc 'shuttle-console-iff-toggle'}"
-                            TextAlign="Center"
-                            StyleClasses="ButtonSquare"
-                            ToggleMode="True"/>
-                    <controls:Button Name="IFFDetailedToggle"
-                             Text="{controls:Loc 'shuttle-console-iff-detailed'}"
-                             TextAlign="Center"
-                             StyleClasses="ButtonSquare"
-                             ToggleMode="True"/>
+                    <!-- LuaM: IFF and D.IFF side by side with short labels, like the gunnery console -->
+                    <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="4">
+                        <controls:Button Name="IFFToggle"
+                                Text="{controls:Loc 'shuttle-console-iff-toggle-short'}"
+                                TextAlign="Center"
+                                HorizontalExpand="True"
+                                StyleClasses="LuaMConsoleButton"
+                                ToggleMode="True"/>
+                        <!-- Mono -->
+                        <controls:Button Name="IFFDetailedToggle"
+                                 Text="{controls:Loc 'shuttle-console-iff-detailed-short'}"
+                                 TextAlign="Center"
+                                 HorizontalExpand="True"
+                                 StyleClasses="LuaMConsoleButton"
+                                 ToggleMode="True"/>
+                    </controls:BoxContainer>
                     <controls:Button Name="DockToggle"
                             Text="{controls:Loc 'shuttle-console-dock-toggle'}"
                             TextAlign="Center"
-                            StyleClasses="ButtonSquare"
+                            StyleClasses="LuaMConsoleButton"
                             ToggleMode="True"/>
-                        </controls:BoxContainer>
-                    </controls:PanelContainer>
                     <!-- Frontier - Inertia dampener controls-->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
                     <controls:BoxContainer Name="DampenerModeButtons"
                                   Orientation="Horizontal"
-                                  Margin="2 2 2 2">
+                                  HorizontalAlignment="Stretch"
+                                  HorizontalExpand="True"
+                                  SeparationOverride="4">
                         <controls:Button Name="DampenerOff"
                                          Text="{controls:Loc 'shuttle-console-inertia-dampener-off'}"
                                          TextAlign="Center"
                                          ToggleMode="True"
-                                         StyleClasses="ButtonSquare"
                                          HorizontalExpand="True"
-                                         MinWidth="60"/>
+                                         StyleClasses="LuaMConsoleButton"/>
                         <controls:Button Name="DampenerOn"
                                          Text="{controls:Loc 'shuttle-console-inertia-dampener-dampen'}"
                                          TextAlign="Center"
                                          ToggleMode="True"
-                                         StyleClasses="ButtonSquare"
                                          HorizontalExpand="True"
-                                         MinWidth="60"/>
+                                         StyleClasses="LuaMConsoleButton"/>
                         <controls:Button Name="AnchorOn"
                                          Text="{controls:Loc 'shuttle-console-inertia-dampener-anchor'}"
                                          TextAlign="Center"
                                          ToggleMode="True"
-                                         StyleClasses="ButtonSquare"
                                          HorizontalExpand="True"
-                                         MinWidth="60"/>
+                                         StyleClasses="LuaMConsoleButton"/>
                     </controls:BoxContainer>
-                    </controls:PanelContainer>
                     <!-- End Frontier - Inertia dampener controls-->
-                    <!-- Frontier - IFF search -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
-                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="IffSearchBox" Margin="4 4 4 4">
-                        <controls:Label Text="{controls:Loc 'shuttle-console-iff-search'}"/>
-                        <controls:LineEdit Name="IffSearchCriteria" Access="Public" HorizontalExpand="True"/>
-                    </controls:BoxContainer>
-                    </controls:PanelContainer>
-                    <!-- End Frontier - IFF search -->
 
                     <!-- Frontier - settable target -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
-                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="TargetCoordsBox" Margin="2 2 2 2">
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="TargetCoordsBox" SeparationOverride="3">
                         <controls:Label Text="{controls:Loc 'shuttle-console-target'}"/>
                         <controls:BoxContainer Orientation="Horizontal"
                                                HorizontalExpand="True"
-                                               Align="Center"
-                                               Margin="0 0 0 3">
-                            <controls:LineEdit Name="TargetX" Access="Public" HorizontalExpand="True"/>
-                            <controls:LineEdit Name="TargetY" Access="Public" HorizontalExpand="True"/>
+                                               SeparationOverride="3">
+                            <controls:LineEdit Name="TargetX" Access="Public" HorizontalExpand="True" StyleClasses="LuaMConsoleInput"/>
+                            <controls:LineEdit Name="TargetY" Access="Public" HorizontalExpand="True" StyleClasses="LuaMConsoleInput"/>
                             <controls:Button Name="TargetSet"
                                             Text="{controls:Loc 'shuttle-console-set-target'}"
                                             TextAlign="Center"
                                             MinWidth="20"
                                             ToolTip="{controls:Loc 'shuttle-console-set-target-description'}"
-                                            StyleClasses="OpenRight"
-                                            Margin="0"/>
+                                            StyleClasses="LuaMConsoleButton"/>
                             <controls:Button Name="TargetHide"
                                             Text="{controls:Loc 'shuttle-console-hide-target'}"
                                             TextAlign="Center"
                                             ToggleMode="True"
                                             MinWidth="20"
                                             ToolTip="{controls:Loc 'shuttle-console-hide-target-description'}"
-                                            StyleClasses="OpenLeft"
-                                            Margin="0"/>
+                                            StyleClasses="LuaMConsoleButton"/>
                         </controls:BoxContainer>
+                        <!-- LuaM-start: autopilot to the marker and removing it -->
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="3">
+                            <controls:Button Name="TargetAutopilot"
+                                            Text="{controls:Loc 'shuttle-console-autopilot-button'}"
+                                            ToolTip="{controls:Loc 'shuttle-console-target-autopilot-description'}"
+                                            TextAlign="Center"
+                                            HorizontalExpand="True"
+                                            StyleClasses="LuaMConsoleButton"/>
+                            <controls:Button Name="TargetClear"
+                                            Text="{controls:Loc 'shuttle-console-clear-target'}"
+                                            ToolTip="{controls:Loc 'shuttle-console-clear-target-description'}"
+                                            TextAlign="Center"
+                                            HorizontalExpand="True"
+                                            StyleClasses="LuaMConsoleButton"/>
+                        </controls:BoxContainer>
+                        <!-- LuaM-end -->
                     </controls:BoxContainer>
-                    </controls:PanelContainer>
                     <!-- End Frontier - settable target -->
 
+                    <!-- Frontier - IFF search -->
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="IffSearchBox" SeparationOverride="3">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-iff-search'}"/>
+                        <controls:LineEdit Name="IffSearchCriteria" Access="Public" HorizontalExpand="True" StyleClasses="LuaMConsoleInput"/>
+                    </controls:BoxContainer>
+                    <!-- End Frontier - IFF search -->
+
                     <!-- Frontier - Maximum IFF Distance -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
-                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumIFFDistanceBox" Margin="4 4 4 4">
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumIFFDistanceBox">
                         <controls:Label Text="{controls:Loc 'shuttle-console-maximum-iff-distance'}"/>
                         <controls:SliderIntInput Name="MaximumIFFDistanceValue"
                                                  Access="Public"
@@ -243,102 +264,83 @@
                     <!-- End Frontier - Maximum IFF Distance -->
 
                     <!-- Frontier - Maximum Shuttle Speed -->
-                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumShuttleSpeedBox" Margin="4 4 4 4">
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumShuttleSpeedBox" SeparationOverride="3">
                         <controls:Label Text="{controls:Loc 'shuttle-console-maximum-speed'}"/>
                         <controls:LineEdit Name="MaximumShuttleSpeedValue"
-                                                 Access="Public"
-                                                 HorizontalExpand="True"/>
+                                           Access="Public"
+                                           HorizontalExpand="True"
+                                           StyleClasses="LuaMConsoleInput"/>
                     </controls:BoxContainer>
-                </controls:BoxContainer>
-                    </controls:PanelContainer>
                     <!-- End Frontier - Maximum Shuttle Speed -->
 
                     <!-- Network Port Buttons -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                        </controls:PanelContainer.PanelOverride>
-                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                        <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 6">
-                            <controls:PanelContainer.PanelOverride>
-                                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#050505"/>
-                            </controls:PanelContainer.PanelOverride>
-                            <controls:Label Text="{controls:Loc 'shuttle-console-network-ports'}"
-                                   FontColorOverride="#00ff2a"
-                                   VerticalExpand="False"
-                                   HorizontalAlignment="Center"/>
-                        </controls:PanelContainer>
-                        <controls:PanelContainer Margin="1">
-                            <controls:ScrollContainer
-                                HorizontalExpand="False"
-                                MinHeight="80"
-                                MaxHeight="80">
-                                <controls:GridContainer
-                                    Columns="8"
-                                    Rows="2"
-                                    HorizontalExpand="False"
-                                    HorizontalAlignment="Center"
-                                    Name="NetworkPortsBox"
-                                    Margin="0 6 0 6"
-                                    HSeparationOverride="4"
-                                    VSeparationOverride="4">
-                                    <controls:Button Name="DeviceButton1"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-1'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                    <controls:Button Name="DeviceButton2"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-2'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                    <controls:Button Name="DeviceButton3"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-3'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                    <controls:Button Name="DeviceButton4"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-4'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                    <controls:Button Name="DeviceButton5"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-5'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                    <controls:Button Name="DeviceButton6"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-6'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                    <controls:Button Name="DeviceButton7"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-7'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                    <controls:Button Name="DeviceButton8"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-8'}"
-                                                     TextAlign="Center"
-                                                     StyleClasses="ButtonSquare"
-                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
-                                </controls:GridContainer>
-                            </controls:ScrollContainer>
-                        </controls:PanelContainer>
-                    </controls:BoxContainer>
-                </controls:PanelContainer>
-                    <!-- End Network Port Buttons -->
-                    </controls:BoxContainer>
+                    <!-- LuaM: plain 4x2 grid filling the panel, buttons go 1 3 5 7 / 2 4 6 8 like before -->
+                    <controls:PanelContainer StyleClasses="LuaMConsoleInset" HorizontalExpand="True" Margin="0 2 0 0">
+                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <controls:PanelContainer StyleClasses="LuaMConsoleHeader">
+                                <controls:Label Text="{controls:Loc 'shuttle-console-network-ports'}"
+                                       StyleClasses="LuaMConsoleHeaderLabel"
+                                       HorizontalAlignment="Center"/>
+                            </controls:PanelContainer>
+                            <controls:GridContainer Columns="4"
+                                                    HorizontalExpand="True"
+                                                    Name="NetworkPortsBox"
+                                                    Margin="4"
+                                                    HSeparationOverride="4"
+                                                    VSeparationOverride="4">
+                            <controls:Button Name="DeviceButton1"
+                                             Text="{controls:Loc 'shuttle-console-device-button-1'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            <controls:Button Name="DeviceButton3"
+                                             Text="{controls:Loc 'shuttle-console-device-button-3'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            <controls:Button Name="DeviceButton5"
+                                             Text="{controls:Loc 'shuttle-console-device-button-5'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            <controls:Button Name="DeviceButton7"
+                                             Text="{controls:Loc 'shuttle-console-device-button-7'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            <controls:Button Name="DeviceButton2"
+                                             Text="{controls:Loc 'shuttle-console-device-button-2'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            <controls:Button Name="DeviceButton4"
+                                             Text="{controls:Loc 'shuttle-console-device-button-4'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            <controls:Button Name="DeviceButton6"
+                                             Text="{controls:Loc 'shuttle-console-device-button-6'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            <controls:Button Name="DeviceButton8"
+                                             Text="{controls:Loc 'shuttle-console-device-button-8'}"
+                                             TextAlign="Center"
+                                             StyleClasses="LuaMConsoleButton"
+                                             ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
+                                             HorizontalExpand="True"/>
+                            </controls:GridContainer>
+                        </controls:BoxContainer>
                     </controls:PanelContainer>
-                </controls:PanelContainer>
+                    <!-- End Network Port Buttons -->
                 </controls:BoxContainer>
-
-                
+                </controls:PanelContainer>
+                <!-- Lua-end -->
+</controls:BoxContainer>

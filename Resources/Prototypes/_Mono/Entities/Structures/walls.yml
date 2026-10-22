@@ -68,7 +68,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 2750
+        damage: 3500 # LuaM: 2750 > 3500, value from before the upstream merge
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -77,7 +77,7 @@
           collection: MetalSlam
     - trigger:
         !type:DamageTrigger
-        damage: 3250
+        damage: 3000 # LuaM: 3250 > 3000, value from before the upstream merge
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -118,7 +118,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 3000
+        damage: 4000 # LuaM: 3000 > 4000, value from before the upstream merge
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -127,7 +127,7 @@
           collection: MetalSlam
     - trigger:
         !type:DamageTrigger
-        damage: 3300
+        damage: 3500 # LuaM: 3300 > 3500, value from before the upstream merge
       behaviors:
       - !type:PlaySoundBehavior
         sound:

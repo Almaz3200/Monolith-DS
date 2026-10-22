@@ -85,7 +85,9 @@ public partial class MapGridControl : LayoutContainer
     protected virtual Vector2 MidPointVector => new Vector2(MidPoint, MidPoint); // Lua: virtual
 
     protected int MidPoint => SizeFull / 2;
-    // Lua start
+//    protected int SizeFull => (int)((UIDisplayRadius + MinimapMargin) * 2 * UIScale); // Commented by Lua
+//    protected int ScaledMinimapRadius => (int)(UIDisplayRadius * UIScale); // Commented by Lua
+// Lua-start: resizable controls scale to their smaller side
     protected int SizeFull
     {
         get
@@ -96,7 +98,8 @@ public partial class MapGridControl : LayoutContainer
                 if (px > 0)
                     return px;
             }
-            return (int)((UIDisplayRadius + MinimapMargin) * 2 * UIScale);
+
+            return (int) ((UIDisplayRadius + MinimapMargin) * 2 * UIScale);
         }
     }
 
@@ -105,11 +108,12 @@ public partial class MapGridControl : LayoutContainer
         get
         {
             if (!ScaleWithControlSize)
-                return (int)(UIDisplayRadius * UIScale);
-            return Math.Max(0, MidPoint - (int)(MinimapMargin * UIScale));
+                return (int) (UIDisplayRadius * UIScale);
+
+            return Math.Max(0, MidPoint - (int) (MinimapMargin * UIScale));
         }
     }
-    // Lua end
+// Lua-end
     protected float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
 
     public event Action<float>? WorldRangeChanged;
@@ -122,10 +126,13 @@ public partial class MapGridControl : LayoutContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        if (AllowResize) // Lua
+// Lua-start
+        if (AllowResize)
             MinSize = new Vector2((UIDisplayRadius + MinimapMargin) * 2, (UIDisplayRadius + MinimapMargin) * 2);
         else
             SetSize = new Vector2(SizeFull, SizeFull);
+// Lua-end
+//        SetSize = new Vector2(SizeFull, SizeFull); // Commented by Lua
         RectClipContent = true;
         MouseFilter = MouseFilterMode.Stop;
         ActualRadarRange = WorldRange;
@@ -207,6 +214,29 @@ public partial class MapGridControl : LayoutContainer
     {
         ActualRadarRange = Math.Clamp(ActualRadarRange + value, WorldMinRange, WorldMaxRange);
     }
+
+// Lua-start: zoom as 0..1 for sliders, logarithmic to match the multiplicative scroll zoom
+    public float RadarZoom
+    {
+        get
+        {
+            if (WorldMaxRange <= WorldMinRange || WorldMinRange <= 0f)
+                return 0f;
+
+            var zoom = MathF.Log(WorldMaxRange / ActualRadarRange) / MathF.Log(WorldMaxRange / WorldMinRange);
+            return Math.Clamp(zoom, 0f, 1f);
+        }
+    }
+
+    public void SetRadarZoom(float zoom)
+    {
+        if (WorldMaxRange <= WorldMinRange || WorldMinRange <= 0f)
+            return;
+
+        zoom = Math.Clamp(zoom, 0f, 1f);
+        ActualRadarRange = WorldMaxRange * MathF.Pow(WorldMinRange / WorldMaxRange, zoom);
+    }
+// Lua-end
 
     /// <summary>
     /// Converts map coordinates to the local control.

@@ -18,7 +18,7 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Battery/asakimrifle.rsi
   - type: GunWieldBonus
-    minAngle: -17 # LuaM: -18 > -17
+    minAngle: -18
     maxAngle: -14
   - type: Gun
     minAngle: 18
@@ -46,6 +46,9 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 60
+  - type: Tag # LuaM
+    tags:
+    - SafetyDepositBlacklist # LuaM: can't be kept in safety deposit boxes
 
 - type: entity
   name: kunisa-pattern plasma autopulser
@@ -88,3 +91,6 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 60
+  - type: Tag # LuaM
+    tags:
+    - SafetyDepositBlacklist # LuaM: can't be kept in safety deposit boxes

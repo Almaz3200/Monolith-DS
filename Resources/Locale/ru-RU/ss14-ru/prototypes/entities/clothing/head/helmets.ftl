@@ -53,3 +53,7 @@ ent-ClothingHeadHelmetJustice = шлем правосудия
 ent-ClothingHeadHelmetJusticeEmpty = { ent-ClothingHeadHelmetJustice }
     .suffix = Пустой
     .desc = { ent-ClothingHeadHelmetJustice.desc }
+ent-ClothingHeadHelmetBase = { ent-ClothingHeadBase }
+    .desc = { ent-ClothingHeadBase.desc }
+ent-ActionToggleJusticeHelm = Toggle Justice Helm
+    .desc = Toggles the justice helm on and off.

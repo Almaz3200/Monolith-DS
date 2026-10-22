@@ -128,3 +128,7 @@ ent-FoodMeatAnomaly = масса аномального мяса
     .desc = Невероятно плотный кусок мяса. От одного взгляда на него становится не по себе.
 ent-FoodMeatAnomalyCooked = аномальный стейк
     .desc = Гигантская масса приготовленного мяса. Блюдо для вечеринки или для тех, кто ПО-НАСТОЯЩЕМУ голоден.
+ent-FoodMeatPatty = meat patty
+    .desc = A flat slab of ground meat. Ready for grillin'.
+ent-FoodMeatPattyCooked = cooked meat patty
+    .desc = A cooked meat patty.

@@ -14,7 +14,7 @@
   category: Large
   group: Expedition
   access: Mercenary
-  shuttlePath: /Maps/_LuaM/Shuttles/Expedition/Phoenix.yml
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/Expedition/Phoenix.yml
   guidebookPage: Null
   class:
   - Medical
@@ -29,7 +29,7 @@
 - type: gameMap
   id: Phoenix
   mapName: 'FXD Phoenix'
-  mapPath: /Maps/_LuaM/Shuttles/Expedition/Phoenix.yml
+  mapPath: /SharedMaps/_LuaM/Shuttles/Expedition/Phoenix.yml
   minPlayers: 0
   stations:
     Phoenix:

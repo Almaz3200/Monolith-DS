@@ -158,6 +158,7 @@ public sealed partial class ShuttleSystem
         DebugTools.Assert(!_mapSystem.IsPaused(mapId));
         var parallax = EnsureComp<ParallaxComponent>(mapUid);
         parallax.Parallax = ftlMap.Parallax;
+        _mapSystem.SetAmbientLight(mapId, ftlMap.AmbientLightColor); // Mono
 
         return mapUid;
     }
@@ -1550,6 +1551,10 @@ public sealed partial class ShuttleSystem
         if (comp.LinkedShuttle.HasValue)
             return;
         var xform = _xformQuery.GetComponent(entity);
+
+        if (TrySkipHyperspace(entity, xform)) // Lua: instant jump
+            return;
+
         DoTheDinosaur(xform);
 
         comp.State = FTLState.Travelling;

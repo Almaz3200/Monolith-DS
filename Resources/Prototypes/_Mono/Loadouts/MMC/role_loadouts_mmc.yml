@@ -35,7 +35,7 @@
   - MMCCorpSecEars
   - MMCCorpSecBalaclava
   - MMCHud
-  - MMCRanksCorpSec
+#  - MMCRanksCorpSec # Commented by LuaM: chat ranks are off for now
   - ContractorEncryptionKey
   - ContractorBoxSurvival
   - MieyoSecurityPDA

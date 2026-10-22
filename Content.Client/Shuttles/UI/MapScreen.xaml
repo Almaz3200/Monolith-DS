@@ -1,122 +1,138 @@
 <controls:BoxContainer Visible="False"
        HorizontalExpand="True"
+       VerticalExpand="True"
        xmlns:controls="https://spacestation14.io"
-       xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
        xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
-       xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
-            <ui:ShuttleMapControl Name="MapRadar"
-                             MouseFilter="Stop"
-                             Margin="5 4 10 5"
-                             HorizontalExpand="True"
-                             VerticalExpand="True"
-                             VerticalAlignment="Stretch"/>
-            <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                <controls:PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BorderThickness="0" BackgroundColor="Transparent"/>
-                </controls:PanelContainer.PanelOverride>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                    </controls:PanelContainer.PanelOverride>
-            <controls:BoxContainer Name="RightDisplayMap"
-                          VerticalAlignment="Top"
-                          HorizontalAlignment="Center"
-                          MinWidth="256"
-                          MaxWidth="256"
-                          Margin="5 5 5 5"
-                          Orientation="Vertical"
-                          VerticalExpand="True">
-                <controls1:StripeBack
-                    MinSize="48 48">
-                    <controls:Label Name="MapDisplayLabel" Text="{controls:Loc 'shuttle-console-ftl-label'}"
-                                    VerticalExpand="True"
-                                    HorizontalAlignment="Center"/>
-                </controls1:StripeBack>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                    </controls:PanelContainer.PanelOverride>
-                    <controls:BoxContainer Orientation="Vertical"
-                                           Margin="2 2 2 2">
-                <controls:Label Name="MapFTLState"
-                                Text="{controls:Loc 'shuttle-console-ftl-state-Available'}"
-                                VerticalAlignment="Stretch"
-                                HorizontalAlignment="Center"/>
-                <controls1:StripeBack
-                    Margin="5 5 5 5"
-                    HorizontalExpand="False"
-                    VerticalExpand="False">
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
-                    </controls:PanelContainer.PanelOverride>
-                <controls:ProgressBar Name="FTLBar" HorizontalExpand="True"
-                                      Margin="5"
-                                      MinValue="0.0"
-                                      MaxValue="1.0"
-                                      Value="1.0"/>
-                </controls:PanelContainer>
-                </controls1:StripeBack>
-                    </controls:BoxContainer>
-                </controls:PanelContainer>
-                <controls:BoxContainer Orientation="Vertical">
-                <!-- Normal buttons -->
-                <controls1:StripeBack MinSize="48 48">
-                    <controls:Label Name="SettingsLabel" Text="{controls:Loc 'shuttle-console-map-settings'}"
-                           HorizontalAlignment="Center"/>
-                </controls1:StripeBack>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                    </controls:PanelContainer.PanelOverride>
-                    <controls:BoxContainer Orientation="Vertical"
-                                           Margin="2 2 2 2">
-                <controls:Button Name="MapBeaconsButton"
-                                 Text="{controls:Loc 'shuttle-console-map-beacons'}"
-                                 TextAlign="Center"
-                                 StyleClasses="ButtonSquare"
-                                 ToggleMode="True"
-                                 Pressed="True"/>
-                <controls:Button Name="MapFTLButton"
-                                 ToggleMode="True"
-                                 Text="{controls:Loc 'shuttle-console-ftl-button'}"
-                                 TextAlign="Center"
-                                 StyleClasses="ButtonSquare"/>
-                <!-- Mono - Autopilot -->
-                <controls:Button Name="MapAutopilotButton"
-                                 ToggleMode="True"
-                                 Text="{controls:Loc 'shuttle-console-autopilot-button'}"
-                                 TextAlign="Center"
-                                 StyleClasses="ButtonSquare"/>
-                <controls:Button Name="MapRebuildButton"
-                        Text="{controls:Loc 'shuttle-console-map-rebuild'}"
-                        TextAlign="Center"
-                        StyleClasses="ButtonSquare"/>
-                    </controls:BoxContainer>
-                </controls:PanelContainer>
-                <!-- Map objects -->
-                <controls1:StripeBack MinSize="48 48">
-                    <controls:Label Name="HyperspaceLabel" Text="{controls:Loc 'shuttle-console-map-objects'}"
-                           HorizontalAlignment="Center"/>
-                </controls1:StripeBack>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                    </controls:PanelContainer.PanelOverride>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
-                        </controls:PanelContainer.PanelOverride>
-                <controls:ScrollContainer VerticalExpand="True" HScrollEnabled="False"
-                                 ReturnMeasure="True">
-                    <controls:BoxContainer Name="HyperspaceDestinations"
-                                  Orientation="Vertical"
-                                  VerticalExpand="True"/>
-                </controls:ScrollContainer>
-                </controls:PanelContainer>
-                </controls:PanelContainer>
+       xmlns:lua="clr-namespace:Content.Client._Lua.Shuttles.UI">
+    <!-- Lua-start: map screen layout -->
+    <!-- LuaM: Dead Space 14 menu colors (LuaMConsole* style classes) -->
+    <controls:PanelContainer HorizontalExpand="True" VerticalExpand="True"> <!-- LuaM: no own background, the window shell shows through -->
+        <controls:BoxContainer Orientation="Vertical" SeparationOverride="7" VerticalExpand="True">
+            <controls:BoxContainer Orientation="Horizontal" VerticalExpand="True" SeparationOverride="9">
+                <ui:ShuttleMapControl Name="MapRadar"
+                                      MouseFilter="Stop"
+                                      HorizontalExpand="True"
+                                      VerticalExpand="True"
+                                      VerticalAlignment="Stretch"/>
+                <controls:BoxContainer Name="RightDisplayMap"
+                                       VerticalAlignment="Stretch"
+                                       HorizontalAlignment="Right"
+                                       MinWidth="292"
+                                       MaxWidth="292"
+                                       Orientation="Vertical"
+                                       SeparationOverride="5"
+                                       VerticalExpand="True">
+                    <!-- FTL status -->
+                    <controls:PanelContainer StyleClasses="LuaMConsoleSection" MinHeight="46" HorizontalExpand="True">
+                        <controls:BoxContainer Orientation="Vertical" Margin="8 5" SeparationOverride="3">
+                            <controls:BoxContainer Orientation="Horizontal">
+                                <controls:Label Name="MapDisplayLabel"
+                                                Text="{controls:Loc 'shuttle-console-ftl-label'}"
+                                                StyleClasses="LuaMConsoleHeaderLabel"
+                                                HorizontalExpand="True"/>
+                                <controls:Label Name="MapFTLState"
+                                                Text="{controls:Loc 'shuttle-console-ftl-state-Available'}"
+                                                FontColorOverride="#C5CEDB"
+                                                HorizontalAlignment="Right"/>
+                            </controls:BoxContainer>
+                            <lua:ShuttleBssProgressBar Name="FTLBar" HorizontalExpand="True" MinHeight="14"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- Map objects -->
+                    <controls:PanelContainer StyleClasses="LuaMConsoleSection" HorizontalExpand="True" VerticalExpand="True">
+                        <controls:BoxContainer Orientation="Vertical" Margin="7 6" SeparationOverride="4" VerticalExpand="True">
+                            <controls:Label Name="HyperspaceLabel"
+                                            Text="{controls:Loc 'shuttle-console-map-objects'}"
+                                            StyleClasses="LuaMConsoleHeaderLabel"
+                                            HorizontalExpand="True"/>
+                            <!-- LuaM: object search -->
+                            <controls:LineEdit Name="MapObjectSearch" StyleClasses="LuaMConsoleInput"
+                                               PlaceHolder="{controls:Loc 'shuttle-console-map-search'}"
+                                               HorizontalExpand="True"/>
+                            <controls:ScrollContainer VerticalExpand="True" HScrollEnabled="False" VScrollEnabled="True">
+                                <controls:BoxContainer Name="HyperspaceDestinations"
+                                                       Orientation="Vertical"
+                                                       SeparationOverride="3"/>
+                            </controls:ScrollContainer>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- Settings -->
+                    <controls:PanelContainer StyleClasses="LuaMConsoleSection" HorizontalExpand="True">
+                        <controls:BoxContainer Orientation="Vertical" Margin="7 5" SeparationOverride="3">
+                            <controls:Label Name="SettingsLabel"
+                                            Text="{controls:Loc 'shuttle-console-map-settings'}"
+                                            StyleClasses="LuaMConsoleHeaderLabel"/>
+                            <controls:GridContainer Columns="2" HSeparationOverride="3" VSeparationOverride="3">
+                                <controls:Button Name="MapFTLButton" StyleClasses="LuaMConsoleButton"
+                                                 ToggleMode="True"
+                                                 MinHeight="18"
+                                                 HorizontalExpand="True"
+                                                 Text="{controls:Loc 'shuttle-console-ftl-button'}"
+                                                 TextAlign="Center"/>
+                                <!-- Mono - Autopilot -->
+                                <controls:Button Name="MapAutopilotButton" StyleClasses="LuaMConsoleButton"
+                                                 ToggleMode="True"
+                                                 MinHeight="18"
+                                                 HorizontalExpand="True"
+                                                 Text="{controls:Loc 'shuttle-console-autopilot-button'}"
+                                                 TextAlign="Center"/>
+                            </controls:GridContainer>
+                            <!-- LuaM: the scan button is gone, the map refreshes by itself; beacons take the whole row -->
+                            <controls:Button Name="MapBeaconsButton" StyleClasses="LuaMConsoleButton"
+                                             ToggleMode="True"
+                                             Pressed="True"
+                                             MinHeight="18"
+                                             HorizontalExpand="True"
+                                             Text="{controls:Loc 'shuttle-console-map-beacons'}"
+                                             TextAlign="Center"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- LuaM-start: map marker, shared with the radar marker on NAV -->
+                    <controls:PanelContainer StyleClasses="LuaMConsoleSection" HorizontalExpand="True">
+                        <controls:BoxContainer Orientation="Vertical" Margin="7 5" SeparationOverride="3">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-map-target'}" StyleClasses="LuaMConsoleHeaderLabel"/>
+                            <controls:BoxContainer Orientation="Horizontal" SeparationOverride="3">
+                                <controls:LineEdit Name="MapTargetX" StyleClasses="LuaMConsoleInput" HorizontalExpand="True" MinWidth="60"/>
+                                <controls:LineEdit Name="MapTargetY" StyleClasses="LuaMConsoleInput" HorizontalExpand="True" MinWidth="60"/>
+                                <controls:Button Name="MapTargetSet" StyleClasses="LuaMConsoleButton"
+                                                 MinHeight="18"
+                                                 Text="{controls:Loc 'shuttle-console-set-target'}"
+                                                 ToolTip="{controls:Loc 'shuttle-console-set-target-description'}"
+                                                 TextAlign="Center"/>
+                                <controls:Button Name="MapTargetHide" StyleClasses="LuaMConsoleButton"
+                                                 ToggleMode="True"
+                                                 MinHeight="18"
+                                                 Text="{controls:Loc 'shuttle-console-hide-target'}"
+                                                 ToolTip="{controls:Loc 'shuttle-console-hide-target-description'}"
+                                                 TextAlign="Center"/>
+                            </controls:BoxContainer>
+                            <controls:BoxContainer Orientation="Horizontal" SeparationOverride="3">
+                                <controls:Button Name="MapTargetAutopilot" StyleClasses="LuaMConsoleButton"
+                                                 MinHeight="18"
+                                                 HorizontalExpand="True"
+                                                 Text="{controls:Loc 'shuttle-console-autopilot-button'}"
+                                                 ToolTip="{controls:Loc 'shuttle-console-target-autopilot-description'}"
+                                                 TextAlign="Center"/>
+                                <controls:Button Name="MapTargetClear" StyleClasses="LuaMConsoleButton"
+                                                 MinHeight="18"
+                                                 HorizontalExpand="True"
+                                                 Text="{controls:Loc 'shuttle-console-clear-target'}"
+                                                 ToolTip="{controls:Loc 'shuttle-console-clear-target-description'}"
+                                                 TextAlign="Center"/>
+                            </controls:BoxContainer>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- LuaM-end -->
+                    <!-- Zoom -->
+                    <controls:PanelContainer StyleClasses="LuaMConsoleSection" HorizontalExpand="True">
+                        <controls:BoxContainer Orientation="Vertical" Margin="7 5" SeparationOverride="3">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-map-zoom'}" StyleClasses="LuaMConsoleHeaderLabel" HorizontalExpand="True"/>
+                            <controls:Slider Name="MapZoomSlider" MinValue="0" MaxValue="1" Value="0" HorizontalExpand="True" MinWidth="92"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                </controls:BoxContainer>
             </controls:BoxContainer>
         </controls:BoxContainer>
-            </controls:PanelContainer>
-            </controls:PanelContainer>
+    </controls:PanelContainer>
+    <!-- Lua-end -->
 </controls:BoxContainer>

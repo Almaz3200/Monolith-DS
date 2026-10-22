@@ -36,3 +36,5 @@ ent-SheetMagmite = магмитовая сталь
 ent-SheetMagmite1 = магмитовая сталь
     .suffix = Один
     .desc = Лист крайне плотной и сложной в производстве магмитовой стали.
+ent-SheetMetalBaseDestructible = { ent-SheetMetalBase }
+    .desc = { ent-SheetMetalBase.desc }

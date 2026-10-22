@@ -27,6 +27,9 @@
   - type: ClothingGrantComponent
     component:
     - type: TheManWhoSoldTheWorld
+  - type: Tag # LuaM
+    tags:
+    - SafetyDepositBlacklist # LuaM: can't be kept in safety deposit boxes
 
 - type: entity
   parent: HoloCigar

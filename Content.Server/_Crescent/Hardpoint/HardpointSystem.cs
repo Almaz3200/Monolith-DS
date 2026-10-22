@@ -23,7 +23,7 @@ public class HardpointSystem : SharedHardpointSystem
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private EntityLookupSystem _lookupSystem = default!;
     // Explosions can cause a lot of lookups and events to fire. So we time-limit it based on grids
-    private const float UpdateDelay = 60f;
+    private const float UpdateDelay = 2f; // LuaM: 60 > 2, a swapped gun stayed unusable for up to a minute
     private float InternalTimer = 0f;
     private HashSet<EntityUid> QueuedGrids = new();
     /// <inheritdoc/>
@@ -65,8 +65,10 @@ public class HardpointSystem : SharedHardpointSystem
 
     public void QueueHardpointRefresh(EntityUid grid)
     {
-        if (QueuedGrids.Contains(grid))
+        // LuaM: grids without a gunnery server have nothing to refresh
+        if (!HasComp<FireControlGridComponent>(grid))
             return;
+
         QueuedGrids.Add(grid);
     }
 
@@ -101,18 +103,16 @@ public class HardpointSystem : SharedHardpointSystem
         if (InternalTimer < UpdateDelay)
             return;
         InternalTimer = 0;
-        foreach(var grid in QueuedGrids)
+        // LuaM: a grid without a gunnery server used to return here, the queue was never cleared and no grid got
+        // refreshed again, so guns put on hardpoints stayed undetected. Removing from the set while iterating it threw too.
+        foreach (var grid in QueuedGrids)
         {
-            if (TerminatingOrDeleted(grid))
-            {
-                QueuedGrids.Remove(grid);
+            if (TerminatingOrDeleted(grid) || !TryComp<FireControlGridComponent>(grid, out var gridFireControlComp))
                 continue;
-            }
-            HashSet<Entity<HardpointComponent>> lookupList = new();
-            if (!TryComp<FireControlGridComponent>(grid, out var gridFireControlComp))
-                return;
-            _fcsSystem.RefreshControllables(grid);
+
+            _fcsSystem.RefreshControllables(grid, gridFireControlComp);
         }
         QueuedGrids.Clear();
+        // End LuaM
     }
 }
