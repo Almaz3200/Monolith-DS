@@ -13,6 +13,8 @@
       - type: IFF
         color: "#37946e"
         readOnly: true # mono
+      - type: Company # LuaM: faction outpost
+        companyName: Colonial
       - type: StationDeadDrop
         maxDeadDrops: 2
       - type: StationCargoOrderDatabase

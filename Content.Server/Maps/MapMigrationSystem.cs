@@ -23,6 +23,8 @@ public sealed partial class MapMigrationSystem : EntitySystem
 
     private static readonly string[] MigrationFiles = { "/migration.yml", "/nf_migration.yml", "/mono_migration.yml" }; // Monolith: custom migration file
 
+    private List<MappingDataNode>? _mappings; // LuaM: parsed migration files
+
     public override void Initialize()
     {
         base.Initialize();
@@ -87,8 +89,15 @@ public sealed partial class MapMigrationSystem : EntitySystem
 
     private void OnBeforeReadEvent(BeforeEntityReadEvent ev)
     {
-        if (!TryReadFiles(out var mappings))
+//        if (!TryReadFiles(out var mappings)) // Commented by LuaM
+//            return; // Commented by LuaM
+// LuaM-start: the migration files are parsed once instead of on every map or grid load
+        if (_mappings == null && TryReadFiles(out var read))
+            _mappings = read;
+
+        if (_mappings is not { } mappings)
             return;
+// LuaM-end
 
         // Delta-V: apply a set of mappings
         foreach (var mapping in mappings)

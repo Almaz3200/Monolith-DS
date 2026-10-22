@@ -191,6 +191,8 @@ public sealed partial class GunSystem : SharedGunSystem
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime); // LuaM: the shared system keeps the tick length for the offset of several projectiles per tick
+
         if (!Timing.IsFirstTimePredicted)
             return;
 

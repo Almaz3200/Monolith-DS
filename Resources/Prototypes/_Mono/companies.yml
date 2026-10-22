@@ -12,6 +12,7 @@
   id: TSF
   name: Корпус Морпехов ТСФ # LuaM: TSF > Корпус Морпехов ТСФ
   color: "#047ABD"
+  friendlyIffGroup: TSF # LuaM: sees own hidden-IFF shuttles
   disabled: true
   companyUplinkCurrency: FederationMilitaryCredit
 
@@ -26,6 +27,7 @@
   id: PDV
   name: Авангард «Нордфолл» # LuaM: PDV > Vanguard Nordfall Locale: «Авангард Нордфолл»
   color: "#E03131FF" # LuaM: #D2B48C > #E03131FF
+  friendlyIffGroup: PDV # LuaM: sees own hidden-IFF shuttles
   disabled: true
   companyUplinkCurrency: Doubloon
 
@@ -40,12 +42,14 @@
   id: MD
   name: Медицинский Персонал # LuaM: MED > Медицинский Персонал
   color: "#3B8EEA"
+  friendlyIffGroup: MD # LuaM: sees own hidden-IFF shuttles
   disabled: true
 
 - type: company
   id: Colonial
   name: Персонал Колосса # LuaM: Colonial Staff > Персонал Колосса
   color: "#279659"
+  friendlyIffGroup: Colonial # LuaM: sees own hidden-IFF shuttles
   disabled: true
 
 - type: company
@@ -53,6 +57,7 @@
   name: Winter Solstice
   description: winter-solstice-description
   color: "#008CE3"
+  friendlyIffGroup: TSF # LuaM: sees own hidden-IFF shuttles
   disabled: true
   whitelisted: true
 
@@ -61,6 +66,7 @@
   name: Dynasty High Command
   description: pdv-highcomm-description
   color: "#D2B48C"
+  friendlyIffGroup: PDV # LuaM: sees own hidden-IFF shuttles
   disabled: true
   whitelisted: true
 # DO NOT TOUCH
@@ -101,6 +107,7 @@
   id: USSP
   name: USSP
   color: "#B01340"
+  friendlyIffGroup: USSP # LuaM: sees own hidden-IFF shuttles, allied with Viper Group
   disabled: true # USSP are now USSP-pilled.
   description: ussp-description
   image: /Textures/_Mono/Companies/USSP.png
@@ -108,7 +115,8 @@
 - type: company
   id: MMC
   name: Mieyo Manufacturing Concern
-  color: "#EEEEEE"
+  color: "#fca503" # LuaM: #EEEEEE > #fca503 (Mieyo radio color)
+  friendlyIffGroup: MMC # LuaM: sees own hidden-IFF shuttles
   disabled: true
 
 # Major companies
@@ -214,6 +222,7 @@
   name: Viper Group
   description: viper-group-description
   color: "#B82121"
+  friendlyIffGroup: USSP # LuaM: sees own hidden-IFF shuttles, allied with USSP
   image: /Textures/_Mono/Companies/thevipergroup.png # Example
   disabled: true # LuaM: true > false # LuaM change whitelisted: false > disabled: true
 

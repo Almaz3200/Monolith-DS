@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client.Shuttles.Systems;
+using Content.Shared._LuaM.Shuttles; // LuaM
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -22,6 +23,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
     private readonly DockingSystem _dockSystem;
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _xformSystem;
+    private readonly FriendlyIffSystem _friendlyIff; // LuaM
 
     public NetEntity? HighlightedDock;
 
@@ -66,6 +68,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         _dockSystem = EntManager.System<DockingSystem>();
         _shuttles = EntManager.System<SharedShuttleSystem>();
         _xformSystem = EntManager.System<SharedTransformSystem>();
+        _friendlyIff = EntManager.System<FriendlyIffSystem>(); // LuaM
         MinSize = new Vector2(SizeFull, SizeFull);
     }
 
@@ -151,7 +154,8 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
             var curGridToView = curGridToWorld * worldToSelectedDock * selectedDockToView;
 
             // Mono - hide color if needed
-            var hideLabel = iffComp != null && (iffComp.Flags & IFFFlags.HideLabel) != 0x0;
+            var hideLabel = iffComp != null && (iffComp.Flags & IFFFlags.HideLabel) != 0x0
+                && !_friendlyIff.IsFriendlyToLocalPlayer(grid.Owner); // LuaM: own faction sees through IFF off
             var hideColor = hideLabel && iffComp != null && (iffComp.Flags & IFFFlags.AlwaysShowColor) == 0x0;
             // this has no detection logic but this is probably fine
             var color = hideColor ? Color.White : _shuttles.GetIFFColor(grid.Owner, grid.Owner == GridEntity, component: iffComp);
