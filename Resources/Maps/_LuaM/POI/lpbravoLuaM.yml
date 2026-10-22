@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/21/2026 16:16:09
-  entityCount: 7805
+  time: 10/22/2026 02:30:00
+  entityCount: 7820
 maps: []
 grids:
 - 1
@@ -38,7 +38,7 @@ entities:
     components:
     - type: MetaData
       desc: SYN_LP
-      name: grid
+      name: Bravo
     - type: Transform
       pos: 0.25,-1.078125
       parent: invalid
@@ -204,10 +204,10 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
       spreadQueues:
-        Smoke: []
-        Puddle: []
-        MetalFoam: []
         Kudzu: []
+        MetalFoam: []
+        Puddle: []
+        Smoke: []
     - type: Shuttle
       dampingModifier: 2.5
       bodyModifier: 2.5
@@ -27304,13 +27304,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 15.5,19.5
       parent: 1
-- proto: ChemistryHotplate
-  entities:
-  - uid: 1829
-    components:
-    - type: Transform
-      pos: -1.5,-6.5
-      parent: 1
 - proto: ChemMasterFilled
   entities:
   - uid: 1791
@@ -27762,13 +27755,6 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-- proto: ConstructionBox
-  entities:
-  - uid: 858
-    components:
-    - type: Transform
-      pos: 32.5,-9.5
-      parent: 1
 - proto: CrateNanotrasenLootFilledT3
   entities:
   - uid: 3166
@@ -29249,6 +29235,53 @@ entities:
     components:
     - type: Transform
       pos: -8.5,-7.5
+      parent: 1
+- proto: ExtinguisherCabinetFilled
+  entities:
+  - uid: 7807
+    components:
+    - type: Transform
+      pos: -13.5,-12.5
+      parent: 1
+  - uid: 7808
+    components:
+    - type: Transform
+      pos: 19.5,14.5
+      parent: 1
+  - uid: 7809
+    components:
+    - type: Transform
+      pos: 38.5,4.5
+      parent: 1
+  - uid: 7810
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,-10.5
+      parent: 1
+  - uid: 7811
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 25.5,-10.5
+      parent: 1
+  - uid: 7812
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 12.5,6.5
+      parent: 1
+  - uid: 7813
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -7.5,-3.5
+      parent: 1
+  - uid: 7814
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -25.5,1.5
       parent: 1
 - proto: Firelock
   entities:
@@ -33195,6 +33228,50 @@ entities:
       startingCharge: 0
     - type: ApcPowerReceiver
       powerLoad: 50
+- proto: HardpointUniversalSuperheavy
+  entities:
+  - uid: 7806
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 42.5,20.5
+      parent: 1
+  - uid: 7815
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -20.5,-29.5
+      parent: 1
+  - uid: 7816
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,33.5
+      parent: 1
+  - uid: 7817
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 14.5,34.5
+      parent: 1
+  - uid: 7818
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -21.5,15.5
+      parent: 1
+  - uid: 7819
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 30.5,-23.5
+      parent: 1
+  - uid: 7820
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,-23.5
+      parent: 1
 - proto: JetpackBlackFilled
   entities:
   - uid: 1773
@@ -33374,6 +33451,13 @@ entities:
       parent: 1
     missingComponents:
     - Anchorable
+- proto: MachineThermobath
+  entities:
+  - uid: 1829
+    components:
+    - type: Transform
+      pos: -1.5,-6.5
+      parent: 1
 - proto: Mannequin
   entities:
   - uid: 7284
@@ -33462,6 +33546,13 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -27.5,4.5
+      parent: 1
+- proto: NFMagnetBoxConstruction
+  entities:
+  - uid: 858
+    components:
+    - type: Transform
+      pos: 32.5,-9.5
       parent: 1
 - proto: NFPosterContrabandEatShrooms
   entities:
@@ -52742,6 +52833,8 @@ entities:
   entities:
   - uid: 3465
     components:
+    - type: MetaData
+      name: Bravo
     - type: Transform
       pos: 18.5,18.5
       parent: 1
