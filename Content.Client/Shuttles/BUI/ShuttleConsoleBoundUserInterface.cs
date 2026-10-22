@@ -33,7 +33,10 @@ public sealed partial class ShuttleConsoleBoundUserInterface : BoundUserInterfac
         _window.UndockRequest += OnUndockRequest;
         _window.UndockAllRequest += OnUndockAllRequest;
         _window.ToggleFTLLockRequest += OnToggleFTLLockRequest;
+        _window.OnFireControlRefresh += () => SendMessage(new ShuttleConsoleRefreshFireControlMessage()); // Lua
+        _window.OnGunneryFire += (selected, coordinates) => SendMessage(new ShuttleConsoleFireMessage(selected, coordinates)); // Lua
         NfOpen(); // Frontier
+        LuaMOpen(); // LuaM
     }
 
     private void OnToggleFTLLockRequest(List<NetEntity> dockEntities, bool enabled)

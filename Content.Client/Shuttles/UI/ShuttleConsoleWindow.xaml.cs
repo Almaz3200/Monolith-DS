@@ -33,6 +33,8 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        UseDeadSpaceMenuStyle(); // LuaM
+        InitializeGunnery(); // Lua
 
         // Mode switching
         NavModeButton.OnPressed += NavPressed;
@@ -93,6 +95,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         };
 
         NfInitialize(); // Frontier Initialization for the ShuttleConsoleWindow
+        InitializeMapTarget(); // LuaM
     }
 
     private void ClearModes(ShuttleConsoleMode mode)
@@ -176,5 +179,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         NavContainer.UpdateState(cState.NavState);
         MapContainer.UpdateState(cState.MapState);
         DockContainer.UpdateState(coordinates?.EntityId, cState.DockState);
+        NavContainer.UpdateWeapons(cState.FireControlConnected, cState.FireControllables); // Lua
+        MapContainer.UpdateMapTarget(cState.NavState); // LuaM
     }
 }

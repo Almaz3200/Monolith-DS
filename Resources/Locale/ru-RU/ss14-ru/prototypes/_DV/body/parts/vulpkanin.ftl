@@ -20,3 +20,5 @@ ent-LeftFootVulpkanin = левая ступня вульпканина
     .desc = { ent-PartVulpkanin.desc }
 ent-RightFootVulpkanin = правая ступня вульпканина
     .desc = { ent-PartVulpkanin.desc }
+ent-PartVulpkaninBase = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }

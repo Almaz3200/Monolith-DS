@@ -11,3 +11,5 @@ ent-ResearchAndDevelopmentServerDebug = РнД-сервер
     .desc = Содержит совокупные знания всех. Да, вообще всех.
 ent-ResearchAndDevelopmentServerMerc = РнД-сервер наёмников
     .desc = Содержит совокупные знания всех наёмников этого сектора.
+ent-ResearchAndDevelopmentServerMMC = MMC R&D server
+    .desc = Contains the collective knowledge of the MMC in this sector.

@@ -12,3 +12,5 @@ ent-BaseBorgHead = голова киборга
     .desc = { ent-PartSilicon.desc }
 ent-BaseBorgTorso = туловище киборга
     .desc = { ent-PartSilicon.desc }
+ent-PartSiliconBase = { ent-BasePartInorganic }
+    .desc = { ent-BasePartInorganic.desc }

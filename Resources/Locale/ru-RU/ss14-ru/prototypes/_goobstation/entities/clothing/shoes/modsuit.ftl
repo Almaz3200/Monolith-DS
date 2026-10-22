@@ -16,3 +16,5 @@ ent-ClothingModsuitBootsResearchDirector = ботинки МОД «Минерв�
     .desc = Не спасут от скольжения по собственной крови, когда голокарп летит за тобой.
 ent-ClothingModsuitBootsCaptain = ботинки МОД «Магнат»
     .desc = Эти ботинки разработаны самим МАЙКЛОМ ДЖОРДАНОМ и выкованы из древних сплавов, чувак.
+ent-ClothingModsuitBootsBase = modsuit boots
+    .desc = A special modular suit boots designed for compact folding inside modular suit control.

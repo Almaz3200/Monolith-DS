@@ -24,3 +24,5 @@ ent-CartridgeMPSSMMissile = MPSSM ASM-19 missile tube
     .desc = Труба ракеты для пусковой MPSSM. Запускает противокорабельную ЭМИ-ОФ ракету с захватом цели до 1,2 км.
 ent-CartridgeMPSSMHEAT = MPSSM Mk.248 rocket tube
     .desc = Труба ракеты для пусковой MPSSM. Запускает неуправляемую кумулятивную ракету для точечного разрушения и ПТ.
+ent-BaseGrenade = base grenade
+    .desc = { ent-BaseItem.desc }

@@ -1,0 +1,14 @@
+ent-ExGrenadeLaunched = explosive grenade
+    .desc = Grenade that creates a small but devastating explosion.
+ent-StickyGrenadeLaunched = sticky bomb
+    .desc = An anti-tank sticky bomb based on old designs, still effective even in space. Packs a punch, but has a long delay.
+ent-GrenadeFlashBangLaunched = flashbang
+    .desc = Eeeeeeeeeeeeeeeeeeeeee.
+ent-EmpGrenadeLaunched = EMP grenade
+    .desc = A grenade designed to wreak havoc on electronic systems.
+ent-SmokeGrenadeLaunched = smoke grenade
+    .desc = A tactical grenade that releases a large, long-lasting cloud of smoke when used.
+ent-CleanerGrenadeLaunched = cleanade
+    .desc = Special grenade for janitors, releasing large cloud of space cleaner foam.
+ent-MetalFoamGrenadeLaunched = metal foam grenade
+    .desc = An emergency tool used for patching up holes. Almost as good as real walls.

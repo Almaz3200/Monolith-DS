@@ -11,3 +11,6 @@ ent-WindowFrostedDirectional = направленное матовое окно
 ent-WindowDiagonal = { ent-Window }
     .suffix = Диагональ
     .desc = { ent-Window.desc }
+ent-TintedWindowTransparent = { ent-TintedWindow }
+    .desc = { ent-TintedWindow.desc }
+    .suffix = Transparent

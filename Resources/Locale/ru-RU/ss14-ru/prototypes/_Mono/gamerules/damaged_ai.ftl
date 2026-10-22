@@ -16,3 +16,5 @@ ent-UnknownShuttleRazorN = неизвестный шаттл ИИ
 ent-UnknownShuttleWyvern = неизвестный шаттл ИИ
     .suffix = Wyvern
     .desc = { ent-BaseRandomShuttleRule.desc }
+ent-UnknownShuttleWyrm = { ent-BaseRandomShuttleRule }
+    .desc = { ent-BaseRandomShuttleRule.desc }

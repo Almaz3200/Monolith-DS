@@ -326,8 +326,9 @@
   - type: DetectionRangeMultiplier # same as mass scanner
     infraredMultiplier: 0.5
     visualMultiplier: 0.75
-  # - type: ShipNpcTarget # Commented by LuaM
-  #   needGrid: NoGrid
+  - type: ShipNpcTarget
+    needGrid: NoGrid
+    maxTargetRange: 50
   - type: RetroMonitorView
   # </Mono>
 

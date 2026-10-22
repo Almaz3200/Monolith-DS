@@ -34,3 +34,5 @@ ent-ResomiCube = резомиовский кубик
     .desc = { ent-MonkeyCube.desc }
 ent-GoblinCube = гоблинский кубик
     .desc = { ent-MonkeyCube.desc }
+ent-FeroxiCube = фероксиевый кубик
+    .desc = { ent-MonkeyCube.desc }

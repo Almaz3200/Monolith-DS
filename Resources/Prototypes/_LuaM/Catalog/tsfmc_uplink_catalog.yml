@@ -16,20 +16,34 @@
       tags:
       - SecurityUplink
 
-# Utilities
+# Implants
 
 - type: listing
-  id: UplinkSecurityFactionHoloCigarWestern
-  name: uplink-holo-cigar-tsf-name
-  description: uplink-holo-cigar-tsf-desc
-  productEntity: HoloCigarWestern
+  id: UplinkSecurityCombatMedipenImplanter
+  name: uplink-combat-medipen-implanter-name
+  description: uplink-combat-medipen-implanter-desc
+  productEntity: CombatMedipenImplanter
   cost:
-    FederationMilitaryCredit: 350
+    FederationMilitaryCredit: 20
   categories:
-    - UplinkSecurityUtility
-  restockTime: 12600
+  - UplinkSecurityUtility
   conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - SecurityUplink
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink
+
+- type: listing
+  id: UplinkSecurityStimulantImplanter
+  name: uplink-stimulant-implanter-name
+  description: uplink-stimulant-implanter-desc
+  productEntity: StimulantImplanter
+  cost:
+    FederationMilitaryCredit: 20
+  categories:
+  - UplinkSecurityUtility
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink
