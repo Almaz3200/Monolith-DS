@@ -291,7 +291,7 @@
     range: 500
   - type: Gun
     fireRate: 0.2
-    projectileSpeed: 320
+    projectileSpeed: 180
     shootThermalSignature: 2000000 # ~1414m after firing - relatively low
     soundGunshot:
       collection: ShipGunMjolnir
