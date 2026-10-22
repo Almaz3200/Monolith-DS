@@ -2,71 +2,81 @@
   id: NFMercenaryTechfabDeprecatedStatic
   recipes:
 # Shared lathe recipes
+# LuaM-commented-start: removed base recipes
 ## Basic tools
-  - Wirecutter
-  - Screwdriver
-  - Welder
-  - Wrench
-  - CrowbarGreen
-  - Multitool
+  # - Wirecutter
+  # - Screwdriver
+  # - Welder
+  # - Wrench
+  # - CrowbarGreen
+  # - Multitool
+# LuaM-commented-end
   - FlashlightLantern
   - AppraisalTool
   - HandLabeler
   - Signaller
   - ClothingMaskWeldingGas
+# LuaM-commented-start: removed base recipes
 ## Basic storage
-  - ToolboxArtisticNF
-  - ToolboxElectricalNF
-  - ToolboxMechanicalNF
-  - ToolboxEmergencyNF
+  # - ToolboxArtisticNF
+  # - ToolboxElectricalNF
+  # - ToolboxMechanicalNF
+  # - ToolboxEmergencyNF
 ## Basic parts
-  - CableStack
-  - LightTube
-  - LedLightTube
-  - SodiumLightTube
-  - ExteriorLightTube
-  - LightBulb
-  - LedLightBulb
-  - SodiumLightBulb
-  - ExteriorLightBulb
+  # - CableStack
+  # - LightTube
+  # - LedLightTube
+  # - SodiumLightTube
+  # - ExteriorLightTube
+  # - LightBulb
+  # - LedLightBulb
+  # - SodiumLightBulb
+  # - ExteriorLightBulb
+# LuaM-commented-end
   - ConveyorBeltAssembly
-  - PowerCellSmall
-  - PowerCellMedium
+# LuaM-commented-start: removed base recipes
+  # - PowerCellSmall
+  # - PowerCellMedium
 ## Basic electronics
-  - SignalTimerElectronics
-  - CellRechargerCircuitboard
-  - BorgChargerCircuitboard
+  # - SignalTimerElectronics
+  # - CellRechargerCircuitboard
+  # - BorgChargerCircuitboard
+# LuaM-commented-end
   - WeaponCapacitorRechargerCircuitboard
-  - AirTank
+  - AmmoTechFabCircuitboardLuaM # LuaM
+  # - AirTank # Commented by LuaM: removed base recipes
 # Mercenary techfab
 ## Clothing / Armor
   - RiotShield
-  - ClothingNeckIFFNeutral
-  - ClothingNeckIFFGreen
-  - ClothingNeckIFFRed
-  - ClothingNeckIFFBlue
-  - ClothingNeckIFFOrange
-  - ClothingNeckIFFPurple
-#  - ClothingHeadHelmetMercenary # Commented by LuaM
-#  - ClothingHeadHelmetBasic # Commented by LuaM
-#  - ClothingOuterVestWebMercenary # Commented by LuaM
-#  - ClothingOuterVestWebMercenaryBlack # Commented by LuaM
+# LuaM-commented-start: removed base recipes
+  # - ClothingNeckIFFNeutral
+  # - ClothingNeckIFFGreen
+  # - ClothingNeckIFFRed
+  # - ClothingNeckIFFBlue
+  # - ClothingNeckIFFOrange
+  # - ClothingNeckIFFPurple
+  # - ClothingHeadHelmetMercenary
+  # - ClothingHeadHelmetBasic
+  # - ClothingOuterVestWebMercenary
+  # - ClothingOuterVestWebMercenaryBlack
+# LuaM-commented-end
+  - ClothingNeckWearableCamera # LuaM
   - ClothingBeltMercenaryWebbing
   - ClothingBeltMilitaryWebbing
-  - ClothingHandsMercenaryGlovesCombat
+  # - ClothingHandsMercenaryGlovesCombat # Commented by LuaM: removed base recipes
   - ClothingHandsGlovesCombat
-  - ClothingShoesBootsMercenary
+  # - ClothingShoesBootsMercenary # Commented by LuaM: removed base recipes
   - ClothingShoesBootsCombat
   - ClothingShoesBootsJack
   - ClothingEyesGlassesMercenary
-  - ClothingEyesGlassesSunglasses
+  # - ClothingEyesGlassesSunglasses # Commented by LuaM: removed base recipes
   - ClothingMaskGasMercenary
   - ClothingMaskBreathMedicalSecurity
   - ClothingMaskGasSecurity
   - ClothingBeltBandolier
 ## EVA / Hardsuits
-  - ClothingOuterEVASuitMercenary
-  - ClothingOuterEVASuitPrivateSec
+  # - ClothingOuterEVASuitMercenary # Commented by LuaM: removed base recipes
+  # - ClothingOuterEVASuitPrivateSec # Commented by LuaM: removed base recipes
 ## Storage
   - MedkitCombat
   - WeaponCaseShort
@@ -86,7 +96,7 @@
   - WeaponRifleNovaliteC1
   - WeaponRifleGestio
   - WeaponSubMachineGunKnallstock # Mono
-  - BaseBallBatNF
+  # - BaseBallBatNF # Commented by LuaM: removed base recipes
   - CrossbowModern
   - WeaponPistolPollock
   - WeaponRifleSVSUSSP #Mono

@@ -60,7 +60,7 @@
 - type: entity
   parent: BaseInjectorImplantImplanter
   id: CombatMedipenImplanter
-  suffix: combat medipen
+  name: combat medipen implanter
   components:
   - type: Implanter
     implant: CombatMedipenImplant
@@ -68,7 +68,7 @@
 - type: entity
   parent: BaseInjectorImplantImplanter
   id: StimulantImplanter
-  suffix: stimulant
+  name: stimulant implanter
   components:
   - type: Implanter
     implant: StimulantImplant

@@ -25,8 +25,6 @@
         ambientMusicPrototype: ColossusCentralMusic
       - type: VesselInfo
         description: "Это одно из самых цивилизованных мест в секторе. Здесь безопасно. Почти." # LuaM: "The closest thing to civilization in this sector. You almost feel safe." > "Это одно из самых цивилизованных мест в секторе. Здесь безопасно. Почти."
-      - type: DeleteNearbyDrones
-        distance: 4000
       components:
         - type: StationNameSetup
           mapNameTemplate: '«Колосс Централл»' # LuaM: 'Caelestinus Central' > '«Колосс Централл»'

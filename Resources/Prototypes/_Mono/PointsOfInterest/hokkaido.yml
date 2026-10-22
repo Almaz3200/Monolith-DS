@@ -31,8 +31,6 @@
   stations:
     Hokkaido:
       stationProto: RecordsFrontierOutpostCargo
-      gridComponents:
-        - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
           mapNameTemplate: 'ММС «Хоккайдо»' # LuaM: 'MMC Hokkaido' > 'ММС «Хоккайдо»'

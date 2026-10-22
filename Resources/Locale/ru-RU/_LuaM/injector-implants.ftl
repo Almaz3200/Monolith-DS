@@ -10,12 +10,10 @@ ent-CombatMedipenImplant = имплант боевого медипена
 ent-StimulantImplant = имплант стимулятора
     .desc = Вводит дозу стимулятора по команде и автоматически при критическом состоянии владельца.
 
-ent-CombatMedipenImplanter = { ent-Implanter }
+ent-CombatMedipenImplanter = имплантер боевого медипена
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-    .suffix = боевой медипен
-ent-StimulantImplanter = { ent-Implanter }
+ent-StimulantImplanter = имплантер стимулятор
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-    .suffix = стимулятор
 
 crit-injector-clothing-used = Скафандр впрыскивает медикаменты.
 

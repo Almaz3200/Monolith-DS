@@ -122,6 +122,10 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         var disciplineParallax = new ParallaxControl // LuaM
         {
             ParallaxPrototype = "Default",
+            SpeedX = 6.0f,
+            SpeedY = 6.0f,
+            ScaleX = 2.0f,
+            ScaleY = 2.0f,
             HorizontalExpand = true,
             VerticalExpand = true,
         };
@@ -137,6 +141,10 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             ParallaxPrototype = "Default",
             HorizontalExpand = true,
             VerticalExpand = true,
+            SpeedX = 6.0f,
+            SpeedY = 6.0f,
+            ScaleX = 2.0f,
+            ScaleY = 2.0f,
         };
 // LuaM-end.
         ResearchesContainer.AddChild(_parallaxControl);

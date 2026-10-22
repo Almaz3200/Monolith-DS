@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 09/27/2026 09:37:07
-  entityCount: 8463
+  entityCount: 8462
 maps: []
 grids:
 - 1
@@ -45175,13 +45175,6 @@ entities:
     components:
     - type: Transform
       pos: 1.5,66.5
-      parent: 1
-- proto: SpawnerSupplyCrateAdamantite
-  entities:
-  - uid: 8505
-    components:
-    - type: Transform
-      pos: -17.237152,13.511111
       parent: 1
 - proto: SpawnerSupplyCratePlastic
   entities:

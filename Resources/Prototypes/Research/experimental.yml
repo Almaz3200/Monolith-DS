@@ -59,7 +59,7 @@
   - TechDiskComputerCircuitboard
   technologyPrerequisites:
   - BasicParts
-  position: 7, 12 # LuaM: 1, -6 > 7, 12
+  position: 7, 11 # LuaM: 1, -6 > 7, 11
 
 - type: technology
   id: MagnetsTech
@@ -150,7 +150,7 @@
   - HoloprojectorField
   technologyPrerequisites:
   - BasicParts
-  position: 4, 13 # LuaM: 2, -1 > 4, 13
+  position: 4, 12 # LuaM: 2, -1 > 4, 12
 
 - type: technology
   id: AiTechnology

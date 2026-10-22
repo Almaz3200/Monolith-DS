@@ -9,9 +9,9 @@
   - ClothingOuterHardsuitM82cTsf
   - ClothingOuterHardsuitM82bTsf
   technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  - HardsuitsArmored # LuaM
-  position: 8, 13 # LuaM: 12, 1 > 8, 13
+  # - UniversalMaterialResearchT1 # LuaM
+  - TsfForensics # LuaM
+  position: 9, 7 # LuaM: 12, 1 > 9, 7
 
 - type: technology
   id: TsfmcAdvancedEquipment
@@ -25,7 +25,7 @@
   - MechIFFTSF
   technologyPrerequisites:
   - TsfmcBasicEquipment
-  position: 8, 10 # LuaM: 12, 7 > 8, 10
+  position: 10, 6 # LuaM: 12, 7 > 10, 6
 
 - type: technology
   id: TsfmcExperimentalEquipment
@@ -38,4 +38,4 @@
   - ClothingOuterHardsuitM92XTsf
   technologyPrerequisites:
   - TsfmcAdvancedEquipment
-  position: 8, 7 # LuaM: 12, 12 > 8, 7
+  position: 11, 6 # LuaM: 12, 12 > 11, 6
