@@ -6,7 +6,7 @@ research-discipline-rogue-shipyard = АН | Судостроение
 # T1 Авангарда
 research-technology-rogue-jaws = Модификация поршневых механизмов
 research-technology-rogue-basic-guns = Базовое вооружение Авангарда
-research-technology-pdv-basic-module = Разработка базовых модулей киборгов Авангарда
+research-technology-pdv-basic-module = Базовые модули киборгов Авангарда
 research-technology-rogue-tier-one-vouchers = Базовое судостроение Авангарда
 research-technology-rogue-basic-equipment = Базовое снаряжение Авангарда
 
@@ -23,7 +23,7 @@ research-technology-rogue-advanced-equipment = Продвинутое снаря
 research-technology-rogue-tier-three-vouchers = Глобальное судостроение Авангарда
 research-technology-rogue-hf-sword = Модификации плазменного вооружения
 research-technology-rogue-syndicate-tacsuits = Боевые скафандры Авангарда
-research-technology-pdv-advanced-module = Разработка продвинутых модулей киборгов Авангарда
+research-technology-pdv-advanced-module = Продвинутые модули киборгов Авангарда
 research-technology-rogue-super-armor = Экспериментальное снаряжение Авангарда
 research-technology-rogue-heavy-weapons = Тяжёлое вооружение Авангарда
 
@@ -32,7 +32,7 @@ research-technology-rogue-experimental-equipment = Эксперименталь�
 research-technology-rogue-thermals = Тепловидение
 research-technology-pdv-ias = Кардиореспираторная бионика Авангарда
 research-technology-rogue-advanced-melee-weapon = Продвинутое оружие ближнего боя
-research-technology-rogue-saintie-voucher = «Сенти» 
+research-technology-rogue-saintie-voucher = «Сенти»
 research-technology-rogue-motley-anne-voucher = «Пёстрая Энн»
 research-technology-rogue-motley-anne-fighters = «Пёстрой Энн»
 research-technology-rogue-prowler-voucher = Технологии манипуляций с радаром

@@ -151,6 +151,7 @@
   technologyPrerequisites:
   # - UniversalMaterialResearchT2 # Commented by LuaM
   - MieyoMedicalGear # LuaM
+  - AdvancedTreatment # LuaM
   position: 4, 6 # LuaM -5, -15 > 4, 6
 
 - type: technology

@@ -9,4 +9,5 @@
   - Hypospray
   technologyPrerequisites:
   - TsfmcBasicEquipment
+  - HypoMiniLimitedEdition
   position: 10, 8

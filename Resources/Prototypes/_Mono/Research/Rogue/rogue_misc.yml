@@ -72,6 +72,7 @@
   technologyPrerequisites:
   # - UniversalMaterialResearchT1 # Commented by LuaM
   - RogueJaws # LuaM
+  - HypoMiniLimitedEdition # LuaM
   position: 7, 6 # LuaM: 12, -2 > 7, 6
 
 - type: technology
@@ -131,6 +132,7 @@
   - AutosurgeonDermalArmorPDV
   technologyPrerequisites:
   - RogueHypospray # LuaM
+  - AdvancedTreatment
   # - UniversalMaterialResearchT2
   position: 7, 5 # LuaM -3, -21 > 7, 5
 

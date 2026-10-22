@@ -180,6 +180,7 @@
   technologyPrerequisites:
   - ConcentratedLaserWeaponry
   - SuperParts
+  - PortableFission # LuaM
   position: 11, 7 # LuaM: 4, 3 > 11, 7
 
 # Mono edit - research consolidation

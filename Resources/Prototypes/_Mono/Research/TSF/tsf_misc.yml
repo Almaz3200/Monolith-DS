@@ -119,6 +119,7 @@
   technologyPrerequisites:
   # - UniversalMaterialResearchT1 # Commented by LuaM
   - TsfForensics # LuaM
+  - PortableFission # LuaM
   position: 8, 8 # LuaM: 12, -3 > 8, 8
 
 - type: technology
@@ -176,6 +177,7 @@
   technologyPrerequisites:
   # - UniversalMaterialResearchT3
   - Hypospray # LuaM
+  - AdvancedTreatment # LuaM
   position: 11, 8 # LuaM 2, -28 > 11< 8
 
 #- type: technology

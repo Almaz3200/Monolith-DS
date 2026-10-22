@@ -112,4 +112,4 @@
   technologyPrerequisites:
   - UniversalLightFighterOrdinance
   - UniversalRailgunAmmo # LuaM: UniversalPlastitaniumCore > UniversalRailgunAmmo
-  position: 3, 5 # LuaM: 6, 5 > 3, 5
+  position: 3, 4 # LuaM: 6, 5 > 3, 4

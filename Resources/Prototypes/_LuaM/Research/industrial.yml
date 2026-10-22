@@ -26,6 +26,20 @@
   - ConstructionBags
   position: 6, 3
 
+- type: technology
+  id: FultonTechnology
+  name: research-technology-fulton
+  entityIcon: FultonBeacon
+  discipline: Industrial
+  tier: 2
+  cost: 15000
+  recipeUnlocks:
+  - Fulton
+  - FultonBeacon
+  technologyPrerequisites:
+  - AdvancedToolsTechnology
+  position: 3, 5
+
 # Tier 3
 - type: technology
   id: BlueSpaceAirTanks
