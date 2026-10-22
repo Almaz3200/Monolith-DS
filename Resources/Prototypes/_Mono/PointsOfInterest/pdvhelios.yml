@@ -20,6 +20,14 @@
     readOnly: true # mono
     flags:
     - HideLabelAlways # hidden
+  - type: FriendlyIff # LuaM: the Vanguard always sees Helios
+    group: PDV
+    alwaysVisible: true
+  - type: RadarStealthField # LuaM: hidden from non-Vanguard radars farther than 3 km, hides shuttles within 256 m
+    revealRange: 3000
+    fieldRadius: 256
+  - type: Company # LuaM: faction outpost
+    companyName: PDV
   - type: WorldGenDistanceCarver
     distanceThresholds:
     # drones no droning
@@ -88,6 +96,11 @@
   - type: IFF
     color: "#DE9E59"
     readOnly: true # mono
+  - type: FriendlyIff # LuaM: the Vanguard always sees Helios
+    group: PDV
+    alwaysVisible: true
+  - type: Company # LuaM: faction outpost
+    companyName: PDV
 
 - type: gameMap
   id: HeliosFortressHyperwar

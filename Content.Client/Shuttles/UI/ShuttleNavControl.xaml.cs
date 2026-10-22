@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Client._Mono.Radar;
 using Content.Client.Station; // Frontier
+using Content.Shared._LuaM.Shuttles; // LuaM
 using Content.Shared._Crescent.ShipShields;
 using Content.Shared._Mono.Company;
 using Content.Shared._Mono.Detection;
@@ -37,6 +38,8 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
     private readonly RadarBlipsSystem _blips;
+    private readonly FriendlyIffSystem _friendlyIff; // LuaM
+    private readonly RadarStealthFieldSystem _stealthField; // LuaM
 
     protected override bool AllowResize => true; // Lua
     protected override bool ScaleWithControlSize => true; // Lua
@@ -134,6 +137,8 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         _transform = EntManager.System<SharedTransformSystem>();
         _station = EntManager.System<StationSystem>(); // Frontier
         _blips = EntManager.System<RadarBlipsSystem>();
+        _friendlyIff = EntManager.System<FriendlyIffSystem>(); // LuaM
+        _stealthField = EntManager.System<RadarStealthFieldSystem>(); // LuaM
 
         OnMouseEntered += HandleMouseEntered;
         OnMouseExited += HandleMouseExited;
@@ -606,6 +611,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
         _grids.Clear();
         _mapManager.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector), ref _grids, approx: true, includeMap: false);
+        AddAlwaysVisibleGrids(xform.MapID); // LuaM
 
         // Draw our grid's fill.
         var ourGridId = xform.GridUid;
@@ -849,6 +855,25 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         DrawGunneryLines(handle, worldToView, xform.MapID); // Lua: shuttle console gunnery
     }
 
+    // LuaM
+    /// <summary>
+    /// Adds friendly grids that must be seen at any range (e.g. Helios for the Vanguard) even if they are outside the radar range.
+    /// </summary>
+    private void AddAlwaysVisibleGrids(MapId mapId)
+    {
+        var query = EntManager.EntityQueryEnumerator<FriendlyIffComponent, MapGridComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var friendly, out var grid, out var gridXform))
+        {
+            if (!friendly.AlwaysVisible
+                || gridXform.MapID != mapId
+                || !_friendlyIff.IsFriendlyToLocalPlayer(uid)
+                || _grids.Exists(g => g.Owner == uid))
+                continue;
+
+            _grids.Add((uid, grid));
+        }
+    }
+
     private void DrawGrids(List<Entity<MapGridComponent>> _grids, DrawingHandleScreen handle, Entity<MapGridComponent>? ourGrid, bool renderFill)
     {
         var xformQuery = EntManager.GetEntityQuery<TransformComponent>();
@@ -857,6 +882,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
         var worldRot = _rotation!.Value;
         var mapPos = _transform.ToMapCoordinates(_coordinates!.Value).Offset(_rotation.Value.RotateVec(Offset));
+        var radarPos = _transform.ToMapCoordinates(_coordinates.Value); // LuaM: stealth fields are checked from the radar itself, not the panned view
         var mapCoord = _transform.ToCoordinates(mapPos);
         var worldToShuttle = Matrix3Helpers.CreateTranslation(-mapCoord.Position) * Matrix3Helpers.CreateRotation(-worldRot);
         Matrix3x2.Invert(worldToShuttle, out var shuttleToWorld);
@@ -893,7 +919,10 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
                 if (!_shuttles.CanDraw(grid.Owner, gridBody, iff))
                     continue;
-                var hideLabel = iff != null && (iff.Flags & IFFFlags.HideLabel) != 0x0;
+                if (grid.Owner != ourGrid?.Owner && _stealthField.IsHiddenFromLocalPlayer(grid.Owner, radarPos)) // LuaM
+                    continue;
+                var hideLabel = iff != null && (iff.Flags & IFFFlags.HideLabel) != 0x0
+                    && !_friendlyIff.IsFriendlyToLocalPlayer(grid.Owner); // LuaM: own faction sees through IFF off
                 var hideColor = hideLabel && iff != null && (iff.Flags & IFFFlags.AlwaysShowColor) == 0x0;
                 var labelColor = hideColor ? blipOnly ? Color.Orange : Color.White : _shuttles.GetIFFColor(grid, self: false, iff);
 
@@ -914,8 +943,13 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 if (!_shuttles.CanDraw(gUid, gridBody, iff))
                     continue;
 
-                var hideLabel = iff != null && (iff.Flags & IFFFlags.HideLabel) != 0x0;
-                var noLabel = iff != null && (iff.Flags & IFFFlags.HideLabelAlways) != 0x0;
+                if (_stealthField.IsHiddenFromLocalPlayer(gUid, radarPos)) // LuaM
+                    continue;
+
+                var friendly = _friendlyIff.IsFriendlyToLocalPlayer(gUid); // LuaM: own faction sees through IFF off
+                var alwaysVisible = friendly && _friendlyIff.IsAlwaysVisibleToLocalPlayer(gUid); // LuaM
+                var hideLabel = iff != null && (iff.Flags & IFFFlags.HideLabel) != 0x0 && !friendly; // LuaM: friendly
+                var noLabel = iff != null && (iff.Flags & IFFFlags.HideLabelAlways) != 0x0 && !friendly; // LuaM: own faction also sees the label hidden by docking at a faction station
                 var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(grid.Owner);
                 var detected = detectionLevel != DetectionLevel.Undetected || !hideLabel;
                 var blipOnly = detectionLevel != DetectionLevel.Detected; // don't show outline outside of detection radius even if IFF on
@@ -940,7 +974,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                     detectionLevel == DetectionLevel.PartialDetected ?
                         Loc.GetString($"shuttle-console-signature-infrared")
                         : _detection.HandleUnknownMassLabel(grid.Owner)
-                    : _shuttles.GetIFFLabel(grid, self: false, component: iff);
+                    : _shuttles.GetIFFLabel(grid, self: false, component: iff, ignoreHidden: friendly); // LuaM: ignoreHidden
 
                 var shouldDrawIFF = ShowIFF && labelName != null;
                 var shouldDrawDetailedIFF = ShowIFFDetailed && shouldDrawIFF; // Mono
@@ -956,7 +990,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 //shouldDrawIFF = NfCheckShouldDrawIffRangeCondition(shouldDrawIFF, mapCenter, curGridToWorld); // Frontier code
                 // Frontier: range checks // Mono
                 var gridMapPos = _transform.ToMapCoordinates(new EntityCoordinates(gUid, gridBody.LocalCenter)).Position;
-                if (!hideLabel) // Mono - show thermal signatures even at long range
+                if (!hideLabel && !alwaysVisible) // Mono - show thermal signatures even at long range // LuaM: alwaysVisible
                     shouldDrawIFF = NfCheckShouldDrawIffRangeCondition(shouldDrawIFF, mapPos.Position - gridMapPos);
                 // End Frontier
 
@@ -1369,6 +1403,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
     private void DrawShields(DrawingHandleScreen handle, TransformComponent consoleXform, Matrix3x2 matrix)
     {
+        var radarPos = _transform.ToMapCoordinates(_coordinates!.Value); // LuaM
         var shields = EntManager.AllEntityQueryEnumerator<ShipShieldVisualsComponent, FixturesComponent, TransformComponent>();
         while (shields.MoveNext(out var uid, out var visuals, out var fixtures, out var xform))
         {
@@ -1380,6 +1415,12 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
             // Don't draw shields when in FTL
             if (EntManager.HasComponent<FTLComponent>(parentXform.Owner))
+                continue;
+
+            // LuaM: shields of grids hidden from radar (IFF hide, cloak, stealth fields) are hidden with them
+            if (parentXform.Owner != consoleXform.GridUid
+                && (!_shuttles.CanDraw(parentXform.Owner)
+                    || _stealthField.IsHiddenFromLocalPlayer(parentXform.Owner, radarPos)))
                 continue;
 
             var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(parentXform.Owner);

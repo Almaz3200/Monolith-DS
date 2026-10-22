@@ -10,6 +10,8 @@
   addComponents:
   - type: IFF
     color: "#37946e"
+  - type: Company # LuaM: faction outpost
+    companyName: Colonial
   - type: VesselInfo
     description: "Even the air has a thin coat of dust."
 
