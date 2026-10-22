@@ -1,0 +1,9 @@
+ent-BaseGunAttachmentGrip = grip
+    .desc = Helps a bit with recoil control.
+    .suffix = Grip Attachment
+ent-BaseGunAttachmentSuppressor = suppressor
+    .desc = Makes a gunshot a bit more quiet.
+    .suffix = Barrel Attachment
+ent-BaseGunAttachmentOptic = optic
+    .desc = Wow, I can see farther!
+    .suffix = Optic Attachment

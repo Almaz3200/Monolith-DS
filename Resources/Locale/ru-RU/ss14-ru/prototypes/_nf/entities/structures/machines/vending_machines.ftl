@@ -81,3 +81,6 @@ ent-NFVendingMachineCartNfsd = ТСФТех
 ent-NFVendingMachineCart = КЦТех
     .desc = Автомат для выдачи всяких бюрократических и не очень бюрократических штучек сотрудникам Колосса Централл.
     .suffix = Комендант
+ent-MonoVendingMachineCartMieyo = { ent-NFVendingMachineCart }
+    .desc = { ent-NFVendingMachineCart.desc }
+    .suffix = MMC

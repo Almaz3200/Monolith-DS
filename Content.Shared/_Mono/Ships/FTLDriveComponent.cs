@@ -60,4 +60,18 @@ public sealed partial class FTLDriveComponent : Component
     [DataField]
     [AutoNetworkedField]
     public float ThermalSignature = 2000000; // ~2.8km
+
+    // Lua-start: instant jump
+    /// <summary>
+    /// Jumps straight to the target without going through hyperspace, with an EMP flash on both ends.
+    /// </summary>
+    [DataField]
+    public bool SkipHyperspace;
+
+    /// <summary>
+    /// Range of the EMP flash of an instant jump, it is only a visual.
+    /// </summary>
+    [DataField]
+    public float SkipHyperspaceEmpRange = 60f;
+    // Lua-end
 }

@@ -21,3 +21,7 @@ ent-Magazine68x52mmCaselessShortPractice = магазин (6,8x52мм STANAG б�
     .desc = Магазин, использующий учебные безгильзовые патроны калибра 6,8x52мм STANAG.
 ent-Magazine68x52mmCaselessBig = короб (6,8x52мм STANAG безгильзовые)
     .desc = Коробчатый магазин, использующий патроны калибра 6,8x52мм STANAG.
+ent-BaseMagazine68x52mmCaselessShort = caseless rifle short magazine (6.8x52mm STANAG Caseless)
+    .desc = { ent-BaseMagazine68x52mmCaseless.desc }
+ent-Magazine68x52mmCaselessPlasma = magazine (6.8x52mm STANAG caseless plasma)
+    .desc = { ent-BaseMagazine68x52mmCaseless.desc }

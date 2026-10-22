@@ -1,3 +1,5 @@
+using Content.Shared.Inventory; // LuaM
+using Content.Shared._LuaM.Radio; // LuaM
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -729,12 +731,27 @@ public sealed partial class ChatUIController : UIController
             case ChatSelectChannel.CollectiveMind:
                 box.ChatInput.ChannelSelector.UpdateChannelSelectButton(prefixChannel, null, collectiveMind);
                 break;
+            // LuaM start: a channel switched off in the headset won't go over the radio, it is just said aloud
+            case ChatSelectChannel.Radio when radioChannel != null && IsHeadsetChannelDisabled(radioChannel.ID):
+                box.ChatInput.ChannelSelector.UpdateChannelSelectButton(ChatSelectChannel.Local, null, null);
+                break;
+            // LuaM end
             default:
                 box.ChatInput.ChannelSelector.UpdateChannelSelectButton(prefixChannel, radioChannel, null);
                 break;
         }
         // </Goobstation>
     }
+
+    // LuaM start
+    private bool IsHeadsetChannelDisabled(string channel)
+    {
+        return _player.LocalEntity is { Valid: true } uid
+               && _ent.System<InventorySystem>().TryGetSlotEntity(uid, "ears", out var headset)
+               && _ent.TryGetComponent<HeadsetChannelToggleComponent>(headset, out var toggle)
+               && toggle.DisabledChannels.Contains(channel);
+    }
+    // LuaM end
 
     // Goobstation - Starlight collective mind port
     public (ChatSelectChannel chatChannel, string text, RadioChannelPrototype? radioChannel, CollectiveMindPrototype? collectiveMind) SplitInputContents(string text)

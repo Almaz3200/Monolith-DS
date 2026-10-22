@@ -1,0 +1,30 @@
+# Sale consoles of the faction and civilian stations: items sell for 0.75 of their price.
+
+- type: entity
+  parent: ComputerPalletConsoleNFMarket
+  id: LuaMComputerPalletConsoleStationMarket
+  suffix: Station 0.75
+  components:
+  - type: MarketModifier
+    mod: 0.75
+
+- type: entity
+  parent: [BaseStructureIndestructible, BaseStructureComputerTabletop, LuaMComputerPalletConsoleStationMarket]
+  id: LuaMComputerTabletopPalletConsoleStationMarket
+  suffix: Station 0.75, Tabletop
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: _NF/Structures/Machines/computers.rsi
+      state: cargo_sale
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: tech_key

@@ -11,7 +11,7 @@
   - type: Organ
     onAdd:
     - type: SandevistanUser # This is worse than the mieyo one, because its reverse engineered or something. My secrets are propietary to my company. I mean, the only difference though is that it cools down a little bit slower.
-      activeDuration: 8
+      safeDuration: 15 # LuaM: activeDuration 8 > safeDuration 15
       rechargeDuration: 80
 
 - type: entity
@@ -144,5 +144,5 @@
   - type: Organ
     onAdd:
     - type: SandevistanUser
-      activeDuration: 8
+      safeDuration: 10 # LuaM: activeDuration 8 > safeDuration 10
       rechargeDuration: 40

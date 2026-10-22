@@ -8,3 +8,5 @@ ent-ClothingModsuitHelmetVolta = Volta Modsuit Helmet
     .desc = Усиленная сапёрная пластина с камерой получше и армейским фонарём; краше от этого не станешь.
 ent-ClothingModsuitHelmetGalloglass = шлем модкостюма «Галлоглас»
     .desc = Визор небесно-голубой — враги не поймут, что ты их ещё не положил.
+ent-ClothingModsuitHelmetMercenary = mercenary modsuit helmet
+    .desc = The visor is sky blue, so your enemies don't realize you haven't put them on their backs yet. Comes with a built in Mass Scanner in its HUD.

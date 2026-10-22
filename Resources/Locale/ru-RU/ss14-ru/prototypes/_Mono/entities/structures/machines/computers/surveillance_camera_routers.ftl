@@ -1,0 +1,9 @@
+ent-SurveillanceCameraRouterWirelessPDV = { ent-SurveillanceCameraWirelessRouterBase }
+    .desc = { ent-SurveillanceCameraWirelessRouterBase.desc }
+    .suffix = PDV (long range)
+ent-SurveillanceCameraRouterWirelessTSF = { ent-SurveillanceCameraWirelessRouterBase }
+    .desc = { ent-SurveillanceCameraWirelessRouterBase.desc }
+    .suffix = TSF (long range)
+ent-SurveillanceCameraRouterWirelessMMC = { ent-SurveillanceCameraWirelessRouterBase }
+    .desc = { ent-SurveillanceCameraWirelessRouterBase.desc }
+    .suffix = MMC (long range)

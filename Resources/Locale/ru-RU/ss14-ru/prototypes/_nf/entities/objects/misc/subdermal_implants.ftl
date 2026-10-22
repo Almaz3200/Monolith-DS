@@ -17,3 +17,7 @@ ent-RedLightImplant = имплант подсветки (красный)
     .desc = Этот имплант излучает свет с кожи пользователя при активации.
 ent-DissonantWhispersImplant = имплант диссонирующих шёпотов
     .desc = Этот имплант позволяет пользователю издавать диссонирующие шёпоты.
+ent-RadioImplantTsf = TSF radio implant
+    .desc = This implant grants access to the TSF channel without a headset.
+ent-RadioImplantCivilian = Civilian radio implant
+    .desc = This implant grants access to the Civilian channel without a headset.

@@ -15,6 +15,13 @@ public sealed partial class MiniTechnologyCardControl : Control
     /// The technology that this control represents
     public readonly TechnologyPrototype Technology;
 
+    // LuaM-start:
+    /// <summary>
+    /// Raised when the card is clicked, see <see cref="MakeSelectable"/>.
+    /// </summary>
+    public event Action<TechnologyPrototype>? OnSelected;
+    // LuaM-end.
+
     public MiniTechnologyCardControl(TechnologyPrototype technology, IPrototypeManager prototypeManager, SpriteSystem spriteSys, FormattedMessage description)
     {
         RobustXamlLoader.Load(this);
@@ -55,4 +62,15 @@ public sealed partial class MiniTechnologyCardControl : Control
         Main.TooltipSupplier = _ => tooltip;
         Technology = technology;
     }
+
+    // LuaM
+    /// <summary>
+    /// Lets the card be clicked to go to its technology, it is a disabled button by default.
+    /// </summary>
+    public void MakeSelectable()
+    {
+        Main.Disabled = false;
+        Main.OnPressed += _ => OnSelected?.Invoke(Technology);
+    }
+    // LuaM-end.
 }

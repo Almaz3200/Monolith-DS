@@ -16,3 +16,7 @@ ent-ClothingNeckCaptainCloak = плащ капитана ТСФ
     .desc = Стильный плащ ТСФ для капитана и исполнительного офицера морского десанта.
 ent-ClothingNeckCloakPdvPurple = церемониальный плащ командора Авангарда
     .desc = Мантия великого командора Авангарда Нордфолла, смесь элегантности и практичности.
+ent-ClothingNeckTSFCloak = tsf officer's cloak
+    .desc = A more subtle TSFMC cloak for an officer to blend in while still appearing commanding.
+ent-ClothingNeckCloakCCTC = executive's cloak
+    .desc = A pompous and elite green cloak with a nice gold trim, tailored specifically for executives of the Creon-Centennial Trade Charter. It's so heavy, the gold trim might be real.

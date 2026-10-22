@@ -81,3 +81,5 @@ ent-PlushieHeadWalker22T = плюшевый ужасный уоловоход
 
 ent-PlushiePurpleGhost22T = плюшевый фиолетовый призрак
     .desc = Вы точно его где-то видели, но не знаете где именно. Присмотревшись к этикетке вы видите надпись о пожелании к Удаче, больше сил и нервов..
+ent-BaseAkiPlushie = seal
+    .desc = { ent-BasePlushie.desc }

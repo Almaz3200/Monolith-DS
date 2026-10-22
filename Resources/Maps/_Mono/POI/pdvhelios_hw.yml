@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/25/2026 22:23:41
-  entityCount: 8504
+  time: 09/27/2026 09:37:07
+  entityCount: 8463
 maps: []
 grids:
 - 1
@@ -27692,6 +27692,112 @@ entities:
     - type: Transform
       pos: -4.5,51.5
       parent: 1
+- proto: HardpointUniversalSuperheavy
+  entities:
+  - uid: 8461
+    components:
+    - type: Transform
+      pos: -25.5,5.5
+      parent: 1
+  - uid: 8471
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -24.5,24.5
+      parent: 1
+  - uid: 8472
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -22.5,47.5
+      parent: 1
+  - uid: 8473
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -24.5,36.5
+      parent: 1
+  - uid: 8479
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.5,79.5
+      parent: 1
+  - uid: 8480
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,93.5
+      parent: 1
+  - uid: 8481
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,90.5
+      parent: 1
+  - uid: 8482
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,93.5
+      parent: 1
+  - uid: 8483
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,90.5
+      parent: 1
+  - uid: 8486
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 16.5,79.5
+      parent: 1
+  - uid: 8492
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,47.5
+      parent: 1
+  - uid: 8493
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 25.5,36.5
+      parent: 1
+  - uid: 8494
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 25.5,24.5
+      parent: 1
+  - uid: 8504
+    components:
+    - type: Transform
+      pos: 26.5,5.5
+      parent: 1
+  - uid: 8506
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.5,77.5
+      parent: 1
+  - uid: 8507
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 16.5,77.5
+      parent: 1
+  - uid: 8508
+    components:
+    - type: Transform
+      pos: 7.5,-0.5
+      parent: 1
+  - uid: 8509
+    components:
+    - type: Transform
+      pos: -6.5,-0.5
+      parent: 1
 - proto: filingCabinetDrawerRandom
   entities:
   - uid: 4257
@@ -41467,27 +41573,6 @@ entities:
     - type: Transform
       pos: 13.5,36.5
       parent: 1
-- proto: IndustrialFurnaceEconomyCompact
-  entities:
-  - uid: 5935
-    components:
-    - type: Transform
-      pos: -16.5,29.5
-      parent: 1
-- proto: IndustrialPressEconomyElectronics
-  entities:
-  - uid: 5936
-    components:
-    - type: Transform
-      pos: -17.5,28.5
-      parent: 1
-- proto: IndustrialPressEconomyPlates
-  entities:
-  - uid: 5937
-    components:
-    - type: Transform
-      pos: -16.5,28.5
-      parent: 1
 - proto: JanitorialTrolley
   entities:
   - uid: 5938
@@ -44244,13 +44329,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 17.5,37.5
-      parent: 1
-- proto: PrecisionAssemblerEconomyCompact
-  entities:
-  - uid: 6350
-    components:
-    - type: Transform
-      pos: -16.5,30.5
       parent: 1
 - proto: Protolathe
   entities:
