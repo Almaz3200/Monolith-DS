@@ -953,6 +953,9 @@
 #8x65 SKR Ammo Box
   - AmmoBox8x65mmSKR
 
+# Smart
+  - MagazineSmart # LuaM
+  
 - type: latheRecipePack
   id: EnergyAmmo # All energy ammo (which isn't a lot.)
   recipes:

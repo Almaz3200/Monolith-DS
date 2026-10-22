@@ -1,5 +1,8 @@
 using Content.Shared._Goobstation.Sandevistan;
 using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Shared._Goobstation.Sandevistan; // LuaM
+using Content.Shared._LuaM.Sandevistan; // LuaM
+using Content.Shared.Damage; // LuaM
 using Content.Shared.Abilities;
 using Content.Shared.Actions;
 using Content.Shared.Mobs;
@@ -19,6 +22,7 @@ public sealed class SandevistanSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!; // LuaM
 
     public override void Initialize()
     {
@@ -50,13 +54,39 @@ public sealed class SandevistanSystem : EntitySystem
             if (comp.Active == null)
                 continue;
 
-            // Automatically shut down when the active duration expires.
-            if (comp.DisableAt != null
-                && _timing.CurTime >= comp.DisableAt)
+            // LuaM start: no automatic shutdown, the user takes damage after the safe running time
+            if (!comp.PreOverloadWarned
+                && comp.OverloadAt != null
+                && _timing.CurTime >= comp.OverloadAt - comp.OverloadWarningTime)
             {
-                Disable(uid, comp);
-                continue;
+                comp.PreOverloadWarned = true;
+                var left = Math.Max(1, (int) Math.Ceiling((comp.OverloadAt.Value - _timing.CurTime).TotalSeconds));
+                _popup.PopupEntity(Loc.GetString("sandevistan-overload-soon", ("time", left)), uid, uid, PopupType.LargeCaution);
+                _audio.PlayEntity(comp.OverloadWarningSound, uid, uid);
             }
+
+            if (comp.OverloadAt != null
+                && _timing.CurTime >= comp.OverloadAt)
+            {
+                if (!comp.OverloadWarned)
+                {
+                    comp.OverloadWarned = true;
+                    _popup.PopupEntity(Loc.GetString("sandevistan-overload"), uid, uid, PopupType.LargeCaution);
+                    _audio.PlayEntity(comp.OverloadWarningSound, uid, uid);
+                    SetGlitch(uid, comp.OverloadGlitchIntensity);
+                }
+
+                if (_timing.CurTime >= comp.NextOverloadDamage)
+                {
+                    comp.NextOverloadDamage = _timing.CurTime + comp.OverloadInterval;
+                    _damageable.TryChangeDamage(uid, comp.OverloadDamage, ignoreResistances: true, interruptsDoAfters: false, canSever: false);
+
+                    // The damage may have put the user into crit, which shuts the Sandevistan down.
+                    if (comp.Active == null)
+                        continue;
+                }
+            }
+            // LuaM end
 
             // Update visual trail.
             if (comp.Trail != null)
@@ -110,8 +140,14 @@ public sealed class SandevistanSystem : EntitySystem
         ent.Comp.Active =
             EnsureComp<ActiveSandevistanUserComponent>(ent);
 
-        ent.Comp.DisableAt =
-            _timing.CurTime + ent.Comp.ActiveDuration;
+        // LuaM start
+        ent.Comp.OverloadAt = _timing.CurTime + ent.Comp.SafeDuration;
+        ent.Comp.NextOverloadDamage = ent.Comp.OverloadAt.Value + ent.Comp.OverloadInterval;
+        ent.Comp.OverloadWarned = false;
+        ent.Comp.PreOverloadWarned = false;
+        EnsureComp<SandevistanGunBlockComponent>(ent);
+        SetGlitch(ent, ent.Comp.GlitchIntensity);
+        // LuaM end
 
         _speed.RefreshMovementSpeedModifiers(ent);
 
@@ -197,7 +233,9 @@ public sealed class SandevistanSystem : EntitySystem
         RemComp<ActiveSandevistanUserComponent>(uid);
 
         comp.Active = null;
-        comp.DisableAt = null;
+        comp.OverloadAt = null; // LuaM: DisableAt > OverloadAt
+        RemComp<SandevistanGunBlockComponent>(uid); // LuaM
+        RemComp<SandevistanGlitchComponent>(uid); // LuaM
         comp.ColorAccumulator = 0;
         _audio.Stop(comp.RunningSound);
         comp.RunningSound = null;
@@ -219,4 +257,19 @@ public sealed class SandevistanSystem : EntitySystem
             comp.Trail = null;
         }
     }
+
+    // LuaM start
+    /// <summary>
+    /// Shows the glitch screen effect to the user with the given strength.
+    /// </summary>
+    private void SetGlitch(EntityUid uid, float intensity)
+    {
+        var glitch = EnsureComp<SandevistanGlitchComponent>(uid);
+        if (glitch.Intensity.Equals(intensity))
+            return;
+
+        glitch.Intensity = intensity;
+        Dirty(uid, glitch);
+    }
+    // LuaM end
 }

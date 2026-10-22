@@ -18,3 +18,5 @@
       interfaces:
         enum.ChameleonUiKey.Key:
           type: ChameleonBoundUserInterface
+        enum.HeadsetChannelsUiKey.Key: # LuaM
+          type: HeadsetChannelsBoundUserInterface # LuaM

@@ -1,0 +1,17 @@
+- type: entity
+  id: PDVLatheMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: PDV TechFab machine board
+  description: A machine printed circuit board for a PDV TechFab.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: PDVLathe
+    requirements:
+      MatterBin: 2
+      Manipulator: 2
+    tagRequirements:
+      GlassBeaker:
+        amount: 2
+        defaultPrototype: Beaker

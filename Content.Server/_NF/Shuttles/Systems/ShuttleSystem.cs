@@ -34,6 +34,13 @@ public sealed partial class ShuttleSystem
         SubscribeLocalEvent<ShuttleConsoleComponent, SetHideTargetRequest>(NfSetHideTarget);
     }
 
+    // LuaM-start:
+    private void NfOnShuttleShutdown(EntityUid uid)
+    {
+        _unmannedSince.Remove(uid);
+    }
+    // LuaM-end
+
     public bool SetInertiaDampening(EntityUid uid, PhysicsComponent physicsComponent, ShuttleComponent shuttleComponent, TransformComponent transform, InertiaDampeningMode mode)
     {
         if (!transform.GridUid.HasValue)

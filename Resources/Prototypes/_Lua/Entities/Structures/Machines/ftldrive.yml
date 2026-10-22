@@ -1,0 +1,39 @@
+# Lua: CTLA-600 drive. There is no recipe for it, it can't be unanchored or taken apart,
+# and its board is lost with it when it's destroyed.
+
+- type: entity
+  parent: [BaseStructureDisableToolUse, MachineFTLDrive]
+  id: MachineFTLDrive600Cicads
+  name: CTLA-600 bluespace drive
+  description: An advanced FTL drive that extends a ship's FTL range to ~10 kilometers and jumps there instantly, skipping hyperspace. Does not stack.
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: _Lua/Structures/Shuttles/ftlengine.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      shader: unshaded
+      color: "#8fcfff"
+  - type: FTLDrive
+    range: 10000
+    cooldown: 90
+    driveMassMultiplier: 0.25 # the same as the CTLA-160 heavy core
+    hyperSpaceTime: 15
+    startupTime: 4.2
+    thermalSignature: 4000000
+    skipHyperspace: true
+    skipHyperspaceEmpRange: 45
+  - type: ApcPowerReceiver
+    powerLoad: 4000
+  - type: PointLight
+    enabled: false
+    color: "#010101"
+    radius: 2.0
+    energy: 1.5
+  - type: Machine
+    board: MachineFTLDrive600CircuitboardCicads

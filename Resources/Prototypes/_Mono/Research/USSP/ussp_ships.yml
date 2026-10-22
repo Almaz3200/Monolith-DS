@@ -8,8 +8,9 @@
   recipeUnlocks:
   - ShipVoucherUsspT0Recipe
   technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 3, -8
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - UsspMediumGuns # LuaM
+  position: 8, 8 # LuaM 3, -6 > 8, 8
 
 - type: technology
   id: UsspMediumShips
@@ -23,7 +24,7 @@
   - ShipVoucherUsspTayfun
   technologyPrerequisites:
   - UsspBasicShips
-  position: 3, -16
+  position: 9, 8 # LuaM 3, -16 > 9, 8
 
 - type: technology
   id: UsspAdvancedShips
@@ -36,5 +37,5 @@
   - ShipVoucherUsspBuran
   technologyPrerequisites:
   - UsspMediumShips
-  - UniversalMaterialResearchT3
-  position: 3, -26
+  # - UniversalMaterialResearchT3 # Commented by LuaM
+  position: 10, 8 # LuaM 3, -26 > 10, 8

@@ -23,6 +23,8 @@
   - type: IFF
     color: "#047abd"
     readOnly: true
+  - type: Company # LuaM: faction outpost
+    companyName: TSF
   - type: SolarPoweredGrid
     doNotCull: true
   - type: WorldGenDistanceCarver
@@ -45,7 +47,6 @@
       gridComponents:
       - type: VesselInfo
         description: "A mothballed battleship-turned-FOB, and Home of the TSFMC operations."
-      - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
           mapNameTemplate: 'TSFMC Flagship Halcyon'
@@ -89,6 +90,8 @@
   - type: IFF
     color: "#047abd"
     readOnly: true
+  - type: Company # LuaM: faction outpost
+    companyName: TSF
   - type: SolarPoweredGrid
     doNotCull: true
 

@@ -1,2 +1,2 @@
-ent-GaryTranslatorImplanter = gary translator implanter
+ent-GaryTranslatorImplanter = имплантер переводчика Гэри
     .desc = { ent-BaseTranslatorImplanter.desc }

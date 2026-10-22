@@ -1,0 +1,13 @@
+- type: technology
+  id: ViperGroupAK12
+  name: research-technology-viper-group-weapons
+  entityIcon: WeaponRifleAK12
+  discipline: Ussp
+  tier: 1
+  cost: 25000
+  recipeUnlocks:
+  - WeaponRifleAK12
+  - WeaponPistolAnaconda
+  technologyPrerequisites:
+  - ViperGroupHardsuitBasic
+  position: 4, 9

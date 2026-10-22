@@ -13,7 +13,7 @@
   technologyPrerequisites:
   - MercArmementSimple
 #  - AdvancedParts # Commented by LuaM
-  position: 12, 9 # LuaM: 3, 1 > 12, 9
+  position: 12, 8 # LuaM: 3, 1 > 12, 8
 
 - type: technology
   id: MercArmementSimple
@@ -35,9 +35,9 @@
   - WeaponShotgunKammererNF
   - WeaponSniperRepeater
   technologyPrerequisites:
-  - AdvancedParts # LuaM: BasicParts > AdvancedParts
+  - BasicParts
   - WeaponizedLaserManipulation # LuaM
-  position: 12, 11 # LuaM: 2, 1 > 12, 11 
+  position: 12, 10 # LuaM: 2, 1 > 12, 10
 
 - type: technology
   id: AdvancedMeleeCombatOptions
@@ -53,4 +53,4 @@
   technologyPrerequisites:
   - MercArmementAdvanced # LuaM: AdvancedRiotControl > MercArmementAdvanced
   - PortableMicrofusionWeaponry # LuaM: SuperParts > PortableMicrofusionWeaponry
-  position: 14, 8 # LuaM: 4, 2 >  14, 8
+  position: 14, 7 # LuaM: 4, 2 >  14, 7

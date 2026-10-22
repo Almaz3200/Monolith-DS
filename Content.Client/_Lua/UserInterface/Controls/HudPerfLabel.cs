@@ -10,6 +10,12 @@ public sealed class HudPerfLabel : RichTextLabel
     private readonly IGameTiming _gameTiming;
     private readonly ClientServerPerfSystem _serverPerf;
 
+    // LuaM-start: setting the text parses its markup and relayouts the label, so it isn't done every frame
+    private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(0.25);
+    private TimeSpan _nextUpdate;
+    private string? _lastText;
+    // LuaM-end
+
     public HudPerfLabel(IGameTiming gameTiming, ClientServerPerfSystem serverPerf)
     {
         _gameTiming = gameTiming;
@@ -20,6 +26,12 @@ public sealed class HudPerfLabel : RichTextLabel
     {
         if (!VisibleInTree)
             return;
+        // LuaM-start
+        var now = _gameTiming.RealTime;
+        if (now < _nextUpdate)
+            return;
+        _nextUpdate = now + UpdateInterval;
+        // LuaM-end
         var clientFps = _gameTiming.FramesPerSecondAvg;
         var serverFps = _serverPerf.ServerFpsAvg;
         var tps = _serverPerf.ServerTickRate;
@@ -41,7 +53,13 @@ public sealed class HudPerfLabel : RichTextLabel
             statusText = Loc.GetString("server-status-stable");
             statusColorHex = "#00FF00";
         }
-        Text = $"FPS: {clientFps:N0} | SrvFPS: [color={statusColorHex}]{serverFps:N0}[/color] | TPS: {tps} | [color={statusColorHex}]{statusText}[/color]"; //LuaM Deleted {version}
+        var text = $"FPS: {clientFps:N0} | SrvFPS: [color={statusColorHex}]{serverFps:N0}[/color] | TPS: {tps} | [color={statusColorHex}]{statusText}[/color]"; //LuaM Deleted {version} // LuaM: Text > var text
+        // LuaM-start
+        if (text == _lastText)
+            return;
+        _lastText = text;
+        Text = text;
+        // LuaM-end
     }
 }
 

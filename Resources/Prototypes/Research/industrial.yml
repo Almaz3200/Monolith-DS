@@ -77,7 +77,7 @@
   - NFBlueprintRped
   technologyPrerequisites:
   - AdvancedParts
-  position: 1, 11 # LuaM: -1, 8 > 1, 11 
+  position: 1, 11 # LuaM: -1, 8 > 1, 11
 # Mono edit end
 
 - type: technology
@@ -111,7 +111,7 @@
   - SheetifierMachineCircuitboard
   technologyPrerequisites:
   - MechanicalCompression
-  position: 2, 10 # LuaM: -1, 7 > 2, 10 
+  position: 2, 10 # LuaM: -1, 7 > 2, 10
 
 # Mono edit
 - type: technology
@@ -140,7 +140,7 @@
   technologyPrerequisites:
   - AdvancedParts
   - SpaceScanning
-  position: 13, 10 # LuaM: -2, 8 > 13, 10
+  position: 7, 12 # LuaM: -2, 8 > 7, 12
 
 - type: technology
   id: AtmosphericTech
@@ -155,7 +155,7 @@
   - FanElectronics # LuaM
   technologyPrerequisites:
   - PowerGeneration # LuaM: BasicParts > PowerGeneration
-  position: 14, 9 # LuaM: -2, 1 > 14, 9
+  position: 12, 10 # LuaM: -2, 1 > 12, 10
 
 # Tier 2
 
@@ -179,11 +179,8 @@
   - SmallGyroscopeMachineCircuitboard # Frontier
   technologyPrerequisites:
 #  - AdvancedParts # Commented by LuaM
-# LuaM-start:
-  - SpaceScanning
-  - PowerGeneration
-# LuaM-end.
-  position: 6, 12 # LuaM: -5, 7 > 6, 12
+  - PowerGeneration # LuaM
+  position: 6, 11 # LuaM: -5, 7 > 6, 11
 
 - type: technology
   id: AdvancedAtmospherics
@@ -200,7 +197,7 @@
   #  - FireExtinguisherBluespace # DeltaV
   technologyPrerequisites:
   - AtmosphericTech
-  position: 14, 8 # LuaM: -2, 2 > 14, 8
+  position: 12, 8 # LuaM: -2, 2 > 12, 8
 
 - type: technology
   id: AdvancedToolsTechnology
@@ -232,7 +229,7 @@
   - NFBlueprintRCDAmmo
   # Mono edit end
   technologyPrerequisites:
-  - SuperParts 
+  - SuperParts
   - MassExcavation # LuaM
   position: 4, 6 # LuaM: -1, 18 > 4, 6
 
@@ -295,7 +292,7 @@
   technologyPrerequisites:
   - PowerGeneration
   - SuperParts
-  position: 12, 7 # LuaM: -2, 7 > 12, 7
+  position: 8, 11 # LuaM: -2, 7 > 8, 11
 
 - type: technology
   id: MaterialSilo
@@ -303,12 +300,14 @@
   entityIcon: MachineMaterialSilo
   discipline: Industrial
   tier: 3
-  cost: 50000
+  cost: 25000 # LuaM 50000 > 25000
   recipeUnlocks:
   - MaterialSiloMachineCircuitboard
   technologyPrerequisites:
   - SuperParts
-  position: -1, 6
+  - MechanicalCompression # LuaM
+  position: 1, 9 # LuaM -1, 6 > 1, 9
+
 # Mono edit - research consolidation
 # - type: technology
 #   id: RapidConstruction

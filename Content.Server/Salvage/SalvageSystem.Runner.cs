@@ -17,6 +17,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using Content.Shared.Coordinates;
+using Content.Server._LuaM.Salvage; // LuaM
 
 namespace Content.Server.Salvage;
 
@@ -28,6 +29,7 @@ public sealed partial class SalvageSystem
 
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ExpeditionHudSystem _expeditionHud = default!; // LuaM
     private void InitializeRunner()
     {
         SubscribeLocalEvent<FTLRequestEvent>(OnFTLRequest);
@@ -306,6 +308,9 @@ public sealed partial class SalvageSystem
                 comp.Completed = true;
                 Announce(uid, Loc.GetString("salvage-expedition-completed"));
             }
+
+            if (structureAnnounce || comp.Completed) // LuaM: expedition HUD
+                _expeditionHud.SetObjectives(uid, structure.Structures.Count, comp.Completed);
         }
 
         // Elimination missions
@@ -338,6 +343,9 @@ public sealed partial class SalvageSystem
                 comp.Completed = true;
                 Announce(uid, Loc.GetString("salvage-expedition-completed"));
             }
+
+            if (announce || comp.Completed) // LuaM: expedition HUD
+                _expeditionHud.SetObjectives(uid, elimination.Megafauna.Count, comp.Completed);
         }
     }
 }

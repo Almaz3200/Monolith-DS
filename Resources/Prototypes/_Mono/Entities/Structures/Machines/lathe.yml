@@ -24,25 +24,27 @@
     idleState: icon
     runningState: icon
     staticPacks:
-    - StaticAmmoRecipePack
+    # - StaticAmmoRecipePack # Commented by LuaM
     - NFMercenaryTechfabDeprecatedStatic
-    - RoundstartShipgunAmmo
+    # - RoundstartShipgunAmmo # Commented by LuaM
     - StaticGrenades
     - MonoAttachmentsStatic
     dynamicPacks:
     # rogue start
-    - MonoRogueWeaponsDynamicMelee
-    - MonoRogueWeaponsDynamicRanged
-    - MonoRogueVouchersDynamic
-    - MonoRogueMiscDynamic
-    - MonoRogueGearDynamic
-    #- MonoRogueGearProDynamic
+    # LuaM-comment-start:
+    # - MonoRogueWeaponsDynamicMelee
+    # - MonoRogueWeaponsDynamicRanged
+    # - MonoRogueVouchersDynamic
+    # - MonoRogueMiscDynamic
+    # - MonoRogueGearDynamic
+    # - MonoRogueGearProDynamic
     # TSF start
-    - MonoTSFWeaponsDynamicMelee
-    - MonoTSFWeaponsDynamicRanged
-    - MonoTSFVouchersDynamic
-    - MonoTSFMiscDynamic
-    - MonoTSFGearDynamic
+    # - MonoTSFWeaponsDynamicMelee`
+    # - MonoTSFWeaponsDynamicRanged
+    # - MonoTSFVouchersDynamic
+    # - MonoTSFMiscDynamic
+    # - MonoTSFGearDynamic
+    # LuaM-comment-end
     # USSP start
     # - MonoUSSPArmorDynamic
     # - MonoUSSPMiscDynamic
@@ -50,16 +52,19 @@
     # Viper Group start
     # - MonoViperGroupDynamic
     # Universal shit (stuff like shipgun ammo)
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalShellAmmo
-    - UniversalOrdinance
-    - DynamicAmmoRecipePack
+    # LuaM-comment-start:
+    # - UniversalRailgunAmmo
+    # - UniversalMissileAmmo
+    # - UniversalShellAmmo
+    # - UniversalOrdinance
+    # - DynamicAmmoRecipePack
+    # LuaM-comment-end
     - NFMercenaryTechfabDeprecated
     # Civ military tech
     - ResearchedExplosives
     - SecurityEquipment
     - SmartGun
+    - TechDiskRecipes # LuaM
   - type: MaterialStorage
     whitelist:
       tags:
@@ -136,12 +141,13 @@
     idleState: icon
     runningState: icon
     staticPacks:
-    - StaticAmmoRecipePack
+    # - StaticAmmoRecipePack # Commented by LuaM
     - NFMercenaryTechfabDeprecatedStatic
-    - RoundstartShipgunAmmo
+    # - RoundstartShipgunAmmo # Commented by LuaM
     - StaticGrenades
     - MonoAttachmentsStatic
     - MonoUSSPStatic
+    - MonoViperGroupStatic # LuaM
     dynamicPacks:
     # USSP start
     - MonoUSSPArmorDynamic
@@ -149,16 +155,34 @@
     - MonoUSSPWeaponsDynamicRanged
     - MonoUSSPVouchersDynamic
     # Universal shit (stuff like shipgun ammo)
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalShellAmmo
-    - UniversalOrdinance
-    - DynamicAmmoRecipePack
+    # LuaM-comment-start:
+    # - UniversalRailgunAmmo
+    # - UniversalMissileAmmo
+    # - UniversalShellAmmo
+    # - UniversalOrdinance
+    # - DynamicAmmoRecipePack
+    # LuaM-comment-end
     - NFMercenaryTechfabDeprecated
     # Civ military tech
     - ResearchedExplosives
     - SecurityEquipment
     - SmartGun
+    # LuaM-start:
+    - ArmorBasic
+    - ArmorAdvanced
+    - PunkGear
+    - AdvMeds
+    - BluespaceAirTanks
+    - Hyposprays
+    - GlassesContractor
+    - TechDiskRecipes
+    - MonoViperGroupDynamic
+    # LuaM-end
+  - type: CompanyAccessReader # LuaM
+    requiredCompanies:
+    - USSP
+    - TheViperGroup
+
   - type: MaterialStorage
     whitelist:
       tags:
@@ -200,9 +224,10 @@
     idleState: icon
     runningState: icon
     staticPacks:
-    - StaticAmmoRecipePack
+    # - StaticAmmoRecipePack # Commented by LuaM
     - NFMercenaryTechfabDeprecatedStatic
-    - RoundstartShipgunAmmo
+    # - RoundstartShipgunAmmo # Commented by LuaM
+    - MonoUSSPStatic # LuaM
     - StaticGrenades
     - MonoAttachmentsStatic
     - MonoViperGroupStatic
@@ -210,11 +235,13 @@
     # Viper Group start
     - MonoViperGroupDynamic
     # Universal shit (stuff like shipgun ammo)
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalShellAmmo
-    - UniversalOrdinance
-    - DynamicAmmoRecipePack
+    # LuaM-comment-start:
+    # - UniversalRailgunAmmo
+    # - UniversalMissileAmmo
+    # - UniversalShellAmmo
+    # - UniversalOrdinance
+    # - DynamicAmmoRecipePack
+    # LuaM-comment-end
     - NFMercenaryTechfabDeprecated
     # Civ military tech
     - ResearchedExplosives
@@ -228,6 +255,11 @@
     - BluespaceAirTanks
     - Hyposprays
     - GlassesContractor
+    - TechDiskRecipes
+    - MonoUSSPArmorDynamic
+    - MonoUSSPMiscDynamic
+    - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPVouchersDynamic
 # LuaM-end.
   - type: MaterialStorage
     whitelist:
@@ -236,6 +268,10 @@
       - RawMaterial
       - Ingot
   - type: RequireProjectileTarget
+  - type: CompanyAccessReader # LuaM
+    requiredCompanies:
+    - USSP
+    - TheViperGroup
 
 - type: entity
   id: ViperLatheImmmovable
@@ -270,19 +306,23 @@
     idleState: icon
     runningState: icon
     staticPacks:
-    - StaticAmmoRecipePack
-    - RoundstartShipgunAmmo
+    - NFMercenaryTechfabDeprecatedStatic # LuaM
+    - MonoAttachmentsStatic # LuaM
+    # - StaticAmmoRecipePack # Commented by LuaM
+    # - RoundstartShipgunAmmo # Commented by LuaM
     - StaticGrenades
     - MonoMMCUtilityStatic
-    - MonoMMCProductionStatic
+    # - MonoMMCProductionStatic # Commented by LuaM
     - MonoMMCGearStatic
     dynamicPacks:
     # Universal shit (stuff like shipgun ammo)
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalShellAmmo
-    - UniversalOrdinance
-    - DynamicAmmoRecipePack
+    # LuaM-comment-start:
+    # - UniversalRailgunAmmo
+    # - UniversalMissileAmmo
+    # - UniversalShellAmmo
+    # - UniversalOrdinance
+    # - DynamicAmmoRecipePack
+    # LuaM-comment-end
     # main
     - MonoMMCUtilityResearch
     - MonoMMCProductionResearch
@@ -290,6 +330,11 @@
     # Civ military tech
     - SecurityEquipment
     - SmartGun
+    # LuaM-start:
+    - NFMercenaryTechfabDeprecated
+    - ResearchedExplosives
+    - TechDiskRecipes
+    # LuaM-end
   - type: MaterialStorage
     whitelist:
       tags:
@@ -297,6 +342,9 @@
       - RawMaterial
       - Ingot
   - type: RequireProjectileTarget
+  - type: CompanyAccessReader # LuaM
+    requiredCompanies:
+    - MMC
 
 - type: entity
   id: MMCLatheImmmovable
@@ -866,14 +914,14 @@
     staticPacks:
     - SecurityEquipmentStatic
     - SecurityPracticeStatic
-    - StaticAmmoRecipePack
-    - StaticGrenades
+    # - StaticAmmoRecipePack
+    # - StaticGrenades
     - SecurityWeaponsStatic
     - MonoCaelestinusVouchersStatic
     dynamicPacks:
     - SecurityEquipment
     - SecurityExplosives
-    - DynamicAmmoRecipePack
+    # - DynamicAmmoRecipePack
     - SecurityWeapons
     - SecurityDisablers
     - SMCybernetics
@@ -881,18 +929,18 @@
     - WeaponMechCombatArsenal
     - SmartGun # Goobstation
     # Mono start
-    - MonoTSFWeaponsDynamicMelee
-    - MonoTSFWeaponsDynamicRanged
-    - MonoTSFMiscDynamic
-    - MonoRogueWeaponsDynamicMelee
-    - MonoRogueWeaponsDynamicRanged
-    - MonoRogueMiscDynamic
-    - UniversalShellAmmo
+    # - MonoTSFWeaponsDynamicMelee
+    # - MonoTSFWeaponsDynamicRanged
+    # - MonoTSFMiscDynamic
+    # - MonoRogueWeaponsDynamicMelee
+    # - MonoRogueWeaponsDynamicRanged
+    # - MonoRogueMiscDynamic
+    # - UniversalShellAmmo
     - ResearchedExplosives
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalOrdinance
-    - SmartGun #Smart SMG
+    # - UniversalRailgunAmmo
+    # - UniversalMissileAmmo
+    # - UniversalOrdinance
+    - TechDiskRecipes
     - NFMercenaryTechfabDeprecated
     # Mono end
   - type: MaterialStorage
@@ -918,3 +966,6 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: Machine
     board: SecurityTechFabCaelestinusMachineCircuitboard
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - Colonial

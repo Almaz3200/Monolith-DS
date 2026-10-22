@@ -1,6 +1,6 @@
 - type: entity
   name: mieyo nanite applicator
-  parent: NaniteApplicator
+  parent: NaniteApplicatorExperimental # LuaM NaniteApplicator > NaniteApplicatorExperimental
   id: NaniteApplicatorMMC
   description: "Advanced tool that uses nanotechnology to repair structures. Faster variant manufactured by MMC."
   components:
@@ -20,6 +20,19 @@
   - type: StaticPrice
     price: 20
     vendPrice: 4000
+  - type: WeldingHealing # LuaM: nerfed for balance
+    qualityNeeded: Applicating
+    damageContainers:
+      - Silicon
+    fuelCost: 5
+    damage:
+      types:
+        Blunt: -7.5
+        Piercing: -7.5
+        Slash: -7.5
+        Heat: -5
+        Shock: -5
+        Radiation: -5
 
 - type: entity
   id: ShipRepairDeviceMMC

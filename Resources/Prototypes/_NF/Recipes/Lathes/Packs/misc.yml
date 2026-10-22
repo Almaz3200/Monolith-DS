@@ -62,5 +62,5 @@
   id: SmartGun
   recipes:
   - WeaponSubMachineSmart # Goobstation
-  - MagazineSmart # Goobstation
+  # - MagazineSmart # Goobstation # Commented by LuaM: move to ammo pack
   - ASMGTUniversallyHostile # Mono

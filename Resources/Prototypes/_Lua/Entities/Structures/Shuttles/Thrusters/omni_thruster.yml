@@ -1,5 +1,5 @@
 - type: entity
-  id: OmniThrusterLua
+  id: OmniThrusterCicads
   parent: [BaseThruster, ConstructibleMachine]
   name: omni thruster
   description: A compact multi-vector thruster that pushes the shuttle in every direction at once.
@@ -49,18 +49,18 @@
       map: ["enum.ThrusterVisualLayers.ThrustOn"]
       shader: unshaded
       visible: false
-      color: "#7962a8"
+      color: "#24a4ff"
     - state: thrust_burn_unshaded
       map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
       shader: unshaded
       visible: false
       offset: 0, 1.85
-      color: "#d5c9ee"
+      color: "#add6ff"
   - type: PointLight
     enabled: false
     castShadows: false
     radius: 1.5
-    color: "#7962a8"
+    color: "#24a4ff"
   - type: Destructible
     thresholds:
     - trigger:

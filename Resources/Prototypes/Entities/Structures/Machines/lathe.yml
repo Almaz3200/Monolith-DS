@@ -574,17 +574,17 @@
     runningState: icon
     staticPacks:
     - StaticAmmoRecipePack
-    - StaticGrenades
+    # - StaticGrenades # Commented by LuaM
     - RoundstartShipgunAmmo # Mono
     dynamicPacks:
     - DynamicAmmoRecipePack
     # Mono start
-    - ResearchedExplosives
+    # - ResearchedExplosives # Commented by LuaM
     - UniversalRailgunAmmo
     - UniversalMissileAmmo
     - UniversalShellAmmo
     - UniversalOrdinance
-    # Mono end
+    - TechDiskAmmoRecipes # LuaM
   - type: MaterialStorage
     whitelist:
       tags:

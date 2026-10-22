@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Shuttles.Systems;
+using Content.Shared._LuaM.Shuttles; // LuaM
 using Content.Shared._Mono.Detection;
 using Content.Shared._NF.Shuttles.Components;
 using Content.Shared.Shuttles.BUIStates;
@@ -34,6 +35,8 @@ public sealed partial class MapScreen : BoxContainer
     [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     private readonly DetectionSystem _detection; // Mono
+    private readonly FriendlyIffSystem _friendlyIff; // LuaM
+    private readonly RadarStealthFieldSystem _stealthField; // LuaM
     private readonly SharedAudioSystem _audio;
     private readonly SharedMapSystem _maps;
     private readonly ShuttleSystem _shuttles;
@@ -84,6 +87,8 @@ public sealed partial class MapScreen : BoxContainer
         IoCManager.InjectDependencies(this);
 
         _detection = _entManager.System<DetectionSystem>(); // Mono
+        _friendlyIff = _entManager.System<FriendlyIffSystem>(); // LuaM
+        _stealthField = _entManager.System<RadarStealthFieldSystem>(); // LuaM
         _audio = _entManager.System<SharedAudioSystem>();
         _maps = _entManager.System<SharedMapSystem>();
         _shuttles = _entManager.System<ShuttleSystem>();
@@ -403,10 +408,13 @@ public sealed partial class MapScreen : BoxContainer
                 _entManager.TryGetComponent(grid.Owner, out IFFComponent? iffComp);
 
                 // Mono
-                var hideLabel = iffComp != null && (iffComp.Flags & IFFFlags.HideLabel) != 0x0 && grid.Owner != _shuttleEntity; // never hide our own label
+                var friendly = _friendlyIff.IsFriendlyToLocalPlayer(grid.Owner); // LuaM: own faction sees through IFF off
+                var hideLabel = iffComp != null && (iffComp.Flags & IFFFlags.HideLabel) != 0x0 && grid.Owner != _shuttleEntity && !friendly; // never hide our own label // LuaM: friendly
                 var detectionLevel = _console == null ? DetectionLevel.Detected : _detection.IsGridDetected(grid.Owner, _console.Value);
                 var detected = detectionLevel != DetectionLevel.Undetected || !hideLabel;
                 if (!detected || iffComp != null && (iffComp.Flags & IFFFlags.Hide) != 0x0)
+                    continue;
+                if (grid.Owner != _shuttleEntity && _stealthField.IsHiddenFromLocalPlayer(grid.Owner, _console ?? _shuttleEntity)) // LuaM
                     continue;
                 var name = hideLabel ?
                     detectionLevel == DetectionLevel.PartialDetected ?
@@ -418,7 +426,8 @@ public sealed partial class MapScreen : BoxContainer
                 {
                     Name = name, // Mono
                     Entity = grid.Owner,
-                    HideButton = iffComp != null && (iffComp.Flags & IFFFlags.HideLabelAlways) != 0x0,
+                    HideButton = iffComp != null && (iffComp.Flags & IFFFlags.HideLabelAlways) != 0x0
+                        && !friendly, // LuaM: own faction also sees grids hidden by docking at a faction station
                 };
 
                 // Always show our shuttle immediately

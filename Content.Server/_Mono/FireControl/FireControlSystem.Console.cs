@@ -175,7 +175,7 @@ public sealed partial class FireControlSystem : EntitySystem
     }
 
 // LuaM-start:
-    private void QueueUiUpdate(EntityUid uid, FireControlConsoleComponent component)
+    public void QueueUiUpdate(EntityUid uid, FireControlConsoleComponent component) // LuaM: public for the reload display
     {
         if (component.NextUiUpdate == null || component.NextUiUpdate <= _timing.CurTime)
         {
@@ -352,6 +352,18 @@ public sealed partial class FireControlSystem : EntitySystem
             controlled.AmmoCount = ammoCount;
             controlled.HasManualReload = hasManualReload;
 
+            // LuaM: reload progress, from the last shot until the weapon may fire again
+            var reloadEnd = fcComp?.NextFire ?? TimeSpan.Zero;
+            if (_gunQuery.TryComp(controllable, out var gun) && gun.NextFire > reloadEnd)
+                reloadEnd = gun.NextFire;
+
+            if (fcComp != null && fcComp.LastShot > TimeSpan.Zero && reloadEnd > _timing.CurTime && fcComp.LastShot < reloadEnd)
+            {
+                controlled.ReloadStart = fcComp.LastShot;
+                controlled.ReloadEnd = reloadEnd;
+            }
+            // End LuaM
+
             controllables.Add(controlled);
         }
 
@@ -364,6 +376,15 @@ public sealed partial class FireControlSystem : EntitySystem
     /// </summary>
     private (int? ammoCount, bool hasManualReload) GetWeaponAmmunitionInfo(EntityUid weaponEntity)
     {
+        // LuaM: battery weapons first. Energy artillery also inherits an empty grenade slot (BallisticAmmoProvider)
+        // from the base launcher, which made them always show 0 ammo.
+        if (TryComp<ProjectileBatteryAmmoProviderComponent>(weaponEntity, out var projectileBattery))
+            return (projectileBattery.Shots, true);
+
+        if (TryComp<HitscanBatteryAmmoProviderComponent>(weaponEntity, out var hitscanBattery))
+            return (hitscanBattery.Shots, true);
+        // End LuaM
+
         if (TryComp<BasicEntityAmmoProviderComponent>(weaponEntity, out var basicAmmo))
         {
             var hasRecharge = HasComp<RechargeBasicEntityAmmoComponent>(weaponEntity);

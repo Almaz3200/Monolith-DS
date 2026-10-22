@@ -2,6 +2,7 @@ using System.Buffers;
 using System.Numerics;
 using Content.Client._Lua.UserInterface; // Lua
 using Content.Client.Shuttles.Systems;
+using Content.Shared._LuaM.Shuttles; // LuaM
 using Content.Shared._Mono.Company;
 using Content.Shared._Mono.Detection;
 using Content.Shared.Shuttles.Components;
@@ -31,6 +32,8 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
     [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IEntityManager _entManager = default!; // Frontier
     private readonly DetectionSystem _detection; // Mono
+    private readonly FriendlyIffSystem _friendlyIff; // LuaM
+    private readonly RadarStealthFieldSystem _stealthField; // LuaM
     private readonly ShuttleSystem _shuttles;
     private readonly SharedTransformSystem _xformSystem;
 
@@ -103,6 +106,8 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
     {
         RobustXamlLoader.Load(this);
         _detection = EntManager.System<DetectionSystem>(); // Mono
+        _friendlyIff = EntManager.System<FriendlyIffSystem>(); // LuaM
+        _stealthField = EntManager.System<RadarStealthFieldSystem>(); // LuaM
         _shuttles = EntManager.System<ShuttleSystem>();
         _xformSystem = EntManager.System<SharedTransformSystem>();
         var cache = IoCManager.Resolve<IResourceCache>();
@@ -406,8 +411,12 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
                 continue;
             }
 
+            if (grid.Owner != _shuttleEntity && _stealthField.IsHiddenFromLocalPlayer(grid.Owner, _console ?? _shuttleEntity)) // LuaM
+                continue;
+
             // Mono
-            var hideLabel = iffComp != null && (iffComp.Flags & IFFFlags.HideLabel) != 0x0;
+            var hideLabel = iffComp != null && (iffComp.Flags & IFFFlags.HideLabel) != 0x0
+                && !_friendlyIff.IsFriendlyToLocalPlayer(grid.Owner); // LuaM: own faction sees through IFF off
             var detectionLevel = _console == null ? DetectionLevel.Detected : _detection.IsGridDetected(grid.Owner, _console.Value);
             var detected = detectionLevel != DetectionLevel.Undetected || !hideLabel;
             var blipOnly = detectionLevel != DetectionLevel.Detected;
