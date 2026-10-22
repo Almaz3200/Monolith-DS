@@ -60,4 +60,8 @@
   - AutosurgeonLeftMantisBladeMMC
   - ShipVoucherMieyoYukikaze
   - ShipVoucherMieyoSenkusha
+  # LuaM-start:
+  - CombatMedipenImplanterRecipe
+  - StimulantImplanterRecipe
+  # LuaM-end
 
