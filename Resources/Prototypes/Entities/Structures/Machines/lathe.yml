@@ -811,6 +811,7 @@
     - OreSmelting
     - RGlassSmelting
     - AdvancedSmelting
+    - LuaMPlasticSmelting # LuaM
 
 - type: entity
   parent: BaseLathe

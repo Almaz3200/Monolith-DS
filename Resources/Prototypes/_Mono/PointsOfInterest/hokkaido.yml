@@ -41,8 +41,8 @@
         - type: StationJobs
           availableJobs:
             MMCLiason: [ 1, 1 ]
-            MMCSecurity: [ 5, 5 ]
-            MMCEmployee: [ -1, -1 ]
+            MMCSecurity: [ 2, 2 ] # LuaM: 5 > 2
+            MMCEmployee: [ 5, 5 ] # LuaM: -1 > 5
           tags:
           - MieyoLiason
         - type: StationDeadDropHintExempt

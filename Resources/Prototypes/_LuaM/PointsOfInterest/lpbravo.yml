@@ -23,6 +23,9 @@
   - type: SolarPoweredGrid
     trackOnInit: true
     doNotCull: true
+  - type: RadarStealthField # LuaM: hidden from radars and the map farther than 1 km
+    revealRange: 1000
+    fieldRadius: 0
 
 - type: gameMap
   id: LPBravo

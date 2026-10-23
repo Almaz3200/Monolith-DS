@@ -5,12 +5,12 @@
   playTimeTracker: JobTsfMarsoc
   whitelisted: true # LuaM
   requirements:
-  - !type:DepartmentTimeRequirement # Requires time in both factions
-    department: Antag
-    time: 14400 # 4 hours # mono
-  - !type:DepartmentTimeRequirement # Requires time in both factions
-    department: Security
-    time: 108000 # 30 hours # mono
+#  - !type:DepartmentTimeRequirement # Requires time in both factions # Commented by LuaM: whitelist only, no playtime
+#    department: Antag # Commented by LuaM
+#    time: 14400 # 4 hours # mono # Commented by LuaM
+#  - !type:DepartmentTimeRequirement # Requires time in both factions # Commented by LuaM
+#    department: Security # Commented by LuaM
+#    time: 108000 # 30 hours # mono # Commented by LuaM
   - !type:TraitsRequirement # The trait is intended for members of the civilian population or other neutral groups. TSF are already all implicitly heretics.
     inverted: true
     traits:

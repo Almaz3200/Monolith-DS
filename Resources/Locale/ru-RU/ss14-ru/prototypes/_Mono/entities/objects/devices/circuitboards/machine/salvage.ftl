@@ -1,3 +1,3 @@
-ent-OreMagnetMachineCircuitboard = ore magnet machine board
-    .desc = A machine printed circuit board for an ore magnet.
+ent-OreMagnetMachineCircuitboard = рудный магнит (машинная плата)
+    .desc = Печатная плата для рудного магнита.
     .suffix = { ent-BaseMachineCircuitboard.suffix }

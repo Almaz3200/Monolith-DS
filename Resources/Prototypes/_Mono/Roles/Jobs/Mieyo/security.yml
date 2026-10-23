@@ -9,10 +9,18 @@
     time: 36000 # 10 hours
   - !type:OverallPlaytimeRequirement
     time: 72000 # 20 hrs
+  - !type:TraitsRequirement # LuaM: heretics can't take this job
+    inverted: true
+    traits:
+    - Heretic
   alternateRequirementSets:
     longerPlaytimeLessEmployee:
     - !type:OverallPlaytimeRequirement
       time: 108000 # 30 hours
+    - !type:TraitsRequirement # LuaM: heretics can't take this job
+      inverted: true
+      traits:
+      - Heretic
   startingGear: MMCSecurityGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true

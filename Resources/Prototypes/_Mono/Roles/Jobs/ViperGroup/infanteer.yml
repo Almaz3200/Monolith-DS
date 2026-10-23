@@ -9,6 +9,10 @@
     species:
     - Human
     - Dwarf
+  - !type:TraitsRequirement # LuaM: heretics can't take this job
+    inverted: true
+    traits:
+    - Heretic
   startingGear: ViperRadioGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
