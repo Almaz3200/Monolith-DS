@@ -1,7 +1,7 @@
 - type: gameMap
   id: Frontier
   mapName: '«Колосс Централл»' # LuaM: 'Caelestinus Central' > '«Колосс Централл»'
-  mapPath: /Maps/_Mono/Outpost/caelestinus_central.yml # Mono
+  mapPath: /Maps/_LuaM/POI/caelestinus_centralLuaM.yml # LuaM /Maps/_Mono/POI/caelestinus_central.yml > /Maps/_LuaM/POI/caelestinus_centralLuaM.yml
   minPlayers: 0
   maxPlayers: 100
   randomRotation: true
