@@ -6,6 +6,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Server._EinsteinEngines.Language;
+using Content.Server._LuaM.Telephone; // LuaM
 using Content.Shared.Chat;
 using Content.Shared.Corvax.TTS; // Corvax-TTS
 using Content.Shared.Database;
@@ -16,6 +17,7 @@ using Content.Shared.Silicons.StationAi;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Speech;
 using Content.Shared.Telephone;
+using Content.Shared._LuaM.HoloComms; // LuaM
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -40,9 +42,13 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IReplayRecordingManager _replay = default!;
     [Dependency] private LanguageSystem _language = default!; // Einstein Engines - Language
+    [Dependency] private TelephoneRelayChatSystem _relayChat = default!; // LuaM
 
     // Has set used to prevent telephone feedback loops
     private HashSet<(EntityUid, string, Entity<TelephoneComponent>)> _recentChatMessages = new();
+
+    // LuaM - a ship line can hear one speaker through several of its points, the other side gets the line once
+    private HashSet<(EntityUid, string, EntityUid)> _recentRelayedMessages = new();
 
     public override void Initialize()
     {
@@ -116,10 +122,12 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
             ("originalName", nameEv.VoiceName),
             ("speaker", Name(speaker)));
 
-        var range = args.TelephoneSource.Comp.LinkedTelephones.Count > 1 ? ChatTransmitRange.HideChat : ChatTransmitRange.GhostRangeLimit;
+        // LuaM - only broadcasts stay out of the chat, a ship line links several points without muting them
+        var range = args.TelephoneSource.Comp.LinkedTelephones.Count > 1 && entity.Comp.Muted ? ChatTransmitRange.HideChat : ChatTransmitRange.GhostRangeLimit;
         var volume = entity.Comp.SpeakerVolume == TelephoneVolume.Speak ? InGameICChatType.Speak : InGameICChatType.Whisper;
 
-        _chat.TrySendInGameICMessage(speaker, args.Message, volume, range, nameOverride: name, checkRadioPrefix: false, languageOverride: args.Language); // Einstein Engines - Language
+        using (_relayChat.Relay(speaker, args.MessageSource, args.Message)) // LuaM - the chat gets the line once from all the telephones of a side
+            _chat.TrySendInGameICMessage(speaker, args.Message, volume, range, nameOverride: name, checkRadioPrefix: false, languageOverride: args.Language); // Einstein Engines - Language
     }
 
 // Corvax-TTS-start:
@@ -195,6 +203,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         }
 
         _recentChatMessages.Clear();
+        _recentRelayedMessages.Clear(); // LuaM
     }
 
     public void BroadcastCallToTelephones(Entity<TelephoneComponent> source, HashSet<Entity<TelephoneComponent>> receivers, EntityUid user, TelephoneCallOptions? options = null)
@@ -217,6 +226,16 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
 
         if (!TryCallTelephone(source, receiver, user, options))
             EndTelephoneCalls(source);
+    }
+
+    /// <summary>
+    /// LuaM - links one more receiver to a call the source is already placing or holding,
+    /// <see cref="TelephoneCallOptions.ForceJoin"/> connects it right away if the receiver is in a call.
+    /// Unlike <see cref="CallTelephone"/>, a failure leaves the call of the source as it is.
+    /// </summary>
+    public bool TryAddTelephoneToCall(Entity<TelephoneComponent> source, Entity<TelephoneComponent> receiver, EntityUid user, TelephoneCallOptions? options = null)
+    {
+        return TryCallTelephone(source, receiver, user, options);
     }
 
     private bool TryCallTelephone(Entity<TelephoneComponent> source, Entity<TelephoneComponent> receiver, EntityUid user, TelephoneCallOptions? options = null)
@@ -396,6 +415,10 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
 
         foreach (var receiver in source.Comp.LinkedTelephones)
         {
+            // LuaM - the same speaker was already relayed to this receiver through another point of the ship
+            if (!_recentRelayedMessages.Add((messageSource, message, receiver.Owner)))
+                continue;
+
             RaiseLocalEvent(receiver, ref evReceivedMessage);
             receiver.Comp.StateStartTime = _timing.CurTime;
         }
@@ -511,6 +534,10 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
 
     public bool IsTelephonePowered(Entity<TelephoneComponent> entity)
     {
+        // LuaM - the hidden holopad of a console runs on the console's power
+        if (TryComp<HoloCommsModuleComponent>(entity, out var module) && module.Console is { } console)
+            return this.IsPowered(console, EntityManager);
+
         return this.IsPowered(entity, EntityManager) || !entity.Comp.RequiresPower;
     }
 }

@@ -1,0 +1,53 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:holo="clr-namespace:Content.Client._LuaM.HoloComms"
+                      Title="{Loc 'holo-comms-window-title'}"
+                      SetSize="380 620"
+                      MinSize="340 540">
+    <!-- LuaM: the look of the shuttle console, the window shell is set in code -->
+    <BoxContainer Orientation="Vertical" Margin="8 6 8 8" SeparationOverride="6">
+
+        <!-- The screen: the hologram of the other side, what it says right above it -->
+        <PanelContainer StyleClasses="LuaMConsoleInset" MinHeight="270">
+            <holo:HoloCommsHologramView Name="HologramView" HorizontalExpand="True" VerticalExpand="True" Margin="4 36 4 24"/>
+
+            <PanelContainer Name="BubblePanel" StyleClasses="LuaMConsoleSection" Visible="False"
+                            VerticalAlignment="Top" HorizontalAlignment="Center" Margin="12 8 12 0" MaxWidth="320">
+                <RichTextLabel Name="BubbleLabel" Margin="8 4"/>
+            </PanelContainer>
+
+            <Label Name="ScreenStatusLabel" StyleClasses="LuaMConsoleHeaderLabel"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 6"/>
+            <Label Name="TypingLabel" Text="{Loc 'holo-comms-typing'}" Visible="False" FontColorOverride="#7A8899"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 8 6"/>
+        </PanelContainer>
+
+        <!-- Who is on the line -->
+        <PanelContainer StyleClasses="LuaMConsoleHeader">
+            <BoxContainer Orientation="Vertical">
+                <Label Name="RemoteLabel" StyleClasses="LuaMConsoleHeaderLabel" HorizontalAlignment="Center" ClipText="True"/>
+                <Label Name="SpeakerLabel" HorizontalAlignment="Center" ClipText="True" FontColorOverride="#9FB3C8"/>
+            </BoxContainer>
+        </PanelContainer>
+
+        <!-- What the one on the hologram said -->
+        <PanelContainer StyleClasses="LuaMConsoleInset" VerticalExpand="True">
+            <OutputPanel Name="LinesLog" VerticalExpand="True" Margin="6 4"/>
+        </PanelContainer>
+
+        <!-- Controls while there is no incoming call -->
+        <BoxContainer Name="MainButtons" Orientation="Horizontal" SeparationOverride="4">
+            <Button Name="ContactsButton" Text="{Loc 'holo-comms-contacts-button'}" StyleClasses="LuaMConsoleButton"
+                    HorizontalExpand="True" ClipText="True"/>
+            <Button Name="DoNotDisturbButton" Text="{Loc 'holo-comms-do-not-disturb'}" StyleClasses="LuaMConsoleButton"
+                    ToggleMode="True" ToolTip="{Loc 'holo-comms-do-not-disturb-tooltip'}"/>
+            <Button Name="EndButton" Text="{Loc 'holo-comms-end'}" StyleClasses="LuaMConsoleButton"/>
+        </BoxContainer>
+
+        <!-- Controls while the line rings -->
+        <BoxContainer Name="RingingButtons" Orientation="Horizontal" SeparationOverride="4" Visible="False">
+            <Button Name="AnswerButton" Text="{Loc 'holo-comms-answer'}" StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+            <Button Name="DeclineButton" Text="{Loc 'holo-comms-decline'}" StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

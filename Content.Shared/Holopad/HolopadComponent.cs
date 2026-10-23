@@ -77,6 +77,13 @@ public sealed partial class HolopadComponent : Component
     [ViewVariables]
     [DataField]
     public string? StationNameSuffix { get; set; } = null;
+
+    /// <summary>
+    /// LuaM - the hologram on the other end switches to whoever spoke last.
+    /// Off for the shuttle console comms, there it shows the one closest to the console.
+    /// </summary>
+    [DataField]
+    public bool LinkUserOnMessage = true;
 }
 
 #region: Event messages

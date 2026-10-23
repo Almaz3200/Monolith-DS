@@ -61,7 +61,7 @@ public sealed partial class NavScreen
     /// </summary>
     private void UpdateWeaponsPanelVisibility()
     {
-        WeaponsPanel.Visible = _gunneryConnected || ShieldPanel.Visible;
+        WeaponsPanel.Visible = _gunneryConnected || ShieldPanel.Visible || _holoCommsAvailable; // LuaM - and the comms button
     }
 
     private void OnGunneryRadarClick(EntityCoordinates coordinates)
