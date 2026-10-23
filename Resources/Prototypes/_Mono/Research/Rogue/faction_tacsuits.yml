@@ -13,7 +13,7 @@
   technologyPrerequisites:
   # - UniversalMaterialResearchT1 # Commented by LuaM
   - RogueJaws # LuaM
-  position: 5, 7 # LuaM: 12, 1 > 5, 7
+  position: 4, 7 # LuaM: 12, 1 > 4, 7
 
 - type: technology
   id: RogueAdvancedEquipment
@@ -29,7 +29,7 @@
   - MechIFFPDV
   technologyPrerequisites:
   - RogueBasicEquipment
-  position: 4, 8 # LuaM: 12, 7 > 8, 10
+  position: 3, 8 # LuaM: 12, 7 > 3, 8
 
 - type: technology
   id: RogueSyndicateTacsuits
@@ -43,7 +43,7 @@
   - ClothingOuterHardsuitSyndieEliteRogue
   technologyPrerequisites:
   - RogueAdvancedEquipment
-  position: 4, 9 # LuaM: 12, 12 > 8, 7
+  position: 3, 9 # LuaM: 12, 12 > 3, 9
 
 - type: technology
   id: RogueSuperArmor
@@ -57,4 +57,4 @@
   - ClothingOuterHardsuitJuggernautRogue
   technologyPrerequisites:
   - RogueAdvancedEquipment # LuaM: RogueSyndicateTacsuits > RogueAdvancedEquipment
-  position: 3, 9 # LuaM: 13, 12 > 3, 9
+  position: 2, 9 # LuaM: 13, 12 > 2, 9

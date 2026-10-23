@@ -2,15 +2,13 @@
   id: NFMercenaryTechfabDeprecatedStatic
   recipes:
 # Shared lathe recipes
-# LuaM-commented-start: removed base recipes
-## Basic tools
-  # - Wirecutter
-  # - Screwdriver
-  # - Welder
-  # - Wrench
-  # - CrowbarGreen
-  # - Multitool
-# LuaM-commented-end
+# Basic tools
+  - Wirecutter
+  - Screwdriver
+  - Welder
+  - Wrench
+  - CrowbarGreen
+  - Multitool
   - FlashlightLantern
   - AppraisalTool
   - HandLabeler
@@ -85,6 +83,7 @@
   - WeaponCaseHeavyAmmo #Mono
   - WeaponCaseShortAmmo
   - WeaponCaseShortExplosives
+  - ArmorPlateStorageT1Recipe # LuaM
 ## Weapons
   - CombatKnife
   - WeaponLaserSvalinn # After the changes made to windows shouldn't be that much of an issue now if it's widely available
@@ -119,8 +118,6 @@
   - PowerCellHigh
   # - PowerCellHyperNF
   - PowerCellCombat # Mono edit
-  - NaniteApplicatorSyndicate # LuaM
-  - ExperimentalPowerCellCombat # LuaM
   - PowerCellMicroreactor
 # Mercenary techfab
 ## Armor
@@ -129,24 +126,26 @@
   - ArmorPlateHeat #Mono
   - ArmorPlateSpeed #Mono
   - TelescopicShield
-#  - ClothingOuterArmorBulletproofNF # Commented by LuaM
-#  - ClothingOuterCoatBHTrench # Commented by LuaM
-#  - ClothingOuterArmorPunkRandomized # Commented by LuaM
-#  - ClothingOuterArmorPunkRed # Commented by LuaM
-#  - ClothingOuterArmorPunkGreen # Commented by LuaM
-#  - ClothingOuterArmorPunkOrange # Commented by LuaM
-#  - ClothingOuterArmorElitePunkRandomized # Commented by LuaM
-#  - ClothingBeltPunkRandomized # Commented by LuaM
-#  - ClothingShoesBootsPunkRandomized # Commented by LuaM
-#  - ClothingEyesPunkGoggles # Commented by LuaM
-#  - ClothingEyesPunkInfoShades # Commented by LuaM
-#  - ClothingMaskPunkHalf # Commented by LuaM
-#  - ClothingUniformRandomPunkTanktop # Commented by LuaM
-#  - ClothingUniformRandomPunkTanktopShorts # Commented by LuaM
-#  - ClothingUniformRandomPunkCroptop # Commented by LuaM
-#  - ClothingUniformRandomPunkCroptopShorts # Commented by LuaM
-#  - ClothingOuterCoatLettermanRandomized # Commented by LuaM
-#  - ClothingOuterCoatBomberRandomized # Commented by LuaM
+  # LuaM-commented-start:
+  # - ClothingOuterArmorBulletproofNF
+  # - ClothingOuterCoatBHTrench
+  # - ClothingOuterArmorPunkRandomized
+  # - ClothingOuterArmorPunkRed
+  # - ClothingOuterArmorPunkGreen
+  # - ClothingOuterArmorPunkOrange
+  # - ClothingOuterArmorElitePunkRandomized
+  # - ClothingBeltPunkRandomized
+  # - ClothingShoesBootsPunkRandomized
+  # - ClothingEyesPunkGoggles
+  # - ClothingEyesPunkInfoShades
+  # - ClothingMaskPunkHalf
+  # - ClothingUniformRandomPunkTanktop
+  # - ClothingUniformRandomPunkTanktopShorts
+  # - ClothingUniformRandomPunkCroptop
+  # - ClothingUniformRandomPunkCroptopShorts
+  # - ClothingOuterCoatLettermanRandomized
+  # - ClothingOuterCoatBomberRandomized
+  # LuaM-commented-end
   - ClothingBackpackJack
 ## EVA / Hardsuits
   - ClothingOuterHardsuitCap
@@ -172,6 +171,7 @@
   - ClothingBackpackDuffelHolding
   - ClothingBackpackMessengerHolding
   - FlashlightSecliteNF
+  - ArmorPlateStorageT2Recipe # LuaM
 ## Weapons
   - WeaponGrapplingGun
   - KatanaNF
