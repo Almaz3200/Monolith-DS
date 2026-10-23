@@ -1,0 +1,29 @@
+- type: constructionGraph
+  id: BullSharkSteak
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: cooked shark meat
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+  - node: cooked shark meat
+    entity: FoodMeatBullSharkCooked
+    
+- type: constructionGraph
+  id: BullSharkFillet
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: cooked shark fillet
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+  - node: cooked shark fillet
+    entity: FoodMeatBullSharkFilletCooked

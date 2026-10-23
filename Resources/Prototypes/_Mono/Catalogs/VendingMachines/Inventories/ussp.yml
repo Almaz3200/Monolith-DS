@@ -33,7 +33,11 @@
     Ointment: 4294967295 # Infinite
     Gauze: 4294967295 # Infinite
     EmergencyMedipen: 4294967295 # Infinite
-    JugOmnizine: 10 # Limited to 10
+    # JugOmnizine: 10 # Limited to 10 # Сommented by LuaM
+    JugPuncturase: 3 # LuaM: Limited to 3
+    JugBicaridine: 3 # LuaM: Limited to 3
+    JugDermaline: 3 # LuaM: Limited to 3
+    JugDylovene: 3 # LuaM: Limited to 3
     ClothingOuterHardsuitUsspL27: 4294967295 # Infinite
     ClothingOuterHardsuitUsspL10: 4294967295 # Infinite
     ClothingOuterHardsuitUsspM10: 4294967295 # Infinite

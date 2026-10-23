@@ -16,13 +16,15 @@
   name: 'Флагман TSF-113 «Халкион»' # LuaM: 'TSFMC Flagship Halcyon' > 'Флагман TSF-113 «Халкион»'
   minimumDistance: 2500 # Mono
   maximumDistance: 3500 # Mono
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsf ]
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsfPdv ] # LuaM: MonoChimeraTsf > MonoChimeraTsfPdv
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/tsfmchalcyon.yml
   addComponents:
   - type: IFF
     color: "#047abd"
     readOnly: true
+  - type: Company # LuaM: faction outpost
+    companyName: TSF
   - type: SolarPoweredGrid
     doNotCull: true
   - type: WorldGenDistanceCarver
@@ -45,7 +47,6 @@
       gridComponents:
       - type: VesselInfo
         description: "A mothballed battleship-turned-FOB, and Home of the TSFMC operations."
-      - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
           mapNameTemplate: 'TSFMC Flagship Halcyon'
@@ -61,6 +62,7 @@
             #TsfCivilian: [ -1, -1 ]
             Sheriff: [ 1, 1 ]
             Bailiff: [1, 1 ]
+            TsfMarsoc: [ 1, 1 ] # LuaM
             SeniorOfficer: [ 3, 3 ] # Mono
             Brigmedic: [ 2, 2 ] # Mono
             Deputy: [ -1, -1 ] # Mono
@@ -88,6 +90,8 @@
   - type: IFF
     color: "#047abd"
     readOnly: true
+  - type: Company # LuaM: faction outpost
+    companyName: TSF
   - type: SolarPoweredGrid
     doNotCull: true
 

@@ -4,3 +4,7 @@ ent-ClothingOuterHardsuitViperGroupMedic = скафандр IMP mk.III Viper
     .desc = Боевой медицинский скафандр с маркировкой Viper Group. Усиленное бронирование в жизненно важных зонах.
 ent-ClothingOuterHardsuitViperGroupInitiate = скафандр BROOD mk.I Viper
     .desc = Боевой скафандр, фирменной маркировкой Viper Group.
+ent-ClothingOuterHardsuitViperGroupJuggernaut = IMP mk.IV viper hardsuit
+    .desc = A heavy combat hardsuit adorned with signature markings of the Viper Group. The armor features reinforced plating and padding fitting for close encounters.
+ent-ClothingOuterHardsuitViperGroupShield = MEDUSA mk.VI viper hardsuit
+    .desc = A heavy combat hardsuit adorned with signature markings of the Viper Group. The armor features a personal shield projector integrated into the suit.

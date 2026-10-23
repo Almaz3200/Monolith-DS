@@ -9,6 +9,8 @@
   icon: "JobIconContractor"
   supervisors: job-supervisors-nobody
   displayWeight: 40 # Top
+  access: # LuaM
+  - Mercenary # LuaM: contractors are mercenaries now
   accessGroups: # Frontier
   - GeneralAccess # Frontier
   special:

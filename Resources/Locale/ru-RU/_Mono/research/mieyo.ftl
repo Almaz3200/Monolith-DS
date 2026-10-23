@@ -1,0 +1,14 @@
+research-discipline-mieyo = Производственный концерн ММС
+research-technology-mieyo-press = ММС | Гидравлика
+research-technology-mieyo-goods = ММС | Торговые товары
+research-technology-mieyo-breaching-gear = ММС | Пробивное снаряжение
+research-technology-mieyo-meds = ММС | Лечение ран
+research-technology-mieyo-srd = ММС | Корабельное оборудование
+research-technology-mieyo-lpc-1 = ММС | Базовое шаттлостроение
+research-technology-mieyo-smart-guns = ММС | Смарт-оружие
+research-technology-mieyo-corpsec-gear = ММС | Снаряжение охраны активов
+research-technology-mieyo-corpsec-rifles = ММС | Огнестрельное оружие охраны активов
+research-technology-mieyo-bionics-basic = ММС | Базовые бионические протезы
+research-technology-mieyo-bionics-advanced = ММС | Продвинутые бионические протезы
+research-technology-mieyo-bionics-lotus = ММС | EVT-002 «Лотос»
+research-technology-mieyo-bionics-sakimoto = ММС | EVT-001 «Сакимото»

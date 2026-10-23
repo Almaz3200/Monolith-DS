@@ -3,7 +3,16 @@
   name: job-name-vg-lieutenant
   description: job-description-vg-lieutenant
   playTimeTracker: JobVGLieutenant
-  whitelisted: true # For Lieutenants and such.
+  whitelisted: false # LuaM: true > false
+  requirements: # LuaM
+  - !type:SpeciesRequirement
+    species:
+    - Human
+    - Dwarf
+  - !type:TraitsRequirement # LuaM: heretics can't take this job
+    inverted: true
+    traits:
+    - Heretic
   startingGear: ViperRadioGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
@@ -36,3 +45,4 @@
   accessGroups:
   - GeneralAccess
   - ViperHigh
+  - USSPHigh # LuaM: VG and USSP share their access

@@ -3,7 +3,8 @@
   maps:
   - EmptyFrontierBeacon
 
-- type: gameMapPool
-  id: CrocusMapPool
-  maps:
-  - CrocusJianghuiIndustrial
+# Commented by LuaM: infantry roles and Crocus mode are disabled
+#- type: gameMapPool
+#  id: CrocusMapPool
+#  maps:
+#  - CrocusJianghuiIndustrial

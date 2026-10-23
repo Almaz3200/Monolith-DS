@@ -40,6 +40,6 @@
   - PDVInfiltrator # Mono
   - PdvBorg # Mono
   - PDVTarkhan
-  - PdvInfantry
+  # - PdvInfantry # Commented by LuaM
   - PdvCivilian
   - Prisoner #nyano

@@ -426,6 +426,9 @@ ent-DrinkHellRamen = говяжий доширак
 ent-DrinkBloodGlass = { ent-DrinkGlass }
     .suffix = Кровь
     .desc = { ent-DrinkGlass.desc }
+ent-DrinkIrishSlammer = { ent-DrinkGlass }
+    .desc = { ent-DrinkGlass.desc }
+    .suffix = irish slammer
 
 # Lua start
 ent-DrinkAlienBrainHemorrhage = { ent-DrinkGlass }

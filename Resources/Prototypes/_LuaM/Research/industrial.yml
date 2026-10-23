@@ -10,10 +10,10 @@
   - GasDepositLocator
   technologyPrerequisites:
   - AtmosphericTech
-  position: 12, 9
+  position: 13, 9
 
 # Tier 2
-- type: technology 
+- type: technology
   id: CrateBluespaceTechnology
   name: research-technology-crate-bluespace
   entityIcon: CrateBlueSpace
@@ -25,6 +25,20 @@
   technologyPrerequisites:
   - ConstructionBags
   position: 6, 3
+
+- type: technology
+  id: FultonTechnology
+  name: research-technology-fulton
+  entityIcon: FultonBeacon
+  discipline: Industrial
+  tier: 2
+  cost: 15000
+  recipeUnlocks:
+  - Fulton
+  - FultonBeacon
+  technologyPrerequisites:
+  - AdvancedToolsTechnology
+  position: 3, 5
 
 # Tier 3
 - type: technology
@@ -39,5 +53,5 @@
   - SmallBluespaceAirTank
   technologyPrerequisites:
   - HardsuitsAdvanced
-  - AdvancedAtmospherics
-  position: 10, 5
+  - AdvancedPersonalPropulsion
+  position: 9, 7

@@ -1350,6 +1350,10 @@
   description: flavor-base-trashy
 
 # Lua start
+- type: flavor
+  id: artifactglue
+  flavorType: Complex
+  description: flavor-complex-artifact-glue
 
 - type: flavor
   id: alienbrainhemorrhage

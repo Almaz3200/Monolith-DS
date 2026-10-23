@@ -320,6 +320,7 @@ flavor-complex-bottledlightning = like lightning in a bottle
 flavor-complex-punishment = like punishment
 flavor-weh = like weh
 flavor-hew = like hew
+flavor-complex-artifact-glue = like crushed artifacts
 
 # Lua start
 flavor-complex-alien-brain-hemorrhage = like an extraterrestrial injury

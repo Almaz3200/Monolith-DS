@@ -57,3 +57,9 @@ ent-NuclearReactorSmallMeltedSalvage = { ent-NuclearReactorSmall }
 # Nuclear debris resultant from a meltdown
 ent-NuclearDebrisChunk = ядерные обломки
     .desc = Вы не замечаете графит на полу. Вы в шоке. Немедленно обратитесь в медблок.
+ent-ReactorFlowArrow = { "" }
+    .desc = { "" }
+ent-ReactorSmallFlowArrow = { ent-ReactorFlowArrow }
+    .desc = { ent-ReactorFlowArrow.desc }
+ent-ReactorGasPipe = { "" }
+    .desc = { "" }

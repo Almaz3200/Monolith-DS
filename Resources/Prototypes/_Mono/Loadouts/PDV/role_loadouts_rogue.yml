@@ -172,18 +172,19 @@
   - RoguePistolMag
   canCustomizeName: true
 
-- type: roleLoadout
-  id: JobPdvInfantry
-  groups:
-  - PDVInfantryHead
-  - PDVInfantryJumpsuit
-  - PDVGloves
-  - PDVInfantryOuterClothing
-  - PDVInfantryBackpack
-  - PDVShoes
-  - TsfmcBalaclava
-  - RakhshanPDA
-  - NFSpeciesSpecific
-  - PDVInfantryBelt
-  - FactionArmorPlates
-  canCustomizeName: true
+# Commented by LuaM: infantry roles and Crocus mode are disabled
+#- type: roleLoadout
+#  id: JobPdvInfantry
+#  groups:
+#  - PDVInfantryHead
+#  - PDVInfantryJumpsuit
+#  - PDVGloves
+#  - PDVInfantryOuterClothing
+#  - PDVInfantryBackpack
+#  - PDVShoes
+#  - TsfmcBalaclava
+#  - RakhshanPDA
+#  - NFSpeciesSpecific
+#  - PDVInfantryBelt
+#  - FactionArmorPlates
+#  canCustomizeName: true

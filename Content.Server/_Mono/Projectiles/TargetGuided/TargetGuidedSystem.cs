@@ -3,6 +3,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Projectiles;
 using Content.Server._Mono.FireControl;
 using Content.Shared._Mono.FireControl;
+using Content.Server.Shuttles.Components; // Lua
 using Robust.Server.GameObjects;
 using EntityCoordinates = Robust.Shared.Map.EntityCoordinates;
 
@@ -198,6 +199,11 @@ public sealed partial class TargetGuidedSystem : EntitySystem
         {
             if (!EntityManager.EntityExists(component.ControllingConsole.Value))
                 return true;
+
+// Lua-start: a shuttle console guides while its grid still has fire control
+            if (HasComp<ShuttleConsoleComponent>(component.ControllingConsole.Value))
+                return !_fireControl.TryGetShuttleConsoleServer(component.ControllingConsole.Value, out _, out _);
+// Lua-end
 
             // Check if console is still powered/functioning
             if (!TryComp<FireControlConsoleComponent>(component.ControllingConsole.Value, out var console) ||

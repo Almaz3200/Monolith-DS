@@ -16,3 +16,7 @@ ent-SpawnForerunnerBorg = спаунер обслуживающего борга
 ent-SpawnForerunnerBorgSelectable = спаунер боевого борга
     .desc = {ent-MarkerBase}
     .suffix = ADS ONLY, Гост-роль
+ent-SpawnPlayerXenoBorg = Xenoborg tender spawner
+    .desc = { ent-MarkerBase.desc }
+ent-SpawnPlayerXenoBorgPlaytime = Xenoborg playtime-locked tender spawner
+    .desc = { ent-MarkerBase.desc }

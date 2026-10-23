@@ -10,10 +10,51 @@
   - ClothingOuterHardsuitPirateScafRogue
   - ClothingOuterVestWebRogue
   - ClothingOuterVestWebEliteRogue
-  - MechIFFPDV
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - RogueJaws # LuaM
+  position: 5, 7 # LuaM: 12, 1 > 5, 7
+
+- type: technology
+  id: RogueAdvancedEquipment
+  name: research-technology-rogue-advanced-equipment
+  entityIcon: ClothingOuterHardsuitPDVMedic # LuaM ClothingOuterHardsuitAshen > ClothingOuterHardsuitPDVMedic
+  discipline: RogueEquipment
+  tier: 2
+  cost: 35000
+  recipeUnlocks:
+  - ClothingOuterHardsuitPDVMedic # LuaM
   - ClothingShoesBootsMagSyndieRogue
   - ClothingMaskGasSyndicateRogue
+  - MechIFFPDV
   technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  - HardsuitsArmored # LuaM
-  position: 8, 10 # LuaM: 12, 7 > 8, 10
+  - RogueBasicEquipment
+  position: 4, 8 # LuaM: 12, 7 > 8, 10
+
+- type: technology
+  id: RogueSyndicateTacsuits
+  name: research-technology-rogue-syndicate-tacsuits
+  entityIcon: ClothingOuterHardsuitAshen
+  discipline: RogueEquipment
+  tier: 2
+  cost: 50000
+  recipeUnlocks:
+  - ClothingOuterHardsuitSyndieRogue
+  - ClothingOuterHardsuitSyndieEliteRogue
+  technologyPrerequisites:
+  - RogueAdvancedEquipment
+  position: 4, 9 # LuaM: 12, 12 > 8, 7
+
+- type: technology
+  id: RogueSuperArmor
+  name: research-technology-rogue-super-armor
+  entityIcon: ClothingOuterHardsuitCybersunStealth
+  discipline: RogueEquipment
+  tier: 2
+  cost: 40000 # LuaM: 20000 > 40000
+  recipeUnlocks:
+  - ClothingOuterHardsuitCybersunStealthRogue
+  - ClothingOuterHardsuitJuggernautRogue
+  technologyPrerequisites:
+  - RogueAdvancedEquipment # LuaM: RogueSyndicateTacsuits > RogueAdvancedEquipment
+  position: 3, 9 # LuaM: 13, 12 > 3, 9

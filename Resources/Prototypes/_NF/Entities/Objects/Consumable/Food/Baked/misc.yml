@@ -60,6 +60,7 @@
   - type: Tag
     tags:
     - Fruit
+    - BountyPearMuffin
 
 - type: entity
   name: apple strudel bite
@@ -97,6 +98,7 @@
   - type: Tag
     tags:
     - Fruit
+    - BountyAppleStrudelBite
 
 # Lua start
 

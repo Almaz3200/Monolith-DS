@@ -49,6 +49,18 @@
           - ItemMask
         density: 1000
         hard: false
+      # Goobstation - fishing
+      fishing:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        layer:
+        - ItemMask
+        mask:
+        - HighImpassable
+        density: 1000
+        hard: false
+      # Goobstation - fishing
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepWater
@@ -63,6 +75,13 @@
   - type: TileEntityEffect
     effects:
     - !type:ExtinguishReaction
+  # Goobstation - fishing
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: WaterFishingLootTable
+    fishDefaultTimer: 25.0
+    fishTimerVariety: 15.0
+  # Goobstation - fishing
 
 - type: entity
   id: MonoFloorWaterEntity
@@ -121,6 +140,18 @@
         - ItemMask
         density: 1000
         hard: false
+      # LuaM-start: | fishing
+      fishing:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        layer:
+        - ItemMask
+        mask:
+        - HighImpassable
+        density: 1000
+        hard: false
+      # LuaM-end
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepWater
@@ -135,3 +166,10 @@
   - type: TileEntityEffect
     effects:
     - !type:ExtinguishReaction
+  # LuaM-start: | fishing
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: WaterFishingLootTable
+    fishDefaultTimer: 25.0
+    fishTimerVariety: 15.0
+  # LuaM-end

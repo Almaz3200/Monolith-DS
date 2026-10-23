@@ -22,12 +22,14 @@ namespace Content.Client.Guidebook.Controls;
 ///     Control for embedding a reagent into a guidebook.
 /// </summary>
 [UsedImplicitly, GenerateTypedNameReferences]
-public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISearchableControl
+public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISearchableControl, IPrototypeRepresentationControl // Lua: IPrototypeRepresentationControl
 {
     [Dependency] private IEntitySystemManager _systemManager = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly ChemistryGuideDataSystem _chemistryGuideData;
+
+    public IPrototype? RepresentedPrototype { get; private set; } // Lua: target of guidebook prototype links
 
     public GuideReagentEmbed()
     {
@@ -80,6 +82,7 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
 
     private void GenerateControl(ReagentPrototype reagent)
     {
+        RepresentedPrototype = reagent; // Lua
         NameBackground.PanelOverride = new StyleBoxFlat
         {
             BackgroundColor = reagent.SubstanceColor
