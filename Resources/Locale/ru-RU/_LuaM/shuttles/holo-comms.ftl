@@ -21,7 +21,6 @@ holo-comms-caller-with-job = { $name } ({ $job })
 holo-comms-log-emote = * { $name } { $action }
 
 # Кнопки
-holo-comms-contacts-button = КОНТАКТЫ
 holo-comms-do-not-disturb = НЕ БЕСПОКОИТЬ
 holo-comms-do-not-disturb-tooltip = Корабль не принимает вызовы ни на одну из своих консолей и голопадов.
 holo-comms-end = ЗАВЕРШИТЬ
@@ -29,11 +28,13 @@ holo-comms-answer = ОТВЕТИТЬ
 holo-comms-decline = ОТКЛОНИТЬ
 
 # Контакты
+holo-comms-contacts-title = КОНТАКТЫ
 holo-comms-contacts-search = Поиск...
 holo-comms-contacts-empty = Некого вызвать
 holo-comms-contacts-ships = Корабли и станции
 holo-comms-contacts-holopads = Голопады
 holo-comms-contact-busy = { $name } (занят)
+holo-comms-contact-entry = { $number }. { $name }
 
 # Всплывающие сообщения
 holo-comms-popup-unavailable = Абонент не может принять вызов.

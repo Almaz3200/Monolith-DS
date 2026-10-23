@@ -130,6 +130,9 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
             return;
         }
 
+        // LuaM - copying the sprite also copies whether the target is drawn, the hologram must stay up even when it is not
+        _sprite.SetVisible((hologram, hologramSprite), true);
+
         UpdateHologramShader(hologram, hologramSprite, holopadhologram);
     }
 

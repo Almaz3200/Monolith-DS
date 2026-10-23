@@ -15,8 +15,8 @@ using Robust.Shared.Utility;
 namespace Content.Client._LuaM.HoloComms;
 
 /// <summary>
-/// The comms window of a shuttle console: the hologram of the other side with what it says above it,
-/// the lines of the one shown below, and the list of everybody the console can call.
+/// The comms window of a shuttle console: the hologram of the other side down to the hips,
+/// the last thing the one shown said, and the list of everybody the console can call.
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class HoloCommsWindow : FancyWindow
@@ -25,15 +25,12 @@ public sealed partial class HoloCommsWindow : FancyWindow
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IUserInterfaceManager _uiManager = default!;
 
-    private const int MaxLogEntries = 50;
-    private static readonly TimeSpan BubbleTime = TimeSpan.FromSeconds(6);
-
     /// <summary>
     /// The buttons wait a moment after the call changes, so a click meant for the old buttons does not hit the new ones.
     /// </summary>
     private static readonly TimeSpan ButtonLockTime = TimeSpan.FromSeconds(0.5);
 
-    private static readonly Color SpeakerColor = Color.FromHex("#4EC6E8");
+    private static readonly Color LineColor = Color.FromHex("#E8C547");
 
     public event Action<NetEntity>? OnCall;
     public event Action? OnAnswer;
@@ -46,14 +43,12 @@ public sealed partial class HoloCommsWindow : FancyWindow
     public Func<BaseWindow?>? AnchorWindow;
 
     private readonly AppearanceSystem _appearance;
-    private readonly HoloCommsContactsPopup _contactsPopup = new();
 
     private HoloCommsPhase _phase = HoloCommsPhase.Idle;
     private string? _remoteName;
     private string? _callerName;
     private EntityUid? _hologram;
     private EntityUid? _shownEntity;
-    private TimeSpan _bubbleUntil;
     private TimeSpan _buttonsUnlockAt;
     private bool _buttonsLocked;
 
@@ -65,10 +60,7 @@ public sealed partial class HoloCommsWindow : FancyWindow
 
         _appearance = _entManager.System<AppearanceSystem>();
 
-        LinesLog.StyleBoxOverride = new StyleBoxFlat { BackgroundColor = Color.Transparent };
-
-        ContactsButton.OnPressed += _ => ToggleContacts();
-        _contactsPopup.OnContactPicked += target => OnCall?.Invoke(target);
+        ContactsList.OnContactPicked += target => OnCall?.Invoke(target);
         DoNotDisturbButton.OnToggled += args => OnDoNotDisturb?.Invoke(args.Pressed);
         AnswerButton.OnPressed += _ => OnAnswer?.Invoke();
         DeclineButton.OnPressed += _ => OnHangUp?.Invoke();
@@ -82,8 +74,6 @@ public sealed partial class HoloCommsWindow : FancyWindow
             Close();
         };
 
-        OnClose += () => _contactsPopup.Close();
-
         UpdateTexts();
     }
 
@@ -95,15 +85,11 @@ public sealed partial class HoloCommsWindow : FancyWindow
             if (state.Phase is HoloCommsPhase.Calling or HoloCommsPhase.Ringing &&
                 _phase is HoloCommsPhase.Idle or HoloCommsPhase.Ending or HoloCommsPhase.Unpowered)
             {
-                LinesLog.Clear();
-                BubblePanel.Visible = false;
+                LastLinePanel.Visible = false;
             }
 
             _phase = state.Phase;
             _buttonsUnlockAt = _timing.RealTime + ButtonLockTime;
-
-            if (_phase != HoloCommsPhase.Idle)
-                _contactsPopup.Close();
         }
 
         _remoteName = state.RemoteName;
@@ -114,7 +100,7 @@ public sealed partial class HoloCommsWindow : FancyWindow
         HologramView.ShowPlaceholder = _phase is HoloCommsPhase.Calling or HoloCommsPhase.Ringing or HoloCommsPhase.InCall;
 
         DoNotDisturbButton.Pressed = state.DoNotDisturb;
-        _contactsPopup.SetContacts(state.Contacts);
+        ContactsList.SetContacts(state.Contacts);
 
         MainButtons.Visible = _phase != HoloCommsPhase.Ringing;
         RingingButtons.Visible = _phase == HoloCommsPhase.Ringing;
@@ -124,42 +110,27 @@ public sealed partial class HoloCommsWindow : FancyWindow
     }
 
     /// <summary>
-    /// A line of the one shown on the hologram: it goes to the log and above the hologram.
+    /// A line of the one shown on the hologram, it stays under their name until the next one.
     /// </summary>
     public void AddLine(HoloCommsLineMessage line)
     {
-        var entry = new FormattedMessage();
-        var bubble = new FormattedMessage();
+        var message = new FormattedMessage();
 
         if (line.Emote)
         {
-            entry.PushTag(new MarkupNode("italic", null, null));
-            entry.AddText(Loc.GetString("holo-comms-log-emote", ("name", line.Speaker), ("action", line.Text)));
-            entry.Pop();
-
-            bubble.PushTag(new MarkupNode("italic", null, null));
-            bubble.AddText(line.Text);
-            bubble.Pop();
+            message.PushTag(new MarkupNode("italic", null, null));
+            message.AddText(Loc.GetString("holo-comms-log-emote", ("name", line.Speaker), ("action", line.Text)));
+            message.Pop();
         }
         else
         {
-            entry.PushColor(SpeakerColor);
-            entry.AddText(line.Speaker);
-            entry.Pop();
-            entry.AddText(": " + line.Text);
-
-            bubble.AddText(line.Text);
+            message.PushColor(LineColor);
+            message.AddText(line.Text);
+            message.Pop();
         }
 
-        LinesLog.AddMessage(entry);
-        while (LinesLog.EntryCount > MaxLogEntries)
-        {
-            LinesLog.RemoveEntry(0);
-        }
-
-        BubbleLabel.SetMessage(bubble);
-        BubblePanel.Visible = true;
-        _bubbleUntil = _timing.RealTime + BubbleTime;
+        LastLineLabel.SetMessage(message);
+        LastLinePanel.Visible = true;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -167,9 +138,6 @@ public sealed partial class HoloCommsWindow : FancyWindow
         base.FrameUpdate(args);
 
         var now = _timing.RealTime;
-
-        if (BubblePanel.Visible && now > _bubbleUntil)
-            BubblePanel.Visible = false;
 
         UpdateShownEntity();
 
@@ -231,22 +199,11 @@ public sealed partial class HoloCommsWindow : FancyWindow
         _buttonsLocked = locked && _timing.RealTime < _buttonsUnlockAt;
 
         var powered = _phase != HoloCommsPhase.Unpowered;
-        ContactsButton.Disabled = _buttonsLocked || _phase != HoloCommsPhase.Idle;
+        ContactsList.SetLocked(_buttonsLocked || _phase != HoloCommsPhase.Idle);
         DoNotDisturbButton.Disabled = !powered;
         AnswerButton.Disabled = _buttonsLocked;
         DeclineButton.Disabled = _buttonsLocked;
         EndButton.Disabled = _buttonsLocked && _phase != HoloCommsPhase.Idle;
-    }
-
-    private void ToggleContacts()
-    {
-        if (_contactsPopup.Visible)
-        {
-            _contactsPopup.Close();
-            return;
-        }
-
-        _contactsPopup.OpenBelow(ContactsButton);
     }
 
     /// <summary>

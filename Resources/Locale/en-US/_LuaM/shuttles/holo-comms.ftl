@@ -21,7 +21,6 @@ holo-comms-caller-with-job = {$name} ({$job})
 holo-comms-log-emote = * {$name} {$action}
 
 # Buttons
-holo-comms-contacts-button = CONTACTS
 holo-comms-do-not-disturb = DO NOT DISTURB
 holo-comms-do-not-disturb-tooltip = The ship takes no calls on any of its consoles and holopads.
 holo-comms-end = END
@@ -29,11 +28,13 @@ holo-comms-answer = ANSWER
 holo-comms-decline = DECLINE
 
 # Contacts
+holo-comms-contacts-title = CONTACTS
 holo-comms-contacts-search = Search...
 holo-comms-contacts-empty = Nobody to call
 holo-comms-contacts-ships = Ships and stations
 holo-comms-contacts-holopads = Holopads
 holo-comms-contact-busy = {$name} (busy)
+holo-comms-contact-entry = { $number }. { $name }
 
 # Popups
 holo-comms-popup-unavailable = The other side can't take the call.

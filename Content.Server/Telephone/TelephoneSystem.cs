@@ -18,6 +18,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Speech;
 using Content.Shared.Telephone;
 using Content.Shared._LuaM.HoloComms; // LuaM
+using Content.Shared._EinsteinEngines.Language; // LuaM
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -98,7 +99,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         if (!_recentChatMessages.Add((args.Source, args.Message, entity)))
             return;
 
-        SendTelephoneMessage(args.Source, args.Message, entity);
+        SendTelephoneMessage(args.Source, args.Message, entity, language: args.Language); // LuaM - the other side hears the language it was spoken in
     }
 
     private void OnTelephoneMessageReceived(Entity<TelephoneComponent> entity, ref TelephoneMessageReceivedEvent args)
@@ -368,7 +369,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         SetTelephoneMicrophoneState(entity, false);
     }
 
-    private void SendTelephoneMessage(EntityUid messageSource, string message, Entity<TelephoneComponent> source, bool escapeMarkup = true)
+    private void SendTelephoneMessage(EntityUid messageSource, string message, Entity<TelephoneComponent> source, bool escapeMarkup = true, LanguagePrototype? language = null) // LuaM - language
     {
         // This method assumes that you've already checked that this
         // telephone is able to transmit messages and that it can
@@ -411,7 +412,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         RaiseLocalEvent(source, ref evSentMessage);
         source.Comp.StateStartTime = _timing.CurTime;
 
-        var evReceivedMessage = new TelephoneMessageReceivedEvent(message, chatMsg, messageSource, source);
+        var evReceivedMessage = new TelephoneMessageReceivedEvent(message, chatMsg, messageSource, source, language); // LuaM - language
 
         foreach (var receiver in source.Comp.LinkedTelephones)
         {

@@ -193,6 +193,23 @@ public sealed class ShipCommsLineSystem : EntitySystem
     }
 
     /// <summary>
+    /// The points that talk for the same side as this one: every point of its ship, or only itself.
+    /// </summary>
+    public void GetSidePoints(EntityUid point, List<EntityUid> points)
+    {
+        if (TryGetShip(point, out var grid))
+        {
+            foreach (var shipPoint in GetPoints(grid.Value))
+            {
+                points.Add(shipPoint.Owner);
+            }
+        }
+
+        if (!points.Contains(point))
+            points.Add(point);
+    }
+
+    /// <summary>
     /// Ends the call on the point and on every other point of its ship that talks to the same side.
     /// </summary>
     public void HangUp(Entity<TelephoneComponent> point)

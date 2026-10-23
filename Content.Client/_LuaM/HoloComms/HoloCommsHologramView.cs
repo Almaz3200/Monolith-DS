@@ -1,22 +1,22 @@
 using System.Numerics;
 using Content.Client.Holopad;
 using Content.Client.StatusIcon;
-using Content.Client.Stylesheets;
 using Content.Shared.Holopad;
 using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client._LuaM.HoloComms;
 
 /// <summary>
 /// Draws the hologram of the other side the same way the holopads show it in the world:
 /// the sprite goes into a render target first, then the hologram shader is put over the whole of it.
-/// With nobody to show it draws a holographic question mark instead.
+/// The one shown is framed like a portrait, from the head down to the hips.
+/// With nobody to show it draws the holographic phone of the holopads instead.
 /// The status icons of the hologram, like the SSD indicator of the one shown, go over it as they do in the world.
 /// </summary>
 public sealed partial class HoloCommsHologramView : Control
@@ -25,12 +25,11 @@ public sealed partial class HoloCommsHologramView : Control
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IResourceCache _resourceCache = default!;
 
     private static readonly ProtoId<ShaderPrototype> HologramShader = "Hologram";
     private static readonly TimeSpan RefreshInterval = TimeSpan.FromSeconds(0.5);
 
-    // Same look as the holopad hologram, used for the question mark before there is a hologram to take it from
+    // Same look as the holopad hologram, used for the phone before there is a hologram to take it from
     private static readonly Color DefaultColor1 = Color.FromHex("#65b8e2");
     private static readonly Color DefaultColor2 = Color.FromHex("#3a6981");
     private const float DefaultAlpha = 0.9f;
@@ -38,15 +37,36 @@ public sealed partial class HoloCommsHologramView : Control
     private const float DefaultScrollRate = 0.125f;
 
     /// <summary>
-    /// Stripes of the question mark, in screen pixels.
+    /// The part of the sprite height that is shown, a humanoid has the top of its head and its hips about here.
     /// </summary>
-    private const float GlyphStripe = 3f;
+    private const float PortraitTop = 0.12f;
+    private const float PortraitBottom = 0.66f;
+
+    /// <summary>
+    /// The part of the sprite width a humanoid takes, the rest of the sprite may go past the sides of the screen.
+    /// </summary>
+    private const float PortraitWidth = 0.6f;
+
+    /// <summary>
+    /// Status icons are drawn smaller than the portrait, at full scale they would cover the face.
+    /// </summary>
+    private const float IconScale = 0.4f;
+
+    /// <summary>
+    /// The phone takes this part of the screen.
+    /// </summary>
+    private const float PhoneFill = 0.45f;
+
+    /// <summary>
+    /// The holopad phone, used when the hologram has no default sprite of its own.
+    /// </summary>
+    private static readonly SpriteSpecifier.Rsi DefaultPhone =
+        new(new ResPath("/Textures/Structures/Machines/holopad.rsi"), "icon_in_call");
 
     private readonly SpriteSystem _sprite;
     private readonly HolopadSystem _holopad;
     private readonly StatusIconSystem _statusIcon;
     private readonly SharedTransformSystem _xform;
-    private readonly Font _glyphFont;
 
     // Both are made on the first draw and freed when the view leaves the screen
     private ShaderInstance? _shader;
@@ -56,7 +76,7 @@ public sealed partial class HoloCommsHologramView : Control
     private TimeSpan _nextRefresh;
 
     /// <summary>
-    /// Show the question mark when there is nobody on the hologram.
+    /// Show the phone when there is nobody on the hologram.
     /// </summary>
     public bool ShowPlaceholder { get; set; }
 
@@ -68,7 +88,6 @@ public sealed partial class HoloCommsHologramView : Control
         _holopad = _entManager.System<HolopadSystem>();
         _statusIcon = _entManager.System<StatusIconSystem>();
         _xform = _entManager.System<SharedTransformSystem>();
-        _glyphFont = _resourceCache.NotoStack(variation: "Bold", size: 64);
 
         RectClipContent = true;
     }
@@ -108,7 +127,7 @@ public sealed partial class HoloCommsHologramView : Control
         }
         else if (ShowPlaceholder)
         {
-            stripes = DrawGlyph(handle, size);
+            stripes = DrawPhone(handle, size);
         }
         else
         {
@@ -123,7 +142,7 @@ public sealed partial class HoloCommsHologramView : Control
         screen.UseShader(null);
 
         if (hologram != null && spriteBox != null)
-            DrawStatusIcons(screen, hologram.Value, spriteBox.Value, scale);
+            DrawStatusIcons(screen, hologram.Value, spriteBox.Value, size, scale);
     }
 
     protected override void ExitedTree()
@@ -172,14 +191,21 @@ public sealed partial class HoloCommsHologramView : Control
         if (bounds.Width <= 0f || bounds.Height <= 0f)
             return false;
 
-        // The largest whole scale that fits keeps the pixels square
+        // The largest whole scale that fits the portrait keeps the pixels square
         var pixelsPerMeter = EyeManager.PixelsPerMeter;
-        var fit = MathF.Min(size.X / (bounds.Width * pixelsPerMeter), size.Y * 0.92f / (bounds.Height * pixelsPerMeter));
+        var spriteSize = bounds.Size * pixelsPerMeter;
+        var fit = MathF.Min(size.X / (spriteSize.X * PortraitWidth), size.Y / (spriteSize.Y * (PortraitBottom - PortraitTop)));
         scale = MathF.Max(1f, MathF.Floor(fit));
 
-        // Center the drawn part, the offset of the hologram only lifts it above the holopad in the world
+        // The head goes to the top of the screen, whatever is below the hips stays under its bottom edge
+        var drawnSize = spriteSize * scale;
+        spriteBox = UIBox2.FromDimensions(
+            new Vector2((size.X - drawnSize.X) / 2f, -drawnSize.Y * PortraitTop),
+            drawnSize);
+
+        // The offset of the hologram only lifts it above the holopad in the world
         var center = bounds.Center + sprite.Offset;
-        var position = (Vector2) size / 2f - new Vector2(center.X, -center.Y) * pixelsPerMeter * scale;
+        var position = spriteBox.Center - new Vector2(center.X, -center.Y) * pixelsPerMeter * scale;
 
         _sprite.ForceUpdate(hologram);
 
@@ -190,15 +216,14 @@ public sealed partial class HoloCommsHologramView : Control
             handle.DrawEntity(hologram, position, new Vector2(drawScale), Angle.Zero, Angle.Zero, Direction.South, sprite, xform, _xform);
         }, Color.Transparent);
 
-        var drawnSize = bounds.Size * pixelsPerMeter * scale;
-        spriteBox = UIBox2.FromDimensions(((Vector2) size - drawnSize) / 2f, drawnSize);
         return true;
     }
 
     /// <summary>
-    /// Same places as in the world: the corners at the top of the sprite, the base icons stacked down from there.
+    /// Same places as in the world: the top corners, the base icons stacked down from there.
+    /// The corners are those of the part of the sprite on the screen, the rest of it is cut off.
     /// </summary>
-    private void DrawStatusIcons(DrawingHandleScreen screen, EntityUid hologram, UIBox2 spriteBox, float scale)
+    private void DrawStatusIcons(DrawingHandleScreen screen, EntityUid hologram, UIBox2 spriteBox, Vector2i size, float scale)
     {
         var icons = _statusIcon.GetStatusIcons(hologram);
         if (icons.Count == 0)
@@ -207,6 +232,13 @@ public sealed partial class HoloCommsHologramView : Control
         icons.Sort();
         var left = 0f;
         var right = 0f;
+        scale = MathF.Max(1f, MathF.Floor(scale * IconScale));
+
+        // The character takes the middle of its sprite, the icons go at its sides
+        var shownWidth = MathF.Min(size.X, spriteBox.Width * PortraitWidth);
+        spriteBox = UIBox2.FromDimensions(
+            new Vector2((size.X - shownWidth) / 2f, MathF.Max(spriteBox.Top, 0f) + 4f),
+            new Vector2(shownWidth, spriteBox.Height));
 
         foreach (var icon in icons)
         {
@@ -229,24 +261,36 @@ public sealed partial class HoloCommsHologramView : Control
         }
     }
 
-    private float DrawGlyph(IRenderHandle handle, Vector2i size)
+    /// <summary>
+    /// The phone the holopads show while nobody stands at the other end.
+    /// </summary>
+    private float DrawPhone(IRenderHandle handle, Vector2i size)
     {
-        const string glyph = "?";
+        var specifier = DefaultPhone;
+        if (_hologram is { } uid &&
+            _entManager.TryGetComponent<HolopadHologramComponent>(uid, out var comp) &&
+            !string.IsNullOrEmpty(comp.RsiPath) && !string.IsNullOrEmpty(comp.RsiState))
+        {
+            specifier = new SpriteSpecifier.Rsi(new ResPath("/Textures") / comp.RsiPath, comp.RsiState);
+        }
 
-        var screen = handle.DrawingHandleScreen;
-        var dimensions = screen.GetDimensions(_glyphFont, glyph, 1f);
-        var position = ((Vector2) size - dimensions) / 2f;
+        var texture = _sprite.Frame0(specifier);
+        var fit = MathF.Min(size.X, size.Y) * PhoneFill / MathF.Max(texture.Width, texture.Height);
+        var scale = MathF.Max(1f, MathF.Floor(fit));
+        var drawnSize = (Vector2) texture.Size * scale;
+        var box = UIBox2.FromDimensions(((Vector2) size - drawnSize) / 2f, drawnSize);
 
         // Slowly pulses while waiting
         var pulse = 0.75f + 0.25f * MathF.Sin((float) _timing.RealTime.TotalSeconds * 3f);
 
+        var screen = handle.DrawingHandleScreen;
         screen.RenderInRenderTarget(_target!, () =>
         {
             ResetTargetState(handle);
-            screen.DrawString(_glyphFont, position, glyph, Color.White.WithAlpha(pulse));
+            screen.DrawTextureRect(texture, box, Color.White.WithAlpha(pulse));
         }, Color.Transparent);
 
-        return size.Y / GlyphStripe;
+        return size.Y / scale; // One stripe per pixel of the phone, like in the world
     }
 
     /// <summary>

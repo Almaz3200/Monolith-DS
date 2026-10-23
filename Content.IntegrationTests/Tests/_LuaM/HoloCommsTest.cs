@@ -2,15 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Content.Server._LuaM.HoloComms;
+using Content.Server.Chat.Systems;
+using Content.Server.Holopad;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Telephone;
+using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._LuaM.HoloComms;
+using Content.Shared.Chat;
 using Content.Shared.Holopad;
 using Content.Shared.Telephone;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._LuaM;
 
@@ -220,6 +225,139 @@ public sealed class HoloCommsTest
         await pair.CleanReturnAsync();
     }
 
+    /// <summary>
+    /// Both points of a ship show whoever stands at any point of the other ship,
+    /// and speech keeps the language it was spoken in.
+    /// </summary>
+    [Test]
+    public async Task ShipHologramAndLanguageTest()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+
+        var entMan = server.EntMan;
+        var mapManager = server.ResolveDependency<IMapManager>();
+        var protoMan = server.ResolveDependency<IPrototypeManager>();
+        var mapSystem = entMan.System<SharedMapSystem>();
+        var xformSystem = entMan.System<SharedTransformSystem>();
+        var power = entMan.System<PowerReceiverSystem>();
+        var telephones = entMan.System<TelephoneSystem>();
+        var holopads = entMan.System<HolopadSystem>();
+        var chat = entMan.System<ChatSystem>();
+        var spoken = entMan.System<HoloCommsSpeechRecorderSystem>();
+
+        EntityUid consoleA = default;
+        EntityUid consoleB = default;
+        EntityUid holopadA = default;
+        EntityUid holopadB = default;
+        EntityUid pilotB = default;
+        EntityUid crewB = default;
+
+        await server.WaitAssertion(() =>
+        {
+            var gridA = map.Grid.Owner;
+            var newGrid = mapManager.CreateGridEntity(map.MapId);
+            var gridB = newGrid.Owner;
+            xformSystem.SetLocalPosition(gridB, new Vector2(40f, 0f));
+
+            var tiles = new List<(Vector2i, Tile)>();
+            for (var x = -4; x <= 4; x++)
+            {
+                for (var y = -4; y <= 4; y++)
+                {
+                    tiles.Add((new Vector2i(x, y), map.Tile.Tile));
+                }
+            }
+
+            mapSystem.SetTiles(gridA, map.Grid.Comp, tiles);
+            mapSystem.SetTiles(gridB, newGrid.Comp, tiles);
+
+            consoleA = entMan.SpawnEntity(Console, new EntityCoordinates(gridA, 0.5f, 0.5f));
+            holopadA = entMan.SpawnEntity(ShipHolopad, new EntityCoordinates(gridA, 3.5f, 3.5f));
+            consoleB = entMan.SpawnEntity(Console, new EntityCoordinates(gridB, 0.5f, 0.5f));
+            holopadB = entMan.SpawnEntity(ShipHolopad, new EntityCoordinates(gridB, 3.5f, 3.5f));
+
+            // The pilot hears only the console, the crewman only the holopad
+            pilotB = entMan.SpawnEntity("MobHuman", new EntityCoordinates(gridB, 0.5f, -0.5f));
+            crewB = entMan.SpawnEntity("MobHuman", new EntityCoordinates(gridB, 3.5f, 4.2f));
+
+            foreach (var uid in new[] { consoleA, consoleB, holopadA, holopadB })
+            {
+                power.SetNeedsPower(uid, false);
+            }
+        });
+
+        await server.WaitRunTicks(PowerTicks);
+
+        Entity<TelephoneComponent> moduleA = default;
+        Entity<TelephoneComponent> moduleB = default;
+
+        await server.WaitAssertion(() =>
+        {
+            moduleA = GetModule(entMan, consoleA);
+            moduleB = GetModule(entMan, consoleB);
+
+            telephones.CallTelephone(moduleA, (holopadB, entMan.GetComponent<TelephoneComponent>(holopadB)), consoleA);
+        });
+
+        await server.WaitRunTicks(1);
+        await server.WaitPost(() => telephones.AnswerTelephone(moduleB, consoleB));
+        await server.WaitRunTicks(1);
+
+        await server.WaitAssertion(() =>
+        {
+            var holopadAComp = entMan.GetComponent<HolopadComponent>(holopadA);
+            var moduleAComp = entMan.GetComponent<HolopadComponent>(moduleA);
+            Assert.That(entMan.GetComponent<TelephoneComponent>(holopadA).CurrentState, Is.EqualTo(TelephoneState.InCall),
+                "Every point of the calling ship joins the call");
+
+            holopads.SetHolopadUser((moduleB, entMan.GetComponent<HolopadComponent>(moduleB)), pilotB);
+            holopads.SetHolopadUser((holopadB, entMan.GetComponent<HolopadComponent>(holopadB)), crewB);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(Shown(holopadAComp), Is.EqualTo(crewB), "The last one to step up is shown");
+                Assert.That(Shown(moduleAComp), Is.EqualTo(crewB));
+            });
+
+            // The crewman walks off, the pilot is still at the console of the same ship
+            holopads.SetHolopadUser((holopadB, entMan.GetComponent<HolopadComponent>(holopadB)), null);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(Shown(holopadAComp), Is.EqualTo(pilotB), "The holopad went blank while the pilot was still on the line");
+                Assert.That(Shown(moduleAComp), Is.EqualTo(pilotB));
+            });
+
+            holopads.SetHolopadUser((moduleB, entMan.GetComponent<HolopadComponent>(moduleB)), null);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(Shown(holopadAComp), Is.Null, "Nobody is left at the other ship");
+                Assert.That(Shown(moduleAComp), Is.Null);
+            });
+
+            // Speech in another language reaches the other ship in that language
+            spoken.Spoken.Clear();
+            var language = protoMan.Index<LanguagePrototype>("Xeno");
+            chat.TrySendInGameICMessage(crewB, "hiss", InGameICChatType.Speak, ChatTransmitRange.Normal,
+                ignoreActionBlocker: true, languageOverride: language);
+
+            var hologramA = holopadAComp.Hologram!.Value.Owner;
+            Assert.That(spoken.Spoken.Any(s => s.Source == hologramA), "The holopad of the other ship did not speak");
+            Assert.That(spoken.Spoken.Where(s => s.Source == hologramA).Select(s => s.Language), Has.All.EqualTo("Xeno"),
+                "The holopad turned the speech into its own language");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    private static EntityUid? Shown(HolopadComponent holopad)
+    {
+        return holopad.Hologram?.Comp.LinkedEntity;
+    }
+
     private static Entity<TelephoneComponent> GetModule(IEntityManager entMan, EntityUid console)
     {
         var module = entMan.GetComponent<HoloCommsConsoleComponent>(console).Module;
@@ -230,5 +368,19 @@ public sealed class HoloCommsTest
     private static EntityUid? GetGrid(IEntityManager entMan, EntityUid uid)
     {
         return entMan.GetComponent<TransformComponent>(uid).GridUid;
+    }
+}
+
+/// <summary>
+/// Records what was said and in which language, for <see cref="HoloCommsTest"/>.
+/// </summary>
+public sealed class HoloCommsSpeechRecorderSystem : EntitySystem
+{
+    public readonly List<(EntityUid Source, string Language)> Spoken = new();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<EntitySpokeEvent>(ev => Spoken.Add((ev.Source, ev.Language.ID)));
     }
 }

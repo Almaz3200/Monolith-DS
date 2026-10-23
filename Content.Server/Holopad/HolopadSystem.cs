@@ -575,22 +575,106 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
     }
     private void SyncHolopadHologramAppearanceWithTarget(Entity<HolopadComponent> entity, Entity<HolopadUserComponent>? user, bool onlyIfChanged = false) // LuaM - onlyIfChanged
     {
-        foreach (var linkedHolopad in GetLinkedHolopads(entity))
+        // LuaM-start: a ship talks through all of its points, so every point of the other side gets the update,
+        // not only the ones linked to this point. Losing the user here keeps showing anyone still standing
+        // at another point of the ship, otherwise the hologram went blank while the pilot was still talking.
+        foreach (var linkedHolopad in GetConversationTargets(entity))
         {
             if (linkedHolopad.Comp.Hologram == null)
                 continue;
 
+            var shown = user?.Owner ?? FindShownUser(linkedHolopad);
+
             // LuaM - skip the network update when the hologram already shows them
-            if (onlyIfChanged && linkedHolopad.Comp.Hologram.Value.Comp.LinkedEntity == user?.Owner)
+            if (onlyIfChanged && linkedHolopad.Comp.Hologram.Value.Comp.LinkedEntity == shown)
                 continue;
 
-            if (user == null)
+            if (shown == null)
                 _appearanceSystem.SetData(linkedHolopad.Comp.Hologram.Value.Owner, TypingIndicatorVisuals.State, false);
 
-            linkedHolopad.Comp.Hologram.Value.Comp.LinkedEntity = user;
+            linkedHolopad.Comp.Hologram.Value.Comp.LinkedEntity = shown;
             Dirty(linkedHolopad.Comp.Hologram.Value);
         }
+        // LuaM-end
     }
+
+    // LuaM-start
+    private readonly List<EntityUid> _sidePoints = new();
+
+    /// <summary>
+    /// The holopads of this side that talk to the same other side as this one, the point itself included.
+    /// </summary>
+    private List<Entity<HolopadComponent>> GetConversationPoints(Entity<HolopadComponent> point)
+    {
+        var points = new List<Entity<HolopadComponent>> { point };
+
+        if (!TryComp<TelephoneComponent>(point, out var telephone) || telephone.LinkedTelephones.Count == 0)
+            return points;
+
+        // Everything the point talks to, with the whole ship behind each of them
+        var otherSide = new HashSet<EntityUid>();
+        foreach (var linked in telephone.LinkedTelephones)
+        {
+            _sidePoints.Clear();
+            _shipCommsLine.GetSidePoints(linked, _sidePoints);
+            otherSide.UnionWith(_sidePoints);
+        }
+
+        _sidePoints.Clear();
+        _shipCommsLine.GetSidePoints(point, _sidePoints);
+        foreach (var sidePoint in _sidePoints)
+        {
+            if (sidePoint == point.Owner ||
+                !TryComp<HolopadComponent>(sidePoint, out var holopad) ||
+                !TryComp<TelephoneComponent>(sidePoint, out var sideTelephone))
+            {
+                continue;
+            }
+
+            foreach (var linked in sideTelephone.LinkedTelephones)
+            {
+                if (!otherSide.Contains(linked.Owner))
+                    continue;
+
+                points.Add((sidePoint, holopad));
+                break;
+            }
+        }
+
+        return points;
+    }
+
+    /// <summary>
+    /// Every holopad on the other side of the conversation the point is a part of.
+    /// </summary>
+    private HashSet<Entity<HolopadComponent>> GetConversationTargets(Entity<HolopadComponent> point)
+    {
+        var targets = new HashSet<Entity<HolopadComponent>>();
+        foreach (var source in GetConversationPoints(point))
+        {
+            targets.UnionWith(GetLinkedHolopads(source));
+        }
+
+        return targets;
+    }
+
+    /// <summary>
+    /// Whoever stands at any point of the other side of the holopad's call, if anyone.
+    /// </summary>
+    private EntityUid? FindShownUser(Entity<HolopadComponent> holopad)
+    {
+        foreach (var remote in GetLinkedHolopads(holopad))
+        {
+            foreach (var point in GetConversationPoints(remote))
+            {
+                if (point.Comp.User is { } user && !TerminatingOrDeleted(user))
+                    return user.Owner;
+            }
+        }
+
+        return null;
+    }
+    // LuaM-end
 
     private void ShutDownHolopad(Entity<HolopadComponent> entity)
     {

@@ -1,4 +1,4 @@
-using System.Numerics;
+using System.Linq;
 using Content.Client.Stylesheets;
 using Content.Shared._LuaM.HoloComms;
 using Robust.Client.UserInterface;
@@ -7,21 +7,27 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client._LuaM.HoloComms;
 
 /// <summary>
-/// The drop-down list of everybody the console can call, ships first, then the holopads.
+/// The list of everybody the console can call, ships first, then the holopads.
+/// It stays in the comms window, picking a contact places the call.
 /// </summary>
-public sealed class HoloCommsContactsPopup : Popup
+public sealed class HoloCommsContactsList : BoxContainer
 {
-    private const float MaxListHeight = 320f;
-
     public event Action<NetEntity>? OnContactPicked;
 
     private readonly LineEdit _search;
     private readonly BoxContainer _list;
     private readonly Label _empty;
     private IReadOnlyList<HoloCommsContact> _contacts = Array.Empty<HoloCommsContact>();
+    private bool _locked;
 
-    public HoloCommsContactsPopup()
+    public HoloCommsContactsList()
     {
+        Orientation = LayoutOrientation.Vertical;
+        SeparationOverride = 4;
+
+        var header = new Label { Text = Loc.GetString("holo-comms-contacts-title") };
+        header.AddStyleClass(ConsoleStyles.HeaderLabel);
+
         _search = new LineEdit
         {
             PlaceHolder = Loc.GetString("holo-comms-contacts-search"),
@@ -32,7 +38,7 @@ public sealed class HoloCommsContactsPopup : Popup
 
         _list = new BoxContainer
         {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Orientation = LayoutOrientation.Vertical,
             HorizontalExpand = true,
             SeparationOverride = 2,
             Margin = new Thickness(4),
@@ -46,7 +52,7 @@ public sealed class HoloCommsContactsPopup : Popup
             FontColorOverride = Color.FromHex("#7A8899"),
         };
 
-        var listPanel = new PanelContainer { VerticalExpand = true };
+        var listPanel = new PanelContainer { VerticalExpand = true, MinHeight = 90 };
         listPanel.AddStyleClass(ConsoleStyles.Inset);
         listPanel.AddChild(new ScrollContainer
         {
@@ -54,53 +60,45 @@ public sealed class HoloCommsContactsPopup : Popup
             VerticalExpand = true,
             Children = { new BoxContainer
             {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                Orientation = LayoutOrientation.Vertical,
                 Children = { _list, _empty },
             } },
         });
 
-        var root = new PanelContainer();
+        var root = new PanelContainer { VerticalExpand = true };
         root.AddStyleClass(ConsoleStyles.Section);
         root.AddChild(new BoxContainer
         {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Orientation = LayoutOrientation.Vertical,
             Margin = new Thickness(4),
             SeparationOverride = 4,
-            Children = { _search, listPanel },
+            Children = { header, _search, listPanel },
         });
 
         AddChild(root);
-        OnPopupHide += () =>
-        {
-            _search.Clear();
-            Orphan();
-        };
+        Rebuild();
     }
 
     public void SetContacts(IReadOnlyList<HoloCommsContact> contacts)
     {
-        _contacts = contacts;
+        // Rebuilding the same list would throw the scroll back to the top
+        if (_contacts.SequenceEqual(contacts))
+            return;
 
-        if (Visible)
-            Rebuild();
+        _contacts = contacts.ToArray();
+        Rebuild();
     }
 
     /// <summary>
-    /// Opens the list right under the given control, as wide as it.
+    /// No calls can be placed while the line is taken, the list stays to read.
     /// </summary>
-    public void OpenBelow(Control anchor)
+    public void SetLocked(bool locked)
     {
-        if (anchor.Root == null)
+        if (_locked == locked)
             return;
 
+        _locked = locked;
         Rebuild();
-
-        var position = anchor.GlobalPosition + new Vector2(0f, anchor.Size.Y + 2f);
-        var height = MathF.Min(MaxListHeight, anchor.Root.Size.Y - position.Y - 4f);
-
-        anchor.Root.ModalRoot.AddChild(this);
-        Open(UIBox2.FromDimensions(position, new Vector2(anchor.Size.X, MathF.Max(120f, height))));
-        _search.GrabKeyboardFocus();
     }
 
     private void Rebuild()
@@ -109,6 +107,7 @@ public sealed class HoloCommsContactsPopup : Popup
 
         var filter = _search.Text.Trim();
         HoloCommsContactKind? section = null;
+        var number = 0;
 
         foreach (var contact in _contacts)
         {
@@ -125,29 +124,29 @@ public sealed class HoloCommsContactsPopup : Popup
                         ? "holo-comms-contacts-ships"
                         : "holo-comms-contacts-holopads"),
                     Margin = new Thickness(2, _list.ChildCount == 0 ? 0 : 6, 2, 2),
+                    FontColorOverride = Color.FromHex("#9FB3C8"),
                 };
-                header.AddStyleClass(ConsoleStyles.HeaderLabel);
                 _list.AddChild(header);
             }
 
+            number++;
+            var name = contact.Busy
+                ? Loc.GetString("holo-comms-contact-busy", ("name", contact.Name))
+                : contact.Name;
+
             var button = new Button
             {
-                Text = contact.Busy
-                    ? Loc.GetString("holo-comms-contact-busy", ("name", contact.Name))
-                    : contact.Name,
-                Disabled = contact.Busy,
+                Text = Loc.GetString("holo-comms-contact-entry", ("number", number), ("name", name)),
+                Disabled = contact.Busy || _locked,
                 ClipText = true,
                 HorizontalExpand = true,
                 ToolTip = contact.Name,
             };
             button.AddStyleClass(ConsoleStyles.Button);
+            button.Label.HorizontalAlignment = HAlignment.Left;
 
             var target = contact.Target;
-            button.OnPressed += _ =>
-            {
-                OnContactPicked?.Invoke(target);
-                Close();
-            };
+            button.OnPressed += _ => OnContactPicked?.Invoke(target);
 
             _list.AddChild(button);
         }
