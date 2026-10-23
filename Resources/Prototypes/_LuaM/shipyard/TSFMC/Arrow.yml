@@ -6,7 +6,7 @@
   name: vessel-arrow-name
   description: vessel-arrow-desc
   limit: 2
-  price: 320000
+  price: 445000 # LuaM: 320000<445000, appraised at ~442000
   purchasable: false # voucher only
   category: Large
   group: Security

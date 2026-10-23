@@ -61,7 +61,7 @@
 Чем больше мутагена, тем больше мутаций. Многие гены жизненны, поэтому большинство мутаций убивают растение.
 
 <Box>
-<GuideEntityEmbed Entity="ChemistryBottleUnstableMutagen"/>
+<GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
 </Box>
 
 ## Перекрёстное опыление

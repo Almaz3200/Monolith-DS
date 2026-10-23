@@ -12391,7 +12391,6 @@ entities:
     - type: Transform
       pos: 9.449436,34.446896
       parent: 1
-    - type: BiasedArtifact
 - proto: ComputerAnalysisConsole
   entities:
   - uid: 5073
