@@ -1,0 +1,11 @@
+# Lua: flavors of the ported caviar and sawdust soup, they were missing in the port.
+
+- type: flavor
+  id: caviar
+  flavorType: Complex
+  description: flavor-complex-caviar
+
+- type: flavor
+  id: sawdust
+  flavorType: Complex
+  description: flavor-complex-sawdust

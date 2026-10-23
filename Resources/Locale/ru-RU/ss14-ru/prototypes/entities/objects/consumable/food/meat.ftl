@@ -132,3 +132,12 @@ ent-FoodMeatPatty = meat patty
     .desc = A flat slab of ground meat. Ready for grillin'.
 ent-FoodMeatPattyCooked = cooked meat patty
     .desc = A cooked meat patty.
+
+# Lua start
+ent-FoodMeatDragonCutlet = сырая драконья котлета
+    .desc = Сырая котлета из драконьего мяса.
+ent-FoodMeatDragonCooked = стейк из дракона
+    .desc = На большинстве станций полить его кетчупом считается тяжким преступлением.
+ent-FoodMeatDragonCutletCooked = котлета из дракона
+    .desc = Еда, достойная королей!
+# Lua end
