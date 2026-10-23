@@ -83,6 +83,7 @@
   - WeaponCaseHeavyAmmo #Mono
   - WeaponCaseShortAmmo
   - WeaponCaseShortExplosives
+  - ArmorPlateStorageT1Recipe # LuaM
 ## Weapons
   - CombatKnife
   - WeaponLaserSvalinn # After the changes made to windows shouldn't be that much of an issue now if it's widely available
@@ -170,6 +171,7 @@
   - ClothingBackpackDuffelHolding
   - ClothingBackpackMessengerHolding
   - FlashlightSecliteNF
+  - ArmorPlateStorageT2Recipe # LuaM
 ## Weapons
   - WeaponGrapplingGun
   - KatanaNF

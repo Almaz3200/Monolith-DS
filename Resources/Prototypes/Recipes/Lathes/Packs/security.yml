@@ -11,6 +11,8 @@
   - TargetSyndicate
   - Zipties
   # LuaM-start:
+  - ArmorPlateStorageT1Recipe
+  - ArmorPlateStorageT3Recipe # Temporarily, until Caelestinus R&D is available.
   - Wirecutter
   - Screwdriver
   - Welder

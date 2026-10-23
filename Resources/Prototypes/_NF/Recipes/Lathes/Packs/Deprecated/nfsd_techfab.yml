@@ -45,7 +45,10 @@
   - PowerCageMedium
   - PowerCageSmall
   - Signaller
-  - ClothingNeckWearableCameraTSF # LuaM
+  # LuaM-start:
+  - ClothingNeckWearableCameraTSF
+  - ArmorPlateStorageT1Recipe
+  # LuaM-end
 
 - type: latheRecipePack
   id: NFNfsdTechfabDeprecated

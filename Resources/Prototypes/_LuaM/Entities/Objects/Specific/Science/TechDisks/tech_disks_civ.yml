@@ -38,3 +38,23 @@
   - type: TechnologyDisk
     recipes:
     - ZookeeperTranslatorImplanter
+
+- type: entity
+  parent: TechDiskBase
+  id: TechDiskArmorPlateStorageT5
+  name: advanced armor plate storage technology disk
+  description: A disk containing advanced materials technology for manufacturing high-capacity armor plate storage boxes.
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#30104D"
+    - state: label
+    - state: protect
+    - state: design
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - ArmorPlateStorageT5Recipe

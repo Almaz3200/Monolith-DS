@@ -6,6 +6,10 @@
   - ClothingOuterHardsuitM86Tsf
   - ClothingOuterHardsuitM92XTsf
   - ClothingEyesNightVisionGoggles
+  # LuaM-start:
+  - ArmorPlateStorageT4TSFRecipe
+  - ClothingBackpackERTLeaderRecipe
+  # LuaM-end
 # - ClothingUniformTsfmcMoppTsf
 # - ClothingHandsGlovesMoppTsf
 
