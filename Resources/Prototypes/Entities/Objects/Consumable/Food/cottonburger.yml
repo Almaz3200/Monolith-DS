@@ -31,6 +31,7 @@
     - ClothMade
     - Bread
     - Slice
+    - BountyCottonBun # LuaM
   - type: MothFood # Frontier
 
 - type: entity

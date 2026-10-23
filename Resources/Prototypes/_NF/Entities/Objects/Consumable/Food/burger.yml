@@ -147,6 +147,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - BountyCottonCheeseburger # LuaM
   - type: SolutionContainerManager
     solutions:
       food:
@@ -180,6 +181,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - BountyCottonBurger # LuaM
   - type: SolutionContainerManager
     solutions:
       food:

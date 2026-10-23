@@ -182,7 +182,7 @@
       - avocado
       - bread
       - egg
-      - cheese
+      - cheesy # LuaM: cheese > cheesy, there is no such flavor
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/Baked/bread.rsi
     state: breakfastbagel
@@ -209,7 +209,7 @@
       - avocado
       - bread
       - egg
-      - cheese
+      - cheesy # LuaM: cheese > cheesy, there is no such flavor
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/Baked/bread.rsi
     state: breakfastbagelpoppy
@@ -688,6 +688,7 @@
   - type: Tag
     tags:
     - Meat
+    - BountyTonkatsuNoodles # LuaM
 
 - type: entity
   name: battered tofu slice
@@ -716,6 +717,7 @@
   - type: Tag
     tags:
     - Cooked
+    - BountyFriedTofu # LuaM
   - type: FlavorProfile
     flavors:
       - oily
@@ -762,5 +764,6 @@
   - type: Tag
     tags:
     - Meat
+    - BountyChickenParmesan # LuaM
 
 # Lua end

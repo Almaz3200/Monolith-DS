@@ -215,7 +215,7 @@
   - type: FlavorProfile
     flavors:
       - corn
-      - salt
+      - salty # LuaM: salt > salty, there is no such flavor
       - butter
   - type: Sprite
     state: popcorn

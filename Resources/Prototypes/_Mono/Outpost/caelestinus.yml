@@ -310,6 +310,45 @@
           - CCBountyBreadDog
           - CCBountyCrazyHamburger
           - CCBountyDragonOmelette
+          # LuaM-start: food ported from Lua
+          - CCBountyCottonBun
+          - CCBountyRatKebab
+          - CCBountyCottonGrilledCheeseSandwich
+          - CCBountyCreamCroissant
+          - CCBountyChocolateCroissant
+          - CCBountyCheeseCroissant
+          - CCBountyDoughHotDog
+          - CCBountyFriedEggSausage
+          - CCBountyFriedSausage
+          - CCBountyMeatKebab
+          - CCBountyLizardTailKebab
+          - CCBountyDoubleRatKebab
+          - CCBountyTexasToast
+          - CCBountyCottonBurger
+          - CCBountyLicoriceCreamsicle
+          - CCBountyFriedTofu
+          - CCBountyWholeChicken
+          - CCBountyWholeDuck
+          - CCBountyCottonCake
+          - CCBountyAmericanBreakfast
+          - CCBountyEnglishBreakfast
+          - CCBountyShawarma
+          - CCBountyCheeseShawarma
+          - CCBountyMeatShawarma
+          - CCBountyHawaiianKebab
+          - CCBountyFiestaKebab
+          - CCBountyMashedMeatballs
+          - CCBountyFrenchGarlicBread
+          - CCBountyCinnamonRoll
+          - CCBountyCottonCheeseburger
+          - CCBountyCinnamonMochi
+          - CCBountyChickenParmesan
+          - CCBountyWorldPeazza
+          - CCBountySnakeKebab
+          - CCBountyWholePenguin
+          - CCBountyDragonSteak
+          - CCBountyDraco
+          # LuaM-end
 
 - type: gameMap
   id: EmptyFrontier

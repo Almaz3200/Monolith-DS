@@ -25,6 +25,9 @@
   id: FoodBreakfastAmerican
   description: A huge plate of protein and carbs, more likely to put you back in bed than get you out of it. Oh, what fresh hell is this?
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyAmericanBreakfast
   - type: FlavorProfile
     flavors:
       - food
@@ -37,6 +40,9 @@
   id: FoodBreakfastEnglish
   description: A huge plate of protein and carbs, more likely to put you back in bed than get you out of it. Don't mention the war!
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyEnglishBreakfast
   - type: FlavorProfile
     flavors:
       - food

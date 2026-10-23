@@ -216,6 +216,10 @@
   id: FoodTacoDragon
   description: A dragon taco, which is technically also a fish taco.
   components:
+  - type: Tag # LuaM: food bounty tag, the parent's tags are kept
+    tags:
+    - Meat
+    - BountyDraco
   - type: FlavorProfile
     flavors:
     - meaty

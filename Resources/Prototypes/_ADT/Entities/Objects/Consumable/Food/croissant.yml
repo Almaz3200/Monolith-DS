@@ -4,6 +4,9 @@
   id: ADTFoodCroissantCream
   description: croissant-cream-desc
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyCreamCroissant
   - type: Sprite
     sprite: ADT/Objects/Consumable/Food/croissant.rsi
     state: cream
@@ -27,6 +30,9 @@
   id: ADTFoodCroissantChocolate
   description: croissant-choco-desc
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyChocolateCroissant
   - type: Sprite
     sprite: ADT/Objects/Consumable/Food/croissant.rsi
     state: chocolate
@@ -50,6 +56,9 @@
   id: ADTFoodCroissantCheese
   description: croissant-cheese-desc
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyCheeseCroissant
   - type: Sprite
     sprite: ADT/Objects/Consumable/Food/croissant.rsi
     state: cheese
@@ -73,6 +82,9 @@
   id: ADTFoodHotDog
   description: hot-dog-desc
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyDoughHotDog
   - type: FlavorProfile
     flavors:
       - bun

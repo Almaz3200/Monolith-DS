@@ -62,6 +62,10 @@
   id: FoodBreadGarlicBaguette
   description: Garlic? Melted cheese on a baguette!? The only thing missing here is more even garlic. 
   components:
+  - type: Tag # LuaM: food bounty tag, the parent's tags are kept
+    tags:
+    - Bread
+    - BountyFrenchGarlicBread
   - type: FlavorProfile
     flavors:
       - bread
@@ -117,6 +121,11 @@
   id: FoodBreadTexasToast
   description: A thick slab of toast covered in garlic and butter. And if that don't work - use more garlic.
   components:
+  - type: Tag # LuaM: food bounty tag, the parent's tags are kept
+    tags:
+    - Bread
+    - Slice
+    - BountyTexasToast
   - type: FlavorProfile
     flavors:
       - bread

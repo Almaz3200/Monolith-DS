@@ -745,6 +745,11 @@
   id: FoodPizzaWorldpeas
   description: Modern diplomacy in the shape of a disc.
   components:
+  - type: Tag # LuaM: food bounty tag, the parent's tags are kept
+    tags:
+    - Pizza
+    - ReptilianFood
+    - BountyWorldPeazza
   - type: FlavorProfile
     flavors:
       - bread

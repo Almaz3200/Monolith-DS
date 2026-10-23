@@ -4,6 +4,9 @@
   id: ADTFriedEggSausage
   description: fried-egg-desc
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyFriedEggSausage
   - type: FlavorProfile
     flavors:
       - egg

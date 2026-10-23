@@ -226,7 +226,7 @@
     flavors:
     - rice
     - icecream
-    - antiseptic
+    - medicine # LuaM: antiseptic > medicine, there is no such flavor
 
 # Lua start
 
@@ -236,6 +236,9 @@
   id: FoodFrozenPopsicleLicorice
   description: Vanilla ice cream on a stick covered in a chewy licorice shell.
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyLicoriceCreamsicle
   - type: Sprite
     layers:
     - state: stick
@@ -262,6 +265,9 @@
   id: FoodFrozenMochiSpice
   description: A delicious blorb of chewey sticky rice encapsulating a core of ice cream. It's spicy! Is that cinnamon?
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyCinnamonMochi
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
     layers:

@@ -108,6 +108,9 @@
   id: FoodBakedCinnamonRoll
   description: I wonder how much more icing you could put on this.
   components:
+  - type: Tag # LuaM: food bounty tag
+    tags:
+    - BountyCinnamonRoll
   - type: FlavorProfile
     flavors:
       - sweet

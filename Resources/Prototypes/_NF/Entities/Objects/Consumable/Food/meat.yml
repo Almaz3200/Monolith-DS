@@ -128,7 +128,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - meat
+      - meaty # LuaM: meat > meaty, there is no such flavor
       - honey
       - salty
   - type: Sprite
@@ -161,7 +161,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - meat
+      - meaty # LuaM: meat > meaty, there is no such flavor
       - honey
       - salty
   - type: SolutionContainerManager
@@ -295,6 +295,7 @@
     tags:
     - Cooked
     - Meat
+    - BountyWholeChicken # LuaM
 
 - type: entity
   name: whole cooked duck
@@ -321,6 +322,7 @@
     tags:
     - Cooked
     - Meat
+    - BountyWholeDuck # LuaM
 
 - type: entity
   name: whole cooked penguin
@@ -348,5 +350,6 @@
     tags:
     - Cooked
     - Meat
+    - BountyWholePenguin # LuaM
 
 # Lua end

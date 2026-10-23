@@ -964,6 +964,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - BountyCottonGrilledCheeseSandwich # LuaM
   - type: SolutionContainerManager
     solutions:
       food:
