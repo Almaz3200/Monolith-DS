@@ -38,7 +38,7 @@
 - type: gameMap
   id: TSFMCHalcyon
   mapName: 'TSFMC Flagship Halcyon'
-  mapPath: Maps/_LuaM/POI/tsfmchalcyonLuaM.yml # LuaM: /Maps/_Mono/POI/tsfmchalcyon.yml > /Maps/_LuaM/POI/tsfmchalcyonLuaM.yml
+  mapPath: /Maps/_LuaM/POI/tsfmchalcyonLuaM.yml # LuaM: /Maps/_Mono/POI/tsfmchalcyon.yml > /Maps/_LuaM/POI/tsfmchalcyonLuaM.yml
   minPlayers: 0
   randomRotation: false
   stations:
