@@ -1,0 +1,8 @@
+# Species
+- type: loadoutEffectGroup
+  id: WaterBreather
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Feroxi
+    - Shark # LuaM

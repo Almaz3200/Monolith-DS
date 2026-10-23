@@ -17,6 +17,7 @@ using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Content.Shared.Stacks;
 using Content.Shared.Construction.Prototypes;
+using Content.Shared._LuaM.PartExchanger; // LuaM
 
 namespace Content.Server._NF.Construction;
 
@@ -28,6 +29,7 @@ public sealed partial class PartExchangerSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private StorageSystem _storage = default!;
+    [Dependency] private RpedPickupModeSystem _rpedPickupMode = default!; // LuaM
     [Dependency] private StackSystem _stack = default!;
     [Dependency] private EntityManager _entity = default!;
 
@@ -192,7 +194,11 @@ public sealed partial class PartExchangerSystem : EntitySystem
             foreach (var partState in partSet)
             {
                 if (!partState.state.InContainer)
+                {
+                    _rpedPickupMode.IgnoreFilters = true; // LuaM: replaced parts always go back into the RPED
                     _storage.Insert(storageUid, partState.part, out _, playSound: false);
+                    _rpedPickupMode.IgnoreFilters = false; // LuaM
+                }
             }
         }
         _construction.RefreshParts(uid, machine);
@@ -309,7 +315,11 @@ public sealed partial class PartExchangerSystem : EntitySystem
             foreach (var partState in partSet)
             {
                 if (!partState.state.InContainer)
+                {
+                    _rpedPickupMode.IgnoreFilters = true; // LuaM: replaced parts always go back into the RPED
                     _storage.Insert(uid, partState.part, out _, playSound: false);
+                    _rpedPickupMode.IgnoreFilters = false; // LuaM
+                }
             }
         }
     }

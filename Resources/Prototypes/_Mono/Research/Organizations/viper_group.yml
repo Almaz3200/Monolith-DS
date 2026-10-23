@@ -1,8 +1,10 @@
+# T1
+
 - type: technology
   id: ViperGroupApparel
   name: research-technology-viper-group-apparel
   entityIcon: ClothingNeckViperGroupMantle
-  discipline: ViperGroup
+  discipline: Ussp # LuaM ViperGroup > Ussp
   tier: 1
   cost: 5000
   recipeUnlocks:
@@ -10,14 +12,17 @@
   - ClothingUniformJumpsuitViperGroupUniform
   - ClothingUniformJumpsuitViperGroupTurtleneck
   technologyPrerequisites:
+  - UsspMediumGuns
   - UniversalMaterialResearchT1
-  position: 14, 1
+  position: 6, 8 # LuaM 7, -8 > 6, 8
+
+# T2
 
 - type: technology
   id: ViperGroupHardsuitBasic
   name: research-technology-viper-group-basic
   entityIcon: ClothingOuterHardsuitViperGroupStandard
-  discipline: ViperGroup
+  discipline: Ussp # LuaM ViperGroup > Ussp
   tier: 2
   cost: 40000
   recipeUnlocks:
@@ -26,18 +31,48 @@
   - ClothingOuterHardsuitViperGroupMedic
   technologyPrerequisites:
   - ViperGroupApparel
-  - UniversalMaterialResearchT2
-  position: 14, 7
+# - UniversalMaterialResearchT2 # Commented by LuaM
+  position: 5, 9 # LuaM 7, -16 > 5, 9
 
 - type: technology
-  id: ViperGroupHardsuitJuggernaut
-  name: research-technology-viper-group-juggernaut
+  id: ViperGroupHardsuitHeavy
+  name: research-technology-viper-group-heavy
   entityIcon: ClothingOuterHardsuitViperGroupJuggernaut
-  discipline: ViperGroup
+  discipline: Ussp # LuaM ViperGroup > Ussp
   tier: 3
-  cost: 20000
+  cost: 25000
   recipeUnlocks:
   - ClothingOuterHardsuitViperGroupJuggernaut
+  - ClothingOuterHardsuitViperGroupShield
   technologyPrerequisites:
   - ViperGroupHardsuitBasic
-  position: 14, 8
+  position: 5, 10 # LuaM 8, -17 > 5, 10
+
+- type: technology
+  id: ViperGroupShipyardAdvanced
+  name: research-technology-viper-group-shipyard-adv
+  entityIcon: ShipVoucherVGWolf
+  discipline: Ussp # LuaM ViperGroup > Ussp
+  tier: 2
+  cost: 50000
+  recipeUnlocks:
+  - ShipVoucherVGWolf
+  technologyPrerequisites:
+  - ViperGroupApparel
+  position: 7, 9 # LuaM 8, 16 > 7, 9
+
+- type: technology
+  id: ViperGroupShipyardElite # needs better id
+  name: research-technology-viper-group-shipyard-T3
+  entityIcon: ShipVoucherVGWolf
+  discipline: Ussp # LuaM ViperGroup > Ussp
+  tier: 3
+  cost: 150000
+  recipeUnlocks:
+  - ShipVoucherVGLeviathan
+  - ShipVoucherVGKeelback
+  - ShipVoucherVGLancehead
+  technologyPrerequisites:
+  - ViperGroupShipyardAdvanced
+  # - UniversalMaterialResearchT3 # Commented by LuaM
+  position: 7, 10 # LuaM 9, -16 > 7, 10

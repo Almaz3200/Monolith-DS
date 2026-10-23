@@ -49,3 +49,6 @@ ent-MobCrabAtmos = Тропико
     .desc = Благородный и непоколебимый защитник Атмосии. Viva!
 ent-MobKoboldYipyip = Ип-Ип
     .desc = Он живет в ананасе на Фронтире!
+ent-MobCorgiMouse = real mouse
+    .desc = It's 100% a real hungry mouse.
+    .suffix = { ent-MobCorgiIan.suffix }

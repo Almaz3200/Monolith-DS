@@ -1,0 +1,17 @@
+ent-MMCIndustrialCredit = MMC industrial credit
+    .desc = A ticket for use at the MMC requisitions kiosk. Have a pheno-Mieyo day!
+    .suffix = 100 MIC
+ent-MMCIndustrialCredit1 = { ent-MMCIndustrialCredit }
+    .desc = { ent-MMCIndustrialCredit.desc }
+    .suffix = 1 MIC
+ent-MMCIndustrialCredit5 = { ent-MMCIndustrialCredit }
+    .desc = { ent-MMCIndustrialCredit.desc }
+    .suffix = 5 MIC
+ent-MMCIndustrialCredit25 = { ent-MMCIndustrialCredit }
+    .desc = { ent-MMCIndustrialCredit.desc }
+    .suffix = 25 MIC
+ent-MMCIndustrialCredit50 = { ent-MMCIndustrialCredit }
+    .desc = { ent-MMCIndustrialCredit.desc }
+    .suffix = 50 MIC
+ent-VendingMachineRestockMMC = MMC Vendor Restock
+    .desc = A box filled with MMC corporate supplies. Load it into a MMC Automated Vendor to restock. A label reads "FOR AUTHORIZED EMPLOYEES ONLY. HANDLE WITH CARE."

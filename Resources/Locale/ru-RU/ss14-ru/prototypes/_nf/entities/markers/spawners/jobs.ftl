@@ -1,4 +1,4 @@
-ent-SpawnPointContractor = авантюрист
+ent-SpawnPointContractor = наёмник
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointMercenary = наёмник
     .desc = { ent-SpawnPointJobBase.desc }

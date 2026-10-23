@@ -32,13 +32,15 @@ public sealed partial class NavScreen : BoxContainer
         IFFToggle.OnToggled += OnIFFTogglePressed;
         IFFToggle.Pressed = NavRadar.ShowIFF;
 
-        IFFShuttleToggle.OnToggled += OnIFFShuttleTogglePressed;
-        IFFShuttleToggle.Pressed = NavRadar.ShowIFFShuttles;
+        IFFDetailedToggle.OnToggled += OnIFFDetailedTogglePressed; // Mono
+        IFFDetailedToggle.Pressed = NavRadar.ShowIFFDetailed; // Mono
 
         DockToggle.OnToggled += OnDockTogglePressed;
         DockToggle.Pressed = NavRadar.ShowDocks;
 
         NfInitialize(); // Frontier Initialization for the NavScreen
+        InitializeGunnery(); // Lua
+        InitializeTargetControls(); // LuaM
     }
 
     // Frontier - IFF search
@@ -100,10 +102,11 @@ public sealed partial class NavScreen : BoxContainer
         args.Button.Pressed = NavRadar.ShowIFF;
     }
 
-    private void OnIFFShuttleTogglePressed(BaseButton.ButtonEventArgs args)
+    // Mono
+    private void OnIFFDetailedTogglePressed(BaseButton.ButtonEventArgs args)
     {
-        NavRadar.ShowIFFShuttles ^= true;
-        args.Button.Pressed = NavRadar.ShowIFFShuttles;
+        NavRadar.ShowIFFDetailed ^= true;
+        args.Button.Pressed = NavRadar.ShowIFFDetailed;
     }
 
     private void OnDockTogglePressed(BaseButton.ButtonEventArgs args)
@@ -123,6 +126,7 @@ public sealed partial class NavScreen : BoxContainer
         ShieldPanel.Visible = scc.ShieldState.HasShield;
         ShieldBar.SetState(scc.ShieldState);
         // Forge-Change-End
+        UpdateWeaponsPanelVisibility(); // Lua: the shield sits in the gunnery panel now
 
         NfUpdateState(scc); // Frontier Update State
     }

@@ -7,6 +7,7 @@
   - WeaponDP29USSP
   - WeaponShotgunBigLeadyUSSP
   - WeaponRifleAK410USSP
+  - WeaponLMGHammerUSSP # LuaM
 
 - type: latheRecipePack
   id: MonoUSSPMiscDynamic
@@ -25,3 +26,17 @@
   - ClothingOuterHardsuitUsspM10USSP
   - ClothingModsuitUSSPVaryagUSSP
   - ClothingModsuitUSSPZastavnikUSSP
+
+- type: latheRecipePack
+  id: MonoUSSPVouchersDynamic
+  recipes:
+  - ShipVoucherUsspT0Recipe
+  - ShipVoucherUsspDrakon
+  - ShipVoucherUsspTayfun
+  - ShipVoucherUsspBuran
+
+- type: latheRecipePack
+  id: MonoUSSPStatic
+  recipes:
+  - USSPTechfabMachineCircuitboard
+  - ShipVoucherUsspT0Recipe

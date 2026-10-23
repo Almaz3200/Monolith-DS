@@ -12,7 +12,7 @@
 
   ## Механики
 
-  Из-за [color=yellow]маленького роста[/color] таяраны [color=#ec3a3a]получают на 15% больше механического урона[/color], но также могут [color=#1e90ff]помещаться в вещмешки[/color].
+  Из-за [color=yellow]маленького роста[/color] таяраны могут [color=#1e90ff]помещаться в вещмешки[/color].
 
   Их слой шерсти даёт им некоторую [color=#1e90ff]устойчивость к холоду[/color], ценой [color=#ec3a3a]получения большего урона от ожогов[/color].
 
@@ -23,5 +23,9 @@
   ## Мягкие лапы
 
   Этa раса при падении с большой высоты приземляется мягче. (Проще говоря, у них большее расстояние, при котором падение не причиняет им вреда и не оглушает их.)
+
+  ## Soft Paws
+
+  This species lands softer when dropping from high altitudes. (In layman's terms, they have a higher distance where falling does not hurt or stun them.)
 
 </Document>

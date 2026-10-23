@@ -146,7 +146,6 @@
         Piercing: 0.65
         Radiation: 0.25 #salv is supposed to have radiation hazards in the future
         Caustic: 0.45
-        Poison: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.87
@@ -470,7 +469,7 @@
         Slash: 0.8
         Piercing: 0.85
         Heat: 0.35
-        Radiation: 0.01 # Mono 0.0 -> 0.01
+        Radiation: 0.1 # Mono 0.0 -> 0.1
         Caustic: 0.7
   - type: ClothingSpeedModifier
     walkModifier: 0.8
@@ -508,7 +507,6 @@
         Slash: 0.9
         Piercing: 0.9
         Caustic: 0.1
-        Poison: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 1.10 # 0.9-> 1.10 - Mono
     sprintModifier: 1.10 # 0.95-> 1.10 - Mono
@@ -545,7 +543,7 @@
         Slash: 0.65 # Mono 0.65 < 0.8
         Piercing: 0.65 # Mono 0.65 < 0.9
         Heat: 0.3
-        Radiation: 0.01 # Mono 0.1 -> 0.0 -> 0.01
+        Radiation: 0.1
         Caustic: 0.2
   - type: ExplosionResistance
     damageCoefficient: 0.1
@@ -572,7 +570,8 @@
   - type: StaticPrice
     price: 750
   - type: StealTarget
-    stealGroup: ClothingOuterHardsuitRd
+    stealGroup:
+    - ClothingOuterHardsuitRd
   - type: PirateBountyItem # Frontier
     id: ClothingOuterHardsuitRd # Frontier
   - type: StaminaDamageResistance # Mono - Stamres
@@ -660,7 +659,7 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT3]
   id: ClothingOuterHardsuitSyndie
   name: blood-red hardsuit
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
@@ -679,9 +678,9 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.45 # LuaM: 0.5 > 0.45
-        Slash: 0.45 # LuaM: 0.5 > 0.45
-        Piercing: 0.4 # LuaM: 0.5 > 0.4
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
         Heat: 0.5
         Radiation: 0.5
         Caustic: 0.5
@@ -707,7 +706,7 @@
 
 # Syndicate Medic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitSyndie]
+  parent: [ClothingOuterHardsuitSyndie, BaseFactionGearOtherFactionT1]
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
@@ -719,15 +718,15 @@
   - type: Armor # Mono
     modifiers:
       coefficients:
-        Blunt: 0.5 # LuaM: 0.55 > 0.5
-        Slash: 0.5 # LuaM: 0.55 > 0.5
-        Piercing: 0.45 # LuaM: 0.5 > 0.45
-        Heat: 0.4 # LuaM: 0.5 > 0.4
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.5
+        Heat: 0.5
         Radiation: 0.35
         Caustic: 0.2
   - type: ClothingSpeedModifier # Mono
-    walkModifier: 1.0 # LuaM: 0.93 > 1.0
-    sprintModifier: 1.0 # LuaM: 0.93 > 1.0
+    walkModifier: 0.93
+    sprintModifier: 0.93
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -743,7 +742,7 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT3]
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
@@ -765,17 +764,17 @@
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.5 # LuaM: 0.6 > 0.5
-        Slash: 0.5 # LuaM: 0.6 > 0.5
-        Piercing: 0.5 # LuaM: 0.6 > 0.5
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
         Heat: 0.35
-        Radiation: 0.01
+        Radiation: 0.1 # Mono: 0.01 -> 0.1
         Caustic: 0.5
   - type: Item
     size: Huge
   - type: ClothingSpeedModifier
-    walkModifier: 1.1 # LuaM: 1.0 > 1.1
-    sprintModifier: 1.1 # 0.9-> 1 Mono # LuaM: 1.0 > 1.1
+    walkModifier: 1.0
+    sprintModifier: 1.0 # 0.9-> 1 Mono
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.45
@@ -869,7 +868,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
 #      helmetattachment: ClothingHeadHelmetAttachmentBlock # Commented by LuaM
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.4
+    coefficient: 0.6
   - type: FootstepModifier # LuaM
     footstepSoundCollection:
       collection: FootstepHeavySuit

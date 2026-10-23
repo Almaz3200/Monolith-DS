@@ -3,6 +3,7 @@
   recipes:
   - ClothingOuterHardsuitPirateScafRogue
   - ClothingOuterVestWebRogue
+  - ClothingOuterVestWebEliteRogue
   - ClothingOuterHardsuitPDVMedic
   - ClothingShoesBootsMagSyndieRogue
   - ClothingMaskGasSyndicateRogue
@@ -22,7 +23,8 @@
   recipes:
   - EnergySwordRogue
   - EnergyDaggerRogue
-  - EnergyShieldRogue
+  - HeavyBallisticShield
+  - TelescopicShield
   - HFSwordVT7
 
 - type: latheRecipePack
@@ -33,7 +35,6 @@
   - WeaponSubMachineGunC20rRogue
   - WeaponRevolverPythonRogue
   - WeaponRifleM90Rogue
-  - WeaponSubMachineGunWt550Rogue
   - WeaponSubMachineGunAtreidesRogue
   - WeaponLauncherPanzeroRogue
   - WeaponShotgunBulldogRogue
@@ -43,16 +44,17 @@
   - WeaponShotgunSultanPulsar
   - WeaponLightMachineGunL6Rogue
   - WeaponRifleBurnerRogue
-
+  - WeaponLMGPKMSPDV # LuaM
 
 - type: latheRecipePack
   id: MonoRogueVouchersDynamic
   recipes:
   - ShipVoucherPdvT0Recipe
-  - ShipVoucherPdvT1RandomRecipe
-  - ShipVoucherPdvT2RandomRecipe
-  - SaintieVoucherRogue
-  - SaturnVoucherRogue
+  - ShipVoucherPdvT1Recipe
+  - ShipVoucherPdvT2Recipe
+  - ShipVoucherKortikT3Recipe
+  - ShipVoucherEuropaT3Recipe
+  - ShipVoucherSaturnRecipe
   - SnakeletVoucherRogue
   - InertiaVoucherRogue
   - MockVoucherRogue
@@ -68,3 +70,6 @@
   - BasicBorgCombatModulePDV
   - AdvancedBorgCombatModulePDV
   - PrintableDirtyBomb
+  - AutosurgeonIASPDV
+  - AutosurgeonAdvHeartPDV
+  - AutosurgeonDermalArmorPDV

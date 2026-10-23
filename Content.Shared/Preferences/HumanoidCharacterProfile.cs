@@ -35,7 +35,7 @@ namespace Content.Shared.Preferences
         public const int MaxLoadoutNameLength = 32;
         public const int MaxDescLength = 512;
 
-        public const int DefaultBalance = 75000;
+        public const int DefaultBalance = 150000; // LuaM: 75000 > 150000
 
         //private readonly Dictionary<string, JobPriority> _jobPriorities; // Frontier: commented out during merge.
         //private readonly List<string> _antagPreferences; // Frontier: commented out during merge.
@@ -149,6 +149,17 @@ namespace Content.Shared.Preferences
         [DataField]
         public string Company { get; private set; } = "None";
 
+        // Mono start
+        [DataField]
+        public List<string> Flags { get; private set; } = [];
+
+        [DataField]
+        public List<PersistentProfileComponent> Components { get; private set; } = [];
+
+        [DataField]
+        public List<PersistentProfileItem> Items { get; private set; } = [];
+        // Mono end
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -165,6 +176,9 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
             string company = "None",
+            IEnumerable<string>? flags = null, // Mono
+            IEnumerable<PersistentProfileComponent>? components = null, // Mono
+            IEnumerable<PersistentProfileItem>? items = null, // Mono
             string? voice = null) // Corvax-TTS
         {
             Name = name;
@@ -183,6 +197,11 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
             Company = company;
+            // Mono start
+            Flags = flags is null ? [] : [..flags];
+            Components = components is null ? [] : [..components];
+            Items = items is null ? [] : [..items];
+            // Mono end
         }
 
         /// <summary>Copy constructor but with overridable references (to prevent useless copies)</summary>
@@ -193,7 +212,9 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts)
             : this(other.Name, other.FlavorText, other.Species, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.Voice) // Corvax-TTS: added other.Voice
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company,
+                other.Flags, other.Components, other.Items, // Mono
+                other.Voice) // Corvax-TTS: added other.Voice
         {
         }
 
@@ -214,6 +235,9 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
                 other.Company,
+                other.Flags, // Mono
+                other.Components, // Mono
+                other.Items, // Mono
                 other.Voice) // Corvax-TTS
         {
         }
@@ -420,6 +444,21 @@ namespace Content.Shared.Preferences
             return new(this) { Company = company };
         }
 
+        // Mono start
+        public HumanoidCharacterProfile WithPersistentData(
+            IEnumerable<string> flags,
+            IEnumerable<PersistentProfileComponent> components,
+            IEnumerable<PersistentProfileItem> items)
+        {
+            return new(this)
+            {
+                Flags = [..flags],
+                Components = [..components],
+                Items = [..items],
+            };
+        }
+        // Mono end
+
         public HumanoidCharacterProfile WithAntagPreferences(IEnumerable<ProtoId<AntagPrototype>> antagPreferences)
         {
             return new(this)
@@ -537,6 +576,9 @@ namespace Content.Shared.Preferences
             if (Species != other.Species) return false;
             if (Voice != other.Voice) return false; // Corvax-TTS
             if (Company != other.Company) return false;
+            if (!Flags.SequenceEqual(other.Flags)) return false; // Mono
+            if (!Components.SequenceEqual(other.Components)) return false; // Mono
+            if (!Items.SequenceEqual(other.Items)) return false; // Mono
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
@@ -563,6 +605,9 @@ namespace Content.Shared.Preferences
         {
             var configManager = collection.Resolve<IConfigurationManager>();
             var prototypeManager = collection.Resolve<IPrototypeManager>();
+
+            if (Species == "Resomi") // LuaM
+                Species = "Avali"; // LuaM
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
@@ -772,10 +817,23 @@ namespace Content.Shared.Preferences
             var groups = new Dictionary<string, int>();
             var result = new List<ProtoId<TraitPrototype>>();
 
+            // LuaM-start: traits are checked from the cheapest, so the most expensive ones get dropped when points run out
+            var ordered = new List<TraitPrototype>();
             foreach (var trait in traits)
             {
-                if (!protoManager.TryIndex(trait, out var traitProto))
-                    continue;
+                if (protoManager.TryIndex(trait, out var indexed))
+                    ordered.Add(indexed);
+            }
+
+            ordered.Sort((a, b) => a.Cost != b.Cost ? a.Cost.CompareTo(b.Cost) : string.CompareOrdinal(a.ID, b.ID));
+            // LuaM-end
+
+//            foreach (var trait in traits) // Commented by LuaM
+            foreach (var traitProto in ordered) // LuaM: traits > ordered
+            {
+//                if (!protoManager.TryIndex(trait, out var traitProto)) // Commented by LuaM
+//                    continue; // Commented by LuaM
+                ProtoId<TraitPrototype> trait = traitProto.ID; // LuaM
 
                 // Always valid.
                 if (traitProto.Category == null)
@@ -838,6 +896,14 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add(BankBalance); // Frontier
+            // Mono start
+            foreach (var flag in Flags)
+                hashCode.Add(flag);
+            foreach (var component in Components)
+                hashCode.Add(component);
+            foreach (var item in Items)
+                hashCode.Add(item);
+            // Mono end
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
             return hashCode.ToHashCode();

@@ -9,14 +9,17 @@
   startingGear: USSPRiflemanGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
-  icon: "JobIconSecurityCadet" # TODO - new USSP icons
+  icon: "JobIconUSSPRifleman"
   supervisors: job-supervisors-ussp-sergeant
+  assignedCompany: USSP
   canBeAntag: false
   weight: 10
   displayWeight: 10
+  guides:
+  - USSP_Entry
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, UsspTrackingImplant ]
+    implants: [ UsspTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled
@@ -33,6 +36,7 @@
   accessGroups:
   - GeneralAccess
   - USSPLow
+  - ViperLow # LuaM: VG and USSP share their access
 
 - type: startingGear
   id: USSPRiflemanGear
@@ -42,3 +46,4 @@
   storage:
     back:
     - RadioHandheldNF
+    - BookUSSPLaw

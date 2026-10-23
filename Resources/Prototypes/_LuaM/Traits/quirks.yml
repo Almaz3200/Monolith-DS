@@ -1,0 +1,17 @@
+- type: trait
+  id: AriralNonToxic
+  name: trait-ariral-non-toxic-name
+  description: trait-ariral-non-toxic-desc
+  category: Quirks
+  whitelist:
+    components:
+    - MeleeChemicalInjector
+  removeComponents:
+  - type: InteractionPopup
+  - type: MeleeChemicalInjector
+  components:
+  - type: InteractionPopup
+    predict: false
+    interactSuccessString: hugging-success-generic
+    interactSuccessSound: /Audio/Effects/thudswoosh.ogg
+    messagePerceivedByOthers: hugging-success-generic-others

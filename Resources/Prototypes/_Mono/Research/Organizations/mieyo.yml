@@ -1,0 +1,183 @@
+# T1
+
+- type: technology
+  id: MieyoMedicalGear
+  name: research-technology-mieyo-meds
+  entityIcon: Hypospray
+  discipline: Mieyo
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - HyposprayMMC
+  # - SutureMMC # Commented by LuaM
+  # - MeshMMC # Commented by LuaM
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - MieyoManufacturingGoods # LuaM
+  position: 5, 6 # LuaM -5, -8 > 5, 6
+
+- type: technology
+  id: MieyoManufacturingPress
+  name: research-technology-mieyo-press
+  entityIcon: IndustrialPressEconomyElectronicsMMC
+  discipline: Mieyo
+  tier: 1
+  cost: 15000
+  recipeUnlocks:
+  - IndustrialPressEconomyElectronicsMMCMachineCircuitboard
+  - IndustrialPressEconomyPlatesMMCMachineCircuitboard
+  - IndustrialFurnaceEconomyCompactCircuitboard # LuaM
+  - PrecisionAssemblerEconomyCompactCircuitboard # LuaM
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 7, 6 # LuaM -6, -8 > 7, 6
+
+- type: technology
+  id: MieyoManufacturingGoods
+  name: research-technology-mieyo-goods
+  entityIcon: TradeGoodFissionFuel
+  discipline: Mieyo
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - TradeGoodLuxuriesAlt
+  - TradeGoodFissionFuel
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - MieyoManufacturingPress # LuaM
+  position: 6, 7 # LuaM -7, -8 > 6, 7
+
+- type: technology
+  id: MieyoShipworking
+  name: research-technology-mieyo-srd
+  entityIcon: NaniteApplicatorMMC
+  discipline: Mieyo
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - NaniteApplicatorMMC
+  - ShipRepairDeviceMMC
+  - ShipRepairDeviceAmmo
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - MieyoManufacturingPress # LuaM
+  position: 8, 7 # LuaM -6, -7 > 8, 7
+
+- type: technology
+  id: MieyoLPCT1
+  name: research-technology-mieyo-lpc-1
+  entityIcon: ShipVoucherMieyoYukikaze
+  discipline: Mieyo
+  tier: 1
+  cost: 20000
+  recipeUnlocks:
+  - ShipVoucherMieyoYukikaze
+  - ShipVoucherMieyoSenkusha
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - MieyoShipworking # LuaM
+  position: 9, 6 # LuaM -7, -7 > 9, 6
+
+- type: technology
+  id: MieyoBreachingGear
+  name: research-technology-mieyo-breaching-gear
+  entityIcon: AccessBreakerMMC
+  discipline: Mieyo
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - AccessBreakerMMC
+  - SecBreachingHammerMMC
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - MieyoManufacturingGoods # LuaM
+  position: 5, 8 # LuaM -5, -7 > 5, 8
+
+- type: technology
+  id: MieyoSmartGuns
+  name: research-technology-mieyo-smart-guns
+  entityIcon: WeaponSubMachineGunSakura
+  discipline: Mieyo
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - WeaponSubMachineGunSakuraMMC
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - MieyoShipworking
+  position: 9, 8
+
+# T2
+
+- type: technology
+  id: MieyoCorpsecSuits
+  name: research-technology-mieyo-corpsec-gear
+  entityIcon: ClothingOuterHardsuitMieyoCombat
+  discipline: Mieyo
+  tier: 2
+  cost: 25000
+  recipeUnlocks:
+  - ClothingOuterHardsuitMieyoCombatMMC
+  technologyPrerequisites:
+  - MieyoBreachingGear
+  position: 5, 9
+
+- type: technology
+  id: MieyoCorpsecRifles
+  name: research-technology-mieyo-corpsec-rifles
+  entityIcon: WeaponRifleOsaka
+  discipline: Mieyo
+  tier: 2
+  cost: 25000
+  recipeUnlocks:
+  - WeaponRifleOsakaMMC
+  #- WeaponRifleIzumoMMC # he was too powerful
+  - WeaponShotgunMayonakaMMC
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT2 # Commented by LuaM
+  - MieyoSmartGuns # LuaM
+  position: 9, 9 # LuaM -6, -16 > 9, 9
+
+- type: technology
+  id: MieyoBionicsT2
+  name: research-technology-mieyo-bionics-basic
+  entityIcon: MantisBlade
+  discipline: Mieyo
+  tier: 2
+  cost: 50000
+  recipeUnlocks:
+  - AutosurgeonRightMantisBladeMMC
+  - AutosurgeonLeftMantisBladeMMC
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT2 # Commented by LuaM
+  - MieyoMedicalGear # LuaM
+  - AdvancedTreatment # LuaM
+  position: 4, 6 # LuaM -5, -15 > 4, 6
+
+- type: technology
+  id: MieyoBionicsSandevistan
+  name: research-technology-mieyo-bionics-lotus
+  entityIcon: OrganHeartSandevistan
+  discipline: Mieyo
+  tier: 3
+  cost: 75000
+  recipeUnlocks:
+  - AutosurgeonSandevistanMMC
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT3 # Commented by LuaM
+  - MieyoBionicsT2
+  position: 3, 7 # LuaM -6, -15 > 3, 7
+
+- type: technology
+  id: MieyoBionicsBlackFlash
+  name: research-technology-mieyo-bionics-sakimoto
+  entityIcon: OrganHeartMMCSakimoto
+  discipline: Mieyo
+  tier: 3
+  cost: 75000
+  recipeUnlocks:
+  - AutosurgeonAdvHeartMMC
+  technologyPrerequisites:
+  # - UniversalMaterialResearchT3 # Commented by LuaM
+  - MieyoBionicsT2
+  position: 3, 5 # LuaM -7, -15 > 3, 5

@@ -10,7 +10,7 @@
     grid:
     - 0,0,7,1
   - type: Item
-    size: Large
+    size: Ginormous # LuaM: Large > Ginormous, belts don't fit into bags
     shape:
     - 0,0,3,3
 
@@ -22,7 +22,7 @@
   - type: BallisticAmmoProvider
     mayTransfer: true
   - type: Item
-    size: Large
+    size: Ginormous # LuaM: Large > Ginormous, belts don't fit into bags
     shape:
     - 0,0,3,3
   - type: ContainerContainer

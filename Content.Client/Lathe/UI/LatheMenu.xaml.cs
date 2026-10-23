@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text;
 using Content.Client.Materials;
+using Content.Client.Storage.Components;
 using Content.Client.Stylesheets; // Mono
 using Content.Shared.Lathe;
 using Content.Shared.Lathe.Prototypes;
@@ -13,6 +14,12 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Content.Client.UserInterface.Controls;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.FixedPoint;
+using Content.Shared.Stacks;
+using Content.Shared.Storage.EntitySystems;
+using Robust.Shared.Containers;
 
 namespace Content.Client.Lathe.UI;
 
@@ -25,6 +32,9 @@ public sealed partial class LatheMenu : FancyWindow
     private readonly SpriteSystem _spriteSystem;
     private readonly LatheSystem _lathe;
     private readonly MaterialStorageSystem _materialStorage;
+    private readonly SharedContainerSystem _container; // mono
+    private readonly SharedSolutionContainerSystem _solution; // mono
+
 
     public event Action<BaseButton.ButtonEventArgs>? OnServerListButtonPressed;
     public event Action<string, int>? RecipeQueueAction;
@@ -42,6 +52,11 @@ public sealed partial class LatheMenu : FancyWindow
 
     public EntityUid Entity;
 
+    // LuaM-start
+    private readonly List<(string Id, RecipeControl Control)> _recipeControls = new();
+    private readonly List<(int Index, Label Label)> _queueRows = new();
+    // LuaM-end
+
     public LatheMenu()
     {
         RobustXamlLoader.Load(this);
@@ -50,6 +65,8 @@ public sealed partial class LatheMenu : FancyWindow
         _spriteSystem = _entityManager.System<SpriteSystem>();
         _lathe = _entityManager.System<LatheSystem>();
         _materialStorage = _entityManager.System<MaterialStorageSystem>();
+        _container = _entityManager.System<SharedContainerSystem>(); // mono
+        _solution = _entityManager.System<SharedSolutionContainerSystem>(); // mono
 
         SearchBar.OnTextChanged += _ =>
         {
@@ -132,9 +149,24 @@ public sealed partial class LatheMenu : FancyWindow
         if (!int.TryParse(AmountLineEdit.Text, out var quantity) || quantity <= 0)
             quantity = 1;
 
-        var sortedRecipesToShow = recipesToShow.OrderBy(_lathe.GetRecipeName);
-        RecipeList.Children.Clear();
+        var sortedRecipesToShow = recipesToShow.OrderBy(_lathe.GetRecipeName).ToList(); // LuaM: added ToList
         _entityManager.TryGetComponent(Entity, out LatheComponent? lathe);
+
+        // LuaM-start
+        if (sortedRecipesToShow.Count == _recipeControls.Count &&
+            sortedRecipesToShow.Select(p => p.ID).SequenceEqual(_recipeControls.Select(c => c.Id)))
+        {
+            for (var i = 0; i < sortedRecipesToShow.Count; i++)
+            {
+                _recipeControls[i].Control.SetCanProduce(_lathe.CanProduce(Entity, sortedRecipesToShow[i], quantity, component: lathe));
+            }
+
+            return;
+        }
+
+        _recipeControls.Clear();
+        // LuaM-end
+        RecipeList.Children.Clear();
 
         foreach (var prototype in sortedRecipesToShow)
         {
@@ -148,6 +180,7 @@ public sealed partial class LatheMenu : FancyWindow
                 RecipeQueueAction?.Invoke(s, amount);
             };
             RecipeList.AddChild(control);
+            _recipeControls.Add((prototype.ID, control)); // LuaM
         }
     }
 
@@ -186,6 +219,48 @@ public sealed partial class LatheMenu : FancyWindow
 
             sb.AppendLine(tooltipText);
         }
+
+        //mono start
+        foreach (var (id, amount) in prototype.Entities)
+        {
+            if (!_prototypeManager.TryIndex(id, out var proto))
+                continue;
+
+            var name = Loc.GetString(proto.Name);
+            var currentAmount = GetEntityCount(id);
+
+            var missingAmount = amount - currentAmount;
+
+            string tooltipText;
+
+            if (missingAmount > 0)
+                tooltipText = Loc.GetString("lathe-menu-entity-amount-missing", ("amount", amount), ("missingAmount", missingAmount), ("unit", ""), ("material", name));
+            else
+                tooltipText = Loc.GetString("lathe-menu-tooltip-display", ("material", name), ("amount", amount));
+
+            sb.AppendLine(tooltipText);
+        }
+
+        foreach (var (id, amount) in prototype.Reagents)
+        {
+            if (!_prototypeManager.TryIndex(id, out var proto))
+                continue;
+
+            var name = Loc.GetString(proto.LocalizedName);
+            var currentAmount = GetReagentAmount(id);
+
+            var missingAmount = amount - currentAmount;
+
+            string tooltipText;
+
+            if (missingAmount > 0)
+                tooltipText = Loc.GetString("lathe-menu-reagent-amount-missing", ("amount", amount), ("missingAmount", missingAmount), ("unit", "u"), ("material", name));
+            else
+                tooltipText = Loc.GetString("lathe-menu-tooltip-display", ("material", name), ("amount", amount));
+
+            sb.AppendLine(tooltipText);
+        }
+        // mono end
 
         var desc = _lathe.GetRecipeDescription(prototype);
         if (!string.IsNullOrWhiteSpace(desc))
@@ -243,6 +318,20 @@ public sealed partial class LatheMenu : FancyWindow
     /// <param name="queue"></param>
     public void PopulateQueueList(List<LatheRecipeBatch> queue) // Frontier: LatheRecipePrototype<LatheRecipeBatch
     {
+        // LuaM-start
+        if (queue.Count == _queueRows.Count &&
+            queue.Select(b => b.Index).SequenceEqual(_queueRows.Select(r => r.Index)))
+        {
+            for (var i = 0; i < queue.Count; i++)
+            {
+                _queueRows[i].Label.Text = GetQueueLabelText(i + 1, queue[i]);
+            }
+
+            return;
+        }
+
+        _queueRows.Clear();
+        // LuaM-end
         QueueList.DisposeAllChildren();
 
         var idx = 1;
@@ -255,10 +344,8 @@ public sealed partial class LatheMenu : FancyWindow
             queuedRecipeBox.AddChild(GetRecipeDisplayControl(batch.Recipe));
 
             var queuedRecipeLabel = new Label();
-            if (batch.ItemsRequested > 1)
-                queuedRecipeLabel.Text = $"{idx}. {_lathe.GetRecipeName(batch.Recipe)} ({batch.ItemsPrinted}/{batch.ItemsRequested})";
-            else
-                queuedRecipeLabel.Text = $"{idx}. {_lathe.GetRecipeName(batch.Recipe)}";
+            queuedRecipeLabel.Text = GetQueueLabelText(idx, batch); // LuaM: inline text > GetQueueLabelText
+            _queueRows.Add((batch.Index, queuedRecipeLabel)); // LuaM
             // End Frontier
             queuedRecipeBox.AddChild(queuedRecipeLabel);
             // <Mono>
@@ -272,6 +359,16 @@ public sealed partial class LatheMenu : FancyWindow
             idx++;
         }
     }
+
+    // LuaM-start
+    private string GetQueueLabelText(int idx, LatheRecipeBatch batch)
+    {
+        if (batch.ItemsRequested > 1)
+            return $"{idx}. {_lathe.GetRecipeName(batch.Recipe)} ({batch.ItemsPrinted}/{batch.ItemsRequested})";
+
+        return $"{idx}. {_lathe.GetRecipeName(batch.Recipe)}";
+    }
+    // LuaM-end
 
     public void SetQueueInfo(LatheRecipePrototype? recipe)
     {
@@ -328,5 +425,45 @@ public sealed partial class LatheMenu : FancyWindow
             CurrentCategory = Categories?[obj.Id];
         }
         PopulateRecipes();
+    }
+
+    // mono
+    private int GetEntityCount(EntProtoId recipeEnt)
+    {
+        var count = 0;
+
+        if (!_entityManager.TryGetComponent<EntityStorageComponent>(Entity, out var storage))
+            return count;
+
+        foreach (var containedEnt in storage.Contents.ContainedEntities)
+        {
+            if ( _entityManager.GetComponent<MetaDataComponent>(containedEnt).EntityPrototype is not { } proto
+                || proto.ID != recipeEnt)
+                continue;
+
+            if (_entityManager.TryGetComponent<StackComponent>(containedEnt, out var stack))
+                count += stack.Count;
+            else
+                count += 1;
+        }
+
+        return count;
+    }
+
+    // mono
+    private FixedPoint2 GetReagentAmount(ProtoId<ReagentPrototype> recipeReag)
+    {
+        if (!_entityManager.TryGetComponent<LatheComponent>(Entity, out var lathe) ||
+            lathe.ReagentOutputSlotId is not { } slotId)
+            return 0;
+
+        if (!_container.TryGetContainer(Entity, slotId, out var container) ||
+            container.ContainedEntities.Count == 0)
+            return 0;
+
+        if (!_solution.TryGetDrainableSolution(container.ContainedEntities[0], out _, out var solution))
+            return 0;
+
+        return solution.GetReagentQuantity(new ReagentId(recipeReag, []));
     }
 }

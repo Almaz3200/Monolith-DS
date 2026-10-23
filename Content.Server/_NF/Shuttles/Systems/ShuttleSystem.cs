@@ -24,7 +24,7 @@ public sealed partial class ShuttleSystem
     // LuaM-start:
     private readonly Dictionary<EntityUid, TimeSpan> _unmannedSince = new();
     private static readonly TimeSpan UnmannedGracePeriod = TimeSpan.FromSeconds(3);
-    private static readonly TimeSpan UnmannedDampenPeriod = TimeSpan.FromSeconds(5);
+    private static readonly TimeSpan UnmannedDampenPeriod = TimeSpan.FromSeconds(4);
     // LuaM-end
     private void NfInitialize()
     {
@@ -33,6 +33,13 @@ public sealed partial class ShuttleSystem
         SubscribeLocalEvent<ShuttleConsoleComponent, SetTargetCoordinatesRequest>(NfSetTargetCoordinates);
         SubscribeLocalEvent<ShuttleConsoleComponent, SetHideTargetRequest>(NfSetHideTarget);
     }
+
+    // LuaM-start:
+    private void NfOnShuttleShutdown(EntityUid uid)
+    {
+        _unmannedSince.Remove(uid);
+    }
+    // LuaM-end
 
     public bool SetInertiaDampening(EntityUid uid, PhysicsComponent physicsComponent, ShuttleComponent shuttleComponent, TransformComponent transform, InertiaDampeningMode mode)
     {

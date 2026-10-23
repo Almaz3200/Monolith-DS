@@ -25,4 +25,17 @@ public sealed partial class FireControllableComponent : Component
     /// </summary>
     [DataField]
     public float FireCooldown = 0.2f;
+
+    /// <summary>
+    /// Skip LOS check for this weapon.
+    /// </summary>
+    [DataField]
+    public bool IgnoreLos = false;
+
+    // LuaM
+    /// <summary>
+    /// When the weapon last fired, shown on the gunnery console as the start of its reload.
+    /// </summary>
+    [ViewVariables]
+    public TimeSpan LastShot = TimeSpan.Zero;
 }

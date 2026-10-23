@@ -20,3 +20,5 @@ ent-LeftFootSkeleton = левая стопа скелета
     .desc = { ent-PartSkeleton.desc }
 ent-RightFootSkeleton = правая стопа скелета
     .desc = { ent-PartSkeleton.desc }
+ent-PartSkeletonBase = skeleton body part
+    .desc = { ent-BasePartInorganic.desc }

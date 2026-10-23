@@ -8,3 +8,15 @@
   - ClothingOuterHardsuitViperGroupStandard
   - ClothingOuterHardsuitViperGroupMedic
   - ClothingOuterHardsuitViperGroupJuggernaut
+  - ClothingOuterHardsuitViperGroupShield
+  - ShipVoucherVGWolf
+  - ShipVoucherVGKeelback
+  - ShipVoucherVGLancehead
+  - ShipVoucherVGLeviathan
+  - WeaponRifleAK12 # LuaM
+  - WeaponPistolAnaconda # LuaM
+
+- type: latheRecipePack
+  id: MonoViperGroupStatic
+  recipes:
+  - VGTechfabMachineCircuitboard

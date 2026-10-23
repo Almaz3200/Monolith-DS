@@ -28,6 +28,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Physics;
 using Content.Shared.Tools.Systems;
+using Content.Shared.Turrets;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -70,6 +71,7 @@ public sealed partial class NPCUtilitySystem : EntitySystem
     [Dependency] private DestructibleSystem _destructible = default!; // Mono
     [Dependency] private GunSystem _gun = default!; // Mono
     [Dependency] private NPCCombatSystem _npcCombat = default!;
+    [Dependency] private TurretTargetSettingsSystem _turretTargetSettings = default!;
 
     private EntityQuery<PuddleComponent> _puddleQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -403,6 +405,14 @@ public sealed partial class NPCUtilitySystem : EntitySystem
 
                 return 0f;
             }
+            case TurretTargetingCon:
+            {
+                if (!TryComp<TurretTargetSettingsComponent>(owner, out var turretTargetSettings) ||
+                    _turretTargetSettings.EntityIsTargetForTurret((owner, turretTargetSettings), targetUid))
+                    return 1f;
+
+                return 0f;
+            }
             case TargetOnFireCon:
                 {
                     if (TryComp(targetUid, out FlammableComponent? fire) && fire.OnFire)
@@ -536,11 +546,12 @@ public sealed partial class NPCUtilitySystem : EntitySystem
                 {
                     var targetXform = Transform(target);
                     var targetGrid = targetXform.GridUid;
+                    var maxRange = MathF.Min(shuttlesQuery.Range, targetComp.MaxTargetRange ?? shuttlesQuery.Range); // LuaM
                     if (targetComp.NeedGrid != NpcTargetGridMode.Either // if we care about grid..
                           // ..and our (non-)need for grid is equal to the (non-)absence of a grid
                           && (targetComp.NeedGrid == NpcTargetGridMode.OnGrid) == (targetGrid == null)
                         || targetGrid == ownGrid
-                        || (_transform.GetWorldPosition(target) - _transform.GetWorldPosition(xform)).Length() > shuttlesQuery.Range
+                        || (_transform.GetWorldPosition(target) - _transform.GetWorldPosition(xform)).Length() > maxRange // LuaM shuttlesQuery.Range > maxRange
                         || targetComp.NeedPower && !this.IsPowered(target, EntityManager)
                         || targetGrid != null && _whitelistSystem.IsBlacklistPass(shuttlesQuery.Blacklist, targetGrid.Value))
                     {
@@ -575,11 +586,18 @@ public sealed partial class NPCUtilitySystem : EntitySystem
         {
             var targetXform = Transform(target);
             var targetGrid = targetXform.GridUid;
+            var targetCoords = _transform.GetMapCoordinates(targetXform); // LuaM
+            var maxRange = MathF.Min(range, targetComp.MaxTargetRange ?? range); // LuaM
 
             if (targetComp.NeedGrid != NpcTargetGridMode.Either
                 && (targetComp.NeedGrid == NpcTargetGridMode.OnGrid) == (targetGrid == null))
                 continue;
 
+            // LuaM-start:
+            if (targetCoords.MapId != coords.MapId
+                || (targetCoords.Position - coords.Position).Length() > maxRange)
+                continue;
+            // LuaM-end
             if (targetComp.NeedPower && !this.IsPowered(target, EntityManager))
                 continue;
 

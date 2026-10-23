@@ -108,5 +108,15 @@ public sealed partial class RadarConsoleSystem : SharedRadarConsoleSystem
         ent.Comp.HideTarget = hideTarget;
         Dirty(ent);
     }
+
+    // LuaM-start: removing the marker
+    public void ClearTarget(Entity<RadarConsoleComponent> ent)
+    {
+        ent.Comp.Target = null;
+        ent.Comp.TargetEntity = EntityUid.Invalid;
+        ent.Comp.HideTarget = false;
+        Dirty(ent);
+    }
+    // LuaM-end
     // End Frontier
 }

@@ -14,13 +14,14 @@
     AmmoBox23x75mmBeanbag: 4294967295 # 4 gauge
     AmmoBox23x75mmDozd: 4294967295 # 4 gauge
     AmmoBox23x75mmFlashbang: 4294967295 # 4 gauge
+    AmmoBox23x75mmFlare: 4294967295 # 4 gauge
     AmmoBox762x39mmFMJ: 4294967295 # 762x39mm
     AmmoBox762x39mmBigFMJ: 4294967295 # 762x39mm
     AmmoBox762x54mmRFMJ: 4294967295 # 762x54mmR
     AmmoBox762x54mmRBigFMJ: 4294967295 # 762x54mmR
     AmmoBox9x19mmFMJ: 4294967295 # 9x19mm
     AmmoBox9x19mmBigFMJ: 4294967295 # 9x19mm
-    AmmoBox45_magnumFMJ: 4294967295 # .45 magnum
+    AmmoBox357_magnumFMJ: 4294967295 # .357 magnum
     WeaponSniperMosin: 4294967295 # Infinite
     WeaponRifleSVS: 4294967295 # Infinite
     CombatKnife: 4294967295 # Infinite
@@ -32,7 +33,11 @@
     Ointment: 4294967295 # Infinite
     Gauze: 4294967295 # Infinite
     EmergencyMedipen: 4294967295 # Infinite
-    JugOmnizine: 10 # Limited to 10
+    # JugOmnizine: 10 # Limited to 10 # Сommented by LuaM
+    JugPuncturase: 3 # LuaM: Limited to 3
+    JugBicaridine: 3 # LuaM: Limited to 3
+    JugDermaline: 3 # LuaM: Limited to 3
+    JugDylovene: 3 # LuaM: Limited to 3
     ClothingOuterHardsuitUsspL27: 4294967295 # Infinite
     ClothingOuterHardsuitUsspL10: 4294967295 # Infinite
     ClothingOuterHardsuitUsspM10: 4294967295 # Infinite
@@ -42,5 +47,4 @@
     WeaponShotgunBigLeady: 4294967295 # Infinite
     WeaponDP29: 4294967295 # Infinite
     RubberStampUSSP: 4294967295 # Infinite
-#    RDServerUSSPFlatpack: 4294967295 # Infinite # Commented by LuaM
-    MercenaryTechFabFlatpack: 4294967295 # Infinite
+    USSPLatheFlatpack: 4294967295 # Infinite

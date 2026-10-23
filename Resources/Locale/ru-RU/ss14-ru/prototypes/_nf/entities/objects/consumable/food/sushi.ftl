@@ -19,3 +19,5 @@ ent-FoodMealGasSafeSushi = ролл с заправки
     .desc = Стоит ли ради этого рисковать?
 ent-FoodMealGasBadSushi = испорченный ролл с заправки
     .desc = Точно не стоит рисковать — последствия будут неприятными.
+ent-FoodBaseSushi = { "" }
+    .desc = { "" }

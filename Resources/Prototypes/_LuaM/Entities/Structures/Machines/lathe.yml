@@ -1,0 +1,55 @@
+# PDV
+- type: entity
+  id: PDVLathe
+  parent: BaseLatheLube
+  name: PDV TechFab
+  description: Capable of manufacturing equipment to PDV design specifications.
+  components:
+  - type: Sprite
+    sprite: _Mono/Structures/Machines/techfab.rsi
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: techfab-rogue
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: PDVLatheMachineCircuitboard
+  - type: Lathe
+    producingSound: /Audio/Machines/circuitprinter.ogg
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - NFMercenaryTechfabDeprecatedStatic
+    - StaticGrenades
+    - MonoAttachmentsStatic
+    - PDVLatheStatic
+    dynamicPacks:
+    - MonoRogueWeaponsDynamicMelee
+    - MonoRogueWeaponsDynamicRanged
+    - MonoRogueVouchersDynamic
+    - MonoRogueMiscDynamic
+    - MonoRogueGearDynamic
+    - MonoRogueGearProDynamic
+    - TechDiskRecipes
+    - NFMercenaryTechfabDeprecated
+    - SecurityEquipment
+    - SmartGun
+    - ResearchedExplosives
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: RequireProjectileTarget
+  - type: OreSiloClient
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - PDV
+    - PDVHighComm

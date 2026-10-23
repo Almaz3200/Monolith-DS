@@ -79,22 +79,22 @@
   - type: LitOnPowered
   - type: PowerSwitch
   - type: ApcPowerReceiver
-    powerLoad: 240000 # LuaM: 60000 > 240000
+    powerLoad: 60000
   - type: Appearance
   - type: ShipShieldEmitter
-    damageLimit: 240000 # LuaM: 60000 > 240000
+    damageLimit: 60000
     damageOverloadTimePunishment: 40
-    healPerSecond: 3000 # Base is 250 # LuaM: 600 > 3000
+    healPerSecond: 600 # Base is 250
     damageExp: 1.05 # Base is 1.1
-    baseDraw: 20000 # Base is 50000 # LuaM: 40000 > 20000
-    maxDraw: 400000 # Base is 150000 # LuaM: 100000 > 400000
+    baseDraw: 40000 # Base is 50000
+    maxDraw: 100000 # Base is 150000
     unpoweredBonus: 7 # Base is 6
     shieldColor: "#FF3333"
     collisionResistanceMultiplier: 1.0
     powerUpSound: !type:SoundPathSpecifier
         path: "/Audio/Effects/teleport_arrival.ogg"
         params:
-          pitch: 0.5
+          pitch: 0.55 # LuaM: 0.5 > 0.55
     powerDownSound: !type:SoundPathSpecifier
         path: "/Audio/Effects/teleport_departure.ogg"
         params:
@@ -123,14 +123,14 @@
   suffix: POI ONLY
   components:
   - type: ShipShieldEmitter
-    damageLimit: 2500000 # LuaM: 250000 > 2500000
-    healPerSecond: 15000 # LuaM: 1000 > 15000
+    damageLimit: 500000
+    healPerSecond: 2000
     damageExp: 1
-    baseDraw: 80000 # LuaM: 80000 > 40000
-    maxDraw: 1500000 # LuaM: 150000 > 1500000
+    baseDraw: 80000
+    maxDraw: 150000
     unpoweredBonus: 7
-    powerModifier: 0.25
-    damageOverloadTimePunishment: 45
+    powerModifier: 0.1
+    damageOverloadTimePunishment: 30
     shieldColor: "#FF9933"
     collisionResistanceMultiplier: 0.0
   - type: Sprite
@@ -178,7 +178,7 @@
     intensitySlope: 4
     totalIntensity: 1000
   - type: ApcPowerReceiver
-    powerLoad: 800000 # LuaM: 80000 > 800000
+    powerLoad: 80000
   - type: PointLight
     enabled: false
     castShadows: true
@@ -190,6 +190,77 @@
     repairTime: 30
     repairCost: 300
 
+- type: entity
+  id: ShieldGeneratorPOIBio
+  parent: ShieldGeneratorPOI
+  name: S-243 "Biodome" Biological Molecular Accelerator
+  description: A very expensive, bulky and specialized device that detects and 'excites' foreign DNA molecules caught inside its radius. Due to it being very heavy and quite expensive, it has been relegated to usage only on stationary outposts. In addition to its biological defense, this device has also been retrofitted with a regular shield generator.
+  suffix: POI ONLY
+  components:
+  - type: ShipShieldEmitter
+    damageLimit: 150000
+    healPerSecond: 650
+    damageExp: 1
+    baseDraw: 80000
+    maxDraw: 150000
+    unpoweredBonus: 7
+    powerModifier: 0.25
+    damageOverloadTimePunishment: 65
+    shieldColor: "#50C878"
+    collisionResistanceMultiplier: 0.0
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
+    snapCardinals: true
+    layers:
+    - state: fobshield
+    - state: fobshield_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#50C878"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#50C878"
+  - type: FixtureDamageDealer
+    collisionMask: 65
+    damage:
+      types:
+        Heat: 25
+    whitelist:
+      tags:
+        - Chimera
+
+- type: entity
+  id: ShieldGeneratorPOIBioTsf
+  parent: ShieldGeneratorPOIBio
+  name: QZ-293 "Biodome" TSF Biological Molecular Accelerator
+  suffix: TSF POI ONLY, RAMPING
+  components:
+  - type: ShipShieldRampingLoad # we give the Biothreat military FOBs these biodomes to mechanically enforce portstrike and to force factions to work to keep their shields online.
+    radioChannel: Nfsd
+  - type: ExtendDescription
+    descriptionList:
+    - description: This one is an experimental prototype haphazardly rushed out due to the sudden Letoferol outbreak in the sector. It will require increasing amounts of power the longer it is kept active, meaning you eventually must decide between feeding it even more power or living without it.
+      color: "#4f94ad"
+      requireDetailRange: false
+
+- type: entity
+  id: ShieldGeneratorPOIBioPdv
+  parent: ShieldGeneratorPOIBioTsf
+  name: RD-493 "Biodome" PDV Biological Molecular Accelerator
+  suffix: PDV POI ONLY, RAMPING
+  components:
+  - type: ShipShieldRampingLoad
+    radioChannel: Freelance
+  - type: ExtendDescription
+    descriptionList:
+    - description: This one is an experimental prototype haphazardly rushed out due to the sudden Letoferol outbreak in the sector. It will require increasing amounts of power the longer it is kept active, meaning you eventually must decide between feeding it even more power or living without it.
+      color: "#4f94ad"
+      requireDetailRange: false
+
 # TSF capital shield - inbetween POI and MS-500, meant for flyssa
 - type: entity
   id: ShieldGeneratorTSFCapital
@@ -199,11 +270,11 @@
   suffix: TSF CAPITAL ONLY
   components:
   - type: ShipShieldEmitter
-    damageLimit: 340000 # LuaM: 85000 > 340000
-    healPerSecond: 3200 # LuaM: 800 > 3200
+    damageLimit: 85000
+    healPerSecond: 800
     damageExp: 1
-    baseDraw: 30000 # LuaM: 60000 > 30000
-    maxDraw: 400000 # LuaM: 100000 > 400000
+    baseDraw: 60000
+    maxDraw: 100000
     unpoweredBonus: 6
     damageOverloadTimePunishment: 35
     shieldColor: "#FF0A70"
@@ -273,12 +344,12 @@
   suffix: ADS ONLY
   components:
   - type: ShipShieldEmitter
-    damageLimit: 300000 # LuaM: 75000 > 300000
+    damageLimit: 75000
     damageOverloadTimePunishment: 40
-    healPerSecond: 3800 # Base is 250 # LuaM: 950 > 3800
+    healPerSecond: 950 # Base is 250
     damageExp: 1.05 # Base is 1.1
-    baseDraw: 20000 # Base is 50000 # LuaM: 40000 > 20000
-    maxDraw: 400000 # Base is 150000 # LuaM: 100000 > 400000
+    baseDraw: 40000 # Base is 50000
+    maxDraw: 100000 # Base is 150000
     unpoweredBonus: 6 # Base is 6
     shieldColor: "#FF3333"
     collisionResistanceMultiplier: 0.05
@@ -299,11 +370,11 @@
   suffix: ADS/TSF ONLY, SCI VOUCHER SHIPS ONLY
   components:
   - type: ShipShieldEmitter
-    damageLimit: 720000 # LuaM: 180000 > 720000
-    healPerSecond: 3000 # Base is 250 # LuaM: 750 > 3000
+    damageLimit: 180000
+    healPerSecond: 750 # Base is 250
     damageExp: 1.05 # Base is 1.1
-    baseDraw: 15000 # Base is 50000 # LuaM: 30000 > 15000
-    maxDraw: 300000 # Base is 150000 # LuaM: 75000 > 300000
+    baseDraw: 30000 # Base is 50000
+    maxDraw: 75000 # Base is 150000
     unpoweredBonus: 4 # Base is 6
     damageOverloadTimePunishment: 100
     shieldColor: "#9933FF"
@@ -386,11 +457,11 @@
   description: The Sentinel. A good, reliable shield.
   components:
   - type: ShipShieldEmitter
-    damageLimit: 260000 # Mono # LuaM: 65000 > 260000
-    healPerSecond: 2000 # Mono # LuaM: 500 > 2000
+    damageLimit: 65000 # Mono
+    healPerSecond: 500 # Mono
     damageExp: 1.05 # Mono
-    baseDraw: 10000 # LuaM: 20000 > 10000
-    maxDraw: 240000 # LuaM: 60000 > 240000
+    baseDraw: 20000
+    maxDraw: 60000
     unpoweredBonus: 3 # Mono
     damageOverloadTimePunishment: 80
     shieldColor: "#3399FF"

@@ -1,0 +1,63 @@
+- type: entity
+  parent: Jug
+  suffix: puncturase
+  id: JugPuncturase
+  components:
+  - type: Label
+    currentLabel: reagent-name-puncturase
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Puncturase
+          Quantity: 200
+  - type: StaticPrice
+    vendPrice: 45000
+
+- type: entity
+  parent: Jug
+  suffix: bicaridine
+  id: JugBicaridine
+  components:
+  - type: Label
+    currentLabel: reagent-name-bicaridine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 200
+  - type: StaticPrice
+    vendPrice: 25000
+
+- type: entity
+  parent: Jug
+  suffix: dermaline
+  id: JugDermaline
+  components:
+  - type: Label
+    currentLabel: reagent-name-dermaline
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Dermaline
+          Quantity: 200
+  - type: StaticPrice
+    vendPrice: 25000
+
+- type: entity
+  parent: Jug
+  suffix: dylovene
+  id: JugDylovene
+  components:
+  - type: Label
+    currentLabel: reagent-name-dylovene
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Dylovene
+          Quantity: 200
+  - type: StaticPrice
+    vendPrice: 25000

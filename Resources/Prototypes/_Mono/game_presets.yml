@@ -7,7 +7,7 @@
     - MonoGreenshift
   name: mono-standard-title
   description: mono-standard-description
-  showInVote: false # For admin usage really. Not that boring, but I'd rather just let players choose their main threat instead of choosing no threat.
+  showInVote: true
   rules:
   - NFAdventure
   - BasicStationEventScheduler
@@ -17,7 +17,9 @@
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
+  - ManualPortstrikeTsfPdv
+  - StarSystemKyphrus
+#  - PortstrikeAnnounceRuleHour3 # LuaM: auto portstrike removed, manual only (faction heads)
 
 - type: gamePreset
   id: MonoRogueTSF
@@ -33,7 +35,9 @@
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
+  - ManualPortstrikeTsfPdv
+  - StarSystemKyphrus
+#  - PortstrikeAnnounceRuleHour3 # LuaM: auto portstrike removed, manual only (faction heads)
 
 - type: gamePreset
   id: MonoRogueUSSP
@@ -49,7 +53,8 @@
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
+  - StarSystemKyphrus
+#  - PortstrikeAnnounceRuleHour3 # LuaM: auto portstrike removed, manual only (faction heads)
 
 - type: gamePreset
   id: MonoTSFUSSP
@@ -65,13 +70,14 @@
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
+  - StarSystemKyphrus
+#  - PortstrikeAnnounceRuleHour3 # LuaM: auto portstrike removed, manual only (faction heads)
 
 - type: gamePreset
   id: MonoADS
   name: mono-ads-title
   description: mono-ads-description
-  showInVote: true
+  showInVote: true # mono: "deprecate remnants (for now)" 8/31/2026 # LuaM: false > true
   rules:
   - NFAdventure
   - BasicStationEventScheduler
@@ -82,15 +88,18 @@
   - FrontierRoundstartVariation
   - MonoAISTCShuttleSpawnerScheduler
   - MonoAISTCShuttleSpawnerSchedulerTier2
-  - MonoAsakimSTCShuttleSpawnerScheduler
+  - MonoAsakimSTCShuttleSpawnerScheduler # LuaM: uncommented
   - MonoMonolithicEventsScheduler
-  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
+  - ManualPortstrikeTsfPdv
+  - StarSystemKyphrus
+#  - PortstrikeAnnounceRuleHour3 # LuaM: auto portstrike removed, manual only (faction heads)
 
 - type: gamePreset
   id: MonoChimera
+  weight: 0.75 # mono: needs 25% of votes
   name: mono-chimera-title
   description: mono-chimera-description
-  showInVote: true
+  showInVote: false # replaced by new-Biothreat. this old gamemode was just Standard with chimera spawns anyways.
   rules:
   - NFAdventure
   - BasicStationEventScheduler
@@ -101,18 +110,65 @@
   - FrontierRoundstartVariation
   - MonoChimeraSTCShuttleSpawnerScheduler
   - MonoMonolithicEventsScheduler
-  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
+  - ManualPortstrikeTsfPdv
+  - StarSystemKyphrus
+
+# Commented by LuaM: merged into MonoChimeraTsfPdv (_LuaM/game_presets.yml)
+#- type: gamePreset
+#  id: MonoChimeraTsf
+#  weight: 0.5
+#  name: mono-chimera-tsf-title
+#  description: mono-chimera-tsf-description
+#  showInVote: true
+#  rules:
+#  - NFAdventure
+#  - BasicStationEventScheduler
+#  - BluespaceEventScheduler
+#  - BluespaceDungeonEventScheduler
+#  - BluespaceSalvageEventScheduler
+#  - SmugglingEventScheduler
+#  - FrontierRoundstartVariation
+#  - MonoChimeraSTCShuttleSpawnerScheduler
+#  - MonoChimeraSTCShuttleSpawnerSchedulerTier2
+#  - MonoMonolithicEventsScheduler
+#  - RoundEndRuleHour3
+#  - HalcyonBiodome
+#  - StarSystemKyphrus
+
+# Commented by LuaM: merged into MonoChimeraTsfPdv (_LuaM/game_presets.yml)
+#- type: gamePreset
+#  id: MonoChimeraPdv
+#  weight: 0.5
+#  name: mono-chimera-pdv-title
+#  description: mono-chimera-pdv-description
+#  showInVote: true
+#  rules:
+#  - NFAdventure
+#  - BasicStationEventScheduler
+#  - BluespaceEventScheduler
+#  - BluespaceDungeonEventScheduler
+#  - BluespaceSalvageEventScheduler
+#  - SmugglingEventScheduler
+#  - FrontierRoundstartVariation
+#  - MonoChimeraSTCShuttleSpawnerScheduler
+#  - MonoChimeraSTCShuttleSpawnerSchedulerTier2
+#  - MonoMonolithicEventsScheduler
+#  - RoundEndRuleHour3
+#  - HeliosBiodome
+#  - StarSystemKyphrus
+#  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
 
 - type: gamePreset
   id: MonoMixed
   name: mono-mixed-title
   description: mono-mixed-description
-  showInVote: true
-  weight: 0.35 # LuaM
+  showInVote: true # it was just old-Biothreat and the deprecated Remnants in one # LuaM: false > true
+  weight: 0.43 # LuaM: 0.35 > 0.43, needs ~70% of votes against a weight 1 mode
   rules:
   - NFAdventure
   - BasicStationEventScheduler
   - BluespaceEventScheduler
+#  - StarSystemKyphrus # LuaM: moved to the end, like in the other presets
   - BluespaceDungeonEventScheduler
   - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
@@ -120,9 +176,11 @@
   - MonoChimeraSTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerTier2Slow
-  - MonoAsakimSTCShuttleSpawnerSchedulerSlow
+  - MonoAsakimSTCShuttleSpawnerSchedulerSlow # LuaM: uncommented
   - MonoMonolithicEventsScheduler
-  - PortstrikeAnnounceRuleHour3 # LuaM: PortstrikeAnnounceRuleHour4 > PortstrikeAnnounceRuleHour3
+  - ManualPortstrikeTsfPdv
+  - StarSystemKyphrus
+#  - PortstrikeAnnounceRuleHour3 # LuaM: auto portstrike removed, manual only (faction heads)
 
 - type: gamePreset
   id: MonoAllAtOnce
@@ -140,7 +198,39 @@
   - FrontierRoundstartVariation
   - MonoChimeraSTCShuttleSpawnerSchedulerApocalypse
   - MonoAISTCShuttleSpawnerSchedulerApocalypse
-  - MonoAsakimSTCShuttleSpawnerSchedulerApocalypse
+  #- MonoAsakimSTCShuttleSpawnerSchedulerApocalypse
   - MonoMonolithicEventsScheduler
   - RoundEndRuleHour3
-  - PortstrikeAnnounceRuleHour1
+  - ManualPortstrikeTsfPdv
+  - StarSystemKyphrus
+
+- type: gamePreset
+  id: MonoRogueTSFHyperwar
+  name: mono-roguetsf-hyperwar-title
+  description: mono-roguetsf-hyperwar-description
+  showInVote: false # we ball # LuaM: true > false
+  weight: 0.15 # Giant majority needed
+  supportedMaps: HyperwarMapPool
+  rules:
+  - NFAdventure
+  - Hyperwar
+  - RoundEndRuleHour3
+#  - PortstrikeAnnounceRuleHour2 # LuaM: auto portstrike removed, manual only (faction heads)
+  - StarSystemKyphrus
+
+# Commented by LuaM: infantry roles and Crocus mode are disabled
+#- type: gamePreset
+#  id: MonoCrocus
+#  alias:
+#  - crocus
+#  - monocrocus
+#  name: mono-crocus-title
+#  description: mono-crocus-description
+#  showInVote: false
+#  weight: 0.2 # Giant majority needed
+#  supportedMaps: CrocusMapPool
+#  rules:
+#  - PDVObjectivesCrocus
+#  - RoundEndRuleHour2
+#  - CrocusAnnouncementMinuteRoundStart
+#  - CrocusAnnouncementMinute10m

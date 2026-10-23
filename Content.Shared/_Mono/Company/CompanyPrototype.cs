@@ -54,4 +54,11 @@ public sealed partial class CompanyPrototype : IPrototype
     /// </summary>
     [DataField]
     public ProtoId<CurrencyPrototype>? CompanyUplinkCurrency { get; private set; }
+
+    // LuaM
+    /// <summary>
+    /// Companies with the same group see each other's shuttles on radar even with their IFF turned off.
+    /// </summary>
+    [DataField]
+    public string? FriendlyIffGroup { get; private set; }
 }

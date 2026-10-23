@@ -27,6 +27,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -583,6 +584,23 @@ public abstract partial class SharedGunSystem : EntitySystem
         TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle() + projectile.Angle);
     }
 
+    // Mono - handle hitscan
+    public virtual void ShootHitscan(EntityUid uid, EntityCoordinates? fromCoordinates, Vector2 direction, EntityUid gunUid, EntityUid? user = null, EntityUid? target = null)
+    {
+        if (fromCoordinates is null)
+            return;
+
+        var hitscanEv = new HitscanTraceEvent
+        {
+            FromCoordinates = fromCoordinates.Value,
+            ShotDirection = direction.Normalized(),
+            Gun = gunUid,
+            Shooter = user,
+            Target = target,
+        };
+        RaiseLocalEvent(uid, ref hitscanEv);
+    }
+
     // Mono
     public bool TryNextShootPrototype(Entity<GunComponent?> gun, [NotNullWhen(true)] out EntityPrototype? proto)
     {
@@ -650,12 +668,30 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (cartridge.DeleteOnSpawn) // Mono - No need to update appearance if cartridge is getting deleted anyways
             return;
 
-        if (cartridge.AutoTimedDespawn != 0)
+        if (cartridge.AutoTimedDespawn != 0 && !IsInGunOrMagazine(uid)) // LuaM: casings left in guns/magazines don't despawn
             EnsureComp<TimedDespawnComponent>(uid).Lifetime = cartridge.AutoTimedDespawn;
         // End mono
 
         Appearance.SetData(uid, AmmoVisuals.Spent, spent);
     }
+
+    // LuaM
+    /// <summary>
+    /// Whether the cartridge sits in a gun's chamber or cylinder, or in a magazine, speedloader or ammo box.
+    /// Spent casings there must not despawn: the gun would keep pointing at a deleted entity and jam for good.
+    /// </summary>
+    public bool IsInGunOrMagazine(EntityUid uid)
+    {
+        if (!Containers.TryGetContainingContainer((uid, null, null), out var container))
+            return false;
+
+        var owner = container.Owner;
+        return HasComp<GunComponent>(owner)
+            || HasComp<BallisticAmmoProviderComponent>(owner)
+            || HasComp<RevolverAmmoProviderComponent>(owner)
+            || HasComp<ContainerAmmoProviderComponent>(owner);
+    }
+    // End LuaM
 
     /// <summary>
     /// Drops a single cartridge / shell
@@ -712,12 +748,30 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
+        // Mono - muzzle flash checks gun
         var sprite = component.MuzzleFlash;
+        if (TryComp<GunComponent>(gun, out var gunComp) && gunComp.MuzzleFlash != null)
+            sprite = gunComp.MuzzleFlash;
 
         if (sprite == null)
             return;
 
         var ev = new MuzzleFlashEvent(GetNetEntity(gun), sprite, worldAngle);
+        CreateEffect(gun, ev, user);
+    }
+
+    // mono
+    protected void MuzzleFlash(EntityUid gun, EntProtoId? muzzle, Angle worldAngle, EntityUid? user = null)
+    {
+        var attemptEv = new GunMuzzleFlashAttemptEvent();
+        RaiseLocalEvent(gun, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+
+        if (muzzle == null)
+            return;
+
+        var ev = new MuzzleFlashEvent(GetNetEntity(gun), muzzle, worldAngle);
         CreateEffect(gun, ev, user);
     }
 

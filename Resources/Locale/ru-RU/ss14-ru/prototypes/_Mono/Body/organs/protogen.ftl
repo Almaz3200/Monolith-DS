@@ -17,3 +17,7 @@ ent-OrganProtogenLiver = печень
     .desc = В пару подавать: ферментированные планки RAM и CPU-накопители.
 ent-OrganProtogenKidneys = почки
     .desc = Фильтрует токсины и компьютерные вирусы из кровотока.
+ent-BaseProtogenOrganUnGibbable = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }
+ent-BaseProtogenOrgan = { ent-BaseProtogenOrganUnGibbable }
+    .desc = { ent-BaseProtogenOrganUnGibbable.desc }

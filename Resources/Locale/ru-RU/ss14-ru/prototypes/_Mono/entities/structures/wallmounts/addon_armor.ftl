@@ -1,0 +1,16 @@
+ent-WallArmorAddonSolid = solid armor
+    .desc = An additional chunk of armor, attached to the side of a vessel. Provides additional protection, but makes the hull more vulnerable to explosives.
+ent-WallArmorAddonSolidCornerL = solid armor corner
+    .desc = An additional chunk of armor, attached to the side of a vessel. Provides additional protection, but makes the hull more vulnerable to explosives.
+    .suffix = Left
+ent-WallArmorAddonSolidCornerR = solid armor corner
+    .desc = An additional chunk of armor, attached to the side of a vessel. Provides additional protection, but makes the hull more vulnerable to explosives.
+    .suffix = Right
+ent-WallArmorAddonSolidBroken = broken solid armor
+    .desc = The remains of a chunk of additional armor plating. Doesn't seem very effective anymore.
+ent-WallArmorAddonSolidBrokenCornerL = broken solid armor corner
+    .desc = The remains of a chunk of additional armor plating. Doesn't seem very effective anymore.
+    .suffix = Left
+ent-WallArmorAddonSolidBrokenCornerR = broken solid armor corner
+    .desc = The remains of a chunk of additional armor plating. Doesn't seem very effective anymore.
+    .suffix = Right

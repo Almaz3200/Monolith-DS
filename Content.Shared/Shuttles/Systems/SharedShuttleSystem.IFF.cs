@@ -28,7 +28,7 @@ public abstract partial class SharedShuttleSystem
         return component.Color;
     }
 
-    public string? GetIFFLabel(EntityUid gridUid, bool self = false, IFFComponent? component = null)
+    public string? GetIFFLabel(EntityUid gridUid, bool self = false, IFFComponent? component = null, bool ignoreHidden = false) // LuaM: ignoreHidden
     {
         var entName = MetaData(gridUid).EntityName;
 
@@ -37,14 +37,14 @@ public abstract partial class SharedShuttleSystem
             return entName;
         }
 
-        if (Resolve(gridUid, ref component, false) && (component.Flags & (IFFFlags.HideLabel | IFFFlags.Hide)) != 0x0)
+        if (!ignoreHidden && Resolve(gridUid, ref component, false) && (component.Flags & (IFFFlags.HideLabel | IFFFlags.Hide)) != 0x0) // LuaM: ignoreHidden
         {
             return null;
         }
 
         // Get the company information if available
-        Color? companyColor = null;
-        string? companyName = null;
+        Color? companyColor = Color.White;
+        string? companyName = Loc.GetString("shuttle-console-company-unknown");
 
         if (TryComp<_Mono.Company.CompanyComponent>(gridUid, out var companyComp) && !string.IsNullOrEmpty(companyComp.CompanyName))
         {

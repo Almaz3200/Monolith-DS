@@ -11,6 +11,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Log;
 using Robust.Shared.Utility;
+using Content.Client.Stylesheets; // LuaM
 
 namespace Content.Client.Shuttles.UI;
 
@@ -441,7 +442,7 @@ public sealed partial class DockingScreen : BoxContainer
                 Group = buttonGroup,
                 Margin = new Thickness(0f, 3f),
                 HorizontalExpand = true,
-                StyleClasses = { "ButtonSquare" } // LuaM square button
+                StyleClasses = { ConsoleStyles.Button } // LuaM square button // LuaM: ButtonSquare > console button
             };
 
             // LuaM-start: | painting button

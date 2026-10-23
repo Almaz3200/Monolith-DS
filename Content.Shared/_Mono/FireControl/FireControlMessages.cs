@@ -99,12 +99,30 @@ public struct FireControllableEntry
     /// </summary>
     public bool HasManualReload;
 
-    public FireControllableEntry(NetEntity entity, NetCoordinates coordinates, string name, int? ammoCount = null, bool hasManualReload = false)
+    /// <summary>
+    /// Whether this weapon ignores line-of-sight restrictions.
+    /// </summary>
+    public bool IgnoresLos;
+
+    // LuaM
+    /// <summary>
+    /// When the weapon fired last, if it is still waiting to fire again.
+    /// </summary>
+    public TimeSpan? ReloadStart;
+
+    /// <summary>
+    /// When the weapon can fire again, if it is still waiting.
+    /// </summary>
+    public TimeSpan? ReloadEnd;
+    // End LuaM
+
+    public FireControllableEntry(NetEntity entity, NetCoordinates coordinates, string name, int? ammoCount = null, bool hasManualReload = false, bool ignoresLos = false)
     {
         NetEntity = entity;
         Coordinates = coordinates;
         Name = name;
         AmmoCount = ammoCount;
         HasManualReload = hasManualReload;
+        IgnoresLos = ignoresLos;
     }
 }
