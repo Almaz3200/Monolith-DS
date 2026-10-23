@@ -2,12 +2,22 @@
   parent: [BaseMachinePowered, ConstructibleMachine]
   id: MachineOreMagnet
   name: ore magnet
-  description: Uses a powerful magnet to suck in ore. Has an internal storage.
+  description: Uses a powerful magnet to suck ore straight into a linked material silo. # LuaM: Uses a powerful magnet to suck in ore. Has an internal storage. > Uses a powerful magnet to suck ore straight into a linked material silo.
   components:
-  - type: MagnetPickup
-    magnetEnabled: false
-    magnetCanBeEnabled: false
+#  - type: MagnetPickup # Commented by LuaM: the ore goes into the linked silo, see SiloMagnetPickup
+#    magnetEnabled: false # Commented by LuaM
+#    magnetCanBeEnabled: false # Commented by LuaM
+#    range: 30 # Commented by LuaM
+# LuaM-start
+  - type: SiloMagnetPickup
     range: 30
+    whitelist:
+      tags:
+      - Ore
+  - type: OreSiloClient
+  - type: MaterialStorage # holds nothing, the silo only links machines that have a material storage
+    storageLimit: 0
+# LuaM-end
   - type: Sprite
     sprite: Structures/Machines/salvage.rsi
     layers:
@@ -63,22 +73,22 @@
         - MachineMask
         layer:
         - MachineLayer
-  - type: Storage
-    grid:
-    - 0,0,19,9
-    maxItemSize: Normal
-    storageOpenSound: /Audio/Effects/closetopen.ogg
-    storageCloseSound: /Audio/Effects/closetclose.ogg
-    whitelist:
-      tags:
-      - Ore
-      - ArtifactFragment
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: Dumpable
-    multiplier: 0.15
+#  - type: Storage # Commented by LuaM: no internal storage, the ore goes into the linked silo
+#    grid: # Commented by LuaM
+#    - 0,0,19,9 # Commented by LuaM
+#    maxItemSize: Normal # Commented by LuaM
+#    storageOpenSound: /Audio/Effects/closetopen.ogg # Commented by LuaM
+#    storageCloseSound: /Audio/Effects/closetclose.ogg # Commented by LuaM
+#    whitelist: # Commented by LuaM
+#      tags: # Commented by LuaM
+#      - Ore # Commented by LuaM
+#      - ArtifactFragment # Commented by LuaM
+#  - type: UserInterface # Commented by LuaM
+#    interfaces: # Commented by LuaM
+#      enum.StorageUiKey.Key: # Commented by LuaM
+#        type: StorageBoundUserInterface # Commented by LuaM
+#  - type: Dumpable # Commented by LuaM
+#    multiplier: 0.15 # Commented by LuaM
   - type: ItemToggle
     soundActivate: &soundActivate
       collection: sparks
@@ -105,8 +115,8 @@
     board: OreMagnetMachineCircuitboard
   - type: ContainerContainer
     containers:
-      storagebase: !type:Container
-        ents: []
+#      storagebase: !type:Container # Commented by LuaM
+#        ents: [] # Commented by LuaM
       machine_board: !type:Container
       machine_parts: !type:Container
 

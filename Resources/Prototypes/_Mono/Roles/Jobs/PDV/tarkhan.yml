@@ -5,12 +5,12 @@
   playTimeTracker: JobPDVTarkhan
   whitelisted: true # LuaM
   requirements:
-  - !type:DepartmentTimeRequirement # Requires time in both factions
-    department: Security
-    time: 14400 # 4 hours # mono
-  - !type:DepartmentTimeRequirement # Requires time in both factions
-    department: Antag
-    time: 108000 # 30 hours # mono
+#  - !type:DepartmentTimeRequirement # Requires time in both factions # Commented by LuaM: whitelist only, no playtime
+#    department: Security # Commented by LuaM
+#    time: 14400 # 4 hours # mono # Commented by LuaM
+#  - !type:DepartmentTimeRequirement # Requires time in both factions # Commented by LuaM
+#    department: Antag # Commented by LuaM
+#    time: 108000 # 30 hours # mono # Commented by LuaM
   - !type:TraitsRequirement # The trait doesn't do anything if you're PDV anyways, but this is 1 step closer to letting it actually give you points
     inverted: true
     traits:
