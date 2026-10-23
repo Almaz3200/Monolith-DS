@@ -109,7 +109,7 @@ public sealed partial class DroppableBorgModuleSystem : EntitySystem
                 if (hand?.HeldEntity is { } item)
                     QueueDel(item);
                 else if (!TerminatingOrDeleted(chassis)) // don't care if its empty if the server is shutting down
-                    Log.Error($"Borg {ToPrettyString(chassis)} terminated with empty hand {i} in {ToPrettyString(ent)}");
+                    Log.Warning($"Borg {ToPrettyString(chassis)} terminated with empty hand {i} in {ToPrettyString(ent)}"); // LuaM: Error > Warning
                 _hands.RemoveHand(chassis, handId, hands);
             }
             return;
