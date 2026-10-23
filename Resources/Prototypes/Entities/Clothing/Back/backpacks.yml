@@ -225,7 +225,7 @@
     sprite: Clothing/Back/Backpacks/ertleader.rsi
   - type: Storage
     grid:
-    - 0,0,10,3
+    - 0,0,9,7 # LuaM: 0,0,10,3 > 0,0,9,7, 4x11 > 8x10
   - type: ExplosionResistance # Goobstation
     damageCoefficient: 0.1
 

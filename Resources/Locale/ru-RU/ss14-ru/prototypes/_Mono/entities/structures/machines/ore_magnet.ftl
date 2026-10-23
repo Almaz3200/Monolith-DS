@@ -1,4 +1,4 @@
-ent-MachineOreMagnet = ore magnet
-    .desc = Uses a powerful magnet to suck in ore. Has an internal storage.
-ent-OreMagnetFlatpack = ore magnet flatpack
-    .desc = A flatpack used for constructing an ore magnet.
+ent-MachineOreMagnet = рудный магнит
+    .desc = Мощным магнитом затягивает руду вокруг прямо в подключённое хранилище материалов. Подключается через интерфейс хранилища.
+ent-OreMagnetFlatpack = упакованный рудный магнит
+    .desc = Упаковка, при помощи которой можно создать рудный магнит.

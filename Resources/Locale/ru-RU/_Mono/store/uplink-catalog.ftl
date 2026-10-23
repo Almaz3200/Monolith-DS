@@ -35,4 +35,4 @@ uplink-faction-materials-advanced-name = Ящик продвинутых мат�
 uplink-faction-materials-advanced-desc = Ящик, содержащий по 50 листов плазмы, урана, золота и серебра.
 
 uplink-faction-materials-exotic-name = Ящик экзотических материалов
-uplink-faction-materials-exotic-desc = Ящик, содержащий 10 листов пластитана, 5 слитков объединённого урана и 3 пластины обогащённого урана.
+uplink-faction-materials-exotic-desc = Ящик, содержащий 10 листов пластитана, 5 слитков обеднённого урана и 3 пластины обогащённого урана.

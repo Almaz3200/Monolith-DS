@@ -446,6 +446,7 @@
     staticPacks:
     - NFScrapStatic
     - MonoTradeCratesScrapProcessor
+    - LuaMScrapStatic # LuaM
 
 - type: entity
   id: MedicalAssembler
