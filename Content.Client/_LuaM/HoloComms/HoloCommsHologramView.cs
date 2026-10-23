@@ -1,7 +1,9 @@
 using System.Numerics;
 using Content.Client.Holopad;
+using Content.Client.StatusIcon;
 using Content.Client.Stylesheets;
 using Content.Shared.Holopad;
+using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
@@ -15,6 +17,7 @@ namespace Content.Client._LuaM.HoloComms;
 /// Draws the hologram of the other side the same way the holopads show it in the world:
 /// the sprite goes into a render target first, then the hologram shader is put over the whole of it.
 /// With nobody to show it draws a holographic question mark instead.
+/// The status icons of the hologram, like the SSD indicator of the one shown, go over it as they do in the world.
 /// </summary>
 public sealed partial class HoloCommsHologramView : Control
 {
@@ -41,6 +44,7 @@ public sealed partial class HoloCommsHologramView : Control
 
     private readonly SpriteSystem _sprite;
     private readonly HolopadSystem _holopad;
+    private readonly StatusIconSystem _statusIcon;
     private readonly SharedTransformSystem _xform;
     private readonly Font _glyphFont;
 
@@ -62,6 +66,7 @@ public sealed partial class HoloCommsHologramView : Control
 
         _sprite = _entManager.System<SpriteSystem>();
         _holopad = _entManager.System<HolopadSystem>();
+        _statusIcon = _entManager.System<StatusIconSystem>();
         _xform = _entManager.System<SharedTransformSystem>();
         _glyphFont = _resourceCache.NotoStack(variation: "Bold", size: 64);
 
@@ -93,13 +98,22 @@ public sealed partial class HoloCommsHologramView : Control
         EnsureTarget(size);
         var screen = handle.DrawingHandleScreen;
         float stripes;
+        UIBox2? spriteBox = null;
+        var scale = 1f;
 
-        if (hologram != null && TryDrawSprite(handle, hologram.Value, size, out var spriteStripes))
-            stripes = spriteStripes;
+        if (hologram != null && TryDrawSprite(handle, hologram.Value, size, out var drawnBox, out scale))
+        {
+            spriteBox = drawnBox;
+            stripes = size.Y / scale; // One stripe per pixel of the sprite, like in the world
+        }
         else if (ShowPlaceholder)
+        {
             stripes = DrawGlyph(handle, size);
+        }
         else
+        {
             return;
+        }
 
         _shader ??= _prototype.Index(HologramShader).InstanceUnique();
         SetShaderParameters(_shader, hologram?.Comp, stripes);
@@ -107,6 +121,9 @@ public sealed partial class HoloCommsHologramView : Control
         screen.UseShader(_shader);
         screen.DrawTextureRect(_target!.Texture, UIBox2.FromDimensions(Vector2.Zero, size));
         screen.UseShader(null);
+
+        if (hologram != null && spriteBox != null)
+            DrawStatusIcons(screen, hologram.Value, spriteBox.Value, scale);
     }
 
     protected override void ExitedTree()
@@ -140,9 +157,10 @@ public sealed partial class HoloCommsHologramView : Control
         return (uid, comp);
     }
 
-    private bool TryDrawSprite(IRenderHandle handle, EntityUid hologram, Vector2i size, out float stripes)
+    private bool TryDrawSprite(IRenderHandle handle, EntityUid hologram, Vector2i size, out UIBox2 spriteBox, out float scale)
     {
-        stripes = 0f;
+        spriteBox = default;
+        scale = 1f;
 
         if (!_entManager.TryGetComponent<SpriteComponent>(hologram, out var sprite) ||
             !_entManager.TryGetComponent<TransformComponent>(hologram, out var xform))
@@ -157,7 +175,7 @@ public sealed partial class HoloCommsHologramView : Control
         // The largest whole scale that fits keeps the pixels square
         var pixelsPerMeter = EyeManager.PixelsPerMeter;
         var fit = MathF.Min(size.X / (bounds.Width * pixelsPerMeter), size.Y * 0.92f / (bounds.Height * pixelsPerMeter));
-        var scale = MathF.Max(1f, MathF.Floor(fit));
+        scale = MathF.Max(1f, MathF.Floor(fit));
 
         // Center the drawn part, the offset of the hologram only lifts it above the holopad in the world
         var center = bounds.Center + sprite.Offset;
@@ -165,15 +183,50 @@ public sealed partial class HoloCommsHologramView : Control
 
         _sprite.ForceUpdate(hologram);
 
+        var drawScale = scale;
         handle.DrawingHandleScreen.RenderInRenderTarget(_target!, () =>
         {
             ResetTargetState(handle);
-            handle.DrawEntity(hologram, position, new Vector2(scale), Angle.Zero, Angle.Zero, Direction.South, sprite, xform, _xform);
+            handle.DrawEntity(hologram, position, new Vector2(drawScale), Angle.Zero, Angle.Zero, Direction.South, sprite, xform, _xform);
         }, Color.Transparent);
 
-        // One stripe per pixel of the sprite, like in the world
-        stripes = size.Y / scale;
+        var drawnSize = bounds.Size * pixelsPerMeter * scale;
+        spriteBox = UIBox2.FromDimensions(((Vector2) size - drawnSize) / 2f, drawnSize);
         return true;
+    }
+
+    /// <summary>
+    /// Same places as in the world: the corners at the top of the sprite, the base icons stacked down from there.
+    /// </summary>
+    private void DrawStatusIcons(DrawingHandleScreen screen, EntityUid hologram, UIBox2 spriteBox, float scale)
+    {
+        var icons = _statusIcon.GetStatusIcons(hologram);
+        if (icons.Count == 0)
+            return;
+
+        icons.Sort();
+        var left = 0f;
+        var right = 0f;
+
+        foreach (var icon in icons)
+        {
+            var texture = _sprite.GetFrame(icon.Icon, _timing.RealTime);
+            var iconSize = (Vector2) texture.Size * scale;
+            var onRight = icon.LocationPreference == StatusIconLocationPreference.Right;
+            var position = onRight
+                ? new Vector2(spriteBox.Right - iconSize.X, spriteBox.Top + right)
+                : new Vector2(spriteBox.Left, spriteBox.Top + left);
+
+            screen.DrawTextureRect(texture, UIBox2.FromDimensions(position, iconSize));
+
+            if (icon.Layer != StatusIconLayer.Base)
+                continue;
+
+            if (onRight)
+                right += iconSize.Y;
+            else
+                left += iconSize.Y;
+        }
     }
 
     private float DrawGlyph(IRenderHandle handle, Vector2i size)

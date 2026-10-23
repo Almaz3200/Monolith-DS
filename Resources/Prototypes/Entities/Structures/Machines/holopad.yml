@@ -180,6 +180,7 @@
     intensity: 2
     scrollRate: 0.125
     offset: -0.02, 0.45
+  - type: StatusIcon # LuaM - repeats the SSD indicator of the one shown
   - type: Tag
     tags:
     - HideContextMenu
