@@ -1,0 +1,204 @@
+# Ported from ADT via Arcane (https://github.com/ArcaneSS14/Arcane) as plain seats.
+
+- type: entity
+  name: sofa
+  id: ADTSofaBase
+  parent: SeatBase
+  abstract: true
+  description: A big sofa you never want to get up from.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+  - type: StaticPrice
+    price: 25
+  - type: ShipRepairable
+    repairTime: 1
+    repairCost: 1
+
+# white office sofa
+- type: entity
+  name: white office sofa left side
+  id: ADTSofaOfficeWhiteLeftSide
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_left
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaOfficeWhiteLeftSideNode
+
+- type: entity
+  name: white office sofa middle
+  id: ADTSofaOfficeWhiteMiddle
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_middle
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaOfficeWhiteMiddleNode
+
+- type: entity
+  name: white office sofa right side
+  id: ADTSofaOfficeWhiteRightSide
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_right
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaOfficeWhiteRightSideNode
+
+- type: entity
+  name: white office sofa left corner
+  id: ADTSofaOfficeWhiteLeftCorner
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_leftcorner
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaOfficeWhiteLeftCornerNode
+
+- type: entity
+  name: white office sofa right corner
+  id: ADTSofaOfficeWhiteRightCorner
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_rightcorner
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaOfficeWhiteRightCornerNode
+
+# black sofa
+- type: entity
+  name: black sofa left side
+  id: ADTSofaCutBlackLeftSide
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_left
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutBlackLeftSideNode
+
+- type: entity
+  name: black sofa middle
+  id: ADTSofaCutBlackMiddle
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_middle
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutBlackMiddleNode
+
+- type: entity
+  name: black sofa right side
+  id: ADTSofaCutBlackRightSide
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_right
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutBlackRightSideNode
+
+- type: entity
+  name: black sofa left corner
+  id: ADTSofaCutBlackLeftCorner
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_corner
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutBlackLeftCornerNode
+
+- type: entity
+  name: black sofa right corner
+  id: ADTSofaCutBlackRightCorner
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_corner
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutBlackRightCornerNode
+
+# comfy sofa
+- type: entity
+  name: comfy sofa left side
+  id: ADTSofaCutComfyLeftSide
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_left
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutComfyLeftSideNode
+
+- type: entity
+  name: comfy sofa middle
+  id: ADTSofaCutComfyMiddle
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_middle
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutComfyMiddleNode
+
+- type: entity
+  name: comfy sofa right side
+  id: ADTSofaCutComfyRightSide
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_right
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutComfyRightSideNode
+
+- type: entity
+  name: comfy sofa left corner
+  id: ADTSofaCutComfyLeftCorner
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_corner
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutComfyLeftCornerNode
+
+- type: entity
+  name: comfy sofa right corner
+  id: ADTSofaCutComfyRightCorner
+  parent: ADTSofaBase
+  components:
+  - type: Sprite
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_corner
+  - type: Construction
+    graph: ADTSofasGraph
+    node: ADTSofaCutComfyRightCornerNode

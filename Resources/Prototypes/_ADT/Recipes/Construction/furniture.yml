@@ -1,0 +1,254 @@
+- type: construction
+  id: ADTSofaOfficeWhiteLeftSide
+  name: white office sofa (left side)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaOfficeWhiteLeftSideNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_left
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaOfficeWhiteMiddle
+  name: white office sofa (middle)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaOfficeWhiteMiddleNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_middle
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaOfficeWhiteRightSide
+  name: white office sofa (right side)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaOfficeWhiteRightSideNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_right
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaOfficeWhiteLeftCorner
+  name: white office sofa (left corner)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaOfficeWhiteLeftCornerNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_leftcorner
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaOfficeWhiteRightCorner
+  name: white office sofa (right corner)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaOfficeWhiteRightCornerNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/white_office_sofa.rsi
+    state: sofa_rightcorner
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutBlackLeftSide
+  name: black sofa (left side)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutBlackLeftSideNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_left
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutBlackMiddle
+  name: black sofa (middle)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutBlackMiddleNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_middle
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutBlackRightSide
+  name: black sofa (right side)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutBlackRightSideNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_right
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutBlackLeftCorner
+  name: black sofa (left corner)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutBlackLeftCornerNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_corner
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutBlackRightCorner
+  name: black sofa (right corner)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutBlackRightCornerNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_black_cut.rsi
+    state: sofa_corner
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutComfyLeftSide
+  name: comfy sofa (left side)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutComfyLeftSideNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_left
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutComfyMiddle
+  name: comfy sofa (middle)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutComfyMiddleNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_middle
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutComfyRightSide
+  name: comfy sofa (right side)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutComfyRightSideNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_right
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutComfyLeftCorner
+  name: comfy sofa (left corner)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutComfyLeftCornerNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_corner
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ADTSofaCutComfyRightCorner
+  name: comfy sofa (right corner)
+  description: A big sofa you never want to get up from.
+  graph: ADTSofasGraph
+  startNode: start
+  targetNode: ADTSofaCutComfyRightCornerNode
+  category: construction-category-furniture
+  icon:
+    sprite: _ADT/Structures/Furniture/Sofas/sofa_comfy_cut.rsi
+    state: sofa_corner
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
