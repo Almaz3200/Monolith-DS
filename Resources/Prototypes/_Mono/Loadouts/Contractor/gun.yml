@@ -10,6 +10,11 @@
   #- ContractorArgentiLoadout
   - ContractorSvalinnLoadout
   - ContractorDoubleBarreledLoadout
+  - MercenaryKammererLoadout # LuaM
+  - MercenaryPrometheusLoadout # LuaM
+  - MercenaryGestioLoadout # LuaM
+  - ContractorAkmLoadout # LuaM
+  - MercenaryNovaliteLoadout # LuaM
   fallbacks:
   - ContractorMk32Loadout
 

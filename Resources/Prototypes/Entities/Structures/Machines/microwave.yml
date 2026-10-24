@@ -193,7 +193,7 @@
     damage:
       types:
         Blunt: 30
-        Shock: 5
+        Slash: 5 # LuaM: Shock 5 > Slash 5
   - type: DamageOtherOnHit
     damage:
       types:

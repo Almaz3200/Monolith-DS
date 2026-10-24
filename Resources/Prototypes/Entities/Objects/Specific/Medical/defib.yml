@@ -137,6 +137,6 @@
     activatedDamage:
       types:
         Blunt: 8
-        Shock: 16
+        Slash: 16 # LuaM: Shock 16 > Slash 16
   - type: StaticPrice # Mono
     price: 1250

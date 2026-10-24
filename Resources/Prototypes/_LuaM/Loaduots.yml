@@ -7,3 +7,48 @@
   price: 250000
   inhand:
   - WeaponCaseHunter101Registered
+
+- type: loadout
+  id: ContractorSpecialGunIroh
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MonoCivSkilled
+  price: 100000 # same as the old mercenary Iroh, it's premium
+  inhand:
+  - WeaponCaseLongIrohRegistered
+
+- type: loadout
+  id: ContractorAkmLoadout
+  price: 15000 # same as the Prometheus, a full-auto rifle as well
+  storage:
+    back:
+    - WeaponRifleAk
+
+# VG weapons: MercenaryFirearm (shared with other jobs, so it is copied here) plus the mercenary self-defense guns
+- type: loadoutGroup
+  id: VGFirearm
+  name: loadout-group-weapon
+  minLimit: 0
+  loadouts:
+  - MercenaryGestioLoadout
+  - MercenaryNovaliteLoadout
+  - MercenaryAk220Loadout
+  - MercenaryKnallstockLoadout
+  - MercenaryKeyboardLoadout
+  - MercenaryPrometheusLoadout
+  - MercenaryIrohLoadout
+  - MercenaryLeeEnfieldLoadout
+  - MercenaryVulcanCLoadout
+  - MercenaryMosinLoadout
+  - MercenarySvsLoadout
+  - MercenaryKammererLoadout
+  - MercenaryDisablerSMGLoadout
+  - MercenaryLaserCarbineLoadout
+  - MercenaryEnergyGunLoadout
+  - MercenaryLeverActionloadout
+  # From the mercenary self-defense list, the disabler is already in their pistol group
+  - ContractorMk32Loadout
+  - ContractorSurvivalKnifeLoadout
+  - ContractorSvalinnLoadout
+  - ContractorDoubleBarreledLoadout
+  - ContractorAkmLoadout

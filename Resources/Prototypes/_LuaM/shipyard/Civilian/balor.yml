@@ -1,0 +1,36 @@
+- type: vessel
+  id: Balor
+  parent: BaseVessel
+  name: vessel-balor-name # LuaM-locale
+  description: vessel-balor-desc # LuaM-locale
+  price: 92660
+  category: Large
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/Civilian/balor.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  - Capital
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Balor
+  mapName: 'Z-22 Balor'
+  mapPath: /SharedMaps/_LuaM/Shuttles/Civilian/balor.yml
+  minPlayers: 0
+  stations:
+    Balor:
+      stationProto: StandardFrontierVessel # no expeditions for the Balor, even with a bought console
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Balor MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

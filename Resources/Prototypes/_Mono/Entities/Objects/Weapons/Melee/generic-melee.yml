@@ -61,8 +61,8 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 25
-        Heat: 25
+        Slash: 50 # LuaM: 25 > 50, Heat 25 moved to Slash
+        # Heat: 25 # Commented by LuaM: moved to Slash
         Structural: 150
   - type: MeleeWeapon
     heavyStaminaCost: 1

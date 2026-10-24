@@ -30,7 +30,7 @@
   minPlayers: 0
   stations:
     Spessbite:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel, expeditions with a bought console
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Spessbite CIV{1}'
