@@ -29,6 +29,7 @@ namespace Content.Client.Communications.UI
             _menu.OnAlertLevel += AlertLevelSelected;
             _menu.OnEmergencyLevel += EmergencyShuttleButtonPressed;
             _menu.OnDeclareWar += reason => SendMessage(new CommunicationsConsoleDeclareWarMessage(reason)); // LuaM
+            _menu.OnSurrender += () => SendMessage(new CommunicationsConsoleSurrenderMessage()); // LuaM
         }
 
         public void AlertLevelSelected(string level)
@@ -98,6 +99,8 @@ namespace Content.Client.Communications.UI
                 _menu.ShowWarDeclaration = commsState.ShowWarDeclaration;
                 _menu.WarDeclared = commsState.WarDeclared;
                 _menu.WarDeclarationAvailableAt = commsState.WarDeclarationAvailableAt;
+                _menu.WarActive = commsState.WarActive;
+                _menu.WarOver = commsState.WarOver;
                 _menu.UpdateWarDeclaration();
                 // LuaM end
             }
