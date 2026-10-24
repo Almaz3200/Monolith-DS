@@ -1,2 +1,2 @@
-ent-Handrail = handrail
+ent-Handrail = поручень
     .desc = { ent-ChairBase.desc }

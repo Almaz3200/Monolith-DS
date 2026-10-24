@@ -31,5 +31,11 @@ public sealed partial class ManualPortstrikeRuleComponent : Component
     /// </summary>
     [ViewVariables]
     public TimeSpan? FirstDeclarationTime;
+
+    /// <summary>
+    /// The faction that capitulated. The war is over (white war level) and can't be declared again this round.
+    /// </summary>
+    [ViewVariables]
+    public ProtoId<CompanyPrototype>? SurrenderedFaction;
     // LuaM end
 }
