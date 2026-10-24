@@ -11,3 +11,18 @@
   - TsfmcBasicEquipment
   - HypoMiniLimitedEdition
   position: 10, 8
+
+- type: technology
+  id: TsfmcAdvancedStorages
+  name: research-technology-tsfmc-advanced-storages
+  entityIcon: ArmorPlateStorageT4TSF
+  discipline: TsfmcEquipment
+  tier: 1
+  cost: 20000
+  recipeUnlocks:
+  - ArmorPlateStorageT4TSFRecipe
+  - ClothingBackpackERTLeaderRecipe
+  technologyPrerequisites:
+  - TsfmcBasicEquipment
+  - ArmorPlateStorage
+  position: 9, 6

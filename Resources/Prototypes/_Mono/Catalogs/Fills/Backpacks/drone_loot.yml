@@ -14,7 +14,7 @@
     items:
     # Money - 30k # removed
     # Scrap chunks
-    - id: ScrapOre100
+    - id: ScrapOre50 # LuaM: ScrapOre100 > ScrapOre50
       amount: 1
     # Material
     - id: SheetPlastitanium10
@@ -78,7 +78,7 @@
     # - id: SpaceCash25000 # Commented by LuaM: no cash from drones
     # Scrap chunks
     - id: ScrapOre100
-      amount: 3
+      amount: 2 # LuaM: 3 > 2, -33%
     # Material
     - id: SheetPlastitanium10
       amount: 4
@@ -134,7 +134,7 @@
     # - id: SpaceCash20000 # Commented by LuaM: no cash from drones
     # Scrap chunks
     - id: ScrapOre100
-      amount: 6
+      amount: 4 # LuaM: 6 > 4, -33%
     # Material
     - id: SheetPlastitanium10
       amount: 8

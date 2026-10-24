@@ -21,3 +21,15 @@ comms-console-war-declaration-auto-sender = Сектор Колосс
 comms-console-war-declaration-auto = Внимание! {$faction} не ответил на объявление войны. Война объявлена автоматически.
 
 comp-pda-ui-station-war-level-pending = УРОВЕНЬ ВОЙНЫ: [color=yellow]ТЁПЛЫЙ[/color]
+comp-pda-ui-station-war-level-white = УРОВЕНЬ ВОЙНЫ: [color=white]БЕЛЫЙ[/color]
+
+comms-console-menu-declare-war-button-over = Война окончена
+comms-console-menu-surrender-button = Капитулировать
+comms-console-menu-surrender-button-confirm = Подтвердить капитуляцию
+comms-console-menu-surrender-button-tooltip = Капитулировать от лица фракции. Война закончится, и до конца раунда её нельзя будет объявить снова.
+comms-console-war-surrender = Внимание! {$faction} капитулирует. Война окончена.
+
+administration-ui-round-tab-cancel-war = Отменить войну
+cmd-cancelwar-desc = Отменяет войну между фракциями и возвращает холодный уровень войны.
+cmd-cancelwar-help = Использование: cancelwar
+cmd-cancelwar-done = Война отменена, уровень войны снова холодный.

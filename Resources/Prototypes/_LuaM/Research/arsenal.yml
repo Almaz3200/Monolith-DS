@@ -77,3 +77,18 @@
   - ThermalVisionTech
   - CyberneticEnhancements
   position: 4, 4
+
+- type: technology
+  id: ArmorPlateStorage
+  name: research-technology-armor-plate-storage
+  entityIcon: ArmorPlateStorageT2
+  discipline: Arsenal
+  tier: 1
+  cost: 50000
+  recipeUnlocks:
+  - ArmorPlateStorageT2Recipe
+  technologyPrerequisites:
+  - UniversalArmorPlatesT1
+  - MiscellaneousItemsOrganization
+  - ArmorBasic
+  position: 3, 11

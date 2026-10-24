@@ -72,7 +72,7 @@ public class SharedHardpointSystem : EntitySystem
             {
                 //_transformSystem.Unanchor(uid); //if it's not / we dont have a hardpoint under it, kick that shit out
                 //play sound effect
-                _popup.PopupPredicted(Loc.GetString("WARNING! This weapon is not mounted on a compatible hardpoint and will not function!"), uid, null);
+                _popup.PopupPredicted(Loc.GetString("gunnery-hardpoint-not-mounted"), uid, null); // LuaM: raw english text > gunnery-hardpoint-not-mounted
                 return;
             }
         }
@@ -80,6 +80,15 @@ public class SharedHardpointSystem : EntitySystem
         //else, if we UNanchored
         if (component.anchoredTo == null || TerminatingOrDeleted(uid)) //this should literally never happen
         {
+            return;
+        }
+
+        // LuaM: the hardpoint under the gun may be gone already (destroyed or deleted), so there is nothing to free.
+        // Calling Transform on it threw and broke the unanchor of the gun.
+        if (TerminatingOrDeleted(component.anchoredTo.Value) || !HasComp<HardpointComponent>(component.anchoredTo.Value))
+        {
+            component.anchoredTo = null;
+            DirtyEntity(uid);
             return;
         }
 
@@ -178,6 +187,8 @@ public class SharedHardpointSystem : EntitySystem
         {
             if (!TryComp<HardpointComponent>(entity, out var hardComp))
                 continue;
+            if (hardComp.anchoring == uid && component.anchoredTo == entity) // LuaM: already mounted on this hardpoint
+                return true;
             if (hardComp.anchoring is not null && !IsStaleAnchoring(entity, hardComp)) // LuaM: free hardpoints taken by gone guns
                 continue;
             if ((hardComp.CompatibleTypes & component.CompatibleTypes) == 0)

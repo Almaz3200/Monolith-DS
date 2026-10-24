@@ -8,7 +8,7 @@
       state: security
     - type: MachineBoard
       prototype: ShieldGeneratorSmall
-      flatpackable: false
+      flatpackable: true # LuaM: false > true, industry parts are only for MMC, nothing left to bypass
       stackRequirements:
         Glass: 10
         Steel: 10
@@ -38,7 +38,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorMedium
-    flatpackable: false
+    flatpackable: true # LuaM: false > true, industry parts are only for MMC, nothing left to bypass
     stackRequirements:
       Glass: 10
       Steel: 10
@@ -71,7 +71,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGenerator
-    flatpackable: false
+    flatpackable: true # LuaM: false > true, industry parts are only for MMC, nothing left to bypass
     stackRequirements:
       Glass: 30
       Steel: 30

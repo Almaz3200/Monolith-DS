@@ -1,2 +1,2 @@
-ent-GasFilterInline = inline gas filter
-    .desc = Filters gases from a pipenet without splitting it in two.
+ent-GasFilterInline = проточный газовый фильтр
+    .desc = Отфильтровывает газы из трубопровода, не разделяя его надвое.

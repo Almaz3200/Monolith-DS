@@ -65,6 +65,15 @@
                     StyleClasses="Caution"
                     Text="{Loc 'comms-console-menu-declare-war-button'}"
                     ToolTip="{Loc 'comms-console-menu-declare-war-button-tooltip'}"/>
+
+                <!-- LuaM: capitulation -->
+                <controls:ConfirmButton Name="SurrenderButton"
+                    Access="Public"
+                    Visible="False"
+                    StyleClasses="Caution"
+                    Text="{Loc 'comms-console-menu-surrender-button'}"
+                    ConfirmationText="{Loc 'comms-console-menu-surrender-button-confirm'}"
+                    ToolTip="{Loc 'comms-console-menu-surrender-button-tooltip'}"/>
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

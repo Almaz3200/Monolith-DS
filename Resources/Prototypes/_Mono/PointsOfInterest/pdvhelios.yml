@@ -13,7 +13,7 @@
   maximumDistance: 27000 # somewhere in far reaches 1 or 2
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsfPdv ] # LuaM: MonoChimeraPdv > MonoChimeraTsfPdv
   spawnGroup: Required
-  gridPath: /Maps/_Mono/POI/pdvhelios.yml
+  gridPath: /Maps/_LuaM/POI/pdvheliosLuaM.yml # LuaM: /Maps/_Mono/POI/pdvhelios.yml > /Maps/_LuaM/POI/pdvheliosLuaM.yml
   addComponents:
   - type: IFF
     color: "#DE9E59"
@@ -39,7 +39,7 @@
 - type: gameMap
   id: HeliosFortress
   mapName: 'PDV Helios Fortress'
-  mapPath: /Maps/_Mono/POI/pdvhelios.yml
+  mapPath: /Maps/_LuaM/POI/pdvheliosLuaM.yml # LuaM: /Maps/_Mono/POI/pdvhelios.yml > /Maps/_LuaM/POI/pdvheliosLuaM.yml 
   minPlayers: 0
   stations:
     HeliosFortress:

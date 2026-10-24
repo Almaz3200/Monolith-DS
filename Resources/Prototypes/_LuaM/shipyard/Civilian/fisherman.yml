@@ -22,7 +22,7 @@
   minPlayers: 0
   stations:
     Fisherman:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel, expeditions with a bought console
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Fisherman CIV{1}'

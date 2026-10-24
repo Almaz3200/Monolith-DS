@@ -8,6 +8,10 @@
   - ClothingShoesBootsMagSyndieRogue
   - ClothingMaskGasSyndicateRogue
   - ClothingEyesThermalVisionGoggles
+  # LuaM-start:
+  - ArmorPlateStorageT4PDVRecipe
+  - ClothingBackpackPDVTarkhanRecipe
+  # LuaM-end
 
 - type: latheRecipePack
   id: MonoRogueGearProDynamic # for syndie hardsuits and shit

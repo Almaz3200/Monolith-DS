@@ -449,7 +449,7 @@
   name: trait-heretic-name
   description: trait-heretic-desc
   category: Physical
-  cost: 0 # no points because it's free points for members of the PDV and arguably TSF too.
+  cost: -10 # LuaM: 0 > -10, gives 10 trait points. PDV, TSF, medical, VG, USSP and MMC jobs can't take it.
   blacklist:
     components:
     - BorgChassis

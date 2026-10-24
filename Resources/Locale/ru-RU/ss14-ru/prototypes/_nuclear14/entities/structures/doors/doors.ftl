@@ -1,7 +1,7 @@
 ent-N14BaseDoor = door
     .desc = A door, where will it lead?
-ent-N14DoorMakeshift = makeshift door
-    .desc = It's a wooden door. It looks dirty and handmade.
+ent-N14DoorMakeshift = самодельная дверь
+    .desc = Это деревянная дверь. Выглядит грязной и самодельной.
 ent-N14DoorWoodHousePainted = wooden door
     .desc = It's a painted door.
     .suffix = painted

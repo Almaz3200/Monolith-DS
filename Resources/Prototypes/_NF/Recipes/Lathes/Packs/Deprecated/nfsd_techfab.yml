@@ -4,6 +4,19 @@
 - type: latheRecipePack
   id: NFNfsdTechfabDeprecatedStatic
   recipes:
+  # LuaM-start: Basic tools
+  - Wirecutter
+  - Screwdriver
+  - Welder
+  - Wrench
+  - CrowbarGreen
+  - Multitool
+  - FlashlightLantern
+  - AppraisalTool
+  - HandLabeler
+  - Signaller
+  - ClothingMaskWeldingGas
+  # LuaM-end
   - ClothingEyesHudNfsd
   - CombatKnife
   - Flash
@@ -32,8 +45,10 @@
   - PowerCageMedium
   - PowerCageSmall
   - Signaller
-  - ClothingNeckWearableCameraTSF # LuaM
-  - Magazine8x65mmEmptyBox # LuaM
+  # LuaM-start:
+  - ClothingNeckWearableCameraTSF
+  - ArmorPlateStorageT1Recipe
+  # LuaM-end
 
 - type: latheRecipePack
   id: NFNfsdTechfabDeprecated
@@ -51,8 +66,6 @@
   - WeaponLaserCannon
   - WeaponLaserCarbine
   - WeaponXrayCannon
-  - NaniteApplicatorSyndicate # LuaM
-  - ExperimentalPowerCellCombat # LuaM
 
 - type: latheRecipePack
   id: NFNfsdTechfabDeprecatedEmag

@@ -1,30 +1,30 @@
 # Author Info
-# GitHub: LassiH
-# Discord: lassih
+# GitHub: LassiH (Remap by Xapcyc)
+# Discord: lassih (Xapcyc)
 
 #
 - type: vessel
   id: Leviathan
   parent: BaseVessel
   name: VG Leviathan
-  description: The Viper group's capital-sized brawler with thick armor. Made by the GS from an old cargo freighter.
   limit: 1
+  description: Чудовищный фрегат Viper Group, способный выступать в качестве автономной базы. Вооружён одним W-194 "Хейдес", двумя AC-35, двумя ASM-302 "Ванык", двумя SRM-573 "Ванквер", двумя L-85 "Рупор", двумя AK-800 "Фанг", двумя L-65 "Лонгбоу" и четырьмя ADBP-7 "Дравон"
   price: 540000
   purchasable: false # Voucher only
   category: Large
   group: Viper
   access: Viper
-  shuttlePath: /SharedMaps/_Mono/Shuttles/VG/leviathan.yml
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/VG/Levi2.yml #LuaM/SharedMaps/_Mono/Shuttles/VG/leviathan.yml > /SharedMaps/_LuaM/Shuttles/VG/Levi2.yml
   guidebookPage: ShipyardNFROperation
   class:
   - Frigate
   engine:
-  - NFR
+  - Plasma #LuaM NFR > Plasma
 
 - type: gameMap
   id: Leviathan
   mapName: 'VG Leviathan'
-  mapPath: /SharedMaps/_Mono/Shuttles/VG/leviathan.yml
+  mapPath: /SharedMaps/_LuaM/Shuttles/VG/Levi2.yml #Luam/SharedMaps/_Mono/Shuttles/VG/leviathan.yml > /SharedMaps/_LuaM/Shuttles/VG/Levi2.yml
   minPlayers: 0
   stations:
     Leviathan:

@@ -48,7 +48,7 @@
     state: security
   - type: MachineBoard
     prototype: MachineFTLDrive
-    flatpackable: false
+    flatpackable: true # LuaM: false > true, industry parts are only for MMC, nothing left to bypass
     requirements:
       Capacitor: 4
       Manipulator: 2
@@ -197,7 +197,7 @@
     state: security
   - type: MachineBoard
     prototype: MachineFTLDrive25S
-    flatpackable: false
+    flatpackable: true # LuaM: false > true, industry parts are only for MMC, nothing left to bypass
     requirements:
       Capacitor: 8
       Manipulator: 4
@@ -229,7 +229,7 @@
     state: security
   - type: MachineBoard
     prototype: MachineFTLDrive50
-    flatpackable: false
+    flatpackable: true # LuaM: false > true, industry parts are only for MMC, nothing left to bypass
     requirements:
       Capacitor: 8
       Manipulator: 4
