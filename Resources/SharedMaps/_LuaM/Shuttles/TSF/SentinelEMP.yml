@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 10/21/2026 12:11:51
-  entityCount: 1474
+  time: 10/24/2026 16:28:35
+  entityCount: 1470
 maps: []
 grids:
 - 1
@@ -404,10 +404,10 @@ entities:
             267: -5,-19
     - type: SpreaderGrid
       spreadQueues:
+        MetalFoam: []
+        Puddle: []
         Kudzu: []
         Smoke: []
-        Puddle: []
-        MetalFoam: []
     - type: GridAtmosphere
       version: 2
       data:
@@ -491,12 +491,10 @@ entities:
             2: 58564
             0: 2
           0,-6:
-            2: 35603
-            3: 1024
+            2: 36627
             1: 8
           -1,-6:
-            2: 20174
-            3: 256
+            2: 20430
           1,-7:
             0: 8465
             1: 4096
@@ -535,11 +533,6 @@ entities:
           moles:
             Oxygen: 21.824879
             Nitrogen: 82.10312
-        - volume: 2500
-          temperature: 293.14996
-          moles:
-            Oxygen: 20.078888
-            Nitrogen: 75.53487
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
@@ -6450,7 +6443,7 @@ entities:
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -3.5,-8.5
+      pos: -1.5,-3.5
       parent: 1
   - uid: 614
     components:
@@ -6466,8 +6459,8 @@ entities:
   - uid: 672
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,-4.5
+      rot: 1.5707963267948966 rad
+      pos: 1.5,-7.5
       parent: 1
   - uid: 676
     components:
@@ -6510,7 +6503,7 @@ entities:
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 2.5,-8.5
+      pos: 0.5,-3.5
       parent: 1
   - uid: 688
     components:
@@ -6522,13 +6515,7 @@ entities:
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -2.5,-6.5
-      parent: 1
-  - uid: 697
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 1.5,-4.5
+      pos: -2.5,-7.5
       parent: 1
   - uid: 700
     components:
@@ -6541,24 +6528,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 9.5,-19.5
-      parent: 1
-  - uid: 725
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 1.5,-6.5
-      parent: 1
-  - uid: 729
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,-2.5
-      parent: 1
-  - uid: 732
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 0.5,-2.5
       parent: 1
   - uid: 734
     components:
@@ -10394,7 +10363,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -6048.512
+      secondsUntilStateChange: -6091.042
       state: Opening
     - type: Airlock
       autoClose: False
