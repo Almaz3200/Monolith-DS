@@ -38,3 +38,6 @@ ent-SurveillanceCameraRogue = камера
 ent-SurveillanceCameraUSSP = камера
     .suffix = СССП
     .desc = { ent-SurveillanceCameraBase.desc }
+ent-Xenoborgs = camera
+    .desc = { ent-SurveillanceCameraBase.desc }
+    .suffix = Xenoborgs

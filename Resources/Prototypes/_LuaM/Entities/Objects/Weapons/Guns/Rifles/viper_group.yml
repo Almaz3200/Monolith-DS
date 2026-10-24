@@ -1,0 +1,159 @@
+- type: entity
+  parent: BaseWeaponRifle
+  id: WeaponRifleAK12
+  name: AK-12 «Sumrak» (7.62x39mm)
+  description: An improved AK-pattern rifle chambered in 7.62x39mm, configured for optics, grips, lights, and suppressors.
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Weapons/Guns/Rifles/ak12.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - map: ["gripAttachment"]
+    - map: ["barrelAttachment"]
+    - map: ["opticAttachment"]
+  - type: Item
+    sprite: _LuaM/Objects/Weapons/Guns/Rifles/ak12_inhands_32x.rsi
+  - type: Clothing
+    sprite: _LuaM/Objects/Weapons/Guns/Rifles/ak12_inhands_32x.rsi
+  - type: GunWieldBonus
+    minAngle: -18
+    maxAngle: -47
+  - type: Gun
+    minAngle: 18
+    maxAngle: 54
+    angleIncrease: 3
+    angleDecay: 15
+    availableModes:
+    - FullAuto
+    - Burst
+    burstFireRate: 12
+    burstCooldown: 0.8
+    shotsPerBurst: 4
+    fireRate: 7.0
+    projectileSpeed: 50
+    soundGunshot:
+      path: /Audio/_Goobstation/Weapons/Guns/Gunshots/thock.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine762x39mmFMJ
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/amr_magin.ogg
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/cm82_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine762x39mmFMJ
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge762x39mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge762x39mmFMJ
+      attachment_grip:
+        insertSound: /Audio/Items/screwdriver2.ogg
+        ejectSound: /Audio/Items/screwdriver2.ogg
+        priority: 0
+        whitelist:
+          tags:
+          - MonoGripErebusRailmount
+      attachment_barrel:
+        insertSound: /Audio/Items/screwdriver.ogg
+        ejectSound: /Audio/Items/screwdriver.ogg
+        priority: 0
+        whitelist:
+          tags:
+          - MonoSuppressorMulticalRifle
+      attachment_optic:
+        insertSound: /Audio/Items/screwdriver2.ogg
+        ejectSound: /Audio/Items/screwdriver2.ogg
+        priority: 0
+        whitelist:
+          tags:
+          - MonoOpticErebusRailmount
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      attachment_grip: !type:ContainerSlot
+      attachment_barrel: !type:ContainerSlot
+      attachment_optic: !type:ContainerSlot
+  - type: ESAttachableGun
+    slots:
+    - name: es-gun-attachments-slot-name-barrel
+      containerId: attachment_barrel
+      whitelist:
+        tags:
+        - MonoSuppressorMulticalRifle
+    - name: es-gun-attachments-slot-name-grip
+      containerId: attachment_grip
+      whitelist:
+        tags:
+        - MonoGripErebusRailmount
+    - name: es-gun-attachments-slot-name-optic
+      containerId: attachment_optic
+      whitelist:
+        tags:
+        - MonoOpticErebusRailmount
+  - type: ActivatableUI
+    key: enum.ESAttachableGunUiKey.Key
+    verbOnly: true
+    verbText: es-gun-attachments-verb-text
+  - type: UserInterface
+    interfaces:
+      enum.ESAttachableGunUiKey.Key:
+        type: ESGunAttachmentBui
+  - type: ESItemMapper
+    mappings:
+      gripAttachment:
+      - containerId: attachment_grip
+        state: grip
+        whitelist:
+          tags:
+          - MonoGripVFG
+      - containerId: attachment_grip
+        state: lam
+        whitelist:
+          tags:
+          - MonoGripLAM
+      - containerId: attachment_grip
+        state: light
+        whitelist:
+          tags:
+          - MonoGripLight
+      barrelAttachment:
+      - containerId: attachment_barrel
+        state: suppressed
+        whitelist:
+          tags:
+          - MonoSuppressor
+      opticAttachment:
+      - containerId: attachment_optic
+        state: optic2x
+        whitelist:
+          tags:
+          - MonoOptic2x
+      - containerId: attachment_optic
+        state: optic4x
+        whitelist:
+          tags:
+          - MonoOptic4x
+      - containerId: attachment_optic
+        state: optic8x
+        whitelist:
+          tags:
+          - MonoOptic8x
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: GunRequiresWield

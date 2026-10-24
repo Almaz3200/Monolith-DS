@@ -84,7 +84,8 @@ public sealed partial class InteractionPopupSystem : EntitySystem
         var msg = ""; // Stores the text to be shown in the popup message
         SoundSpecifier? sfx = null; // Stores the filepath of the sound to be played
 
-        var predict = component.SuccessChance is 0 or 1
+        var predict = component.Predict // LuaM
+                      && component.SuccessChance is 0 or 1
                       && component.InteractSuccessSpawn == null
                       && component.InteractFailureSpawn == null;
 

@@ -36,7 +36,7 @@
     CadetPDA: 10
     DeputyPDA: 10
     BrigmedicNFPDA: 10
-  # NFDetectivePDA: 10  # Mono: no such role. (TSFMC private gets to stay for new recruits)
+    NFDetectivePDA: 10
     SergeantPDA: 10
     BailiffPDA: 10
     ClearNFPDA: 4294967295 #infinite
@@ -55,7 +55,7 @@
     BoxFolderRed: 3
     HandLabeler: 4294967295 #Infinite
     EncryptionKeyNfsd: 4294967295 #Infinite
-    EncryptionKeyCommand: 4294967295 # Mono: infinite
+    EncryptionKeyCommand: 5
     ClothingNeckFormalTSF: 5
     ClothingNeckFormalTSFColonel: 3
     ClothingNeckTSFCloak: 3

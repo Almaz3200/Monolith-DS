@@ -1,0 +1,41 @@
+- type: vessel
+  id: Arkalis
+  parent: BaseVessel
+  name: vessel-arkalis-name
+  description: vessel-arkalis-desc
+  limit: 2
+  price: 420000
+  category: Large
+  group: Expedition
+  access: Mercenary
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/Expedition/Arkalis.yml
+  guidebookPage: Null
+  class:
+  - Medical
+  - Chemistry
+  - Pursuit
+  - Expedition
+  - Science
+  - Salvage
+  engine:
+  - AME
+
+- type: gameMap
+  id: Arkalis
+  mapName: 'CIC Arkalis'
+  mapPath: /SharedMaps/_LuaM/Shuttles/Expedition/Arkalis.yml
+  minPlayers: 0
+  stations:
+    Arkalis:
+      stationProto: StandardFrontierExpeditionVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'CIC Arkalis{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

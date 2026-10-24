@@ -1,0 +1,24 @@
+# Lua: board of the CTLA-600 drive. No lathe or research gives it.
+
+- type: entity
+  id: MachineFTLDrive600CircuitboardCicads
+  parent: BaseMachineCircuitboard
+  name: CTLA-600 bluespace drive board
+  description: A machine board for a bluespace drive.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: MachineFTLDrive600Cicads
+    flatpackable: false
+    requirements:
+      Capacitor: 4
+      Manipulator: 2
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 10
+      Steel: 10
+      Uranium: 30

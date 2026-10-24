@@ -54,3 +54,7 @@ ent-Magazine46x30mmSubMachineGunTopMountedFMJ = надствольный маг�
 ent-Magazine46x30mmSubMachineGunTopMountedEmpty = надствольный магазин (4.6x30мм)
     .desc = Магазин WT550, использующий патроны калибра 4.6x30мм.
     .suffix = Пустой
+ent-BaseMagazine46x30mmPistolHighCapacityFMJ = machine pistol magazine (4.6x30mm FMJ)
+    .desc = { ent-BaseItem.desc }
+ent-BaseMagazine46x30mmSubMachineGunFMJ = SMG magazine (4.6x30mm FMJ)
+    .desc = { ent-BaseItem.desc }

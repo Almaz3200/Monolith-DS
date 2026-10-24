@@ -33,7 +33,7 @@
   minPlayers: 0
   stations:
     Takeaway:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel, expeditions with a bought console
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Takeaway CIV{1}'

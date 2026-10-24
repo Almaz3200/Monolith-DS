@@ -90,6 +90,8 @@
   maxY: 42 # 5376m
   noiseRanges: {}
   chunkComponents:
+  - type: DebrisRespawn # LuaM: new asteroids and wrecks every 20 minutes, even if someone stays nearby
+    interval: 1200
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: DensityHigh
   - type: SimpleDebrisSelector
@@ -142,6 +144,8 @@
   maxY: -55 # -6528
   noiseRanges: {}
   chunkComponents:
+  - type: DebrisRespawn # LuaM: new asteroids and wrecks every 20 minutes, even if someone stays nearby
+    interval: 1200
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: DensityHigh
   - type: SimpleDebrisSelector
@@ -252,6 +256,8 @@
   maxY: -51 # -6528
   noiseRanges: {}
   chunkComponents:
+  - type: DebrisRespawn # LuaM: new asteroids and wrecks every 20 minutes, even if someone stays nearby
+    interval: 1200
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: DensityHigh
   - type: SimpleDebrisSelector
@@ -365,6 +371,8 @@
   maxY: -43
   noiseRanges: {}
   chunkComponents:
+  - type: DebrisRespawn # LuaM: new asteroids and wrecks every 20 minutes, even if someone stays nearby
+    interval: 1200
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: Density
   - type: SimpleDebrisSelector

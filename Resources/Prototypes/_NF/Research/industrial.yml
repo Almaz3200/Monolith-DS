@@ -54,7 +54,7 @@
   - ModsuitCoreStandard
   technologyPrerequisites:
   - AdvancedParts
-  position: 8, 13 # LuaM: 1, 8 > 8, 13
+  position: 8, 9 # LuaM: 1, 8 > 8, 9
 
 # Tier 2
 

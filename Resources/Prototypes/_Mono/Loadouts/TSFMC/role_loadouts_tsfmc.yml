@@ -26,7 +26,7 @@
   - TsfmcFirearm
   - TsfmcMag
   - FactionArmorPlates
-  - TsfmcRanksEnlisted
+#  - TsfmcRanksEnlisted # Commented by LuaM: chat ranks are off for now
   canCustomizeName: true # pseudonym?
 
 - type: roleLoadout
@@ -57,7 +57,7 @@
   - TsfmcMag
   - TsfmcSidearmAmmo
   - FactionArmorPlates
-  - TsfmcRanksEnlisted
+#  - TsfmcRanksEnlisted # Commented by LuaM: chat ranks are off for now
   canCustomizeName: true
 
 - type: roleLoadout
@@ -88,7 +88,7 @@
   - TsfmcMag
   - TsfmcSidearmAmmo
   - FactionArmorPlates
-  - TsfnRanksCorpsmen
+#  - TsfnRanksCorpsmen # Commented by LuaM: chat ranks are off for now
   canCustomizeName: true
 
 - type: roleLoadout
@@ -119,7 +119,7 @@
   - TsfmcMag
   - TsfmcSidearmAmmo
   - FactionArmorPlates
-  - TsfmcRanksCaptain
+#  - TsfmcRanksCaptain # Commented by LuaM: chat ranks are off for now
   canCustomizeName: true
 
 - type: roleLoadout
@@ -150,7 +150,7 @@
   - TsfmcMag
   - TsfmcSidearmAmmo
   - FactionArmorPlates
-  - TsfmcRanksFTL
+#  - TsfmcRanksFTL # Commented by LuaM: chat ranks are off for now
   canCustomizeName: true
 
 - type: roleLoadout
@@ -180,7 +180,7 @@
   - TsfmcMag
   - TsfmcSidearmAmmo
   - FactionArmorPlates
-  - TsfmcRanksColonel
+#  - TsfmcRanksColonel # Commented by LuaM: chat ranks are off for now
   canCustomizeName: true
 
 - type: roleLoadout
@@ -209,7 +209,7 @@
   - TsfmcSidearm
   - TsfmcSidearmAmmo
   - FactionArmorPlates
-  - TsfnRanksEngineers
+#  - TsfnRanksEngineers # Commented by LuaM: chat ranks are off for now
   canCustomizeName: true
 
 - type: roleLoadout

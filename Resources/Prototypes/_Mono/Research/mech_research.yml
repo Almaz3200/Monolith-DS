@@ -25,8 +25,7 @@
   - ClarkePeripheralsElectronics
   technologyPrerequisites:
   - AdvancedParts
-  position: 8, 13 # LuaM: 2, 10 > 8, 13
-
+  position: 8, 12 # LuaM: 2, 10 > 8, 12
 
 # - type: technology
 #  id: HONKWeapons
@@ -77,7 +76,7 @@
   technologyPrerequisites:
   - SuperParts
   - MechBasic
-  position: 8, 11 # LuaM: 2, 11 > 8, 11
+  position: 8, 10 # LuaM: 2, 11 > 8, 10
 
 - type: technology
   id: Broadsword
@@ -130,7 +129,7 @@
   - MediumMechTOW
   technologyPrerequisites:
   - Broadsword
-  position: 9, 9 # LuaM: 3, 12 > 9, 9
+  position: 9, 8 # LuaM: 3, 12 > 9, 8
 
 - type: technology
   id: Flail
@@ -154,7 +153,7 @@
 #  - HeavyMechProjector # Commented by LuaM
   technologyPrerequisites:
   - Broadsword
-  position: 8, 7 # LuaM: 4, 11 > 8, 7
+  position: 8, 6 # LuaM: 4, 11 > 8, 6
 
 - type: technology
   id: FlailSubtypes
@@ -170,4 +169,4 @@
   - EWACMechaJammer
   technologyPrerequisites:
   - Flail
-  position: 9, 7 # LuaM: 4, 12 > 9, 7
+  position: 9, 6 # LuaM: 4, 12 > 9, 6

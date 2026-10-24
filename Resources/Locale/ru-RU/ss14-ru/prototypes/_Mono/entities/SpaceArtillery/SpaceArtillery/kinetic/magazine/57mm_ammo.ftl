@@ -35,3 +35,5 @@ ent-Magazine57mmSACLOSInfinite = автозарядник 57мм снарядо�
     .ammo-loader-type = Контейнер (SACLOS)
     .ammo-loader-caliber = 57 мм
     .ammo-loader-weight = 19 кг
+ent-MuzzleFlashEffectAk570 = { "" }
+    .desc = { "" }

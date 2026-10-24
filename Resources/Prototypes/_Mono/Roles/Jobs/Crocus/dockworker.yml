@@ -3,6 +3,11 @@
   name: job-name-crocus-dockworker
   description: job-description-crocus-dockworker
   playTimeTracker: JobCrocusDockworker
+  requirements: # LuaM
+  - !type:TraitsRequirement # LuaM: heretics can't take this job
+    inverted: true
+    traits:
+    - Heretic
   startingGear: JianghuiDockworkerGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true

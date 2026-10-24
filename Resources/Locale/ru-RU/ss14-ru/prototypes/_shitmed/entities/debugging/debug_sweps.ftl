@@ -1,0 +1,15 @@
+ent-MeleeDebugSever = bang severer
+    .desc = sever yer parts a week from now
+    .suffix = DEBUG
+ent-MeleeDebugSever100 = bang severer 100dmg
+    .desc = { ent-MeleeDebugSever.desc }
+    .suffix = { ent-MeleeDebugSever.suffix }
+ent-MeleeDebugSever200 = bang severer 200dmg
+    .desc = { ent-MeleeDebugSever.desc }
+    .suffix = { ent-MeleeDebugSever.suffix }
+ent-MeleeDebugBurner = bang burner
+    .desc = burn yer parts
+    .suffix = DEBUG
+ent-MeleeDebugBurner200 = bang burner 200dmg
+    .desc = { ent-MeleeDebugBurner.desc }
+    .suffix = { ent-MeleeDebugBurner.suffix }

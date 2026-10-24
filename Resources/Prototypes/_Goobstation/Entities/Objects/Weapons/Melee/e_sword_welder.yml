@@ -30,8 +30,8 @@
         variation: 0.125
     activatedDamage:
         types:
-            Slash: 8
-            Heat: 22
+            Slash: 30 # LuaM: 8 > 30, Heat 22 moved to Slash
+            # Heat: 22 # Commented by LuaM: moved to Slash
   - type: ItemToggle
     soundActivate:
       path: /Audio/_Goobstation/Weapons/EswordWelder/on.ogg

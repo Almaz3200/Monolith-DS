@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._LuaM.Movement; // LuaM
 using Content.Shared.Emoting;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
@@ -18,6 +19,7 @@ public sealed class DashActionSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly DashImpactSystem _dashImpact = default!; // LuaM
 
     public override void Initialize()
     {
@@ -50,6 +52,7 @@ public sealed class DashActionSystem : EntitySystem
         }
 
         _throwing.TryThrow( args.Performer, vec, baseThrowSpeed: speed, user: null, pushbackRatio: 0, friction: null, compensateFriction: false, recoil: false, animated: false);
+        _dashImpact.StartImpact(args.Performer); // LuaM
 
         if (args.StaminaDrain != null)
             _stamina.TakeStaminaDamage(args.Performer, args.StaminaDrain.Value, visual: false, immediate: false);

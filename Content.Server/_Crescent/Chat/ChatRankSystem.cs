@@ -8,7 +8,7 @@ public sealed class ChatRankSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ChatRankComponent, TransformSpeakerNameEvent>(AddRank);
+//        SubscribeLocalEvent<ChatRankComponent, TransformSpeakerNameEvent>(AddRank); // Commented by LuaM: chat ranks are off for now
     }
 
     private void AddRank(EntityUid uid, ChatRankComponent component, TransformSpeakerNameEvent args)

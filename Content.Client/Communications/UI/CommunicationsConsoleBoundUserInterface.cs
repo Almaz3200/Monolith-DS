@@ -1,6 +1,7 @@
 ﻿using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Communications;
+using Content.Shared._LuaM.WarDeclaration; // LuaM
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
@@ -27,6 +28,8 @@ namespace Content.Client.Communications.UI
             _menu.OnBroadcast += BroadcastButtonPressed;
             _menu.OnAlertLevel += AlertLevelSelected;
             _menu.OnEmergencyLevel += EmergencyShuttleButtonPressed;
+            _menu.OnDeclareWar += reason => SendMessage(new CommunicationsConsoleDeclareWarMessage(reason)); // LuaM
+            _menu.OnSurrender += () => SendMessage(new CommunicationsConsoleSurrenderMessage()); // LuaM
         }
 
         public void AlertLevelSelected(string level)
@@ -91,6 +94,15 @@ namespace Content.Client.Communications.UI
                 _menu.EmergencyShuttleButton.Disabled = !_menu.CanCall;
                 _menu.AnnounceButton.Disabled = !_menu.CanAnnounce;
                 _menu.BroadcastButton.Disabled = !_menu.CanBroadcast;
+
+                // LuaM start: war declaration
+                _menu.ShowWarDeclaration = commsState.ShowWarDeclaration;
+                _menu.WarDeclared = commsState.WarDeclared;
+                _menu.WarDeclarationAvailableAt = commsState.WarDeclarationAvailableAt;
+                _menu.WarActive = commsState.WarActive;
+                _menu.WarOver = commsState.WarOver;
+                _menu.UpdateWarDeclaration();
+                // LuaM end
             }
         }
     }

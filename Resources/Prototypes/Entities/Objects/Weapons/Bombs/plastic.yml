@@ -78,9 +78,9 @@
   - type: HolidayRsiSwap
     sprite:
       festive: Objects/Weapons/Bombs/c4gift.rsi
-  - type: EmbeddableProjectile
-    offset: 0.3,0.0
-    removalTime: 3.0
+  # - type: EmbeddableProjectile # Commented by LuaM
+  #   offset: 0.3,0.0
+  #   removalTime: 3.0
   - type: ExtendDescription
     descriptionList:
     - description: Can be thrown to stick to targets.

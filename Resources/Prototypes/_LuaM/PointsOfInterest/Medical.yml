@@ -9,6 +9,8 @@
   addComponents:
   - type: IFF
     color: "#00b7eb"
+  - type: Company
+    companyName: MD
   - type: StationTransit
 
 - type: gameMap
@@ -32,7 +34,7 @@
         - type: StationJobs
           availableJobs:
             DirectorOfCare: [ 1, 1 ]
-            MdMedic: [ -1, -1 ]
+            MdMedic: [ 5, 5 ]
           tags:
           - HeadOfPersonnel
           - HeadOfSecurity

@@ -37,11 +37,11 @@
 #  - ClothingUniformRandomPunkTanktopShorts # Commented by LuaM
 #  - ClothingUniformRandomPunkCroptop # Commented by LuaM
 #  - ClothingUniformRandomPunkCroptopShorts # Commented by LuaM
-#  - ClothingOuterCoatLettermanRandomized # Commented by LuaM 
+#  - ClothingOuterCoatLettermanRandomized # Commented by LuaM
 #  - ClothingOuterCoatBomberRandomized # Commented by LuaM
   technologyPrerequisites:
   - AdvancedRiotControl
-  position: 7, 12 # LuaM: 3, 2 > 7, 12
+  position: 7, 11 # LuaM: 3, 2 > 7, 11
 
 # Tier 2
 
@@ -57,8 +57,8 @@
   - ClothingShoesBootsMagMercenary
   technologyPrerequisites:
   - MagnetsTech
-#  - AdvancedParts # Commented by LuaM
-  position: 4, 13 # LuaM: -3, -1 > 4, 13
+  # - AdvancedParts # Commented by LuaM
+  position: 4, 12 # LuaM: -3, -1 > 4, 12
 
 - type: technology
   id: HardsuitsArmored
@@ -72,9 +72,9 @@
   - ClothingOuterHardsuitPrivateSecurity
   technologyPrerequisites:
   - MagnetsTechCombat # LuaM: HardsuitsSpecialized > MagnetsTechCombat
-  - HardsuitsAdvanced
+  # - HardsuitsAdvanced # Commented by LuaM
   - ArmorAdvanced # LuaM
-  position: 4, 10 # LuaM: 2, 8 > 4, 10
+  position: 4, 9 # LuaM: 2, 8 > 4, 9
 
 # Mono edit - research consolidation
 # - type: technology
@@ -125,4 +125,5 @@
   technologyPrerequisites:
   - HardsuitsArmored
   - SuperParts
-  position: 4, 7 # LuaM: 3, 7 > 4, 7
+  - HardsuitsAdvanced # LuaM
+  position: 4, 6 # LuaM: 3, 7 > 4, 6

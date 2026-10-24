@@ -1,0 +1,76 @@
+- type: rpInteraction
+  id: TailPat
+  category: Tail
+  kind: Soft
+  range: 1.5
+  sound:
+    collection: RpFriction
+  messages: RpTailPatMessages
+  icon: _LuaM/Interface/RpPanel/pat_tail.png
+  targetRequirements:
+  - !type:MarkingCategoryRequirement
+    category: Tail
+
+- type: rpInteraction
+  id: TailHug
+  category: Tail
+  kind: Soft
+  range: 1.5
+  sound:
+    collection: RpFriction
+  messages: RpTailHugMessages
+  icon: _LuaM/Interface/RpPanel/tail_hug.png
+  targetRequirements:
+  - !type:MarkingCategoryRequirement
+    category: Tail
+  userRequirements:
+  - !type:MarkingCategoryRequirement
+    category: Tail
+
+- type: rpInteraction
+  id: FriendlyTailPull
+  category: Tail
+  kind: Harmful
+  sound:
+    collection: RpPat
+  messages: RpFriendlyTailPullMessages
+  icon: _LuaM/Interface/RpPanel/friendly_tail_pull.png
+  targetRequirements:
+  - !type:MarkingCategoryRequirement
+    category: Tail
+
+- type: rpInteraction
+  id: WagTail
+  category: Tail
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpWagTailMessages
+  icon: _LuaM/Interface/RpPanel/wagging-tail.png
+  userRequirements:
+  - !type:MarkingCategoryRequirement
+    category: Tail
+
+- type: rpInteraction
+  id: TuckTail
+  category: Tail
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpTuckTailMessages
+  icon: _LuaM/Interface/RpPanel/tail-down.png
+  userRequirements:
+  - !type:MarkingCategoryRequirement
+    category: Tail
+
+- type: rpInteraction
+  id: StepOnTail
+  category: Tail
+  kind: Harmful
+  sound:
+    collection: RpPat
+  messages: RpStepOnTailMessages
+  icon: _LuaM/Interface/RpPanel/step-on-tail.png
+  targetRequirements:
+  - !type:MarkingCategoryRequirement
+    category: Tail
