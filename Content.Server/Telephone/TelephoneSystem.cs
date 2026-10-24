@@ -117,6 +117,11 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
 
         // Determine if speech should be relayed via the telephone itself or a designated speaker
         var speaker = entity.Comp.Speaker != null ? entity.Comp.Speaker.Value.Owner : entity.Owner;
+
+        // LuaM - another point of the same side close by already said it
+        if (!_relayChat.TrySay(speaker, args.MessageSource, args.Message))
+            return;
+
         SyncRelayedSpeakerTts(args.MessageSource, speaker); // Corvax-TTS
 
         var name = Loc.GetString("chat-telephone-name-relay",
@@ -414,7 +419,8 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
 
         var evReceivedMessage = new TelephoneMessageReceivedEvent(message, chatMsg, messageSource, source, language); // LuaM - language
 
-        foreach (var receiver in source.Comp.LinkedTelephones)
+        // LuaM - the loud ones first, of a few points near each other only the first says the line
+        foreach (var receiver in source.Comp.LinkedTelephones.OrderByDescending(r => r.Comp.SpeakerVolume == TelephoneVolume.Speak))
         {
             // LuaM - the same speaker was already relayed to this receiver through another point of the ship
             if (!_recentRelayedMessages.Add((messageSource, message, receiver.Owner)))

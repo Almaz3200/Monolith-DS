@@ -1,15 +1,22 @@
 using System.Runtime.InteropServices;
 using Content.Server.Chat.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 
 namespace Content.Server._LuaM.Telephone;
 
 /// <summary>
 /// A line relayed through a call can be repeated by several telephones of the same side, like the points of a ship line.
-/// Everybody near them gets the line in the chat once, the other copies only show their speech bubble.
+/// Only one of the telephones near each other says it, one far off says it again for the people around it.
+/// Where the hearing of two of them overlaps, everybody gets the line in the chat once, the other copy only shows its speech bubble.
 /// </summary>
 public sealed class TelephoneRelayChatSystem : EntitySystem
 {
+    [Dependency] private SharedTransformSystem _xform = default!;
+
+    // Where the lines relayed this tick were said
+    private readonly Dictionary<(EntityUid Origin, string Message), List<MapCoordinates>> _said = new();
+
     // The lines relayed this tick and who already got them in the chat
     private readonly Dictionary<(EntityUid Origin, string Message), RelayListeners> _lines = new();
     private readonly Stack<RelayListeners> _pool = new();
@@ -28,6 +35,8 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        _said.Clear();
+
         if (_lines.Count == 0)
             return;
 
@@ -38,6 +47,29 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
         }
 
         _lines.Clear();
+    }
+
+    /// <summary>
+    /// Whether the speaker says a line of the origin: not when another telephone said it this tick close enough to be heard here.
+    /// </summary>
+    public bool TrySay(EntityUid speaker, EntityUid origin, string message)
+    {
+        var position = _xform.GetMapCoordinates(speaker);
+
+        if (!_said.TryGetValue((origin, message), out var said))
+        {
+            said = new List<MapCoordinates>();
+            _said.Add((origin, message), said);
+        }
+
+        foreach (var other in said)
+        {
+            if (other.MapId == position.MapId && (other.Position - position.Position).Length() <= ChatSystem.VoiceRange)
+                return false;
+        }
+
+        said.Add(position);
+        return true;
     }
 
     /// <summary>

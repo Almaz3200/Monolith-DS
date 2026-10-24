@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server._LuaM.Chat;
 using Content.Server._LuaM.Telephone;
 using Content.Server.Chat.Systems;
@@ -64,7 +65,8 @@ public sealed class HolopadEmoteRelaySystem : EntitySystem
 
             name ??= Loc.GetString("holopad-hologram-name", ("name", Identity.Entity(args.Source, EntityManager)));
 
-            foreach (var receiver in telephone.LinkedTelephones)
+            // The loud ones first, the same as speech
+            foreach (var receiver in telephone.LinkedTelephones.OrderByDescending(r => r.Comp.SpeakerVolume == TelephoneVolume.Speak))
             {
                 if (!TryComp<HolopadComponent>(receiver, out var receiverHolopad) ||
                     receiverHolopad.Hologram is not { } hologram ||
@@ -78,11 +80,14 @@ public sealed class HolopadEmoteRelaySystem : EntitySystem
                     ? ChatTransmitRange.HideChat
                     : ChatTransmitRange.GhostRangeLimit;
 
-                // Forced, if the user can do it the hologram can too
-                using (_relayChat.Relay(hologram, args.Source, args.Action))
+                // Forced, if the user can do it the hologram can too. Of a few points near each other only the first shows it
+                if (_relayChat.TrySay(hologram, args.Source, args.Action))
                 {
-                    _chat.TrySendInGameICMessage(hologram, args.Action, InGameICChatType.Emote, range,
-                        hideLog: true, nameOverride: name, checkRadioPrefix: false, ignoreActionBlocker: true);
+                    using (_relayChat.Relay(hologram, args.Source, args.Action))
+                    {
+                        _chat.TrySendInGameICMessage(hologram, args.Action, InGameICChatType.Emote, range,
+                            hideLog: true, nameOverride: name, checkRadioPrefix: false, ignoreActionBlocker: true);
+                    }
                 }
 
                 var relayedEv = new HolopadEmoteRelayedEvent(args.Source, args.Action);

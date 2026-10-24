@@ -16,7 +16,6 @@ holo-comms-status-ringing = Incoming call
 holo-comms-status-nobody = Nobody at the other end
 holo-comms-status-ended = Call ended
 holo-comms-status-unpowered = No power
-holo-comms-typing = typing...
 holo-comms-caller-with-job = {$name} ({$job})
 holo-comms-log-emote = * {$name} {$action}
 

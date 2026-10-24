@@ -143,7 +143,11 @@ public sealed class HoloCommsContactsList : BoxContainer
                 ToolTip = contact.Name,
             };
             button.AddStyleClass(ConsoleStyles.Button);
-            button.Label.HorizontalAlignment = HAlignment.Left;
+
+            // A clipped label wants no width, aligned to the left it got none and the names were not drawn.
+            // It keeps the whole button and the text goes to the left, the style centers it for that class.
+            button.Label.RemoveStyleClass(Button.StyleClassButton);
+            button.TextAlign = Label.AlignMode.Left;
 
             var target = contact.Target;
             button.OnPressed += _ => OnContactPicked?.Invoke(target);

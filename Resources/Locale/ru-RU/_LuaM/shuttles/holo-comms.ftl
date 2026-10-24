@@ -16,7 +16,6 @@ holo-comms-status-ringing = Входящий вызов
 holo-comms-status-nobody = На той стороне никого
 holo-comms-status-ended = Вызов завершён
 holo-comms-status-unpowered = Нет питания
-holo-comms-typing = печатает...
 holo-comms-caller-with-job = { $name } ({ $job })
 holo-comms-log-emote = * { $name } { $action }
 
