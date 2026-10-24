@@ -41,8 +41,8 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
-        Heat: 20
+        Slash: 35 # LuaM: 15 > 35, Heat 20 moved to Slash
+        # Heat: 20 # Commented by LuaM: moved to Slash
         Structural: 20
   - type: MeleeWeapon
     heavyStaminaCost: 2.5 # goob edit
@@ -122,8 +122,8 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-        Slash: 15 # LuaM: 50 > 15
-        Heat: 20 # LuaM
+        Slash: 35 # LuaM: 50 > 35, Heat 20 moved to Slash
+        # Heat: 20 # Commented by LuaM: moved to Slash
         Structural: 100
 
 - type: entity
@@ -149,8 +149,8 @@
         variation: 0.250
     activatedDamage:
       types:
-        Slash: 10
-        Heat: 10
+        Slash: 20 # LuaM: 10 > 20, Heat 10 moved to Slash
+        # Heat: 10 # Commented by LuaM: moved to Slash
     deactivatedSecret: true
   - type: ItemToggleActiveSound
     activeSound:
@@ -221,8 +221,8 @@
         variation: 0.250
     activatedDamage:
       types:
-        Slash: 10
-        Heat: 10
+        Slash: 20 # LuaM: 10 > 20, Heat 10 moved to Slash
+        # Heat: 10 # Commented by LuaM: moved to Slash
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -287,8 +287,8 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-        Slash: 15
-        Heat: 20
+        Slash: 35 # LuaM: 15 > 35, Heat 20 moved to Slash
+        # Heat: 20 # Commented by LuaM: moved to Slash
         Structural: 15
     deactivatedSecret: true
   - type: Sprite
@@ -332,8 +332,8 @@
         variation: 0.250
     activatedDamage:
       types:
-        Slash: 20 # Mono increased from 10 to 15 to be on-par with normal e-swords # LuaM: 15 > 20
-        Heat: 25 # LuaM: 20 > 25
+        Slash: 45 # LuaM: 15 > 45, Heat 25 moved to Slash # Mono increased from 10 to 15 to be on-par with normal e-swords
+        # Heat: 25 # Commented by LuaM: moved to Slash
         Structural: 125 # Mono increased from 25 to 100, keep in mind a breaching hammer does 300 a hit # LuaM: 100 > 125
   - type: ItemToggleActiveSound
     activeSound:
@@ -398,8 +398,8 @@
         variation: 0.250
     activatedDamage:
       types:
-        Slash: 20
-        Heat: 25
+        Slash: 45 # LuaM: 20 > 45, Heat 25 moved to Slash
+        # Heat: 25 # Commented by LuaM: moved to Slash
         Structural: 25
   - type: MeleeRequiresWield
   - type: HeldSpeedModifier #slowdown is what balances this compared to a dsword

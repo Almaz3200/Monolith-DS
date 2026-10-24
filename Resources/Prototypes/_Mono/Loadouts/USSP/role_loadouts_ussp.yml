@@ -26,6 +26,7 @@
   - ContractorArmorPlates
   - UsspFirearm
   - UsspMag
+  - CivGunCaseSpecial # LuaM
 #  - UsspRanksRifleman # Commented by LuaM: chat ranks are off for now
 
 - type: roleLoadout
@@ -56,6 +57,7 @@
   - ContractorArmorPlates
   - UsspFirearm
   - UsspMag
+  - CivGunCaseSpecial # LuaM
 #  - UsspRanksSerzhant # Commented by LuaM: chat ranks are off for now
 
 - type: roleLoadout
@@ -86,4 +88,5 @@
   - ContractorArmorPlates
   - UsspFirearm
   - UsspMag
+  - CivGunCaseSpecial # LuaM
 #  - UsspRanksCommissar # Commented by LuaM: chat ranks are off for now

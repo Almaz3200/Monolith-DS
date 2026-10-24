@@ -13,3 +13,21 @@
       amount: 1
     - id: Blueprint18x160mmAmmo
       amount: 1
+
+# Registered, so it can't be sold for more than it is worth in the loadout.
+- type: entity
+  parent: [WeaponLoadoutRegisteredBase, WeaponRifleIroh]
+  id: WeaponRifleIrohRegistered
+  suffix: Registered
+
+- type: entity
+  parent: WeaponCaseLong
+  id: WeaponCaseLongIrohRegistered
+  suffix: Loadout, Iroh
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleIrohRegistered
+      amount: 1
+    - id: Magazine556x45mmFMJ
+      amount: 2

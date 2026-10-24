@@ -11,6 +11,14 @@
 #  - !type:DepartmentTimeRequirement # Requires time in both factions # Commented by LuaM
 #    department: Security # Commented by LuaM
 #    time: 108000 # 30 hours # mono # Commented by LuaM
+# LuaM-start: only these species can be MARSOC
+  - !type:SpeciesRequirement
+    species:
+    - Human
+    - Dwarf
+    - Demon # Arkana
+    - SlimePerson
+# LuaM-end
   - !type:TraitsRequirement # The trait is intended for members of the civilian population or other neutral groups. TSF are already all implicitly heretics.
     inverted: true
     traits:

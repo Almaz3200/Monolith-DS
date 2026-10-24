@@ -13,7 +13,7 @@
   - VGBelt
   - VGEars
   - VGBalaclava
-  - MercenaryFirearm
+  - VGFirearm # LuaM: MercenaryFirearm > VGFirearm
   - MercenaryPistol
   - MercenaryMag
   - ContractorEncryptionKey
@@ -27,7 +27,7 @@
   - ContractorTrinkets
   - ContractorBureaucracy
   - NFSpeciesSpecific
-# - CivGunCaseSpecial # Mono
+  - CivGunCaseSpecial # Mono # LuaM: uncommented, VG can take special weapons
   - ContractorArmorPlates # Mono
 
 - type: roleLoadout
@@ -45,7 +45,7 @@
   - VGBelt
   - VGEars
   - VGBalaclava
-  - MercenaryFirearm
+  - VGFirearm # LuaM: MercenaryFirearm > VGFirearm
   - MercenaryPistol
   - MercenaryMag
   - ContractorEncryptionKey
@@ -59,7 +59,7 @@
   - ContractorTrinkets
   - ContractorBureaucracy
   - NFSpeciesSpecific
-# - CivGunCaseSpecial # Mono
+  - CivGunCaseSpecial # Mono # LuaM: uncommented, VG can take special weapons
   - ContractorArmorPlates # Mono
 
 - type: roleLoadout
@@ -77,7 +77,7 @@
   - VGBelt
   - VGEars
   - VGBalaclava
-  - MercenaryFirearm
+  - VGFirearm # LuaM: MercenaryFirearm > VGFirearm
   - MercenaryPistol
   - MercenaryMag
   - ContractorEncryptionKey
@@ -91,5 +91,5 @@
   - ContractorTrinkets
   - ContractorBureaucracy
   - NFSpeciesSpecific
-# - CivGunCaseSpecial # Mono
+  - CivGunCaseSpecial # Mono # LuaM: uncommented, VG can take special weapons
   - ContractorArmorPlates # Mono
