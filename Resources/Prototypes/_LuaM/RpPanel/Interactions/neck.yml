@@ -1,0 +1,37 @@
+- type: rpInteraction
+  id: BiteNeck
+  category: Neck
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpBiteNeckMessages
+  icon: _LuaM/Interface/RpPanel/bite_neck.png
+
+- type: rpInteraction
+  id: StretchNeck
+  category: Neck
+  kind: Soft
+  sound:
+    collection: RpStretchNeck
+  selfMessages: RpStretchNeckSelfMessages
+  icon: _LuaM/Interface/RpPanel/pat_neck.png
+
+- type: rpInteraction
+  id: GrabsNeck
+  category: Neck
+  kind: Harmful
+  sound:
+    collection: RpPat
+  messages: RpGrabsNeckMessages
+  icon: _LuaM/Interface/RpPanel/grab_neck.png
+
+- type: rpInteraction
+  id: StepOnNeck
+  category: Neck
+  kind: Harmful
+  sound:
+    collection: RpPat
+  messages: RpStepOnNeckMessages
+  icon: _LuaM/Interface/RpPanel/step_on_neck.png
+  targetRequirements:
+  - !type:TargetOnFloorRequirement
