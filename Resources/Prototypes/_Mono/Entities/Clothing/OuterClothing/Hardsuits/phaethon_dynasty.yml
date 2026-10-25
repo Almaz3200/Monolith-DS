@@ -153,7 +153,7 @@
     - RogueHardsuit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, MonoEnergyShieldClothing ]
+  parent: [ ClothingOuterHardsuitBaseNoPlateholder, MonoEnergyShieldClothing ]
   id: ClothingOuterHardsuitAshenElite
   name: PDV CV-53 combat tacsuit
   description: Originally based off of the CV-32 hardsuit, the CV-53 tacsuit sacrifices conventional armor plating for environmental protection, and a rechargeable hard-shield.
