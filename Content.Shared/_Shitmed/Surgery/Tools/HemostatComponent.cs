@@ -6,6 +6,7 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class HemostatComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "itemswitch-component-state-hemostat"; // LuaM: a hemostat > itemswitch-component-state-hemostat
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
 
     /// <summary>

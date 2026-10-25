@@ -235,9 +235,7 @@ public sealed partial class GameTicker
         var playerIds = _playerGameStatuses.Keys.Select(player => player.UserId).ToArray();
         var serverName = _cfg.GetCVar(CCVars.AdminLogsServerName);
 
-        // TODO FIXME AAAAAAAAAAAAAAAAAAAH THIS IS BROKEN
         // Task.Run as a terrible dirty workaround to avoid synchronization context deadlock from .Result here.
-        // This whole setup logic should be made asynchronous so we can properly wait on the DB AAAAAAAAAAAAAH
         var task = Task.Run(async () =>
         {
             var server = await _dbEntryManager.ServerEntity;

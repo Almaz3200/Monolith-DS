@@ -32,7 +32,7 @@
       - Cash
       - Paper
       - NFCoin
-      - NFShipyardVoucher
+      - ShipyardVoucher # LuaM
       - Card # single cards
     blacklist:
       tags:
@@ -51,7 +51,7 @@
         whitelist:
           components:
           - Paper
-          - NFShipyardVoucher
+          - ShipyardVoucher # LuaM
           - Card
       closed-cash:
         whitelist:

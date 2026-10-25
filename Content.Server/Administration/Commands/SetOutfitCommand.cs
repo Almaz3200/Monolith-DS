@@ -3,6 +3,7 @@ using Content.Server.EUI;
 using Content.Server.Hands.Systems;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems; // LuaM
 using Content.Shared.Administration;
 using Content.Shared.Clothing;
 using Content.Shared.Hands.Components;
@@ -116,7 +117,7 @@ namespace Content.Server.Administration.Commands
                         entityManager.TryGetComponent(equipmentEntity, out PdaComponent? pdaComponent) &&
                         entityManager.TryGetComponent<IdCardComponent>(pdaComponent.ContainedId, out var id))
                     {
-                        id.FullName = entityManager.GetComponent<MetaDataComponent>(target).EntityName;
+                        entityManager.System<SharedIdCardSystem>().TryChangeFullName(pdaComponent.ContainedId.Value, entityManager.GetComponent<MetaDataComponent>(target).EntityName, id); // LuaM
                     }
 
                     invSystem.TryEquip(target, equipmentEntity, slot.Name, silent: true, force: true, inventory: inventoryComponent);

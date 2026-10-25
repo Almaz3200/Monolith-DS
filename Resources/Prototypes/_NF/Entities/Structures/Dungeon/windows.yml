@@ -4,7 +4,7 @@
   id: WindowMurkyDungeon
   abstract: true
   suffix: Dungeon only, DO NOT MAP
-  # categories: [ DoNotMap ] # FIXME - shouldn't be mapped on shuttles/POIs, bluespace events might be fine
+  categories: [ DoNotMap ] # LuaM
   description: A murky glass window, it's hard to see what's on the other side.
 #  components: # Mono - No longer blocks lasers
 #  - type: Fixtures
@@ -21,7 +21,7 @@
   id: WindowDirectionalMurkyDungeon
   abstract: true
   suffix: Dungeon only, DO NOT MAP
-  # categories: [ DoNotMap ] # FIXME - shouldn't be mapped on shuttles/POIs, bluespace events might be fine
+  categories: [ DoNotMap ] # LuaM
   description: A murky glass window, it's hard to see what's on the other side.
 #  components: # Mono - No longer blocks lasers
 #  - type: Fixtures

@@ -1,0 +1,15 @@
+- type: entity
+  id: GasMiningDrillMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: gas mining drill machine board
+  description: A machine printed circuit board for a gas mining drill.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: GasMiningDrill
+    requirements:
+      Manipulator: 2
+    stackRequirements:
+      Steel: 5
+      Cable: 5

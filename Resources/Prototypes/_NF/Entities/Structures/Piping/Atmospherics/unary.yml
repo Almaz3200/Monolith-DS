@@ -79,7 +79,7 @@
   - type: ApcPowerReceiver
     load: 4000
   - type: Machine
-    board: Null # FIXME
+    board: GasMiningDrillMachineCircuitboard # LuaM
   - type: GasDepositExtractor
     extractionRate: 50 # 50 mol/s => 20 kmol in ~6.6 min
     port: outlet
@@ -128,7 +128,7 @@
   - type: ApcPowerReceiver
     load: 1000
   - type: Machine
-    board: Null # FIXME
+    board: Null
   - type: GasSalePoint
   - type: CargoSellBlacklist
   - type: ContainerContainer

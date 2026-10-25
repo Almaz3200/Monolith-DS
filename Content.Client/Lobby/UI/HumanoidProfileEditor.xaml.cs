@@ -1016,6 +1016,11 @@ namespace Content.Client.Lobby.UI
                     {
                         hide = true;
                     }
+
+                    if (thisProto.SpeciesWhitelist.Count > 0 && !thisProto.SpeciesWhitelist.Contains(speciesId)) // LuaM
+                    {
+                        hide = true;
+                    }
                 }
 
                 if (!hide)
@@ -1816,7 +1821,8 @@ namespace Content.Client.Lobby.UI
                 if (!_prototypeManager.TryIndex(traitId, out TraitPrototype? trait))
                     continue;
 
-                if (trait.SpeciesBlacklist.Contains(species))
+                if (trait.SpeciesBlacklist.Contains(species)
+                    || trait.SpeciesWhitelist.Count > 0 && !trait.SpeciesWhitelist.Contains(species)) // LuaM
                     toRemove.Add(traitId);
             }
 

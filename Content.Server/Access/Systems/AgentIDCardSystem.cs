@@ -18,6 +18,7 @@ namespace Content.Server.Access.Systems
         [Dependency] private IdCardSystem _cardSystem = default!;
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private SharedAccessSystem _access = default!; // LuaM
 
         public override void Initialize()
         {
@@ -39,7 +40,7 @@ namespace Content.Server.Access.Systems
                 return;
 
             var beforeLength = access.Tags.Count;
-            access.Tags.UnionWith(targetAccess.Tags);
+            _access.TryAddTags(uid, targetAccess.Tags, access); // LuaM
             var addedLength = access.Tags.Count - beforeLength;
 
             if (addedLength == 0)
@@ -47,8 +48,6 @@ namespace Content.Server.Access.Systems
                 _popupSystem.PopupEntity(Loc.GetString("agent-id-no-new", ("card", args.Target)), args.Target.Value, args.User);
                 return;
             }
-
-            Dirty(uid, access);
 
             if (addedLength == 1)
             {

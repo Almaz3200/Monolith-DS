@@ -9,6 +9,7 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class TweezersComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "itemswitch-component-state-tweezers"; // LuaM: tweezers > itemswitch-component-state-tweezers
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
     [DataField]
     public float Speed { get; set; } = 1f;

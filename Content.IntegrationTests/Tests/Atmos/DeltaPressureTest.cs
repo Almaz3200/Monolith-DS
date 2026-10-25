@@ -158,7 +158,7 @@ public sealed class DeltaPressureTest
 
         Entity<MapGridComponent> grid = default;
         Entity<DeltaPressureComponent> dpEnt = default;
-        TileAtmosphere tile = null!;
+        GasMixture air = null!; // LuaM
         AtmosDirection direction = default;
 
         // Load our test map in and assert that it exists.
@@ -181,18 +181,17 @@ public sealed class DeltaPressureTest
             await server.WaitPost(() =>
             {
                 var indices = transformSystem.GetGridOrMapTilePosition(dpEnt);
-                var gridAtmosComp = entMan.GetComponent<GridAtmosphereComponent>(grid);
 
                 direction = (AtmosDirection)(1 << i);
                 var offsetIndices = indices.Offset(direction);
-                tile = gridAtmosComp.Tiles[offsetIndices];
+                air = atmosphereSystem.GetTileMixture(grid.Owner, null, offsetIndices)!; // LuaM
 
-                Assert.That(tile.Air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
+                Assert.That(air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
 
                 var toPressurize = dpEnt.Comp!.MinPressureDelta - 10;
-                var moles = (toPressurize * tile.Air.Volume) / (Atmospherics.R * Atmospherics.T20C);
+                var moles = (toPressurize * air.Volume) / (Atmospherics.R * Atmospherics.T20C);
 
-                tile.Air!.AdjustMoles(Gas.Nitrogen, moles);
+                air.AdjustMoles(Gas.Nitrogen, moles); // LuaM
             });
 
             await server.WaitRunTicks(30);
@@ -201,7 +200,7 @@ public sealed class DeltaPressureTest
             await server.WaitAssertion(() =>
             {
                 Assert.That(!entMan.Deleted(dpEnt), $"{dpEnt} should still exist after experiencing non-threshold pressure from {direction} side!");
-                tile.Air!.Clear();
+                air.Clear(); // LuaM
             });
 
             await server.WaitRunTicks(30);
@@ -228,7 +227,7 @@ public sealed class DeltaPressureTest
 
         Entity<MapGridComponent> grid = default;
         Entity<DeltaPressureComponent> dpEnt = default;
-        TileAtmosphere tile = null!;
+        GasMixture air = null!; // LuaM
         AtmosDirection direction = default;
 
         // Load our test map in and assert that it exists.
@@ -253,18 +252,17 @@ public sealed class DeltaPressureTest
                 Assert.That(atmosphereSystem.IsDeltaPressureEntityInList(grid.Owner, dpEnt), "Entity was not in processing list when it should have been added!");
 
                 var indices = transformSystem.GetGridOrMapTilePosition(dpEnt);
-                var gridAtmosComp = entMan.GetComponent<GridAtmosphereComponent>(grid);
 
                 direction = (AtmosDirection)(1 << i);
                 var offsetIndices = indices.Offset(direction);
-                tile = gridAtmosComp.Tiles[offsetIndices];
+                air = atmosphereSystem.GetTileMixture(grid.Owner, null, offsetIndices)!; // LuaM
 
-                Assert.That(tile.Air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
+                Assert.That(air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
 
                 var toPressurize = dpEnt.Comp!.MinPressureDelta + 10;
-                var moles = (toPressurize * tile.Air.Volume) / (Atmospherics.R * Atmospherics.T20C);
+                var moles = (toPressurize * air.Volume) / (Atmospherics.R * Atmospherics.T20C);
 
-                tile.Air!.AdjustMoles(Gas.Nitrogen, moles);
+                air.AdjustMoles(Gas.Nitrogen, moles); // LuaM
             });
 
             await server.WaitRunTicks(30);
@@ -273,7 +271,7 @@ public sealed class DeltaPressureTest
             await server.WaitAssertion(() =>
             {
                 Assert.That(entMan.Deleted(dpEnt), $"{dpEnt} still exists after experiencing threshold pressure from {direction} side!");
-                tile.Air!.Clear();
+                air.Clear(); // LuaM
             });
 
             await server.WaitRunTicks(30);
@@ -300,7 +298,7 @@ public sealed class DeltaPressureTest
 
         Entity<MapGridComponent> grid = default;
         Entity<DeltaPressureComponent> dpEnt = default;
-        TileAtmosphere tile = null!;
+        GasMixture air = null!; // LuaM
         AtmosDirection direction = default;
 
         await server.WaitPost(() =>
@@ -321,16 +319,15 @@ public sealed class DeltaPressureTest
             await server.WaitPost(() =>
             {
                 var indices = transformSystem.GetGridOrMapTilePosition(dpEnt);
-                var gridAtmosComp = entMan.GetComponent<GridAtmosphereComponent>(grid);
 
                 direction = (AtmosDirection)(1 << i);
                 var offsetIndices = indices.Offset(direction);
-                tile = gridAtmosComp.Tiles[offsetIndices];
-                Assert.That(tile.Air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
+                air = atmosphereSystem.GetTileMixture(grid.Owner, null, offsetIndices)!; // LuaM
+                Assert.That(air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
 
                 var toPressurize = dpEnt.Comp!.MinPressure - 10; // just below absolute threshold
-                var moles = (toPressurize * tile.Air.Volume) / (Atmospherics.R * Atmospherics.T20C);
-                tile.Air!.AdjustMoles(Gas.Nitrogen, moles);
+                var moles = (toPressurize * air.Volume) / (Atmospherics.R * Atmospherics.T20C);
+                air.AdjustMoles(Gas.Nitrogen, moles); // LuaM
             });
 
             await server.WaitRunTicks(30);
@@ -338,7 +335,7 @@ public sealed class DeltaPressureTest
             await server.WaitAssertion(() =>
             {
                 Assert.That(!entMan.Deleted(dpEnt), $"{dpEnt} should still exist after experiencing non-threshold absolute pressure from {direction} side!");
-                tile.Air!.Clear();
+                air.Clear(); // LuaM
             });
 
             await server.WaitRunTicks(30);
@@ -365,7 +362,7 @@ public sealed class DeltaPressureTest
 
         Entity<MapGridComponent> grid = default;
         Entity<DeltaPressureComponent> dpEnt = default;
-        TileAtmosphere tile = null!;
+        GasMixture air = null!; // LuaM
         AtmosDirection direction = default;
 
         await server.WaitPost(() =>
@@ -388,17 +385,16 @@ public sealed class DeltaPressureTest
                 Assert.That(atmosphereSystem.IsDeltaPressureEntityInList(grid.Owner, dpEnt), "Entity was not in processing list when it should have been added!");
 
                 var indices = transformSystem.GetGridOrMapTilePosition(dpEnt);
-                var gridAtmosComp = entMan.GetComponent<GridAtmosphereComponent>(grid);
 
                 direction = (AtmosDirection)(1 << i);
                 var offsetIndices = indices.Offset(direction);
-                tile = gridAtmosComp.Tiles[offsetIndices];
-                Assert.That(tile.Air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
+                air = atmosphereSystem.GetTileMixture(grid.Owner, null, offsetIndices)!; // LuaM
+                Assert.That(air, Is.Not.Null, $"Tile at {offsetIndices} should have air!");
 
                 // Above absolute threshold but below delta threshold to ensure absolute alone causes damage
                 var toPressurize = dpEnt.Comp!.MinPressure + 10;
-                var moles = (toPressurize * tile.Air.Volume) / (Atmospherics.R * Atmospherics.T20C);
-                tile.Air!.AdjustMoles(Gas.Nitrogen, moles);
+                var moles = (toPressurize * air.Volume) / (Atmospherics.R * Atmospherics.T20C);
+                air.AdjustMoles(Gas.Nitrogen, moles); // LuaM
             });
 
             await server.WaitRunTicks(30);
@@ -406,7 +402,7 @@ public sealed class DeltaPressureTest
             await server.WaitAssertion(() =>
             {
                 Assert.That(entMan.Deleted(dpEnt), $"{dpEnt} still exists after experiencing threshold absolute pressure from {direction} side!");
-                tile.Air!.Clear();
+                air.Clear(); // LuaM
             });
 
             await server.WaitRunTicks(30);

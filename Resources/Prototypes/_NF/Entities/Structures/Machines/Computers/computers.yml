@@ -359,7 +359,7 @@
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Computer
-    board: Null # FIXME
+    board: Null
   - type: MarketModifier
     mod: 1
 

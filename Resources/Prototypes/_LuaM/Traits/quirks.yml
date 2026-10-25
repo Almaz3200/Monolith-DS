@@ -3,6 +3,8 @@
   name: trait-ariral-non-toxic-name
   description: trait-ariral-non-toxic-desc
   category: Quirks
+  speciesWhitelist:
+  - Ariral
   whitelist:
     components:
     - MeleeChemicalInjector

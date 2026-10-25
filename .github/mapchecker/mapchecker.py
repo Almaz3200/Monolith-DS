@@ -162,31 +162,29 @@ if __name__ == "__main__":
     for map_proto in map_proto_paths:
         with open(map_proto, "r") as map:
             file_data = yaml.load(map, Loader=YamlLoaderIgnoringTags)
-            if file_data is None:
-                logger.warning(f"Map prototype '{map_proto}' is empty. Continuing without it.")
-                continue
+        if file_data is None:
+            logger.warning(f"Map prototype '{map_proto}' is empty. Continuing without it.")
+            continue
 
-            map_name = map_proto  # The map name that will be reported over output.
-            map_file_location = None
-            shipyard_group = None  # Shipyard group of this map, if it's a shuttle.
-            # Shipyard override of this map, in the case it's a custom shipyard shuttle but needs to be treated as a
-            # specific group.
-            shipyard_override = None
+        # LuaM-start
+        map_descriptors = list()
+        group_descriptors: Dict[str, tuple] = dict()
+        for item in file_data:
+            if item["type"] == "gameMap":
+                map_descriptors.append((item.get("id", map_proto), item.get("mapPath")))
+            elif item["type"] == "vessel":
+                group_descriptors[item.get("id")] = (item.get("group"), item.get("mapchecker_group_override"))
+            elif item["type"] == "pointOfInterest":
+                group_descriptors[item.get("id")] = ("PointOfInterest", item.get("mapchecker_group_override"))
 
-            # FIXME: this breaks down with multiple descriptions in one file.
-            for item in file_data:
-                if item["type"] == "gameMap":
-                    # This yaml entry is the map descriptor. Collect its file location and map name.
-                    if "id" in item.keys():
-                        map_name = item["id"]
-                    map_file_location = item["mapPath"] if "mapPath" in item.keys() else None
-                elif item["type"] == "vessel":
-                    # This yaml entry is a vessel descriptor!
-                    shipyard_group = item["group"] if "group" in item.keys() else None
-                    shipyard_override = item["mapchecker_group_override"] if "mapchecker_group_override" in item.keys() else None
-                elif item["type"] == "pointOfInterest":
-                    shipyard_group = "PointOfInterest"
-                    shipyard_override = item["mapchecker_group_override"] if "mapchecker_group_override" in item.keys() else None
+        for map_name, map_file_location in map_descriptors:
+            if map_name in group_descriptors:
+                shipyard_group, shipyard_override = group_descriptors[map_name]
+            elif len(group_descriptors) == 1:
+                shipyard_group, shipyard_override = next(iter(group_descriptors.values()))
+            else:
+                shipyard_group, shipyard_override = None, None
+            # LuaM-end
 
             if map_file_location is None:
                 # Silently skip. If the map doesn't have a mapPath, it won't appear in game anyways.
