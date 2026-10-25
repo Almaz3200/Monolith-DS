@@ -1,0 +1,39 @@
+- type: entity
+  parent:
+    - BaseItem
+    - StoreMMCPresetUplink
+  id: BaseMMCUplinkRadio
+  name: MMC uplink
+  description: Industrial-looking radio...
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/communication.rsi
+    layers:
+    - state: old-radio
+  - type: Item
+    sprite: Objects/Devices/communication.rsi
+    heldPrefix: old-radio
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - MMC
+
+- type: entity
+  parent:
+    - BaseItem
+    - StoreMMCPresetUplink
+  id: BaseMMCUplinkRadioDebug
+  name: MMC uplink
+  description: Industrial-looking radio...
+  suffix: DEBUG
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/communication.rsi
+    layers:
+    - state: old-radio
+  - type: Item
+    sprite: Objects/Devices/communication.rsi
+    heldPrefix: old-radio
+  - type: Store
+    balance:
+      MMCIndustrialCredit: 99999
