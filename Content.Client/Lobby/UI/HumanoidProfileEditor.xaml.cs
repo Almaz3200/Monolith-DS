@@ -488,7 +488,7 @@ namespace Content.Client.Lobby.UI
             companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
             // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
+            var noneIndex = companies.FindIndex(c => c.ID == CompanyPrototype.NoCompany.Id);
             if (noneIndex != -1)
             {
                 var none = companies[noneIndex];
@@ -2381,7 +2381,7 @@ namespace Content.Client.Lobby.UI
             companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
             // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
+            var noneIndex = companies.FindIndex(c => c.ID == CompanyPrototype.NoCompany.Id);
             if (noneIndex != -1)
             {
                 var none = companies[noneIndex];

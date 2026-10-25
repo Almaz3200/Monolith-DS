@@ -76,8 +76,8 @@ public sealed partial class MotionDetectorIgnoreHolderSystem : EntitySystem
 
         if (string.IsNullOrEmpty(holderCompany.CompanyName) ||
             string.IsNullOrEmpty(targetCompany.CompanyName) ||
-            holderCompany.CompanyName == "None" ||
-            targetCompany.CompanyName == "None")
+            holderCompany.CompanyName == CompanyPrototype.NoCompany ||
+            targetCompany.CompanyName == CompanyPrototype.NoCompany)
         {
             return false;
         }

@@ -68,10 +68,10 @@ namespace Content.Client.Lobby
             {
                 var protoManager = IoCManager.Resolve<IPrototypeManager>();
                 if (!string.IsNullOrEmpty(humanoidProfile.Company) &&
-                    humanoidProfile.Company != "None" &&
+                    humanoidProfile.Company != CompanyPrototype.NoCompany.Id &&
                     !protoManager.HasIndex<CompanyPrototype>(humanoidProfile.Company))
                 {
-                    profile = humanoidProfile.WithCompany("None");
+                    profile = humanoidProfile.WithCompany(CompanyPrototype.NoCompany);
                 }
             }
 
@@ -139,10 +139,10 @@ namespace Content.Client.Lobby
 
                     if (profile is HumanoidCharacterProfile humanoidProfile &&
                         !string.IsNullOrEmpty(humanoidProfile.Company) &&
-                        humanoidProfile.Company != "None" &&
+                        humanoidProfile.Company != CompanyPrototype.NoCompany.Id &&
                         !protoManager.HasIndex<CompanyPrototype>(humanoidProfile.Company))
                     {
-                        updatedProfile = humanoidProfile.WithCompany("None");
+                        updatedProfile = humanoidProfile.WithCompany(CompanyPrototype.NoCompany);
                         needsUpdate = true;
                     }
 

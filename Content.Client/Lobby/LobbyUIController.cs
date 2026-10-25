@@ -235,11 +235,11 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         // Verify company exists, if not set it to "None"
         if (!string.IsNullOrEmpty(humanoid.Company) &&
-            humanoid.Company != "None" &&
+            humanoid.Company != CompanyPrototype.NoCompany.Id &&
             !_prototypeManager.HasIndex<CompanyPrototype>(humanoid.Company))
         {
             // Create a new profile with the company set to "None"
-            humanoid = humanoid.WithCompany("None");
+            humanoid = humanoid.WithCompany(CompanyPrototype.NoCompany);
 
             // Update the character in preferences
             if (_preferencesManager.Preferences != null)

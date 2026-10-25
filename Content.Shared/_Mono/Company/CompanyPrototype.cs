@@ -9,6 +9,8 @@ namespace Content.Shared._Mono.Company;
 [Prototype]
 public sealed partial class CompanyPrototype : IPrototype
 {
+    public static readonly ProtoId<CompanyPrototype> NoCompany = "None";
+
     /// <inheritdoc/>
     [IdDataField]
     public string ID { get; private set; } = default!;

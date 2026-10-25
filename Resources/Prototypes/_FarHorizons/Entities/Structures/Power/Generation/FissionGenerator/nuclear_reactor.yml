@@ -86,8 +86,8 @@
   #  flags:
   #  - Anchorable
   - type: AtmosDevice
-  - type: AtmosMonitoringConsoleDevice # TODO: this doesn't work?
-    navMapBlip: Thermoregulator
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: NuclearReactor
   - type: RadiationSource
     intensity: 0
   - type: ContainerContainer
