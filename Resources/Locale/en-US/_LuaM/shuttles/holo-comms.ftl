@@ -10,6 +10,7 @@ holo-comms-button-in-call = On the line
 # The screen
 holo-comms-remote-none = No connection
 holo-comms-remote-unpowered = Console unpowered
+holo-comms-remote-unknown = Unknown
 holo-comms-status-idle = Line is free
 holo-comms-status-calling = Calling...
 holo-comms-status-ringing = Incoming call

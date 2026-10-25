@@ -18,6 +18,9 @@ public sealed partial class HoloCommsConsoleComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Module;
+
+    [ViewVariables, AutoNetworkedField]
+    public string? RemoteName;
 }
 
 /// <summary>

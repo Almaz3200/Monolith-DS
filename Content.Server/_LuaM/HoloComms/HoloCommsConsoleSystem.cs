@@ -374,7 +374,7 @@ public sealed class HoloCommsConsoleSystem : EntitySystem
         string? remoteName = null;
         foreach (var linked in telephone.LinkedTelephones)
         {
-            remoteName = _line.GetPointName(linked);
+            remoteName = _line.GetRemoteName(uid, linked);
             break;
         }
 
@@ -417,7 +417,31 @@ public sealed class HoloCommsConsoleSystem : EntitySystem
         else
             _activeModules.Remove(ent);
 
+        UpdateRemoteName(ent, args.NewState);
         UpdateModuleConsoleUi(ent);
+    }
+
+    private void UpdateRemoteName(Entity<HoloCommsModuleComponent> ent, TelephoneState state)
+    {
+        if (ent.Comp.Console is not { } console || !TryComp<HoloCommsConsoleComponent>(console, out var comp))
+            return;
+
+        string? remote = null;
+        if (state is TelephoneState.Calling or TelephoneState.Ringing or TelephoneState.InCall &&
+            TryComp<TelephoneComponent>(ent, out var telephone))
+        {
+            foreach (var linked in telephone.LinkedTelephones)
+            {
+                remote = _line.GetRemoteName(ent, linked);
+                break;
+            }
+        }
+
+        if (comp.RemoteName == remote)
+            return;
+
+        comp.RemoteName = remote;
+        Dirty(console, comp);
     }
 
     private void OnModuleCallCommenced(Entity<HoloCommsModuleComponent> ent, ref TelephoneCallCommencedEvent args)

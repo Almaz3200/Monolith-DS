@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server._LuaM.HoloComms;
 using Content.Server._Mono.Shuttles;
+using Content.Server.NPC.HTN;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._LuaM.HoloComms;
@@ -9,6 +10,7 @@ using Content.Shared.Shuttles.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Server._LuaM.Shuttles;
 
@@ -23,10 +25,27 @@ public sealed partial class ShuttleRadarMenuSystem : EntitySystem
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
+    [Dependency] private IGameTiming _timing = default!;
+
     private const float HullDistance = 50f;
 
     // -- автопилот (AutopilotMoveCompound) встаёт за столько метров до своей точки
     private const float ArrivalRange = 40f;
+
+    private const float MarkerStep = 25f;
+    private static readonly TimeSpan FollowInterval = TimeSpan.FromSeconds(1);
+
+    private readonly Dictionary<EntityUid, FollowState> _follows = new();
+    private readonly List<EntityUid> _stoppedFollows = new();
+    private TimeSpan _nextFollowUpdate;
+
+    private sealed class FollowState(EntityUid grid, EntityUid actor, EntityCoordinates destination, Vector2 marker)
+    {
+        public readonly EntityUid Grid = grid;
+        public readonly EntityUid Actor = actor;
+        public EntityCoordinates Destination = destination;
+        public Vector2 Marker = marker;
+    }
 
     public override void Initialize()
     {
@@ -70,6 +89,64 @@ public sealed partial class ShuttleRadarMenuSystem : EntitySystem
         _radarConsole.SetTargetAt((uid, radar), grid.Value, center);
         _autopilot.StartAutopilot((uid, component), new MapCoordinates(destination, ourXform.MapID), _transform.GetWorldRotation(ourXform));
         _console.RefreshShuttleConsoles(ourGrid);
+
+        if (TryComp<HTNComponent>(uid, out var htn) &&
+            htn.Blackboard.TryGetValue<EntityCoordinates>(component.AutopilotTargetKey, out var set, EntityManager))
+        {
+            _follows[uid] = new FollowState(grid.Value, args.Actor, set, center);
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_follows.Count == 0 || _timing.CurTime < _nextFollowUpdate)
+            return;
+
+        _nextFollowUpdate = _timing.CurTime + FollowInterval;
+
+        _stoppedFollows.Clear();
+        foreach (var (console, follow) in _follows)
+        {
+            if (!UpdateFollow(console, follow))
+                _stoppedFollows.Add(console);
+        }
+
+        foreach (var console in _stoppedFollows)
+        {
+            _follows.Remove(console);
+        }
+    }
+
+    // -- автопилот перечитывает точку каждый кадр, её двигаем за целью, пока он ведёт именно к ней
+    private bool UpdateFollow(EntityUid console, FollowState follow)
+    {
+        if (!TryComp<ShuttleConsoleComponent>(console, out var component) ||
+            !TryComp<HTNComponent>(console, out var htn) ||
+            !htn.Blackboard.TryGetValue<EntityCoordinates>(component.AutopilotTargetKey, out var current, EntityManager) ||
+            current != follow.Destination ||
+            TerminatingOrDeleted(follow.Grid) ||
+            !_identification.CanTarget(console, follow.Grid, follow.Actor) ||
+            Transform(console).GridUid is not { } ourGrid)
+        {
+            return false;
+        }
+
+        var center = _identification.GetCenter(follow.Grid);
+        var destination = new MapCoordinates(GetStopPoint(follow.Grid, center, ourGrid), Transform(ourGrid).MapID);
+
+        follow.Destination = _transform.ToCoordinates(destination);
+        htn.Blackboard.SetValue(component.AutopilotTargetKey, follow.Destination);
+
+        if (Vector2.Distance(center, follow.Marker) > MarkerStep && TryComp<RadarConsoleComponent>(console, out var radar))
+        {
+            follow.Marker = center;
+            _radarConsole.SetTargetAt((console, radar), follow.Grid, center);
+            _console.RefreshShuttleConsoles(ourGrid);
+        }
+
+        return true;
     }
 
     private bool CanFollow(EntityUid console, EntityUid grid)

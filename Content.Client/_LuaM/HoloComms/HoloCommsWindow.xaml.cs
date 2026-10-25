@@ -30,6 +30,8 @@ public sealed partial class HoloCommsWindow : FancyWindow
     private static readonly TimeSpan ButtonLockTime = TimeSpan.FromSeconds(0.5);
 
     private static readonly Color LineColor = Color.FromHex("#E8C547");
+    private static readonly Color RemoteColor = Color.FromHex("#4EC6E8");
+    private static readonly Color SpeakerColor = Color.FromHex("#9FB3C8");
 
     public event Action<NetEntity>? OnCall;
     public event Action? OnAnswer;
@@ -179,21 +181,23 @@ public sealed partial class HoloCommsWindow : FancyWindow
 
     private void UpdateTexts()
     {
-        RemoteLabel.Text = _phase switch
+        var remote = _phase switch
         {
             HoloCommsPhase.Calling or HoloCommsPhase.Ringing or HoloCommsPhase.InCall when _remoteName != null => _remoteName,
             HoloCommsPhase.Unpowered => Loc.GetString("holo-comms-remote-unpowered"),
             _ => Loc.GetString("holo-comms-remote-none"),
         };
+        RemoteLabel.SetMessage(HeaderText(remote, RemoteColor, true));
 
-        SpeakerLabel.Text = _phase switch
+        var speaker = _phase switch
         {
             HoloCommsPhase.Ringing when !string.IsNullOrEmpty(_callerName) => _callerName,
             HoloCommsPhase.InCall when _shownEntity != null && _entManager.EntityExists(_shownEntity) =>
                 Identity.Name(_shownEntity.Value, _entManager),
             _ => string.Empty,
         };
-        SpeakerLabel.Visible = !string.IsNullOrEmpty(SpeakerLabel.Text);
+        SpeakerLabel.SetMessage(HeaderText(speaker, SpeakerColor, false));
+        SpeakerLabel.Visible = speaker.Length > 0;
 
         ScreenStatusLabel.Text = _phase switch
         {
@@ -205,6 +209,22 @@ public sealed partial class HoloCommsWindow : FancyWindow
             HoloCommsPhase.Idle => Loc.GetString("holo-comms-status-idle"),
             _ => string.Empty,
         };
+    }
+
+    private static FormattedMessage HeaderText(string text, Color color, bool bold)
+    {
+        var message = new FormattedMessage();
+        if (bold)
+            message.PushTag(new MarkupNode("bold", null, null));
+
+        message.PushColor(color);
+        message.AddText(text);
+        message.Pop();
+
+        if (bold)
+            message.Pop();
+
+        return message;
     }
 
     private void UpdateButtons(bool locked)

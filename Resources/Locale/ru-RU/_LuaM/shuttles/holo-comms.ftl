@@ -10,6 +10,7 @@ holo-comms-button-in-call = На связи
 # Экран
 holo-comms-remote-none = Нет соединения
 holo-comms-remote-unpowered = Консоль обесточена
+holo-comms-remote-unknown = Неизвестно
 holo-comms-status-idle = Линия свободна
 holo-comms-status-calling = Вызов...
 holo-comms-status-ringing = Входящий вызов

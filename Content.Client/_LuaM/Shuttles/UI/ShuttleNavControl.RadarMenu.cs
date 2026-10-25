@@ -59,10 +59,9 @@ public partial class ShuttleNavControl
             bestDistance = distance;
         }
 
-        if (best == null)
-            return false;
+        if (best != null)
+            OnRadarMenuRequested?.Invoke(best.Value);
 
-        OnRadarMenuRequested?.Invoke(best.Value);
         args.Handle();
         return true;
     }

@@ -388,6 +388,19 @@ public sealed class ShipCommsLineSystem : EntitySystem
     /// <summary>
     /// The name the point shows up under: its ship for a ship line, its label or name otherwise.
     /// </summary>
+    public string GetRemoteName(EntityUid point, EntityUid remote)
+    {
+        var ownGrid = Transform(point).GridUid;
+        if (Transform(remote).GridUid is { } remoteGrid &&
+            remoteGrid != ownGrid &&
+            !_identification.IsIdentified(remoteGrid, _xform.GetMapCoordinates(point), ownGrid))
+        {
+            return Loc.GetString("holo-comms-remote-unknown");
+        }
+
+        return GetPointName(remote);
+    }
+
     public string GetPointName(EntityUid point)
     {
         return TryGetShip(point, out _) ? GetShipName(point) : GetLabelOrName(point);

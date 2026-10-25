@@ -1,6 +1,9 @@
 using Content.Shared._LuaM.HoloComms;
 using Content.Shared.Telephone;
 using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Shuttles.UI;
 
@@ -36,9 +39,50 @@ public sealed partial class NavScreen
         ContentMarginRightOverride = 6,
     };
 
+    private static readonly Color HoloCommsRemoteColor = Color.FromHex("#C9D6E2");
+
+    private readonly RichTextLabel _holoCommsRemote = new()
+    {
+        HorizontalAlignment = HAlignment.Center,
+        MouseFilter = MouseFilterMode.Ignore,
+        Visible = false,
+    };
+
+    private string? _holoCommsRemoteName;
+
     private void InitializeHoloComms()
     {
         HoloCommsButton.OnPressed += _ => OnHoloCommsPressed?.Invoke();
+
+        var label = HoloCommsButton.Label;
+        label.Orphan();
+
+        var content = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            MouseFilter = MouseFilterMode.Ignore,
+        };
+        content.AddChild(label);
+        content.AddChild(_holoCommsRemote);
+        HoloCommsButton.AddChild(content);
+    }
+
+    private void UpdateHoloCommsRemote(string? remote)
+    {
+        if (remote == _holoCommsRemoteName)
+            return;
+
+        _holoCommsRemoteName = remote;
+        _holoCommsRemote.Visible = remote != null;
+
+        if (remote == null)
+            return;
+
+        var message = new FormattedMessage();
+        message.PushColor(HoloCommsRemoteColor);
+        message.AddText(remote);
+        message.Pop();
+        _holoCommsRemote.SetMessage(message);
     }
 
     private void UpdateHoloCommsButton()
@@ -69,6 +113,8 @@ public sealed partial class NavScreen
                 _ => "holo-comms-button",
             });
         }
+
+        UpdateHoloCommsRemote(state == TelephoneState.Idle ? null : comms.RemoteName);
 
         // Only the colors change every frame, the layout stays as it is
         switch (state)

@@ -46,10 +46,14 @@ public sealed partial class RadarIdentificationSystem : EntitySystem
         if (!IsIdentified(grid, viewer, actor))
             return false;
 
-        if (TryComp<FriendlyIffComponent>(grid, out var friendly) && friendly.AlwaysVisible && _friendlyIff.IsFriendly(actor, grid))
+        // -- радар уводится ПКМ куда угодно по карте, дальность ограничена только у радаров с MaxIffRange
+        if (radar.MaxIffRange is not { } maxRange ||
+            TryComp<FriendlyIffComponent>(grid, out var friendly) && friendly.AlwaysVisible && _friendlyIff.IsFriendly(actor, grid))
+        {
             return true;
+        }
 
-        return Vector2.Distance(GetCenter(grid), viewer.Position) <= (radar.MaxIffRange ?? radar.MaxRange);
+        return Vector2.Distance(GetCenter(grid), viewer.Position) <= maxRange;
     }
 
     public Vector2 GetCenter(EntityUid grid)

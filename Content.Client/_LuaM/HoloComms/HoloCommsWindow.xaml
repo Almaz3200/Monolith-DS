@@ -8,27 +8,29 @@
     <BoxContainer Orientation="Vertical" Margin="8 6 8 8" SeparationOverride="6">
 
         <!-- The screen: the other side shown down to the hips -->
-        <PanelContainer StyleClasses="LuaMConsoleInset" MinHeight="300" VerticalExpand="True" SizeFlagsStretchRatio="1.4">
+        <PanelContainer StyleClasses="LuaMConsoleInset" MinHeight="300">
             <holo:HoloCommsHologramView Name="HologramView" HorizontalExpand="True" VerticalExpand="True" Margin="4 4 4 24"/>
 
             <Label Name="ScreenStatusLabel" StyleClasses="LuaMConsoleHeaderLabel"
                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 6"/>
         </PanelContainer>
 
-        <!-- Who is on the line and the last thing they said -->
-        <PanelContainer StyleClasses="LuaMConsoleHeader">
-            <BoxContainer Orientation="Vertical">
-                <Label Name="RemoteLabel" StyleClasses="LuaMConsoleHeaderLabel" HorizontalAlignment="Center" ClipText="True"/>
-                <Label Name="SpeakerLabel" HorizontalAlignment="Center" ClipText="True" FontColorOverride="#9FB3C8"/>
-            </BoxContainer>
-        </PanelContainer>
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" SeparationOverride="6">
+            <!-- Who is on the line and the last thing they said -->
+            <PanelContainer StyleClasses="LuaMConsoleHeader">
+                <BoxContainer Orientation="Vertical">
+                    <RichTextLabel Name="RemoteLabel" HorizontalAlignment="Center"/>
+                    <RichTextLabel Name="SpeakerLabel" HorizontalAlignment="Center"/>
+                </BoxContainer>
+            </PanelContainer>
 
-        <PanelContainer Name="LastLinePanel" StyleClasses="LuaMConsoleInset" Visible="False">
-            <RichTextLabel Name="LastLineLabel" Margin="8 4"/>
-        </PanelContainer>
+            <PanelContainer Name="LastLinePanel" StyleClasses="LuaMConsoleInset" Visible="False" MaxHeight="72" RectClipContent="True">
+                <RichTextLabel Name="LastLineLabel" Margin="8 4"/>
+            </PanelContainer>
 
-        <!-- Everybody the console can call -->
-        <holo:HoloCommsContactsList Name="ContactsList" VerticalExpand="True"/>
+            <!-- Everybody the console can call -->
+            <holo:HoloCommsContactsList Name="ContactsList" VerticalExpand="True"/>
+        </BoxContainer>
 
         <!-- Controls while there is no incoming call -->
         <BoxContainer Name="MainButtons" Orientation="Horizontal" SeparationOverride="4">

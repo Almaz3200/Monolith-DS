@@ -1,5 +1,8 @@
 using System.Runtime.InteropServices;
 using Content.Server.Chat.Systems;
+using Content.Server.Speech;
+using Content.Server.Speech.Components;
+using Content.Shared.Examine;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 
@@ -7,12 +10,14 @@ namespace Content.Server._LuaM.Telephone;
 
 /// <summary>
 /// A line relayed through a call can be repeated by several telephones of the same side, like the points of a ship line.
-/// Only one of the telephones near each other says it, one far off says it again for the people around it.
-/// Where the hearing of two of them overlaps, everybody gets the line in the chat once, the other copy only shows its speech bubble.
+/// Only one of the telephones in the same room says it, one behind a wall or far off says it again for the people around it.
+/// Where the hearing of two of them overlaps, everybody gets the line in the chat once, the other copy only shows its speech bubble,
+/// and a microphone that heard one copy does not pass on the other.
 /// </summary>
 public sealed class TelephoneRelayChatSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     // Where the lines relayed this tick were said
     private readonly Dictionary<(EntityUid Origin, string Message), List<MapCoordinates>> _said = new();
@@ -24,11 +29,15 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
     private RelayListeners? _pending;
     private EntityUid _pendingSpeaker;
 
+    private RelayListeners? _relaying;
+    private EntityUid _relayingSpeaker;
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
+        SubscribeLocalEvent<ActiveListenerComponent, ListenAttemptEvent>(OnListenAttempt);
     }
 
     public override void Update(float frameTime)
@@ -50,7 +59,7 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
     }
 
     /// <summary>
-    /// Whether the speaker says a line of the origin: not when another telephone said it this tick close enough to be heard here.
+    /// Whether the speaker says a line of the origin: not when another telephone in the same room said it this tick.
     /// </summary>
     public bool TrySay(EntityUid speaker, EntityUid origin, string message)
     {
@@ -64,7 +73,7 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
 
         foreach (var other in said)
         {
-            if (other.MapId == position.MapId && (other.Position - position.Position).Length() <= ChatSystem.VoiceRange)
+            if (_examine.InRangeUnOccluded(other, position, ChatSystem.VoiceRange, null))
                 return false;
         }
 
@@ -85,7 +94,18 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
 
         _pending = listeners;
         _pendingSpeaker = speaker;
+        _relaying = listeners;
+        _relayingSpeaker = speaker;
         return new RelayScope(this);
+    }
+
+    private void OnListenAttempt(Entity<ActiveListenerComponent> ent, ref ListenAttemptEvent args)
+    {
+        if (_relaying is not { } listeners || args.Source != _relayingSpeaker || args.Cancelled)
+            return;
+
+        if (!listeners.Devices.Add(ent))
+            args.Cancel();
     }
 
     private void OnExpandRecipients(ExpandICChatRecipientsEvent ev)
@@ -122,6 +142,7 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
         public void Dispose()
         {
             _system._pending = null;
+            _system._relaying = null;
         }
     }
 
@@ -129,11 +150,13 @@ public sealed class TelephoneRelayChatSystem : EntitySystem
     {
         public readonly HashSet<ICommonSession> InRange = new();
         public readonly HashSet<ICommonSession> Far = new();
+        public readonly HashSet<EntityUid> Devices = new();
 
         public void Clear()
         {
             InRange.Clear();
             Far.Clear();
+            Devices.Clear();
         }
     }
 }
