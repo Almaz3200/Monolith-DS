@@ -54,7 +54,6 @@ public sealed partial class CompanySystem : EntitySystem
         if (!string.IsNullOrEmpty(profileCompany))
             return profileCompany;
 
-        // No preference at all: fall back to a whitelisted company the player is a member of.
         foreach (var companyProto in _prototypeManager.EnumeratePrototypes<CompanyPrototype>())
         {
             if (companyProto.Whitelisted && _manager.IsMember(args.Player.UserId, companyProto.ID))

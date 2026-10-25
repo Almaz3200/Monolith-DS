@@ -10,7 +10,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [honks.]
+  chatMessages: ["delta-chat-emote-msg-honk"]
   chatTriggers:
     - honk
     - honks
@@ -28,7 +28,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [rings.]
+  chatMessages: ["delta-chat-emote-msg-ring"]
   chatTriggers:
     - ring
     - rings
@@ -47,7 +47,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [pews.]
+  chatMessages: ["delta-chat-emote-msg-pew"]
   chatTriggers:
     - pew
     - pews
@@ -64,7 +64,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [bangs.]
+  chatMessages: ["delta-chat-emote-msg-bang"]
   chatTriggers:
     - bang
     - bangs
@@ -82,7 +82,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [beeps.]
+  chatMessages: ["delta-chat-emote-msg-beep"]
   chatTriggers:
     - beep
     - beeps
@@ -100,7 +100,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [revs.]
+  chatMessages: ["delta-chat-emote-msg-rev"]
   chatTriggers:
     - rev
     - revs
@@ -118,7 +118,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [caws.]
+  chatMessages: ["delta-chat-emote-msg-caw"]
   chatTriggers:
     - caw
     - caws
@@ -137,7 +137,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [barks.]
+  chatMessages: ["delta-chat-emote-msg-bark"]
   chatTriggers:
     - bark
     - barks
@@ -155,7 +155,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [snarls.]
+  chatMessages: ["delta-chat-emote-msg-snarl"]
   chatTriggers:
     - snarl
     - snarls
@@ -173,7 +173,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [whimper.] # Starlight / Monolith: Renamed to whimper
+  chatMessages: ["delta-chat-emote-msg-whimper"] # Starlight / Monolith: Renamed to whimper
   chatTriggers:
     - whimper
     - whimpers
@@ -191,7 +191,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [howls.]
+  chatMessages: ["delta-chat-emote-msg-howl"]
   chatTriggers:
     - howl
     - howls
@@ -209,7 +209,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [awoos.]
+  chatMessages: ["delta-chat-emote-msg-awoo"]
   chatTriggers:
     - awoo
     - awoos
