@@ -23,6 +23,8 @@ namespace Content.Shared.Communications
         public bool ShowWarDeclaration;
         public bool WarDeclared;
         public TimeSpan WarDeclarationAvailableAt;
+        public bool WarActive; // Some faction has declared war, the console's faction can capitulate
+        public bool WarOver; // The war ended with a capitulation
         // LuaM end
 
         public CommunicationsConsoleInterfaceState(bool canAnnounce, bool canCall, List<string>? alertLevels, string currentAlert, float currentAlertDelay, TimeSpan? expectedCountdownEnd = null)

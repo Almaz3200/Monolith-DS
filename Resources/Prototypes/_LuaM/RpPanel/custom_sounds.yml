@@ -1,0 +1,44 @@
+- type: rpCustomSound
+  id: Kiss
+  sound:
+    collection: RpKiss
+
+- type: rpCustomSound
+  id: Pat
+  sound:
+    collection: RpPat
+
+- type: rpCustomSound
+  id: Slap
+  sound:
+    collection: RpSlap
+
+- type: rpCustomSound
+  id: Friction
+  sound:
+    collection: RpFriction
+
+- type: rpCustomSound
+  id: Handshake
+  sound:
+    collection: RpHandshake
+
+- type: rpCustomSound
+  id: Crunch
+  sound:
+    collection: RpStretchBody
+
+- type: rpCustomSound
+  id: NeckCrunch
+  sound:
+    collection: RpStretchNeck
+
+- type: rpCustomSound
+  id: Click
+  sound:
+    collection: RpClick
+
+- type: rpCustomSound
+  id: Thump
+  sound:
+    collection: RpBang

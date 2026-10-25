@@ -44,6 +44,9 @@ public sealed partial class ManualPortstrikeRuleSystem : GameRuleSystem<ManualPo
             if (!comp.SectorStatus.TryGetValue(ent.Comp.Faction, out var warAlreadyDeclared) || warAlreadyDeclared)
                 continue;
 
+            if (comp.SurrenderedFaction != null) // LuaM: the war ended with a capitulation
+                continue;
+
             comp.SectorStatus[ent.Comp.Faction] = true;
 
             var channel = _prototypes.Index(ent.Comp.Channel);
@@ -97,6 +100,9 @@ public sealed partial class ManualPortstrikeRuleSystem : GameRuleSystem<ManualPo
         while (query.MoveNext(out _, out _, out var comp, out _))
         {
             if (!comp.SectorStatus.TryGetValue(faction, out var warAlreadyDeclared) || warAlreadyDeclared)
+                continue;
+
+            if (comp.SurrenderedFaction != null) // LuaM: the war ended with a capitulation
                 continue;
 
             comp.SectorStatus[faction] = true;

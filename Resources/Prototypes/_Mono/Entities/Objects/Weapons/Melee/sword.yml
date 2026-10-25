@@ -11,8 +11,8 @@
      wideAnimationRotation: -60
      damage:
        types: # It's still incredibly strong, but -reasonable-
-         Slash: 25 # Mono increased slash damage from 20 to 25 in an attempt to not let it be outclassed by normal weapons, the shock is still doing the heavy lifting here
-         Shock: 6
+         Slash: 31 # LuaM: 25 > 31, Shock 6 moved to Slash # Mono increased slash damage from 20 to 25 in an attempt to not let it be outclassed by normal weapons, the shock is still doing the heavy lifting here
+         # Shock: 6 # Commented by LuaM: moved to Slash
          Structural: 25 # Ion doesn't exist, according to Proto manager.
    - type: Item
      sprite: _Mono/Objects/Weapons/Melee/hfblade.rsi
@@ -47,17 +47,17 @@
     wideAnimationRotation: -60
     damage:
       types:
-        Slash: 25 # Mono increased slash damage from 20 to 25 in an attempt to not let it be outclassed by normal weapons, the shock and heat are still doing the heavy lifting here
-        Heat: 12
-        Shock: 6
+        Slash: 43 # LuaM: 25 > 43, Shock 6 and Heat 12 moved to Slash # Mono increased slash damage from 20 to 25 in an attempt to not let it be outclassed by normal weapons, the shock and heat are still doing the heavy lifting here
+        # Heat: 12 # Commented by LuaM: moved to Slash
+        # Shock: 6 # Commented by LuaM: moved to Slash
         Structural: 40
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Slash: 10
-        Heat: 8
-        Shock: 4
+        Slash: 22 # LuaM: 10 > 22, Shock 4 and Heat 8 moved to Slash
+        # Heat: 8 # Commented by LuaM: moved to Slash
+        # Shock: 4 # Commented by LuaM: moved to Slash
         Structural: 85
   - type: Item
     sprite: _Mono/Objects/Weapons/Melee/murasama.rsi
@@ -90,8 +90,8 @@
     wideAnimationRotation: -60
     damage:
       types: # admeme..
-        Slash: 35
-        Shock: 15
+        Slash: 50 # LuaM: 35 > 50, Shock 15 moved to Slash
+        # Shock: 15 # Commented by LuaM: moved to Slash
         Structural: 55
   - type: Item
     sprite: _Mono/Objects/Weapons/Melee/murasama.rsi
@@ -124,8 +124,8 @@
     wideAnimationRotation: -60
     damage:
       types:
-        Slash: 25
-        Shock: 15
+        Slash: 40 # LuaM: 25 > 40, Shock 15 moved to Slash
+        # Shock: 15 # Commented by LuaM: moved to Slash
         Structural: 40
     clickPartDamageMultiplier: 2.25 # LOL
   - type: Item
@@ -267,8 +267,8 @@
         variation: 0.125
     activatedDamage:
         types:
-            Slash: 30
-            Heat: 50
+            Slash: 80 # LuaM: 30 > 80, Heat 50 moved to Slash
+            # Heat: 50 # Commented by LuaM: moved to Slash
             Structural: 300
   - type: ItemToggle
     predictable: false

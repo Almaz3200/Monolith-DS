@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/03/2026 17:56:46
-  entityCount: 2577
+  time: 10/23/2026 16:40:56
+  entityCount: 2586
 maps: []
 grids:
 - 1
@@ -105,7 +105,7 @@ entities:
           version: 7
         -1,3:
           ind: -1,3
-          tiles: BgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAAAAAAAAAAjAAAAAAAAIwAAAAAAAAAAAAAAAAAbAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAHAAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAjAAAAAAAAIwAAAAAAACUAAAAAAAAAAAAAAAAAFwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAABkAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAIwAAAAAAACMAAAAAAAAlAAAAAAAAAAAAAAAAABoAAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAACMAAAAAAAAjAAAAAAAAJQAAAAAAAAAAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAHAAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAAAAAAAAAAIwAAAAAAACMAAAAAAAAAAAAAAAAAGwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAB0AAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAAAAAAAAAACMAAAAAAAAjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAAAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAAAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAA==
+          tiles: BgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAAAAAAAAAAjAAAAAAAAIwAAAAAAAAAAAAAAAAAbAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAHAAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAjAAAAAAAAIwAAAAAAACUAAAAAAAAAAAAAAAAAFwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAABkAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAIwAAAAAAACMAAAAAAAAlAAAAAAAAAAAAAAAAABoAAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAACMAAAAAAAAjAAAAAAAAJQAAAAAAAAAAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAHAAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAAAAAAAAAAIwAAAAAAACMAAAAAAAAAAAAAAAAAGwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAB0AAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAAAAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAAAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAAAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAAIwAAAAAAACMAAAAAAAAjAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIwAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAA==
           version: 7
         0,3:
           ind: 0,3
@@ -122,10 +122,10 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
         Kudzu: []
-        Smoke: []
+        Puddle: []
         MetalFoam: []
+        Smoke: []
     - type: Shuttle
       dampingModifier: 2.5
       bodyModifier: 2.5
@@ -1885,7 +1885,8 @@ entities:
             0: 30579
             1: 128
           3,0:
-            0: 273
+            0: 257
+            2: 16
             1: 12
           3,1:
             0: 4095
@@ -1950,16 +1951,16 @@ entities:
           -1,-3:
             0: 29440
             1: 96
-            2: 32768
+            3: 32768
           -1,-2:
             0: 65395
-            2: 8
+            3: 8
           0,-3:
-            2: 4096
+            3: 4096
             0: 51200
             1: 192
           0,-2:
-            2: 1
+            3: 1
             0: 65516
           1,-3:
             0: 65280
@@ -2125,6 +2126,11 @@ entities:
           immutable: True
           moles: {}
         - volume: 2500
+          temperature: 293.14996
+          moles:
+            Oxygen: 20.078888
+            Nitrogen: 75.53487
+        - volume: 2500
           temperature: 235
           moles:
             Oxygen: 27.225372
@@ -2133,6 +2139,64 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ExplosionAirtightGrid
+  - uid: 2580
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - drink
+    - type: Transform
+      parent: 2579
+    - type: Solution
+      solution:
+        maxVol: 50
+        name: drink
+        reagents:
+        - data: []
+          ReagentId: Beer
+          Quantity: 50
+    - type: ContainedSolution
+      containerName: drink
+      container: 2579
+  - uid: 2582
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 2581
+    - type: Solution
+      solution:
+        maxVol: 10
+        name: food
+        reagents:
+        - data: []
+          ReagentId: Fiber
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 2581
+- proto: ActionStartFishing
+  entities:
+  - uid: 2584
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 2583
+    - type: WorldTargetAction
+      originalIconColor: '#FFFFFFFF'
+      container: 2583
+  - uid: 2586
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 2585
+    - type: WorldTargetAction
+      originalIconColor: '#FFFFFFFF'
+      container: 2585
 - proto: AirAlarm
   entities:
   - uid: 2178
@@ -2499,11 +2563,6 @@ entities:
       parent: 1
 - proto: Akiplushie16
   entities:
-  - uid: 28
-    components:
-    - type: Transform
-      pos: 12.578256,10.390521
-      parent: 1
   - uid: 1828
     components:
     - type: Transform
@@ -7082,13 +7141,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -11.5,1.5
       parent: 1
-- proto: ChemistryHotplate
-  entities:
-  - uid: 2046
-    components:
-    - type: Transform
-      pos: 1.5,17.5
-      parent: 1
 - proto: ChemMasterFilledFlatpack
   entities:
   - uid: 1654
@@ -7483,6 +7535,25 @@ entities:
     - type: Transform
       pos: 1.5123112,4.835023
       parent: 1
+  - uid: 2581
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 2578
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: EmitSoundOnCollide
+      nextSound: -2885.0637816
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 2582
+    - type: InsideEntityStorage
 - proto: ClothingHeadPaperSackSmile
   entities:
   - uid: 1835
@@ -7681,6 +7752,35 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: CrateFishingGoodies
+  entities:
+  - uid: 2578
+    components:
+    - type: Transform
+      pos: 12.5,1.5
+      parent: 1
+    - type: EntityStorage
+      air:
+        volume: 200
+        immutable: False
+        temperature: 293.14923
+        moles:
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 2579
+          - 2581
+          - 2583
+          - 2585
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
 - proto: CrateFoodCooking
   entities:
   - uid: 2060
@@ -9022,6 +9122,37 @@ entities:
     - type: Transform
       pos: 3.448602,23.640285
       parent: 1
+- proto: DrinkBeerBottleFull
+  entities:
+  - uid: 2579
+    mapInit: true
+    paused: true
+    components:
+    - type: MetaData
+      name: пиво (пиво)
+    - type: Transform
+      parent: 2578
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - drink
+    - type: Label
+      currentLabel: пиво
+    - type: PressurizedSolution
+      sprayFizzinessThresholdRoll: 0.67309433
+    - type: MeleeWeapon
+      nextAttack: -1.0333313
+    - type: EmitSoundOnCollide
+      nextSound: -2885.0637816
+    - type: Physics
+      canCollide: False
+    - type: NameModifier
+      baseName: пиво
+    - type: ContainerContainer
+      containers:
+        solution@drink: !type:ContainerSlot
+          ent: 2580
+    - type: InsideEntityStorage
 - proto: DrinkChampagneBottleFull
   entities:
   - uid: 2152
@@ -9712,6 +9843,68 @@ entities:
     - type: Transform
       pos: 9.5,14.5
       parent: 1
+- proto: FishingRod
+  entities:
+  - uid: 2585
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 2578
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 0
+          startTime: 0
+          length: 0.08
+    - type: MeleeWeapon
+      nextAttack: 0.0333343
+    - type: FishingRod
+      throwLureActionEntity: 2586
+    - type: EmitSoundOnCollide
+      nextSound: -2876.8304565
+    - type: Physics
+      canCollide: False
+    - type: ActionsContainer
+    - type: ContainerContainer
+      containers:
+        actions: !type:Container
+          ents:
+          - 2586
+    - type: Actions
+      actions: []
+    - type: InsideEntityStorage
+- proto: FishingRodGoon
+  entities:
+  - uid: 2583
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 2578
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 0
+          startTime: 0
+          length: 0.08
+    - type: MeleeWeapon
+      nextAttack: -0.4333319
+    - type: FishingRod
+      throwLureActionEntity: 2584
+    - type: EmitSoundOnCollide
+      nextSound: -2876.8304565
+    - type: Physics
+      canCollide: False
+    - type: ActionsContainer
+    - type: ContainerContainer
+      containers:
+        actions: !type:Container
+          ents:
+          - 2584
+    - type: Actions
+      actions: []
+    - type: InsideEntityStorage
 - proto: FloorDrain
   entities:
   - uid: 1819
@@ -13888,6 +14081,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+- proto: MachineThermobath
+  entities:
+  - uid: 2046
+    components:
+    - type: Transform
+      pos: 1.5,17.5
+      parent: 1
 - proto: MetalBaseballBat
   entities:
   - uid: 1896
@@ -13995,6 +14195,13 @@ entities:
     components:
     - type: Transform
       pos: 8.538718,19.621456
+      parent: 1
+- proto: PlushieYarrMoth
+  entities:
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 12.586087,10.493815
       parent: 1
 - proto: PortableGeneratorDK
   entities:
@@ -16188,7 +16395,8 @@ entities:
   - uid: 2099
     components:
     - type: Transform
-      pos: -9.622814,2.4353733
+      rot: -12.566370614359172 rad
+      pos: -9.617223,2.4672287
       parent: 1
 - proto: TreasureCoinDiamond
   entities:

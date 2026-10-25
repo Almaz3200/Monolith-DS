@@ -9,10 +9,18 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 72000 # mono - 20 hours
+    - !type:TraitsRequirement # LuaM: heretics can't take this job
+      inverted: true
+      traits:
+      - Heretic
   alternateRequirementSets: # mono
     longerPlaytimeLessSec: # mono
     - !type:OverallPlaytimeRequirement # mono
       time: 234000 # mono 65 hours
+    - !type:TraitsRequirement # LuaM: heretics can't take this job
+      inverted: true
+      traits:
+      - Heretic
   startingGear: DocGear
   alwaysUseSpawner: true
   assignedCompany: MD

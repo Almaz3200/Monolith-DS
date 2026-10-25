@@ -1,0 +1,27 @@
+- type: rpInteraction
+  id: PatShoulder
+  category: Shoulders
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpPatShoulderMessages
+  icon: _LuaM/Interface/RpPanel/pat_shoulder.png
+
+- type: rpInteraction
+  id: ShoulderMassage
+  category: Shoulders
+  kind: Soft
+  sound:
+    collection: RpFriction
+  messages: RpShoulderMassageMessages
+  selfMessages: RpShoulderMassageSelfMessages
+  icon: _LuaM/Interface/RpPanel/shoulder_massage.png
+
+- type: rpInteraction
+  id: HugShoulders
+  category: Shoulders
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpHugShouldersMessages
+  icon: _LuaM/Interface/RpPanel/pat_shoulders.png

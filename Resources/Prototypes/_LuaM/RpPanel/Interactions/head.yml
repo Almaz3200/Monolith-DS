@@ -1,0 +1,49 @@
+- type: rpInteraction
+  id: HornsPat
+  category: Head
+  kind: Soft
+  sound:
+    collection: RpFriction
+  messages: RpHornsPatMessages
+  icon: _LuaM/Interface/RpPanel/horns_pat.png
+  targetRequirements:
+  - !type:SpeciesRequirement
+    species:
+    - Demon
+    - Oni
+
+- type: rpInteraction
+  id: PetHead
+  category: Head
+  kind: Soft
+  sound:
+    collection: RpFriction
+  messages: RpPetHeadMessages
+  icon: _LuaM/Interface/RpPanel/pet_head.png
+
+- type: rpInteraction
+  id: GiveSlapHead
+  category: Head
+  kind: Harmful
+  sound:
+    collection: RpFriction
+  messages: RpGiveSlapHeadMessages
+  icon: _LuaM/Interface/RpPanel/slap_back_of_head.png
+
+- type: rpInteraction
+  id: RuffleHair
+  category: Head
+  kind: Soft
+  sound:
+    collection: RpFriction
+  messages: RpRuffleHairMessages
+  icon: _LuaM/Interface/RpPanel/ruffle_head.png
+
+- type: rpInteraction
+  id: TapCrown
+  category: Head
+  kind: Soft
+  sound:
+    collection: RpFriction
+  messages: RpTapCrownMessages
+  icon: _LuaM/Interface/RpPanel/pat_back_of_head.png

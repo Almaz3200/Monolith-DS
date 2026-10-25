@@ -1,6 +1,6 @@
-ent-N14Torch = torch
-    .desc = A flaming torch for lighting an area.
-    .suffix = floor
+ent-N14Torch = факел
+    .desc = Горящий факел для освещения местности.
+    .suffix = напольный
 ent-N14TorchWall = { ent-N14Torch }
     .desc = { ent-N14Torch.desc }
-    .suffix = wall
+    .suffix = настенный

@@ -1,7 +1,7 @@
 - type: gameMap
   id: Frontier
   mapName: '«Колосс Централл»' # LuaM: 'Caelestinus Central' > '«Колосс Централл»'
-  mapPath: /Maps/_Mono/Outpost/caelestinus_central.yml # Mono
+  mapPath: /Maps/_LuaM/POI/caelestinus_centralLuaM.yml # LuaM /Maps/_Mono/POI/caelestinus_central.yml > /Maps/_LuaM/POI/caelestinus_centralLuaM.yml
   minPlayers: 0
   maxPlayers: 100
   randomRotation: true
@@ -310,6 +310,45 @@
           - CCBountyBreadDog
           - CCBountyCrazyHamburger
           - CCBountyDragonOmelette
+          # LuaM-start: food ported from Lua
+          - CCBountyCottonBun
+          - CCBountyRatKebab
+          - CCBountyCottonGrilledCheeseSandwich
+          - CCBountyCreamCroissant
+          - CCBountyChocolateCroissant
+          - CCBountyCheeseCroissant
+          - CCBountyDoughHotDog
+          - CCBountyFriedEggSausage
+          - CCBountyFriedSausage
+          - CCBountyMeatKebab
+          - CCBountyLizardTailKebab
+          - CCBountyDoubleRatKebab
+          - CCBountyTexasToast
+          - CCBountyCottonBurger
+          - CCBountyLicoriceCreamsicle
+          - CCBountyFriedTofu
+          - CCBountyWholeChicken
+          - CCBountyWholeDuck
+          - CCBountyCottonCake
+          - CCBountyAmericanBreakfast
+          - CCBountyEnglishBreakfast
+          - CCBountyShawarma
+          - CCBountyCheeseShawarma
+          - CCBountyMeatShawarma
+          - CCBountyHawaiianKebab
+          - CCBountyFiestaKebab
+          - CCBountyMashedMeatballs
+          - CCBountyFrenchGarlicBread
+          - CCBountyCinnamonRoll
+          - CCBountyCottonCheeseburger
+          - CCBountyCinnamonMochi
+          - CCBountyChickenParmesan
+          - CCBountyWorldPeazza
+          - CCBountySnakeKebab
+          - CCBountyWholePenguin
+          - CCBountyDragonSteak
+          - CCBountyDraco
+          # LuaM-end
 
 - type: gameMap
   id: EmptyFrontier

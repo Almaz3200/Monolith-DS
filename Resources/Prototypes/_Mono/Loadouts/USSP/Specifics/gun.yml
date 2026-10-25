@@ -7,6 +7,18 @@
   - FactionMosinLoadout
   - FactionSvsLoadout
   - FactionDp29Loadout
+# LuaM-start: the mercenary self-defense guns
+  - ContractorMk32Loadout
+  - ContractorSurvivalKnifeLoadout
+  - ContractorDisablerLoadout
+  - ContractorSvalinnLoadout
+  - ContractorDoubleBarreledLoadout
+  - MercenaryKammererLoadout
+  - MercenaryPrometheusLoadout
+  - MercenaryGestioLoadout
+  - ContractorAkmLoadout
+  - MercenaryNovaliteLoadout
+# LuaM-end
   fallbacks:
   - FactionAk502Loadout
 

@@ -34,7 +34,7 @@
         - type: StationJobs
           availableJobs:
             DirectorOfCare: [ 1, 1 ]
-            MdMedic: [ -1, -1 ]
+            MdMedic: [ 5, 5 ]
           tags:
           - HeadOfPersonnel
           - HeadOfSecurity

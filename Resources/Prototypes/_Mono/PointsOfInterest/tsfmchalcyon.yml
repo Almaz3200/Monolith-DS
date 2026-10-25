@@ -18,7 +18,7 @@
   maximumDistance: 3500 # Mono
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsfPdv ] # LuaM: MonoChimeraTsf > MonoChimeraTsfPdv
   spawnGroup: Required
-  gridPath: /Maps/_Mono/POI/tsfmchalcyon.yml
+  gridPath: /Maps/_LuaM/POI/tsfmchalcyonLuaM.yml # LuaM: /Maps/_Mono/POI/tsfmchalcyon.yml > /Maps/_LuaM/POI/tsfmchalcyonLuaM.yml
   addComponents:
   - type: IFF
     color: "#047abd"
@@ -38,7 +38,7 @@
 - type: gameMap
   id: TSFMCHalcyon
   mapName: 'TSFMC Flagship Halcyon'
-  mapPath: /Maps/_Mono/POI/tsfmchalcyon.yml
+  mapPath: /Maps/_LuaM/POI/tsfmchalcyonLuaM.yml # LuaM: /Maps/_Mono/POI/tsfmchalcyon.yml > /Maps/_LuaM/POI/tsfmchalcyonLuaM.yml
   minPlayers: 0
   randomRotation: false
   stations:

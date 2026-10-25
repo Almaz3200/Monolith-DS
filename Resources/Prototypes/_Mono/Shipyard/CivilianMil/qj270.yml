@@ -23,7 +23,7 @@
   minPlayers: 0
   stations:
     QJ270:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel
       components:
       - type: StationNameSetup
         mapNameTemplate: 'QJ-270/B MIL{1}'

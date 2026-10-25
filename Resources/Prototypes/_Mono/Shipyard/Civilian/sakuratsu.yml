@@ -21,7 +21,7 @@
   minPlayers: 0
   stations:
     Sakuratsu:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel, expeditions with a bought console
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Sakuratsu CIV{1}'

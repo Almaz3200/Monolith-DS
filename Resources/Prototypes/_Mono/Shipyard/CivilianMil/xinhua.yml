@@ -24,7 +24,7 @@
   minPlayers: 0
   stations:
     Xinhua:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel, expeditions with a bought console
       components:
       - type: StationNameSetup
         mapNameTemplate: 'Xinhua MIL{1}'

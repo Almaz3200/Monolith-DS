@@ -1,0 +1,38 @@
+#Author: Primusirius on Github and Discord.
+
+- type: vessel
+  id: Sagittarius
+  parent: BaseVessel
+  name: vessel-sagittarius-name # LuaM-locale
+  description: vessel-sagittarius-desc # LuaM-locale
+  price: 100400
+  category: Large
+  group: Expedition
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/Expedition/sagittarius.yml
+  guidebookPage: null
+  class:
+  - Expedition
+  - Chemistry
+  - Salvage
+  engine:
+  - AME
+
+- type: gameMap
+  id: Sagittarius
+  mapName: 'HT Sagittarius'
+  mapPath: /SharedMaps/_LuaM/Shuttles/Expedition/sagittarius.yml
+  minPlayers: 0
+  stations:
+    Sagittarius:
+      stationProto: StandardFrontierExpeditionVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'HT Sagittarius EXP{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

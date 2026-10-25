@@ -274,7 +274,8 @@ public sealed partial class FireControlSystem : EntitySystem
         var hardpointValid = true;
         if (TryComp<HardpointAnchorableOnlyComponent>(controllable, out var hardpointAnchorable))
         {
-            if (hardpointAnchorable.anchoredTo == null)
+            // LuaM: anchoredTo == null > the hardpoint must also still exist, a gun kept firing after its hardpoint was destroyed
+            if (hardpointAnchorable.anchoredTo is not { } hardpoint || TerminatingOrDeleted(hardpoint))
                 return false;
         }
 

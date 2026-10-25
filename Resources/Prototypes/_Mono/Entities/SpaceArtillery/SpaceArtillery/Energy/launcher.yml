@@ -87,7 +87,7 @@
   - type: WirelessNetworkConnection
     range: 500
   - type: Gun
-    fireRate: 0.5
+    fireRate: 0.3
     recoil: 8
     minAngle: 0
     maxAngle: 0
@@ -154,7 +154,7 @@
     recoil: 5 # 1/5x
     minAngle: 0
     maxAngle: 5
-    projectileSpeed: 320
+    projectileSpeed: 400
     shootThermalSignature: 500000 # ~5.6km with continuous fire
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/Gunshots/autopulse_laser_fire_01.ogg
@@ -162,7 +162,7 @@
       path: /Audio/Weapons/click.ogg
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 1175
+    autoRechargeRate: 1800
   - type: SpaceArtillery
     powerChargeRate: 700
     powerUsePassive: 100
@@ -171,7 +171,7 @@
   - type: Actions
   - type: ProjectileBatteryAmmoProvider
     proto: ShipAutopulserPlasmaProjectile
-    fireCost: 450
+    fireCost: 300
   - type: RadarBlip
     radarColor: "#C92BCC"
     scale: 1.5
@@ -291,7 +291,7 @@
     range: 500
   - type: Gun
     fireRate: 0.2
-    projectileSpeed: 170
+    projectileSpeed: 180
     shootThermalSignature: 2000000 # ~1414m after firing - relatively low
     soundGunshot:
       collection: ShipGunMjolnir

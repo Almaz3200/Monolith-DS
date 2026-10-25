@@ -1,0 +1,37 @@
+#Автор: almaz3200 (discord)
+#Специально для МК:КОЛОСС (ss14s://sf.deadspace14.net)
+- type: vessel
+  id: VSKSentinelDRG
+  parent: BaseVesselIFFDisabled
+  name: vessel-VSKSentinelDRG-name
+  description: vessel-VSKSentinelDRG-desc
+  price: 350000
+  purchasable: false # voucher only - T2
+  category: Medium
+  group: Security
+  access: Security
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/TSF/SentinelDRG.yml
+  guidebookPage: Null
+  class:
+  - Corvette
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: VSKSentinelDRG
+  mapName: 'Sentinel-DRG'
+  mapPath: /SharedMaps/_LuaM/Shuttles/TSF/SentinelDRG.yml
+  minPlayers: 0
+  stations:
+    VSKSentinelDRG:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Sentinel-DRG TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Deputy: [ 0, 0 ]
+          TsfBorg: [ 0, 0 ]

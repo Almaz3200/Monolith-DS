@@ -16,7 +16,7 @@
   maximumDistance: 12400
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsfPdv ] # LuaM: MonoChimeraTsf/MonoChimeraPdv > MonoChimeraTsfPdv
   spawnGroup: Required
-  gridPath: /Maps/_Mono/POI/camelot.yml
+  gridPath: /Maps/_LuaM/POI/camelotLuaM.yml # LuaM: /Maps/_Mono/POI/camelot.yml > /Maps/_LuaM/POI/camelotLuaM.yml
   addComponents:
   - type: IFF
     color: "#ccaa55"
@@ -31,7 +31,7 @@
 - type: gameMap
   id: USSPCamelot
   mapName: 'Freeport Camelot'
-  mapPath: /Maps/_Mono/POI/camelot.yml
+  mapPath: /Maps/_LuaM/POI/camelotLuaM.yml # LuaM: /Maps/_Mono/POI/camelot.yml > /Maps/_LuaM/POI/camelotLuaM.yml
   minPlayers: 0
   stations:
     USSPCamelot:
@@ -54,11 +54,11 @@
         - type: StationJobs
           availableJobs:
             USSPCommissar: [1, 1]
-            USSPSergeant: [4, 4]
-            USSPRifleman: [-1, -1]
+            USSPSergeant: [3, 3] # LuaM: 4 > 3
+            USSPRifleman: [5, 5] # LuaM: -1 > 5
             VGCommander: [1, 1]
             VGLieutenant: [2, 2]
-            VGInfanteer: [-1, -1]
+            VGInfanteer: [5, 5] # LuaM: -1 > 5
 #            Contractor: [-1, -1] # Commented by LuaM
             #Pilot: [0, -1]
             #Mercenary: [0, -1]
