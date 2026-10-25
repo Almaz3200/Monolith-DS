@@ -556,6 +556,11 @@
   - type: ShipRepairable
     repairTime: 45
     repairCost: 200
+# LuaM-start: the Howdy needs a hardpoint
+  - type: HardpointAnchorableOnly
+    class: Ballistic
+    size: Superheavy
+# LuaM-end
 
 - type: entity
   id: WeaponTurretR300Infinite
