@@ -21,7 +21,7 @@
   minPlayers: 0
   stations:
     Sellsword:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel
       gridComponents:
       - type: VesselInfo
         description: "A warrior-poet's sarcophagus."

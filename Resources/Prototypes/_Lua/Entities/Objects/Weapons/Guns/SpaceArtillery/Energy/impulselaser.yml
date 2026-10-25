@@ -1,0 +1,89 @@
+# LuaWorld - This file is licensed under AGPLv3
+# Copyright (c) 2025 LuaWorld Contributors
+# See AGPLv3.txt for details.
+
+# Lua: ported from sector-frontier-14-ds, rebuilt on the Monolith ship weapon bases.
+# Stats match the Type-35 plasma cannon, with a slightly higher fire rate.
+
+- type: entity
+  id: ImpulseLaserBase
+  name: pulse laser
+  parent:
+  - BallisticArtillery
+  - BallisticArtilleryTier2HP
+  suffix: Medium, ShuttleGun
+  description: A laser cannon, powered by pulse laser energy cells.
+  components:
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    sprite: _Lua/Objects/Weapons/Guns/Turrets/impulselaser.rsi
+    layers:
+    - state: impulselaser
+    - state: impulselaser-unshaded
+      shader: unshaded
+  - type: Appearance
+  - type: AmmoCounter
+  - type: Battery
+    maxCharge: 40000
+    startingCharge: 40000
+  - type: ExaminableBattery
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: Gun
+    fireRate: 10
+    recoil: 5
+    minAngle: 0
+    maxAngle: 0
+    projectileSpeed: 320
+    shootThermalSignature: 4000000 # ~2.8km with continuous fire
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_Lua/Weapons/Guns/Gunshots/lasergatling.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 550
+  - type: SpaceArtillery
+    powerChargeRate: 550
+    powerUsePassive: 500
+    powerUseActive: 0
+  - type: FireControlRotate
+  - type: Actions
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletMachineGunImpulseTurret
+    fireCost: 300
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    radarColor: "#1a4a88"
+    scale: 2
+  - type: ShipGunType
+    shipType: Energy
+  - type: ShipGunClass
+    shipClass: Medium # 6 fire control processing power
+  - type: ShipRepairable
+    repairTime: 15
+    repairCost: 60
+
+- type: entity
+  parent: [BaseStructureDisableToolUse, ImpulseLaserBase]
+  id: ImpulseLaserUnanchor
+  suffix: Unanchorable, ShuttleGun
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: ImpulseLaserBaseFlatpack
+  name: pulse laser flatpack
+  description: A flatpacked laser cannon, powered by pulse laser energy cells.
+  components:
+  - type: Flatpack
+    entity: ImpulseLaserBase
+  - type: StaticPrice
+    price: 250
+  - type: Sprite
+    sprite: _Lua/Flatpack/flatpack.rsi
+    layers:
+    - state: ship_weapon

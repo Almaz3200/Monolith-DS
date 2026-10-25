@@ -13,6 +13,7 @@
   # LuaM-start:
   - ArmorPlateStorageT1Recipe
   - ArmorPlateStorageT3Recipe # Temporarily, until Caelestinus R&D is available.
+  # Basic tools
   - Wirecutter
   - Screwdriver
   - Welder
@@ -24,6 +25,11 @@
   - HandLabeler
   - Signaller
   - ClothingMaskWeldingGas
+  # Basic storage
+  - ToolboxArtisticNF
+  - ToolboxElectricalNF
+  - ToolboxMechanicalNF
+  - ToolboxEmergencyNF
   # LuaM-end
 
 # Practice ammo/mags and practice weapons
