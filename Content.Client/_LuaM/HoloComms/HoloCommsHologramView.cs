@@ -306,7 +306,8 @@ public sealed partial class HoloCommsHologramView : Control
     }
 
     /// <summary>
-    /// The sprite pixel for pixel, its scale included, the same as the world draws it.
+    /// The sprite pixel for pixel, without its scale: the height and width of the character squeezed whole rows of pixels out
+    /// and a small one came out flattened, the screen fits the portrait to itself anyway.
     /// The typing bubble is a layer of the sprite too, it is left out: with it the portrait jumped every time they typed.
     /// </summary>
     private bool TryDrawShown(IRenderHandle handle, Entity<SpriteComponent, TransformComponent> shown, out Vector2i spriteSize)
@@ -318,6 +319,11 @@ public sealed partial class HoloCommsHologramView : Control
 
         if (bubble)
             _sprite.LayerSetVisible((shown, shown.Comp1), bubbleLayer, false);
+
+        var scale = shown.Comp1.Scale;
+        var scaled = scale != Vector2.One;
+        if (scaled)
+            _sprite.SetScale((shown, shown.Comp1), Vector2.One);
 
         try
         {
@@ -346,6 +352,9 @@ public sealed partial class HoloCommsHologramView : Control
         }
         finally
         {
+            if (scaled)
+                _sprite.SetScale((shown, shown.Comp1), scale);
+
             if (bubble)
                 _sprite.LayerSetVisible((shown, shown.Comp1), bubbleLayer, true);
         }
