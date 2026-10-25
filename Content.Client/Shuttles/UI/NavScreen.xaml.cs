@@ -42,6 +42,7 @@ public sealed partial class NavScreen : BoxContainer
         InitializeGunnery(); // Lua
         InitializeTargetControls(); // LuaM
         InitializeHoloComms(); // LuaM
+        InitializeRadarMenu(); // LuaM
     }
 
     // Frontier - IFF search

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Server._LuaM.Shuttles;
 using Content.Server.Holopad;
 using Content.Server.Station.Systems;
 using Content.Server.Telephone;
@@ -19,6 +20,8 @@ public sealed class ShipCommsLineSystem : EntitySystem
     [Dependency] private TelephoneSystem _telephone = default!;
     [Dependency] private HolopadSystem _holopad = default!;
     [Dependency] private StationSystem _station = default!;
+    [Dependency] private RadarIdentificationSystem _identification = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private EntityQuery<ShipCommsLineComponent> _lineQuery;
     private EntityQuery<TelephoneComponent> _telephoneQuery;
@@ -281,6 +284,61 @@ public sealed class ShipCommsLineSystem : EntitySystem
         return _lineQuery.TryComp(point, out var line) && line.Enabled && line.DoNotDisturb;
     }
 
+    public bool CanCall(Entity<TelephoneComponent> source, Entity<TelephoneComponent> receiver, EntityUid? viewer = null)
+    {
+        if (receiver.Owner == source.Owner ||
+            receiver.Comp.UnlistedNumber ||
+            !_holopadQuery.HasComp(receiver) ||
+            !_telephone.IsSourceInRangeOfReceiver(source, receiver))
+        {
+            return false;
+        }
+
+        var sourceGrid = Transform(source).GridUid;
+        var receiverGrid = Transform(receiver).GridUid;
+
+        // Inside the own ship the holopads are called one by one, the consoles only talk to other ships
+        if (receiverGrid == sourceGrid && sourceGrid != null)
+            return !HasComp<HoloCommsModuleComponent>(receiver);
+
+        return receiverGrid != null &&
+               _identification.IsIdentified(receiverGrid.Value, _xform.GetMapCoordinates(source), viewer ?? sourceGrid);
+    }
+
+    public void GetGridContacts(Entity<TelephoneComponent> source, EntityUid grid, EntityUid viewer, List<HoloCommsContact> contacts)
+    {
+        Entity<TelephoneComponent>? shipPoint = null;
+        var shipFree = false;
+
+        var query = EntityQueryEnumerator<HolopadComponent, TelephoneComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var telephone, out var xform))
+        {
+            var receiver = new Entity<TelephoneComponent>(uid, telephone);
+            if (xform.GridUid != grid || !CanCall(source, receiver, viewer))
+                continue;
+
+            var free = IsFree(receiver) && !IsDoNotDisturb(uid);
+
+            if (TryGetShip(uid, out _))
+            {
+                if (shipPoint == null || free && !shipFree)
+                {
+                    shipPoint = receiver;
+                    shipFree = free;
+                }
+
+                continue;
+            }
+
+            contacts.Add(new HoloCommsContact(GetNetEntity(uid), GetLabelOrName(uid), HoloCommsContactKind.Holopad, !free));
+        }
+
+        contacts.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.CurrentCultureIgnoreCase));
+
+        if (shipPoint is { } point)
+            contacts.Insert(0, new HoloCommsContact(GetNetEntity(point), GetShipName(point), HoloCommsContactKind.Ship, !shipFree));
+    }
+
     /// <summary>
     /// Everybody the source can call. Other ships are listed once by their name, ships that take no calls are left out.
     /// </summary>
@@ -292,19 +350,13 @@ public sealed class ShipCommsLineSystem : EntitySystem
         var query = EntityQueryEnumerator<HolopadComponent, TelephoneComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out _, out var telephone, out var xform))
         {
-            if (uid == source.Owner || telephone.UnlistedNumber)
-                continue;
-
             var receiver = new Entity<TelephoneComponent>(uid, telephone);
-            if (!_telephone.IsSourceInRangeOfReceiver(source, receiver))
+            if (!CanCall(source, receiver))
                 continue;
 
-            // Inside the own ship the holopads are called one by one, the consoles only talk to other ships
             if (xform.GridUid == sourceGrid && sourceGrid != null)
             {
-                if (!HasComp<HoloCommsModuleComponent>(uid))
-                    contacts.Add(new HoloCommsContact(GetNetEntity(uid), GetLabelOrName(uid), HoloCommsContactKind.Holopad, _telephone.IsTelephoneEngaged(receiver)));
-
+                contacts.Add(new HoloCommsContact(GetNetEntity(uid), GetLabelOrName(uid), HoloCommsContactKind.Holopad, _telephone.IsTelephoneEngaged(receiver)));
                 continue;
             }
 

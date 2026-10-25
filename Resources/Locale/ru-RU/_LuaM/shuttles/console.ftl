@@ -6,3 +6,6 @@ shuttle-console-autopilot-popup-marker-removed = Автопилот остано
 shuttle-console-map-search = Поиск объектов
 shuttle-console-iff-toggle-short = IFF
 shuttle-console-iff-detailed-short = D.IFF
+shuttle-radar-menu-follow = Следовать
+shuttle-radar-menu-call = Позвонить
+shuttle-radar-menu-unreachable = Невозможно связаться

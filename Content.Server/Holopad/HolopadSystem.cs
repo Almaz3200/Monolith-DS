@@ -102,6 +102,9 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
         if (!TryComp<TelephoneComponent>(receiver, out var receiverTelephone))
             return;
 
+        if (!_shipCommsLine.CanCall((source, sourceTelephone), (receiver, receiverTelephone))) // LuaM
+            return;
+
         LinkHolopadToUser(source, args.Actor);
         _telephoneSystem.CallTelephone((source, sourceTelephone), (receiver, receiverTelephone), args.Actor);
     }

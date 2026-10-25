@@ -97,6 +97,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         NfInitialize(); // Frontier Initialization for the ShuttleConsoleWindow
         InitializeMapTarget(); // LuaM
         InitializeHoloComms(); // LuaM
+        InitializeRadarMenu(); // LuaM
     }
 
     private void ClearModes(ShuttleConsoleMode mode)

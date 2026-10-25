@@ -63,6 +63,7 @@ public sealed partial class NavScreen
         base.FrameUpdate(args);
 
         UpdateHoloCommsButton();
+        UpdateRadarMenu();
 
         if (_reloadBars.Count == 0)
             return;

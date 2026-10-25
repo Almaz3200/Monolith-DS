@@ -1,11 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Server._EinsteinEngines.Language;
+using Content.Server._LuaM.Shuttles;
 using Content.Server.Administration.Logs;
 using Content.Server.Holopad;
 using Content.Server.Popups;
 using Content.Server.Telephone;
 using Content.Shared._LuaM.HoloComms;
+using Content.Shared._LuaM.Shuttles.Events;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
@@ -33,6 +35,8 @@ public sealed class HoloCommsConsoleSystem : EntitySystem
     [Dependency] private TelephoneSystem _telephone = default!;
     [Dependency] private HolopadSystem _holopad = default!;
     [Dependency] private ShipCommsLineSystem _line = default!;
+    [Dependency] private ShuttleConsoleUiGuardSystem _consoleGuard = default!;
+    [Dependency] private RadarIdentificationSystem _identification = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -68,10 +72,12 @@ public sealed class HoloCommsConsoleSystem : EntitySystem
         SubscribeLocalEvent<HoloCommsConsoleComponent, MapInitEvent>(OnConsoleMapInit);
         SubscribeLocalEvent<HoloCommsConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
         SubscribeLocalEvent<HoloCommsConsoleComponent, PowerChangedEvent>(OnConsolePowerChanged);
+        SubscribeLocalEvent<HoloCommsConsoleComponent, BoundUserInterfaceMessageAttempt>(OnUiMessageAttempt);
 
         Subs.BuiEvents<HoloCommsConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
         {
             subs.Event<HoloCommsToggleWindowMessage>(OnToggleWindow);
+            subs.Event<ShuttleRadarCallMessage>(OnRadarCall);
         });
 
         Subs.BuiEvents<HoloCommsConsoleComponent>(HoloCommsUiKey.Key, subs =>
@@ -210,6 +216,20 @@ public sealed class HoloCommsConsoleSystem : EntitySystem
         _ui.TryToggleUi(ent.Owner, HoloCommsUiKey.Key, args.Actor);
     }
 
+    // -- окно связи открывается только из окна консоли, с запертой консоли не звонят
+    private void OnUiMessageAttempt(EntityUid uid, HoloCommsConsoleComponent component, BoundUserInterfaceMessageAttempt args)
+    {
+        if (!HoloCommsUiKey.Key.Equals(args.UiKey))
+            return;
+
+        var allowed = args.Message is OpenBoundInterfaceMessage
+            ? _ui.IsUiOpen(uid, ShuttleConsoleUiKey.Key, args.Actor)
+            : !_consoleGuard.IsLocked(uid);
+
+        if (!allowed)
+            args.Cancel();
+    }
+
     private void OnUiOpened(Entity<HoloCommsConsoleComponent> ent, ref BoundUIOpenedEvent args)
     {
         _openConsoles.Add(ent);
@@ -224,6 +244,42 @@ public sealed class HoloCommsConsoleSystem : EntitySystem
 
     private void OnCall(Entity<HoloCommsConsoleComponent> ent, ref HoloCommsCallMessage args)
     {
+        if (TryGetEntity(args.Target, out var target))
+            TryCall(ent, args.Actor, target.Value, null);
+    }
+
+    private void OnRadarCall(Entity<HoloCommsConsoleComponent> ent, ref ShuttleRadarCallMessage args)
+    {
+        if (!TryGetEntity(args.Target, out var target) ||
+            Transform(target.Value).GridUid is not { } grid ||
+            !_identification.CanTarget(ent, grid, args.Actor) ||
+            !_ui.TryOpenUi(ent.Owner, HoloCommsUiKey.Key, args.Actor))
+        {
+            return;
+        }
+
+        TryCall(ent, args.Actor, target.Value, args.Actor);
+    }
+
+    public void GetRadarCalls(Entity<HoloCommsConsoleComponent> ent, EntityUid grid, EntityUid actor, List<HoloCommsContact> calls)
+    {
+        if (!TryGetModule(ent, out var module))
+            return;
+
+        var source = new Entity<TelephoneComponent>(module.Value.Owner, module.Value.Comp2);
+        _line.GetGridContacts(source, grid, actor, calls);
+
+        if (_telephone.IsTelephonePowered(source) && !_telephone.IsTelephoneEngaged(source))
+            return;
+
+        for (var i = 0; i < calls.Count; i++)
+        {
+            calls[i] = calls[i] with { Busy = true };
+        }
+    }
+
+    private void TryCall(Entity<HoloCommsConsoleComponent> ent, EntityUid actor, EntityUid target, EntityUid? viewer)
+    {
         if (!TryGetModule(ent, out var module))
             return;
 
@@ -233,33 +289,33 @@ public sealed class HoloCommsConsoleSystem : EntitySystem
         if (_telephone.IsTelephoneEngaged(source) || !_telephone.IsTelephonePowered(source))
             return;
 
-        if (!TryGetEntity(args.Target, out var target))
-            return;
-
-        target = _line.ResolveCallTarget(uid, target.Value);
+        target = _line.ResolveCallTarget(uid, target);
 
         if (!TryComp<TelephoneComponent>(target, out var targetTelephone) || !HasComp<HolopadComponent>(target))
             return;
 
-        var receiver = new Entity<TelephoneComponent>(target.Value, targetTelephone);
+        var receiver = new Entity<TelephoneComponent>(target, targetTelephone);
+
+        if (!_line.CanCall(source, receiver, viewer))
+            return;
 
         if (_line.IsDoNotDisturb(receiver))
         {
-            _popup.PopupEntity(Loc.GetString("holo-comms-popup-do-not-disturb"), ent, args.Actor);
+            _popup.PopupEntity(Loc.GetString("holo-comms-popup-do-not-disturb"), ent, actor);
             return;
         }
 
         if (!_telephone.IsSourceAbleToReachReceiver(source, receiver) || _telephone.IsTelephoneEngaged(receiver))
         {
-            _popup.PopupEntity(Loc.GetString("holo-comms-popup-unavailable"), ent, args.Actor);
+            _popup.PopupEntity(Loc.GetString("holo-comms-popup-unavailable"), ent, actor);
             return;
         }
 
-        _holopad.SetHolopadUser((uid, holopad), args.Actor);
-        _telephone.CallTelephone(source, receiver, args.Actor);
+        _holopad.SetHolopadUser((uid, holopad), actor);
+        _telephone.CallTelephone(source, receiver, actor);
 
         _adminLog.Add(LogType.Action, LogImpact.Low,
-            $"{ToPrettyString(args.Actor):user} called {ToPrettyString(receiver):target} from the comms of {ToPrettyString(ent):console}");
+            $"{ToPrettyString(actor):user} called {ToPrettyString(receiver):target} from the comms of {ToPrettyString(ent):console}");
     }
 
     private void OnAnswer(Entity<HoloCommsConsoleComponent> ent, ref HoloCommsAnswerMessage args)

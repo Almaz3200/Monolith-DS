@@ -18,5 +18,16 @@ public sealed partial class ShuttleConsoleBoundUserInterface
 
         _window.OnClearTarget += () => SendMessage(new ShuttleConsoleClearTargetMessage());
         _window.OnHoloCommsPressed += () => SendMessage(new HoloCommsToggleWindowMessage());
+        _window.OnRadarMenuRequest += grid => SendMessage(new ShuttleRadarMenuRequestMessage(grid));
+        _window.OnRadarFollow += grid => SendMessage(new ShuttleRadarFollowMessage(grid));
+        _window.OnRadarCall += target => SendMessage(new ShuttleRadarCallMessage(target));
+    }
+
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is ShuttleRadarMenuMessage menu)
+            _window?.ShowRadarMenu(menu);
     }
 }

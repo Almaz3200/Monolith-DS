@@ -118,5 +118,15 @@ public sealed partial class RadarConsoleSystem : SharedRadarConsoleSystem
         Dirty(ent);
     }
     // LuaM-end
+
+    // LuaM-start
+    public void SetTargetAt(Entity<RadarConsoleComponent> ent, EntityUid targetEntity, Vector2 position)
+    {
+        ent.Comp.Target = position;
+        ent.Comp.TargetEntity = targetEntity;
+        ent.Comp.HideTarget = false;
+        Dirty(ent);
+    }
+    // LuaM-end
     // End Frontier
 }
