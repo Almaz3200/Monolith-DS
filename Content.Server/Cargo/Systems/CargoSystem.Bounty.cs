@@ -187,6 +187,13 @@ public sealed partial class CargoSystem
             if(bountyPrototype.Reward > 0)
                 _stack.SpawnMultiple(bountyPrototype.RewardProto, bountyPrototype.Reward, sold.ToCoordinates()); // It spawns it on the coordinates of the bounty instead of the console because idgaf. Maybe if someone bothered putting console coordinates in I would do it properly.
 
+            // LuaM-start: Bonus rewards
+            foreach (var bonus in bountyPrototype.BonusRewards) // LuaM
+            {
+                if (bonus.Amount > 0)
+                    _stack.SpawnMultiple(bonus.Prototype, bonus.Amount, sold.ToCoordinates());
+            }
+            // LuaM-end
             TryRemoveBounty(station, bounty.Value, false);
             FillBountyDatabase(station);
             _adminLogger.Add(LogType.Action, LogImpact.Low, $"Bounty \"{bounty.Value.Bounty}\" (id:{bounty.Value.Id}) was fulfilled");
