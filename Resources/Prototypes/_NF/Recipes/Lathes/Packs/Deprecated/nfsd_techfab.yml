@@ -4,7 +4,8 @@
 - type: latheRecipePack
   id: NFNfsdTechfabDeprecatedStatic
   recipes:
-  # LuaM-start: Basic tools
+  # LuaM-start:
+  # Basic tools
   - Wirecutter
   - Screwdriver
   - Welder
@@ -16,6 +17,11 @@
   - HandLabeler
   - Signaller
   - ClothingMaskWeldingGas
+  # Basic storage
+  - ToolboxArtisticNF
+  - ToolboxElectricalNF
+  - ToolboxMechanicalNF
+  - ToolboxEmergencyNF
   # LuaM-end
   - ClothingEyesHudNfsd
   - CombatKnife

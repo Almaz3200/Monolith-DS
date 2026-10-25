@@ -3,6 +3,9 @@
   reward: 750
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -79,6 +82,9 @@
   reward: 1500
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -93,6 +99,9 @@
   reward: 1000
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -107,6 +116,9 @@
   reward: 500
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -121,6 +133,9 @@
   reward: 1000
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -135,6 +150,9 @@
   reward: 2000
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -149,6 +167,9 @@
   reward: 1000
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -163,6 +184,9 @@
   reward: 2000
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
@@ -187,6 +211,9 @@
   reward: 1500
   rewardSuffix: MIC
   rewardProto: MMCIndustrialCredit
+  bonusRewards: # LuaM
+  - prototype: CrateBluespaceElectronics
+    amount: 1
   description: mmc-bounty-desc-generic
   idPrefix: HKD-PRD
   entries:
