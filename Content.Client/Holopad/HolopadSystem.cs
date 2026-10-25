@@ -16,8 +16,13 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SpriteSystem _sprite = default!; // LuaM
 
-    // LuaM - the sprite is rebuilt before every draw, its shader is kept instead of making a new one each frame
+    // LuaM - the shader of a hologram is kept instead of making a new one on every rebuild
     private readonly Dictionary<EntityUid, ShaderInstance> _shaders = new();
+
+    // LuaM
+    // -- слои показываемого копируются 4 раза в секунду, полосы шейдера по-прежнему бегут каждый кадр
+    private static readonly TimeSpan RebuildInterval = TimeSpan.FromSeconds(0.25);
+    private readonly Dictionary<EntityUid, (TimeSpan Next, EntityUid? Target)> _rebuilds = new();
 
     public override void Initialize()
     {
@@ -39,12 +44,25 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
     {
         if (_shaders.Remove(entity, out var shader))
             shader.Dispose();
+
+        _rebuilds.Remove(entity);
     }
 
     private void OnShaderRender(Entity<HolopadHologramComponent> entity, ref BeforePostShaderRenderEvent ev)
     {
         if (ev.Sprite.PostShader == null)
             return;
+
+        // LuaM-start
+        var now = _timing.RealTime;
+        if (_rebuilds.TryGetValue(entity, out var rebuild) && now < rebuild.Next && rebuild.Target == entity.Comp.LinkedEntity)
+        {
+            UpdateHologramShader(entity, ev.Sprite, entity.Comp);
+            return;
+        }
+
+        _rebuilds[entity] = (now + RebuildInterval, entity.Comp.LinkedEntity);
+        // LuaM-end
 
         UpdateHologramSprite(entity, entity.Comp.LinkedEntity);
     }
