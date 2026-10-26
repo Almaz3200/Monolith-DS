@@ -29,7 +29,6 @@
 - type: entity
   parent:
   - BaseCartridge18x160mm
-  - Coilgun18x160mm
   id: Hitscan18x160mm
   name: cartridge (18x160mm Rod)
   description: A massive cartridge used in sniper rifles; this variant contains an increased powder charge that propels a tungsten rod at tremendous speed.
@@ -38,5 +37,6 @@
     layers:
     - state: hypercharged
       map: ["enum.AmmoVisualLayers.Base"]
-  - type: HitscanAmmo
-    casingPrototype: ChemicalSlop
+  - type: CartridgeAmmo
+    proto: Coilgun18x160mm
+  - type: SpentAmmoVisuals

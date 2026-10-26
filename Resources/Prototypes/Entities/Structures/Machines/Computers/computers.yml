@@ -227,6 +227,8 @@
           type: ShuttleConsoleBoundUserInterface
         enum.IntercomUiKey.Key:
           type: IntercomBoundUserInterface
+        enum.HoloCommsUiKey.Key: # LuaM
+          type: HoloCommsBoundUserInterface
   - type: ContainerContainer
     containers:
       board: !type:Container
@@ -238,6 +240,7 @@
       key_slots:
       - EncryptionKeyTraffic
   # End Frontier
+  - type: HoloCommsConsole # LuaM
   - type: TargetSeekerAlert # Mono
     targetGainSound:
       path: /Audio/_Mono/Effects/Alerts/rwr_beep.ogg

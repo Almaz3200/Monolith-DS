@@ -53,7 +53,27 @@ public sealed partial class CargoBountyPrototype : IPrototype
     /// </summary>
     [DataField]
     public string IdPrefix = "NT";
+    
+    // LuaM-start:
+    /// <summary>
+    /// Additional item rewards for completing the bounty.
+    /// </summary>
+    [DataField]
+    public List<CargoBountyBonusReward> BonusRewards = new();
+    // LuaM-end
 }
+
+// LuaM-start:
+[DataDefinition, Serializable, NetSerializable]
+public partial record struct CargoBountyBonusReward()
+{
+    [DataField(required: true)]
+    public EntProtoId Prototype { get; init; } = default!;
+
+    [DataField]
+    public int Amount { get; init; } = 1;
+}
+// LuaM-end
 
 [DataDefinition, Serializable, NetSerializable]
 public readonly partial record struct CargoBountyItemEntry()

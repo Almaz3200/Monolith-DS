@@ -42,6 +42,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Content.Server._LuaM.Chat; // LuaM
 
 namespace Content.Server.Chat.Systems;
 
@@ -820,6 +821,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (checkEmote)
             TryEmoteChatInput(source, action);
         SendInVoiceRange(ChatChannel.Emotes, name, action, wrappedMessage, obfuscated: "", obfuscatedWrappedMessage: "", source, range, author); // Einstein Engines - Language
+
+        // LuaM - lets the holopads relay the emotes of everyone around them
+        var emoteSentEv = new EntityEmoteSentEvent(source, action, range);
+        RaiseLocalEvent(ref emoteSentEv);
         if (!hideLog)
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");

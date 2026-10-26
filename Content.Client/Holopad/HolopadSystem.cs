@@ -14,12 +14,22 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!; // LuaM
+
+    // LuaM - the shader of a hologram is kept instead of making a new one on every rebuild
+    private readonly Dictionary<EntityUid, ShaderInstance> _shaders = new();
+
+    // LuaM
+    // -- слои показываемого копируются 4 раза в секунду, полосы шейдера по-прежнему бегут каждый кадр
+    private static readonly TimeSpan RebuildInterval = TimeSpan.FromSeconds(0.25);
+    private readonly Dictionary<EntityUid, (TimeSpan Next, EntityUid? Target)> _rebuilds = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<HolopadHologramComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<HolopadHologramComponent, ComponentShutdown>(OnComponentShutdown); // LuaM
         SubscribeLocalEvent<HolopadHologramComponent, BeforePostShaderRenderEvent>(OnShaderRender);
         SubscribeAllEvent<TypingChangedEvent>(OnTypingChanged);
     }
@@ -29,10 +39,30 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
         UpdateHologramSprite(entity, entity.Comp.LinkedEntity);
     }
 
+    // LuaM
+    private void OnComponentShutdown(Entity<HolopadHologramComponent> entity, ref ComponentShutdown ev)
+    {
+        if (_shaders.Remove(entity, out var shader))
+            shader.Dispose();
+
+        _rebuilds.Remove(entity);
+    }
+
     private void OnShaderRender(Entity<HolopadHologramComponent> entity, ref BeforePostShaderRenderEvent ev)
     {
         if (ev.Sprite.PostShader == null)
             return;
+
+        // LuaM-start
+        var now = _timing.RealTime;
+        if (_rebuilds.TryGetValue(entity, out var rebuild) && now < rebuild.Next && rebuild.Target == entity.Comp.LinkedEntity)
+        {
+            UpdateHologramShader(entity, ev.Sprite, entity.Comp);
+            return;
+        }
+
+        _rebuilds[entity] = (now + RebuildInterval, entity.Comp.LinkedEntity);
+        // LuaM-end
 
         UpdateHologramSprite(entity, entity.Comp.LinkedEntity);
     }
@@ -106,11 +136,34 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
         // Remove shading from all layers (except displacement maps)
         for (int i = 0; i < hologramSprite.AllLayers.Count(); i++)
         {
-            if (hologramSprite.TryGetLayer(i, out var layer) && layer.ShaderPrototype != "DisplacedStencilDraw")
-                hologramSprite.LayerSetShader(i, "unshaded");
+            if (!hologramSprite.TryGetLayer(i, out var layer)) // LuaM
+                continue;
+
+            // LuaM - the bent clothes keep their bend without the stencil test, in the comms window it cut them off and the one shown looked naked
+            hologramSprite.LayerSetShader(i, layer.ShaderPrototype == "DisplacedStencilDraw" ? "HologramDisplacedDraw" : "unshaded");
         }
 
+        // LuaM - drawn only through a UI with its own shader, copying the sprite of the target makes it visible again
+        if (holopadhologram.HideInWorld)
+        {
+            hologramSprite.PostShader = null;
+            _sprite.SetVisible((hologram, hologramSprite), false);
+            return;
+        }
+
+        // LuaM - copying the sprite also copies whether the target is drawn, the hologram must stay up even when it is not
+        _sprite.SetVisible((hologram, hologramSprite), true);
+
         UpdateHologramShader(hologram, hologramSprite, holopadhologram);
+    }
+
+    /// <summary>
+    /// LuaM - rebuilds the sprite of a hologram that is only drawn through a UI.
+    /// In the world this happens before every draw.
+    /// </summary>
+    public void RefreshHologram(Entity<HolopadHologramComponent> hologram)
+    {
+        UpdateHologramSprite(hologram, hologram.Comp.LinkedEntity);
     }
 
     private void UpdateHologramShader(EntityUid uid, SpriteComponent sprite, HolopadHologramComponent holopadHologram)
@@ -118,7 +171,13 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
         // Find the texture height of the largest layer
         float texHeight = sprite.AllLayers.Max(x => x.PixelSize.Y);
 
-        var instance = _prototypeManager.Index<ShaderPrototype>(holopadHologram.ShaderName).InstanceUnique();
+        // LuaM - one shader per hologram > a new one every frame
+        if (!_shaders.TryGetValue(uid, out var instance))
+        {
+            instance = _prototypeManager.Index<ShaderPrototype>(holopadHologram.ShaderName).InstanceUnique();
+            _shaders.Add(uid, instance);
+        }
+
         instance.SetParameter("color1", new Vector3(holopadHologram.Color1.R, holopadHologram.Color1.G, holopadHologram.Color1.B));
         instance.SetParameter("color2", new Vector3(holopadHologram.Color2.R, holopadHologram.Color2.G, holopadHologram.Color2.B));
         instance.SetParameter("alpha", holopadHologram.Alpha);

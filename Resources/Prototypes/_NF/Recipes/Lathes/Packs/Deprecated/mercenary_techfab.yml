@@ -14,12 +14,12 @@
   - HandLabeler
   - Signaller
   - ClothingMaskWeldingGas
+# Basic storage
+  - ToolboxArtisticNF
+  - ToolboxElectricalNF
+  - ToolboxMechanicalNF
+  - ToolboxEmergencyNF
 # LuaM-commented-start: removed base recipes
-## Basic storage
-  # - ToolboxArtisticNF
-  # - ToolboxElectricalNF
-  # - ToolboxMechanicalNF
-  # - ToolboxEmergencyNF
 ## Basic parts
   # - CableStack
   # - LightTube

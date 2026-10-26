@@ -18,6 +18,7 @@
   - type: AccessReader
     access: [ [ "HeadOfSecurity" ] ]
   - type: PowerSwitch
+  - type: ShipCommsLine # LuaM - rings and joins together with the shuttle consoles of the ship
 
 - type: entity
   parent: NFHolopadShip
@@ -37,6 +38,8 @@
   components:
   - type: Holopad
     useStationName: false
+  - type: ShipCommsLine # LuaM - every POI holopad stands on its own
+    enabled: false
 
 # Mapping Prototypes below
 - type: entity

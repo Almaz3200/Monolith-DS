@@ -1,15 +1,10 @@
-using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
-using Content.Server.Speech.Components;
 using Content.Server.Telephone;
 using Content.Shared.Access.Systems;
 using Content.Shared.Audio;
-using Content.Shared.Chat; // Einstein Engines - Language
 using Content.Shared.Chat.TypingIndicator;
 using Content.Shared.Holopad;
-using Content.Shared.IdentityManagement;
-using Content.Shared.Labels.Components;
 using Content.Shared.Power;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Speech;
@@ -23,6 +18,8 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Server._NF.Station.Systems; // Frontier
+using Content.Server._LuaM.HoloComms; // LuaM
+using Content.Shared._LuaM.HoloComms; // LuaM
 
 namespace Content.Server.Holopad;
 
@@ -36,11 +33,11 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
     [Dependency] private SharedAmbientSoundSystem _ambientSoundSystem = default!;
     [Dependency] private SharedStationAiSystem _stationAiSystem = default!;
     [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private ChatSystem _chatSystem = default!;
     [Dependency] private PopupSystem _popupSystem = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PvsOverrideSystem _pvs = default!;
     [Dependency] private StationRenameHolopadsSystem _renameHolopads = default!; // Frontier
+    [Dependency] private ShipCommsLineSystem _shipCommsLine = default!; // LuaM
 
     private float _updateTimer = 1.0f;
     private const float UpdateTime = 1.0f;
@@ -74,7 +71,7 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
         SubscribeLocalEvent<HolopadUserComponent, ComponentShutdown>(OnHolopadUserShutdown);
 
         // Misc events
-        SubscribeLocalEvent<HolopadUserComponent, EmoteEvent>(OnEmote);
+        // LuaM - the emotes of everyone around a holopad, typed ones included, are relayed by HolopadEmoteRelaySystem
         SubscribeLocalEvent<HolopadUserComponent, JumpToCoreEvent>(OnJumpToCore);
         SubscribeLocalEvent<HolopadComponent, GetVerbsEvent<AlternativeVerb>>(AddToggleProjectorVerb);
         SubscribeLocalEvent<HolopadComponent, EntRemovedFromContainerMessage>(OnAiRemove);
@@ -100,8 +97,12 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
             return;
 
         var receiver = GetEntity(args.Receiver);
+        receiver = _shipCommsLine.ResolveCallTarget(source, receiver); // LuaM - another ship is listed once, call whichever of its points is free
 
         if (!TryComp<TelephoneComponent>(receiver, out var receiverTelephone))
+            return;
+
+        if (!_shipCommsLine.CanCall((source, sourceTelephone), (receiver, receiverTelephone))) // LuaM
             return;
 
         LinkHolopadToUser(source, args.Actor);
@@ -288,6 +289,19 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
 
     private void OnTelephoneMessageSent(Entity<HolopadComponent> holopad, ref TelephoneMessageSentEvent args)
     {
+        // LuaM-start: the console comms keep showing the one closest to the console,
+        // only take the speaker when nobody is shown, and bring the other side back to this point
+        if (!holopad.Comp.LinkUserOnMessage)
+        {
+            if (holopad.Comp.User == null)
+                LinkHolopadToUser(holopad, args.MessageSource);
+            else
+                SyncHolopadHologramAppearanceWithTarget(holopad, holopad.Comp.User, onlyIfChanged: true);
+
+            return;
+        }
+        // LuaM-end
+
         LinkHolopadToUser(holopad, args.MessageSource);
     }
 
@@ -353,36 +367,6 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
     #endregion
 
     #region: Misc events
-
-    private void OnEmote(Entity<HolopadUserComponent> entity, ref EmoteEvent args)
-    {
-        foreach (var linkedHolopad in entity.Comp.LinkedHolopads)
-        {
-            // Treat the ability to hear speech as the ability to also perceive emotes
-            // (these are almost always going to be linked)
-            if (!HasComp<ActiveListenerComponent>(linkedHolopad))
-                continue;
-
-            if (TryComp<TelephoneComponent>(linkedHolopad, out var linkedHolopadTelephone) && linkedHolopadTelephone.Muted)
-                continue;
-
-            var receivingHolopads = GetLinkedHolopads(linkedHolopad);
-            var range = receivingHolopads.Count > 1 ? ChatTransmitRange.HideChat : ChatTransmitRange.GhostRangeLimit;
-
-            foreach (var receiver in receivingHolopads)
-            {
-                if (receiver.Comp.Hologram == null)
-                    continue;
-
-                // Name is based on the physical identity of the user
-                var ent = Identity.Entity(entity, EntityManager);
-                var name = Loc.GetString("holopad-hologram-name", ("name", ent));
-
-                // Force the emote, because if the user can do it, the hologram can too
-                _chatSystem.TryEmoteWithChat(receiver.Comp.Hologram.Value, args.Emote, range, false, name, true, true);
-            }
-        }
-    }
 
     private void OnJumpToCore(Entity<HolopadUserComponent> entity, ref JumpToCoreEvent args)
     {
@@ -466,7 +450,10 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
             var query = AllEntityQuery<HolopadComponent, TelephoneComponent, TransformComponent>();
             while (query.MoveNext(out var uid, out var holopad, out var telephone, out var xform))
             {
-                UpdateUIState((uid, holopad), telephone);
+                // LuaM - the contact list goes over every holopad, only build it for the windows that are open,
+                // the state is never equal to the old one, so it went out to every client around each second
+                if (_userInterfaceSystem.IsUiOpen(uid, GetHolopadUiKey(uid)))
+                    UpdateUIState((uid, holopad), telephone);
 
                 if (holopad.User != null &&
                     !HasComp<IgnoreUIRangeComponent>(holopad.User) &&
@@ -486,31 +473,32 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
         var source = new Entity<TelephoneComponent>(entity, telephone);
         var holopads = new Dictionary<NetEntity, string>();
 
-        var query = AllEntityQuery<HolopadComponent, TelephoneComponent>();
-        while (query.MoveNext(out var receiverUid, out var _, out var receiverTelephone))
-        {
-            var receiver = new Entity<TelephoneComponent>(receiverUid, receiverTelephone);
+        // LuaM - same list as the console comms: a ship is listed once by its name, ships that take no calls are left out
+        _contacts.Clear();
+        _shipCommsLine.GetContacts(source, _contacts);
 
-            if (receiverTelephone.UnlistedNumber)
-                continue;
+        foreach (var contact in _contacts)
+            holopads.TryAdd(contact.Target, contact.Name);
 
-            if (source == receiver)
-                continue;
-
-            if (!_telephoneSystem.IsSourceInRangeOfReceiver(source, receiver))
-                continue;
-
-            var name = MetaData(receiverUid).EntityName;
-
-            if (TryComp<LabelComponent>(receiverUid, out var label) && !string.IsNullOrEmpty(label.CurrentLabel))
-                name = label.CurrentLabel;
-
-            holopads.Add(GetNetEntity(receiverUid), name);
-        }
-
-        var uiKey = HasComp<StationAiCoreComponent>(entity) ? HolopadUiKey.AiActionWindow : HolopadUiKey.InteractionWindow;
-        _userInterfaceSystem.SetUiState(entity.Owner, uiKey, new HolopadBoundInterfaceState(holopads));
+        _userInterfaceSystem.SetUiState(entity.Owner, GetHolopadUiKey(entity), new HolopadBoundInterfaceState(holopads));
     }
+
+    // LuaM-start
+    private readonly List<HoloCommsContact> _contacts = new();
+
+    private HolopadUiKey GetHolopadUiKey(EntityUid holopad)
+    {
+        return HasComp<StationAiCoreComponent>(holopad) ? HolopadUiKey.AiActionWindow : HolopadUiKey.InteractionWindow;
+    }
+
+    /// <summary>
+    /// Shows the given user through every holopad this one is connected to, or nobody.
+    /// </summary>
+    public void SetHolopadUser(Entity<HolopadComponent> holopad, EntityUid? user)
+    {
+        LinkHolopadToUser(holopad, user);
+    }
+    // LuaM-end
 
     private void GenerateHologram(Entity<HolopadComponent> entity)
     {
@@ -588,20 +576,108 @@ public sealed partial class HolopadSystem : SharedHolopadSystem
             RemComp<HolopadUserComponent>(user.Value);
         }
     }
-    private void SyncHolopadHologramAppearanceWithTarget(Entity<HolopadComponent> entity, Entity<HolopadUserComponent>? user)
+    private void SyncHolopadHologramAppearanceWithTarget(Entity<HolopadComponent> entity, Entity<HolopadUserComponent>? user, bool onlyIfChanged = false) // LuaM - onlyIfChanged
     {
-        foreach (var linkedHolopad in GetLinkedHolopads(entity))
+        // LuaM-start: a ship talks through all of its points, so every point of the other side gets the update,
+        // not only the ones linked to this point. Losing the user here keeps showing anyone still standing
+        // at another point of the ship, otherwise the hologram went blank while the pilot was still talking.
+        foreach (var linkedHolopad in GetConversationTargets(entity))
         {
             if (linkedHolopad.Comp.Hologram == null)
                 continue;
 
-            if (user == null)
+            var shown = user?.Owner ?? FindShownUser(linkedHolopad);
+
+            // LuaM - skip the network update when the hologram already shows them
+            if (onlyIfChanged && linkedHolopad.Comp.Hologram.Value.Comp.LinkedEntity == shown)
+                continue;
+
+            if (shown == null)
                 _appearanceSystem.SetData(linkedHolopad.Comp.Hologram.Value.Owner, TypingIndicatorVisuals.State, false);
 
-            linkedHolopad.Comp.Hologram.Value.Comp.LinkedEntity = user;
+            linkedHolopad.Comp.Hologram.Value.Comp.LinkedEntity = shown;
             Dirty(linkedHolopad.Comp.Hologram.Value);
         }
+        // LuaM-end
     }
+
+    // LuaM-start
+    private readonly List<EntityUid> _sidePoints = new();
+
+    /// <summary>
+    /// The holopads of this side that talk to the same other side as this one, the point itself included.
+    /// </summary>
+    private List<Entity<HolopadComponent>> GetConversationPoints(Entity<HolopadComponent> point)
+    {
+        var points = new List<Entity<HolopadComponent>> { point };
+
+        if (!TryComp<TelephoneComponent>(point, out var telephone) || telephone.LinkedTelephones.Count == 0)
+            return points;
+
+        // Everything the point talks to, with the whole ship behind each of them
+        var otherSide = new HashSet<EntityUid>();
+        foreach (var linked in telephone.LinkedTelephones)
+        {
+            _sidePoints.Clear();
+            _shipCommsLine.GetSidePoints(linked, _sidePoints);
+            otherSide.UnionWith(_sidePoints);
+        }
+
+        _sidePoints.Clear();
+        _shipCommsLine.GetSidePoints(point, _sidePoints);
+        foreach (var sidePoint in _sidePoints)
+        {
+            if (sidePoint == point.Owner ||
+                !TryComp<HolopadComponent>(sidePoint, out var holopad) ||
+                !TryComp<TelephoneComponent>(sidePoint, out var sideTelephone))
+            {
+                continue;
+            }
+
+            foreach (var linked in sideTelephone.LinkedTelephones)
+            {
+                if (!otherSide.Contains(linked.Owner))
+                    continue;
+
+                points.Add((sidePoint, holopad));
+                break;
+            }
+        }
+
+        return points;
+    }
+
+    /// <summary>
+    /// Every holopad on the other side of the conversation the point is a part of.
+    /// </summary>
+    private HashSet<Entity<HolopadComponent>> GetConversationTargets(Entity<HolopadComponent> point)
+    {
+        var targets = new HashSet<Entity<HolopadComponent>>();
+        foreach (var source in GetConversationPoints(point))
+        {
+            targets.UnionWith(GetLinkedHolopads(source));
+        }
+
+        return targets;
+    }
+
+    /// <summary>
+    /// Whoever stands at any point of the other side of the holopad's call, if anyone.
+    /// </summary>
+    private EntityUid? FindShownUser(Entity<HolopadComponent> holopad)
+    {
+        foreach (var remote in GetLinkedHolopads(holopad))
+        {
+            foreach (var point in GetConversationPoints(remote))
+            {
+                if (point.Comp.User is { } user && !TerminatingOrDeleted(user))
+                    return user.Owner;
+            }
+        }
+
+        return null;
+    }
+    // LuaM-end
 
     private void ShutDownHolopad(Entity<HolopadComponent> entity)
     {

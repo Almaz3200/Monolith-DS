@@ -1,0 +1,48 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:holo="clr-namespace:Content.Client._LuaM.HoloComms"
+                      Title="{Loc 'holo-comms-window-title'}"
+                      SetSize="400 720"
+                      MinSize="360 620">
+    <!-- LuaM: the look of the shuttle console, the window shell is set in code -->
+    <BoxContainer Orientation="Vertical" Margin="8 6 8 8" SeparationOverride="6">
+
+        <!-- The screen: the other side shown down to the hips -->
+        <PanelContainer StyleClasses="LuaMConsoleInset" MinHeight="300">
+            <holo:HoloCommsHologramView Name="HologramView" HorizontalExpand="True" VerticalExpand="True" Margin="4 4 4 24"/>
+
+            <Label Name="ScreenStatusLabel" StyleClasses="LuaMConsoleHeaderLabel"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 6"/>
+        </PanelContainer>
+
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" SeparationOverride="6">
+            <!-- Who is on the line and the last thing they said -->
+            <PanelContainer StyleClasses="LuaMConsoleHeader">
+                <BoxContainer Orientation="Vertical">
+                    <RichTextLabel Name="RemoteLabel" HorizontalAlignment="Center"/>
+                    <RichTextLabel Name="SpeakerLabel" HorizontalAlignment="Center"/>
+                </BoxContainer>
+            </PanelContainer>
+
+            <PanelContainer Name="LastLinePanel" StyleClasses="LuaMConsoleInset" Visible="False" MaxHeight="72" RectClipContent="True">
+                <RichTextLabel Name="LastLineLabel" Margin="8 4"/>
+            </PanelContainer>
+
+            <!-- Everybody the console can call -->
+            <holo:HoloCommsContactsList Name="ContactsList" VerticalExpand="True"/>
+        </BoxContainer>
+
+        <!-- Controls while there is no incoming call -->
+        <BoxContainer Name="MainButtons" Orientation="Horizontal" SeparationOverride="4">
+            <Button Name="DoNotDisturbButton" Text="{Loc 'holo-comms-do-not-disturb'}" StyleClasses="LuaMConsoleButton"
+                    ToggleMode="True" HorizontalExpand="True" ToolTip="{Loc 'holo-comms-do-not-disturb-tooltip'}"/>
+            <Button Name="EndButton" Text="{Loc 'holo-comms-end'}" StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+        </BoxContainer>
+
+        <!-- Controls while the line rings -->
+        <BoxContainer Name="RingingButtons" Orientation="Horizontal" SeparationOverride="4" Visible="False">
+            <Button Name="AnswerButton" Text="{Loc 'holo-comms-answer'}" StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+            <Button Name="DeclineButton" Text="{Loc 'holo-comms-decline'}" StyleClasses="LuaMConsoleButton" HorizontalExpand="True"/>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

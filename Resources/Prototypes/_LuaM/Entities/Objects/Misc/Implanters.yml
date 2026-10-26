@@ -1,0 +1,8 @@
+- type: entity
+  id: MMCUplinkImplanter
+  suffix: uplink
+  parent:
+    - BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: MMCUplinkImplant

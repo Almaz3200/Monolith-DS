@@ -1,0 +1,28 @@
+- type: entity
+  id: StoreMMCPresetUplink
+  abstract: true
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    name: store-preset-name-mmc-uplink
+    categories:
+    - UplinkMmcProtection
+    - UplinkMmcMunitions
+    - UplinkMmcGear
+    - UplinkMmcTools
+    - UplinkMmcFlatpacks
+    - UplinkMmcEngineeringFlatpacks
+    - UplinkMmcAtmosphericsFlatpacks
+    - UplinkMmcCorporateSuppliesFlatpacks
+    balance:
+      MMCIndustrialCredit: 0
+    currencyWhitelist:
+    - MMCIndustrialCredit
+  - type: Tag
+    tags:
+    - MMCUplink
