@@ -5,3 +5,10 @@
   - ShipVoucherCaelestinusT0RecipeAlternative
   - ShipVoucherCaelestinusT1Recipe
   - ShipVoucherCaelestinusT1RecipeAlternative
+# LuaM Start
+  - WeaponRifleACRRecipe
+  - WeaponRifleACRRecipeAlternative
+  - Magazine635x40mmCaselessBigRecipe
+  - Magazine635x40mmCaselessBigPlasmarecipe
+# LuaM end
+
