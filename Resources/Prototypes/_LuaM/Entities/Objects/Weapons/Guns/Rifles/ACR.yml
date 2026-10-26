@@ -5,7 +5,7 @@
   description: A premium, finely-tuned rifle. Accurate, fast firing, and expensive as shit. Outfitted with Erebus rails on the handguard and carryhandle, and a threaded barrel for attachments.
   components:
   - type: Sprite
-    sprite: _LuaM/Objects/Weapons/Guns/rifles/ACR.rsi
+    sprite: _LuaM/Objects/Weapons/Guns/Rifles/ACR.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
