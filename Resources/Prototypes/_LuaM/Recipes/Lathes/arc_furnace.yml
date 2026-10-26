@@ -286,7 +286,7 @@
 #region Т3 кирпич
 
 - type: latheRecipe # НУ А ХУЛИ ЕГО НЕТУ?
-  id: BroadswordHeadMMC
+  id: ComponentBrickEconomy3Recipe
   result: ComponentBrickEconomy3
   categories:
   - Mechs
