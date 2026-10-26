@@ -107,20 +107,7 @@ public sealed partial class EmotesTabControl : BaseTabControl
         _entManager.RaisePredictiveEvent(new PlayEmoteMessage(protoId));
     }
 
-    // LuaM start
-    private const float GridPadding = 20f;
-    private float _gridWidth;
-
     protected override void Resized()
     {
-        base.Resized();
-
-        var width = Width - GridPadding;
-        if (width <= 0 || MathHelper.CloseTo(width, _gridWidth))
-            return;
-
-        _gridWidth = width;
-        EmotesList.MaxGridWidth = width;
     }
-    // LuaM end
 }
