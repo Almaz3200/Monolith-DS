@@ -87,7 +87,7 @@ namespace Content.Server.Atmos
         /// This can be immutable if the tile is spaced.
         /// </summary>
         [ViewVariables]
-        [Access(typeof(AtmosphereSystem), Other = AccessPermissions.ReadExecute)] // FIXME Friends
+        [Access(typeof(AtmosphereSystem))] // LuaM
         public GasMixture? Air { get; set; }
 
         /// <summary>

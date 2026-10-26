@@ -399,7 +399,7 @@ public abstract partial class SharedStrippableSystem : EntitySystem
         if (!CanStripInsertHand(user, target, held, handName))
             return;
 
-        var (time, stealth) = GetStripTimeModifiers(user, target, null, targetStrippable.HandStripDelay);
+        var (time, stealth) = GetStripTimeModifiers(user, target, null, targetStrippable.HandStripDelay * targetStrippable.HandInsertDelayMultiplier); // LuaM
 
         if (!stealth)
             _popupSystem.PopupEntity(Loc.GetString("strippable-component-alert-owner-insert-hand", ("user", Identity.Entity(user, EntityManager)), ("item", user.Comp.ActiveHandEntity!.Value)), target, target, PopupType.Large);

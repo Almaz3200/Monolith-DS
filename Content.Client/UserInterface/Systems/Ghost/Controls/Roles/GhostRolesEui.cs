@@ -92,10 +92,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             var requirementsManager = IoCManager.Resolve<JobRequirementsManager>();
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>(); // Frontier
 
-            // TODO: role.Requirements value doesn't work at all as an equality key, this must be fixed
             // Grouping roles
             var groupedRoles = ghostState.GhostRoles.GroupBy(
-                role => (role.Name, role.Description, role.Requirements, role.Prototype)); // Frontier: add Prototype
+                role => (role.Name, role.Description, role.Prototype)); // Frontier: add Prototype
 
             // Add a new entry for each role group
             foreach (var group in groupedRoles)
@@ -104,7 +103,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
                 var description = group.Key.Description;
 
                 var hasAccess = requirementsManager.CheckRoleRequirements(
-                    group.Key.Requirements,
+                    group.First().Requirements,
                     null,
                     out var reason);
                 // Frontier: check ghost role whitelist

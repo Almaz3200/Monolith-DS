@@ -83,7 +83,7 @@ namespace Content.Shared.Roles
         ///     Mono - Assigns company to the player on spawn.
         /// </summary>
         [DataField]
-        public ProtoId<CompanyPrototype> AssignedCompany { get; private set; } = "None";
+        public ProtoId<CompanyPrototype> AssignedCompany { get; private set; } = CompanyPrototype.NoCompany;
 
 
         /// <summary>

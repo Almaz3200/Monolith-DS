@@ -31,6 +31,9 @@ public sealed partial class AntagSelectionComponent : Component
     [DataField]
     public List<(EntityUid, string)> SelectedMinds = new();
 
+    [DataField]
+    public Dictionary<int, int> SelectedMindsPerDefinition = new(); // LuaM
+
     /// <summary>
     /// When the antag selection will occur.
     /// </summary>

@@ -13,11 +13,13 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Timing;
 using Content.Client._Corvax.Respawn; // Frontier
+using Content.Client._NF.CryoSleep; // LuaM
+using static Content.Shared._NF.CryoSleep.SharedCryoSleepSystem; // LuaM
 
 namespace Content.Client.UserInterface.Systems.Ghost;
 
 // TODO hud refactor BEFORE MERGE fix ghost gui being too far up
-public sealed partial class GhostUIController : UIController, IOnSystemChanged<GhostSystem>, IOnSystemChanged<RespawnSystem>
+public sealed partial class GhostUIController : UIController, IOnSystemChanged<GhostSystem>, IOnSystemChanged<RespawnSystem>, IOnSystemChanged<CryoSleepSystem> // LuaM: CryoSleepSystem
 {
     [Dependency] private IEntityNetworkManager _net = default!;
     [Dependency] private IConsoleHost _consoleHost = default!;
@@ -25,6 +27,7 @@ public sealed partial class GhostUIController : UIController, IOnSystemChanged<G
 
     [UISystemDependency] private readonly GhostSystem? _system = default;
     [UISystemDependency] private readonly RespawnSystem? _respawn = default;
+    [UISystemDependency] private readonly CryoSleepSystem? _cryoSleep = default; // LuaM
 
     private GhostGui? Gui => UIManager.GetActiveUIWidgetOrNull<GhostGui>();
     private bool _canUncryo = true; // Frontier. TODO: find a reliable way to update this, for now it just stays active all the time
@@ -77,6 +80,28 @@ public sealed partial class GhostUIController : UIController, IOnSystemChanged<G
     {
         system.RespawnReseted -= OnRespawnReseted;
     }
+
+    // LuaM-start
+    public void OnSystemLoaded(CryoSleepSystem system)
+    {
+        system.WakeupResponse += OnCryoWakeupResponse;
+    }
+
+    public void OnSystemUnloaded(CryoSleepSystem system)
+    {
+        system.WakeupResponse -= OnCryoWakeupResponse;
+    }
+
+    private void OnCryoWakeupResponse(ReturnToBodyStatus status)
+    {
+        Gui?.CryosleepWakeupWindow.HandleWakeupResponse(status);
+    }
+
+    private void OnCryoWakeupAccepted()
+    {
+        _cryoSleep?.RequestWakeup();
+    }
+    // LuaM-end
 
     private void OnRespawnReseted()
     {
@@ -165,6 +190,7 @@ public sealed partial class GhostUIController : UIController, IOnSystemChanged<G
         Gui.TargetWindow.WarpClicked += OnWarpClicked;
         Gui.TargetWindow.OnGhostnadoClicked += OnGhostnadoClicked;
         Gui.GhostRespawnPressed += GuiOnGhostRespawnPressed;
+        Gui.CryosleepWakeupWindow.AcceptPressed += OnCryoWakeupAccepted; // LuaM
         UpdateGui();
     }
 
@@ -183,6 +209,7 @@ public sealed partial class GhostUIController : UIController, IOnSystemChanged<G
         Gui.GhostRolesPressed -= GhostRolesPressed;
         Gui.TargetWindow.WarpClicked -= OnWarpClicked;
         Gui.GhostRespawnPressed -= GuiOnGhostRespawnPressed;
+        Gui.CryosleepWakeupWindow.AcceptPressed -= OnCryoWakeupAccepted; // LuaM
 
         Gui.Hide();
     }

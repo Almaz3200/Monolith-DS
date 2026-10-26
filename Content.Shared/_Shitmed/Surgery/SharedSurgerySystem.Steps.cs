@@ -23,6 +23,7 @@ using Content.Shared.Item;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared._Shitmed.Body.Part;
 using Content.Shared.Popups;
+using Content.Shared.Stacks; // LuaM
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed.TypeParsers;
 using System.Linq;
@@ -92,6 +93,19 @@ public abstract partial class SharedSurgerySystem
                 {
                     _audio.PlayEntity(toolComp.EndSound, args.User, tool);
                 }
+
+                // LuaM-start
+                // --  у органов и частей тела Used означает другое, их не расходуем
+                if (_net.IsServer &&
+                    EntityManager.TryGetComponent(tool, reg.Component.GetType(), out var usedComp) &&
+                    usedComp is ISurgeryToolComponent { Used: true } and not OrganComponent and not BodyPartComponent)
+                {
+                    if (TryComp<StackComponent>(tool, out var stack))
+                        _stack.Use(tool, 1, stack);
+                    else
+                        QueueDel(tool);
+                }
+                // LuaM-end
             }
         }
 

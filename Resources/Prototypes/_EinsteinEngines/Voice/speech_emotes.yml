@@ -14,7 +14,7 @@
   id: Whirr
   name: chat-emote-name-whirr
   category: Vocal
-  chatMessages: [ whirrs ]
+  chatMessages: ["chat-emote-msg-whirr"]
   whitelist: # Mono - IPC's, borgs, protogens
     components:
     - Silicon
@@ -27,7 +27,7 @@
   id: Boop
   name: chat-emote-name-boop
   category: Vocal
-  chatMessages: [ boops ]
+  chatMessages: ["chat-emote-msg-boop"]
   whitelist: # Mono - IPC's, borgs, protogens
     components:
     - Silicon

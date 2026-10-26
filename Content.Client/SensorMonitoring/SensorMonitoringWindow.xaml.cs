@@ -103,13 +103,11 @@ public sealed partial class SensorMonitoringWindow : FancyWindow, IComputerWindo
 
         foreach (var netSensor in incremental.Sensors)
         {
-            // TODO: Fuck this doesn't work if a sensor is added while the UI is open.
             if (!_sensorData.TryGetValue(netSensor.NetId, out var sensor))
                 continue;
 
             foreach (var netStream in netSensor.Streams)
             {
-                // TODO: Fuck this doesn't work if a stream is added while the UI is open.
                 if (!sensor.Streams.TryGetValue(netStream.NetId, out var stream))
                     continue;
 
@@ -153,6 +151,9 @@ public sealed partial class SensorMonitoringWindow : FancyWindow, IComputerWindo
 
             foreach (var stream in sensor.Streams.Values)
             {
+                if (stream.Samples.Count == 0)
+                    continue;
+
                 var maxValue = stream.Samples.Max(x => x.Value);
 
                 // TODO: Better way to do this?

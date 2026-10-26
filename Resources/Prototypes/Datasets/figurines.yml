@@ -224,13 +224,13 @@
   id: FigurinesSpaceDragon
   values:
     prefix: figurines-space-dragon-
-    count: 1
+    count: 5
 
-# - type: localizedDataset # TODO add something
-#   id: FigurinesQueen
-#   values:
-#     prefix: figurines-queen-
-#     count: 0
+- type: localizedDataset
+  id: FigurinesQueen
+  values:
+    prefix: figurines-queen-
+    count: 6
 
 - type: localizedDataset
   id: FigurinesRatKing

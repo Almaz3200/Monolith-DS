@@ -99,6 +99,7 @@ public sealed partial class GhostGui : UIWidget
         if (disposing)
         {
             TargetWindow.Dispose();
+            CryosleepWakeupWindow.Dispose(); // LuaM
         }
     }
 }

@@ -1,5 +1,6 @@
 using Content.Server.Popups;
 using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems; // LuaM
 using Content.Shared.Interaction;
 
 namespace Content.Server._Mono.Access;
@@ -7,6 +8,7 @@ namespace Content.Server._Mono.Access;
 public sealed partial class AccessGrantableSystem : EntitySystem
 {
     [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedAccessSystem _access = default!; // LuaM
 
     public override void Initialize()
     {
@@ -24,7 +26,7 @@ public sealed partial class AccessGrantableSystem : EntitySystem
             return;
 
         var beforeLength = ourAccess.Tags.Count;
-        ourAccess.Tags.UnionWith(cardAccess.Tags);
+        _access.TryAddTags(ent, cardAccess.Tags, ourAccess); // LuaM
         var addedLength = ourAccess.Tags.Count - beforeLength;
 
         if (addedLength == 0)
@@ -32,8 +34,6 @@ public sealed partial class AccessGrantableSystem : EntitySystem
             _popupSystem.PopupEntity(Loc.GetString("agent-id-no-new", ("card", args.Used)), ent);
             return;
         }
-
-        Dirty(ent, ourAccess);
 
         if (addedLength == 1)
         {

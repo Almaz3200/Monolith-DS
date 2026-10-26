@@ -72,6 +72,21 @@ namespace Content.Shared.Access.Systems
             return !Resolve(uid, ref access) ? null : access.Tags;
         }
 
+        // LuaM-start
+        public bool TryAddTags(EntityUid uid, IEnumerable<ProtoId<AccessLevelPrototype>> newTags, AccessComponent? access = null)
+        {
+            if (!Resolve(uid, ref access))
+                return false;
+
+            var before = access.Tags.Count;
+            access.Tags.UnionWith(newTags);
+            if (access.Tags.Count != before)
+                Dirty(uid, access);
+
+            return true;
+        }
+        // LuaM-end
+
         public bool TryAddGroups(EntityUid uid, IEnumerable<ProtoId<AccessGroupPrototype>> newGroups, AccessComponent? access = null)
         {
             if (!Resolve(uid, ref access))

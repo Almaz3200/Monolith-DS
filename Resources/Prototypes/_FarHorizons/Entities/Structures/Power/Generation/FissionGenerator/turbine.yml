@@ -68,7 +68,7 @@
     supplyRampTolerance: 5000
   - type: AtmosDevice
   - type: AtmosMonitoringConsoleDevice
-    navMapBlip: Thermoregulator
+    navMapBlip: GasTurbine
   - type: Electrified
     enabled: false
     requirePower: false

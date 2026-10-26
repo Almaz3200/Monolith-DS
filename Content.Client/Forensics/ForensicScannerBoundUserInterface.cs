@@ -30,18 +30,7 @@ namespace Content.Client.Forensics
         private void Print()
         {
             SendMessage(new ForensicScannerPrintMessage());
-
-            if (_window != null)
-                _window.UpdatePrinterState(true);
-
-            // This UI does not require pinpoint accuracy as to when the Print
-            // button is available again, so spawning client-side timers is
-            // fine. The server will make sure the cooldown is honored.
-            Timer.Spawn(_printCooldown, () =>
-            {
-                if (_window != null)
-                    _window.UpdatePrinterState(false);
-            });
+            _window?.SetPrintReadyAt(_gameTiming.CurTime + _printCooldown);
         }
 
         private void Clear()
@@ -60,14 +49,6 @@ namespace Content.Client.Forensics
                 return;
 
             _printCooldown = cast.PrintCooldown;
-
-            // TODO: Fix this
-            if (cast.PrintReadyAt > _gameTiming.CurTime)
-                Timer.Spawn(cast.PrintReadyAt - _gameTiming.CurTime, () =>
-                {
-                    if (_window != null)
-                        _window.UpdatePrinterState(false);
-                });
 
             _window.UpdateState(cast);
         }

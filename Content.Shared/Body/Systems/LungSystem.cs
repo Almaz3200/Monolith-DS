@@ -110,4 +110,16 @@ public sealed partial class LungSystem : EntitySystem
         GasToReagent(gas, solution);
         return solution;
     }
+
+    // LuaM-start
+    public void ClearAir(LungComponent lung)
+    {
+        lung.Air.Clear();
+    }
+
+    public void AdjustAirMoles(LungComponent lung, Gas gas, float quantity)
+    {
+        lung.Air.AdjustMoles(gas, quantity);
+    }
+    // LuaM-end
 }

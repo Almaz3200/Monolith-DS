@@ -3,7 +3,7 @@ using Content.Shared._NF.Shipyard;
 using Content.Shared._NF.Shipyard.Prototypes;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._NF.Shipyard.Components;
+namespace Content.Shared._NF.Shipyard.Components; // LuaM: Content.Server > Content.Shared
 
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class ShipyardVoucherComponent : Component

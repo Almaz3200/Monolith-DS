@@ -20,6 +20,7 @@
     <GuideEntityEmbed Entity="WeaponTetherGun" Caption="Экспериментальная"/>
     <GuideEntityEmbed Entity="ComputerTelevision" Caption="Гражданские службы"/>
     <GuideEntityEmbed Entity="WeaponXrayCannon" Caption="Арсенал"/>
+  </Box>
 <GuideEntityEmbed Entity="ComputerResearchAndDevelopment"/> Используйте ближайшую консоль РнД, чтобы понять, какие исследования закреплены за каждым древом дисциплины.
 
 ## Тиры

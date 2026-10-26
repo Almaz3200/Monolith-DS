@@ -32,7 +32,7 @@
 
   <Box>
     <GuideEntityEmbed Entity="WeaponPistolCobra" Caption="Weaponry"/>
-    <GuideEntityEmbed Entity="NFAmmunitionBoxRifle30" State="icon" Caption="Ammo"/>
+    <GuideEntityEmbed Entity="AmmoBox762x39mmFMJ" Caption="Ammo"/>
     <GuideEntityEmbed Entity="C4" Caption="Explosives"/>
     <GuideEntityEmbed Entity="ClothingOuterHardsuitSyndie" Caption="Wearables"/>
     <GuideEntityEmbed Entity="Stimpack" Caption="Chemicals"/>
@@ -77,7 +77,7 @@
   - Кражу [bold]ID-карты[/bold], [bold]антикварного лазера[/bold], [bold]джетпака[/bold] или [bold]ядерного диска[/bold] [color=yellow]Капитана[/color].
   <Box>
     <GuideEntityEmbed Entity="CaptainIDCard" Caption=""/>
-    <GuideEntityEmbed Entity="NFWeaponEnergyPistolLaserAntique" Caption=""/>
+    <GuideEntityEmbed Entity="WeaponAntiqueLaser" Caption=""/>
     <GuideEntityEmbed Entity="JetpackCaptainFilled" Caption=""/>
     <GuideEntityEmbed Entity="NukeDisk" Caption=""/>
   </Box>

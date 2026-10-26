@@ -18,6 +18,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
+using Content.Shared.Speech; // LuaM
 using Content.Shared._Starlight.CollectiveMind; // Goobstation - Starlight collective mind port
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -1112,25 +1113,37 @@ public sealed partial class ChatSystem : SharedChatSystem
             wrapId = wrapOverride;
 
         var speech = GetSpeechVerb(source, message);
-        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
-            ? _random.Pick(verbsOverride).ToString()
-            : _random.Pick(speech.SpeechVerbStrings);
         var color = DefaultSpeakColor;
         if (language.SpeechOverride.Color is { } colorOverride)
             color = Color.InterpolateBetween(color, colorOverride, colorOverride.A);
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
 
         return Loc.GetString(wrapId,
             ("color", color),
             ("entityName", entityName),
-            ("verb", Loc.GetString(verbId)),
+            ("verb", PickSpeechVerb(speech, language)),
             ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
             ("fontSize", language.SpeechOverride.FontSize ?? speech.FontSize),
             ("message", FormattedMessage.EscapeText(message)), // LuaM message > FormattedMessage.EscapeText(message)
-            ("language", languageDisplay));
+            ("language", GetLanguageDisplay(language)));
     }
+
+    // LuaM start
+    public string PickSpeechVerb(SpeechVerbPrototype speech, LanguagePrototype language)
+    {
+        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
+            ? _random.Pick(verbsOverride).ToString()
+            : _random.Pick(speech.SpeechVerbStrings);
+
+        return Loc.GetString(verbId);
+    }
+
+    public string GetLanguageDisplay(LanguagePrototype language)
+    {
+        return language.IsVisibleLanguage
+            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
+            : "";
+    }
+    // LuaM end
     // Einstein Engines - Language end
 
 

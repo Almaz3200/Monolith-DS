@@ -21,8 +21,7 @@ namespace Content.Server.Electrocution
         {
             if (args.Length < 1)
             {
-                // TODO: Localize this.
-                shell.WriteError("Not enough arguments!");
+                shell.WriteError(Loc.GetString("shell-need-minimum-one-argument"));
                 return;
             }
 
@@ -30,7 +29,7 @@ namespace Content.Server.Electrocution
                 !_entManager.TryGetEntity(uidNet, out var uid) ||
                 !_entManager.EntityExists(uid))
             {
-                shell.WriteError($"Invalid entity specified!");
+                shell.WriteError(Loc.GetString("shell-invalid-entity-id"));
                 return;
             }
 

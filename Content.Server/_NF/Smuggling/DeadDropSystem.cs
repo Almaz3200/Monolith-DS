@@ -223,6 +223,9 @@ public sealed partial class DeadDropSystem : EntitySystem
             if (HasComp<DeadDropComponent>(ent))
                 continue;
 
+            if (MetaData(ent).EntityLifeStage >= EntityLifeStage.Terminating) // LuaM
+                continue;
+
             potentialDeadDrops.Add((ent, potentialDeadDrop));
         }
 
@@ -230,12 +233,6 @@ public sealed partial class DeadDropSystem : EntitySystem
         if (potentialDeadDrops.Count > 0)
         {
             var item = _random.Pick(potentialDeadDrops);
-
-            // If the item is tearing down, do nothing for now.
-            // FIXME: separate sector-wide scheduler?
-            if (MetaData(item.ent).EntityLifeStage >= EntityLifeStage.Terminating)
-                return;
-
             AddDeadDrop(item.ent);
             _sawmill.Debug($"Dead drop at {uid} compromised, new drop at {item.ent}!");
         }

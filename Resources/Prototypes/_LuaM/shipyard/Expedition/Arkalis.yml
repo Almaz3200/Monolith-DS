@@ -4,7 +4,7 @@
   name: vessel-arkalis-name
   description: vessel-arkalis-desc
   limit: 2
-  price: 420000
+  price: 465000 # LuaM: 420000<465000, appraised at ~462000
   category: Large
   group: Expedition
   access: Mercenary

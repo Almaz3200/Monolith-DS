@@ -25,6 +25,7 @@ namespace Content.Server.Sandbox
         [Dependency] private IConGroupController _conGroupController = default!;
         [Dependency] private IServerConsoleHost _host = default!;
         [Dependency] private SharedAccessSystem _access = default!;
+        [Dependency] private SharedIdCardSystem _idCard = default!; // LuaM
         [Dependency] private InventorySystem _inventory = default!;
         [Dependency] private ItemSlotsSystem _slots = default!;
         [Dependency] private GameTicker _ticker = default!;
@@ -165,7 +166,7 @@ namespace Content.Server.Sandbox
                 var card = Spawn("CaptainIDCard", Transform(attached).Coordinates);
                 UpgradeId(card);
 
-                Comp<IdCardComponent>(card).FullName = MetaData(attached).EntityName;
+                _idCard.TryChangeFullName(card, MetaData(attached).EntityName); // LuaM
                 return card;
             }
         }

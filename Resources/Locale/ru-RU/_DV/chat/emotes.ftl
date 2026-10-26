@@ -16,3 +16,16 @@ chat-speech-verb-feroxi-2 = плещет
 chat-speech-verb-feroxi-3 = скрежещет зубами
 chat-speech-verb-feroxi-4 = рычит
 chat-emote-name-gnash = Скрежет зубами
+
+delta-chat-emote-msg-honk = хонкает
+delta-chat-emote-msg-ring = звенит
+delta-chat-emote-msg-pew = пиу-пиукает
+delta-chat-emote-msg-bang = бахает
+delta-chat-emote-msg-beep = бипает
+delta-chat-emote-msg-rev = газует
+delta-chat-emote-msg-caw = каркает
+delta-chat-emote-msg-bark = лает
+delta-chat-emote-msg-snarl = рычит
+delta-chat-emote-msg-whimper = скулит
+delta-chat-emote-msg-howl = воет
+delta-chat-emote-msg-awoo = издаёт протяжное «аууу»

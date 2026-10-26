@@ -7,6 +7,9 @@
 ## Пиццы
 <GuideMicrowaveGroupEmbed Group="Pizza"/>
 
+## Ингредиенты
+<GuideMicrowaveGroupEmbed Group="Ingredients"/>
+
 ## Солёная кухня
 <GuideMicrowaveGroupEmbed Group="Savory"/>
 

@@ -38,7 +38,7 @@
   В [color=cyan]сумке[/color] — то, что успели положить. [bold]Можно выбрать два набора[/bold] для более крупных дел.
 
   <Box>
-    <GuideEntityEmbed Entity="SatchelThief"/>
+    <GuideEntityEmbed Entity="ToolboxThief"/>
   </Box>
   <Box>
     <GuideEntityEmbed Entity="Implanter" Caption="Anatomy"/>

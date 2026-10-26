@@ -4,7 +4,6 @@ using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
-using Robust.Shared.Collections;
 using Robust.Shared.Timing;
 
 namespace Content.Server.NPC.Systems;
@@ -16,6 +15,8 @@ public sealed partial class NPCRetaliationSystem : EntitySystem
 {
     [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private IGameTiming _timing = default!;
+
+    private readonly List<EntityUid> _expiredMemories = new();
 
     /// <inheritdoc />
     public override void Initialize()
@@ -64,14 +65,20 @@ public sealed partial class NPCRetaliationSystem : EntitySystem
         var query = EntityQueryEnumerator<NPCRetaliationComponent, FactionExceptionComponent>();
         while (query.MoveNext(out var uid, out var retaliationComponent, out var factionException))
         {
-            // TODO: can probably reuse this allocation and clear it
-            foreach (var entity in new ValueList<EntityUid>(retaliationComponent.AttackMemories.Keys))
-            {
-                if (!TerminatingOrDeleted(entity) && _timing.CurTime < retaliationComponent.AttackMemories[entity])
-                    continue;
+            if (retaliationComponent.AttackMemories.Count == 0)
+                continue;
 
+            _expiredMemories.Clear();
+            foreach (var (entity, expiresAt) in retaliationComponent.AttackMemories)
+            {
+                if (TerminatingOrDeleted(entity) || _timing.CurTime >= expiresAt)
+                    _expiredMemories.Add(entity);
+            }
+
+            foreach (var entity in _expiredMemories)
+            {
                 _npcFaction.DeAggroEntity((uid, factionException), entity);
-                // TODO: should probably remove the AttackMemory, thats the whole point of the ValueList right??
+                retaliationComponent.AttackMemories.Remove(entity);
             }
         }
     }

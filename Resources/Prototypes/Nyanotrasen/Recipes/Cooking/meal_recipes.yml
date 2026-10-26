@@ -16,7 +16,7 @@
   name: cheese curds recipe
   result: FoodCheeseCurds
   time: 5
-  group: Savory # Frontier: TODO - move to ingredients
+  group: Ingredients # Frontier
   solids:
     FoodCurdCheese: 1
   recipeType: # Frontier

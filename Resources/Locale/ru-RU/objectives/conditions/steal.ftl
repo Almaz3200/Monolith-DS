@@ -13,5 +13,5 @@ objective-condition-steal-title-faction = Добудьте { $itemName } { $owne
 objective-condition-steal-title-faction-no-owner = Добудьте { $itemName }.
 objective-condition-steal-description-faction = Убедитесь, что хотя бы один человек в вашей компании/фракции или вы сами владеете { $itemName }.
 objective-condition-steal-description-faction-beacon-crocus = Убедитесь, что хотя бы один человек в вашей компании/фракции или вы сами владеете { $itemName }, либо оно находится в радиусе маяка эвакуации.
-objective-condition-steal-multiply-description-faction = Убедитесь, что хотя бы один человек в вашей компании/фракции или вы сами владеете { $count }x { MAKEPLURAL($itemName) } (любыми).
-objective-condition-steal-multiply-description-faction-crocus = Убедитесь, что хотя бы один человек в вашей компании/фракции или вы сами владеете { $count }x { MAKEPLURAL($itemName) } (любыми), либо они находятся в радиусе маяка эвакуации.
+objective-condition-steal-multiply-description-faction = Убедитесь, что хотя бы один человек в вашей компании/фракции или вы сами владеете { $count }x { $itemName } (любыми).
+objective-condition-steal-multiply-description-faction-crocus = Убедитесь, что хотя бы один человек в вашей компании/фракции или вы сами владеете { $count }x { $itemName } (любыми), либо они находятся в радиусе маяка эвакуации.
