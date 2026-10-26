@@ -1,0 +1,7 @@
+- type: loadout
+  id: MMCUplinkImplanterLoadout
+  name: MMC Uplink implanter
+  price: 3000000
+  storage:
+    back:
+    - MMCUplinkImplanter
