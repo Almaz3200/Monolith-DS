@@ -283,3 +283,15 @@
     RadioEconomy2: 7
     OpticsEconomy2: 16
 #endregion
+#region Т3 кирпич
+
+- type: latheRecipe # НУ А ХУЛИ ЕГО НЕТУ?
+  id: ComponentBrickEconomy3Recipe
+  result: ComponentBrickEconomy3
+  categories:
+  - Mechs
+  completetime: 3
+  entities:
+    ComponentBrickEconomy2: 2
+    CapacitorEconomy3: 1
+#endregion
