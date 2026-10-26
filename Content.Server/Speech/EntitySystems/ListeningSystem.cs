@@ -1,5 +1,6 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Speech.Components;
+using Content.Shared._EinsteinEngines.Language; // LuaM
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -19,10 +20,10 @@ public sealed partial class ListeningSystem : EntitySystem
 
     private void OnSpeak(EntitySpokeEvent ev)
     {
-        PingListeners(ev.Source, ev.Message, ev.IsWhisper); // Einstein Engines - Languages
+        PingListeners(ev.Source, ev.Message, ev.IsWhisper, ev.Language); // Einstein Engines - Languages // LuaM - language
     }
 
-    public void PingListeners(EntityUid source, string message, bool isWhisper) // Einstein Engines - Language
+    public void PingListeners(EntityUid source, string message, bool isWhisper, LanguagePrototype? language = null) // Einstein Engines - Language // LuaM - language
     {
         // TODO whispering / audio volume? Microphone sensitivity?
         // for now, whispering just arbitrarily reduces the listener's max range.
@@ -32,8 +33,8 @@ public sealed partial class ListeningSystem : EntitySystem
         var sourcePos = _xforms.GetWorldPosition(sourceXform, xformQuery);
 
         var attemptEv = new ListenAttemptEvent(source);
-        var ev = new ListenEvent(message, source);
-        var obfuscatedEv = !isWhisper ? null : new ListenEvent(_chat.ObfuscateMessageReadability(message), source); // Einstein Engines - Language
+        var ev = new ListenEvent(message, source, language); // LuaM - language
+        var obfuscatedEv = !isWhisper ? null : new ListenEvent(_chat.ObfuscateMessageReadability(message), source, language); // Einstein Engines - Language // LuaM - language
         var query = EntityQueryEnumerator<ActiveListenerComponent, TransformComponent>();
 
         while (query.MoveNext(out var listenerUid, out var listener, out var xform))

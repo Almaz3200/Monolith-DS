@@ -1,6 +1,7 @@
 using System.Numerics;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Player;
 
 namespace Content.Shared._LuaM.Shuttles;
 
@@ -10,6 +11,7 @@ namespace Content.Shared._LuaM.Shuttles;
 public sealed class RadarStealthFieldSystem : EntitySystem
 {
     [Dependency] private FriendlyIffSystem _friendlyIff = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
     /// <summary>
@@ -26,10 +28,15 @@ public sealed class RadarStealthFieldSystem : EntitySystem
     /// </summary>
     public bool IsHiddenFromLocalPlayer(EntityUid grid, MapCoordinates viewer)
     {
+        return IsHiddenFrom(grid, viewer, _player.LocalEntity);
+    }
+
+    public bool IsHiddenFrom(EntityUid grid, MapCoordinates viewer, EntityUid? viewerEntity)
+    {
         var query = EntityQueryEnumerator<RadarStealthFieldComponent, TransformComponent>();
         while (query.MoveNext(out var fieldUid, out var field, out var fieldXform))
         {
-            if (fieldXform.MapID != viewer.MapId || _friendlyIff.IsFriendlyToLocalPlayer(fieldUid))
+            if (fieldXform.MapID != viewer.MapId || _friendlyIff.IsFriendly(viewerEntity, fieldUid))
                 continue;
 
             var fieldCenter = GetCenter(fieldUid, fieldXform);

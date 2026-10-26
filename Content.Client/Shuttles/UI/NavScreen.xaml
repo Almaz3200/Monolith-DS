@@ -17,6 +17,9 @@
                                        Margin="0 0 6 0">
                     <controls:PanelContainer StyleClasses="LuaMConsoleSection" VerticalExpand="True" HorizontalExpand="True">
                         <controls:BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="4">
+                            <!-- LuaM: opens the holographic comms of the console -->
+                            <controls:Button Name="HoloCommsButton" Text="{controls:Loc 'holo-comms-button'}"
+                                             StyleClasses="LuaMConsoleButton" Visible="False"/>
                             <!-- Gunnery status -->
                             <controls:BoxContainer Name="GunneryHeader" Orientation="Vertical" SeparationOverride="4">
                                 <controls:PanelContainer StyleClasses="LuaMConsoleHeader">

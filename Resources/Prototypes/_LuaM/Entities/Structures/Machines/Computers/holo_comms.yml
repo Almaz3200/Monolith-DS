@@ -1,0 +1,44 @@
+# The hidden holopad of a shuttle console: places and takes the calls of its comms window.
+# It is a child of the console instead of a part of it, because the console's intercom
+# shares the same microphone slot and would go deaf after a call.
+- type: entity
+  id: HoloCommsModule
+  name: shuttle console comms
+  description: The holographic comms of a shuttle console.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: HoloCommsModule
+  - type: ShipCommsLine
+  - type: Telephone
+    ringTone: /Audio/Machines/double_ring.ogg
+    listeningRange: 3
+    speakerVolume: Speak
+    transmissionRange: Map
+    # The short range holopads inside the stations are left out of the list
+    compatibleRanges:
+    - Map
+    - Unlimited
+    ignoreTelephonesOnSameGrid: true
+    # A pilot can stay quiet for a while without the line dropping
+    idlingTimeout: 300
+  - type: Holopad
+    hologramProtoId: HoloCommsHologram
+    linkUserOnMessage: false
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Borg
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# The other side of a console call, shown only through the comms window.
+# It still speaks, so the speech bubbles show up above the console.
+- type: entity
+  parent: HolopadHologram
+  id: HoloCommsHologram
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: Sprite
+    visible: false
+  - type: HolopadHologram
+    hideInWorld: true

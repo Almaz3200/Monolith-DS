@@ -1,3 +1,4 @@
+using Content.Shared._LuaM.HoloComms; // LuaM
 using Content.Shared.Holopad;
 using Content.Shared.Silicons.StationAi;
 using Robust.Client.Graphics;
@@ -49,6 +50,7 @@ public sealed partial class HolopadBoundUserInterface : BoundUserInterface
         _window.SendHolopadStartBroadcastMessageAction += SendHolopadStartBroadcastMessage;
         _window.SendHolopadActivateProjectorMessageAction += SendHolopadActivateProjectorMessage;
         _window.SendHolopadRequestStationAiMessageAction += SendHolopadRequestStationAiMessage;
+        _window.SendShipCommsDoNotDisturbMessageAction += enabled => SendMessage(new ShipCommsSetDoNotDisturbMessage(enabled)); // LuaM
 
         // If this call is addressed to an AI, open the window in the bottom right hand corner of the screen
         if (uiKey == HolopadUiKey.AiRequestWindow)

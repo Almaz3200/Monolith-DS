@@ -461,6 +461,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
     {
+        if (TryRequestRadarMenu(args)) // LuaM
+            return;
+
         base.KeyBindDown(args);
 
         if (args.Function != EngineKeyFunctions.UIClick)
@@ -680,6 +683,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         _tempBlipDataList.Clear();
 
         _visibleGridsSet.Clear();
+        _radarMenuTargets.Clear(); // LuaM
 
         DrawGrids(_grids, handle, (ourGrid != null && ourGridId.HasValue) ? (ourGridId.Value, ourGrid) : null, false);
 
@@ -1090,6 +1094,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                         };
 
                         #endregion Mono
+
+                        if (!hideLabel && !noLabel) // LuaM
+                            AddRadarMenuTarget(gUid, uiPosition, uiPosition + labelOffset, labelDimensions, blipOnly ? null : curGridToView.TransformBox(grid.Comp.LocalAABB));
 
                         // Get company color if entity has CompanyComponent
                         var displayColor = labelColor;

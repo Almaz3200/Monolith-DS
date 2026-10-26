@@ -1,0 +1,8 @@
+# The clothes of a hologram bent to the body, the same as DisplacedStencilDraw without its stencil test.
+# A hologram has no stencil layers, and the test cut the clothes off in the comms window of the consoles.
+- type: shader
+  id: HologramDisplacedDraw
+  kind: source
+  path: "/Textures/Shaders/displacement.swsl"
+  params:
+    displacementSize: 127
