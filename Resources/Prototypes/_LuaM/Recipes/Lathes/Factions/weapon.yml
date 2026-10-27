@@ -97,3 +97,19 @@
   completetime: 30 # faster for your trouble
   entities:
     MonolithicCrystalSmall: 4
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: Blueprint18x160mmAmmo
+  result: Blueprint18x160mmAmmo
+  completetime: 30 # faster for your trouble
+  entities:
+    MonolithicCrystalSmall: 2
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponSniperHunter101
+  result: WeaponSniperHunter101
+  completetime: 30 # faster for your trouble
+  entities:
+    MonolithicCrystalSmall: 4
