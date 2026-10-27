@@ -97,4 +97,4 @@
   - type: Multishot # боргам уже надоело то насколько оно косое
     missChance: 0
     spreadAddition: 0
-    spreadAddition: 0
+    spreadMultiplier: 0
