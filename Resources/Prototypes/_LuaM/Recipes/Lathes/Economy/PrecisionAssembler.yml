@@ -289,7 +289,7 @@
   id: ComponentBrickEconomy3Recipe
   result: ComponentBrickEconomy3
   categories:
-  - Mechs
+  - Components
   completetime: 3
   entities:
     ComponentBrickEconomy2: 2
