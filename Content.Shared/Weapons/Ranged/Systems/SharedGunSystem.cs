@@ -786,7 +786,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (Containers.TryGetContainingContainer(ent.Owner, out var container))
             impulseCoord = TransformSystem.WithEntityId(impulseCoord, container.Owner);
         else if (selfXform.Anchored && selfXform.ParentUid != selfXform.MapUid)
-            impulseCoord = TransformSystem.WithEntityId(impulseCoord, selfXform.ParentUid);
+            return; // LuaM: impulseCoord = TransformSystem.WithEntityId(impulseCoord, selfXform.ParentUid) > return, anchored guns (ship weapons) don't push their ship
 
         var toEnt = impulseCoord.EntityId;
         if (!_physQuery.TryComp(toEnt, out var toBody))
