@@ -13,7 +13,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._LuaM.Radio;
 
-public sealed class HeadsetChannelToggleSystem : EntitySystem
+public sealed partial class HeadsetChannelToggleSystem : EntitySystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private HeadsetSystem _headset = default!;

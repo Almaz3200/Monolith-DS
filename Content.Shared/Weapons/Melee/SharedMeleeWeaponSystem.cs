@@ -39,7 +39,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected SharedCombatModeSystem   CombatMode      = default!;
     [Dependency] protected DamageableSystem         Damageable      = default!;
     [Dependency] protected SharedInteractionSystem  Interaction     = default!;
-    [Dependency] protected IMapManager              MapManager      = default!;
+    [Dependency] protected SharedMapSystem              MapManager      = default!;
     [Dependency] protected SharedPopupSystem        PopupSystem     = default!;
     [Dependency] protected IGameTiming              Timing          = default!;
     [Dependency] protected SharedTransformSystem    TransformSystem = default!;
@@ -317,12 +317,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         }
 
         // Use inhands entity if we got one.
-        if (EntityManager.TryGetComponent(entity, out HandsComponent? hands) &&
+        if (TryComp(entity, out HandsComponent? hands) &&
             hands.ActiveHandEntity is { } held)
         {
             // Make sure the entity is a weapon AND it doesn't need
             // to be equipped to be used (E.g boxing gloves).
-            if (EntityManager.TryGetComponent(held, out melee) &&
+            if (TryComp(held, out melee) &&
                 !melee.MustBeEquippedToUse)
             {
                 weaponUid = held;
