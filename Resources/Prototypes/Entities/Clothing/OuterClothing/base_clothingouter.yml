@@ -211,8 +211,8 @@
     heatingCoefficient: 0.01 # Not complete protection from fire
     coolingCoefficient: 0.01
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.7 # LuaM: 0.8 > 0.7, all suits are 0.1 slower
+    sprintModifier: 0.7 # LuaM: 0.8 > 0.7, all suits are 0.1 slower
   - type: HeldSpeedModifier
   - type: Item
     size: Huge

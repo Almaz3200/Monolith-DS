@@ -11,7 +11,7 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: LuaMStandardBluespaceExtraEventsTable
-    minimumTimeUntilFirstEvent: 1800 # 30 minutes, same as BluespaceEventScheduler
+    minimumTimeUntilFirstEvent: 2400 # 40 minutes, same as BluespaceEventScheduler
     minMaxEventTiming:
       min: 1800 # 30 minutes between events
       max: 3000 # 50 minutes between events

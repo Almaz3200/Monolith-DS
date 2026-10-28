@@ -56,8 +56,8 @@
         Shock: 0.8
         Caustic: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 # LuaM 0.8 > 0.9
-    sprintModifier: 0.9 # LuaM 0.8 > 0.9
+    walkModifier: 0.8 # LuaM 0.8 > 0.9 # LuaM: 0.9 > 0.8, all suits are 0.1 slower
+    sprintModifier: 0.8 # LuaM 0.8 > 0.9 # LuaM: 0.9 > 0.8, all suits are 0.1 slower
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

@@ -24,6 +24,7 @@ using Content.Server._Mono.GridClaimer;
 using Content.Server._Mono.Store.Components;
 using Content.Server._Mono.Store;
 using Newtonsoft.Json;
+using Robust.Server.Physics; // LuaM
 
 namespace Content.Server._NF.StationEvents.Events;
 
@@ -51,7 +52,32 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<GridSplitEvent>(OnGridSplit); // LuaM
     }
+
+    // LuaM-start: pieces broken off an event grid belong to the event, so they're deleted with it
+    private void OnGridSplit(ref GridSplitEvent args)
+    {
+        var query = EntityQueryEnumerator<BluespaceErrorRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var rule))
+        {
+            if (!GameTicker.IsGameRuleActive(uid, rule) || !comp.GridsUid.Contains(args.Grid))
+                continue;
+
+            comp.GridsUid.AddRange(args.NewGrids);
+
+            // the pieces of a claimable grid can be claimed too, or they'd be deleted with the event
+            if (HasComp<ClaimableGridComponent>(args.Grid))
+            {
+                foreach (var grid in args.NewGrids)
+                    EnsureComp<ClaimableGridComponent>(grid);
+            }
+
+            break; // a grid belongs to one event only
+        }
+    }
+    // LuaM-end
 
     protected override void Started(EntityUid uid, BluespaceErrorRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -222,6 +248,9 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
 
         foreach (var componentGridUid in component.GridsUid)
         {
+            if (TerminatingOrDeleted(componentGridUid)) // LuaM: a piece of the event grid can be destroyed before the event ends
+                continue;
+
             if (!EntityManager.TryGetComponent<TransformComponent>(componentGridUid, out var gridTransform))
             {
                 Log.Error("bluespace error objective was missing transform component");
