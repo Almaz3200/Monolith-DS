@@ -16,6 +16,7 @@
     noRot: true
     drawdepth: OverMobs
   - type: SpriteFade
+    clickThrough: false
   - type: Item
     size: Small
   - type: StaticPrice

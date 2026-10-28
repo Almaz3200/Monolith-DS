@@ -7,8 +7,8 @@
   targetNode: double_bed_complete
   category: construction-category-furniture
   icon:
-    sprite: _Orion/Structures/Furniture/double_bed.rsi
-    state: bed
+    sprite: _ADT/Structures/Furniture/doublebed.rsi
+    state: splitbed
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false

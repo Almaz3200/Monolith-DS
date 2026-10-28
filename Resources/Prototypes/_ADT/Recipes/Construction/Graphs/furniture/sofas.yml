@@ -86,17 +86,7 @@
             - material: Cloth
               amount: 2
               doAfter: 1
-        - to: ADTSofaCutBlackLeftCornerNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-        - to: ADTSofaCutBlackRightCornerNode
+        - to: ADTSofaCutBlackCornerNode
           completed:
             - !type:SnapToGrid { }
           steps:
@@ -136,17 +126,7 @@
             - material: Cloth
               amount: 2
               doAfter: 1
-        - to: ADTSofaCutComfyLeftCornerNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-        - to: ADTSofaCutComfyRightCornerNode
+        - to: ADTSofaCutComfyCornerNode
           completed:
             - !type:SnapToGrid { }
           steps:
@@ -486,56 +466,6 @@
             - material: Cloth
               amount: 2
               doAfter: 1
-        - to: ADTSofaOfficeBlackLeftSideNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-        - to: ADTSofaOfficeBlackMiddleNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-        - to: ADTSofaOfficeBlackRightSideNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-        - to: ADTSofaOfficeBlackLeftCornerNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-        - to: ADTSofaOfficeBlackRightCornerNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
         - to: ADTSofaCutDainerLeftSideNode
           completed:
             - !type:SnapToGrid { }
@@ -566,17 +496,7 @@
             - material: Cloth
               amount: 2
               doAfter: 1
-        - to: ADTSofaCutDainerLeftCornerNode
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-        - to: ADTSofaCutDainerRightCornerNode
+        - to: ADTSofaCutDainerCornerNode
           completed:
             - !type:SnapToGrid { }
           steps:
@@ -698,22 +618,8 @@
           steps:
             - tool: Screwing
               doAfter: 1
-    - node: ADTSofaCutBlackLeftCornerNode
-      entity: ADTSofaCutBlackLeftCorner
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    - node: ADTSofaCutBlackRightCornerNode
-      entity: ADTSofaCutBlackRightCorner
+    - node: ADTSofaCutBlackCornerNode
+      entity: ADTSofaCutBlackCorner
       edges:
         - to: start
           completed:
@@ -768,22 +674,8 @@
           steps:
             - tool: Screwing
               doAfter: 1
-    - node: ADTSofaCutComfyLeftCornerNode
-      entity: ADTSofaCutComfyLeftCorner
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    - node: ADTSofaCutComfyRightCornerNode
-      entity: ADTSofaCutComfyRightCorner
+    - node: ADTSofaCutComfyCornerNode
+      entity: ADTSofaCutComfyCorner
       edges:
         - to: start
           completed:
@@ -1258,76 +1150,6 @@
           steps:
             - tool: Screwing
               doAfter: 1
-    - node: ADTSofaOfficeBlackLeftSideNode
-      entity: ADTSofaOfficeBlackLeftSide
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    - node: ADTSofaOfficeBlackMiddleNode
-      entity: ADTSofaOfficeBlackMiddle
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    - node: ADTSofaOfficeBlackRightSideNode
-      entity: ADTSofaOfficeBlackRightSide
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    - node: ADTSofaOfficeBlackLeftCornerNode
-      entity: ADTSofaOfficeBlackLeftCorner
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    - node: ADTSofaOfficeBlackRightCornerNode
-      entity: ADTSofaOfficeBlackRightCorner
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
     - node: ADTSofaCutDainerLeftSideNode
       entity: ADTSofaCutDainerLeftSide
       edges:
@@ -1370,22 +1192,8 @@
           steps:
             - tool: Screwing
               doAfter: 1
-    - node: ADTSofaCutDainerLeftCornerNode
-      entity: ADTSofaCutDainerLeftCorner
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    - node: ADTSofaCutDainerRightCornerNode
-      entity: ADTSofaCutDainerRightCorner
+    - node: ADTSofaCutDainerCornerNode
+      entity: ADTSofaCutDainerCorner
       edges:
         - to: start
           completed:
