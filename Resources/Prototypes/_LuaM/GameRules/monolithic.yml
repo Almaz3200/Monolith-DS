@@ -20,8 +20,8 @@
     endAnnouncement: luam-monolithic-event-large-fragment-end-announcement
     endAnnouncementColor: "#c06bff"
     weight: 5
-    duration: 3600 # 1 hour, extended while people are on or near it
-    maxDuration: 3600
+    duration: 2400 # 40 minutes, like all event grids, even with people on it
+    maxDuration: 2400
     maxOccurrences: 1 # once per shift, LuaMMonolithFragmentLargeScheduler starts it at 1:30
   - type: BluespaceErrorRule
     groups:
