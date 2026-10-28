@@ -49,7 +49,6 @@
         </BoxContainer>
         <!-- LuaM -->
         <Label Name="HintsLabel"
-               Text="{Loc 'shuttle-console-hints'}"
                StyleClasses="LabelSubText"
                HorizontalAlignment="Center"
                Margin="0 4 0 0"/>
