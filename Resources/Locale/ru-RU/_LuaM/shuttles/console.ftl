@@ -9,3 +9,4 @@ shuttle-console-iff-detailed-short = D.IFF
 shuttle-radar-menu-follow = Следовать
 shuttle-radar-menu-call = Позвонить
 shuttle-radar-menu-unreachable = Невозможно связаться
+shuttle-console-hints = ПРОБЕЛ — торможение   ·   Alt + ПКМ по гриду — контекстное меню
