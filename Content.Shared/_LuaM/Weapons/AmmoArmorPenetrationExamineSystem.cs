@@ -8,7 +8,7 @@ namespace Content.Shared._LuaM.Weapons;
 /// <summary>
 /// Adds the armor penetration and pellet count of the bullet a cartridge fires to the cartridge's examine text.
 /// </summary>
-public sealed class AmmoArmorPenetrationExamineSystem : EntitySystem
+public sealed partial class AmmoArmorPenetrationExamineSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IComponentFactory _factory = default!;
