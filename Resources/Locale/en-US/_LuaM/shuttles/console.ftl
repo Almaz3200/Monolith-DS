@@ -7,4 +7,4 @@ shuttle-console-map-search = Search objects
 shuttle-radar-menu-follow = Follow
 shuttle-radar-menu-call = Call
 shuttle-radar-menu-unreachable = Unable to connect
-shuttle-console-hints = SPACE — brake   ·   Alt + RMB on a grid — context menu
+shuttle-console-hints = WASD - controls   ·   Q/E - rotation   ·   SPACE - brake   ·   Alt + RMB on a grid - context menu
