@@ -1379,6 +1379,9 @@
   name: TSFMC EVA suit
   description: An EVA suit with a built-in helmet commonly issued to TSFMC personnel.
   components:
+  - type: ClothingSpeedModifier # LuaM: TSF and PDV suits are 10% slower, inherited 0.95 > 0.85
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
