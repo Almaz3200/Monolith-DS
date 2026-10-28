@@ -31,7 +31,6 @@ namespace Content.Server._NF.StationEvents.Events;
 public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErrorRuleComponent>
 {
     NanotrasenNameGenerator _nameGenerator = new();
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private MapSystem _map = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private IPrototypeManager _protoManager = default!;
@@ -187,7 +186,7 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
 
         _mapSystem.CreateMap(out var mapId);
 
-        var spawnedGrid = _mapManager.CreateGridEntity(mapId);
+        var spawnedGrid = _mapSystem.CreateGridEntity(mapId);
 
         _transform.SetMapCoordinates(spawnedGrid, new MapCoordinates(Vector2.Zero, mapId));
         _dungeon.GenerateDungeon(dungeonProto, dungeonProto.ID, spawnedGrid.Owner, spawnedGrid.Comp, Vector2i.Zero, _random.Next(), spawnCoords); // Frontier: add dungeonProto.ID
@@ -251,7 +250,7 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
             if (TerminatingOrDeleted(componentGridUid)) // LuaM: a piece of the event grid can be destroyed before the event ends
                 continue;
 
-            if (!EntityManager.TryGetComponent<TransformComponent>(componentGridUid, out var gridTransform))
+            if (!TryComp<TransformComponent>(componentGridUid, out var gridTransform))
             {
                 Log.Error("bluespace error objective was missing transform component");
                 continue; // LuaM: return > continue
