@@ -14,6 +14,8 @@
   - type: Sprite
     sprite: _Orion/Objects/Misc/bedsheets_double.rsi
     noRot: true
+    drawdepth: OverMobs
+  - type: SpriteFade
   - type: Item
     size: Small
   - type: StaticPrice

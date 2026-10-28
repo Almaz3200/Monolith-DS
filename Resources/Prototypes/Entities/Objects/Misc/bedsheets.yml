@@ -12,6 +12,8 @@
   - type: Sprite
     sprite: Objects/Misc/bedsheets.rsi
     noRot: true
+    drawdepth: OverMobs
+  - type: SpriteFade
   - type: Item
     size: Small
   - type: Clothing
