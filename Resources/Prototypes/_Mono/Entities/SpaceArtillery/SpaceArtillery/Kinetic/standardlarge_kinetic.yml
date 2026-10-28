@@ -517,7 +517,7 @@
         layer:
         - MachineLayer
   - type: Gun
-    projectileSpeed: 40 # Perhaps the slowest shipweapon. Im investing all my yummy pyrotechnics into explosive power and none into propellant.
+    projectileSpeed: 100 # LuaM: 40 > 100
     minAngle: 0
     maxAngle: 0
     fireRate: 0.05
@@ -556,6 +556,11 @@
   - type: ShipRepairable
     repairTime: 45
     repairCost: 200
+# LuaM-start: the Howdy needs a hardpoint
+  - type: HardpointAnchorableOnly
+    class: Ballistic
+    size: Superheavy
+# LuaM-end
 
 - type: entity
   id: WeaponTurretR300Infinite

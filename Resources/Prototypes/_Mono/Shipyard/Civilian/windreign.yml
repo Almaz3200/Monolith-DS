@@ -26,7 +26,7 @@
   minPlayers: 0
   stations:
     Windreign:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel, expeditions with a bought console
       gridComponents:
       - type: VesselInfo
         description: "The air smells of plasma and sulfur.."

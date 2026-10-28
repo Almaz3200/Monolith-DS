@@ -1,0 +1,85 @@
+# Bounty tags of the food ported from Lua (PR #188), see cooking.yml next to this file.
+
+# T0
+- type: Tag
+  id: BountyCottonBun
+- type: Tag
+  id: BountyRatKebab
+
+# T1
+- type: Tag
+  id: BountyCottonGrilledCheeseSandwich
+- type: Tag
+  id: BountyCreamCroissant
+- type: Tag
+  id: BountyChocolateCroissant
+- type: Tag
+  id: BountyCheeseCroissant
+- type: Tag
+  id: BountyDoughHotDog
+- type: Tag
+  id: BountyFriedEggSausage
+- type: Tag
+  id: BountyFriedSausage
+- type: Tag
+  id: BountyMeatKebab
+- type: Tag
+  id: BountyLizardTailKebab
+- type: Tag
+  id: BountyDoubleRatKebab
+- type: Tag
+  id: BountyTexasToast
+- type: Tag
+  id: BountyCottonBurger
+- type: Tag
+  id: BountyLicoriceCreamsicle
+- type: Tag
+  id: BountyFriedTofu
+- type: Tag
+  id: BountyWholeChicken
+- type: Tag
+  id: BountyWholeDuck
+
+# T2
+- type: Tag
+  id: BountyCottonCake
+- type: Tag
+  id: BountyAmericanBreakfast
+- type: Tag
+  id: BountyEnglishBreakfast
+- type: Tag
+  id: BountyShawarma
+- type: Tag
+  id: BountyCheeseShawarma
+- type: Tag
+  id: BountyMeatShawarma
+- type: Tag
+  id: BountyHawaiianKebab
+- type: Tag
+  id: BountyFiestaKebab
+- type: Tag
+  id: BountyMashedMeatballs
+- type: Tag
+  id: BountyFrenchGarlicBread
+- type: Tag
+  id: BountyCinnamonRoll
+- type: Tag
+  id: BountyCottonCheeseburger
+- type: Tag
+  id: BountyCinnamonMochi
+- type: Tag
+  id: BountyChickenParmesan
+
+# T3
+- type: Tag
+  id: BountyWorldPeazza
+- type: Tag
+  id: BountySnakeKebab
+- type: Tag
+  id: BountyWholePenguin
+
+# T4
+- type: Tag
+  id: BountyDragonSteak
+- type: Tag
+  id: BountyDraco

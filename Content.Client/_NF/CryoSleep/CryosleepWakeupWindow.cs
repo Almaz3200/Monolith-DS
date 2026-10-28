@@ -1,23 +1,20 @@
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
-using Robust.Shared.Configuration;
 using static Content.Shared._NF.CryoSleep.SharedCryoSleepSystem;
 
 namespace Content.Client._NF.CryoSleep;
 
-public sealed partial class CryosleepWakeupWindow : DefaultWindow, IEntityEventSubscriber
+public sealed partial class CryosleepWakeupWindow : DefaultWindow
 {
-    [Dependency] private EntityManager _entityManager = default!;
-
     public RichTextLabel Label;
     public Button DenyButton;
     public Button AcceptButton;
 
+    public event Action? AcceptPressed; // LuaM
+
     public CryosleepWakeupWindow()
     {
-        IoCManager.InjectDependencies(this);
-
         Title = Loc.GetString("cryo-wakeup-window-title");
 
         Contents.AddChild(new BoxContainer
@@ -63,7 +60,6 @@ public sealed partial class CryosleepWakeupWindow : DefaultWindow, IEntityEventS
             }
         });
 
-        _entityManager.EventBus.SubscribeEvent<WakeupRequestMessage.Response>(EventSource.Network, this, OnWakeupResponse);
         DenyButton.OnPressed += _ => Close();
         AcceptButton.OnPressed += _ => OnAccept();
     }
@@ -77,17 +73,16 @@ public sealed partial class CryosleepWakeupWindow : DefaultWindow, IEntityEventS
 
     private void OnAccept()
     {
-        var message = new WakeupRequestMessage();
-        _entityManager.EntityNetManager?.SendSystemNetworkMessage(message);
+        AcceptPressed?.Invoke(); // LuaM
 
         // Disable the buttons to make the user wait for a response
         AcceptButton.Disabled = true;
         DenyButton.Disabled = true;
     }
 
-    private void OnWakeupResponse(WakeupRequestMessage.Response response)
+    public void HandleWakeupResponse(ReturnToBodyStatus status) // LuaM
     {
-        if (response.Status == ReturnToBodyStatus.Success)
+        if (status == ReturnToBodyStatus.Success) // LuaM
         {
             Close();
             return;
@@ -95,13 +90,13 @@ public sealed partial class CryosleepWakeupWindow : DefaultWindow, IEntityEventS
 
         // Failure
         DenyButton.Disabled = false;
-        if (response.Status == ReturnToBodyStatus.Occupied)
+        if (status == ReturnToBodyStatus.Occupied) // LuaM
             Label.SetMessage(Loc.GetString("cryo-wakeup-result-occupied"));
-        else if (response.Status == ReturnToBodyStatus.NoCryopodAvailable)
+        else if (status == ReturnToBodyStatus.NoCryopodAvailable) // LuaM
             Label.SetMessage(Loc.GetString("cryo-wakeup-result-no-cryopod"));
-        else if (response.Status == ReturnToBodyStatus.BodyMissing)
+        else if (status == ReturnToBodyStatus.BodyMissing) // LuaM
             Label.SetMessage(Loc.GetString("cryo-wakeup-result-no-body"));
-        else if (response.Status == ReturnToBodyStatus.Disabled)
+        else if (status == ReturnToBodyStatus.Disabled) // LuaM
             Label.SetMessage(Loc.GetString("cryo-wakeup-result-disabled"));
     }
 }

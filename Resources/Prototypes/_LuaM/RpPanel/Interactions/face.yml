@@ -1,0 +1,105 @@
+- type: rpInteraction
+  id: CheeksPat
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpCheeksPatMessages
+  icon: _LuaM/Interface/RpPanel/cheeks_pat.png
+
+- type: rpInteraction
+  id: CheeksPress
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpCheeksPressMessages
+  icon: _LuaM/Interface/RpPanel/cheeks_press.png
+
+- type: rpInteraction
+  id: Mewing
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpFriction
+  selfMessages: RpMewingSelfMessages
+  icon: _LuaM/Interface/RpPanel/mewing.png
+
+- type: rpInteraction
+  id: SuspiciousLook
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpVineBoom
+  selfMessages: RpSuspiciousLookSelfMessages
+  icon: _LuaM/Interface/RpPanel/heart_icon.png
+
+- type: rpInteraction
+  id: FriendlyNoseBoop
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpFriendlyNoseBoopMessages
+  icon: _LuaM/Interface/RpPanel/friendly_nose_boop.png
+
+- type: rpInteraction
+  id: Kitty
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpFriction
+  messages: RpKittyMessages
+  icon: _LuaM/Interface/RpPanel/kitty.png
+  userRequirements:
+  - !type:SpeciesRequirement
+    species:
+    - Felinid
+    - Rodentia
+    - Tajaran
+    - Vulpkanin
+
+- type: rpInteraction
+  id: BlowSlap
+  category: Face
+  kind: Harmful
+  sound:
+    collection: RpBang
+  messages: RpBlowSlapMessages
+  icon: _LuaM/Interface/RpPanel/blow_slap.png
+
+- type: rpInteraction
+  id: BlowSlapUsers
+  category: Face
+  kind: Harmful
+  sound:
+    collection: RpBang
+  selfMessages: RpBlowSlapUsersSelfMessages
+  icon: _LuaM/Interface/RpPanel/blow_slap.png
+
+- type: rpInteraction
+  id: HittingFace
+  category: Face
+  kind: Harmful
+  sound:
+    collection: RpBang
+  selfMessages: RpHittingFaceSelfMessages
+  icon: _LuaM/Interface/RpPanel/blow_slap.png
+
+- type: rpInteraction
+  id: ShedTear
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpDisappointment
+  messages: RpShedTearMessages
+  icon: _LuaM/Interface/RpPanel/cry.png
+
+- type: rpInteraction
+  id: Kiss
+  category: Face
+  kind: Soft
+  sound:
+    collection: RpKiss
+  messages: RpKissMessages
+  icon: _LuaM/Interface/RpPanel/kiss.png

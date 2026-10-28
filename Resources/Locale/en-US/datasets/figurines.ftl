@@ -145,8 +145,17 @@ figurines-wizard-3 = Skidaddle skadoodle!
 figurines-wizard-4 = FIREBALL!
 
 figurines-space-dragon-1 = Fish will consume the station.
+figurines-space-dragon-2 = Dragon de- Actually, nevermind.
+figurines-space-dragon-3 = Crew is delicious.
+figurines-space-dragon-4 = Don't you dare make sushi.
+figurines-space-dragon-5 = This station ain't big enough for the two of us.
 
-# figurines-queen
+figurines-queen-1 = Our domain must grow.
+figurines-queen-2 = The hive hungers.
+figurines-queen-3 = We consume all.
+figurines-queen-4 = We are the apex.
+figurines-queen-5 = You're just biomass.
+figurines-queen-6 = We must evolve.
 
 figurines-rat-king-1 = Gimme some food, capiche?
 figurines-rat-king-2 = Fugeddaboutit.

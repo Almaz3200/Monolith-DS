@@ -1,0 +1,14 @@
+- type: technology
+  id: RogueAdvancedStorages
+  name: research-technology-rogue-advanced-storages
+  entityIcon: ArmorPlateStorageT4PDV
+  discipline: RogueEquipment
+  tier: 1
+  cost: 20000
+  recipeUnlocks:
+  - ArmorPlateStorageT4PDVRecipe
+  - ClothingBackpackPDVTarkhanRecipe
+  technologyPrerequisites:
+  - RogueBasicEquipment
+  - ArmorPlateStorage
+  position: 5, 8

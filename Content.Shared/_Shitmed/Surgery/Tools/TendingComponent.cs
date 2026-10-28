@@ -9,6 +9,7 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class TendingComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "itemswitch-component-state-wound-tender"; // LuaM: a wound tender > itemswitch-component-state-wound-tender
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
     [DataField]
     public float Speed { get; set; } = 1f;

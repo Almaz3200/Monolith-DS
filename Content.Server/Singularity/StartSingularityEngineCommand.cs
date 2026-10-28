@@ -7,7 +7,11 @@ using Content.Server.Singularity.EntitySystems;
 using Content.Shared.Administration;
 using Content.Shared.Machines.Components;
 using Content.Shared.Singularity.Components;
+using Content.Shared.Tag;
 using Robust.Shared.Console;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+using System.Linq;
 
 namespace Content.Server.Singularity
 {
@@ -18,6 +22,8 @@ namespace Content.Server.Singularity
         [Dependency] private readonly MultipartMachineSystem _multipartSystem = default!;
         [Dependency] private readonly ParticleAcceleratorSystem  _paSystem = default!;
         [Dependency] private readonly RadiationCollectorSystem _radCollectorSystem = default!;
+        [Dependency] private readonly IPrototypeManager _prototype = default!; // LuaM
+        [Dependency] private readonly IComponentFactory _componentFactory = default!; // LuaM
 
         public override string Command => "startsingularityengine";
 
@@ -29,13 +35,31 @@ namespace Content.Server.Singularity
                 return;
             }
 
-            // Turn on emitters
-            var emitterQuery = EntityManager.EntityQueryEnumerator<EmitterComponent>();
-            while (emitterQuery.MoveNext(out var uid, out var emitterComponent))
+            // LuaM-start
+            var fieldTags = new Dictionary<EntityUid, HashSet<string>>();
+            var generatorQuery = EntityManager.EntityQueryEnumerator<ContainmentFieldGeneratorComponent, TransformComponent>();
+            while (generatorQuery.MoveNext(out _, out var generator, out var generatorXform))
             {
-                //FIXME: This turns on ALL emitters, including APEs. It should only turn on the containment field emitters.
+                if (generatorXform.GridUid is { } generatorGrid)
+                    fieldTags.GetOrNew(generatorGrid).Add(generator.IDTag);
+            }
+
+            // Turn on emitters
+            var emitterQuery = EntityManager.EntityQueryEnumerator<EmitterComponent, TransformComponent>();
+            while (emitterQuery.MoveNext(out var uid, out var emitterComponent, out var emitterXform))
+            {
+                if (emitterXform.GridUid is not { } grid ||
+                    !fieldTags.TryGetValue(grid, out var tags) ||
+                    !_prototype.TryIndex<EntityPrototype>(emitterComponent.BoltType, out var bolt) ||
+                    !bolt.TryGetComponent<TagComponent>(out var boltTags, _componentFactory) ||
+                    !boltTags.Tags.Any(tag => tags.Contains(tag)))
+                {
+                    continue;
+                }
+
                 _emitterSystem.SwitchOn(uid, emitterComponent);
             }
+            // LuaM-end
 
             // Turn on radiation collectors
             var radiationCollectorQuery = EntityManager.EntityQueryEnumerator<RadiationCollectorComponent>();

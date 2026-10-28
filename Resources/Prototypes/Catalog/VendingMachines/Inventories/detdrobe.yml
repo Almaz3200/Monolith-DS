@@ -16,5 +16,6 @@
     ClothingHandsGlovesLatex: 2
     ClothingHeadsetSecurityCommon: 2 # Frontier: Security<SecurityCommon - Ask SR or Sheriff for keys
     trayScanner: 2 # Frontier
+    ClothingEyesGlassesNoir: 1
   contrabandInventory:
     ToyFigurineDetective: 1

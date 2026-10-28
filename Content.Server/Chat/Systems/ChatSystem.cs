@@ -18,6 +18,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
+using Content.Shared.Speech; // LuaM
 using Content.Shared._Starlight.CollectiveMind; // Goobstation - Starlight collective mind port
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -41,6 +42,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Content.Server._LuaM.Chat; // LuaM
 
 namespace Content.Server.Chat.Systems;
 
@@ -819,6 +821,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (checkEmote)
             TryEmoteChatInput(source, action);
         SendInVoiceRange(ChatChannel.Emotes, name, action, wrappedMessage, obfuscated: "", obfuscatedWrappedMessage: "", source, range, author); // Einstein Engines - Language
+
+        // LuaM - lets the holopads relay the emotes of everyone around them
+        var emoteSentEv = new EntityEmoteSentEvent(source, action, range);
+        RaiseLocalEvent(ref emoteSentEv);
         if (!hideLog)
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
@@ -1107,25 +1113,37 @@ public sealed partial class ChatSystem : SharedChatSystem
             wrapId = wrapOverride;
 
         var speech = GetSpeechVerb(source, message);
-        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
-            ? _random.Pick(verbsOverride).ToString()
-            : _random.Pick(speech.SpeechVerbStrings);
         var color = DefaultSpeakColor;
         if (language.SpeechOverride.Color is { } colorOverride)
             color = Color.InterpolateBetween(color, colorOverride, colorOverride.A);
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
 
         return Loc.GetString(wrapId,
             ("color", color),
             ("entityName", entityName),
-            ("verb", Loc.GetString(verbId)),
+            ("verb", PickSpeechVerb(speech, language)),
             ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
             ("fontSize", language.SpeechOverride.FontSize ?? speech.FontSize),
             ("message", FormattedMessage.EscapeText(message)), // LuaM message > FormattedMessage.EscapeText(message)
-            ("language", languageDisplay));
+            ("language", GetLanguageDisplay(language)));
     }
+
+    // LuaM start
+    public string PickSpeechVerb(SpeechVerbPrototype speech, LanguagePrototype language)
+    {
+        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
+            ? _random.Pick(verbsOverride).ToString()
+            : _random.Pick(speech.SpeechVerbStrings);
+
+        return Loc.GetString(verbId);
+    }
+
+    public string GetLanguageDisplay(LanguagePrototype language)
+    {
+        return language.IsVisibleLanguage
+            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
+            : "";
+    }
+    // LuaM end
     // Einstein Engines - Language end
 
 

@@ -50,6 +50,7 @@
 # LuaM-start:
     - id: TechDiskCombatSilicon
     - id: TechDiskZookeeperTranslatorImplanter
+    - id: TechDiskArmorPlateStorageT5
 # LuaM-end.
 
 #T2 TECH DISKS
@@ -105,6 +106,7 @@
 # LuaM-start:
     - id: TechDiskCombatSilicon
     - id: TechDiskDataFarm
+    - id: TechDiskArmorPlateStorageT5
 # LuaM-end.
 
 #T2 TECH MECH DISKS
@@ -146,6 +148,7 @@
 # LuaM-start:
       - id: TechDiskCombatSilicon
       - id: TechDiskDataFarm
+      - id: TechDiskArmorPlateStorageT5
 # LuaM-end.
       - !type:GroupSelector
         weight: 3

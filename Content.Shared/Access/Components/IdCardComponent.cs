@@ -11,12 +11,11 @@ namespace Content.Shared.Access.Components;
 
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
-[Access(typeof(SharedIdCardSystem), typeof(SharedPdaSystem), typeof(SharedAgentIdCardSystem), Other = AccessPermissions.ReadWrite)]
+[Access(typeof(SharedIdCardSystem), typeof(SharedPdaSystem), typeof(SharedAgentIdCardSystem))] // LuaM
 public sealed partial class IdCardComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
-    // FIXME Friends
     public string? FullName;
 
     [DataField]

@@ -67,4 +67,4 @@
     damage:
       types:
         Blunt: 7
-        Shock: 2
+        Slash: 2 # LuaM: Shock 2 > Slash 2

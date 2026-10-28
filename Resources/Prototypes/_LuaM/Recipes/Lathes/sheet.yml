@@ -1,0 +1,23 @@
+# Industrial ore processor: plastic from salt and coal.
+
+- type: latheRecipe
+  id: LuaMSheetPlasticFromSaltCoal
+  name: materials-plastic
+  icon:
+    sprite: Objects/Materials/Sheets/other.rsi
+    state: plastic
+  materialResult:
+    Plastic: 100
+  completetime: 0.06
+  materials:
+    RawSalt: 100
+    Coal: 100
+
+# Scrap processor: wood from scrap, the same cost as plastic and cloth.
+
+- type: latheRecipe
+  id: LuaMScrapMaterialWoodPlank1
+  result: MaterialWoodPlank1
+  parent: BaseMaterialsYesDiscountRecipe
+  materials:
+    RawScrap: 30

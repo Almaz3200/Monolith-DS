@@ -41,13 +41,13 @@
   У каждого есть [color=cyan]аплинк[/color], чтобы купить всё необходимое, аналогично [textlink="предателям" link="Traitors"].
 
   <Box>
-    <GuideEntityEmbed Entity="BaseUplinkRadio40TC" Caption="your uplink"/>
+    <GuideEntityEmbed Entity="BaseUplinkRadio" Caption="your uplink"/>
   </Box>
 
   Доступно то же, что и предателям, но с лучшим качеством и большим числом телекристаллов.
   <Box>
-    <GuideEntityEmbed Entity="NFWeaponLightMachineGunL6" Caption="Weaponry"/>
-    <GuideEntityEmbed Entity="NFAmmunitionBoxRifle30" State="icon" Caption="Ammo"/>
+    <GuideEntityEmbed Entity="WeaponLightMachineGunL6" Caption="Weaponry"/>
+    <GuideEntityEmbed Entity="AmmoBox762x39mmFMJ" Caption="Ammo"/>
     <GuideEntityEmbed Entity="C4" Caption="Explosives"/>
     <GuideEntityEmbed Entity="ClothingOuterHardsuitJuggernaut" Caption="Wearables"/>
     <GuideEntityEmbed Entity="Stimpack" Caption="Chemicals"/>

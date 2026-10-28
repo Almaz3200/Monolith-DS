@@ -47,7 +47,7 @@
   - type: Construction
     graph: NailBomb
     node: gunpowder
-    defaultTarget: pipebomb
+    defaultTarget: nailbomb # LuaM: pipebomb > nailbomb, the graph has no pipebomb node
 
 - type: entity
   parent: BaseItem

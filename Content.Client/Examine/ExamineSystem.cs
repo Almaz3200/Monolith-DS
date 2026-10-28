@@ -93,9 +93,10 @@ namespace Content.Client.Examine
             if (examinerComp.SkipChecks)
                 return true;
 
-            if (examinerComp.CheckInRangeUnOccluded)
+            if (examinerComp.CheckInRangeUnOccluded
+                && TryComp<EyeComponent>(examiner, out var eye)
+                && eye.Eye == _eyeManager.CurrentEye)
             {
-                // TODO fix this. This should be using the examiner's eye component, not eye manager.
                 var b = _eyeManager.GetWorldViewbounds();
                 if (!b.Contains(target.Position))
                     return false;

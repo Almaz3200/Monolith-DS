@@ -24,6 +24,7 @@ public sealed partial class IdCardSystem : SharedIdCardSystem
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private MicrowaveSystem _microwave = default!;
+    [Dependency] private SharedAccessSystem _access = default!; // LuaM
 
     public override void Initialize()
     {
@@ -97,8 +98,7 @@ public sealed partial class IdCardSystem : SharedIdCardSystem
             {
                 _popupSystem.PopupEntity(Loc.GetString("id-card-component-microwave-bricked", ("id", uid)), uid);
 
-                access.Tags.Clear();
-                Dirty(uid, access);
+                _access.TrySetTags(uid, [], access); // LuaM
 
                 _adminLogger.Add(LogType.Action, LogImpact.Medium,
                     $"{ToPrettyString(args.Microwave)} cleared access on {ToPrettyString(uid):entity}");
@@ -116,8 +116,7 @@ public sealed partial class IdCardSystem : SharedIdCardSystem
 
             var random = _random.Pick(ids);
 
-            access.Tags.Add(random.ID);
-            Dirty(uid, access);
+            _access.TryAddTags(uid, [random.ID], access); // LuaM
 
             _adminLogger.Add(LogType.Action, LogImpact.Medium,
                     $"{ToPrettyString(args.Microwave)} added {random.ID} access to {ToPrettyString(uid):entity}");

@@ -382,6 +382,7 @@ namespace Content.Server.PDA
             if (!TryComp(station, out WarLevelComponent? warComp))
                 return;
             pda.WarLevel = warComp.PostWar ? Loc.GetString("comp-pda-ui-station-war-level-post")
+                : warComp.White ? Loc.GetString("comp-pda-ui-station-war-level-white") // LuaM
                 : warComp.Pending ? Loc.GetString("comp-pda-ui-station-war-level-pending") // LuaM
                 : Loc.GetString("comp-pda-ui-station-war-level-pre");
         }

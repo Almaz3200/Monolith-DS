@@ -6,6 +6,7 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class CauteryComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "itemswitch-component-state-cautery"; // LuaM: a cautery > itemswitch-component-state-cautery
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
     
     /// <summary>

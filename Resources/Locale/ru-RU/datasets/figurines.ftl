@@ -233,8 +233,17 @@ figurines-wizard-2 = Настоящие волшебники поддержив�
 figurines-wizard-3 = Skidaddle skadoodle!
 figurines-wizard-4 = ФАЙРБОЛЛ!
 figurines-space-dragon-1 = Рыба поглотит станцию.
+figurines-space-dragon-2 = Драконий де... А, забудьте.
+figurines-space-dragon-3 = Экипаж вкусный.
+figurines-space-dragon-4 = Только посмей сделать суши.
+figurines-space-dragon-5 = Этой станции на двоих не хватит.
 
-# figurines-queen
+figurines-queen-1 = Наши владения должны расти.
+figurines-queen-2 = Улей голоден.
+figurines-queen-3 = Мы поглотим всё.
+figurines-queen-4 = Мы вершина.
+figurines-queen-5 = Ты всего лишь биомасса.
+figurines-queen-6 = Мы должны эволюционировать.
 
 figurines-rat-king-1 = Дай-ка немного еды, андестенд?
 figurines-rat-king-2 = Дазабей.
@@ -259,13 +268,3 @@ figurines-hamlet-5 = Пип!
 figurines-hamlet-6 = Уиип!
 figurines-hamlet-7 = Иип!
 figurines-hamlet-8 = ТОЛЬКО НЕ МИКРОВОЛНОВКА!
-figurines-space-dragon-2 = Dragon de- Actually, nevermind.
-figurines-space-dragon-3 = Crew is delicious.
-figurines-space-dragon-4 = Don't you dare make sushi.
-figurines-space-dragon-5 = This station ain't big enough for the two of us.
-figurines-queen-1 = Our domain must grow.
-figurines-queen-2 = The hive hungers.
-figurines-queen-3 = We consume all.
-figurines-queen-4 = We are the apex.
-figurines-queen-5 = You're just biomass.
-figurines-queen-6 = We must evolve.

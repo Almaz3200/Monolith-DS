@@ -54,9 +54,14 @@ namespace Content.Server.Shuttles.Systems
 
             // Yes this isn't in shuttle console; it may be used by other systems technically.
             // in which case I would also add their subs here.
-            SubscribeLocalEvent<ShuttleConsoleComponent, DockRequestMessage>(OnRequestDock);
-            SubscribeLocalEvent<ShuttleConsoleComponent, UndockRequestMessage>(OnRequestUndock);
-            SubscribeLocalEvent<ShuttleConsoleComponent, UndockAllRequestMessage>(OnRequestUndockAll);
+            // LuaM-start
+            Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
+            {
+                subs.Event<DockRequestMessage>(OnRequestDock);
+                subs.Event<UndockRequestMessage>(OnRequestUndock);
+                subs.Event<UndockAllRequestMessage>(OnRequestUndockAll);
+            });
+            // LuaM-end
         }
 
         public void UndockDocks(EntityUid gridUid)

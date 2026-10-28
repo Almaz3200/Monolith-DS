@@ -17,7 +17,7 @@ generic-reagent-effect-dizzy = Вы чувствуете головокруже�
 
 petting-failure-ariral = Вы тянетесь обнять { $target }, но вспоминаете, что прикосновение к ариралу токсично!
 
-trait-ariral-non-toxic-name = Нетоксичен (Только для ариралов)
+trait-ariral-non-toxic-name = Нетоксичный
 trait-ariral-non-toxic-desc = Ваша кожа не выделяет ядовитый пот: вас можно спокойно обнимать, а удары никого не отравляют.
 
 ent-BaseMobAriral = Урист МакАрирал

@@ -73,5 +73,5 @@ ent-CrateTrashCartJani = мусорная тележка уборщика
 ent-InvisibleCrate = { ent-CrateBaseWeldable }
     .suffix = Стелс
     .desc = { ent-CrateBaseWeldable.desc }
-ent-CrateWood = wooden crate
+ent-CrateWood = деревянный ящик
     .desc = { ent-CrateBaseWeldable.desc }

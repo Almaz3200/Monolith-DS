@@ -6,6 +6,7 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class ScalpelComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "itemswitch-component-state-scalpel"; // LuaM: a scalpel > itemswitch-component-state-scalpel
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
     
     /// <summary>

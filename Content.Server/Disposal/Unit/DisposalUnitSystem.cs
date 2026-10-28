@@ -40,6 +40,14 @@ public sealed partial class DisposalUnitSystem : SharedDisposalUnitSystem
 
     private void OnTerminating(Entity<DisposalUnitComponent> ent, ref EntityTerminatingEvent args)
     {
+        // LuaM - when the whole grid or map goes, there is nowhere to drop the contents, they go with the unit
+        var xform = Transform(ent);
+        if (xform.GridUid is { } grid && TerminatingOrDeleted(grid) ||
+            xform.MapUid is { } map && TerminatingOrDeleted(map))
+        {
+            return;
+        }
+
         TryEjectContents(ent, ent.Comp);
     }
 

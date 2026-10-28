@@ -217,8 +217,8 @@ public abstract partial class InventorySystem
 
         // Is the actor currently stripping the target? Here we could check if the actor has the stripping UI open, but
         // that requires server/client specific code.
-        // Uhhh TODO, fix this. This doesn't even fucking check if the target item is IN the targets inventory.
         return actor != target &&
+            _containerSystem.TryGetContainingContainer(target, itemUid, out _) &&
             HasComp<StrippableComponent>(target) &&
             HasComp<StrippingComponent>(actor) &&
             HasComp<HandsComponent>(actor);

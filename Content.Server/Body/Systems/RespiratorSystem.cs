@@ -169,7 +169,7 @@ public sealed partial class RespiratorSystem : EntitySystem
         foreach (var (organUid, lung, _) in organs)
         {
             _atmosSys.Merge(outGas, lung.Air);
-            lung.Air.Clear();
+            _lungSystem.ClearAir(lung); // LuaM
 
             if (_solutionContainerSystem.ResolveSolution(organUid, lung.SolutionName, ref lung.Solution))
                 _solutionContainerSystem.RemoveAllSolution(lung.Solution.Value);

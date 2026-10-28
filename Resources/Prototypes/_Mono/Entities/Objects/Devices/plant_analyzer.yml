@@ -34,3 +34,6 @@
   - type: ItemToggle
     onUse: false
   - type: Appearance
+  - type: Tag # LuaM
+    tags:
+    - SafetyDepositBlacklist # LuaM

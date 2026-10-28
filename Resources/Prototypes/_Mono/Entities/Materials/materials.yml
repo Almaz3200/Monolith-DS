@@ -211,7 +211,7 @@
   unit: materials-unit-sheet
   icon: { sprite: /Textures/_Mono/Objects/Materials/fissiles.rsi, state: uranium }
   color: "#8a8568"
-  price: 250 # 25000/sheet
+  price: 100 # LuaM: 250 > 100, 10000/sheet
   properties: # FH edit
     electrical: 4
     thermal: 3
@@ -311,7 +311,7 @@
   unit: materials-unit-sheet
   icon: { sprite: /Textures/_Mono/Objects/Materials/fissiles.rsi, state: depleted }
   color: "#14211d"
-  price: 20 # 250/sheet
+  price: 10 # LuaM: 20 > 10, 1000/sheet
   properties: # FH edit
     electrical: 4
     thermal: 3

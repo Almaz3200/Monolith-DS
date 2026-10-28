@@ -290,27 +290,22 @@ public sealed partial class RadioSystem : EntitySystem
         string message,
         LanguagePrototype language)
     {
-        // TODO: code duplication with ChatSystem.WrapMessage
         var speech = _chat.GetSpeechVerb(source, message);
         var languageColor = channel.Color;
 
         if (language.SpeechOverride.Color is { } colorOverride)
             languageColor = Color.InterpolateBetween(Color.White, colorOverride, colorOverride.A); // Changed first param to Color.White so it shows color correctly.
 
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
-
         return Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
             ("color", channel.Color),
             ("languageColor", languageColor),
             ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
             ("fontSize", language.SpeechOverride.FontSize ?? speech.FontSize),
-            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+            ("verb", _chat.PickSpeechVerb(speech, language)),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("name", name),
             ("message", FormattedMessage.EscapeText(message)), // LuaM message > FormattedMessage.EscapeText(message)
-            ("language", languageDisplay));
+            ("language", _chat.GetLanguageDisplay(language)));
     }
     // Einstein Engines - Language end
 

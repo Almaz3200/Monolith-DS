@@ -19,7 +19,7 @@ generic-reagent-effect-dizzy = You feel dizzy and see colorful shapes...
 
 petting-failure-ariral = You reach out to hug { $target }, but remember that touching an ariral is toxic!
 
-trait-ariral-non-toxic-name = Non-toxic (Ariral only)
+trait-ariral-non-toxic-name = Non-toxic
 trait-ariral-non-toxic-desc = Your skin doesn't secrete toxic sweat: you can be hugged safely and your strikes poison no one.
 
 marking-SharkFrillsAquatic = Frills (Aquatic)

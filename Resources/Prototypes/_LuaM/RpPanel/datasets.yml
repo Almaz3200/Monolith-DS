@@ -1,0 +1,269 @@
+- type: localizedDataset
+  id: RpFingerTapMessages
+  values:
+    prefix: rp-interaction-finger-tap-
+    count: 8
+
+- type: localizedDataset
+  id: RpStretchBodySelfMessages
+  values:
+    prefix: rp-interaction-stretch-body-self-
+    count: 6
+
+- type: localizedDataset
+  id: RpStrikeCoolPoseSelfMessages
+  values:
+    prefix: rp-interaction-strike-cool-pose-self-
+    count: 6
+
+- type: localizedDataset
+  id: RpHugWingsMessages
+  values:
+    prefix: rp-interaction-hug-wings-
+    count: 6
+
+- type: localizedDataset
+  id: RpBiteEarsMessages
+  values:
+    prefix: rp-interaction-bite-ears-
+    count: 10
+
+- type: localizedDataset
+  id: RpPatEarsMessages
+  values:
+    prefix: rp-interaction-pat-ears-
+    count: 6
+
+- type: localizedDataset
+  id: RpPatEarsHumanMessages
+  values:
+    prefix: rp-interaction-pat-ears-human-
+    count: 5
+
+- type: localizedDataset
+  id: RpScratchingEarsSelfMessages
+  values:
+    prefix: rp-interaction-scratching-ears-self-
+    count: 5
+
+- type: localizedDataset
+  id: RpCheeksPatMessages
+  values:
+    prefix: rp-interaction-cheeks-pat-
+    count: 6
+
+- type: localizedDataset
+  id: RpCheeksPressMessages
+  values:
+    prefix: rp-interaction-cheeks-press-
+    count: 6
+
+- type: localizedDataset
+  id: RpMewingSelfMessages
+  values:
+    prefix: rp-interaction-mewing-self-
+    count: 6
+
+- type: localizedDataset
+  id: RpSuspiciousLookSelfMessages
+  values:
+    prefix: rp-interaction-suspicious-look-self-
+    count: 5
+
+- type: localizedDataset
+  id: RpFriendlyNoseBoopMessages
+  values:
+    prefix: rp-interaction-friendly-nose-boop-
+    count: 5
+
+- type: localizedDataset
+  id: RpKittyMessages
+  values:
+    prefix: rp-interaction-kitty-
+    count: 5
+
+- type: localizedDataset
+  id: RpBlowSlapMessages
+  values:
+    prefix: rp-interaction-blow-slap-
+    count: 5
+
+- type: localizedDataset
+  id: RpBlowSlapUsersSelfMessages
+  values:
+    prefix: rp-interaction-blow-slap-users-self-
+    count: 5
+
+- type: localizedDataset
+  id: RpHittingFaceSelfMessages
+  values:
+    prefix: rp-interaction-hitting-face-self-
+    count: 6
+
+- type: localizedDataset
+  id: RpShedTearMessages
+  values:
+    prefix: rp-interaction-shed-tear-
+    count: 6
+
+- type: localizedDataset
+  id: RpKissMessages
+  values:
+    prefix: rp-interaction-kiss-
+    count: 6
+
+- type: localizedDataset
+  id: RpHandshakeMessages
+  values:
+    prefix: rp-interaction-handshake-
+    count: 5
+
+- type: localizedDataset
+  id: RpHighFiveMessages
+  values:
+    prefix: rp-interaction-high-five-
+    count: 3
+
+- type: localizedDataset
+  id: RpPushUpsFloorSelfMessages
+  values:
+    prefix: rp-interaction-push-ups-floor-self-
+    count: 4
+
+- type: localizedDataset
+  id: RpHornsPatMessages
+  values:
+    prefix: rp-interaction-horns-pat-
+    count: 5
+
+- type: localizedDataset
+  id: RpPetHeadMessages
+  values:
+    prefix: rp-interaction-pet-head-
+    count: 6
+
+- type: localizedDataset
+  id: RpGiveSlapHeadMessages
+  values:
+    prefix: rp-interaction-give-slap-head-
+    count: 4
+
+- type: localizedDataset
+  id: RpRuffleHairMessages
+  values:
+    prefix: rp-interaction-ruffle-hair-
+    count: 6
+
+- type: localizedDataset
+  id: RpTapCrownMessages
+  values:
+    prefix: rp-interaction-tap-crown-
+    count: 6
+
+- type: localizedDataset
+  id: RpBiteNeckMessages
+  values:
+    prefix: rp-interaction-bite-neck-
+    count: 8
+
+- type: localizedDataset
+  id: RpStretchNeckSelfMessages
+  values:
+    prefix: rp-interaction-stretch-neck-self-
+    count: 7
+
+- type: localizedDataset
+  id: RpGrabsNeckMessages
+  values:
+    prefix: rp-interaction-grabs-neck-
+    count: 4
+
+- type: localizedDataset
+  id: RpStepOnNeckMessages
+  values:
+    prefix: rp-interaction-step-on-neck-
+    count: 5
+
+- type: localizedDataset
+  id: RpPatShoulderMessages
+  values:
+    prefix: rp-interaction-pat-shoulder-
+    count: 5
+
+- type: localizedDataset
+  id: RpShoulderMassageMessages
+  values:
+    prefix: rp-interaction-shoulder-massage-
+    count: 10
+
+- type: localizedDataset
+  id: RpShoulderMassageSelfMessages
+  values:
+    prefix: rp-interaction-shoulder-massage-self-
+    count: 5
+
+- type: localizedDataset
+  id: RpHugShouldersMessages
+  values:
+    prefix: rp-interaction-hug-shoulders-
+    count: 5
+
+- type: localizedDataset
+  id: RpTailPatMessages
+  values:
+    prefix: rp-interaction-tail-pat-
+    count: 7
+
+- type: localizedDataset
+  id: RpTailHugMessages
+  values:
+    prefix: rp-interaction-tail-hug-
+    count: 5
+
+- type: localizedDataset
+  id: RpFriendlyTailPullMessages
+  values:
+    prefix: rp-interaction-friendly-tail-pull-
+    count: 5
+
+- type: localizedDataset
+  id: RpWagTailMessages
+  values:
+    prefix: rp-interaction-wag-tail-
+    count: 4
+
+- type: localizedDataset
+  id: RpTuckTailMessages
+  values:
+    prefix: rp-interaction-tuck-tail-
+    count: 4
+
+- type: localizedDataset
+  id: RpStepOnTailMessages
+  values:
+    prefix: rp-interaction-step-on-tail-
+    count: 6
+
+- type: localizedDataset
+  id: RpFlutterWingsSelfMessages
+  values:
+    prefix: rp-interaction-flutter-wings-self-
+    count: 6
+
+- type: localizedDataset
+  id: RpSlapFaceWithWingMessages
+  values:
+    prefix: rp-interaction-slap-face-with-wing-
+    count: 4
+
+- type: localizedDataset
+  id: RpPullWingMessages
+  values:
+    prefix: rp-interaction-pull-wing-
+    count: 4
+
+- type: localizedDataset
+  id: RpPetWingsMessages
+  values:
+    prefix: rp-interaction-pet-wings-
+    count: 6

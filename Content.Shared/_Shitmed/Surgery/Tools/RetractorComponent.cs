@@ -6,6 +6,7 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class RetractorComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "itemswitch-component-state-retractor"; // LuaM: a retractor > itemswitch-component-state-retractor
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
     
     /// <summary>

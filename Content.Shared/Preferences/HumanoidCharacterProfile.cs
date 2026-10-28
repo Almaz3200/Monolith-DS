@@ -147,7 +147,7 @@ namespace Content.Shared.Preferences
         /// The company affiliation of the character
         /// </summary>
         [DataField]
-        public string Company { get; private set; } = "None";
+        public string Company { get; private set; } = CompanyPrototype.NoCompany.Id;
 
         // Mono start
         [DataField]
@@ -767,10 +767,10 @@ namespace Content.Shared.Preferences
 
             // Check if the company exists, if not set to "None"
             if (!string.IsNullOrEmpty(Company) &&
-                Company != "None" &&
+                Company != CompanyPrototype.NoCompany.Id &&
                 !prototypeManager.HasIndex<CompanyPrototype>(Company))
             {
-                Company = "None";
+                Company = CompanyPrototype.NoCompany.Id;
             }
 
             _jobPriorities.Clear();

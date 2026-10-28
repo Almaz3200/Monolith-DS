@@ -1,0 +1,23 @@
+# LuaWorld - This file is licensed under AGPLv3
+# Copyright (c) 2025 LuaWorld Contributors
+# See AGPLv3.txt for details.
+
+- type: entity
+  parent: CrateBaseSecure
+  suffix: Ship weapon
+  id: CrateShipWeaponBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Lua/Structures/Storage/Crates/sweapon.rsi
+
+- type: entity
+  id: CrateArmoryWeaponImpulseLaser
+  parent: CrateShipWeaponBase
+  name: pulse laser crate
+  description: Contains 1 flatpacked laser cannon, powered by pulse laser energy cells.
+  components:
+  - type: StorageFill
+    contents:
+    - id: ImpulseLaserBaseFlatpack
+      amount: 1

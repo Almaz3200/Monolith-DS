@@ -69,4 +69,11 @@ public sealed partial class HolopadHologramComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public EntityUid? LinkedEntity = null;
+
+    /// <summary>
+    /// LuaM - the hologram is not drawn in the world, only through a UI, like the shuttle console comms.
+    /// It still speaks, so the speech bubbles show up above it.
+    /// </summary>
+    [DataField]
+    public bool HideInWorld;
 }

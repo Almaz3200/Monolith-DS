@@ -7,7 +7,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Lock;
-using Content.Shared._NF.Whitelist.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared._Mono.Company;
 using Content.Shared.Ghost;
@@ -273,7 +272,7 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
         foreach (var item in _handsSystem.EnumerateHeld(user))
         {
             // Check if the item is a voucher
-            if (HasComp<NFShipyardVoucherComponent>(item))
+            if (HasComp<ShipyardVoucherComponent>(item)) // LuaM
                 vouchers.Add(item);
         }
 
@@ -281,7 +280,7 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
         if (_inventorySystem.TryGetSlotEntity(user, "id", out var idUid))
         {
             // Check if the item is a voucher
-            if (HasComp<NFShipyardVoucherComponent>(idUid.Value))
+            if (HasComp<ShipyardVoucherComponent>(idUid.Value)) // LuaM
                 vouchers.Add(idUid.Value);
         }
 

@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 09/27/2026 06:58:23
-  entityCount: 1721
+  entityCount: 1720
 maps:
 - 1
 grids:
@@ -7514,13 +7514,6 @@ entities:
     components:
     - type: Transform
       pos: 23.5,14.5
-      parent: 2
-- proto: SpawnMobCorgiMouse
-  entities:
-  - uid: 1131
-    components:
-    - type: Transform
-      pos: 3.5,8.5
       parent: 2
 - proto: SpawnMobHuman
   entities:

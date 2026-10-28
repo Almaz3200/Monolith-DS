@@ -6,6 +6,10 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 14400 # 4 hours. It's a paramedic role dude.
+    - !type:TraitsRequirement # LuaM: heretics can't take this job
+      inverted: true
+      traits:
+      - Heretic
   startingGear: MdMedicGear
   alwaysUseSpawner: true
   icon: "JobIconMedicalDoctor"

@@ -12,3 +12,24 @@
   - type: ShipRepairable
     repairTime: 100
     repairCost: 30
+  # Explosions hit every anchored entity on a tile, and with 3500 hp the hardpoint died long before the gun on it.
+  # The gun kept firing, but once swapped there was nothing left to mount a new one on, and hardpoints can't be built.
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 0
+  # Not hard, so it never blocks the tile: guns and other things can be pushed onto it and anchored there.
+  # Turning collision off on anchor is not enough, map-loaded hardpoints could stay solid.
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 600
+        hard: false
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer

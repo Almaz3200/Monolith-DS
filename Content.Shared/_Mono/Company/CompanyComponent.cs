@@ -13,5 +13,5 @@ public sealed partial class CompanyComponent : Component
     /// The name of the company the player belongs to.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public ProtoId<CompanyPrototype> CompanyName = "None";
+    public ProtoId<CompanyPrototype> CompanyName = CompanyPrototype.NoCompany;
 }

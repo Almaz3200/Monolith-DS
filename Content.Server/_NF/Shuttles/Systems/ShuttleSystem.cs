@@ -28,10 +28,15 @@ public sealed partial class ShuttleSystem
     // LuaM-end
     private void NfInitialize()
     {
-        SubscribeLocalEvent<ShuttleConsoleComponent, SetInertiaDampeningRequest>(OnSetInertiaDampening);
-        SubscribeLocalEvent<ShuttleConsoleComponent, SetMaxShuttleSpeedRequest>(OnSetMaxShuttleSpeed);
-        SubscribeLocalEvent<ShuttleConsoleComponent, SetTargetCoordinatesRequest>(NfSetTargetCoordinates);
-        SubscribeLocalEvent<ShuttleConsoleComponent, SetHideTargetRequest>(NfSetHideTarget);
+        // LuaM-start
+        Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
+        {
+            subs.Event<SetInertiaDampeningRequest>(OnSetInertiaDampening);
+            subs.Event<SetMaxShuttleSpeedRequest>(OnSetMaxShuttleSpeed);
+            subs.Event<SetTargetCoordinatesRequest>(NfSetTargetCoordinates);
+            subs.Event<SetHideTargetRequest>(NfSetHideTarget);
+        });
+        // LuaM-end
     }
 
     // LuaM-start:

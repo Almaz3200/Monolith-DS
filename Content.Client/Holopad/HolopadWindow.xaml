@@ -94,6 +94,12 @@
                     </PanelContainer>
                 </BoxContainer>
 
+                <!-- LuaM: a ship holopad can stop the whole ship from taking calls -->
+                <BoxContainer Name="DoNotDisturbContainer" Orientation="Vertical" ReservesSpace="False" Visible="False">
+                    <Button Name="DoNotDisturbButton" Text="{Loc 'holo-comms-do-not-disturb'}" ToolTip="{Loc 'holo-comms-do-not-disturb-tooltip'}"
+                            ToggleMode="True" Margin="10 0 10 5"/>
+                </BoxContainer>
+
                 <!-- Button to start an emergency broadcast (the user requires a certain level of access to interact with it) -->
                 <BoxContainer Name="StartBroadcastContainer" Orientation="Vertical" ReservesSpace="False" Visible="False">
                     <Button Name="StartBroadcastButton" Text="{Loc 'holopad-window-emergency-broadcast'}" Margin="10 0 10 5" Disabled="False" ReservesSpace="False"/>

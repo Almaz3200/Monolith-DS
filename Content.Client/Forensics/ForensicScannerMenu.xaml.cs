@@ -12,29 +12,46 @@ namespace Content.Client.Forensics
     {
         [Dependency] private IGameTiming _gameTiming = default!;
 
+        private bool _hasScan;
+        private TimeSpan _printReadyAt;
+
         public ForensicScannerMenu()
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
         }
 
-        public void UpdatePrinterState(bool disabled)
+        public void SetPrintReadyAt(TimeSpan printReadyAt)
         {
-            Print.Disabled = disabled;
+            _printReadyAt = printReadyAt;
+            UpdatePrintButton();
+        }
+
+        protected override void FrameUpdate(FrameEventArgs args)
+        {
+            base.FrameUpdate(args);
+            UpdatePrintButton();
+        }
+
+        private void UpdatePrintButton()
+        {
+            Print.Disabled = !_hasScan || _gameTiming.CurTime < _printReadyAt;
         }
 
         public void UpdateState(ForensicScannerBoundUserInterfaceState msg)
         {
-            if (string.IsNullOrEmpty(msg.LastScannedName))
+            _hasScan = !string.IsNullOrEmpty(msg.LastScannedName);
+            _printReadyAt = msg.PrintReadyAt;
+            UpdatePrintButton();
+
+            if (!_hasScan)
             {
-                Print.Disabled = true;
                 Clear.Disabled = true;
                 NameLabel.Text = string.Empty;
                 Diagnostics.Text = string.Empty;
                 return;
             }
 
-            Print.Disabled = (msg.PrintReadyAt > _gameTiming.CurTime);
             Clear.Disabled = false;
 
             NameLabel.Text = msg.LastScannedName;

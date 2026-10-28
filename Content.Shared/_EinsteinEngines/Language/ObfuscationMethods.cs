@@ -172,8 +172,12 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
             }
             sentenceBeginIndex = i + 1;
 
-            if (IsPunctuation(ch))
-                builder.Append(ch).Append(' '); // TODO: this will turn '...' into '. . . '
+            if (!IsPunctuation(ch))
+                continue;
+
+            builder.Append(ch);
+            if (i + 1 >= message.Length || !IsPunctuation(message[i + 1]))
+                builder.Append(' ');
         }
     }
 

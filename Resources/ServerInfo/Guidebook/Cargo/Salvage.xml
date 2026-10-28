@@ -148,10 +148,10 @@
 
   While your starting equipment is all you need to do your job at a basic level, advanced gear makes your work far easier, and gives you the equipment necessary to let you tackle the dreaded [color=red]Mining Asteroid[/color]
 
-  ### Salvage Job Board
+  ### Консоль экспедиций утилизации
 
   <Box>
-    <GuideEntityEmbed Entity="ComputerSalvageJobBoard"/>
+    <GuideEntityEmbed Entity="ComputerSalvageExpedition"/>
   </Box>
 
   Сначала на [color=cyan]консоле экспедиций утилизации[/color] выберите миссию. Каждые 30 секунд список обновляется и показывает [color=yellow]сложность[/color] и [color=yellow]типы врагов[/color].
@@ -198,14 +198,12 @@
   <Box>
     <GuideEntityEmbed Entity="MiningDrill"/>
     <GuideEntityEmbed Entity="HandHeldMassScanner"/>
-    <GuideEntityEmbed Entity="PKAUpgradeRange"/>
   </Box>
 
   Science is the only source for a variety of extremely useful gear, including:
 
   - [color=cyan]Mining Gear[/color]: Science can provide you with [color=yellow]Mining Drills and Mineral Scanners[/color], which make mining faster and easier. They can also build you an [color=yellow]Industrial Ore Processor[/color], which processes ore into finished materials at a much better rate.
   - [color=cyan]Handheld Mass Scanner[/color]: A pocket-portable Mass Scanner Computer. Though it requires a battery to use, it lets you view your position anywhere in space.
-  - [color=cyan]PKA Upgrades[/color]: You can upgrade your PKA with up to two unique upgrades from a pool of three: [color=red]Damage,[/color] [color=yellow]Fire Rate,[/color] and [color=green]Range[/color].
 
   ## The Mining Asteroid
 
@@ -214,7 +212,6 @@
   <Box>
     <GuideEntityEmbed Entity="MobGoliath"/>
     <GuideEntityEmbed Entity="MobHivelord"/>
-    <GuideEntityEmbed Entity="MobBasilisk"/>
   </Box>
 
   The Mining Asteroid consists of two sections: the [color=cyan]Dungeon[/color], a randomly-generated structure filled with enemies and material loot, and the [color=cyan]Asteroid[/color], which contains vast deposits of mineral wealth dotted with pockets of loot and monsters.
@@ -223,5 +220,4 @@
 
   - [color=cyan]Goliaths[/color]: Titanic beasts which can incapacitate targets with writhing tendrils, leaving them helpless against their massive claws and gnashing teeth. They're a pain to take down, but they can be butchered for valuable [color=cyan]Goliath Hide Plating,[/color] useful in both completing Salvage Jobs and upgrading your Spationaut Suit.
   - [color=cyan]Hivelords[/color]: Fast moving and erratic anomalies. They prefer to keep their distance in combat, spewing out small [color=cyan]Hivelord Brood[/color] to swarm Salvagers. They're not especially tough, so ambush them quickly before they can summon a horde to drown you in. They can be butchered for the quick-rotting [color=cyan]Hivelord Cores,[/color] which are used to complete Salvage Jobs and can also be eaten raw for quick healing.
-  - [color=cyan]Basilisks[/color]: An ice-encrusted terror that lurks in the shadows. Basilisks can fire freezing energy bolts which damage and slow their targets, and will often use them to soften up a target before moving in for the kill. Once defeated, they can be butchered for invaluable [color=cyan]Diamond Ore[/color].
 </Document>

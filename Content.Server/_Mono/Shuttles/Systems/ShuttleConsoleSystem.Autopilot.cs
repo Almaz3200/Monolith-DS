@@ -6,6 +6,8 @@ using Content.Shared._Mono.Shuttles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Content.Server._Mono.NPC.HTN; // LuaM
+using Content.Shared.Shuttles.Components; // LuaM
+using Robust.Shared.Map; // LuaM
 
 namespace Content.Server._Mono.Shuttles;
 
@@ -19,24 +21,34 @@ public sealed partial class ShuttleConsoleAutopilotSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ShuttleConsoleComponent, ShuttleConsoleAutopilotPositionMessage>(OnAutopilotMessage);
+        // LuaM-start
+        Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
+        {
+            subs.Event<ShuttleConsoleAutopilotPositionMessage>(OnAutopilotMessage);
+        });
+        // LuaM-end
         SubscribeLocalEvent<ShuttleConsoleComponent, SteeringDoneEvent>(OnSteeringDone);
     }
 
     private void OnAutopilotMessage(Entity<ShuttleConsoleComponent> ent, ref ShuttleConsoleAutopilotPositionMessage args)
     {
+        StartAutopilot(ent, args.Coordinates, args.Angle); // LuaM
+    }
+
+    // LuaM-start
+    public void StartAutopilot(Entity<ShuttleConsoleComponent> ent, MapCoordinates coordinates, Angle angle)
+    {
         if (!TryComp<HTNComponent>(ent, out var htn))
             return;
 
         var blackboard = htn.Blackboard;
-        blackboard.SetValue(ent.Comp.AutopilotTargetKey, _transform.ToCoordinates(args.Coordinates));
-        blackboard.SetValue(ent.Comp.AutopilotRotationKey, args.Angle + MathF.PI);
+        blackboard.SetValue(ent.Comp.AutopilotTargetKey, _transform.ToCoordinates(coordinates));
+        blackboard.SetValue(ent.Comp.AutopilotRotationKey, angle + MathF.PI);
 
-        // LuaM-start:
         var steerer = EnsureComp<ShipSteererComponent>(ent.Owner);
         steerer.MaxVelocity = ent.Comp.AutopilotMaxSpeed;
-        // LuaM-end
     }
+    // LuaM-end
 
     private void OnSteeringDone(Entity<ShuttleConsoleComponent> ent, ref SteeringDoneEvent args)
     {

@@ -26,6 +26,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Stacks; // LuaM
 using Content.Shared.Body.Organ;
 
 namespace Content.Shared._Shitmed.Medical.Surgery;
@@ -49,6 +50,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedCorticalBorerSystem _corticalBorer = default!;
+    [Dependency] private SharedStackSystem _stack = default!; // LuaM
 
     private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
 

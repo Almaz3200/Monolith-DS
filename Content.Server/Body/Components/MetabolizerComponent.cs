@@ -1,4 +1,6 @@
 using Content.Server.Body.Systems;
+using Content.Server.EntityEffects.EffectConditions; // LuaM
+using Content.Server._DV.Feroxi; // LuaM
 using Content.Shared.Body.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
@@ -44,7 +46,7 @@ namespace Content.Server.Body.Components
         ///     List of metabolizer types that this organ is. ex. Human, Slime, Felinid, w/e.
         /// </summary>
         [DataField]
-        [Access(typeof(MetabolizerSystem), Other = AccessPermissions.ReadExecute)] // FIXME Friends
+        [Access(typeof(MetabolizerSystem), typeof(OrganType), typeof(FeroxiDehydrateSystem))] // LuaM
         public HashSet<ProtoId<MetabolizerTypePrototype>>? MetabolizerTypes = null;
 
         /// <summary>

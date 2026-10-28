@@ -13,6 +13,9 @@ namespace Content.Shared.Strip.Components
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite), DataField("handDelay")]
         public TimeSpan HandStripDelay = TimeSpan.FromSeconds(4f);
+
+        [DataField]
+        public float HandInsertDelayMultiplier = 0.5f; // LuaM
     }
 
     [NetSerializable, Serializable]

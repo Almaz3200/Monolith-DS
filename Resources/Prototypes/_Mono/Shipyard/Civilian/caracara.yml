@@ -27,7 +27,7 @@
   minPlayers: 0
   stations:
     Caracara:
-      stationProto: StandardFrontierVessel
+      stationProto: StandardFrontierExpeditionVessel # LuaM: StandardFrontierVessel > StandardFrontierExpeditionVessel, expeditions with a bought console
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Caracara CIV{1}'

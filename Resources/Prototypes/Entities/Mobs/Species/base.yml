@@ -10,6 +10,7 @@
   id: BaseMobSpecies
   abstract: true
   components:
+  - type: Sprinter # Goobstation
   - type: Sprite
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
@@ -232,6 +233,7 @@
   - type: Targeting # Shitmed Change
   - type: SurgeryTarget # Shitmed Change
   - type: ExaminableCharacter # WWDP
+  - type: RpPanelOwner # LuaM
   # Mono
   - type: ShipNpcTarget # Commented by LuaM
     needGrid: NoGrid

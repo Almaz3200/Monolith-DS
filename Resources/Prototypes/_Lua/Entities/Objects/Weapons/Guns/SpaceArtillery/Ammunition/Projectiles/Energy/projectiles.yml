@@ -1,0 +1,39 @@
+# LuaWorld - This file is licensed under AGPLv3
+# Copyright (c) 2025 LuaWorld Contributors
+# See AGPLv3.txt for details.
+
+- type: entity
+  id: BulletMachineGunImpulseTurret
+  name: pulse laser bolt
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Radiation: 25
+        Structural: 100
+        Heat: 50
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 7
+    intensitySlope: 2
+    maxIntensity: 3
+    tileBreakScale: 3
+  - type: PointLight
+    radius: 3.5
+    color: "#FF0040"
+    energy: 0.5
+  - type: Sprite
+    sprite: _Lua/Objects/SpaceArtillery/laserturret.rsi
+    layers:
+    - state: base-projectile
+  - type: RadarBlip
+    radarColor: "#C92BCC" # same as the Type-35 plasma
+    scale: 1.35
+    requireNoGrid: true
+    shape: triangle
+  - type: TimedDespawn
+    lifetime: 10
+  - type: ShipWeaponProjectile

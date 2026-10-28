@@ -1,5 +1,6 @@
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems; // LuaM
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
@@ -36,12 +37,13 @@ public sealed partial class ModifyLungGas : EntityEffect
 
         if (lung != null)
         {
+            var lungSystem = args.EntityManager.System<LungSystem>(); // LuaM
             foreach (var (gas, ratio) in _ratios)
             {
                 var quantity = ratio * amount / Atmospherics.BreathMolesToReagentMultiplier;
                 if (quantity < 0)
                     quantity = Math.Max(quantity, -lung.Air[(int) gas]);
-                lung.Air.AdjustMoles(gas, quantity);
+                lungSystem.AdjustAirMoles(lung, gas, quantity); // LuaM
             }
         }
     }

@@ -12,4 +12,9 @@ public sealed partial class WarLevelComponent : Component
     /// LuaM: one side has declared war and the others have not answered yet (yellow war level).
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)] public bool Pending = false;
+
+    /// <summary>
+    /// LuaM: the war ended with a faction's capitulation (white war level).
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)] public bool White = false;
 }

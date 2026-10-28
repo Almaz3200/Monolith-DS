@@ -77,6 +77,9 @@ public sealed partial class TraitPrototype : IPrototype
         [DataField]
         public HashSet<ProtoId<SpeciesPrototype>> SpeciesBlacklist { get; private set; } = new();
 
+        [DataField] // LuaM
+        public HashSet<ProtoId<SpeciesPrototype>> SpeciesWhitelist { get; private set; } = new(); // LuaM
+
     // Einstein Engines - Language begin (remove this if trait system refactor)
     /// <summary>
     ///     The list of all Spoken Languages that this trait adds.
