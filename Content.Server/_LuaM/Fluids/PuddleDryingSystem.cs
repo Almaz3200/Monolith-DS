@@ -10,7 +10,7 @@ namespace Content.Server._LuaM.Fluids;
 /// <summary>
 /// Dries out the reagents of puddles that don't evaporate on their own, see <see cref="PuddleDryingComponent"/>.
 /// </summary>
-public sealed class PuddleDryingSystem : EntitySystem
+public sealed partial class PuddleDryingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
