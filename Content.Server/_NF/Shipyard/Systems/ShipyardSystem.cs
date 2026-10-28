@@ -70,9 +70,9 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     {
         base.Initialize();
 
-        // FIXME: Load-bearing jank - game doesn't want to create a shipyard map at this point.
+        // --  карта верфи создаётся лениво в SetupShipyardIfNeeded, на этапе Initialize создавать карты нельзя
         _enabled = _configManager.GetCVar(NFCCVars.Shipyard);
-        _configManager.OnValueChanged(NFCCVars.Shipyard, SetShipyardEnabled); // NOTE: run immediately set to false, see comment above
+        _configManager.OnValueChanged(NFCCVars.Shipyard, SetShipyardEnabled);
 
         _configManager.OnValueChanged(NFCCVars.ShipyardSellRate, SetShipyardSellRate, true);
         _sawmill = Logger.GetSawmill("shipyard");
@@ -87,6 +87,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         SubscribeLocalEvent<ShipyardConsoleComponent, EntRemovedFromContainerMessage>(OnItemSlotChanged);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<StationDeedSpawnerComponent, MapInitEvent>(OnInitDeedSpawner);
+        InitializeDockSelect(); // Lua
     }
     public override void Shutdown()
     {
@@ -195,8 +196,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         if (!TryComp<StationDataComponent>(stationUid, out var stationGrid)
             || !HasComp<ShuttleComponent>(shuttleUid)
-            || !TryComp(shuttleUid, out TransformComponent? xform)
-            || ShipyardMap == null)
+            || !TryComp(shuttleUid, out TransformComponent? xform)) // LuaM: - ShipyardMap == null
         {
             result.Error = ShipyardSaleError.InvalidShip;
             return result;
@@ -330,6 +330,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         }
 
         _map.DeleteMap(ShipyardMap.Value);
+        ShipyardMap = null; // LuaM
     }
 
     public void SetupShipyardIfNeeded()

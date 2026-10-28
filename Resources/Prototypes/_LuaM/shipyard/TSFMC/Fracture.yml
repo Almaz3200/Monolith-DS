@@ -1,0 +1,38 @@
+#Автор: almaz3200 (discord)
+#Специально для МК:КОЛОСС (ss14s://sf.deadspace14.net)
+- type: vessel
+  id: VSKFracture
+  parent: BaseVesselIFFDisabled
+  name: vessel-VSKFracture-name
+  description: vessel-VSKFracture-desc
+  price: 150000
+  purchasable: false # voucher only - T1
+  category: Medium
+  group: Security
+  access: Security
+  shuttlePath: /SharedMaps/_LuaM/Shuttles/TSF/Fracture.yml
+  guidebookPage: Null
+  class:
+  - Brawler
+  - Pursuit
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: VSKFracture
+  mapName: 'Fracture'
+  mapPath: /SharedMaps/_LuaM/Shuttles/TSF/Fracture.yml
+  minPlayers: 0
+  stations:
+    VSKFracture:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Fracture TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Deputy: [ 0, 0 ]
+          TsfBorg: [ 0, 0 ]

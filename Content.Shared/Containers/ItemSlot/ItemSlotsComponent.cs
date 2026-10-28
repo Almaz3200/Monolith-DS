@@ -1,3 +1,5 @@
+using Content.Shared.Implants; // LuaM
+using Content.Shared.PDA; // LuaM
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
@@ -88,7 +90,7 @@ namespace Content.Shared.Containers.ItemSlots
         ///     of the currently held or currently inserted entity instead.
         /// </remarks>
         [DataField(readOnly: true)]
-        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
+        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWrite)] // LuaM
         public string Name = string.Empty;
 
         /// <summary>
@@ -100,7 +102,7 @@ namespace Content.Shared.Containers.ItemSlots
         ///     when mapping.
         /// </remarks>
         [DataField(readOnly: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
+        [Access(typeof(ItemSlotsSystem), typeof(SharedImplanterSystem), typeof(SharedPdaSystem))] // LuaM
         [NonSerialized]
         public string? StartingItem;
 

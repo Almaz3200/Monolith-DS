@@ -7,6 +7,7 @@ using Content.Shared.Construction.Components;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Map.Components; // LuaM
 using Robust.Shared.Physics;
 using Robust.Shared.Timing;
 
@@ -22,8 +23,9 @@ public class HardpointSystem : SharedHardpointSystem
     [Dependency] private DeviceLinkSystem _signalSystem = default!;
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private EntityLookupSystem _lookupSystem = default!;
+    [Dependency] private SharedMapSystem _maps = default!; // LuaM
     // Explosions can cause a lot of lookups and events to fire. So we time-limit it based on grids
-    private const float UpdateDelay = 60f;
+    private const float UpdateDelay = 2f; // LuaM: 60 > 2, a swapped gun stayed unusable for up to a minute
     private float InternalTimer = 0f;
     private HashSet<EntityUid> QueuedGrids = new();
     /// <inheritdoc/>
@@ -33,7 +35,54 @@ public class HardpointSystem : SharedHardpointSystem
         SubscribeLocalEvent<HardpointComponent, HardpointCannonAnchoredEvent>(OnCannonAnchor);
         SubscribeLocalEvent<HardpointComponent, HardpointCannonDeanchoredEvent>(OnCannonDeanchor);
         SubscribeLocalEvent<HardpointFixedMountComponent, SignalReceivedEvent>(OnSignalReceived);
+        SubscribeLocalEvent<HardpointComponent, MapInitEvent>(OnHardpointMapInit); // LuaM
+        SubscribeLocalEvent<HardpointComponent, ComponentShutdown>(OnHardpointShutdown); // LuaM
     }
+
+    // LuaM-start
+    /// <summary>
+    /// A hardpoint that appears under a gun already standing there (ship repair, admin spawn) mounts that gun,
+    /// otherwise the gun kept pointing at the old, deleted hardpoint.
+    /// </summary>
+    private void OnHardpointMapInit(Entity<HardpointComponent> ent, ref MapInitEvent args)
+    {
+        var xform = Transform(ent);
+        if (!xform.Anchored || xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+            return;
+
+        var tile = _maps.TileIndicesFor(gridUid, grid, xform.Coordinates);
+        foreach (var other in _maps.GetAnchoredEntities((gridUid, grid), tile))
+        {
+            if (!TryComp<HardpointAnchorableOnlyComponent>(other, out var gun))
+                continue;
+
+            if (gun.anchoredTo is { } current && !TerminatingOrDeleted(current) && HasComp<HardpointComponent>(current))
+                continue;
+
+            gun.anchoredTo = null;
+            if (TryAnchorToHardpoint(other, gun))
+                return;
+        }
+    }
+
+    /// <summary>
+    /// A destroyed or deleted hardpoint frees its gun, so the gun no longer counts as mounted.
+    /// </summary>
+    private void OnHardpointShutdown(EntityUid uid, HardpointComponent comp, ComponentShutdown args)
+    {
+        if (comp.anchoring is not { } gun || TerminatingOrDeleted(gun))
+            return;
+
+        if (!TryComp<HardpointAnchorableOnlyComponent>(gun, out var gunComp) || gunComp.anchoredTo != uid)
+            return;
+
+        gunComp.anchoredTo = null;
+        Dirty(gun, gunComp);
+
+        if (Transform(gun).GridUid is { } grid)
+            QueueHardpointRefresh(grid);
+    }
+    // LuaM-end
     private void OnSignalReceived(EntityUid uid, HardpointFixedMountComponent component, ref SignalReceivedEvent args)
     {
         if (!TryComp<HardpointComponent>(uid, out var hard))
@@ -65,8 +114,10 @@ public class HardpointSystem : SharedHardpointSystem
 
     public void QueueHardpointRefresh(EntityUid grid)
     {
-        if (QueuedGrids.Contains(grid))
+        // LuaM: grids without a gunnery server have nothing to refresh
+        if (!HasComp<FireControlGridComponent>(grid))
             return;
+
         QueuedGrids.Add(grid);
     }
 
@@ -101,18 +152,16 @@ public class HardpointSystem : SharedHardpointSystem
         if (InternalTimer < UpdateDelay)
             return;
         InternalTimer = 0;
-        foreach(var grid in QueuedGrids)
+        // LuaM: a grid without a gunnery server used to return here, the queue was never cleared and no grid got
+        // refreshed again, so guns put on hardpoints stayed undetected. Removing from the set while iterating it threw too.
+        foreach (var grid in QueuedGrids)
         {
-            if (TerminatingOrDeleted(grid))
-            {
-                QueuedGrids.Remove(grid);
+            if (TerminatingOrDeleted(grid) || !TryComp<FireControlGridComponent>(grid, out var gridFireControlComp))
                 continue;
-            }
-            HashSet<Entity<HardpointComponent>> lookupList = new();
-            if (!TryComp<FireControlGridComponent>(grid, out var gridFireControlComp))
-                return;
-            _fcsSystem.RefreshControllables(grid);
+
+            _fcsSystem.RefreshControllables(grid, gridFireControlComp);
         }
         QueuedGrids.Clear();
+        // End LuaM
     }
 }

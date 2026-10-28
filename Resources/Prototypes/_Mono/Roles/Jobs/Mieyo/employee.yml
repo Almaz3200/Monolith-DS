@@ -3,6 +3,11 @@
   name: job-name-mmc-employee
   description: job-description-mmc-employee
   playTimeTracker: JobMMCEmployee
+  requirements: # LuaM
+  - !type:TraitsRequirement # LuaM: heretics can't take this job
+    inverted: true
+    traits:
+    - Heretic
   # No requirements. Anyone can be my slave.
   startingGear: MMCEmployeeGear
   alwaysUseSpawner: true

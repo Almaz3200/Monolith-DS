@@ -23,9 +23,11 @@
   recipeUnlocks:
   - CharonSubnuclearSlugUniversal
   technologyPrerequisites:
-  - UniversalRailgunAmmo
-  - UniversalMaterialResearchT3
-  position: 8, 3 # LuaM: 10, 15 > 8, 3
+  # - UniversalRailgunAmmo # Commented by LuaM
+  # - UniversalMaterialResearchT3 # Commented by LuaM
+  - UniversalTorpedoAmmoAdvanced # LuaM
+  - UraniumProcessingAdvanced # LuaM
+  position: 7, 3 # LuaM: 10, 15 > 7, 3
 
 - type: technology
   id: UniversalTorpedoAmmo
@@ -65,8 +67,9 @@
   recipeUnlocks:
   - SandboxHEMissileUniversal
   technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 2, -19
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - UniversalTorpedoAmmoAdvanced # LuaM
+  position: 5, 3 # LuaM 2, -19 > 5, 3
 
 - type: technology
   id: Universal150mmAmmo
@@ -109,4 +112,4 @@
   technologyPrerequisites:
   - UniversalLightFighterOrdinance
   - UniversalRailgunAmmo # LuaM: UniversalPlastitaniumCore > UniversalRailgunAmmo
-  position: 3, 5 # LuaM: 6, 5 > 3, 5
+  position: 3, 4 # LuaM: 6, 5 > 3, 4

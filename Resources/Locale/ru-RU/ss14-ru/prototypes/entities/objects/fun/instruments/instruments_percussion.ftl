@@ -16,3 +16,6 @@ ent-ReverseCymbalsInstrument = реверс-цимбалы
     .desc = Вы уверены, что держите их правильно?
 ent-SuperSynthesizerInstrument = суперсинтезатор
     .desc = Разрываем гетто с помощью Touhou MIDIs с 2020 года.
+ent-SuperSynthesizerNoLimitInstrument = { ent-SuperSynthesizerInstrument }
+    .desc = { ent-SuperSynthesizerInstrument.desc }
+    .suffix = NoLimits

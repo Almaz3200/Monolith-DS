@@ -24,7 +24,8 @@
   - ContractorSpecialGunMla34
   #- ContractorSpecialGunMla79
   - ContractorSpecialGunMalandro
-
+  - ContractorSpecialWeapon101 # LuaM
+  - ContractorSpecialGunIroh # LuaM
 # TSF playtime weapons
 
 - type: loadout

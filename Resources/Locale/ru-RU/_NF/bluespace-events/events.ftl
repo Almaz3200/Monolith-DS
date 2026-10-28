@@ -41,5 +41,5 @@ station-event-bluespace-scrap-end-announcement = Критическая нест
 station-event-bluespace-name-BrokenMcDelivery = МакДоставка
 station-event-bluespace-name-Cave = Астероидная пещера
 station-event-bluespace-name-UnidentifiedVessel = Неопознанный объект
-station-event-bluespace-name-SecureNTVault = Безопасное хранилище
+station-event-bluespace-name-SecureNTVault = Безопасное хранилище ТСФ
 station-event-bluespace-name-SyndicateWeaponsCache = Хранилище оружия Синдиката

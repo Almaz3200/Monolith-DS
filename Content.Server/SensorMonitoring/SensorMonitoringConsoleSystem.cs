@@ -261,6 +261,7 @@ public sealed partial class SensorMonitoringConsoleSystem : EntitySystem
 
     private static int MakeNetId(SensorMonitoringConsoleComponent component)
     {
+        component.InitialUIStateSent.Clear();
         return ++component.IdCounter;
     }
 

@@ -211,7 +211,6 @@ public sealed partial class SpreaderSystem : EntitySystem
     {
         freeTiles = [];
         neighbors = [];
-        // TODO remove occupiedTiles -- its currently unused and just slows this method down.
 
         var tile = _map.TileIndicesFor(grid, xform.Coordinates);
         var blockedAtmosDirs = AtmosDirection.Invalid;

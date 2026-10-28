@@ -6,6 +6,10 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 32400 # 9 hrs
+  - !type:TraitsRequirement # LuaM: heretics can't take this job
+    inverted: true
+    traits:
+    - Heretic
   startingGear: USSPRiflemanGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
@@ -36,6 +40,7 @@
   accessGroups:
   - GeneralAccess
   - USSPLow
+  - ViperLow # LuaM: VG and USSP share their access
 
 - type: startingGear
   id: USSPRiflemanGear

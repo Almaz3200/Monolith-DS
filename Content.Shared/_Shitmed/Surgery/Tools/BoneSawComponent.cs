@@ -6,6 +6,7 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class BoneSawComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "a bone saw"; // LuaM: itemswitch-component-state-bonesaw > itemswitch-component-state-bonesetter
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
     
     /// <summary>

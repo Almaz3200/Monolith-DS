@@ -227,6 +227,8 @@
           type: ShuttleConsoleBoundUserInterface
         enum.IntercomUiKey.Key:
           type: IntercomBoundUserInterface
+        enum.HoloCommsUiKey.Key: # LuaM
+          type: HoloCommsBoundUserInterface
   - type: ContainerContainer
     containers:
       board: !type:Container
@@ -238,6 +240,7 @@
       key_slots:
       - EncryptionKeyTraffic
   # End Frontier
+  - type: HoloCommsConsole # LuaM
   - type: TargetSeekerAlert # Mono
     targetGainSound:
       path: /Audio/_Mono/Effects/Alerts/rwr_beep.ogg
@@ -263,6 +266,9 @@
         params:
           loop: true
           volume: 1
+  - type: ShipNpcTarget # LuaM
+    needPower: true
+    maxTargetRange: 75
 
 - type: entity
   parent: BaseComputerShuttle
@@ -637,8 +643,7 @@
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: ResearchClient
-  - type: AnalysisConsole
-    reportEntityId: PaperArtifactAnalyzer
+  - type: AnalysisConsole # Lua: removed reportEntityId
   - type: DeviceList
   - type: DeviceNetwork
     deviceNetId: Wired
@@ -647,10 +652,10 @@
     ports:
       - ArtifactAnalyzerSender
   - type: ActivatableUI
-    key: enum.ArtifactAnalzyerUiKey.Key
+    key: enum.ArtifactAnalyzerUiKey.Key # Lua: ArtifactAnalzyerUiKey > ArtifactAnalyzerUiKey
   - type: UserInterface
     interfaces:
-      enum.ArtifactAnalzyerUiKey.Key:
+      enum.ArtifactAnalyzerUiKey.Key: # Lua: ArtifactAnalzyerUiKey > ArtifactAnalyzerUiKey
         type: AnalysisConsoleBoundUserInterface
       enum.ResearchClientUiKey.Key:
         type: ResearchClientBoundUserInterface

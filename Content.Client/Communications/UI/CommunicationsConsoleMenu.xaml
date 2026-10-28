@@ -56,6 +56,24 @@
                     Access="Public" 
                     Text="Placeholder Text"
                     ToolTip="{Loc 'comms-console-menu-emergency-shuttle-button-tooltip'}"/>
+
+                <!-- LuaM: war declaration -->
+                <Button Name="DeclareWarButton"
+                    Access="Public"
+                    Visible="False"
+                    Disabled="True"
+                    StyleClasses="Caution"
+                    Text="{Loc 'comms-console-menu-declare-war-button'}"
+                    ToolTip="{Loc 'comms-console-menu-declare-war-button-tooltip'}"/>
+
+                <!-- LuaM: capitulation -->
+                <controls:ConfirmButton Name="SurrenderButton"
+                    Access="Public"
+                    Visible="False"
+                    StyleClasses="Caution"
+                    Text="{Loc 'comms-console-menu-surrender-button'}"
+                    ConfirmationText="{Loc 'comms-console-menu-surrender-button-confirm'}"
+                    ToolTip="{Loc 'comms-console-menu-surrender-button-tooltip'}"/>
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

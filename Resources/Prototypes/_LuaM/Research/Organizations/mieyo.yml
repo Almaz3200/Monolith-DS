@@ -1,0 +1,13 @@
+- type: technology
+  id: CombatImplanters
+  name: research-technology-combat-implanters
+  entityIcon: Stimpack
+  discipline: Mieyo
+  tier: 2
+  cost: 50000
+  recipeUnlocks:
+  - CombatMedipenImplanterRecipe
+  - StimulantImplanterRecipe
+  technologyPrerequisites:
+  - MieyoMedicalGear
+  position: 2, 6

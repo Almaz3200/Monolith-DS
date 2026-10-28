@@ -30,6 +30,7 @@
   - AllAccessMono #Mono
   access:
   - HeadOfPersonnel #Mono
+  - Frontier #LuaM Add (acces fix)
   guides:
   - Caelestinus
   special:
@@ -65,7 +66,9 @@
     - Flash
     - RubberStampSr
     - DoorRemoteCommand
+    - EncryptionKeyCentCom
     - EncryptionKeyStationMasterSR #Mono start
+    - EncryptionKeyDiplomacy
   # - ShipVoucherFrontierGuard # Mono
     - PhoneInstrumentHigh
     - CCHandheldOverwatchConsole

@@ -15,6 +15,14 @@
   - type: Headset
   - type: EncryptionKeyHolder
     keySlots: 10 # Frontier 4<10
+  # LuaM start: headset channels UI and built-in tunable radio
+  - type: HeadsetChannelToggle
+  - type: HeadsetTunableRadio
+  - type: UserInterface
+    interfaces:
+      enum.HeadsetChannelsUiKey.Key:
+        type: HeadsetChannelsBoundUserInterface
+  # LuaM end
   - type: Sprite
     state: icon
   - type: Item

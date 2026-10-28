@@ -13,6 +13,8 @@
   - ShipVoucherVGKeelback
   - ShipVoucherVGLancehead
   - ShipVoucherVGLeviathan
+  - WeaponRifleAK12 # LuaM
+  - WeaponPistolAnaconda # LuaM
 
 - type: latheRecipePack
   id: MonoViperGroupStatic

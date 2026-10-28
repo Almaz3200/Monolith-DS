@@ -10,3 +10,5 @@ ent-BorgModuleBureaucracy = бюрократический модуль борг
     .desc = { ent-BaseBorgModule.desc }
 ent-BorgModuleJetpack = транспортный модуль борга
     .desc = { ent-BaseBorgModule.desc }
+ent-BorgModuleJetpackADM = pre-fracture jetpack cyborg module
+    .desc = { ent-BorgModuleJetpack.desc }

@@ -292,6 +292,9 @@ public sealed partial class AmbientSoundSystem : SharedAmbientSoundSystem
 
             foreach (var (_, sourceEntity) in sourceList)
             {
+                if (playingCount >= MaxSingleSound)
+                    break;
+
                 var uid = sourceEntity.Owner;
                 var comp = sourceEntity.Comp;
 

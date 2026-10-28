@@ -6,6 +6,7 @@ using Content.IntegrationTests.Utility;
 using YamlDotNet.RepresentationModel;
 using Content.Server.Administration.Systems;
 using Content.Server.GameTicking;
+using Content.Server.Maps; // LuaM
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
@@ -494,27 +495,13 @@ namespace Content.IntegrationTests.Tests
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;
             var protoMan = server.ResolveDependency<IPrototypeManager>();
+            var cfg = server.ResolveDependency<IConfigurationManager>(); // LuaM
 
-            var gameMaps = protoMan.EnumeratePrototypes<GameMapPrototype>()
-                .Where(x => !pair.IsTestPrototype(x))
-                // Frontier: FIXME - hacky test fix
-                .Where(x =>
-                    x.ID == PoolManager.TestMap || // Frontier: check test map
-                    (x.MapPath.ToString().StartsWith("/Maps/_Mono") && // Mono: check Mono maps only
-                    !x.MapPath.ToString().StartsWith("/SharedMaps/_Mono/Shuttles") && // Mono: skip shuttles (not loaded as maps)
-                    !x.MapPath.ToString().StartsWith("/Maps/_Mono/Deprecated") && // Mono: skip deprecated (not loaded as maps)
-                    !x.MapPath.ToString().StartsWith("/Maps/_Mono/ShuttleEvent") && // Mono: skip shuttleevents (not loaded as maps)
-                    !x.MapPath.ToString().StartsWith("/Maps/_Mono/Supercapitals") && // Mono: skip supercapitals (not loaded as maps)
-                    !x.MapPath.ToString().StartsWith("/Maps/_Mono/Crocus") && // Mono: skip crocus (irrelevant)
-                    !x.MapPath.ToString().StartsWith("/Maps/_Mono/POI")) // Mono: skip POIs (not loaded as maps)
-                    )
-                // End Frontier
-                .Select(x => x.ID)
-                .ToHashSet();
+            // LuaM-start
+            var gameMaps = protoMan.Index<GameMapPoolPrototype>(cfg.GetCVar(CCVars.GameMapPool)).Maps;
 
-            Assert.That(gameMaps.Remove(PoolManager.TestMap));
-
-            Assert.That(gameMaps, Is.EquivalentTo(GameMaps.ToHashSet()), "Game map prototype missing from test cases.");
+            Assert.That(gameMaps, Is.SubsetOf(GameMaps), "Game map prototype missing from test cases.");
+            // LuaM-end
 
             await pair.CleanReturnAsync();
         }

@@ -1,0 +1,15 @@
+ent-ImpulseLaserBase = импульсный лазер
+    .desc = Лазерное орудие, питается от энергоячейки импульсного лазера.
+    .suffix = Среднее, корабельное орудие
+ent-ImpulseLaserUnanchor = { ent-ImpulseLaserBase }
+    .desc = { ent-ImpulseLaserBase.desc }
+    .suffix = Неоткрепляемый, корабельное орудие
+ent-ImpulseLaserBaseFlatpack = упакованный импульсный лазер
+    .desc = Упакованное лазерное орудие, питается от энергоячейки импульсного лазера.
+ent-BulletMachineGunImpulseTurret = заряд импульсного лазера
+    .desc = { ent-BaseBulletTrigger.desc }
+ent-CrateShipWeaponBase = ящик корабельного вооружения
+    .desc = { ent-CrateBaseSecure.desc }
+    .suffix = Корабельное вооружение
+ent-CrateArmoryWeaponImpulseLaser = ящик с упакованным импульсным лазером
+    .desc = Содержит 1 упакованное лазерное орудие, питающееся от энергоячейки импульсного лазера.

@@ -1,0 +1,30 @@
+- type: rpInteraction
+  id: Handshake
+  category: Hands
+  kind: Soft
+  range: 1.5
+  sound:
+    collection: RpHandshake
+  messages: RpHandshakeMessages
+  icon: _LuaM/Interface/RpPanel/friendly.png
+
+- type: rpInteraction
+  id: HighFive
+  category: Hands
+  kind: Soft
+  range: 1.5
+  sound:
+    collection: RpBang
+  messages: RpHighFiveMessages
+  icon: _LuaM/Interface/RpPanel/high_five.png
+
+- type: rpInteraction
+  id: PushUpsFloor
+  category: Hands
+  kind: Soft
+  sound:
+    collection: RpBang
+  selfMessages: RpPushUpsFloorSelfMessages
+  icon: _LuaM/Interface/RpPanel/push_ups.png
+  targetRequirements:
+  - !type:TargetOnFloorRequirement

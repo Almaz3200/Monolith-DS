@@ -7,6 +7,7 @@ public sealed partial class BoneGelComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "bone gel"; // LuaM: bone gel > itemswitch-component-state-bonegel
 
+    [DataField] // LuaM
     public bool? Used { get; set; } = null;
 
     [DataField]

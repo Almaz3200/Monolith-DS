@@ -27,6 +27,8 @@ public sealed partial class WarLevelSystem : EntitySystem
         }
 
         component.PostWar = level;
+        component.Pending = false; // LuaM
+        component.White = false; // LuaM
         Log.Info($"Setting WarLevelComponent for entity {sectorEnt} to {component.PostWar}. Input value {level}");
             _chatSystem.DispatchGlobalAnnouncement(
                 level ? Loc.GetString("war-level-announcement-post") :  Loc.GetString("war-level-announcement-pre"),
@@ -37,6 +39,33 @@ public sealed partial class WarLevelSystem : EntitySystem
 
         RaiseLocalEvent(new WarLevelChangedEvent(level)); // Frontier: pass invalid, we have no station
     }
+
+    // LuaM start: yellow war level while waiting for the other side to declare war
+    public void SetPending(bool pending)
+    {
+        var sectorEnt = _sectorService.GetServiceEntity();
+        if (!TryComp<WarLevelComponent>(sectorEnt, out var component) || component.Pending == pending)
+            return;
+
+        component.Pending = pending;
+        RaiseLocalEvent(new WarLevelChangedEvent(component.PostWar));
+    }
+
+    /// <summary>
+    /// White war level: the war ended with a faction's capitulation.
+    /// </summary>
+    public void SetWhite()
+    {
+        var sectorEnt = _sectorService.GetServiceEntity();
+        if (!TryComp<WarLevelComponent>(sectorEnt, out var component))
+            return;
+
+        component.PostWar = false;
+        component.Pending = false;
+        component.White = true;
+        RaiseLocalEvent(new WarLevelChangedEvent(false));
+    }
+    // LuaM end
 }
 
 public sealed class WarLevelChangedEvent : EntityEventArgs

@@ -25,7 +25,7 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-        Shock: 5
+        Slash: 5 # LuaM: Shock 5 > Slash 5
   - type: Stunbaton
     energyPerUse: 120
   - type: MeleeWeapon # goob edited

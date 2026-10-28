@@ -1,0 +1,456 @@
+# Kitchen bounties of Colossus Central for the food ported from Lua (PR #188).
+# The same tiers and rewards as _Mono/Catalogs/Bounties/CC/cooking.yml.
+
+# T0
+
+- type: cargoBounty
+  id: CCBountyCottonBun
+  reward: 12500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T0
+  entries:
+  - name: cc-food-bounty-name-BountyCottonBun
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCottonBun
+
+- type: cargoBounty
+  id: CCBountyRatKebab
+  reward: 12500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T0
+  entries:
+  - name: cc-food-bounty-name-BountyRatKebab
+    amount: 5
+    whitelist:
+      tags:
+      - BountyRatKebab
+
+# T1
+
+- type: cargoBounty
+  id: CCBountyCottonGrilledCheeseSandwich
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyCottonGrilledCheeseSandwich
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCottonGrilledCheeseSandwich
+
+- type: cargoBounty
+  id: CCBountyCreamCroissant
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyCreamCroissant
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCreamCroissant
+
+- type: cargoBounty
+  id: CCBountyChocolateCroissant
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyChocolateCroissant
+    amount: 5
+    whitelist:
+      tags:
+      - BountyChocolateCroissant
+
+- type: cargoBounty
+  id: CCBountyCheeseCroissant
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyCheeseCroissant
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCheeseCroissant
+
+- type: cargoBounty
+  id: CCBountyDoughHotDog
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyDoughHotDog
+    amount: 5
+    whitelist:
+      tags:
+      - BountyDoughHotDog
+
+- type: cargoBounty
+  id: CCBountyFriedEggSausage
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyFriedEggSausage
+    amount: 5
+    whitelist:
+      tags:
+      - BountyFriedEggSausage
+
+- type: cargoBounty
+  id: CCBountyFriedSausage
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyFriedSausage
+    amount: 5
+    whitelist:
+      tags:
+      - BountyFriedSausage
+
+- type: cargoBounty
+  id: CCBountyMeatKebab
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyMeatKebab
+    amount: 5
+    whitelist:
+      tags:
+      - BountyMeatKebab
+
+- type: cargoBounty
+  id: CCBountyLizardTailKebab
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyLizardTailKebab
+    amount: 5
+    whitelist:
+      tags:
+      - BountyLizardTailKebab
+
+- type: cargoBounty
+  id: CCBountyDoubleRatKebab
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyDoubleRatKebab
+    amount: 5
+    whitelist:
+      tags:
+      - BountyDoubleRatKebab
+
+- type: cargoBounty
+  id: CCBountyTexasToast
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyTexasToast
+    amount: 5
+    whitelist:
+      tags:
+      - BountyTexasToast
+
+- type: cargoBounty
+  id: CCBountyCottonBurger
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyCottonBurger
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCottonBurger
+
+- type: cargoBounty
+  id: CCBountyLicoriceCreamsicle
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyLicoriceCreamsicle
+    amount: 5
+    whitelist:
+      tags:
+      - BountyLicoriceCreamsicle
+
+- type: cargoBounty
+  id: CCBountyFriedTofu
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyFriedTofu
+    amount: 5
+    whitelist:
+      tags:
+      - BountyFriedTofu
+
+- type: cargoBounty
+  id: CCBountyWholeChicken
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyWholeChicken
+    amount: 5
+    whitelist:
+      tags:
+      - BountyWholeChicken
+
+- type: cargoBounty
+  id: CCBountyWholeDuck
+  reward: 37500
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T1
+  entries:
+  - name: cc-food-bounty-name-BountyWholeDuck
+    amount: 5
+    whitelist:
+      tags:
+      - BountyWholeDuck
+
+# T2
+
+- type: cargoBounty
+  id: CCBountyCottonCake
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyCottonCake
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCottonCake
+
+- type: cargoBounty
+  id: CCBountyAmericanBreakfast
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyAmericanBreakfast
+    amount: 5
+    whitelist:
+      tags:
+      - BountyAmericanBreakfast
+
+- type: cargoBounty
+  id: CCBountyEnglishBreakfast
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyEnglishBreakfast
+    amount: 5
+    whitelist:
+      tags:
+      - BountyEnglishBreakfast
+
+- type: cargoBounty
+  id: CCBountyShawarma
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyShawarma
+    amount: 5
+    whitelist:
+      tags:
+      - BountyShawarma
+
+- type: cargoBounty
+  id: CCBountyCheeseShawarma
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyCheeseShawarma
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCheeseShawarma
+
+- type: cargoBounty
+  id: CCBountyMeatShawarma
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyMeatShawarma
+    amount: 5
+    whitelist:
+      tags:
+      - BountyMeatShawarma
+
+- type: cargoBounty
+  id: CCBountyHawaiianKebab
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyHawaiianKebab
+    amount: 5
+    whitelist:
+      tags:
+      - BountyHawaiianKebab
+
+- type: cargoBounty
+  id: CCBountyFiestaKebab
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyFiestaKebab
+    amount: 5
+    whitelist:
+      tags:
+      - BountyFiestaKebab
+
+- type: cargoBounty
+  id: CCBountyMashedMeatballs
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyMashedMeatballs
+    amount: 5
+    whitelist:
+      tags:
+      - BountyMashedMeatballs
+
+- type: cargoBounty
+  id: CCBountyFrenchGarlicBread
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyFrenchGarlicBread
+    amount: 5
+    whitelist:
+      tags:
+      - BountyFrenchGarlicBread
+
+- type: cargoBounty
+  id: CCBountyCinnamonRoll
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyCinnamonRoll
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCinnamonRoll
+
+- type: cargoBounty
+  id: CCBountyCottonCheeseburger
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyCottonCheeseburger
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCottonCheeseburger
+
+- type: cargoBounty
+  id: CCBountyCinnamonMochi
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyCinnamonMochi
+    amount: 5
+    whitelist:
+      tags:
+      - BountyCinnamonMochi
+
+- type: cargoBounty
+  id: CCBountyChickenParmesan
+  reward: 75000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T2
+  entries:
+  - name: cc-food-bounty-name-BountyChickenParmesan
+    amount: 5
+    whitelist:
+      tags:
+      - BountyChickenParmesan
+
+# T3
+
+- type: cargoBounty
+  id: CCBountyWorldPeazza
+  reward: 150000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T3
+  entries:
+  - name: cc-food-bounty-name-BountyWorldPeazza
+    amount: 5
+    whitelist:
+      tags:
+      - BountyWorldPeazza
+
+- type: cargoBounty
+  id: CCBountySnakeKebab
+  reward: 150000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T3
+  entries:
+  - name: cc-food-bounty-name-BountySnakeKebab
+    amount: 5
+    whitelist:
+      tags:
+      - BountySnakeKebab
+
+- type: cargoBounty
+  id: CCBountyWholePenguin
+  reward: 150000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T3
+  entries:
+  - name: cc-food-bounty-name-BountyWholePenguin
+    amount: 5
+    whitelist:
+      tags:
+      - BountyWholePenguin
+
+# T4
+
+- type: cargoBounty
+  id: CCBountyDragonSteak
+  reward: 250000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T4
+  entries:
+  - name: cc-food-bounty-name-BountyDragonSteak
+    amount: 5
+    whitelist:
+      tags:
+      - BountyDragonSteak
+
+- type: cargoBounty
+  id: CCBountyDraco
+  reward: 250000
+  description: cc-food-bounty-desc-generic
+  idPrefix: CC-SRV-T4
+  entries:
+  - name: cc-food-bounty-name-BountyDraco
+    amount: 5
+    whitelist:
+      tags:
+      - BountyDraco

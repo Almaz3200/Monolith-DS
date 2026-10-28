@@ -1,5 +1,9 @@
+using Content.Server.EntityEffects.Effects; // LuaM
 using Content.Server.Ghost.Roles.Raffles;
 using Content.Server.Mind.Commands;
+using Content.Server.Puppet; // LuaM
+using Content.Server.StationEvents.Events; // LuaM
+using Content.Server.Zombies; // LuaM
 using Content.Shared.Ghost.Roles;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
@@ -38,7 +42,8 @@ public sealed partial class GhostRoleComponent : Component
     // We do this so updating RoleName and RoleDescription in VV updates the open EUIs.
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
+    [Access(typeof(GhostRoleSystem), typeof(MakeSentient), typeof(MakeGhostRoleCommand), typeof(MakeRaffledGhostRoleCommand),
+        typeof(ToggleableGhostRoleSystem), typeof(VentriloquistPuppetSystem), typeof(RandomSentienceRule), typeof(ZombieSystem))] // LuaM
     public string RoleName
     {
         get => Loc.GetString(_roleName);
@@ -50,7 +55,8 @@ public sealed partial class GhostRoleComponent : Component
     }
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
+    [Access(typeof(GhostRoleSystem), typeof(MakeSentient), typeof(MakeGhostRoleCommand), typeof(MakeRaffledGhostRoleCommand),
+        typeof(ToggleableGhostRoleSystem), typeof(VentriloquistPuppetSystem), typeof(RandomSentienceRule), typeof(ZombieSystem))] // LuaM
     public string RoleDescription
     {
         get => Loc.GetString(_roleDescription);
@@ -62,7 +68,8 @@ public sealed partial class GhostRoleComponent : Component
     }
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
+    [Access(typeof(GhostRoleSystem), typeof(MakeSentient), typeof(MakeGhostRoleCommand), typeof(MakeRaffledGhostRoleCommand),
+        typeof(ToggleableGhostRoleSystem), typeof(ZombieSystem))] // LuaM
     public string RoleRules
     {
         get => Loc.GetString(_roleRules);
@@ -102,14 +109,14 @@ public sealed partial class GhostRoleComponent : Component
     /// If set, ghost role is raffled, otherwise it is first-come-first-serve.
     /// </summary>
     [DataField("raffle")]
-    [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
+    [Access(typeof(GhostRoleSystem), typeof(MakeRaffledGhostRoleCommand))] // LuaM
     public GhostRoleRaffleConfig? RaffleConfig { get; set; }
 
     /// <summary>
     /// Job the entity will receive after adding the mind.
     /// </summary>
     [DataField("job")]
-    [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // also FIXME Friends
+    [Access(typeof(GhostRoleSystem), typeof(ToggleableGhostRoleSystem))] // LuaM
     public ProtoId<JobPrototype>? JobProto = null;
 
     // Frontier: per-role ghost role whitelisting

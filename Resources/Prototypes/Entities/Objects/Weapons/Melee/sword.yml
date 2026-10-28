@@ -204,9 +204,9 @@
       damage:
         types:
           Structural: 150
-          Slash: 20 #Horror
+          Slash: 40 # LuaM: 20 > 40, Heat 20 moved to Slash #Horror
           Blunt: 20
-          Heat: 20
+          # Heat: 20 # Commented by LuaM: moved to Slash
           Piercing: 20
           Radiation: 10
       soundHit:

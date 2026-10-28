@@ -13,7 +13,7 @@ public sealed partial class BountyContractUi : UIFragment
 {
     private BountyContractUiFragment? _fragment;
     private BoundUserInterface? _userInterface;
-    private ProtoId<BountyContractCollectionPrototype> _lastCollection = "Command"; //FIXME: nasty.
+    private ProtoId<BountyContractCollectionPrototype>? _lastCollection; // LuaM
     private BoundUserInterfaceState? _lastState = null;
 
     public override Control GetUIFragmentRoot()
@@ -26,6 +26,7 @@ public sealed partial class BountyContractUi : UIFragment
         _fragment = new BountyContractUiFragment();
         _userInterface = userInterface;
         _lastState = null;
+        _lastCollection = null; // LuaM
     }
 
 
@@ -48,6 +49,8 @@ public sealed partial class BountyContractUi : UIFragment
 
     private void ShowCreateState(BountyContractCreateUiState state)
     {
+        _lastCollection = state.Collection; // LuaM
+
         // If the previous state is already a create state, do not destroy our old state.
         if (_lastState is BountyContractCreateUiState)
             return;
@@ -113,22 +116,22 @@ public sealed partial class BountyContractUi : UIFragment
 
     private void OnRefreshListPressed()
     {
-        SendMessage(MakeCommand(BountyContractCommand.RefreshList, _lastCollection));
+        SendCommand(BountyContractCommand.RefreshList); // LuaM
     }
 
     private void OnOpenCreateUiPressed()
     {
-        SendMessage(MakeCommand(BountyContractCommand.OpenCreateUi, _lastCollection));
+        SendCommand(BountyContractCommand.OpenCreateUi); // LuaM
     }
 
     private void OnCancelCreatePressed()
     {
-        SendMessage(MakeCommand(BountyContractCommand.CloseCreateUi, _lastCollection));
+        SendCommand(BountyContractCommand.CloseCreateUi); // LuaM
     }
 
     private void OnToggleNotificationPressed()
     {
-        SendMessage(MakeCommand(BountyContractCommand.ToggleNotifications, _lastCollection));
+        SendCommand(BountyContractCommand.ToggleNotifications); // LuaM
     }
 
     private void OnTryCreatePressed(BountyContractRequest contract)
@@ -141,6 +144,14 @@ public sealed partial class BountyContractUi : UIFragment
     {
         return new BountyContractCommandMessageEvent(command, collection);
     }
+
+    // LuaM-start
+    private void SendCommand(BountyContractCommand command)
+    {
+        if (_lastCollection is { } collection)
+            SendMessage(MakeCommand(command, collection));
+    }
+    // LuaM-end
 
     private void SendMessage(CartridgeMessageEvent msg)
     {

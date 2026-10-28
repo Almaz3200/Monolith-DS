@@ -11,3 +11,5 @@ ent-BaseRandomShuttleRule = базовое правило случайного �
     .desc = { ent-BaseGameRule.desc }
 ent-MonoMonolithicEventsScheduler = планировщик монолитных событий
     .desc = { ent-BaseGameRule.desc }
+ent-MonoChimeraSTCShuttleSpawnerSchedulerTier2 = { ent-BaseGameRule }
+    .desc = { ent-BaseGameRule.desc }

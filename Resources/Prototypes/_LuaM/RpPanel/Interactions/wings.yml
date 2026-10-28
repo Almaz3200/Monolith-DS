@@ -1,0 +1,55 @@
+- type: rpInteraction
+  id: FlutterWings
+  category: Wings
+  kind: Soft
+  sound:
+    collection: RpPat
+  selfMessages: RpFlutterWingsSelfMessages
+  icon: _LuaM/Interface/RpPanel/shaking-moth-wings.png
+  userRequirements:
+  - !type:SpeciesRequirement
+    species:
+    - Harpy
+    - Moth
+
+- type: rpInteraction
+  id: SlapFaceWithWing
+  category: Wings
+  kind: Harmful
+  sound:
+    collection: RpPat
+  messages: RpSlapFaceWithWingMessages
+  icon: _LuaM/Interface/RpPanel/slap-wing-face.png
+  userRequirements:
+  - !type:SpeciesRequirement
+    species:
+    - Harpy
+    - Moth
+
+- type: rpInteraction
+  id: PullWing
+  category: Wings
+  kind: Harmful
+  sound:
+    collection: RpPat
+  messages: RpPullWingMessages
+  icon: _LuaM/Interface/RpPanel/pat-wings.png
+  targetRequirements:
+  - !type:SpeciesRequirement
+    species:
+    - Harpy
+    - Moth
+
+- type: rpInteraction
+  id: PetWings
+  category: Wings
+  kind: Soft
+  sound:
+    collection: RpPat
+  messages: RpPetWingsMessages
+  icon: _LuaM/Interface/RpPanel/hug-wings.png
+  targetRequirements:
+  - !type:SpeciesRequirement
+    species:
+    - Harpy
+    - Moth

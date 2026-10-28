@@ -8,3 +8,5 @@ ent-ClothingModsuitBootsVolta = Volta Modsuit Boots
     .desc = Сделаны, чтобы стать милитаристически маслянистыми.
 ent-ClothingModsuitBootsGalloglass = магнитные сапоги модкостюма «Галлоглас»
     .desc = Эти ботинки были сделаны для топтания бордюров.
+ent-ClothingModsuitBootsMercenary = mercenary modsuit boots
+    .desc = The suits Actuator Enhancement System paired with the built in magboots make boarding actions a breeze.

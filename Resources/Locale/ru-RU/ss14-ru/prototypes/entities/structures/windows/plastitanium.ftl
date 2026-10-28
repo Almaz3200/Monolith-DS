@@ -10,3 +10,6 @@ ent-PlastitaniumWindowDiagonalBase = пластитановое окно
 ent-PlastitaniumWindowDiagonal = { ent-ShuttleWindow }
     .suffix = Дигональ
     .desc = { ent-ShuttleWindow.desc }
+ent-PlastitaniumWindowDiagonalIndestructible = plastitanium window
+    .desc = Skub knows this window is too hard to destroy.
+    .suffix = diagonal, indestructible

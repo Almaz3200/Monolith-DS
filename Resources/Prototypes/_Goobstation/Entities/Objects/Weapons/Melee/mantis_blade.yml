@@ -49,3 +49,13 @@
   - type: Tool
     qualities:
     - Slicing
+  # LuaM start: pries doors like the advanced jaws of life
+  - type: Prying
+    speedModifier: 3.0
+    pryPowered: true
+    useSound: /Audio/Items/jaws_pry.ogg
+  # Reflect chance is set by MantisBladeComboSystem only while both blades are extended
+  - type: Reflect
+    reflectProb: 0
+  - type: MantisBladeCombo
+  # LuaM end

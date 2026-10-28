@@ -1,0 +1,10 @@
+ent-BulletImpactEffectSyndicate = { "" }
+    .desc = { "" }
+ent-BulletImpactEffectGold = { "" }
+    .desc = { "" }
+ent-BulletImpactEffectPurple = { "" }
+    .desc = { "" }
+ent-BulletImpactEffectHot = { "" }
+    .desc = { "" }
+ent-BulletImpactEffectCold = { "" }
+    .desc = { "" }

@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/26/2026 09:16:58
-  entityCount: 56
+  entityCount: 55
 maps: []
 grids:
 - 1
@@ -69,7 +69,6 @@ entities:
         Puddle: []
     - type: Shuttle
       dampingModifier: 0.25
-    - type: HostileDroneGrid
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -251,16 +250,6 @@ entities:
     - type: Transform
       pos: 0.5,-1.5
       parent: 1
-- proto: HardpointBallisticLight
-  entities:
-  - uid: 56
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,1.5
-      parent: 1
-    - type: Physics
-      canCollide: False
 - proto: PlasmaReinforcedWindowDirectional
   entities:
   - uid: 30

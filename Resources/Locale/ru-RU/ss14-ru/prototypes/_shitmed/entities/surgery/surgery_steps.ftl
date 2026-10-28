@@ -86,3 +86,5 @@ ent-SurgeryStepInsertAugmentPowerCellCharger = Установить зарядн
     .desc = { ent-SurgeryStepInsertOrgan.desc }
 ent-SurgeryStepInsertAugmentArm = Установить имплант руки
     .desc = { ent-SurgeryStepInsertOrgan.desc }
+ent-SurgeryStepRemoveCorticalBorer = Remove the Cortical Borer
+    .desc = { ent-SurgeryStepBase.desc }

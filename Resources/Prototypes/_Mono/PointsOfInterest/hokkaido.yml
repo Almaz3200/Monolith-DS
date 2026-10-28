@@ -4,15 +4,17 @@
 - type: pointOfInterest
   id: Hokkaido
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'MMC Hokkaido'
+  name: 'ММС «Хоккайдо»' # LuaM: 'MMC Hokkaido' > 'ММС «Хоккайдо»'
   minimumDistance: 2000
   maximumDistance: 8000
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/hokkaido.yml
   addComponents:
   - type: IFF
-    color: "#EEEEEE"
+    color: "#fca503" # LuaM: #EEEEEE > #fca503 (MMC color)
     readOnly: true # mono
+  - type: Company # LuaM: faction outpost
+    companyName: MMC
   - type: WorldGenDistanceCarver
     distanceThresholds:
     # Dead zone
@@ -23,17 +25,15 @@
 
 - type: gameMap
   id: Hokkaido
-  mapName: 'MMC Hokkaido'
+  mapName: 'ММС «Хоккайдо»' # LuaM: 'MMC Hokkaido' > 'ММС «Хоккайдо»'
   mapPath: /Maps/_Mono/POI/hokkaido.yml
   minPlayers: 0
   stations:
     Hokkaido:
       stationProto: RecordsFrontierOutpostCargo
-      gridComponents:
-        - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'MMC Hokkaido'
+          mapNameTemplate: 'ММС «Хоккайдо»' # LuaM: 'MMC Hokkaido' > 'ММС «Хоккайдо»'
         - type: ExtraStationInformation
           icon: /Textures/_Mono/Interface/Misc/LateJoin/lathe.png
           stationSubtext: 'frontier-lobby-hokkaido-subtext'
@@ -41,8 +41,8 @@
         - type: StationJobs
           availableJobs:
             MMCLiason: [ 1, 1 ]
-            MMCSecurity: [ 5, 5 ]
-            MMCEmployee: [ -1, -1 ]
+            MMCSecurity: [ 2, 2 ] # LuaM: 5 > 2
+            MMCEmployee: [ 5, 5 ] # LuaM: -1 > 5
           tags:
           - MieyoLiason
         - type: StationDeadDropHintExempt

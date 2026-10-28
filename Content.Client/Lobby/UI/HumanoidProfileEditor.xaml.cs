@@ -488,7 +488,7 @@ namespace Content.Client.Lobby.UI
             companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
             // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
+            var noneIndex = companies.FindIndex(c => c.ID == CompanyPrototype.NoCompany.Id);
             if (noneIndex != -1)
             {
                 var none = companies[noneIndex];
@@ -1013,6 +1013,11 @@ namespace Content.Client.Lobby.UI
                 {
                     ProtoId<SpeciesPrototype> speciesId = currentSpecies.Value;
                     if (thisProto.SpeciesBlacklist.Contains(speciesId))
+                    {
+                        hide = true;
+                    }
+
+                    if (thisProto.SpeciesWhitelist.Count > 0 && !thisProto.SpeciesWhitelist.Contains(speciesId)) // LuaM
                     {
                         hide = true;
                     }
@@ -1816,7 +1821,8 @@ namespace Content.Client.Lobby.UI
                 if (!_prototypeManager.TryIndex(traitId, out TraitPrototype? trait))
                     continue;
 
-                if (trait.SpeciesBlacklist.Contains(species))
+                if (trait.SpeciesBlacklist.Contains(species)
+                    || trait.SpeciesWhitelist.Count > 0 && !trait.SpeciesWhitelist.Contains(species)) // LuaM
                     toRemove.Add(traitId);
             }
 
@@ -2375,7 +2381,7 @@ namespace Content.Client.Lobby.UI
             companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
             // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
+            var noneIndex = companies.FindIndex(c => c.ID == CompanyPrototype.NoCompany.Id);
             if (noneIndex != -1)
             {
                 var none = companies[noneIndex];

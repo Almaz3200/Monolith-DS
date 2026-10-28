@@ -1,0 +1,16 @@
+ent-WallArmorAddonSolid = цельная броня
+    .desc = Дополнительный бронеслой на борту корабля. Даёт дополнительную защиту, но делает корпус уязвимее к взрывам.
+ent-WallArmorAddonSolidCornerL = угол цельной брони
+    .desc = Дополнительный бронеслой на борту корабля. Даёт дополнительную защиту, но делает корпус уязвимее к взрывам.
+    .suffix = Левый
+ent-WallArmorAddonSolidCornerR = угол цельной брони
+    .desc = Дополнительный бронеслой на борту корабля. Даёт дополнительную защиту, но делает корпус уязвимее к взрывам.
+    .suffix = Правый
+ent-WallArmorAddonSolidBroken = broken solid armor
+    .desc = The remains of a chunk of additional armor plating. Doesn't seem very effective anymore.
+ent-WallArmorAddonSolidBrokenCornerL = broken solid armor corner
+    .desc = The remains of a chunk of additional armor plating. Doesn't seem very effective anymore.
+    .suffix = Left
+ent-WallArmorAddonSolidBrokenCornerR = broken solid armor corner
+    .desc = The remains of a chunk of additional armor plating. Doesn't seem very effective anymore.
+    .suffix = Right

@@ -2,22 +2,22 @@
   id: UsspBasicSuits
   name: research-technology-ussp-suits-basic
   entityIcon: ClothingOuterHardsuitUsspL10
-  discipline: Arsenal # LuaM: UsspEquipment > Arsenal
+  discipline: Ussp # LuaM: UsspEquipment > Ussp
   tier: 1
   cost: 25000
   recipeUnlocks:
   - ClothingOuterHardsuitUsspL10USSP
   - ClothingOuterHardsuitUsspL10AUSSP
   technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  - HardsuitsArmoredAdvanced # LuaM
-  position: 6, 7 # LuaM: 12, 1 > 6, 7
+  # - UniversalMaterialResearchT1 # Commented by LuaM
+  - UsspMediumGuns # LuaM
+  position: 6, 6 # LuaM: 12, 1 > 6, 6
 
 - type: technology
   id: UsspMediumSuits
   name: research-technology-ussp-suits-medium
   entityIcon: ClothingOuterHardsuitUsspL27
-  discipline: Arsenal # LuaM: UsspEquipment > Arsenal
+  discipline: Ussp # LuaM: UsspEquipment > Ussp
   tier: 2
   cost: 45000
   recipeUnlocks:
@@ -25,14 +25,13 @@
   - ClothingOuterHardsuitUsspM10USSP
   technologyPrerequisites:
   - UsspBasicSuits
-  - UniversalMaterialResearchT2
-  position: 6, 6 # LuaM: 12, 7 > 6, 6
+  position: 5, 6 # LuaM: 12, 7 > 5, 6
 
 - type: technology
   id: UsspAdvancedSuits
   name: research-technology-ussp-suits-advanced
   entityIcon: ClothingModsuitUSSPZastavnik
-  discipline: Arsenal # LuaM: UsspEquipment > Arsenal
+  discipline: Ussp # LuaM UsspEquipment > Ussp
   tier: 3
   cost: 85000
   recipeUnlocks:
@@ -40,4 +39,4 @@
   - ClothingModsuitUSSPZastavnikUSSP
   technologyPrerequisites:
   - UsspMediumSuits
-  position: 6, 5 # LuaM: 12, 12 > 6, 5
+  position: 4, 6 # LuaM 12, 13 > 4, 6

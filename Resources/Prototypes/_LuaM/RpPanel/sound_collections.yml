@@ -1,0 +1,68 @@
+- type: soundCollection
+  id: RpSlap
+  files:
+  - /Audio/_LuaM/RpPanel/slap1.ogg
+  - /Audio/_LuaM/RpPanel/slap2.ogg
+  - /Audio/_LuaM/RpPanel/slap3.ogg
+
+- type: soundCollection
+  id: RpBang
+  files:
+  - /Audio/_LuaM/RpPanel/bang1.ogg
+  - /Audio/_LuaM/RpPanel/bang2.ogg
+  - /Audio/_LuaM/RpPanel/bang3.ogg
+  - /Audio/_LuaM/RpPanel/bang4.ogg
+  - /Audio/_LuaM/RpPanel/bang5.ogg
+  - /Audio/_LuaM/RpPanel/bang6.ogg
+  - /Audio/_LuaM/RpPanel/bang7.ogg
+
+- type: soundCollection
+  id: RpClick
+  files:
+  - /Audio/_LuaM/RpPanel/click.ogg
+
+- type: soundCollection
+  id: RpDisappointment
+  files:
+  - /Audio/_LuaM/RpPanel/disappointment.ogg
+
+- type: soundCollection
+  id: RpFriction
+  files:
+  - /Audio/_LuaM/RpPanel/friction1.ogg
+  - /Audio/_LuaM/RpPanel/friction2.ogg
+
+- type: soundCollection
+  id: RpHandshake
+  files:
+  - /Audio/_LuaM/RpPanel/handshake.ogg
+
+- type: soundCollection
+  id: RpKiss
+  files:
+  - /Audio/_LuaM/RpPanel/kiss1.ogg
+  - /Audio/_LuaM/RpPanel/kiss2.ogg
+  - /Audio/_LuaM/RpPanel/kiss3.ogg
+  - /Audio/_LuaM/RpPanel/kiss4.ogg
+  - /Audio/_LuaM/RpPanel/kiss5.ogg
+
+- type: soundCollection
+  id: RpPat
+  files:
+  - /Audio/_LuaM/RpPanel/pat1.ogg
+  - /Audio/_LuaM/RpPanel/pat2.ogg
+
+- type: soundCollection
+  id: RpStretchBody
+  files:
+  - /Audio/_LuaM/RpPanel/stretch_body.ogg
+
+- type: soundCollection
+  id: RpStretchNeck
+  files:
+  - /Audio/_LuaM/RpPanel/stretch_neck.ogg
+
+- type: soundCollection
+  id: RpVineBoom
+  files:
+  - /Audio/_LuaM/RpPanel/vine_boom.ogg

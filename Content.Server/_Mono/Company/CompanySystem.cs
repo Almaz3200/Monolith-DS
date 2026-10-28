@@ -12,8 +12,6 @@ namespace Content.Server._Mono.Company;
 
 /// <summary>
 /// This system handles assigning a company to players when they join.
-/// TODO: remove hardcoded slop.
-/// whoever hardcoded ts is getting slimed out no joke.
 /// </summary>
 public sealed partial class CompanySystem : EntitySystem
 {
@@ -22,78 +20,19 @@ public sealed partial class CompanySystem : EntitySystem
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private CompanyManager _manager = default!;
 
-    // Dictionary to store original company preferences for players
-    private readonly Dictionary<string, string> _playerOriginalCompanies = new();
-
     public override void Initialize()
     {
         base.Initialize();
 
         // Subscribe to player spawn event to add the company component
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
-
-        // Subscribe to player detached event to clean up stored preferences
-        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
-    }
-
-    private void OnPlayerDetached(PlayerDetachedEvent args)
-    {
-        // Clean up stored preferences when player disconnects
-        _playerOriginalCompanies.Remove(args.Player.UserId.ToString());
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
     {
         // Add the company component with the player's saved company
         var companyComp = EnsureComp<CompanyComponent>(args.Mob);
-
-        var playerId = args.Player.UserId.ToString();
-        var profileCompany = args.Profile.Company;
-
-        // Store the player's original company preference if not already stored
-        if (!_playerOriginalCompanies.ContainsKey(playerId))
-        {
-            _playerOriginalCompanies[playerId] = profileCompany;
-        }
-
-        var assigned = false;
-        if (args.JobId != null)
-        {
-            var job = _prototypeManager.Index<JobPrototype>(args.JobId);
-            companyComp.CompanyName = job.AssignedCompany;
-            assigned = companyComp.CompanyName != "None";
-        }
-        if (!assigned)
-        {
-            // Only consider whitelist if the player has NO specific company preference
-            bool loginFound = false;
-
-            // Only check logins if the player hasn't explicitly set a company preference
-            // or if their preference is "None"
-            if (string.IsNullOrEmpty(profileCompany))
-            {
-                foreach (var companyProto in _prototypeManager.EnumeratePrototypes<CompanyPrototype>())
-                {
-                    if (_manager.IsAllowed(args.Player, companyProto))
-                    {
-                        companyComp.CompanyName = companyProto.ID;
-                        loginFound = true;
-                        break;
-                    }
-                }
-            }
-
-            // If no login was found or login check was skipped due to player preference, use the player's preference
-            if (!loginFound)
-            {
-                // Use "None" as fallback for empty company
-                if (string.IsNullOrEmpty(profileCompany))
-                    profileCompany = "None";
-
-                // Restore the player's original company preference
-                companyComp.CompanyName = profileCompany;
-            }
-        }
+        companyComp.CompanyName = GetSpawnCompany(args);
 
         // Ensure the component is networked to clients
         Dirty(args.Mob, companyComp);
@@ -102,10 +41,32 @@ public sealed partial class CompanySystem : EntitySystem
         UpdateIdCardCompany(args.Mob, companyComp.CompanyName);
     }
 
+    private ProtoId<CompanyPrototype> GetSpawnCompany(PlayerSpawnCompleteEvent args)
+    {
+        if (args.JobId != null)
+        {
+            var jobCompany = _prototypeManager.Index<JobPrototype>(args.JobId).AssignedCompany;
+            if (jobCompany != CompanyPrototype.NoCompany)
+                return jobCompany;
+        }
+
+        var profileCompany = args.Profile.Company;
+        if (!string.IsNullOrEmpty(profileCompany))
+            return profileCompany;
+
+        foreach (var companyProto in _prototypeManager.EnumeratePrototypes<CompanyPrototype>())
+        {
+            if (companyProto.Whitelisted && _manager.IsMember(args.Player.UserId, companyProto.ID))
+                return companyProto.ID;
+        }
+
+        return CompanyPrototype.NoCompany;
+    }
+
     /// <summary>
     /// Updates the player's ID card with their company information
     /// </summary>
-    private void UpdateIdCardCompany(EntityUid playerEntity, string companyName)
+    private void UpdateIdCardCompany(EntityUid playerEntity, ProtoId<CompanyPrototype> companyName)
     {
         // Try to get the player's ID card
         if (!_inventorySystem.TryGetSlotEntity(playerEntity, "id", out var idUid))

@@ -364,6 +364,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             _mind.TransferTo(curMind.Value, antagEnt, ghostCheckOverride: true);
             _role.MindAddRoles(curMind.Value, def.MindRoles, null, true);
             ent.Comp.SelectedMinds.Add((curMind.Value, Name(player)));
+
+            var defIndex = ent.Comp.Definitions.IndexOf(def);
+            if (defIndex >= 0)
+                ent.Comp.SelectedMindsPerDefinition[defIndex] = ent.Comp.SelectedMindsPerDefinition.GetValueOrDefault(defIndex) + 1;
             SendBriefing(session, def.Briefing);
 
             Log.Debug($"Selected {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");

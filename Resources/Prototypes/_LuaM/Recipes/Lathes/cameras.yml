@@ -1,0 +1,25 @@
+- type: latheRecipe
+  abstract: true
+  id: WearableCameraRecipe
+  parent: NFBaseWearableDeviceRecipe
+  completetime: 3
+
+- type: latheRecipe
+  id: ClothingNeckWearableCamera
+  parent: WearableCameraRecipe
+  result: ClothingNeckWearableCamera
+
+- type: latheRecipe
+  id: ClothingNeckWearableCameraPDV
+  parent: WearableCameraRecipe
+  result: ClothingNeckWearableCameraPDV
+
+- type: latheRecipe
+  id: ClothingNeckWearableCameraMMC
+  parent: WearableCameraRecipe
+  result: ClothingNeckWearableCameraMMC
+
+- type: latheRecipe
+  id: ClothingNeckWearableCameraTSF
+  parent: WearableCameraRecipe
+  result: ClothingNeckWearableCameraTSF

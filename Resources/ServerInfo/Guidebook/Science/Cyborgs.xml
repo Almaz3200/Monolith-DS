@@ -55,7 +55,7 @@
     <GuideEntityEmbed Entity="BorgModuleMining" Caption="Mining"/>
     <GuideEntityEmbed Entity="BorgModuleCleaning" Caption="Cleaning"/>
     <GuideEntityEmbed Entity="BorgModuleService" Caption="Service"/>
-    <GuideEntityEmbed Entity="BorgModuleChemical" Caption="Chemical"/>
+    <GuideEntityEmbed Entity="BorgModuleTreatment" Caption="Treatment"/>
   </Box>
   <Box>
     [italic]Примеры профильных модулей. Обратите внимание на цвета корпусов и плат.

@@ -284,3 +284,16 @@
     whitelist:
       tags:
       - MMCUplink
+
+- type: listing
+  id: MMCBaseMMCUplinkRadio
+  productEntity: BaseMMCUplinkRadio
+  cost:
+    MMCIndustrialCredit: 3500
+  categories:
+  - UplinkMmcTools
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - MMCUplink

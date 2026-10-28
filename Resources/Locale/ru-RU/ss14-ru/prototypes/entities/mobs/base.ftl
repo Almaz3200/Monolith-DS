@@ -14,3 +14,5 @@ ent-MobRespirator = { "" }
     .desc = { "" }
 ent-MobBloodstream = { "" }
     .desc = { "" }
+ent-MobPolymorphable = { "" }
+    .desc = { "" }

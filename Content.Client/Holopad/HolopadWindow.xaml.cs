@@ -1,5 +1,6 @@
 using Content.Client.Popups;
 using Content.Client.UserInterface.Controls;
+using Content.Shared._LuaM.HoloComms; // LuaM
 using Content.Shared.Access.Systems;
 using Content.Shared.Holopad;
 using Content.Shared.Telephone;
@@ -42,6 +43,7 @@ public sealed partial class HolopadWindow : FancyWindow
     public event Action? SendHolopadStartBroadcastMessageAction;
     public event Action? SendHolopadActivateProjectorMessageAction;
     public event Action? SendHolopadRequestStationAiMessageAction;
+    public event Action<bool>? SendShipCommsDoNotDisturbMessageAction; // LuaM
 
     public HolopadWindow()
     {
@@ -61,6 +63,7 @@ public sealed partial class HolopadWindow : FancyWindow
         StartBroadcastButton.OnPressed += args => { OnHolopadStartBroadcastMessage(); };
         ActivateProjectorButton.OnPressed += args => { OnHolopadActivateProjectorMessage(); };
         RequestStationAiButton.OnPressed += args => { OnHolopadRequestStationAiMessage(); };
+        DoNotDisturbButton.OnToggled += args => SendShipCommsDoNotDisturbMessageAction?.Invoke(args.Pressed); // LuaM
 
         // Frontier - disable the call AI button until AI is finished implemented
         RequestStationAiButton.Visible = false;
@@ -293,6 +296,12 @@ public sealed partial class HolopadWindow : FancyWindow
         StartBroadcastButton.Disabled = (_currentState != TelephoneState.Idle || !hasBroadcastAccess || lockButtons);
         RequestStationAiButton.Disabled = (_currentState != TelephoneState.Idle || lockButtons);
         ActivateProjectorButton.Disabled = (_currentState != TelephoneState.Idle || lockButtons);
+
+        // LuaM - the ship holopads share the do not disturb of their ship with the shuttle consoles
+        var shipLine = _entManager.TryGetComponent<ShipCommsLineComponent>(_owner.Value, out var line) && line.Enabled;
+        DoNotDisturbContainer.Visible = shipLine && _currentUiKey == HolopadUiKey.InteractionWindow;
+        if (line != null)
+            DoNotDisturbButton.Pressed = line.DoNotDisturb;
 
         // Update control visibility
         FetchingAvailableHolopadsContainer.Visible = (ContactsList.ChildCount == 0);

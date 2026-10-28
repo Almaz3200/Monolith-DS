@@ -10,7 +10,7 @@
   name: vessel-beatle-name
   description: vessel-beatle-desc
   limit: 3
-  price: 305000
+  price: 315000 # LuaM: 305000<315000, appraised at ~312000
   category: Medium
   group: Syndicate
   shuttlePath: /Maps/_LuaM/Shuttles/Syndicate/Beatle.yml

@@ -11,7 +11,7 @@ namespace Content.Shared.Body.Components;
 public sealed partial class LungComponent : Component
 {
     [DataField]
-    [Access(typeof(LungSystem), Other = AccessPermissions.ReadExecute)] // FIXME Friends
+    [Access(typeof(LungSystem))] // LuaM
     public GasMixture Air = new()
     {
         Volume = 6,

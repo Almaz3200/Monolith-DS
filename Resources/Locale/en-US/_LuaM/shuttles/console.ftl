@@ -1,0 +1,9 @@
+shuttle-console-map-target = Map Marker
+shuttle-console-clear-target = Clear Marker
+shuttle-console-clear-target-description = Removes the marker from the radar and the map.
+shuttle-console-target-autopilot-description = Sets the marker at these coordinates and flies the shuttle there on autopilot.
+shuttle-console-autopilot-popup-marker-removed = Autopilot stopped: marker removed
+shuttle-console-map-search = Search objects
+shuttle-radar-menu-follow = Follow
+shuttle-radar-menu-call = Call
+shuttle-radar-menu-unreachable = Unable to connect

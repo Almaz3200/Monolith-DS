@@ -1,63 +1,50 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
-                      xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                       Title="{Loc 'shuttle-console-window-title'}"
-                      SetSize="1000 994"
-                      MinSize="1000 994">
+                      SetSize="1260 850"
+                      MinSize="1260 850">
+    <!-- Lua: 1260x850 instead of 1300x994, the radars scale with the window -->
+    <!-- LuaM: Dead Space 14 menu look like the AHelp, the window shell and header are set in code -->
 
-    <BoxContainer Orientation="Vertical">
-        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 8 0 2">
-            <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BorderThickness="0" BackgroundColor="Transparent"/>
-            </PanelContainer.PanelOverride>
-            <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-                </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" HorizontalAlignment="Center">
-                    <!-- Top row mode buttons -->
-                    <PanelContainer VerticalExpand="False" HorizontalExpand="True" SetWidth="970" Margin="0 10 0 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#121212"/>
-                        </PanelContainer.PanelOverride>
-                        <BoxContainer Name="ModeButtons"
-                                      Orientation="Horizontal"
-                                      HorizontalAlignment="Stretch"
-                                      HorizontalExpand="True"
-                                      MinSize="52 52"
-                                      Margin="5">
-                            <Button Name="NavModeButton"
-                                    ToggleMode="True"
-                                    HorizontalExpand="True"
-                                    VerticalExpand="True"
-                                    Text="NAV"
-                                    StyleClasses="ButtonSquare"/>
-                            <Button Name="MapModeButton"
-                                    ToggleMode="True"
-                                    HorizontalExpand="True"
-                                    VerticalExpand="True"
-                                    Text="MAP"
-                                    StyleClasses="ButtonSquare"/>
-                            <Button Name="DockModeButton"
-                                    ToggleMode="True"
-                                    HorizontalExpand="True"
-                                    VerticalExpand="True"
-                                    Text="DOCK"
-                                    StyleClasses="ButtonSquare"/>
-                        </BoxContainer>
-                    </PanelContainer>
-                    <!-- Contents box -->
-                    <BoxContainer Name="Contents"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalExpand="True"
-                                  Margin="5">
-                        <ui:NavScreen Name="NavContainer" Visible="False"/>
-                        <ui:MapScreen Name="MapContainer" Visible="False"/>
-                        <ui:DockingScreen Name="DockContainer" Visible="False"/>
-                    </BoxContainer>
-                </BoxContainer>
-            </PanelContainer>
+    <BoxContainer Orientation="Vertical" Margin="8 6 8 8">
+        <!-- Top row mode buttons -->
+        <PanelContainer StyleClasses="LuaMConsoleSection" HorizontalExpand="True">
+            <BoxContainer Name="ModeButtons"
+                          Orientation="Horizontal"
+                          HorizontalAlignment="Stretch"
+                          HorizontalExpand="True"
+                          MinSize="44 44"
+                          SeparationOverride="4"
+                          Margin="4">
+                <Button Name="NavModeButton"
+                        ToggleMode="True"
+                        HorizontalExpand="True"
+                        VerticalExpand="True"
+                        Text="NAV"
+                        StyleClasses="LuaMConsoleButton"/>
+                <Button Name="MapModeButton"
+                        ToggleMode="True"
+                        HorizontalExpand="True"
+                        VerticalExpand="True"
+                        Text="MAP"
+                        StyleClasses="LuaMConsoleButton"/>
+                <Button Name="DockModeButton"
+                        ToggleMode="True"
+                        HorizontalExpand="True"
+                        VerticalExpand="True"
+                        Text="DOCK"
+                        StyleClasses="LuaMConsoleButton"/>
+            </BoxContainer>
         </PanelContainer>
+        <!-- Contents box -->
+        <BoxContainer Name="Contents"
+                      HorizontalAlignment="Stretch"
+                      VerticalExpand="True"
+                      Margin="0 6 0 0">
+            <ui:NavScreen Name="NavContainer" Visible="False"/>
+            <ui:MapScreen Name="MapContainer" Visible="False"/>
+            <ui:DockingScreen Name="DockContainer" Visible="False"/>
+        </BoxContainer>
     </BoxContainer>
 </controls:FancyWindow>
