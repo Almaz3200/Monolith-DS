@@ -99,6 +99,11 @@
           32:
             sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: outerClothing
+      head:
+        sizeMaps:
+          32:
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
+            state: head
     displacements:
       jumpsuit:
         sizeMaps:
@@ -115,6 +120,11 @@
           32:
             sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: outerClothing
+      head:
+        sizeMaps:
+          32:
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
+            state: head
 
 - type: entity
   save: false
@@ -144,6 +154,11 @@
           32:
             sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: outerClothing
+      head:
+        sizeMaps:
+          32:
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
+            state: head
     displacements:
       jumpsuit:
         sizeMaps:
@@ -160,3 +175,8 @@
           32:
             sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
             state: outerClothing
+      head:
+        sizeMaps:
+          32:
+            sprite: _LuaM/Mobs/Species/Ariral/displacement.rsi
+            state: head
