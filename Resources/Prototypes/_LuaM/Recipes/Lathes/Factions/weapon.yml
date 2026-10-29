@@ -113,3 +113,11 @@
   completetime: 30 # faster for your trouble
   entities:
     MonolithicCrystalSmall: 4
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponRifleFPDMR
+  result: WeaponRifleFPDMR
+  completetime: 30 # faster for your trouble
+  entities:
+    MonolithicCrystalSmall: 3
