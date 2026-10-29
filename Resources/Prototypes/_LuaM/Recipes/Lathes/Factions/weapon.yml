@@ -121,3 +121,12 @@
   completetime: 30 # faster for your trouble
   entities:
     MonolithicCrystalSmall: 3
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponPistolCCTCGalactica
+  result: WeaponPistolCCTCGalactica
+  completetime: 30 # faster for your trouble
+  materials:
+    Steel: 900
+    Plastic: 400
