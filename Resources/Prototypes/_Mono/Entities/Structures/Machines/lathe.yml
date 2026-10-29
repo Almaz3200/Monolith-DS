@@ -918,6 +918,9 @@
     # - StaticGrenades
     - SecurityWeaponsStatic
     - MonoCaelestinusVouchersStatic
+#LuaM Add:
+    - MonoAttachmentsStatic
+#LuaM End
     dynamicPacks:
     - SecurityEquipment
     - SecurityExplosives
