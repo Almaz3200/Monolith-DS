@@ -745,8 +745,14 @@ public sealed partial class ChatUIController : UIController
     // LuaM start
     private bool IsHeadsetChannelDisabled(string channel)
     {
-        return _player.LocalEntity is { Valid: true } uid
-               && _ent.System<InventorySystem>().TryGetSlotEntity(uid, "ears", out var headset)
+        if (_player.LocalEntity is not { Valid: true } uid)
+            return false;
+
+        // a built-in radio (e.g. an IPC) has the channel toggle on the mob itself
+        if (_ent.TryGetComponent<HeadsetChannelToggleComponent>(uid, out var own))
+            return own.DisabledChannels.Contains(channel);
+
+        return _ent.System<InventorySystem>().TryGetSlotEntity(uid, "ears", out var headset)
                && _ent.TryGetComponent<HeadsetChannelToggleComponent>(headset, out var toggle)
                && toggle.DisabledChannels.Contains(channel);
     }
