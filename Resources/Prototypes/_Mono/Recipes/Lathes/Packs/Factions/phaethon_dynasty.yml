@@ -77,8 +77,3 @@
   - AutosurgeonIASPDV
   - AutosurgeonAdvHeartPDV
   - AutosurgeonDermalArmorPDV
-
-- type: latheRecipePack
-  id: MonoRogueGearStatic
-  recipes:
-  - ClothingBackpackSatchelmilirarybig

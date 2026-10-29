@@ -62,12 +62,3 @@
   - AutosurgeonSandevistanTSF
 #  - AutosurgeonShuntTSF
   - Hypospray # LuaM
-
-#luam Add:
-
-- type: latheRecipePack
-  id: MonoTSFStatic
-  recipes:
-  - ClothingBackpackSatchelmilirarybig
-
-#LuaM end
