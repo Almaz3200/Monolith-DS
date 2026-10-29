@@ -168,7 +168,6 @@
     - StaticGrenades
     - MonoAttachmentsStatic # Mono
     - ReportingStatic # DeltaV
-    - MonoTSFStatic
     dynamicPacks:
     - NFNfsdTechfabDeprecated
     # - DynamicAmmoRecipePack # Commented by LuaM
