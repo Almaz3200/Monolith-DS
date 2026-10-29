@@ -88,7 +88,6 @@
     sprite: _LuaM/Objects/Weapons/Guns/Rifles/FalkorPetra_inhands_32x.rsi
   - type: Item
     sprite: _LuaM/Objects/Weapons/Guns/Rifles/FalkorPetra_inhands_32x.rsi
-    price: 2400
   - type: ESAttachableGun
     slots:
     - name: es-gun-attachments-slot-name-barrel
