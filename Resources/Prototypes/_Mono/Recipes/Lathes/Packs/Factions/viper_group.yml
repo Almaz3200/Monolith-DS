@@ -16,7 +16,9 @@
   - WeaponRifleAK12 # LuaM
   - WeaponPistolAnaconda # LuaM
 
+
 - type: latheRecipePack
   id: MonoViperGroupStatic
   recipes:
   - VGTechfabMachineCircuitboard
+  - ClothingBackpackSatchelmilirarybig

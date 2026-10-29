@@ -26,6 +26,7 @@
   - WeaponSubMachineGunMasamuneMMC
   - WeaponPistolKuosameMMC
   - ClothingOuterHardsuitMieyoMiningMMC
+  - ClothingBackpackSatchelmilirarybig #LuaM add
 
 - type: latheRecipePack
   id: MonoMMCUtilityResearch

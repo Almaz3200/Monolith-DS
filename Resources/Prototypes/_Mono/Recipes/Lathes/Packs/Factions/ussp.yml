@@ -16,7 +16,7 @@
   - TearGasGrenadeUSSP
   - GrenadeShrapnelUSSP
   - GrenadeIncendiaryUSSP
-
+  
 - type: latheRecipePack
   id: MonoUSSPArmorDynamic
   recipes:
@@ -40,3 +40,4 @@
   recipes:
   - USSPTechfabMachineCircuitboard
   - ShipVoucherUsspT0Recipe
+  - ClothingBackpackSatchelmilirarybig
