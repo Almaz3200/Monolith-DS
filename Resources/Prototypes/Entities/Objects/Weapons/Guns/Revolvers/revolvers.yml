@@ -114,10 +114,10 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/mateba.rsi
   - type: Gun
-    fireRate: 0.5
+    fireRate: 1 # LuaM: 0.5 > 1
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/Gunshots/bigshot.ogg
-    damageModifier: 3
+    damageModifier: 1.5 # LuaM: 3 > 1.5
 
 - type: entity
   parent: WeaponRevolverMateba
@@ -150,7 +150,7 @@
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/python_fire.ogg
       params:
         volume: 2.25
-    damageModifier: 1.2
+    damageModifier: 0.9 # LuaM: 1.2 > 0.9
   - type: StaticPrice
     price: 1
 

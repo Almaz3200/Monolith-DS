@@ -62,11 +62,11 @@
       rechargeSound:
         path: /Audio/_NF/Effects/silence.ogg
     - type: BasicEntityAmmoProvider
-      proto: Bullet68x52mmCaseless
+      proto: Bullet68x52mmCaselessPlasteelAP # LuaM: Bullet68x52mmCaseless > Bullet68x52mmCaselessPlasteelAP
       capacity: 5 # LuaM: 1 > 5, an empty gun made the AI drop to melee after every shot
       count: 5 # LuaM: 1 > 5
     - type: Gun
-      damageModifier: 0.8
+      damageModifier: 1.0 # LuaM: 0.8 > 1.0
       minAngle: 5
       maxAngle: 20
       showExamineText: false
@@ -98,11 +98,11 @@
       rechargeSound:
         path: /Audio/_NF/Effects/silence.ogg
     - type: BasicEntityAmmoProvider
-      proto: Bullet9x19mmFMJ
+      proto: Bullet9x19mmPlasteelAP # LuaM: Bullet9x19mmFMJ > Bullet9x19mmPlasteelAP
       capacity: 5 # LuaM: 1 > 5, an empty gun made the AI drop to melee after every shot
       count: 5 # LuaM: 1 > 5
     - type: Gun
-      damageModifier: 0.8
+      damageModifier: 1.0 # LuaM: 0.8 > 1.0
       minAngle: 5
       maxAngle: 20
       showExamineText: false
