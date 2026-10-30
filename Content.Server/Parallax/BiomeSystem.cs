@@ -180,6 +180,20 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
             return;
         _updateTimer = 0f;
 
+        // Mono - always reset the per-cycle state. If anything below throws, the next cycle
+        // would otherwise fail on _activeChunks.Add forever ("same key has already been added").
+        try
+        {
+            UpdateBiomes(frameTime);
+        }
+        finally
+        {
+            CleanupUpdateCycle();
+        }
+    }
+
+    private void UpdateBiomes(float frameTime)
+    {
         var biomes = AllEntityQuery<BiomeComponent>();
 
         while (biomes.MoveNext(out var biome))
@@ -195,10 +209,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
         // Early exit if no players around chunk
         if (_handledEntities.Count == 0)
-        {
-            CleanupUpdateCycle();
             return;
-        }
 
         var loadBiomes = AllEntityQuery<BiomeComponent, MapGridComponent>();
 
@@ -226,8 +237,6 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
         if (shouldUnload)
             _unloadTimer = 0f;
-
-        CleanupUpdateCycle();
     }
 
     private void CleanupUpdateCycle()
