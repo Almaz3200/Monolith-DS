@@ -22,6 +22,7 @@ public sealed partial class ShipyardPreviewBoundUserInterface : BoundUserInterfa
         _menu.UpdateMenu();
 
         _menu.OnExit += Exit;
+        _preview.GridLoaded += OnGridLoaded; // LuaM: the vessel may finish loading after the window opened
     }
 
     protected override void Dispose(bool disposing)
@@ -29,7 +30,14 @@ public sealed partial class ShipyardPreviewBoundUserInterface : BoundUserInterfa
         base.Dispose(disposing);
         if (!disposing)
             return;
+        _preview.GridLoaded -= OnGridLoaded; // LuaM
         _menu?.Dispose();
+    }
+
+    // LuaM
+    private void OnGridLoaded()
+    {
+        _menu?.UpdateMenu();
     }
 
     private void Exit(ButtonEventArgs args)

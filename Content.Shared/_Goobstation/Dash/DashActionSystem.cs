@@ -52,7 +52,8 @@ public sealed partial class DashActionSystem : EntitySystem
         }
 
         _throwing.TryThrow( args.Performer, vec, baseThrowSpeed: speed, user: null, pushbackRatio: 0, friction: null, compensateFriction: false, recoil: false, animated: false);
-        _dashImpact.StartImpact(args.Performer); // LuaM
+        if (args.Impact) // LuaM
+            _dashImpact.StartImpact(args.Performer); // LuaM
 
         if (args.StaminaDrain != null)
             _stamina.TakeStaminaDamage(args.Performer, args.StaminaDrain.Value, visual: false, immediate: false);
