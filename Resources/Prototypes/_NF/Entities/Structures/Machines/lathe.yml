@@ -163,14 +163,14 @@
     runningState: icon
     staticPacks:
     - NFNfsdTechfabDeprecatedStatic
-     - StaticAmmoRecipePack
+    # - StaticAmmoRecipePack
     # - RoundstartShipgunAmmo # Mono # Commented by LuaM
     - StaticGrenades
     - MonoAttachmentsStatic # Mono
     - ReportingStatic # DeltaV
     dynamicPacks:
     - NFNfsdTechfabDeprecated
-     - DynamicAmmoRecipePack
+    # - DynamicAmmoRecipePack
     # Mono start
     - MonoTSFWeaponsDynamicMelee
     - MonoTSFWeaponsDynamicRanged
