@@ -24,9 +24,9 @@
     idleState: icon
     runningState: icon
     staticPacks:
-    - StaticAmmoRecipePack # Commented by LuaM
+   # - StaticAmmoRecipePack # Commented by LuaM
     - NFMercenaryTechfabDeprecatedStatic
-    - RoundstartShipgunAmmo # Commented by LuaM
+   # - RoundstartShipgunAmmo # Commented by LuaM
     - StaticGrenades
     - MonoAttachmentsStatic
     dynamicPacks:
@@ -53,11 +53,11 @@
     # - MonoViperGroupDynamic
     # Universal shit (stuff like shipgun ammo)
     # LuaM-comment-start:
-    - UniversalRailgunAmmo
-    - UniversalMissileAmmo
-    - UniversalShellAmmo
-    - UniversalOrdinance
-    - DynamicAmmoRecipePack
+    #- UniversalRailgunAmmo
+    #- UniversalMissileAmmo
+    #- UniversalShellAmmo
+    #- UniversalOrdinance
+    #- DynamicAmmoRecipePack
     # LuaM-comment-end
     - NFMercenaryTechfabDeprecated
     # Civ military tech
