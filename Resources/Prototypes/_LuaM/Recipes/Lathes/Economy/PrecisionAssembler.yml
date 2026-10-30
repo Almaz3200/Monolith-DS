@@ -8,13 +8,13 @@
   - Mechs
   completetime: 45
   entities:
-    ArmorPlateEconomy3: 10
-    ComponentBrickEconomy3: 6
-    ElectromagnetEconomy2: 4
-    MicroprocessorEconomy3: 5
-    MotorEconomy1: 6
-    RadioEconomy2: 2
-    CapacitorEconomy3: 4
+    ArmorPlateEconomy3: 7
+    ComponentBrickEconomy3: 3
+    ElectromagnetEconomy2: 2
+    MicroprocessorEconomy3: 3
+    MotorEconomy1: 4
+    RadioEconomy2: 1
+    CapacitorEconomy3: 2
 
 - type: latheRecipe
   id: GygaxRArmMMC
@@ -23,10 +23,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy3: 4
+    ArmorPlateEconomy3: 2
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 1
-    MotorEconomy1: 8
+    MotorEconomy1: 6
 
 - type: latheRecipe
   id: GygaxLArmMMC
@@ -35,10 +35,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy3: 4
+    ArmorPlateEconomy3: 2
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 1
-    MotorEconomy1: 8
+    MotorEconomy1: 6
 
 - type: latheRecipe
   id: GygaxLLegMMC
@@ -47,10 +47,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy3: 4
+    ArmorPlateEconomy3: 2
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 1
-    MotorEconomy1: 8
+    MotorEconomy1: 6
 
 - type: latheRecipe
   id: GygaxRLegMMC
@@ -59,10 +59,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy3: 4
+    ArmorPlateEconomy3: 2
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 1
-    MotorEconomy1: 8
+    MotorEconomy1: 6
 
 - type: latheRecipe
   id: GygaxHeadMMC
@@ -71,13 +71,13 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy3: 6
+    ArmorPlateEconomy3: 4
     ComponentBrickEconomy3: 3
     ElectromagnetEconomy2: 1
-    MicroprocessorEconomy3: 6
+    MicroprocessorEconomy3: 4
     MotorEconomy1: 2
-    RadioEconomy2: 4
-    OpticsEconomy2: 4
+    RadioEconomy2: 2
+    OpticsEconomy2: 2
 
 - type: latheRecipe
   id: GygaxArmorPlateMMC
@@ -86,9 +86,9 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy3: 16
-    ElectromagnetEconomy2: 5
-    MotorEconomy1: 7
+    ArmorPlateEconomy3: 7
+    ElectromagnetEconomy2: 3
+    MotorEconomy1: 4
 #endregion
 
 #region Дюранд
@@ -100,13 +100,13 @@
   - Mechs
   completetime: 45
   entities:
-    ArmorPlateEconomy2: 25
+    ArmorPlateEconomy2: 15
     ComponentBrickEconomy3: 3
-    ElectromagnetEconomy2: 6
+    ElectromagnetEconomy2: 4
     MicroprocessorEconomy3: 2
-    MotorEconomy1: 14
+    MotorEconomy1: 8
     RadioEconomy2: 3
-    CapacitorEconomy3: 8
+    CapacitorEconomy3: 4
 
 - type: latheRecipe
   id: DurandRArmMMC
@@ -115,10 +115,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 8
+    ArmorPlateEconomy2: 5
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 2
-    MotorEconomy1: 12
+    MotorEconomy1: 8
 
 - type: latheRecipe
   id: DurandLArmMMC
@@ -127,10 +127,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 8
+    ArmorPlateEconomy2: 5
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 2
-    MotorEconomy1: 12
+    MotorEconomy1: 8
 
 - type: latheRecipe
   id: DurandLLegMMC
@@ -139,10 +139,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 8
+    ArmorPlateEconomy2: 5
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 2
-    MotorEconomy1: 12
+    MotorEconomy1: 8
 
 - type: latheRecipe
   id: DurandRLegMMC
@@ -151,10 +151,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 8
+    ArmorPlateEconomy2: 4
     ComponentBrickEconomy3: 1
     ElectromagnetEconomy2: 2
-    MotorEconomy1: 12
+    MotorEconomy1: 7
 
 - type: latheRecipe
   id: DurandHeadMMC
@@ -163,13 +163,13 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 8
-    ComponentBrickEconomy3: 2
-    ElectromagnetEconomy2: 2
-    MicroprocessorEconomy3: 3
-    MotorEconomy1: 5
-    RadioEconomy2: 3
-    OpticsEconomy2: 8
+    ArmorPlateEconomy2: 4
+    ComponentBrickEconomy3: 1
+    ElectromagnetEconomy2: 1
+    MicroprocessorEconomy3: 2
+    MotorEconomy1: 3
+    RadioEconomy2: 2
+    OpticsEconomy2: 4
 
 - type: latheRecipe
   id: DurandArmorPlateMMC
@@ -178,9 +178,9 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 16
-    ElectromagnetEconomy2: 2
-    MotorEconomy1: 5
+    ArmorPlateEconomy2: 8
+    ElectromagnetEconomy2: 1
+    MotorEconomy1: 3
 
 #endregion
 
@@ -195,14 +195,14 @@
   - Mechs
   completetime: 55
   entities:
-    ArmorPlateEconomy4: 12
-    ArmorPlateEconomy2: 35
-    ComponentBrickEconomy3: 4
-    ElectromagnetEconomy2: 8
-    MicroprocessorEconomy3: 12
-    MotorEconomy1: 32
-    RadioEconomy2: 6
-    CapacitorEconomy3: 12
+    ArmorPlateEconomy4: 7
+    ArmorPlateEconomy2: 18
+    ComponentBrickEconomy3: 2
+    ElectromagnetEconomy2: 4
+    MicroprocessorEconomy3: 5
+    MotorEconomy1: 22
+    RadioEconomy2: 3
+    CapacitorEconomy3: 5
 
 - type: latheRecipe
   id: HalberdHarnessMMC
@@ -211,14 +211,14 @@
   - Mechs
   completetime: 55
   entities:
-    ArmorPlateEconomy4: 17
-    ArmorPlateEconomy2: 41
-    ComponentBrickEconomy3: 4
-    ElectromagnetEconomy2: 8
-    MicroprocessorEconomy3: 12
-    MotorEconomy1: 32
-    RadioEconomy2: 6
-    CapacitorEconomy3: 12
+    ArmorPlateEconomy4: 7
+    ArmorPlateEconomy2: 21
+    ComponentBrickEconomy3: 2
+    ElectromagnetEconomy2: 4
+    MicroprocessorEconomy3: 6
+    MotorEconomy1: 18
+    RadioEconomy2: 3
+    CapacitorEconomy3: 5
 
 - type: latheRecipe
   id: BroadswordRArmMMC
@@ -227,10 +227,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 17
-    ComponentBrickEconomy3: 5
-    ElectromagnetEconomy2: 8
-    MotorEconomy1: 19
+    ArmorPlateEconomy2: 8
+    ComponentBrickEconomy3: 2
+    ElectromagnetEconomy2: 5
+    MotorEconomy1: 8
 
 - type: latheRecipe
   id: BroadswordLArmMMC
@@ -239,10 +239,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 17
-    ComponentBrickEconomy3: 5
-    ElectromagnetEconomy2: 8
-    MotorEconomy1: 19
+    ArmorPlateEconomy2: 8
+    ComponentBrickEconomy3: 2
+    ElectromagnetEconomy2: 5
+    MotorEconomy1: 8
 
 - type: latheRecipe
   id: BroadswordLLegMMC
@@ -251,10 +251,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 17
-    ComponentBrickEconomy3: 5
-    ElectromagnetEconomy2: 8
-    MotorEconomy1: 19
+    ArmorPlateEconomy2: 8
+    ComponentBrickEconomy3: 2
+    ElectromagnetEconomy2: 5
+    MotorEconomy1: 8
 
 - type: latheRecipe
   id: BroadswordRLegMMC
@@ -263,10 +263,10 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 17
-    ComponentBrickEconomy3: 5
-    ElectromagnetEconomy2: 8
-    MotorEconomy1: 19
+    ArmorPlateEconomy2: 8
+    ComponentBrickEconomy3: 2
+    ElectromagnetEconomy2: 5
+    MotorEconomy1: 8
 
 - type: latheRecipe
   id: BroadswordHeadMMC
@@ -275,13 +275,13 @@
   - Mechs
   completetime: 15
   entities:
-    ArmorPlateEconomy2: 23
-    ComponentBrickEconomy3: 4
-    ElectromagnetEconomy2: 7
-    MicroprocessorEconomy3: 5
-    MotorEconomy1: 12
-    RadioEconomy2: 7
-    OpticsEconomy2: 16
+    ArmorPlateEconomy2: 16
+    ComponentBrickEconomy3: 2
+    ElectromagnetEconomy2: 4
+    MicroprocessorEconomy3: 3
+    MotorEconomy1: 7
+    RadioEconomy2: 4
+    OpticsEconomy2: 8
 #endregion
 #region Т3 кирпич
 
