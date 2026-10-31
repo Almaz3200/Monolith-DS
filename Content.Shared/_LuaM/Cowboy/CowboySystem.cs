@@ -35,6 +35,19 @@ public sealed partial class CowboySystem : EntitySystem
         SubscribeLocalEvent<CowboyComponent, DidEquipHandEvent>(OnEquipped);
         SubscribeLocalEvent<CowboyComponent, DidUnequipHandEvent>(OnUnequipped);
         SubscribeLocalEvent<CowboyComponent, GunExaminedByEvent>(OnGunExamined);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (!args.WasModified<EntityPrototype>())
+            return;
+
+        var query = EntityQueryEnumerator<CowboyComponent>();
+        while (query.MoveNext(out var cowboy))
+        {
+            cowboy.GunClassCache.Clear();
+        }
     }
 
     /// <summary>
@@ -116,9 +129,19 @@ public sealed partial class CowboySystem : EntitySystem
         if (MetaData(gun).EntityPrototype is not { } proto)
             return GunClass.Other;
 
+        if (cowboy.GunClassCache.TryGetValue(proto.ID, out var cached))
+            return (GunClass) cached;
+
+        var result = ClassifyPrototype(proto.ID, cowboy);
+        cowboy.GunClassCache[proto.ID] = (byte) result;
+        return result;
+    }
+
+    private GunClass ClassifyPrototype(string protoId, CowboyComponent cowboy)
+    {
         var pistol = false;
         var forbidden = false;
-        foreach (var (id, _) in _prototype.EnumerateAllParents<EntityPrototype>(proto.ID, true))
+        foreach (var (id, _) in _prototype.EnumerateAllParents<EntityPrototype>(protoId, true))
         {
             // sawn-offs inherit from shotguns, so they win over the forbidden list
             if (cowboy.SawnOffBases.Contains(id))

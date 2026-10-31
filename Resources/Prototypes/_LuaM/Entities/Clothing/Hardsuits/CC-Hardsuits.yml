@@ -149,9 +149,6 @@
     autoRechargePauseTime: 5
   - type: UseDelay
     delay: 10
-  - type: FootstepModifier # LuaM
-    footstepSoundCollection:
-      collection: FootstepHeavySuit # LuaM: sound_mecha_powerloader_step > FootstepHeavySuit
   - type: ExtendDescription
     descriptionList:
     - description: Alt-click or otherwise interact to toggle additional shielding.

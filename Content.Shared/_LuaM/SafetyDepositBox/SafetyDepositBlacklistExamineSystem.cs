@@ -56,7 +56,7 @@ public sealed partial class SafetyDepositBlacklistExamineSystem : EntitySystem
         _blacklist = null;
 
         if (_prototype.TryIndex(BoxPrototype, out var proto) &&
-            proto.TryGetComponent<StorageComponent>(out var storage, Factory))
+            proto.TryComp<StorageComponent>(out var storage, Factory))
         {
             _blacklist = storage.Blacklist;
         }

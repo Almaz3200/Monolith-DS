@@ -62,6 +62,11 @@ public sealed partial class CowboyComponent : Component
     public TimeSpan PopupCooldown = TimeSpan.FromSeconds(1);
 
     public TimeSpan NextPopup;
+
+    /// <summary>
+    /// Gun class per prototype id, so the parents of a gun are walked once and not on every shot.
+    /// </summary>
+    public readonly Dictionary<string, byte> GunClassCache = new();
 }
 
 /// <summary>
