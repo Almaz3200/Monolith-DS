@@ -136,6 +136,8 @@
   name: PDV CV-67 combat tacsuit
   description: An adorned tacsuit designed with an imperfect nanolaminate composition. High maneuverability, sturdy armor.
   components:
+  - type: SpeedTieredFootsteps # LuaM: always heavy steps, whatever the slowdown
+    forcedTier: Heavy
   - type: ClothingSpeedModifier # LuaM: TSF and PDV suits are 10% slower, inherited 1.0 > 0.9
     walkModifier: 0.9
     sprintModifier: 0.9

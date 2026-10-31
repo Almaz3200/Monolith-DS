@@ -118,6 +118,8 @@
   name: TSFMC M92 colonel tacsuit
   description: A heavy, gilded tacsuit, stripped of its shield but now capable of taking a lot of physical damage. Usually assigned to commanding officers of TSF flagships.
   components:
+  - type: SpeedTieredFootsteps # LuaM: always heavy steps, whatever the slowdown
+    forcedTier: Heavy
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/tsfmc_colonel.rsi # Mono
   - type: Clothing
@@ -227,9 +229,10 @@
     autoRechargePauseTime: 5
   - type: UseDelay
     delay: 10
-  - type: FootstepModifier # LuaM
-    footstepSoundCollection:
-      collection: FootstepHeavySuit # LuaM: sound_mecha_powerloader_step > FootstepHeavySuit
+  # LuaM: footsteps come from SpeedTieredFootsteps, the own heavy step sound is removed
+  # - type: FootstepModifier # LuaM
+  #   footstepSoundCollection:
+  #     collection: FootstepHeavySuit # LuaM: sound_mecha_powerloader_step > FootstepHeavySuit
   - type: ExtendDescription
     descriptionList:
     - description: Alt-click or otherwise interact to toggle additional shielding.

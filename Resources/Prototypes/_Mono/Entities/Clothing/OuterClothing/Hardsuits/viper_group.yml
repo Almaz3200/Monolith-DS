@@ -147,6 +147,8 @@
   name: MEDUSA mk.VI viper hardsuit
   description: A heavy combat hardsuit adorned with signature markings of the Viper Group. The armor features a personal shield projector integrated into the suit.
   components:
+  - type: SpeedTieredFootsteps # LuaM: always heavy steps, whatever the slowdown
+    forcedTier: Heavy
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/viper_group_shield.rsi
   - type: Item
@@ -205,9 +207,10 @@
     autoRechargePauseTime: 10
   - type: UseDelay
     delay: 10
-  - type: FootstepModifier # Mono
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  # LuaM: footsteps come from SpeedTieredFootsteps, the own heavy step sound is removed
+  # - type: FootstepModifier # Mono
+  #   footstepSoundCollection:
+  #     path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: ExtendDescription
     descriptionList:
     - description: Alt-click or otherwise interact to toggle additional shielding.

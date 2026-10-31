@@ -208,9 +208,10 @@
     walkModifier: 0.75 # LuaM: 0.75 > 0.85 > 0.75, all suits are 0.1 slower
     sprintModifier: 0.75 # LuaM: 0.75 > 0.85 > 0.75, all suits are 0.1 slower
   - type: HeldSpeedModifier
-  - type: FootstepModifier
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  # LuaM: footsteps come from SpeedTieredFootsteps, the own heavy step sound is removed
+  # - type: FootstepModifier
+  #   footstepSoundCollection:
+  #     path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
