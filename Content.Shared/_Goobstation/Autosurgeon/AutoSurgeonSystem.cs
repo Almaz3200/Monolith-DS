@@ -1,14 +1,25 @@
 using System.Linq;
+using Content.Shared._LuaM.Autosurgeon; // LuaM
+using Content.Shared._LuaM.Cyberware; // LuaM
 using Content.Shared._Shitmed.BodyEffects;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
+using Content.Shared.Buckle.Components; // LuaM
 using Content.Shared.Damage.Components; // LuaM
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Forensics;
+using Content.Shared.Implants; // LuaM
+using Content.Shared.Implants.Components; // LuaM
+using Content.Shared.Interaction; // LuaM
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Popups; // LuaM
+using Content.Shared.Stacks; // LuaM
+using Content.Shared.Tools.Systems; // LuaM
+using Content.Shared.Whitelist; // LuaM
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers; // LuaM
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
@@ -21,10 +32,15 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private SharedContainerSystem _container = default!; // LuaM
+    [Dependency] private SharedPopupSystem _popup = default!; // LuaM
+    [Dependency] private EntityWhitelistSystem _whitelist = default!; // LuaM
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private INetManager _netManager = default!;
     [Dependency] private ISerializationManager _serializationManager = default!;
+    [Dependency] private SharedStackSystem _stack = default!; // LuaM
+    [Dependency] private SharedToolSystem _tool = default!; // LuaM
 
     public override void Initialize()
     {
@@ -33,7 +49,43 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
         SubscribeLocalEvent<AutoSurgeonComponent, ItemToggleActivateAttemptEvent>(OnActivated);
         SubscribeLocalEvent<AutoSurgeonComponent, AutoSurgeonDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<AutoSurgeonComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<AutoSurgeonComponent, InteractUsingEvent>(OnInteractUsing); // LuaM
+        SubscribeLocalEvent<AutoSurgeonComponent, AutoSurgeonDisassembleDoAfterEvent>(OnDisassembleDoAfter); // LuaM
     }
+
+    // LuaM-start
+    private void OnInteractUsing(Entity<AutoSurgeonComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled || !ent.Comp.Used)
+            return;
+
+        args.Handled = _tool.UseTool(args.Used,
+            args.User,
+            ent,
+            ent.Comp.DisassembleTime,
+            ent.Comp.DisassembleQuality,
+            new AutoSurgeonDisassembleDoAfterEvent());
+    }
+
+    private void OnDisassembleDoAfter(Entity<AutoSurgeonComponent> ent, ref AutoSurgeonDisassembleDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || !ent.Comp.Used)
+            return;
+
+        args.Handled = true;
+
+        if (_netManager.IsClient)
+            return;
+
+        foreach (var (material, amount) in ent.Comp.DisassembleMaterials)
+        {
+            var stack = SpawnNextToOrDrop(material, ent);
+            _stack.SetCount(stack, amount);
+        }
+
+        QueueDel(ent);
+    }
+    // LuaM-end
 
     private void OnActivated(Entity<AutoSurgeonComponent> ent, ref ItemToggleActivateAttemptEvent args)
     {
@@ -43,13 +95,20 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
         if (ent.Comp.Used || args.User == null)
             return;
 
+        // LuaM-start: whoever is buckled to the autosurgeon gets the surgery, otherwise the one who turned it on
+        var target = args.User.Value;
+        if (TryComp<StrapComponent>(ent, out var strap)
+            && strap.BuckledEntities.FirstOrDefault() is { Valid: true } buckled)
+            target = buckled;
+        // LuaM-end
+
         if (!_doAfter.TryStartDoAfter(new DoAfterArgs(
                 EntityManager,
                 ent.Owner,
                 ent.Comp.DoAfterTime,
                 new AutoSurgeonDoAfterEvent(),
                 ent.Owner,
-                args.User,
+                target, // LuaM: args.User > target
                 ent.Owner)
             {
                 BreakOnMove = true,
@@ -78,6 +137,91 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             _audio.Stop(ent.Comp.ActiveSound);
             return;
         }
+
+        // LuaM-start: autosurgeons that install a subdermal implant
+        if (ent.Comp.Implant is { } implantProto)
+        {
+            _audio.Stop(ent.Comp.ActiveSound);
+
+            if (_netManager.IsClient)
+                return;
+
+            if (TryComp<ImplantedComponent>(args.Target, out var implanted)
+                && implanted.ImplantContainer.ContainedEntities.Any(implant => Prototype(implant)?.ID == implantProto.Id))
+            {
+                _popup.PopupEntity(Loc.GetString("autosurgeon-implant-already"), args.Target.Value, args.Target.Value);
+                return;
+            }
+
+            var newImplant = Spawn(implantProto, Transform(args.Target.Value).Coordinates);
+            if (!TryComp<SubdermalImplantComponent>(newImplant, out var implantComp))
+            {
+                Del(newImplant);
+                return;
+            }
+
+            // Same checks as an implanter: the implant's whitelist and anything that forbids it, like a mindshield on a rev head.
+            var attempt = new AddImplantAttemptEvent(args.Target.Value, args.Target.Value, newImplant, ent.Owner);
+            if (_whitelist.IsWhitelistPassOrNull(implantComp.Whitelist, args.Target.Value)
+                && _whitelist.IsBlacklistFailOrNull(implantComp.Blacklist, args.Target.Value))
+                RaiseLocalEvent(args.Target.Value, attempt);
+            else
+                attempt.Cancel();
+
+            if (attempt.Cancelled)
+            {
+                Del(newImplant);
+                _popup.PopupEntity(Loc.GetString("autosurgeon-implant-failed"), args.Target.Value, args.Target.Value);
+                return;
+            }
+
+            var implantedComp = EnsureComp<ImplantedComponent>(args.Target.Value);
+            implantComp.ImplantedEntity = args.Target.Value;
+            _container.Insert(newImplant, implantedComp.ImplantContainer);
+
+            if (ent.Comp.OneTimeUse)
+                ent.Comp.Used = true;
+            Dirty(ent);
+            RaiseInstalled(args.Target.Value); // LuaM
+            return;
+        }
+
+        // Autosurgeons that put the same organ into several parts, like a mantis blade into each arm
+        if (ent.Comp.OrganForEachPart is { } organProto)
+        {
+            _audio.Stop(ent.Comp.ActiveSound);
+
+            if (_netManager.IsClient)
+                return;
+
+            var target = args.Target.Value;
+            var installed = false;
+            foreach (var (partId, partComp) in _body.GetBodyChildrenOfType(target, ent.Comp.TargetBodyPart).ToList())
+            {
+                var organ = Spawn(organProto, Transform(target).Coordinates);
+                if (!TryComp<OrganComponent>(organ, out var organComp)
+                    || !_body.InsertOrgan(partId, organ, organComp.SlotId, partComp, organComp))
+                {
+                    Del(organ);
+                    continue;
+                }
+
+                installed = true;
+            }
+
+            if (!installed)
+            {
+                _popup.PopupEntity(Loc.GetString("autosurgeon-implant-already"), target, target);
+                return;
+            }
+
+            if (ent.Comp.OneTimeUse)
+                ent.Comp.Used = true;
+            Dirty(ent);
+            RaiseInstalled(args.Target.Value); // LuaM
+            return;
+        }
+        // LuaM-end
 
         var isBodyPart = ent.Comp.TargetOrgan == null;
 
@@ -126,15 +270,21 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
                     return;
                 }
 
-                var oldOrgan = _body.GetPartOrgans(parent)
-                    .FirstOrDefault(organ => organ.Component.SlotId == newOrganComp.SlotId)
-                    .Id;
-
-                if (!_body.AddOrganToFirstValidSlot(parent, newPart) && oldOrgan.Valid)
+                // LuaM-start: the organ goes into its own slot, not into the first free one
+                if (!_body.InsertOrgan(parent, newPart, newOrganComp.SlotId))
                 {
-                    _body.RemoveOrgan(oldOrgan);
-                    _body.InsertOrgan(parent, newPart, newOrganComp.SlotId);
+                    if (_container.TryGetContainer(parent, SharedBodySystem.GetOrganContainerId(newOrganComp.SlotId), out var slotContainer)
+                        && slotContainer.ContainedEntities.FirstOrDefault() is { Valid: true } oldOrgan)
+                        _body.RemoveOrgan(oldOrgan);
+
+                    if (!_body.InsertOrgan(parent, newPart, newOrganComp.SlotId))
+                    {
+                        Del(newPart);
+                        _audio.Stop(ent.Comp.ActiveSound);
+                        return;
+                    }
                 }
+                // LuaM-end
             }
 
             _audio.Stop(ent.Comp.ActiveSound);
@@ -142,6 +292,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             if (ent.Comp.OneTimeUse)
                 ent.Comp.Used = true;
             Dirty(ent);
+            RaiseInstalled(args.Target.Value); // LuaM
             return;
         }
 
@@ -169,46 +320,108 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             return;
         }
 
+        var applied = true; // LuaM
         if (ent.Comp.TargetOrgan == null)
-            HandleBodyPart(args.Target.Value, part, ent.Comp.ComponentsToUser);
+            applied = HandleBodyPart(args.Target.Value, part, ent.Comp.ComponentsToUser, ent.Comp.ReplaceUserComponents, ent.Comp.UpgradeTier); // LuaM: replace, tier
         else
             HandleOrgan(args.Target.Value, part, ent.Comp.ComponentsToUser);
+
+        // LuaM-start: nothing to upgrade, the user already has it or something better, so the autosurgeon is not used up
+        if (!applied)
+        {
+            _audio.Stop(ent.Comp.ActiveSound);
+            if (!_netManager.IsClient)
+                _popup.PopupEntity(Loc.GetString("autosurgeon-implant-already"), args.Target.Value, args.Target.Value);
+            return;
+        }
+        // LuaM-end
+
+        // LuaM-start: humanity cost of the upgrade, stored on the part so a repeated upgrade doesn't count twice
+        if (ent.Comp.HumanityCost > 0 && (ent.Comp.HumanityKey ?? Prototype(ent)?.ID) is { } upgradeId)
+            EnsureComp<CyberwareHumanityComponent>(part).Upgrades[upgradeId] = ent.Comp.HumanityCost;
+        // LuaM-end
 
         _audio.Stop(ent.Comp.ActiveSound);
 
         if (ent.Comp.OneTimeUse)
             ent.Comp.Used = true;
         Dirty(ent);
+        RaiseInstalled(args.Target.Value); // LuaM
     }
 
-    private void HandleBodyPart(EntityUid user, EntityUid part, ComponentRegistry? comps)
+    // LuaM-start
+    private void RaiseInstalled(EntityUid target)
+    {
+        if (_netManager.IsClient)
+            return;
+
+        var ev = new CyberwareInstalledEvent();
+        RaiseLocalEvent(target, ref ev);
+    }
+    // LuaM-end
+
+    private bool HandleBodyPart(EntityUid user, EntityUid part, ComponentRegistry? comps, bool replace = false, int tier = 0) // LuaM: replace, tier, returns whether anything was applied
     {
         if (!TryComp<BodyPartComponent>(part, out var partComp)
         || comps == null)
-            return;
+            return true;
+
+        TryComp<AutoSurgeonUpgradeTiersComponent>(part, out var tiers); // LuaM
 
         var addedToOnAdd = new ComponentRegistry();
         foreach (var (name, data) in comps)
         {
+            // LuaM: the part already has this upgrade at the same or a higher tier
+            if (tier > 0 && tiers != null && tiers.Tiers.TryGetValue(name, out var oldTier) && oldTier >= tier)
+                continue;
+
             if (partComp.OnAdd != null)
             {
                 if (partComp.OnAdd.TryAdd(name, data))
                     addedToOnAdd.Add(name, data);
+                // LuaM-start: an improved version takes the old one's place
+                else if (replace)
+                {
+                    partComp.OnAdd[name] = data;
+                    addedToOnAdd.Add(name, data);
+                }
+                // LuaM-end
             }
             else
             {
-                partComp.OnAdd = comps;
-                addedToOnAdd = comps;
+                // LuaM: a registry of its own, so later components of this autosurgeon go through the same checks
+                partComp.OnAdd = new ComponentRegistry { { name, data } };
+                addedToOnAdd.Add(name, data);
             }
         }
 
-        var addedToUser = AddComponents(user, addedToOnAdd);
+        var addedToUser = AddComponents(user, addedToOnAdd, replace); // LuaM: replace
         if (addedToUser == null)
-            return;
+            return true;
+
+        // LuaM-start
+        if (addedToUser.Count == 0)
+            return false;
+
+        if (tier > 0)
+        {
+            tiers ??= EnsureComp<AutoSurgeonUpgradeTiersComponent>(part);
+            foreach (var name in addedToUser.Keys)
+                tiers.Tiers[name] = tier;
+        }
+        // LuaM-end
 
         var partEffectComp = EnsureComp<BodyPartEffectComponent>(part);
         foreach (var (name, data) in addedToUser)
-            partEffectComp.Active.TryAdd(name, data);
+        {
+            // LuaM: keep the newest version, so it is the one put back if the component gets lost
+            if (replace)
+                partEffectComp.Active[name] = data;
+            else
+                partEffectComp.Active.TryAdd(name, data);
+        }
+
+        return true; // LuaM
     }
 
     private void HandleOrgan(EntityUid user, EntityUid organ, ComponentRegistry? comps)
@@ -241,10 +454,15 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             organEffectComp.Active.TryAdd(name, data);
     }
 
-    private void OnExamined(Entity<AutoSurgeonComponent> ent, ref ExaminedEvent args) =>
+    private void OnExamined(Entity<AutoSurgeonComponent> ent, ref ExaminedEvent args)
+    {
         args.PushMarkup(ent.Comp.Used ? Loc.GetString("gun-cartridge-spent") : Loc.GetString("gun-cartridge-unspent")); // Yes gun locale, and?
 
-    private ComponentRegistry? AddComponents(EntityUid ent, ComponentRegistry? comps) // Returns actually added components
+        if (ent.Comp.Used) // LuaM
+            args.PushMarkup(Loc.GetString("autosurgeon-disassemble-examine"));
+    }
+
+    private ComponentRegistry? AddComponents(EntityUid ent, ComponentRegistry? comps, bool replace = false) // Returns actually added components // LuaM: replace
     {
         if (comps == null)
             return null;
@@ -259,6 +477,16 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
                 // LuaM: implanted damage protection replaces the same one from a trait instead of being skipped
                 if (newComp is DamageProtectionBuffComponent && MergeDamageProtection(ent, newComp, data))
                     result.Add(name, data);
+                // LuaM-start: an improved version overwrites the values of the one the user has
+                else if (replace)
+                {
+                    object? existing = EntityManager.GetComponent(ent, newComp.GetType());
+                    _serializationManager.CopyTo(data.Component, ref existing);
+                    if (existing is Component { NetSyncEnabled: true } synced)
+                        Dirty(ent, synced);
+                    result.Add(name, data);
+                }
+                // LuaM-end
                 continue;
             }
 

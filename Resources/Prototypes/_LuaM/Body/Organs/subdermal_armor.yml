@@ -1,0 +1,133 @@
+# Armor for the subdermal armor slot of the chest. Only one fits.
+# Both use the "dermal" key, the same as the dermal armor trait: while installed they replace
+# the trait's protection, which comes back when the armor is removed.
+- type: entity
+  parent: BaseItem
+  id: BaseOrganSubdermalArmor
+  abstract: true
+  components:
+  # LuaM-start: contextual cybernetics guide.
+  - type: GuideHelp
+    guides:
+    - ColossusImplantProtection
+  # LuaM-end
+  - type: EmitSoundOnPickup
+    sound:
+      collection: OrganInteraction
+  - type: EmitSoundOnDrop
+    sound:
+      collection: OrganInteraction
+  - type: EmitSoundOnLand
+    sound:
+      collection: OrganInteraction
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/cybernetics.rsi
+    state: armor-chest
+  - type: Organ
+    slotId: subdermal
+  - type: Cybernetics
+  - type: Gibbable
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - SafetyDepositBlacklist # can not be carried between shifts
+
+- type: entity
+  parent: BaseOrganSubdermalArmor
+  id: OrganDermalArmor
+  name: dermal armor
+  description: A flexible but durable polymer carapace that goes under the skin. Flat damage reduction against blunt, slash and piercing, but more damage from shock.
+  components:
+  - type: SubdermalArmor
+    modifiers:
+      dermal:
+        id: DermalArmorTrait
+        coefficients:
+          Shock: 1.25
+        flatReductions:
+          Blunt: 3.5
+          Slash: 3.5
+          Piercing: 3.5
+  - type: CyberwareHumanity
+    cost: 1
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  parent: BaseOrganSubdermalArmor
+  id: OrganDermalArmorPDV
+  name: PD-VI E-SAPI armor plates
+  description: An array of E-SAPI armor plates that go under the skin. More vulnerable to shock and a bit heavy to move in, but more resistant to bullets and heat.
+  components:
+  - type: Sprite
+    color: "#c41e24" # red and black, like the PDV hardsuits
+  - type: Organ
+    onAdd:
+    - type: CyberwareSpeedModifier # 5% slower while the plates are installed
+      walkModifier: 0.95
+      sprintModifier: 0.95
+  - type: SubdermalArmor
+    modifiers:
+      dermal:
+        id: DermalArmorCybernetics
+        coefficients:
+          Shock: 1.25
+          Heat: 0.85
+          Piercing: 0.85
+          Blunt: 0.9
+          Slash: 0.9
+  - type: CyberwareHumanity
+    cost: 2
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  parent: BaseOrganSubdermalArmor
+  id: OrganDermalArmorReflective
+  name: reflective dermal armor
+  description: A mirror-polished carapace under the skin that can bounce shots back. A bit heavy to move in, gives no damage reduction and conducts shock.
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Misc/reflective_armor.rsi
+    state: icon
+  - type: Organ
+    onAdd:
+    - type: Reflect # 20% chance to bounce a shot back
+      reflectProb: 0.2
+    - type: CyberwareSpeedModifier # 10% slower while installed
+      walkModifier: 0.9
+      sprintModifier: 0.9
+  - type: SubdermalArmor
+    modifiers:
+      # Own key, so the dermal armor trait keeps its protection.
+      reflective:
+        id: DermalArmorReflective
+        coefficients:
+          Shock: 1.25 # the mirror carapace conducts shock
+  - type: CyberwareHumanity
+    cost: 3
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  parent: BaseOrganSubdermalArmor
+  id: OrganDermalArmorHeavyUSSP
+  name: ultra-durable armor plate base
+  description: A heavy USSP armor plate base under the skin. Every 20 seconds it fully stops one bullet, but it slows you down.
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Misc/heavy_armor_base.rsi
+    state: icon
+  - type: Organ
+    onAdd:
+    - type: BulletAbsorb # fully stops one bullet, then 20 seconds to get ready again
+      cooldown: 20
+    - type: CyberwareSpeedModifier # 10% slower while installed
+      walkModifier: 0.9
+      sprintModifier: 0.9
+  - type: SubdermalArmor # no damage modifiers, only marks the organ for surgeries
+  - type: CyberwareHumanity
+    cost: 3
+  - type: StaticPrice
+    price: 1500

@@ -4,6 +4,8 @@
   description: trait-prybar-prosthetics-desc
   category: Physical
   cost: 2
+  mutuallyExclusiveTraits: # LuaM: no chrome with chrome intolerance
+  - ChromeIntolerance
   components:
   - type: PrybarProsthetics
 
@@ -118,6 +120,8 @@
   description: trait-bionic-legs-desc
   category: Physical
   cost: 2
+  mutuallyExclusiveTraits: # LuaM: no chrome with chrome intolerance
+  - ChromeIntolerance
   components:
   - type: BionicLegs
 
@@ -197,6 +201,7 @@
   speciesBlacklist:
    - Felinid
    - Tajaran
+   - IPC # LuaM: IPCs are not slowed down by damage
   components:
     - type: SlowOnDamage
       speedModifierThresholds:
@@ -282,6 +287,7 @@
   speciesBlacklist:
   - Felinid
   - Tajaran
+  - IPC # LuaM: IPCs are not slowed down by damage
   blacklist:
     components:
     - BorgChassis
@@ -297,6 +303,8 @@
   description: trait-dermal-armor-desc
   category: Physical
   cost: 6
+  mutuallyExclusiveTraits: # LuaM: no chrome with chrome intolerance
+  - ChromeIntolerance
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -394,7 +402,7 @@
   name: trait-nanite-repair-drones-name
   description: trait-nanite-repair-drones-desc
   category: Physical
-  cost: 8
+  cost: 6 # LuaM: 8 > 6
   speciesBlacklist:
   - Human
   - Chitinid

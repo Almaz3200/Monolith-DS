@@ -16,6 +16,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
+using Robust.Shared.Timing; // LuaM
 using System.Numerics;
 
 namespace Content.Server._Mono.NPC.HTN;
@@ -30,6 +31,7 @@ public sealed partial class ShipSteeringSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
     [Dependency] private TargetSeekingSystem _seeking = default!;
+    [Dependency] private IGameTiming _timing = default!; // LuaM
 
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery;
     [Dependency] private EntityQuery<ProjectileGridPhaseComponent> _phaseQuery;
@@ -52,9 +54,30 @@ public sealed partial class ShipSteeringSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ShipSteererComponent, GetShuttleInputsEvent>(OnSteererGetInputs);
+        SubscribeLocalEvent<ShipSteererComponent, GetShuttleInputsEvent>(OnSteererGetInputsSafe); // LuaM
         SubscribeLocalEvent<ShipSteererComponent, PilotedShuttleRelayedEvent<StartCollideEvent>>(OnShuttleStartCollide);
     }
+
+    // LuaM-start: this runs inside the physics step, an exception here stops movement for the whole server
+    private readonly HashSet<EntityUid> _steeringErrorLogged = new();
+
+    private void OnSteererGetInputsSafe(Entity<ShipSteererComponent> ent, ref GetShuttleInputsEvent args)
+    {
+        try
+        {
+            OnSteererGetInputs(ent, ref args);
+        }
+        catch (Exception e)
+        {
+            ent.Comp.RotationCompensation = 0f;
+            args.GotInput = true; // keep the steerer attached, just skip this tick
+            args.Input = null;
+
+            if (_steeringErrorLogged.Add(ent.Owner))
+                Log.Error($"Ship steering failed for {ToPrettyString(ent)}, input skipped: {e}");
+        }
+    }
+    // LuaM-end
 
     private void OnSteererGetInputs(Entity<ShipSteererComponent> ent, ref GetShuttleInputsEvent args)
     {
@@ -151,6 +174,8 @@ public sealed partial class ShipSteeringSystem : EntitySystem
             TargetGridUid = targetGrid,
 
             RotationCompensation = ref ent.Comp.RotationCompensation,
+            Steerer = ent.Comp, // LuaM
+            InRange = inRange, // LuaM
 
             FrameTime = args.FrameTime
         };
@@ -190,12 +215,12 @@ public sealed partial class ShipSteeringSystem : EntitySystem
                     && MathF.Abs(angVel) < maxArrivedAngVel)
                 {
                     var good = true;
-                    if (comp.InRangeRotation is { } targetWorldRot)
+                    if (!comp.ForceArrive && comp.InRangeRotation is { } targetWorldRot) // LuaM: ForceArrive
                     {
                         var wishRotateBy = ShortestAngleDistance(shipNorthAngle + new Angle(Math.PI), targetWorldRot);
                         good = MathF.Abs((float)wishRotateBy.Theta) < comp.RotationTolerance;
                     }
-                    else if (comp.AlwaysFaceTarget)
+                    else if (!comp.ForceArrive && comp.AlwaysFaceTarget) // LuaM: ForceArrive
                     {
                         var wishRotateBy = ShortestAngleDistance(shipNorthAngle + new Angle(Math.PI) - targetAngleOffset, toTargetVec.ToWorldAngle());
                         good = MathF.Abs((float)wishRotateBy.Theta) < comp.RotationTolerance;
@@ -261,12 +286,58 @@ public sealed partial class ShipSteeringSystem : EntitySystem
         strafeInput = GetGoodThrustVector(strafeInput, ctx.Shuttle) * MathF.Min(1f, wishInputVec.Length());
 
         // also set us to anchor dampening if we wish to brake
-        if (brakeInput == 1f && ctx.ShipBody.LinearVelocity.Length() >= config.AnchorMaxVelocity)
-            _shuttle.SetInertiaDampening(ctx.ShipUid, ctx.ShipBody, ctx.Shuttle, ctx.ShipXform, InertiaDampeningMode.Anchor);
-        else
-            _shuttle.SetInertiaDampening(ctx.ShipUid, ctx.ShipBody, ctx.Shuttle, ctx.ShipXform, InertiaDampeningMode.Off);
+        // LuaM-start
+        var speed = ctx.ShipBody.LinearVelocity.Length();
+        var steerer = ctx.Steerer;
+        var wantAnchor = brakeInput == 1f
+            && (speed >= config.AnchorMaxVelocity
+                || steerer.AnchorBraking && speed >= config.AnchorMaxVelocity * AnchorReleaseFraction);
 
-        return new ShuttleInput(strafeInput, rotControl.RotationInput, brakeInput);
+        if (wantAnchor != steerer.AnchorBraking && _timing.CurTime >= steerer.NextDampeningChange)
+        {
+            steerer.AnchorBraking = wantAnchor;
+            steerer.NextDampeningChange = _timing.CurTime + DampeningChangeDelay;
+        }
+
+        var mode = InertiaDampeningMode.Off;
+        var rotationInput = rotControl.RotationInput;
+        if (steerer.AnchorBraking)
+        {
+            mode = InertiaDampeningMode.Anchor;
+        }
+        else if (steerer.AnchorInRange && ctx.InRange)
+        {
+            steerer.InRangeSince ??= _timing.CurTime;
+            if (_timing.CurTime - steerer.InRangeSince.Value >= InRangeAlignTimeout)
+                steerer.ForceArrive = true;
+
+            var aligned = steerer.ForceArrive
+                || config.AngleOverride is not { } wishAngle
+                || MathF.Abs((float) ShortestAngleDistance(ctx.ShipNorthAngle + new Angle(Math.PI), wishAngle + config.TargetAngleOffset)) < steerer.RotationTolerance;
+
+            if (aligned)
+            {
+                mode = InertiaDampeningMode.Anchor;
+                brakeInput = 1f;
+                strafeInput = Vector2.Zero;
+                rotationInput = 0f;
+            }
+            else
+            {
+                mode = InertiaDampeningMode.Dampen;
+            }
+        }
+
+        if (!ctx.InRange)
+        {
+            steerer.InRangeSince = null;
+            steerer.ForceArrive = false;
+        }
+
+        _shuttle.SetInertiaDampening(ctx.ShipUid, ctx.ShipBody, ctx.Shuttle, ctx.ShipXform, mode);
+
+        return new ShuttleInput(strafeInput, rotationInput, brakeInput);
+        // LuaM-end
     }
 
     private BrakeContext GetBrakeContext(ref SteeringContext ctx, float maxArrivedVel)
@@ -604,9 +675,20 @@ public sealed partial class ShipSteeringSystem : EntitySystem
             wishAngleActual = (ctx.DestMapPos.Position - ctx.ShipPos.Position).ToWorldAngle();
 
         wishAngleActual += config.TargetAngleOffset;
-        var wishAngle = wishAngleActual + ctx.RotationCompensation;
 
+        // LuaM-start: a single NaN stored in RotationCompensation made Math.Sign throw every tick and froze all physics
         var angAccel = _mover.GetAngularAcceleration(ctx.Shuttle, ctx.ShipBody);
+        if (!float.IsFinite(angAccel) || angAccel < 0f)
+            angAccel = 0f;
+
+        if (!float.IsFinite(ctx.RotationCompensation))
+            ctx.RotationCompensation = 0f;
+
+        if (!double.IsFinite(wishAngleActual.Theta) || !double.IsFinite(ctx.ShipNorthAngle.Theta))
+            return new RotationResult(0f, 0f);
+        // LuaM-end
+
+        var wishAngle = wishAngleActual + ctx.RotationCompensation;
 
         // process the PID
         var wishRotateByActual = ShortestAngleDistance(ctx.ShipNorthAngle + new Angle(Math.PI), wishAngleActual);
@@ -625,6 +707,14 @@ public sealed partial class ShipSteeringSystem : EntitySystem
         var wishDeltaAngleVel = wishAngleVel - ctx.ShipBody.AngularVelocity;
         // this is clamped to [-1, 1] downstream, but need to invert input
         var rotationInput = angAccel == 0f ? 0f : -wishDeltaAngleVel / angAccel / ctx.FrameTime;
+
+        // LuaM-start: never keep or output a non-finite value
+        if (!float.IsFinite(ctx.RotationCompensation))
+            ctx.RotationCompensation = 0f;
+
+        if (!float.IsFinite(rotationInput) || !float.IsFinite(wishAngleVel))
+            return new RotationResult(0f, 0f);
+        // LuaM-end
 
         return new RotationResult(rotationInput, wishAngleVel);
     }
@@ -751,6 +841,8 @@ public sealed partial class ShipSteeringSystem : EntitySystem
         public ref float RotationCompensation;
         // misc
         public float FrameTime;
+        public ShipSteererComponent Steerer; // LuaM
+        public bool InRange; // LuaM
     }
 
     private record struct SteeringConfig
@@ -780,6 +872,12 @@ public sealed partial class ShipSteeringSystem : EntitySystem
         public Angle TargetAngleOffset;
         public Angle? AngleOverride;
     }
+
+    // LuaM-start
+    private const float AnchorReleaseFraction = 0.5f;
+    private static readonly TimeSpan InRangeAlignTimeout = TimeSpan.FromSeconds(2);
+    private static readonly TimeSpan DampeningChangeDelay = TimeSpan.FromSeconds(1);
+    // LuaM-end
 
     private readonly record struct BrakeContext(float BrakeAccel, float BrakePath, float LeftoverBrakePath);
 

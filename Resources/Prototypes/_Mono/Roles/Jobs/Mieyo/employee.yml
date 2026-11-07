@@ -4,6 +4,8 @@
   description: job-description-mmc-employee
   playTimeTracker: JobMMCEmployee
   requirements: # LuaM
+  - !type:OverallPlaytimeRequirement # LuaM
+    time: 72000 # 20 hrs
   - !type:TraitsRequirement # LuaM: heretics can't take this job
     inverted: true
     traits:
@@ -22,8 +24,11 @@
   - GeneralAccess
   access:
   - Mieyo
+  # LuaM-start: faction overview first, production guides remain available.
   guides:
+  - ColossusMMCFaction
   - MMC
+  # LuaM-end
   special:
   - !type:AddImplantSpecial
     implants: [ MieyoTrackingImplant ]

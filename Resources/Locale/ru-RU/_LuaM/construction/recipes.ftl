@@ -505,6 +505,10 @@ construction-DisposalYJunction = { ent-DisposalYJunction }
 construction-DisposalYJunction-desc = { ent-DisposalYJunction.desc }
 construction-DisposalBend = { ent-DisposalBend }
 construction-DisposalBend-desc = { ent-DisposalBend.desc }
+construction-DisposalXJunction = { ent-DisposalXJunction }
+construction-DisposalXJunction-desc = { ent-DisposalXJunction.desc }
+construction-DisposalSignaller = { ent-DisposalSignaller }
+construction-DisposalSignaller-desc = { ent-DisposalSignaller.desc }
 construction-AirAlarmFixture = { ent-AirAlarm }
 construction-AirAlarmFixture-desc = { ent-AirAlarm.desc }
 construction-FireAlarm = { ent-FireAlarm }
@@ -1372,3 +1376,6 @@ construction-NordfallVanguardFlag = { ent-NordfallVanguardFlag }
 construction-NordfallVanguardFlag-desc = { ent-NordfallVanguardFlag.desc }
 construction-BannerPirates = { ent-BannerPirates }
 construction-BannerPirates-desc = { ent-BannerPirates.desc }
+
+construction-PlastitaniumWindowDirectional-desc = Прочное направленное окно в пластитановой раме.
+construction-WindowWallReinforcedDirectional-desc = Направленное окно в раме укреплённой стены.

@@ -139,10 +139,21 @@
 
 - type: entity
   id: NfsdTechFab
-  parent: [ BlueprintReceiverBase, SecurityTechFab ]
+  parent: [ BlueprintReceiverBase, SecurityTechFab, BaseLatheBeakerSlot] # LuaM: added BaseLatheBeakerSlot
   name: TSFMC techfab
   description: Prints equipment for use by TSFMC.
   components:
+  # LuaM-start: contextual equipment guide.
+  - type: GuideHelp
+    guides:
+    - IndustryFabricators
+  # LuaM-end
+  - type: ContainerContainer # LuaM
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      blueprint: !type:Container
+      beaker_slot: !type:ContainerSlot
   - type: Sprite
     sprite: _NF/Structures/Machines/techfab.rsi
     layers:
@@ -163,14 +174,18 @@
     runningState: icon
     staticPacks:
     - NFNfsdTechfabDeprecatedStatic
-    # - StaticAmmoRecipePack
-    # - RoundstartShipgunAmmo # Mono # Commented by LuaM
+    - StaticAmmoRecipePack
+    - RoundstartShipgunAmmo # Mono
     - StaticGrenades
     - MonoAttachmentsStatic # Mono
     - ReportingStatic # DeltaV
+    # LuaM-start:
+    - NFMercenaryTechfabDeprecatedStatic
+    - MonoRestraintsStatic
+    # LuaM-end
     dynamicPacks:
     - NFNfsdTechfabDeprecated
-    # - DynamicAmmoRecipePack
+    - DynamicAmmoRecipePack
     # Mono start
     - MonoTSFWeaponsDynamicMelee
     - MonoTSFWeaponsDynamicRanged
@@ -192,6 +207,7 @@
     - NFMercenaryTechfabDeprecated
     - SecurityEquipment
     - SmartGun
+    - PunkGear
 # LuaM-end.
   - type: EmagLatheRecipes
     emagStaticPacks:
@@ -205,10 +221,16 @@
 
 - type: entity
   id: MercenaryTechFab
-  parent: [ BlueprintReceiverBase, BaseLatheLube ]
+  parent: [ BlueprintReceiverBase, BaseLatheLube, BaseLatheBeakerSlot] # LuaM: added BaseLatheBeakerSlot
   name: mercenary techfab
   description: Prints the bare minimum of tools of the trade that any budget mercenary or private security could need. Nothing fancy.
   components:
+  - type: ContainerContainer # LuaM
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      blueprint: !type:Container
+      beaker_slot: !type:ContainerSlot
   - type: Sprite
     sprite: _NF/Structures/Machines/techfab.rsi
     layers:

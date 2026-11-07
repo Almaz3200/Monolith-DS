@@ -645,7 +645,13 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         if (!TryComp(user, out TransformComponent? userXform))
             return false;
 
-        var targetMap = TransformSystem.ToMapCoordinates(GetCoordinates(ev.Coordinates));
+        // LuaM-start: client coordinates can point at an entity that is already deleted on the server
+        var targetCoords = GetCoordinates(ev.Coordinates);
+        if (!Exists(targetCoords.EntityId))
+            return false;
+
+        var targetMap = TransformSystem.ToMapCoordinates(targetCoords);
+        // LuaM-end
 
         if (targetMap.MapId != userXform.MapID)
             return false;
@@ -759,7 +765,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             RaiseLocalEvent(entity, attackedEvent);
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
-            var damageResult = Damageable.TryChangeDamage(entity, modifiedDamage, origin: user, armorPenetration: component.ArmorPenetration, partMultiplier: component.HeavyPartDamageMultiplier); // Shitmed Change
+            var damageResult = Damageable.TryChangeDamage(entity, modifiedDamage, origin: user, armorPenetration: component.HeavyArmorPenetration ?? component.ArmorPenetration, partMultiplier: component.HeavyPartDamageMultiplier); // Shitmed Change, LuaM: HeavyArmorPenetration
 
             if (damageResult != null && damageResult.GetTotal() > FixedPoint2.Zero)
             {
@@ -884,14 +890,17 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     {
         var target = GetEntity(ev.Target);
 
-        if (Deleted(target) ||
-            user == target)
-        {
+        // LuaM-start
+        if (user == target)
             return false;
-        }
 
         // Play a sound to give instant feedback; same with playing the animations
         _meleeSound.PlaySwingSound(user, meleeUid, component);
+
+        if (Deleted(target))
+            return false;
+        // LuaM-end
+
         return true;
     }
 
