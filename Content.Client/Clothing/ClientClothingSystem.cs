@@ -54,6 +54,7 @@ public sealed partial class ClientClothingSystem : ClothingSystem
     [Dependency] private IResourceCache _cache = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private DisplacementMapSystem _displacement = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -76,10 +77,10 @@ public sealed partial class ClientClothingSystem : ClothingSystem
         UpdateAllSlots(uid, component);
 
         // No clothing equipped -> make sure the layer is hidden, though this should already be handled by on-unequip.
-        if (args.Sprite.LayerMapTryGet(HumanoidVisualLayers.StencilMask, out var layer))
+        if (_sprite.LayerMapTryGet((uid, args.Sprite), HumanoidVisualLayers.StencilMask, out var layer, false))
         {
             DebugTools.Assert(!args.Sprite[layer].Visible);
-            args.Sprite.LayerSetVisible(layer, false);
+            _sprite.LayerSetVisible((uid, args.Sprite), layer, false);
         }
     }
 
@@ -106,12 +107,16 @@ public sealed partial class ClientClothingSystem : ClothingSystem
             return;
 
         List<PrototypeLayerData>? layers = null;
+        var speciesSpecific = false; // LuaM
 
         // first attempt to get species specific data.
         if (inventory.SpeciesId != null
             && item.ClothingVisuals.TryGetValue($"{args.Slot}-{inventory.SpeciesId}", out var speciesLayers)
             && HasLayerStates(uid, speciesLayers)) // LuaM
+        {
             layers = speciesLayers;
+            speciesSpecific = true; // LuaM
+        }
 
         // if that returned nothing, attempt to find generic data
         if (layers == null && !item.ClothingVisuals.TryGetValue(args.Slot, out layers))
@@ -120,6 +125,8 @@ public sealed partial class ClientClothingSystem : ClothingSystem
             if (!TryGetDefaultVisuals(uid, item, args.Slot, inventory.SpeciesId, out layers))
                 return;
         }
+        else if (!speciesSpecific && inventory.SpeciesId != null) // LuaM
+            layers = GetSpeciesStateLayers(item, layers, inventory.SpeciesId); // LuaM
 
         // add each layer to the visuals
         var i = 0;
@@ -139,6 +146,43 @@ public sealed partial class ClientClothingSystem : ClothingSystem
     }
 
     // LuaM-start
+    // -- явные clothingVisuals раньше никогда не брали состояния вида "equipped-BALACLAVA-vulpkanin", и одежду мяла карта смещения
+    private List<PrototypeLayerData> GetSpeciesStateLayers(ClothingComponent clothing, List<PrototypeLayerData> layers, string speciesId)
+    {
+        List<PrototypeLayerData>? result = null;
+        for (var i = 0; i < layers.Count; i++)
+        {
+            var layer = layers[i];
+            var rsiPath = layer.RsiPath ?? clothing.RsiPath;
+            if (layer.State == null || layer.TexturePath != null || rsiPath == null)
+                continue;
+
+            var speciesState = $"{layer.State}-{speciesId}";
+            if (!_cache.GetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / rsiPath).RSI.TryGetState(speciesState, out _))
+                continue;
+
+            result ??= new List<PrototypeLayerData>(layers);
+            result[i] = new PrototypeLayerData
+            {
+                Shader = layer.Shader,
+                RsiPath = layer.RsiPath,
+                State = speciesState,
+                Scale = layer.Scale,
+                Rotation = layer.Rotation,
+                Offset = layer.Offset,
+                Visible = layer.Visible,
+                Color = layer.Color,
+                MapKeys = layer.MapKeys,
+                RenderingStrategy = layer.RenderingStrategy,
+                CopyToShaderParameters = layer.CopyToShaderParameters,
+                Cycle = layer.Cycle,
+                Loop = layer.Loop,
+            };
+        }
+
+        return result ?? layers;
+    }
+
     /// <summary>
     ///     Checks that every state of species specific layers exists, so a suit without that species' sprites falls back to generic ones.
     /// </summary>
@@ -234,7 +278,7 @@ public sealed partial class ClientClothingSystem : ClothingSystem
         // may eventually bloat the player with lots of invisible layers.
         foreach (var layer in revealedLayers)
         {
-            component.RemoveLayer(layer);
+            _sprite.RemoveLayer((uid, component), layer);
         }
         revealedLayers.Clear();
     }
@@ -277,7 +321,7 @@ public sealed partial class ClientClothingSystem : ClothingSystem
         {
             foreach (var key in revealedLayers)
             {
-                sprite.RemoveLayer(key);
+                _sprite.RemoveLayer((equipee, sprite), key);
             }
             revealedLayers.Clear();
         }
@@ -298,7 +342,12 @@ public sealed partial class ClientClothingSystem : ClothingSystem
 
         // temporary, until layer draw depths get added. Basically: a layer with the key "slot" is being used as a
         // bookmark to determine where in the list of layers we should insert the clothing layers.
-        bool slotLayerExists = sprite.LayerMapTryGet(slot, out var index);
+        bool slotLayerExists = _sprite.LayerMapTryGet((equipee, sprite), slot, out var index, false);
+        if (clothingComponent.RenderLayer is { } renderLayer && _sprite.LayerMapTryGet((equipee, sprite), renderLayer, out var renderIndex, false)) // LuaM
+        {
+            index = renderIndex; // LuaM
+            slotLayerExists = true; // LuaM
+        }
 
         // Select displacement maps
         var displacementData = inventory.Displacements.GetValueOrDefault(slot); //Default unsexed map
@@ -332,16 +381,16 @@ public sealed partial class ClientClothingSystem : ClothingSystem
             {
                 index++;
                 // note that every insertion requires reshuffling & remapping all the existing layers.
-                sprite.AddBlankLayer(index);
-                sprite.LayerMapSet(key, index);
+                _sprite.AddBlankLayer((equipee, sprite), index);
+                _sprite.LayerMapSet((equipee, sprite), key, index);
 
                 if (layerData.Color != null)
-                    sprite.LayerSetColor(key, layerData.Color.Value);
+                    _sprite.LayerSetColor((equipee, sprite), key, layerData.Color.Value);
                 if (layerData.Scale != null)
-                    sprite.LayerSetScale(key, layerData.Scale.Value);
+                    _sprite.LayerSetScale((equipee, sprite), key, layerData.Scale.Value);
             }
             else
-                index = sprite.LayerMapReserveBlank(key);
+                index = _sprite.LayerMapReserve((equipee, sprite), key);
 
             if (sprite[index] is not Layer layer)
                 continue;
@@ -352,11 +401,11 @@ public sealed partial class ClientClothingSystem : ClothingSystem
                 && layer.RSI == null
                 && TryComp(equipment, out SpriteComponent? clothingSprite))
             {
-                layer.SetRsi(clothingSprite.BaseRSI);
+                _sprite.LayerSetRsi(layer, clothingSprite.BaseRSI);
             }
 
-            sprite.LayerSetData(index, layerData);
-            layer.Offset += slotDef.Offset;
+            _sprite.LayerSetData((equipee, sprite), index, layerData);
+            _sprite.LayerSetOffset(layer, layer.Offset + slotDef.Offset);
 
             if (displacementData is not null)
             {
@@ -364,7 +413,7 @@ public sealed partial class ClientClothingSystem : ClothingSystem
                 if (layerData.State is not null && inventory.SpeciesId is not null && layerData.State.EndsWith(inventory.SpeciesId))
                     continue;
 
-                if (_displacement.TryAddDisplacement(displacementData, sprite, index, key, revealedLayers))
+                if (_displacement.TryAddDisplacement(displacementData, (equipee, sprite), index, key, revealedLayers))
                     index++;
             }
         }

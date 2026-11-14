@@ -21,6 +21,7 @@ using Content.Shared._Mono.ShipGuns;
 using Content.Shared.Examine;
 using Content.Server.Salvage.Expeditions;
 using Content.Shared._Crescent.Hardpoints;
+using Content.Shared._Crescent.ShipShields;
 
 namespace Content.Server._Mono.FireControl;
 
@@ -492,7 +493,7 @@ public sealed partial class FireControlSystem : EntitySystem
         var weaponXform = Transform(weapon);
         var weaponCoords = _xform.GetMapCoordinates(weaponXform);
         var weaponPos = weaponCoords.Position;
-        var targetCoords = coords.ToMap(EntityManager, _xform);
+        var targetCoords = _xform.ToMapCoordinates(coords);
         var targetPos = targetCoords.Position;
 
         // Calculate direction
@@ -584,6 +585,10 @@ public sealed partial class FireControlSystem : EntitySystem
         {
             // Always ignore the source weapon itself
             if (entity == sourceWeapon)
+                return true;
+
+            // Always ignore shields, since shields are now opaque and will be caught by the LOS check
+            if (HasComp<ShipShieldComponent>(entity))
                 return true;
 
             // If the weapon isn't on a grid, we'll check against all entities

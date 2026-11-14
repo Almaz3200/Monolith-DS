@@ -205,7 +205,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         if (explosive.DetonationAlert != null)
             while (query.MoveNext(out var ent, out var component))
             {
-                if (ent != null)
+                if (ent.IsValid())
                 {
                     _alertLevel.SetLevel(ent, explosive.DetonationAlert, true, true, true, true);
                 }
@@ -451,7 +451,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         if (queued.Proto.FireColor == null)
         {
             AddComp<ExplosionHideFireComponent>(visualEnt);
-            _explosionEffect.SpawnEffects(pos);
+            _explosionEffect.SpawnEffects(pos, iterationIntensity.Count);
         }
         // LuaM end
 

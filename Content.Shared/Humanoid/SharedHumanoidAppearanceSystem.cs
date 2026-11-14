@@ -37,6 +37,7 @@ namespace Content.Shared.Humanoid;
 public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
+    [Dependency] private GrammarSystem _grammar = default!;
     [Dependency] private INetManager _netManager = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISerializationManager _serManager = default!;
@@ -105,7 +106,11 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         if (string.IsNullOrEmpty(humanoid.Initial)
             || !_proto.TryIndex(humanoid.Initial, out HumanoidProfilePrototype? startingSet))
         {
-            LoadProfile(uid, HumanoidCharacterProfile.DefaultWithSpecies(humanoid.Species), humanoid);
+            var defaultProfile = HumanoidCharacterProfile.DefaultWithSpecies(humanoid.Species);
+            if (TryComp<TTSComponent>(uid, out var tts) && tts.VoicePrototypeId is { } voice) // LuaM
+                defaultProfile = defaultProfile.WithVoice(voice);
+
+            LoadProfile(uid, defaultProfile, humanoid);
             return;
         }
 
@@ -181,7 +186,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
 
         targetHumanoid.Gender = sourceHumanoid.Gender;
         if (TryComp<GrammarComponent>(target, out var grammar))
-            grammar.Gender = sourceHumanoid.Gender;
+            _grammar.SetGender((target, grammar), sourceHumanoid.Gender);
 
         // Apply scaling (height and width)
         if (sourceHumanoid.Height != 1.0f || sourceHumanoid.Width != 1.0f)
@@ -471,7 +476,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         humanoid.Gender = profile.Gender;
         if (TryComp<GrammarComponent>(uid, out var grammar))
         {
-            grammar.Gender = profile.Gender;
+            _grammar.SetGender((uid, grammar), profile.Gender);
         }
 
         humanoid.Age = profile.Age;

@@ -8,6 +8,7 @@ using Content.Client._LuaM.Guidebook;
 using Content.Client.Guidebook.Controls;
 using Content.Shared._LuaM.Guidebook;
 using Content.Shared.Guidebook;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.GameObjects;
@@ -59,8 +60,8 @@ public sealed class GuidebookViewTests
             var longCaption = longItem.Children.OfType<RichTextLabel>().Single();
             Assert.That(shortCaption.Position.Y, Is.EqualTo(longCaption.Position.Y), "Sprite sizes must not shift caption baselines.");
             var prototypes = pair.Client.ResolveDependency<IPrototypeManager>();
-            Assert.That(shortCaption.GetMessage(), Is.EqualTo(prototypes.Index<EntityPrototype>("Wrench").Name));
-            Assert.That(longCaption.GetMessage(), Is.EqualTo(prototypes.Index<EntityPrototype>("IndustrialFurnaceEconomyCompact").Name));
+            Assert.That(shortCaption.GetMessage(), Is.EqualTo(prototypes.Index(new EntProtoId("Wrench")).Name));
+            Assert.That(longCaption.GetMessage(), Is.EqualTo(prototypes.Index(new EntProtoId("IndustrialFurnaceEconomyCompact")).Name));
 
             cards.Measure(new Vector2(190, 1000));
             cards.Arrange(new UIBox2(0, 0, 190, cards.DesiredSize.Y));
@@ -80,7 +81,7 @@ public sealed class GuidebookViewTests
             using var window = new GuidebookWindow();
             var home = window.FindControl<Button>("HomeButton")!;
             var pressed = typeof(BaseButton).GetField("OnPressed", BindingFlags.Instance | BindingFlags.NonPublic)!;
-            var homeListeners = ((Delegate?) pressed.GetValue(home))?.GetInvocationList().Length ?? 0;
+            var homeListeners = ((Delegate) pressed.GetValue(home))?.GetInvocationList().Length ?? 0;
             var allGuides = prototypes.EnumeratePrototypes<GuideEntryPrototype>()
                 .ToDictionary(p => new ProtoId<GuideEntryPrototype>(p.ID), p => (GuideEntry) p);
             window.UpdateGuides(allGuides, GuidebookNavigation.GetBookRoots(allGuides), selected: "NewPlayer");
@@ -93,11 +94,11 @@ public sealed class GuidebookViewTests
                 window.HandleClick("NewPlayer");
             }
             Assert.That(entities.EntityCount, Is.EqualTo(beforePages), "Changing guides releases their client-side sprites.");
-            Assert.That(((Delegate?) pressed.GetValue(home))?.GetInvocationList().Length ?? 0, Is.EqualTo(homeListeners),
+            Assert.That(((Delegate) pressed.GetValue(home))?.GetInvocationList().Length ?? 0, Is.EqualTo(homeListeners),
                 "Selecting pages must not accumulate home-button callbacks.");
             window.UpdateGuides(new Dictionary<ProtoId<GuideEntryPrototype>, GuideEntry>
             {
-                ["TSFMC_Entry"] = prototypes.Index<GuideEntryPrototype>("TSFMC_Entry"),
+                ["TSFMC_Entry"] = prototypes.Index(new ProtoId<GuideEntryPrototype>("TSFMC_Entry")),
             }, selected: "TSFMC_Entry");
             window.HandleClick("ColossusCatalogueUplinks");
             Assert.That(window.LastEntry, Is.EqualTo(new ProtoId<GuideEntryPrototype>("ColossusCatalogueUplinks")),
@@ -142,7 +143,6 @@ public sealed class GuidebookViewTests
             using var tag = new GuideCatalog();
             Assert.That(tag.TryParseTag(new() { ["Kind"] = "ships" }, out var control), Is.True);
             Assert.That(control, Is.TypeOf<GuideShipyardPreview>());
-            control!.Dispose();
             var proto = pair.Client.ResolveDependency<IPrototypeManager>()
                 .EnumeratePrototypes<Content.Shared._NF.Shipyard.Prototypes.VesselPrototype>().First();
             using var live = new Content.Client._NF.Shipyard.UI.ShipyardConsoleMenu();
@@ -155,10 +155,13 @@ public sealed class GuidebookViewTests
             }
             var liveRow = All(live).OfType<Content.Client._NF.Shipyard.UI.VesselRow>().Single();
             var guideRow = All(guide).OfType<Content.Client._NF.Shipyard.UI.VesselRow>().Single();
-            Assert.That(liveRow.Preview.Visible, Is.False);
-            Assert.That(guideRow.Preview.Visible, Is.True);
-            Assert.That(guideRow.Preview.Disabled, Is.EqualTo(!GuidebookMapRendering.Enabled));
-            Assert.That(guideRow.Purchase.Disabled, Is.True);
+            // LuaM start: rows only select a vessel; the window shows the live preview and buys from the bottom bar
+            Assert.That(liveRow.Vessel?.ID, Is.EqualTo(proto.ID));
+            Assert.That(guideRow.Vessel?.ID, Is.EqualTo(proto.ID));
+            Assert.That(guide.PreviewView.Vessel?.ID, Is.EqualTo(proto.ID));
+            Assert.That(live.PurchaseButton.Disabled, Is.False);
+            Assert.That(guide.PurchaseButton.Disabled, Is.True);
+            // LuaM end
         });
         await pair.CleanReturnAsync();
     }
@@ -170,15 +173,17 @@ public sealed class GuidebookViewTests
         await pair.Client.WaitAssertion(() =>
         {
             var entities = pair.Client.ResolveDependency<IEntityManager>();
+            var root = pair.Client.ResolveDependency<IUserInterfaceManager>().RootControl;
             foreach (var mode in new[] { "reactor", "turbine" })
             {
                 var before = entities.EntityCount;
                 var example = new GuideReactorUI();
                 Assert.That(example.TryParseTag(new Dictionary<string, string> { ["Mode"] = mode }, out _), Is.True);
+                root.AddChild(example);
                 typeof(GuideReactorUI).GetMethod("OpenExample", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(example, null);
                 Assert.That(entities.EntityCount, Is.GreaterThan(before));
-                example.Dispose();
-                Assert.That(entities.EntityCount, Is.EqualTo(before), "Closing a teaching example removes its isolated entity.");
+                example.Orphan();
+                Assert.That(entities.EntityCount, Is.EqualTo(before), "Leaving the UI tree closes the teaching example and removes its isolated entity.");
             }
         });
         await pair.CleanReturnAsync();

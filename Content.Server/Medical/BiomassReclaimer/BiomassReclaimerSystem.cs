@@ -35,6 +35,8 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.Contraband; // Frontier
+using System.Linq; // LuaM
+using Content.Server.Explosion.Components; // LuaM
 
 namespace Content.Server.Medical.BiomassReclaimer
 {
@@ -134,7 +136,7 @@ namespace Content.Server.Medical.BiomassReclaimer
         private void OnInit(EntityUid uid, ActiveBiomassReclaimerComponent component, ComponentInit args)
         {
             _jitteringSystem.AddJitter(uid, -10, 100);
-            _sharedAudioSystem.PlayPvs("/Audio/Machines/reclaimer_startup.ogg", uid);
+            _sharedAudioSystem.PlayPvs(new ResolvedPathSpecifier("/Audio/Machines/reclaimer_startup.ogg"), uid);
             _ambientSoundSystem.SetAmbience(uid, true);
         }
 
@@ -250,9 +252,24 @@ namespace Content.Server.Medical.BiomassReclaimer
 
             component.ProcessingTimer = physics.FixturesMass * component.ProcessingTimePerUnitMass;
 
-            var inventory = _inventory.GetHandOrInventoryEntities(toProcess);
+            // LuaM: NPCs whose gear is deleted when their body is gibbed (fauna) lose it here too,
+            // instead of handing out their faction hardsuits through the reclaimer.
+            var deleteItems = TryComp<GibOnTriggerComponent>(toProcess, out var gibOnTrigger) && gibOnTrigger.DeleteItems;
+
+            var inventory = _inventory.GetHandOrInventoryEntities(toProcess).ToList(); // LuaM: ToList, items are deleted while iterating
             foreach (var item in inventory)
             {
+                // LuaM-start
+                if (TerminatingOrDeleted(item))
+                    continue;
+
+                if (deleteItems)
+                {
+                    Del(item);
+                    continue;
+                }
+                // LuaM-end
+
                 if (!HasComp<ContrabandComponent>(item)) // Frontier - delete contraband
                 {
                     _transform.DropNextTo(item, ent.Owner);

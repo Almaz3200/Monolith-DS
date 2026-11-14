@@ -22,6 +22,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Content.Shared._LuaM.Hearing; // LuaM
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -79,13 +80,16 @@ public sealed partial class RadioSystem : EntitySystem
 
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
+        if (HasComp<DeafComponent>(uid)) // LuaM: deaf creatures hear no radio
+            return;
+
         if (TryComp(uid, out ActorComponent? actor))
         {
             // Einstein Engines - Languages begin
-            var listener = component.Owner;
+            var listener = uid;
             var msg = args.OriginalChatMsg;
 
-            if (listener != null && !_language.CanUnderstand(listener, args.Language.ID))
+            if (!_language.CanUnderstand(listener, args.Language.ID))
                 msg = args.LanguageObfuscatedChatMsg;
 
             _netMan.ServerSendMessage(new MsgChatMessage { Message = msg }, actor.PlayerSession.Channel);

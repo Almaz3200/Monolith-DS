@@ -124,6 +124,11 @@ public abstract partial class SharedShuttleSystem : EntitySystem
 
     public bool CanDraw(EntityUid gridUid, PhysicsComponent? physics = null, IFFComponent? iffComp = null)
     {
+        // Lua-start: a veil nebula hides everything inside it from radars
+        if (HasComp<Content.Shared._Lua.SpaceHazards.NebulaVeilTrackedComponent>(gridUid))
+            return false;
+        // Lua-end
+
         if (!Resolve(gridUid, ref physics))
             return true;
 
@@ -231,7 +236,7 @@ public abstract partial class SharedShuttleSystem : EntitySystem
 
         // Just checks if any grids inside of a buffer range at the target position.
         _grids.Clear();
-        var mapCoordinates = coordinates.ToMap(EntityManager, XformSystem);
+        var mapCoordinates = XformSystem.ToMapCoordinates(coordinates);
 
         var ourPos = Maps.GetGridPosition((shuttleUid, shuttlePhysics, shuttleXform));
 

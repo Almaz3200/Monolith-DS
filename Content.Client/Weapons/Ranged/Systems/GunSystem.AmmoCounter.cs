@@ -32,7 +32,7 @@ public sealed partial class GunSystem
         if (!Resolve(uid, ref component, false))
             return;
 
-        component.Control?.Dispose();
+        component.Control?.Orphan();
         component.Control = null;
 
         var ev = new AmmoCounterControlEvent();
@@ -188,7 +188,7 @@ public sealed partial class GunSystem
                             }),
                             (_noMagazineLabel = new Label
                             {
-                                Text = "No Magazine!",
+                                Text = Robust.Shared.Localization.Loc.GetString("luam-gun-no-magazine"), // LuaM: "No Magazine!" > luam-gun-no-magazine
                                 StyleClasses = {StyleNano.StyleClassItemStatus}
                             })
                         }

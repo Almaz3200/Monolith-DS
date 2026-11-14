@@ -14,9 +14,27 @@ public sealed class LuaMCVars
     public static readonly CVarDef<string> RpFavoriteInteractions =
         CVarDef.Create("luam.rp_favorite_interactions", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+    public static readonly CVarDef<string> DeliveryFavorites =
+        CVarDef.Create("luam.delivery_favorites", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<string> ConstructionFavorites =
+        CVarDef.Create("luam.construction_favorites", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);
+
     public static readonly CVarDef<float> AnnouncementVolume =
         CVarDef.Create("luam.announcement_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     public static readonly CVarDef<int> ActionsActivePreset =
         CVarDef.Create("luam.actions_active_preset", 0, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<bool> AdvancedHotbar =
+        CVarDef.Create("luam.advanced_hotbar", false, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<bool> SpaceWindVisuals =
+        CVarDef.Create("luam.space_wind_visuals", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<bool> RoundIntroEnabled =
+        CVarDef.Create("luam.round_intro", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<bool> LobbyBackgroundParallax =
+        CVarDef.Create("luam.lobby_background_parallax", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 }

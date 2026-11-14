@@ -38,6 +38,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
 using Content.Client._Mono.Company;
+using Robust.Client.GameObjects;
 
 namespace Content.Client.Lobby.UI
 {
@@ -68,6 +69,7 @@ namespace Content.Client.Lobby.UI
             Orientation = LayoutOrientation.Vertical,
         };
         private readonly List<EntityUid> _savedItemEntities = [];
+        private bool _savedItemsReleased; // Mono: saved item previews are released while the editor is outside the UI tree
         // Mono end
 
         private FlavorText.FlavorText? _flavorText;
@@ -498,7 +500,7 @@ namespace Content.Client.Lobby.UI
             // Add to TSF company dropdown
             for (var i = 0; i < companies.Count; i++)
             {
-                CompanyButton.AddItem(companies[i].Name, i);
+                CompanyButton.AddItem(GetCompanyName(companies[i]), i); // LuaM
                 //Logger.Debug($"Added company to dropdown: {i} - {companies[i].ID} - {companies[i].Name}");
             }
 
@@ -510,9 +512,7 @@ namespace Content.Client.Lobby.UI
                     var companyId = companies[args.Id].ID;
 
                     // Description of Company (pointed-to in prototype, defined in Locale)
-                    CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[args.Id].Description)
-                        ? Loc.GetString(companies[args.Id].Description)
-                        : "N/A"); // Only if there's a description. If not, then set to N/A.
+                    CompanyDescriptionLabel.SetMessage(GetCompanyDescription(companies[args.Id])); // LuaM
 
                     // Display company image if available
                     if (!string.IsNullOrEmpty(companies[args.Id].Image))
@@ -606,8 +606,8 @@ namespace Content.Client.Lobby.UI
 
                 TabContainer.RemoveChild(_flavorText);
                 _flavorText.OnFlavorTextChanged -= OnFlavorTextChange;
-                _flavorText.Dispose();
-                _flavorTextEdit?.Dispose();
+                _flavorText.Orphan();
+                _flavorTextEdit?.Orphan();
                 _flavorTextEdit = null;
                 _flavorText = null;
             }
@@ -618,7 +618,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshTraits()
         {
-            TraitsList.DisposeAllChildren();
+            TraitsList.RemoveAllChildren();
 
             EnforceSpeciesTraitRestrictions();
 
@@ -1174,7 +1174,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshLoadouts()
         {
-            _loadoutWindow?.Dispose();
+            _loadoutWindow?.Orphan();
         }
 
         /// <summary>
@@ -1261,7 +1261,7 @@ namespace Content.Client.Lobby.UI
                 _entManager.DeleteEntity(entity);
 
             _savedItemEntities.Clear();
-            _savedItemsList.DisposeAllChildren();
+            _savedItemsList.RemoveAllChildren();
 
             var previews = new List<(PersistentProfileItem Item, EntityUid Entity)>();
             foreach (var item in Profile?.Items ?? [])
@@ -1382,7 +1382,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshJobs()
         {
-            JobList.DisposeAllChildren();
+            JobList.RemoveAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
             var firstCategory = true;
@@ -1476,7 +1476,7 @@ namespace Content.Client.Lobby.UI
                         VerticalAlignment = VAlignment.Center
                     };
                     var jobIcon = _prototypeManager.Index(job.Icon);
-                    icon.Texture = jobIcon.Icon.Frame0();
+                    icon.Texture = _entManager.System<SpriteSystem>().Frame0(jobIcon.Icon);
                     selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
 
                     if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
@@ -1566,7 +1566,7 @@ namespace Content.Client.Lobby.UI
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
         {
-            _loadoutWindow?.Dispose();
+            _loadoutWindow?.Orphan();
             _loadoutWindow = null;
             var collection = IoCManager.Instance;
 
@@ -1724,27 +1724,18 @@ namespace Content.Client.Lobby.UI
             ReloadProfilePreview();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            if (!disposing)
-                return;
-
-            _loadoutWindow?.Dispose();
-            _loadoutWindow = null;
-
-            // Mono start
-            foreach (var entity in _savedItemEntities)
-                _entManager.DeleteEntity(entity);
-
-            _savedItemEntities.Clear();
-            // Mono end
-        }
-
         protected override void EnteredTree()
         {
             base.EnteredTree();
             ReloadPreview();
+
+            // Mono start
+            if (_savedItemsReleased)
+            {
+                _savedItemsReleased = false;
+                RefreshSavedItems();
+            }
+            // Mono end
         }
 
         protected override void ExitedTree()
@@ -1752,6 +1743,17 @@ namespace Content.Client.Lobby.UI
             base.ExitedTree();
             _entManager.DeleteEntity(PreviewDummy);
             PreviewDummy = EntityUid.Invalid;
+
+            _loadoutWindow?.Orphan();
+            _loadoutWindow = null;
+
+            // Mono start
+            foreach (var entity in _savedItemEntities)
+                _entManager.DeleteEntity(entity);
+
+            _savedItemsReleased = _savedItemEntities.Count > 0;
+            _savedItemEntities.Clear();
+            // Mono end
         }
 
         private void SetAge(int newAge)
@@ -1851,7 +1853,7 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private void SetHeight(float newHeight)
+        private new void SetHeight(float newHeight)
         {
             Profile = Profile?.WithCharacterAppearance(Profile.Appearance.WithHeight(newHeight));
 // LuaM-start:
@@ -1868,7 +1870,7 @@ namespace Content.Client.Lobby.UI
             UpdateHeightControls();
         }
 
-        private void SetWidth(float newWidth)
+        private new void SetWidth(float newWidth)
         {
             Profile = Profile?.WithCharacterAppearance(Profile.Appearance.WithWidth(newWidth));
 // LuaM-start:
@@ -2365,6 +2367,25 @@ namespace Content.Client.Lobby.UI
             ExportButton.Disabled = false;
         }
 
+        // LuaM start
+        private static string GetCompanyName(CompanyPrototype company)
+        {
+            return company.ID == CompanyPrototype.NoCompany.Id
+                ? Loc.GetString("humanoid-profile-editor-company-none")
+                : company.Name;
+        }
+
+        private static string GetCompanyDescription(CompanyPrototype company)
+        {
+            if (!string.IsNullOrEmpty(company.Description))
+                return Loc.GetString(company.Description);
+
+            return Loc.GetString(company.ID == CompanyPrototype.NoCompany.Id
+                ? "humanoid-profile-editor-company-none-description"
+                : "humanoid-profile-editor-company-no-description");
+        }
+        // LuaM end
+
         private void UpdateCompanyControls()
         {
             if (Profile is null)
@@ -2398,9 +2419,7 @@ namespace Content.Client.Lobby.UI
                 CompanyButton.SelectId(i);
 
                 // Description of Company (pointed-to in prototype, defined in Locale)
-                CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[i].Description)
-                    ? Loc.GetString(companies[i].Description)
-                    : "N/A"); // Only if there's a description. If not, then set to N/A.
+                CompanyDescriptionLabel.SetMessage(GetCompanyDescription(companies[i])); // LuaM
 
                 // Display company image if available
                 if (!string.IsNullOrEmpty(companies[i].Image))
@@ -2423,6 +2442,9 @@ namespace Content.Client.Lobby.UI
                 //Logger.Debug($"Company {Profile.Company} not found in list, defaulting to None");
                 CompanyButton.SelectId(0);
                 CompanyImage.Visible = false;
+                // LuaM
+                if (companies.Count > 0)
+                    CompanyDescriptionLabel.SetMessage(GetCompanyDescription(companies[0]));
 
                 // Also reset the profile's company to None if the current one is disabled
                 if (_prototypeManager.TryIndex<CompanyPrototype>(Profile.Company, out var companyProto) && companyProto.Disabled)

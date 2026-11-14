@@ -28,6 +28,8 @@ namespace Content.Client.Audio;
 /// </summary>
 public sealed partial class ContentAudioSystem
 {
+    private static readonly ProtoId<AmbientMusicPrototype> CombatModeDefaultId = "CombatModeDefault";
+
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPlayerManager _player = default!;
@@ -116,12 +118,16 @@ public sealed partial class ContentAudioSystem
         if (!_timing.IsFirstTimePredicted) //otherwise this will tick like 5x faster on client. thanks prediction
             return;
 
+        if (_state.CurrentState is not GameplayState) // LuaM
+            return;
+
         if (_initialStationMusicBool)
         {
             _initialStationMusicTimer += frameTime;
-            if (_replayAmbientMusicTimer > InitialStationMusicTimeToDrop)
+            if (_initialStationMusicTimer > InitialStationMusicTimeToDrop) // LuaM
             {
-                ReplayAmbientMusic();
+                if (_currentlyPlaying != MusicType.Combat) // LuaM
+                    ReplayAmbientMusic();
                 _initialStationMusicBool = false;
                 _initialStationMusicTimer = 0;
                 _replayAmbientMusicTimer = 0;
@@ -225,7 +231,11 @@ public sealed partial class ContentAudioSystem
 
         string path = _random.Pick(soundcol.PickFiles).ToString(); //picks a random track. if someone really cared we could make it make sure it doesnt play the same track twice
 
-        PlayMusicTrack(path, _musicProto.Sound.Params.Volume, _ambientMusicFadeInTime, false);
+        // LuaM start
+        // -- Перезапуск во время боя должен идти с громкостью боевой музыки, а не музыки окружения
+        var combat = _currentlyPlaying == MusicType.Combat;
+        PlayMusicTrack(path, _musicProto.Sound.Params.Volume, combat ? _combatMusicFadeInTime : _ambientMusicFadeInTime, combat);
+        // LuaM end
     }
 
     private void OnBiomeChange(ref SpaceBiomeSwapMessage ev)
@@ -307,7 +317,7 @@ public sealed partial class ContentAudioSystem
                 if (_proto.TryIndex<AmbientMusicPrototype>("CombatMode" + combatFactionSuffix, out var factionCombatMusicPrototype))
                     _musicProto = factionCombatMusicPrototype;
                 else //if we don't ,set it to the default
-                    _musicProto = _proto.Index<AmbientMusicPrototype>("CombatModeDefault");
+                    _musicProto = _proto.Index<AmbientMusicPrototype>(CombatModeDefaultId);
 
                 _currentlyPlaying = MusicType.Combat;
 
@@ -420,7 +430,7 @@ public sealed partial class ContentAudioSystem
     private void PlayMusicTrack(string path, float volume, float fadein, bool combatMode)
     {
         // LuaM start
-        if (_musicSuppressed)
+        if (_musicSuppressed || _state.CurrentState is not GameplayState)
         {
             DisableAmbientMusic();
             return;
@@ -442,7 +452,7 @@ public sealed partial class ContentAudioSystem
         }
 
         var strim = _audio.PlayGlobal(
-            path,
+            new ResolvedPathSpecifier(path),
             Filter.Local(),
             false,
             AudioParams.Default.WithVolume(volume))!;
@@ -452,7 +462,7 @@ public sealed partial class ContentAudioSystem
         if (fadein != 0)
             FadeIn(_ambientMusicStream, strim.Value.Component, fadein);
 
-        _timeUntilNextAmbientTrack = (float)_audio.GetAudioLength(path).TotalSeconds;
+        _timeUntilNextAmbientTrack = (float)_audio.GetAudioLength(new ResolvedPathSpecifier(path)).TotalSeconds;
     }
 
     /// <summary>
@@ -545,8 +555,26 @@ public sealed partial class ContentAudioSystem
     ///</summary>
     private void OnStateChange(StateChangedEventArgs obj)
     {
-        if (obj.NewState is not GameplayState)
-            DisableAmbientMusic();
+        // LuaM start
+        if (obj.NewState is GameplayState)
+        {
+            _initialStationMusicBool = true;
+            _initialStationMusicTimer = 0f;
+            return;
+        }
+
+        DisableAmbientMusic();
+        _replayAmbientMusicBool = false;
+        _replayAmbientMusicTimer = 0f;
+        _initialStationMusicBool = false;
+        _combatWindUpBool = false;
+        _combatWindDownBool = false;
+        _lastCombatState = false;
+        _isCombatMusicPlaying = false;
+        _currentlyPlaying = MusicType.None;
+        _lastGrid = null;
+        _lastBiome = null;
+        // LuaM end
     }
 
     private void OnRoundEndMessage(RoundEndMessageEvent ev)

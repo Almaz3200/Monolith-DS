@@ -154,6 +154,9 @@ ent-BaseSecurityPDA = { ent-BasePDA }
     .desc = { ent-BasePDA.desc }
 ent-VisitorPDA = { ent-ClearPDA }
     .desc = { ent-ClearPDA.desc }
-ent-ChameleonPDA = contractor PDA
-    .desc = Why isn't it gray?
+ent-ChameleonPDA = КПК подрядчика
+    .desc = Почему он не серый?
     .suffix = Chameleon
+
+ent-ScurretPDA = { ent-ClearPDA }
+    .desc = Временный КПК, выдаваемый скурретам на подработке. Умеет немного. Ва-ва!

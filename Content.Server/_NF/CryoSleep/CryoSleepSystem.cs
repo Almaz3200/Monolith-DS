@@ -46,6 +46,9 @@ namespace Content.Server._NF.CryoSleep;
 
 public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
 {
+    private static readonly ProtoId<RadioChannelPrototype> FreelanceId = "Freelance";
+    private static readonly ProtoId<RadioChannelPrototype> NfsdId = "Nfsd";
+
     [Dependency] private EntityManager _entityManager = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -68,8 +71,11 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
     [Dependency] private JobSystem _jobs = default!;
     [Dependency] private StationJobsSystem _stationJobs = default!;
     [Dependency] private StationSystem _station = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<NetUserId, StoredBody?> _storedBodies = new();
+    private readonly Dictionary<EntityUid, uint> _expiryTokens = new(); // LuaM
+    private uint _nextExpiryToken; // LuaM
     private EntityUid? _storageMap;
 
     public override void Initialize()
@@ -123,12 +129,12 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
             HasComp<MindContainerComponent>(@using))
         {
             var name = "Unknown";
-            if (TryComp<MetaDataComponent>(args.Using.Value, out var metadata))
+            if (TryComp(args.Using.Value, out MetaDataComponent? metadata))
                 name = metadata.EntityName;
 
             InteractionVerb verb = new()
             {
-                Act = () => InsertBody(@using, component, false),
+                Act = () => InsertBody(uid, @using, component, false),
                 Category = VerbCategory.Insert,
                 Text = name
             };
@@ -159,7 +165,7 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
         {
             AlternativeVerb verb = new()
             {
-                Act = () => InsertBody(args.User, component, false),
+                Act = () => InsertBody(uid, args.User, component, false),
                 Category = VerbCategory.Insert,
                 Text = Loc.GetString("medical-scanner-verb-enter")
             };
@@ -205,15 +211,14 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
 
     private void OnEntityDragDropped(EntityUid uid, CryoSleepComponent component, DragDropTargetEvent args)
     {
-        if (InsertBody(args.Dragged, component, false))
+        if (InsertBody(uid, args.Dragged, component, false))
         {
             args.Handled = true;
         }
     }
 
-    public bool InsertBody(EntityUid? toInsert, CryoSleepComponent component, bool force)
+    public bool InsertBody(EntityUid cryopod, EntityUid? toInsert, CryoSleepComponent component, bool force)
     {
-        var cryopod = component.Owner;
         if (toInsert == null)
             return false;
         if (IsOccupied(component) && !force)
@@ -377,7 +382,7 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
             // Get the job title if available
             jobTitle = _jobs.MindTryGetJobName(mindEntity);
         }
-        else if (TryComp<MetaDataComponent>(bodyId, out var metadata))
+        else if (TryComp(bodyId, out MetaDataComponent? metadata))
         {
             characterName = metadata.EntityName;
         }
@@ -385,7 +390,7 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
         var storage = GetStorageMap();
         var bodyTransform = Transform(bodyId);
         _container.Remove(bodyId, cryo.BodyContainer, reparent: false, force: true);
-        bodyTransform.Coordinates = new EntityCoordinates(storage, _cryoCoords); // Mono, replaced Vector.Zero with _cryoCoords. Sets body to this location on cryomap.
+        _transform.SetCoordinates(bodyId, bodyTransform, new EntityCoordinates(storage, _cryoCoords)); // Mono, replaced Vector.Zero with _cryoCoords. Sets body to this location on cryomap.
         _cryoCoords = Vector2.Add(_cryoCoords, _cryoDistance); // Mono - Increments for next body.
 
         RaiseLocalEvent(bodyId, new CryosleepEnterEvent(cryopod, mind?.UserId), true);
@@ -397,7 +402,7 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
         string message;
         var podTransform = Transform(cryopod);
         var coordinates = _entityManager.GetComponent<TransformComponent>(cryopod).Coordinates;
-        var mapPos = coordinates.ToMap(_entityManager, EntityManager.System<SharedTransformSystem>());
+        var mapPos = _transform.ToMapCoordinates(coordinates);
 
         // Check if it's at a named location (like a station or outpost)
         if (podTransform.GridUid != null && _entityManager.TryGetComponent<MetaDataComponent>(podTransform.GridUid.Value, out var gridMetadata))
@@ -444,7 +449,7 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
         if (isPirate)
         {
             // Use Freelancer channel for pirates
-            if (_prototypeManager.TryIndex<RadioChannelPrototype>("Freelance", out var freelanceChannel))
+            if (_prototypeManager.TryIndex<RadioChannelPrototype>(FreelanceId, out var freelanceChannel))
             {
                 _radioSystem.SendRadioMessage(cryopod, message, freelanceChannel, cryopod);
             }
@@ -452,7 +457,7 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
         else if (isTSF)
         {
             // Use TSF channel for TSF - Mono
-            if (_prototypeManager.TryIndex<RadioChannelPrototype>("Nfsd", out var nfsdChannel))
+            if (_prototypeManager.TryIndex<RadioChannelPrototype>(NfsdId, out var nfsdChannel))
             {
                 _radioSystem.SendRadioMessage(cryopod, message, nfsdChannel, cryopod);
             }
@@ -467,8 +472,17 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
         }
 
         // Start a timer. When it ends, the body needs to be deleted.
+        var expiryToken = ++_nextExpiryToken; // LuaM
+        _expiryTokens[bodyId] = expiryToken; // LuaM
         Timer.Spawn(TimeSpan.FromSeconds(_configurationManager.GetCVar(NFCCVars.CryoExpirationTime)), () =>
         {
+            // LuaM-start
+            if (!_expiryTokens.TryGetValue(bodyId, out var currentToken) || currentToken != expiryToken)
+                return;
+
+            _expiryTokens.Remove(bodyId);
+            // LuaM-end
+
             if (id != null)
                 ResetCryosleepState(id.Value);
 
@@ -507,6 +521,7 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
     private void OnRoundEnded(RoundEndedEvent args)
     {
         _storedBodies.Clear();
+        _expiryTokens.Clear(); // LuaM
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)

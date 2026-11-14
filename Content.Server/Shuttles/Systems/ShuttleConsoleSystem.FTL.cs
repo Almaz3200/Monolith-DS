@@ -141,9 +141,10 @@ public sealed partial class ShuttleConsoleSystem
             return;
 
         // Check shuttle can even FTL
-        if (!_shuttle.CanFTL(shuttleUid.Value, out var reason))
+        if (!_shuttle.CanFTL(shuttleUid.Value, out var reason, targetCoordinates)) // Lua: + targetCoordinates
         {
             // TODO: Session popup
+            _popup.PopupEntity(reason, ent.Owner, PopupType.Medium); // Lua: say why, the nebula block is not shown anywhere else
             return;
         }
 
@@ -170,7 +171,7 @@ public sealed partial class ShuttleConsoleSystem
 
         // Check for nearby grids that are above the mass threshold
         var xform = Transform(shuttleUid.Value);
-        var bounds = xform.WorldMatrix.TransformBox(Comp<MapGridComponent>(shuttleUid.Value).LocalAABB).Enlarged(ShuttleFTLRange);
+        var bounds = _transform.GetWorldMatrix(xform).TransformBox(Comp<MapGridComponent>(shuttleUid.Value).LocalAABB).Enlarged(ShuttleFTLRange);
         var bodyQuery = GetEntityQuery<PhysicsComponent>();
         // Keep track of docked grids to exclude them from the proximity check
         var dockedGrids = new HashSet<EntityUid>();

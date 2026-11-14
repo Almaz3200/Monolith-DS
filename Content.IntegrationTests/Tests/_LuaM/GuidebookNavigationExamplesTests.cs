@@ -11,6 +11,7 @@ using Robust.Shared.Prototypes;
 using Content.Client.Salvage.UI;
 using Content.Client.Shuttles.UI;
 using Robust.Shared.GameObjects;
+using Robust.Client.UserInterface;
 
 namespace Content.IntegrationTests.Tests._LuaM;
 
@@ -22,6 +23,7 @@ public sealed class GuidebookNavigationExamplesTests
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
         var entities = pair.Client.ResolveDependency<IEntityManager>();
+        var root = pair.Client.ResolveDependency<IUserInterfaceManager>().RootControl;
         foreach (var mode in new[] { "shuttle", "weapons", "expedition", "research" })
         {
             var before = 0;
@@ -33,6 +35,7 @@ public sealed class GuidebookNavigationExamplesTests
                 using (var example = new GuideNavigationUI())
                 {
                     Assert.That(example.TryParseTag(new Dictionary<string, string> { ["Mode"] = mode }, out _), Is.True);
+                    root.AddChild(example);
                     open.Invoke(example, null);
                     var window = windowField.GetValue(example);
                     Assert.That(window, mode switch
@@ -55,13 +58,16 @@ public sealed class GuidebookNavigationExamplesTests
                     }
                     if (window is FancyResearchConsoleMenu research)
                     {
-                        var technology = pair.Client.ResolveDependency<IPrototypeManager>().Index<TechnologyPrototype>("BasicParts");
+                        var technology = pair.Client.ResolveDependency<IPrototypeManager>().Index(new ProtoId<TechnologyPrototype>("BasicParts"));
                         research.SelectTech(technology, ResearchAvailability.Available);
                         Assert.That(research.CurrentTech?.Id, Is.EqualTo("BasicParts"));
                         Assert.That(research.GuidebookReadOnly, Is.True);
                     }
                     if (window is SalvageExpeditionWindow expedition)
                         Assert.That(expedition.Title, Does.Contain("Учебная"));
+
+                    // Leaving the UI tree closes the tutorial, like switching guidebook pages.
+                    example.Orphan();
                 }
             });
             // Native EntityPrototypeView queues icon deletion in ExitedTree; the next real tick owns it.

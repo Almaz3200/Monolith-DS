@@ -47,7 +47,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
     {
         base.Dispose(disposing);
         if (disposing)
-            _window?.Dispose();
+            _window?.Orphan();
     }
 
     private void Update(SurgeryBuiState state)
@@ -101,9 +101,9 @@ public sealed partial class SurgeryBui : BoundUserInterface
             };
         }
 
-        _window.Surgeries.DisposeAllChildren();
-        _window.Steps.DisposeAllChildren();
-        _window.Parts.DisposeAllChildren();
+        _window.Surgeries.RemoveAllChildren();
+        _window.Steps.RemoveAllChildren();
+        _window.Parts.RemoveAllChildren();
         View(ViewType.Parts);
 
         var oldSurgery = _surgery;
@@ -195,7 +195,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
         _isBody = _entities.HasComponent<BodyComponent>(_part);
         _surgery = (surgery, surgeryId);
 
-        _window.Steps.DisposeAllChildren();
+        _window.Steps.RemoveAllChildren();
 
         // This apparently does not consider if theres multiple surgery requirements in one surgery. Maybe thats fine.
         if (surgery.Comp.Requirement is { } requirementId && _system.GetSingleton(requirementId) is { } requirement)
@@ -211,7 +211,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
 
             var msg = new FormattedMessage();
             var surgeryName = _entities.GetComponent<MetaDataComponent>(requirement).EntityName;
-            msg.AddMarkup($"[bold]{Loc.GetString("surgery-ui-window-require")}: {surgeryName}[/bold]");
+            msg.AddMarkupOrThrow($"[bold]{Loc.GetString("surgery-ui-window-require")}: {surgeryName}[/bold]");
             label.Set(msg, null);
 
             _window.Steps.AddChild(label);
@@ -231,7 +231,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
 
         _part = _entities.GetEntity(netPart);
         _isBody = _entities.HasComponent<BodyComponent>(_part);
-        _window.Surgeries.DisposeAllChildren();
+        _window.Surgeries.RemoveAllChildren();
 
         var surgeries = new List<(Entity<SurgeryComponent> Ent, EntProtoId Id, string Name)>();
         foreach (var surgeryId in surgeryIds)
@@ -335,11 +335,11 @@ public sealed partial class SurgeryBui : BoundUserInterface
 
         if (_entities.TryGetComponent(_part, out MetaDataComponent? partMeta) &&
             _entities.TryGetComponent(_surgery?.Ent, out MetaDataComponent? surgeryMeta))
-            _window.Title = $"Surgery - {partMeta.EntityName}, {surgeryMeta.EntityName}";
+            _window.Title = Loc.GetString("luam-surgery-ui-window-title-part-surgery", ("part", partMeta.EntityName), ("surgery", surgeryMeta.EntityName)); // LuaM: hardcoded "Surgery - ..." > Loc
         else if (partMeta != null)
-            _window.Title = $"Surgery - {partMeta.EntityName}";
+            _window.Title = Loc.GetString("luam-surgery-ui-window-title-part", ("part", partMeta.EntityName)); // LuaM: hardcoded "Surgery - ..." > Loc
         else
-            _window.Title = "Surgery";
+            _window.Title = Loc.GetString("surgery-ui-window-title"); // LuaM: "Surgery" > surgery-ui-window-title
     }
 
     private enum ViewType

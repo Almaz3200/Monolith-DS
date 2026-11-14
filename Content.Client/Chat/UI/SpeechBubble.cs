@@ -59,6 +59,9 @@ namespace Content.Client.Chat.UI
 
         private readonly EntityUid _senderEntity;
 
+        // Die() can be queued from several frames before it runs, the bubble must only report its death once.
+        private bool _dead;
+
         /// <summary>
         /// The time at which this bubble will die.
         /// </summary>
@@ -78,7 +81,7 @@ namespace Content.Client.Chat.UI
         // man down
         public event Action<EntityUid, SpeechBubble>? OnDied;
 
-        public static SpeechBubble CreateSpeechBubble(SpeechType type, ChatMessage message, EntityUid senderEntity)
+        public static SpeechBubble CreateSpeechBubble(SpeechType type, ChatMessage message, EntityUid senderEntity, bool showSpeaker = true) // LuaM
         {
             switch (type)
             {
@@ -86,10 +89,10 @@ namespace Content.Client.Chat.UI
                     return new TextSpeechBubble(message, senderEntity, "emoteBox");
 
                 case SpeechType.Say:
-                    return new FancyTextSpeechBubble(message, senderEntity, "sayBox");
+                    return new FancyTextSpeechBubble(message, senderEntity, "sayBox", showSpeaker: showSpeaker); // LuaM
 
                 case SpeechType.Whisper:
-                    return new FancyTextSpeechBubble(message, senderEntity, "whisperBox");
+                    return new FancyTextSpeechBubble(message, senderEntity, "whisperBox", showSpeaker: showSpeaker); // LuaM
 
                 case SpeechType.Looc:
                     return new TextSpeechBubble(message, senderEntity, "emoteBox", Color.FromHex("#48d1cc"));
@@ -99,7 +102,7 @@ namespace Content.Client.Chat.UI
             }
         }
 
-        public SpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null)
+        public SpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null, bool showSpeaker = true) // LuaM
         {
             IoCManager.InjectDependencies(this);
             _senderEntity = senderEntity;
@@ -108,7 +111,7 @@ namespace Content.Client.Chat.UI
             // Use text clipping so new messages don't overlap old ones being pushed up.
             RectClipContent = true;
 
-            var bubble = BuildBubble(message, speechStyleClass, fontColor);
+            var bubble = BuildBubble(message, speechStyleClass, fontColor, showSpeaker); // LuaM
             // Arcane-start
             bubble.HorizontalAlignment = HAlignment.Center;
             bubble.VerticalAlignment = VAlignment.Bottom;
@@ -132,13 +135,13 @@ namespace Content.Client.Chat.UI
             // _deathTime = _timing.RealTime + TotalTime; Arcane delete
         }
 
-        protected abstract Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor = null);
+        protected abstract Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor, bool showSpeaker); // LuaM
 
         protected override void FrameUpdate(FrameEventArgs args)
         {
             base.FrameUpdate(args);
 
-            var timeLeft = (float)(_deathTime - _timing.RealTime).TotalSeconds;
+            var timeLeft = _persistent ? float.MaxValue : (float)(_deathTime - _timing.RealTime).TotalSeconds; // LuaM
             if (_entityManager.Deleted(_senderEntity) || timeLeft <= 0)
             {
                 // Timer spawn to prevent concurrent modification exception.
@@ -160,7 +163,7 @@ namespace Content.Client.Chat.UI
                 _verticalOffsetAchieved = MathHelper.Lerp(_verticalOffsetAchieved, VerticalOffset, 10 * args.DeltaSeconds);
             }
 
-            if (!_entityManager.TryGetComponent<TransformComponent>(_senderEntity, out var xform) || xform.MapID != _eyeManager.CurrentMap)
+            if (!_entityManager.TryGetComponent<TransformComponent>(_senderEntity, out var xform) || xform.MapID != _eyeManager.CurrentEye.Position.MapId)
             {
                 Modulate = Color.White.WithAlpha(0);
                 return;
@@ -197,10 +200,12 @@ namespace Content.Client.Chat.UI
 
         private void Die()
         {
-            if (Disposed)
+            if (_dead)
             {
                 return;
             }
+
+            _dead = true;
 
             OnDied?.Invoke(_senderEntity, this);
         }
@@ -372,6 +377,29 @@ namespace Content.Client.Chat.UI
         }
         // Arcane-end
 
+        // LuaM-start
+        private bool _persistent;
+
+        protected void MakePersistent()
+        {
+            _persistent = true;
+        }
+
+        public void SnapVerticalOffset(float offset)
+        {
+            _verticalOffsetAchieved = offset;
+        }
+
+        public void ReleasePersistent()
+        {
+            if (!_persistent)
+                return;
+
+            _persistent = false;
+            _deathTime = _timing.RealTime + FadeTime;
+        }
+        // LuaM-end
+
         /// <summary>
         ///     Causes the speech bubble to start fading IMMEDIATELY.
         /// </summary>
@@ -408,7 +436,7 @@ namespace Content.Client.Chat.UI
         {
         }
 
-        protected override Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor = null)
+        protected override Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor, bool showSpeaker) // LuaM
         {
             var label = new RichTextLabel
             {
@@ -431,12 +459,12 @@ namespace Content.Client.Chat.UI
     public sealed class FancyTextSpeechBubble : SpeechBubble
     {
 
-        public FancyTextSpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null)
-            : base(message, senderEntity, speechStyleClass, fontColor)
+        public FancyTextSpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null, bool showSpeaker = true) // LuaM
+            : base(message, senderEntity, speechStyleClass, fontColor, showSpeaker) // LuaM
         {
         }
 
-        protected override Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor = null)
+        protected override Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor, bool showSpeaker) // LuaM
         {
             if (!ConfigManager.GetCVar(CCVars.ChatEnableFancyBubbles))
             {
@@ -485,6 +513,11 @@ namespace Content.Client.Chat.UI
                 Margin = new Thickness(4, 0, 4, 2) // Arcane Margin = new Thickness(4, 14, 4, 2) -> Margin = new Thickness(4, 0, 4, 2)
             };
 
+            // LuaM-start
+            if (!showSpeaker)
+                return mainPanel;
+            // LuaM-end
+
             var headerPanel = new PanelContainer
             {
                 StyleClasses = { "speechBox", speechStyleClass },
@@ -504,4 +537,51 @@ namespace Content.Client.Chat.UI
             return panel;
         }
     }
+
+    // LuaM-start
+    public sealed class SpeakerNameSpeechBubble : SpeechBubble
+    {
+        public readonly List<SpeechBubble> Members = new();
+
+        public SpeakerNameSpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass)
+            : base(message, senderEntity, speechStyleClass)
+        {
+            MakePersistent();
+        }
+
+        protected override Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor, bool showSpeaker)
+        {
+            var header = new RichTextLabel
+            {
+                ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleSpeakerOpacity)),
+                Margin = new Thickness(1, 1, 1, 1),
+            };
+            header.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
+
+            return new PanelContainer
+            {
+                StyleClasses = { "speechBox", speechStyleClass },
+                Children = { header },
+                ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.ChatFancyNameBackground) ? ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity) : 0f),
+                HorizontalAlignment = HAlignment.Center,
+            };
+        }
+
+        protected override void FrameUpdate(FrameEventArgs args)
+        {
+            if (Members.Count > 0)
+            {
+                var top = 0f;
+                foreach (var member in Members)
+                {
+                    top = MathF.Max(top, member.VerticalOffset + member.ContentSize.Y);
+                }
+
+                VerticalOffset = top;
+            }
+
+            base.FrameUpdate(args);
+        }
+    }
+    // LuaM-end
 }

@@ -43,6 +43,7 @@ public sealed partial class ShuttleSystem
     private void NfOnShuttleShutdown(EntityUid uid)
     {
         _unmannedSince.Remove(uid);
+        _impactedAt.Remove(uid);
     }
     // LuaM-end
 
@@ -121,7 +122,7 @@ public sealed partial class ShuttleSystem
 
     public InertiaDampeningMode NfGetInertiaDampeningMode(EntityUid entity)
     {
-        if (!TryComp<TransformComponent>(entity, out var xform))
+        if (!TryComp(entity, out TransformComponent? xform))
             return InertiaDampeningMode.Dampen;
 
         // Not a shuttle, shouldn't be togglable // Mono - remove shuttle deed requirement, kill StationDampening

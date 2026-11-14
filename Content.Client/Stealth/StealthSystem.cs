@@ -13,6 +13,8 @@ namespace Content.Client.Stealth;
 
 public sealed partial class StealthSystem : SharedStealthSystem
 {
+    private static readonly ProtoId<ShaderPrototype> StealthShader = "Stealth";
+
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private SpriteSystem _sprite = default!; // LuaM
@@ -24,12 +26,20 @@ public sealed partial class StealthSystem : SharedStealthSystem
     {
         base.Initialize();
 
-        _shader = _protoMan.Index<ShaderPrototype>("Stealth").InstanceUnique();
+        _shader = _protoMan.Index<ShaderPrototype>(StealthShader).InstanceUnique();
 
         SubscribeLocalEvent<StealthComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<StealthComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<StealthComponent, BeforePostShaderRenderEvent>(OnShaderRender);
+        SubscribeLocalEvent<StealthComponent, OpticalCamoStateChangedEvent>(OnCamoStateChanged); // LuaM
     }
+
+    // LuaM-start: stealth starts up before the camo state arrives, redo the shader once it does
+    private void OnCamoStateChanged(Entity<StealthComponent> ent, ref OpticalCamoStateChangedEvent args)
+    {
+        SetShader(ent, ent.Comp.Enabled, ent.Comp);
+    }
+    // LuaM-end
 
     public override void SetEnabled(EntityUid uid, bool value, StealthComponent? component = null)
     {
@@ -48,7 +58,8 @@ public sealed partial class StealthSystem : SharedStealthSystem
         _sprite.SetColor((uid, sprite), Color.White);
 
         // LuaM-start: optical camo is plain transparency without the distortion, the owner sees a faint outline of themselves
-        var camo = enabled ? CompOrNull<OpticalCamoComponent>(uid) : null;
+        // Only while the camo is on, stealth from clothing on an implant holder keeps the normal shader.
+        var camo = enabled && TryComp<OpticalCamoComponent>(uid, out var camoComp) && camoComp.Active ? camoComp : null;
         if (camo != null)
             _sprite.SetColor((uid, sprite), Color.White.WithAlpha(uid == _player.LocalEntity ? camo.SelfAlpha : 0f));
         // LuaM-end

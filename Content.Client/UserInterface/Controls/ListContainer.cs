@@ -98,13 +98,13 @@ public class ListContainer : Control
             GenerateItem?.Invoke(data[0], control);
             control.Measure(Vector2Helpers.Infinity);
             _itemHeight = control.DesiredSize.Y;
-            control.Dispose();
+            control.Orphan();
         }
 
         // Ensure buttons are re-generated.
         foreach (var button in _buttons.Values)
         {
-            button.Dispose();
+            button.Orphan();
         }
         _buttons.Clear();
 
@@ -291,6 +291,14 @@ public class ListContainer : Control
                             button.Pressed = true;
                     }
                     AddChild(button);
+                    // LuaM-start
+                    // --  ExitedTree в RT 291 убирает кнопку из группы, после повторной вставки группу и выделение надо вернуть
+                    if (_buttonGroup != null)
+                    {
+                        button.Pressed = data == _selected;
+                        button.Group = _buttonGroup;
+                    }
+                    // LuaM-end
                     button.Measure(finalSize);
                 }
             }
@@ -298,7 +306,7 @@ public class ListContainer : Control
             foreach (var (data, button) in toRemove)
             {
                 _buttons.Remove(data);
-                button.Dispose();
+                button.Orphan();
             }
 
             _vScrollBar.SetPositionLast();

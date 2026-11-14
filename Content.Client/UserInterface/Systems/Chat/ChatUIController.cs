@@ -134,6 +134,8 @@ public sealed partial class ChatUIController : UIController
     private readonly Dictionary<EntityUid, List<SpeechBubble>> _activeSpeechBubbles =
         new();
 
+    private readonly Dictionary<EntityUid, List<SpeakerNameSpeechBubble>> _speakerHeaders = new(); // LuaM
+
     /// <summary>
     ///     Speech bubbles that are to-be-sent because of the "rate limit" they have.
     /// </summary>
@@ -455,8 +457,34 @@ public sealed partial class ChatUIController : UIController
 
     private void CreateSpeechBubble(EntityUid entity, SpeechBubbleData speechData)
     {
+        // LuaM-start
+        var fancy = speechData.Type is SpeechBubble.SpeechType.Say or SpeechBubble.SpeechType.Whisper
+                    && _config.GetCVar(CCVars.ChatEnableFancyBubbles);
+        SpeakerNameSpeechBubble? header = null;
+        if (fancy
+            && _activeSpeechBubbles.TryGetValue(entity, out var active)
+            && active.Count > 0
+            && active[^1] is FancyTextSpeechBubble lastFancy
+            && _speakerHeaders.TryGetValue(entity, out var headers))
+        {
+            header = headers.Find(h => h.Members.Contains(lastFancy));
+        }
+
         var bubble =
-            SpeechBubble.CreateSpeechBubble(speechData.Type, speechData.Message, entity);
+            SpeechBubble.CreateSpeechBubble(speechData.Type, speechData.Message, entity, !fancy);
+        var pushUp = bubble.ContentSize.Y;
+
+        SpeakerNameSpeechBubble? newHeader = null;
+        if (fancy && header == null)
+        {
+            var styleClass = speechData.Type == SpeechBubble.SpeechType.Whisper ? "whisperBox" : "sayBox";
+            newHeader = new SpeakerNameSpeechBubble(speechData.Message, entity, styleClass);
+            newHeader.OnDied += SpeakerHeaderDied;
+            newHeader.SnapVerticalOffset(0f);
+            pushUp += newHeader.ContentSize.Y;
+            header = newHeader;
+        }
+        // LuaM-end
 
         bubble.OnDied += SpeechBubbleDied;
 
@@ -465,7 +493,7 @@ public sealed partial class ChatUIController : UIController
             // Push up existing bubbles above the mob's head.
             foreach (var existingBubble in existing)
             {
-                existingBubble.VerticalOffset += bubble.ContentSize.Y;
+                existingBubble.VerticalOffset += pushUp; // LuaM: bubble.ContentSize.Y > pushUp
             }
         }
         else
@@ -476,6 +504,21 @@ public sealed partial class ChatUIController : UIController
 
         existing.Add(bubble);
         _speechBubbleRoot.AddChild(bubble);
+
+        // LuaM-start
+        header?.Members.Add(bubble);
+        if (newHeader != null)
+        {
+            if (!_speakerHeaders.TryGetValue(entity, out var entityHeaders))
+            {
+                entityHeaders = new List<SpeakerNameSpeechBubble>();
+                _speakerHeaders.Add(entity, entityHeaders);
+            }
+
+            entityHeaders.Add(newHeader);
+            _speechBubbleRoot.AddChild(newHeader);
+        }
+        // LuaM-end
 
         if (existing.Count > SpeechBubbleCap)
         {
@@ -493,7 +536,7 @@ public sealed partial class ChatUIController : UIController
     private void EnqueueSpeechBubble(EntityUid entity, ChatMessage message, SpeechBubble.SpeechType speechType)
     {
         // Don't enqueue speech bubbles for other maps. TODO: Support multiple viewports/maps?
-        if (EntityManager.GetComponent<TransformComponent>(entity).MapID != _eye.CurrentMap)
+        if (EntityManager.GetComponent<TransformComponent>(entity).MapID != _eye.CurrentEye.Position.MapId)
             return;
 
         if (!_queuedSpeechBubbles.TryGetValue(entity, out var queueData))
@@ -507,16 +550,43 @@ public sealed partial class ChatUIController : UIController
 
     public void RemoveSpeechBubble(EntityUid entityUid, SpeechBubble bubble)
     {
-        bubble.Dispose();
+        bubble.Orphan();
 
-        var list = _activeSpeechBubbles[entityUid];
+        if (!_activeSpeechBubbles.TryGetValue(entityUid, out var list))
+            return;
+
         list.Remove(bubble);
 
         if (list.Count == 0)
         {
             _activeSpeechBubbles.Remove(entityUid);
         }
+
+        // LuaM-start
+        if (!_speakerHeaders.TryGetValue(entityUid, out var headers))
+            return;
+
+        foreach (var header in headers)
+        {
+            if (header.Members.Remove(bubble) && header.Members.Count == 0)
+                header.ReleasePersistent();
+        }
+        // LuaM-end
     }
+
+    // LuaM-start
+    private void SpeakerHeaderDied(EntityUid entity, SpeechBubble bubble)
+    {
+        bubble.Orphan();
+
+        if (bubble is not SpeakerNameSpeechBubble header || !_speakerHeaders.TryGetValue(entity, out var headers))
+            return;
+
+        headers.Remove(header);
+        if (headers.Count == 0)
+            _speakerHeaders.Remove(entity);
+    }
+    // LuaM-end
 
     private void UpdateChannelPermissions()
     {
@@ -682,6 +752,17 @@ public sealed partial class ChatUIController : UIController
 
             SetBubbles(bubs, true);
         }
+
+        // LuaM-start
+        foreach (var headers in _speakerHeaders.Values)
+        {
+            foreach (var header in headers)
+            {
+                if (header.Members.Count > 0)
+                    header.Visible = header.Members[0].Visible;
+            }
+        }
+        // LuaM-end
     }
 
     private void SetBubbles(List<SpeechBubble> bubbles, bool visible)

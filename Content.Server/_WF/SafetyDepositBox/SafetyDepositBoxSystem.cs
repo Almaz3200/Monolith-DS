@@ -1,4 +1,6 @@
 using System.IO;
+using System.Linq; // LuaM
+using System.Threading.Tasks;
 using Content.Server._Mono.MonoCoins;
 using Content.Server.Administration.Logs;
 using Content.Server.Database;
@@ -14,6 +16,7 @@ using Content.Shared._WF.SafetyDepositBox.Events;
 using Content.Shared.Database;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Timing; // LuaM
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Labels.Components;
 using Content.Shared.Labels.EntitySystems;
@@ -47,6 +50,9 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
     [Dependency] private MapLoaderSystem _loader = default!;
     [Dependency] private MonoCoinsManager _coinBase = default!; // I had to.
     [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!; // LuaM
+
+    private readonly HashSet<Guid> _pendingBoxes = new();
 
     public override void Initialize()
     {
@@ -171,7 +177,7 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
         if (!TryComp<ActorComponent>(player, out var actor))
             return;
 
-        if (_prototypeManager.TryIndex(args.BoxProto, out var proto) && proto.TryGetComponent<SafetyDepositBoxComponent>(out var boxComponent, _componentFactory))
+        if (_prototypeManager.TryIndex(args.BoxProto, out var proto) && proto.TryComp<SafetyDepositBoxComponent>(out var boxComponent, _componentFactory))
         {
             cost = boxComponent.Cost;
             prototypeId = proto;
@@ -230,7 +236,7 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
     public int GetBoxCost(EntProtoId boxProto)
     {
         if (_prototypeManager.TryIndex(boxProto, out var proto) &&
-            proto.TryGetComponent<SafetyDepositBoxComponent>(out var boxComponent, _componentFactory))
+            proto.TryComp<SafetyDepositBoxComponent>(out var boxComponent, _componentFactory))
             return boxComponent.Cost;
         else
             return 0;
@@ -337,6 +343,28 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
         SafetyDepositBoxComponent boxComp,
         StorageComponent storageComp)
     {
+        var boxId = boxComp.BoxId!.Value;
+        if (!_pendingBoxes.Add(boxId))
+            return;
+
+        try
+        {
+            await DepositBox(consoleUid, component, player, boxEntity, boxComp, storageComp);
+        }
+        finally
+        {
+            _pendingBoxes.Remove(boxId);
+        }
+    }
+
+    private async Task DepositBox(
+        EntityUid consoleUid,
+        SafetyDepositConsoleComponent component,
+        EntityUid player,
+        EntityUid boxEntity,
+        SafetyDepositBoxComponent boxComp,
+        StorageComponent storageComp)
+    {
         var entityDataList = new List<string>();
 
         Log.Info($"DepositBoxAsync: Box has {storageComp.Container.ContainedEntities.Count} items");
@@ -433,6 +461,27 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
         int characterIndex,
         Guid boxId)
     {
+        if (!_pendingBoxes.Add(boxId))
+            return;
+
+        try
+        {
+            await ReclaimBox(consoleUid, component, player, userId, characterIndex, boxId);
+        }
+        finally
+        {
+            _pendingBoxes.Remove(boxId);
+        }
+    }
+
+    private async Task ReclaimBox(
+        EntityUid consoleUid,
+        SafetyDepositConsoleComponent component,
+        EntityUid player,
+        Guid userId,
+        int characterIndex,
+        Guid boxId)
+    {
         // Get box from database
         var box = await _dbManager.GetSafetyDepositBox(boxId);
 
@@ -518,6 +567,27 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
         int characterIndex,
         Guid boxId)
     {
+        if (!_pendingBoxes.Add(boxId))
+            return;
+
+        try
+        {
+            await WithdrawBox(consoleUid, component, player, userId, characterIndex, boxId);
+        }
+        finally
+        {
+            _pendingBoxes.Remove(boxId);
+        }
+    }
+
+    private async Task WithdrawBox(
+        EntityUid consoleUid,
+        SafetyDepositConsoleComponent component,
+        EntityUid player,
+        Guid userId,
+        int characterIndex,
+        Guid boxId)
+    {
         // Get box from database
         var box = await _dbManager.GetSafetyDepositBox(boxId);
 
@@ -571,10 +641,12 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
                 try
                 {
                     using var reader = new StringReader(itemData.EntityData);
+                    // -- return тут выходил из всей выдачи: ящик уже выдан, а запись в базе не очищена, и его можно было забрать повторно
                     if (!_loader.TryLoadEntity(reader, "safety deposit box", out var entity))
-                        return;
+                        continue; // LuaM: return > continue
 
                     var itemEntity = entity.Value.Owner;
+                    ResetStoredDelays(itemEntity); // LuaM
                     // Mark item as having been stored in a deposit box
                     EnsureComp<SafetyDepositStoredComponent>(itemEntity);
 
@@ -611,6 +683,23 @@ public sealed partial class SafetyDepositBoxSystem : EntitySystem
 
         UpdateUI(consoleUid, component, player);
     }
+
+    // LuaM-start
+    // -- Задержки использования сохраняются абсолютным временем прошлого раунда, а время нового раунда начинается с нуля:
+    // -- без сброса предмет и его действия оставались "на кулдауне" столько, сколько длился прошлый раунд
+    private void ResetStoredDelays(EntityUid uid)
+    {
+        if (TryComp<UseDelayComponent>(uid, out var delay))
+        {
+            foreach (var id in delay.Delays.Keys.ToList())
+                _useDelay.CancelDelay((uid, delay), id);
+        }
+
+        var children = Transform(uid).ChildEnumerator;
+        while (children.MoveNext(out var child))
+            ResetStoredDelays(child);
+    }
+    // LuaM-end
 
     private void OnSlotChanged(EntityUid uid, SafetyDepositConsoleComponent component, ContainerModifiedMessage args)
     {
