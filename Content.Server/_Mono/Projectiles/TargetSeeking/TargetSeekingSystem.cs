@@ -21,6 +21,8 @@ public sealed partial class TargetSeekingSystem : EntitySystem
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
+    private static readonly TimeSpan AcquireInterval = TimeSpan.FromSeconds(0.25); // LuaM
+
     public override void Initialize()
     {
         base.Initialize();
@@ -194,8 +196,9 @@ public sealed partial class TargetSeekingSystem : EntitySystem
                     xform
                 );
             }
-            else
+            else if (_gameTiming.CurTime >= seekingComp.NextAcquire) // LuaM: the search walks every shuttle console, don't run it every tick
             {
+                seekingComp.NextAcquire = _gameTiming.CurTime + AcquireInterval; // LuaM
                 // Try to acquire a new target
                 AcquireTarget(uid, seekingComp, xform);
             }
@@ -210,6 +213,15 @@ public sealed partial class TargetSeekingSystem : EntitySystem
         var closestDistance = float.MaxValue;
         EntityUid? bestTarget = null;
 
+        // LuaM-start
+        if (component.ScanArc <= 0f)
+            return;
+
+        var sourceMap = transform.MapID;
+        var sourcePos = _transform.GetWorldPosition(transform);
+        var currentRotation = _transform.GetWorldRotation(transform);
+        // LuaM-end
+
         // Look for shuttles to target
         var shuttleQuery = EntityQueryEnumerator<TargetSeekingTargetComponent>();
 
@@ -217,17 +229,21 @@ public sealed partial class TargetSeekingSystem : EntitySystem
         {
             var targetXform = Transform(targetUid);
 
+            // LuaM-start
+            if (targetXform.MapID != sourceMap)
+                continue;
+
+            var targetPos = _transform.GetWorldPosition(targetXform);
+            var distance = Vector2.Distance(sourcePos, targetPos);
+            if (distance > component.DetectionRange)
+                continue;
+            // LuaM-end
+
             // If this entity has a grid UID, use that as our actual target
             // This targets the ship grid rather than just the console
             var actualTarget = targetXform.GridUid ?? targetUid;
 
-            // Get angle to the target
-            var targetPos = _transform.ToMapCoordinates(targetXform.Coordinates).Position;
-            var sourcePos = _transform.ToMapCoordinates(transform.Coordinates).Position;
             var angleToTarget = (targetPos - sourcePos).ToWorldAngle();
-
-            // Get current direction of the projectile
-            var currentRotation = _transform.GetWorldRotation(transform);
 
             // Check if target is within field of view
             var angleDifference = Angle.ShortestDistance(currentRotation, angleToTarget).Degrees;
@@ -235,13 +251,6 @@ public sealed partial class TargetSeekingSystem : EntitySystem
             {
                 continue; // Target is outside our field of view
             }
-
-            // Calculate distance to target
-            var distance = Vector2.Distance(sourcePos, targetPos);
-
-            // Skip if target is out of range
-            if (distance > component.DetectionRange)
-                continue;
 
             // Skip if the target is our own launcher (don't target our own ship)
             if (_projectileQuery.TryGetComponent(uid, out var projectile) &&

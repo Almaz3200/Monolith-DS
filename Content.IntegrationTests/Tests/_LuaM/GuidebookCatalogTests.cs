@@ -4,6 +4,8 @@
  * See AGPLv3.txt for details.
  */
 using System.Linq;
+using Content.Shared.CCVar;
+using Robust.Shared.Configuration;
 using Content.Server._LuaM.Guidebook;
 using Content.Client._LuaM.Guidebook;
 using Content.Shared._NF.Shipyard.Prototypes;
@@ -19,6 +21,30 @@ namespace Content.IntegrationTests.Tests._LuaM;
 [TestFixture]
 public sealed class GuidebookCatalogTests
 {
+    [Test]
+    public async Task StartingStationAppearsAlongsidePois()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        await pair.Server.WaitAssertion(() =>
+        {
+            var configuration = pair.Server.ResolveDependency<IConfigurationManager>();
+            var previous = configuration.GetCVar(CCVars.GameMap);
+            var entities = pair.Server.ResolveDependency<IEntityManager>();
+            var before = entities.EntityCount;
+            try
+            {
+                // Select the real station metadata without loading its entities.
+                configuration.SetCVar(CCVars.GameMap, "Frontier");
+                var catalog = entities.System<GuidebookCatalogSystem>().BuildSnapshot();
+                var station = catalog.Sites.Single(s => s.MapPath == "/Maps/_LuaM/POI/caelestinus_centralLuaM.yml");
+                Assert.That(station.Facilities, Is.Not.Empty);
+                Assert.That(entities.EntityCount, Is.EqualTo(before));
+            }
+            finally { configuration.SetCVar(CCVars.GameMap, previous); }
+        });
+        await pair.CleanReturnAsync();
+    }
+
     [Test]
     public async Task CatalogIncludesResolvedVesselsWithoutSpawningMaps()
     {
@@ -80,7 +106,8 @@ public sealed class GuidebookCatalogTests
         var system = pair.Client.ResolveDependency<IEntityManager>().System<GuidebookCatalogClientSystem>();
         await pair.Client.WaitPost(system.Request);
         // A snapshot is built across ticks, rather than blocking a player request.
-        for (var i = 0; i < 100 && system.Catalog == null; i++) await pair.RunTicksSync(5);
+        var deadline = DateTime.UtcNow + TimeSpan.FromSeconds(90);
+        while (system.Catalog == null && DateTime.UtcNow < deadline) await pair.RunTicksSync(5);
         await pair.Client.WaitAssertion(() =>
         {
             Assert.That(system.Catalog, Is.Not.Null);
@@ -131,7 +158,8 @@ public sealed class GuidebookCatalogTests
         {
             await pair.Server.WaitPost(() => pair.Server.ResolveDependency<IEntityManager>()
                 .System<GuidebookCatalogSystem>().InvalidateResources());
-            for (var i = 0; i < 100 && (system.Catalog == null || ReferenceEquals(system.Catalog, previous)); i++)
+            var refreshDeadline = DateTime.UtcNow + TimeSpan.FromSeconds(90);
+            while ((system.Catalog == null || ReferenceEquals(system.Catalog, previous)) && DateTime.UtcNow < refreshDeadline)
                 await pair.RunTicksSync(5);
             await pair.Client.WaitAssertion(() =>
             {

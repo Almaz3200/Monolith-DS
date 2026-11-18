@@ -191,7 +191,9 @@ public sealed partial class ShuttleSystem
             if (ourTiles == 0 || otherTiles == 0)
                 continue;
 
-            Log.Info($"Shuttle impact of {ToPrettyString(args.OurEntity)} with {ToPrettyString(args.OtherEntity)}; our mass: {ourMass}, other: {otherMass}, velocity {jungleDiff}, impact point {worldPoint}");
+            // LuaM: Info > Debug, fired for every contact point and duplicates the admin log below
+            if (Log.IsLogLevelEnabled(LogLevel.Debug))
+                Log.Debug($"Shuttle impact of {ToPrettyString(args.OurEntity)} with {ToPrettyString(args.OtherEntity)}; our mass: {ourMass}, other: {otherMass}, velocity {jungleDiff}, impact point {worldPoint}");
 
             // E = MV^2/2
             var energyMult = MathF.Pow(jungleDiff, 2) / 2;
@@ -307,7 +309,8 @@ public sealed partial class ShuttleSystem
             if (direction.LengthSquared() > minsq)
             {
                 _stuns.TryKnockdown(ent.Owner, knockdownTime, true);
-                _throwing.TryThrow(ent, direction, ent.Comp, Transform(ent), _projQuery, direction.Length(), playSound: false);
+                var capped = CapImpactThrow(direction); // LuaM
+                _throwing.TryThrow(ent, capped, ent.Comp, Transform(ent), _projQuery, capped.Length(), playSound: false); // LuaM
             }
             else
             {
@@ -464,7 +467,7 @@ public sealed partial class ShuttleSystem
                 }
                 else
                 {
-                    var direction = throwDirection * tileData.DistanceFactor;
+                    var direction = CapImpactThrow(throwDirection * tileData.DistanceFactor); // LuaM
                     _throwing.TryThrow(localEnt, direction, physics, localEnt.Comp, _projQuery, direction.Length(), playSound: false);
                 }
             }
