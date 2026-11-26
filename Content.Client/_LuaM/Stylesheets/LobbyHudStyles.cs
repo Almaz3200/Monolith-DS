@@ -50,14 +50,25 @@ public static class LobbyHudStyles
     private const string Fonts = "/Fonts/_LuaM/";
     private const string Symbols = "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf";
 
+    // The same fallbacks as the old Noto stack: circled digits and ☹ of the ahelp list are only in NotoSansSymbols
+    private static readonly string[] Fallbacks =
+    {
+        "/Fonts/NotoSans/NotoSans-Regular.ttf",
+        "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
+        Symbols,
+        "/Fonts/NotoSans/NotoSansSC-Regular.ttf",
+    };
+
+    private static string[] Stack(string main) => [main, .. Fallbacks];
+
     public static Font UiFont(IResourceCache res, int size, string weight = "SemiBold") =>
-        res.GetFont(new[] { Fonts + $"IBMPlexSansCondensed/IBMPlexSansCondensed-{weight}.ttf", "/Fonts/NotoSans/NotoSans-Regular.ttf", Symbols }, size);
+        res.GetFont(Stack(Fonts + $"IBMPlexSansCondensed/IBMPlexSansCondensed-{weight}.ttf"), size);
 
     public static Font MonoFont(IResourceCache res, int size, bool semi = false) =>
-        res.GetFont(new[] { Fonts + (semi ? "IBMPlexMono/IBMPlexMono-SemiBold.ttf" : "IBMPlexMono/IBMPlexMono-Regular.ttf"), "/Fonts/NotoSans/NotoSans-Regular.ttf", Symbols }, size);
+        res.GetFont(Stack(Fonts + (semi ? "IBMPlexMono/IBMPlexMono-SemiBold.ttf" : "IBMPlexMono/IBMPlexMono-Regular.ttf")), size);
 
     public static Font MonoMediumFont(IResourceCache res, int size) =>
-        res.GetFont(new[] { Fonts + "IBMPlexMono/IBMPlexMono-Medium.ttf", "/Fonts/NotoSans/NotoSans-Regular.ttf", Symbols }, size);
+        res.GetFont(Stack(Fonts + "IBMPlexMono/IBMPlexMono-Medium.ttf"), size);
 
     public static StyleRule[] GetRules(IResourceCache resCache)
     {
@@ -142,7 +153,7 @@ public static class LobbyHudStyles
             ..ButtonState(Option, ContainerButton.StylePseudoClassHover, hover),
             ..ButtonState(Option, ContainerButton.StylePseudoClassPressed, pressed),
             ..ButtonState(Option, ContainerButton.StylePseudoClassDisabled, disabled),
-            ButtonLabel(Option, null, UiFont(resCache, 13, "Medium"), legend),
+            ..ButtonLabels(Option, UiFont(resCache, 13, "Medium"), legend),
 
             Element<Slider>().Class(SliderClass)
                 .Prop(Slider.StylePropertyBackground, flat(HudPalette.Background, HudPalette.Border))
@@ -224,6 +235,8 @@ public static class LobbyHudStyles
             Element<Label>().Class(Body)
                 .Prop(Label.StylePropertyFont, UiFont(resCache, 13, "Regular"))
                 .Prop(Label.StylePropertyFontColor, HudPalette.Text),
+            Element<RichTextLabel>().Class(Body)
+                .Prop("font", UiFont(resCache, 13, "Regular")),
             Element<Label>().Class(BodyBold)
                 .Prop(Label.StylePropertyFont, ui15)
                 .Prop(Label.StylePropertyFontColor, HudPalette.Text),
@@ -244,25 +257,25 @@ public static class LobbyHudStyles
 
             ..PriorityRules(ui13),
 
-            ButtonLabel(Button, null, ui13, legend),
+            ..ButtonLabels(Button, ui13, legend),
             ButtonLabel(Button, ContainerButton.StylePseudoClassHover, null, HudPalette.Fg),
             ButtonLabel(Button, ContainerButton.StylePseudoClassPressed, null, HudPalette.Fg),
             ButtonLabel(Button, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
-            ButtonLabel(Command, null, ui13, legend),
+            ..ButtonLabels(Command, ui13, legend),
             ButtonLabel(Command, ContainerButton.StylePseudoClassHover, null, HudPalette.Fg),
             ButtonLabel(Command, ContainerButton.StylePseudoClassPressed, null, HudPalette.Fg),
             ButtonLabel(Command, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
-            ButtonLabel(Primary, null, ui15, HudPalette.Fg),
+            ..ButtonLabels(Primary, ui15, HudPalette.Fg),
             ButtonLabel(Primary, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
-            ButtonLabel(Accent, null, ui13, HudPalette.Fg),
+            ..ButtonLabels(Accent, ui13, HudPalette.Fg),
             ButtonLabel(Accent, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
-            ButtonLabel(Danger, null, ui13, HudPalette.Bad),
+            ..ButtonLabels(Danger, ui13, HudPalette.Bad),
             ButtonLabel(Danger, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
-            ButtonLabel(Positive, null, ui13, HudPalette.Good),
+            ..ButtonLabels(Positive, ui13, HudPalette.Good),
             ButtonLabel(Positive, ContainerButton.StylePseudoClassPressed, null, HudPalette.Void),
             ButtonLabel(Positive, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
-            ButtonLabel(Ready, null, UiFont(resCache, 20), HudPalette.Void),
-            ButtonLabel(Join, null, UiFont(resCache, 20), HudPalette.Void),
+            ..ButtonLabels(Ready, UiFont(resCache, 20), HudPalette.Void),
+            ..ButtonLabels(Join, UiFont(resCache, 20), HudPalette.Void),
             ButtonLabel(Join, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
             ButtonLabel(Ready, ContainerButton.StylePseudoClassPressed, null, HudPalette.Void),
             ButtonLabel(Ready, ContainerButton.StylePseudoClassDisabled, null, HudPalette.Offline),
@@ -303,7 +316,8 @@ public static class LobbyHudStyles
                 yield return rule;
             }
 
-            yield return ButtonLabel(cls, null, font, StyleBoxLamp.Mix(color, HudPalette.Background, 0.55f));
+            foreach (var rule in ButtonLabels(cls, font, StyleBoxLamp.Mix(color, HudPalette.Background, 0.55f)))
+                yield return rule;
             yield return ButtonLabel(cls, ContainerButton.StylePseudoClassHover, null, color);
             yield return ButtonLabel(cls, ContainerButton.StylePseudoClassPressed, null, fill ? HudPalette.Void : color);
         }
@@ -326,6 +340,15 @@ public static class LobbyHudStyles
             ..ButtonState(cls, ContainerButton.StylePseudoClassPressed, pressed),
             ..ButtonState(cls, ContainerButton.StylePseudoClassDisabled, disabled),
         ];
+    }
+
+    private static IEnumerable<StyleRule> ButtonLabels(string buttonClass, Font? font, Color color)
+    {
+        yield return ButtonLabel(buttonClass, null, font, color);
+        yield return ButtonLabel(buttonClass, ContainerButton.StylePseudoClassNormal, font, color);
+        yield return ButtonLabel(buttonClass, ContainerButton.StylePseudoClassHover, font, color);
+        yield return ButtonLabel(buttonClass, ContainerButton.StylePseudoClassPressed, font, color);
+        yield return ButtonLabel(buttonClass, ContainerButton.StylePseudoClassDisabled, font, color);
     }
 
     private static StyleRule ButtonLabel(string buttonClass, string? pseudo, Font? font, Color color)
