@@ -45,6 +45,7 @@ public static class LobbyHudStyles
     public const string Note = "LuaMHudNote";
     public const string TabTitle = "LuaMHudTab";
     public const string TraitTitle = "LuaMHudTraitTitle";
+    public const string TraitCard = "LuaMHudTraitCard";
     public const string NoteLead = "LuaMHudNoteLead";
 
     private const string Fonts = "/Fonts/_LuaM/";
@@ -81,11 +82,11 @@ public static class LobbyHudStyles
 
         var primary = Lamp(HudPalette.Fg, StyleBoxLamp.Lit.On);
         var accent = Lamp(HudPalette.Fg, StyleBoxLamp.Lit.On, HudPalette.Fg);
-        accent.InnerGlow = HudPalette.Fg.WithAlpha(0.35f);
-        accent.OuterGlow = HudPalette.Fg.WithAlpha(0.07f);
+        accent.InnerGlow = HudPalette.Fg.WithAlpha(0.18f);
+        accent.OuterGlow = HudPalette.Fg.WithAlpha(0.035f);
         var accentHover = Lamp(HudPalette.Fg, StyleBoxLamp.Lit.On, HudPalette.Cream);
-        accentHover.InnerGlow = HudPalette.Fg.WithAlpha(0.5f);
-        accentHover.OuterGlow = HudPalette.Fg.WithAlpha(0.1f);
+        accentHover.InnerGlow = HudPalette.Fg.WithAlpha(0.25f);
+        accentHover.OuterGlow = HudPalette.Fg.WithAlpha(0.05f);
         var primaryHover = Lamp(HudPalette.Fg, StyleBoxLamp.Lit.On, HudPalette.Fg);
         var primaryPressed = Lamp(HudPalette.Fg, StyleBoxLamp.Lit.On, HudPalette.FgDim);
 
@@ -210,6 +211,9 @@ public static class LobbyHudStyles
                 .Prop(Label.StylePropertyFontColor, HudPalette.Fg),
             Element<Label>().Class(TraitTitle)
                 .Prop(Label.StylePropertyFont, UiFont(resCache, 18))
+                .Prop(Label.StylePropertyFontColor, HudPalette.Text),
+            Element<Label>().Class(TraitCard)
+                .Prop(Label.StylePropertyFont, ui13)
                 .Prop(Label.StylePropertyFontColor, HudPalette.Text),
             Element<Label>().Class(Note)
                 .Prop(Label.StylePropertyFont, MonoFont(resCache, 11))
